@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import IdentityAction from "../../actions/IdentityAction";
+import YouTube from "react-youtube";
 
-
+import '../../resources/captainProfile/register.css'
 class Register extends Component {
 
 
@@ -33,64 +34,79 @@ class Register extends Component {
 	}
 
 	render() {
+		const opts = {
+			height: '390',
+			width: '640',
+			playerVars: { // https://developers.google.com/youtube/player_parameters
+			  autoplay: 0
+			}
+		};
+
 		return (
-			<div className='btw-container '>
+			<div className='btw-register btw-container'>
 
-				<p className="btw-registerHeading">Register as a captain</p>
+				<YouTube
+					videoId="2g811Eo7K8U"
+					opts={opts}
+					className="asdf"
+					onReady={this._onReady}
+				/>
 
-				<div className="">
-					<div className="input-field col s6">
-						<input id="firstname" type="" className="btw-input-field" ref="firstname"
-						       style={{color: 'black'}} required="" aria-required="true"
-						       onChange={this.updateRegisterFields.bind(this, 'firstname')}></input>
-						<label htmlFor="username">First Name <span style={{color: 'red'}}>*</span></label>
-					</div>
+				<div className="intro">
+					<p className="intro-title">
+						What's the best way to stay in touch with you ?
+					</p>
 
-					<div className="input-field col s6">
-						<input id="lastname" type="" className="btw-input-field" ref="lastname"
-						       style={{color: 'black'}} required="" aria-required="true"
-						       onChange={this.updateRegisterFields.bind(this, 'lastname')}></input>
-						<label htmlFor="lastname">Last Name <span style={{color: 'red'}}>*</span></label>
-					</div>
-
-					<div className="input-field col s6">
-						<input id="username" type="" className="btw-input-field" ref="username"
-						       style={{color: 'black'}} required="" aria-required="true"
-						       onChange={this.updateRegisterFields.bind(this, 'username')}></input>
-						<label htmlFor="username">Username <span style={{color: 'red'}}>*</span></label>
-					</div>
-
-					<div className="input-field col s6">
-						<input id="password" type="" className="btw-input-field" ref="password"
-						       style={{color: 'black'}} required="" aria-required="true"
-						       onChange={this.updateRegisterFields.bind(this, 'password')}
-						       autoComplete="off"></input>
-						<label htmlFor="password">Password <span style={{color: 'red'}}>*</span></label>
-					</div>
-					<div className="input-field col s6">
-						<input id="confirmPassword" type="" className="btw-input-field" ref="confirmPassword"
-						       style={{color: 'black'}} required="" aria-required="true"
-						       onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}
-						       autoComplete="off"></input>
-						<label htmlFor="confirmPassword">Confirm Password <span style={{color: 'red'}}>*</span></label>
-					</div>
-
-					<div className="input-field col s6">
-						<input id="email" type="" className="btw-input-field" ref="email"
-						       style={{color: 'black'}} required="" aria-required="true"
-						       onChange={this.updateRegisterFields.bind(this, 'email')}></input>
-						<label htmlFor="email">Email Address <span style={{color: 'red'}}>*</span> </label>
-					</div>
-
-					<span style={{color: 'red'}}>*</span><p>Denotes required fields</p>
-
-					<div className='btw-container'>
-						<div id='registerSubmitButton' className="btn-general btn"
-						     onClick={this.btwRegister.bind(this, 'btwSignOn')}>
-							<span className="btw-buttonText">Register</span>
-						</div>
-					</div>
+					<p className="intro-desc">
+						As a member, you can rely on timely reminders for appointments and screenings to keep you healthy. Tell us the best ways to reach you, so you can get the most from your care experience.
+					</p>
 				</div>
+
+				<form>
+					<div className="form-group">
+						<label className="pull-left" for="firstname">First Name</label>
+						<input type="text" className="input-field" id="firstname" ref="firstname"
+							required="" aria-required="true"
+							onChange={this.updateRegisterFields.bind(this, 'firstname')}></input>
+					</div>
+
+					<div className="form-group">
+						<label className="pull-left" for="lastname">Last Name</label>
+						<input type="text" className="input-field" id="lastname" ref="lastname"
+							required="" aria-required="true"
+							onChange={this.updateRegisterFields.bind(this, 'lastname')}></input>
+					</div>
+
+					<div className="form-group">
+						<label className="pull-left" for="username">Username</label>
+						<input type="text" className="input-field" id="username" ref="username"
+							required="" aria-required="true"
+							onChange={this.updateRegisterFields.bind(this, 'username')}></input>
+					</div>
+
+					<div className="form-group">
+						<label className="pull-left" for="password">Password</label>
+						<input type="password" className="input-field" id="password" ref="password"
+							required="" aria-required="true"
+							onChange={this.updateRegisterFields.bind(this, 'password')}></input>
+					</div>
+
+					<div className="form-group">
+						<label className="pull-left" for="confirmPassword">Confirm Password</label>
+						<input type="password" className="input-field" id="confirmPassword" ref="confirmPassword"
+							required="" aria-required="true"
+							onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}></input>
+					</div>
+
+					<div className="form-group">
+						<label className="pull-left" for="email">Email</label>
+						<input type="email" className="input-field" id="email" ref="email"
+							required="" aria-required="true"
+							onChange={this.updateRegisterFields.bind(this, 'email')}></input>
+					</div>
+
+					<button class="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
+				</form>
 			</div>
 		);
 	}

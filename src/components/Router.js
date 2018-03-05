@@ -4,7 +4,7 @@ import Login from './Login';
 import History from '../utility/History';
 import Page_50_X from './errorPages/Page_50_X';
 import SendInvite from './invites/SendInvite';
-
+import Register from './captainProfile/Register';
 
 
 
@@ -12,6 +12,7 @@ const Router =() => (
 	<router history={ History }>
 		<Switch>
 			<Route exact path ='/' component = {Login}/>
+			<Route exact path ='/captainProfile/Register' component = {Register}/>
 			<Route exact path ='/errorPages/Page_50_X' component = {Page_50_X}/>
 			<Route exact path ='/invites/SendInvite' component = {SendInvite}/>
 		</Switch>
