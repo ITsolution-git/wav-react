@@ -43,6 +43,12 @@ function register(state) {
 			"Content-Type": "application/json",
 		}
 	})
+		.then(response => {
+			if (response.data.status !== 200) {
+				return Promise.reject(response);
+			}
+			return response.data;
+		})
 }
 
 

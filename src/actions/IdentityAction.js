@@ -87,7 +87,7 @@ function btwRegister(identity) {
 		return IdentityService.register(identity)
 			.then(
 				response => {
-					dispatch(success(response.data));
+					dispatch(success(response));
 					localStorage.setItem('username', identity.username);
 					//show success page or redirect to login page with username
 					History.push('/');
