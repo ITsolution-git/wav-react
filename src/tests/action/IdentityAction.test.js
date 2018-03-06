@@ -54,10 +54,6 @@ describe('getBtwUserProfile tests', () => {
 
 })
 
-/**
- * TODO : not matching manual response and real server response
- */
-
 /* Test Register */
 describe('btwRegister', () => {
 
@@ -76,18 +72,20 @@ describe('btwRegister', () => {
 			"status"         : 200,
 			"message"        : "User information successfully registered",
 			"userInformation": {
-				"username"   : "username",
-				"email"      : "email@test.com"
+				"username": "testing",
+        		"email": "testUser@test.com",
+				"firstname": "john",
+				"lastname": "test",
+				"role": "captain",
+				"dateofbirth": "2000-01-22T03:39:04.459Z",
+				"address": "1550 Acme street",
+				"phonenumber": "7765564732"
 			}
 		}
 
 		it('it should dispatch a success', () => {
 			let mockAdapter = new MockAdapter(axios);
-			mockAdapter.onPost('https://btwapi-18.herokuapp.com/user/register').reply(200, {
-				data: {
-					response
-				}
-			});
+			mockAdapter.onPost('https://btwapi-18.herokuapp.com/user/register').reply(200, response);
 
 			const expectedActions = [
 				{
@@ -103,7 +101,7 @@ describe('btwRegister', () => {
 			]
 			const store = mockStore({response : []});
 			return store.dispatch( IdentityAction.btwRegister( request ) ).then( () => {
-				expect(store.getActions()).to.deep.equal(store.getActions())
+				expect(store.getActions()).to.deep.equal(expectedActions)
 			} )
 		})
 	})
@@ -126,11 +124,7 @@ describe('btwRegister', () => {
 
 		it('it should dispatch a failure', () => {
 			let mockAdapter = new MockAdapter(axios);
-			mockAdapter.onPost('https://btwapi-18.herokuapp.com/user/register').reply(400, {
-				data: {
-					error
-				}
-			});
+			mockAdapter.onPost('https://btwapi-18.herokuapp.com/user/register').reply(400,error);
 
 			const expectedActions = [
 				{
@@ -146,7 +140,7 @@ describe('btwRegister', () => {
 			]
 			const store = mockStore({response : []});
 			return store.dispatch( IdentityAction.btwRegister( request ) ).then( () => {
-				expect(store.getActions()).to.deep.equal(store.getActions())
+				expect(store.getActions()).to.deep.equal(expectedActions)
 			} )
 		})
 	})

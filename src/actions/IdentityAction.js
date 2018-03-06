@@ -87,14 +87,14 @@ function btwRegister(identity) {
 		return IdentityService.register(identity)
 			.then(
 				response => {
-					dispatch(success(response));
+					dispatch(success(response.data));
 					localStorage.setItem('username', identity.username);
 					//show success page or redirect to login page with username
 					History.push('/');
 					History.go();
 				},
 				error => {
-					dispatch(failure(error));
+					dispatch(failure(error.response.data));
 				})
 	}
 
