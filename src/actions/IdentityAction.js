@@ -1,6 +1,7 @@
-import IdentityConstants from '../constants/IdentityConstants';
+import IdentityConstants from '../constants/IdentityConstants'
 import IdentityService from '../services/IdentityService'
-import History from '../utility/History';
+import History from '../utility/History'
+import localStorage from 'localStorage'
 
 
 const IdentityAction = {
@@ -83,7 +84,7 @@ function btwSignOn(username, password, source) {
 function btwRegister(identity) {
 	return dispatch => {
 		dispatch(request(identity));
-		IdentityService.register(identity)
+		return IdentityService.register(identity)
 			.then(
 				response => {
 					dispatch(success(response));
@@ -223,13 +224,13 @@ function getBtwUserProfile() {
 		let token = localStorage.getItem('token');
 		let username = localStorage.getItem('username');
 		dispatch(request(token));
-		IdentityService.getUserProfile(token, username)
+		return IdentityService.getUserProfile(token, username)
 			.then(
 				response => {
 					dispatch(success(response))
 				},
 				error => {
-					dispatch(failure(error.response.data));
+					dispatch(failure(error.data));
 				})
 	}
 	//if at this point, Token has expired, Clear the cookies, Route the user to login page
