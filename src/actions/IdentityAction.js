@@ -202,7 +202,7 @@ function handleAuthCheckFromSource() {
 				stateOfAuth = true;
 				return stateOfAuth;
 			}
-
+			break;
 		case "google":
 			if ((expires_at >= Date.now()) && (typeof id_token !== 'undefined') && (isAuthenticated === 'true')
 				&& (typeof access_token !== 'undefined')) {
