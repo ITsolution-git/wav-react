@@ -17,11 +17,12 @@ $input_field_space: 30px;
     margin: auto;
     margin-top: $margin_top;
     width: $max_width;
-    font-family: "Gotham";
-    font-weight: 700;
+    text-align: center;
+    font-family: Verdana,Arial,sans-serif;
 
     .intro {
         margin-top: $margin_top;
+        text-align: center;
     }
 
     .intro-title {
@@ -81,7 +82,7 @@ $input_field_space: 30px;
         }
     }
 
-    .asdf {
-        width: 100%;
+    .video {
+        width: 80%;
     }
 }

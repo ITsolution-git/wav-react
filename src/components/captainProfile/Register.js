@@ -48,7 +48,7 @@ class Register extends Component {
 				<YouTube
 					videoId="2g811Eo7K8U"
 					opts={opts}
-					className="asdf"
+					className="video"
 					onReady={this._onReady}
 				/>
 
@@ -63,18 +63,20 @@ class Register extends Component {
 				</div>
 
 				<form>
-					<div className="form-group">
-						<label className="pull-left" for="firstname">First Name</label>
-						<input type="text" className="input-field" id="firstname" ref="firstname"
-							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'firstname')}></input>
-					</div>
+					<div className="row">
+						<div className="form-group col-xs-6">
+							<label className="pull-left" for="firstname">First Name</label>
+							<input type="text" className="input-field" id="firstname" ref="firstname"
+								required="" aria-required="true"
+								onChange={this.updateRegisterFields.bind(this, 'firstname')}></input>
+						</div>
 
-					<div className="form-group">
-						<label className="pull-left" for="lastname">Last Name</label>
-						<input type="text" className="input-field" id="lastname" ref="lastname"
-							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'lastname')}></input>
+						<div className="form-group col-xs-6">
+							<label className="pull-left" for="lastname">Last Name</label>
+							<input type="text" className="input-field" id="lastname" ref="lastname"
+								required="" aria-required="true"
+								onChange={this.updateRegisterFields.bind(this, 'lastname')}></input>
+						</div>
 					</div>
 
 					<div className="form-group">
@@ -82,6 +84,13 @@ class Register extends Component {
 						<input type="text" className="input-field" id="username" ref="username"
 							required="" aria-required="true"
 							onChange={this.updateRegisterFields.bind(this, 'username')}></input>
+					</div>
+
+					<div className="form-group">
+						<label className="pull-left" for="email">Email</label>
+						<input type="email" className="input-field" id="email" ref="email"
+							required="" aria-required="true"
+							onChange={this.updateRegisterFields.bind(this, 'email')}></input>
 					</div>
 
 					<div className="form-group">
@@ -99,13 +108,8 @@ class Register extends Component {
 					</div>
 
 					<div className="form-group">
-						<label className="pull-left" for="email">Email</label>
-						<input type="email" className="input-field" id="email" ref="email"
-							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'email')}></input>
+						<button class="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
 					</div>
-
-					<button class="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
 				</form>
 			</div>
 		);
