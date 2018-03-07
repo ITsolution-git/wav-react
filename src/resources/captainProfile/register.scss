@@ -60,6 +60,10 @@ $input_field_space: 30px;
             }
         }
 
+        span {
+            color: red;
+        }
+        
         .form-group {
             margin-bottom: $input_field_space;
         }
