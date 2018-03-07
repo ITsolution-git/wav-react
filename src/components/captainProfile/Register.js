@@ -23,7 +23,7 @@ class Register extends Component {
 
 	updateRegisterFields(field, event) {
 		let identity = Object.assign({}, this.state.btwIdentity);
-		identity [field] = event.target.value;
+		identity[field] = event.target.value;
 		this.setState({
 			btwIdentity: identity
 		})
@@ -65,14 +65,14 @@ class Register extends Component {
 				<form>
 					<div className="row">
 						<div className="form-group col-xs-6">
-							<label className="pull-left" for="firstname">First Name</label>
+							<label className="pull-left" htmlFor="firstname">First Name</label>
 							<input type="text" className="input-field" id="firstname" ref="firstname"
 								required="" aria-required="true"
 								onChange={this.updateRegisterFields.bind(this, 'firstname')}></input>
 						</div>
 
 						<div className="form-group col-xs-6">
-							<label className="pull-left" for="lastname">Last Name</label>
+							<label className="pull-left" htmlFor="lastname">Last Name</label>
 							<input type="text" className="input-field" id="lastname" ref="lastname"
 								required="" aria-required="true"
 								onChange={this.updateRegisterFields.bind(this, 'lastname')}></input>
@@ -80,37 +80,36 @@ class Register extends Component {
 					</div>
 
 					<div className="form-group">
-						<label className="pull-left" for="username">Username</label>
+						<label className="pull-left" htmlFor="username">Username</label>
 						<input type="text" className="input-field" id="username" ref="username"
 							required="" aria-required="true"
 							onChange={this.updateRegisterFields.bind(this, 'username')}></input>
 					</div>
 
 					<div className="form-group">
-						<label className="pull-left" for="email">Email</label>
+						<label className="pull-left" htmlFor="email">Email</label>
 						<input type="email" className="input-field" id="email" ref="email"
 							required="" aria-required="true"
 							onChange={this.updateRegisterFields.bind(this, 'email')}></input>
 					</div>
 
 					<div className="form-group">
-						<label className="pull-left" for="password">Password</label>
+						<label className="pull-left" htmlFor="password">Password</label>
 						<input type="password" className="input-field" id="password" ref="password"
 							required="" aria-required="true"
 							onChange={this.updateRegisterFields.bind(this, 'password')}></input>
 					</div>
 
 					<div className="form-group">
-						<label className="pull-left" for="confirmPassword">Confirm Password</label>
+						<label className="pull-left" htmlFor="confirmPassword">Confirm Password</label>
 						<input type="password" className="input-field" id="confirmPassword" ref="confirmPassword"
 							required="" aria-required="true"
 							onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}></input>
 					</div>
-
-					<div className="form-group">
-						<button class="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
-					</div>
 				</form>
+				<div id="btn_signup">
+					<button className="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
+				</div>
 			</div>
 		);
 	}
@@ -125,4 +124,4 @@ const mapDispatchToProps = (dispatch) => ({
 	btwRegister: (btwIdentity) => dispatch(IdentityAction.btwRegister(btwIdentity))
 })
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
