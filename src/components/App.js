@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import Router from './Router';
-
-
-
-
+import '../resources/App.css';
 
 
 class App extends Component {

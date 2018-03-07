@@ -17,6 +17,7 @@
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-facebook-login-component": "^0.9.1",
     "react-form": "^2.16.1",
