@@ -1,3 +1,5 @@
+import localStorage from 'localStorage';
+
 import IdentityConstants from '../constants/IdentityConstants'
 import IdentityService from '../services/IdentityService'
 import History from '../utility/History'
