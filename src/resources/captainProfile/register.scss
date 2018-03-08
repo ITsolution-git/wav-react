@@ -1,3 +1,6 @@
+@import '../shared/sizes.scss';
+@import '../shared/components.scss';
+
 .btw-register {
     margin: auto;
     margin-top: $margin_top;
@@ -9,6 +12,7 @@
         margin-top: $margin_top;
         text-align: center;
     }
+
 
     .intro-title {
         font-size: $font_size_title;

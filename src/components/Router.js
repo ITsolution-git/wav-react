@@ -5,6 +5,7 @@ import History from '../utility/History';
 import Page_50_X from './errorPages/Page_50_X';
 import SendInvite from './invites/SendInvite';
 import Register from './captainProfile/Register';
+import Makelist from './captainProfile/Makelist';
 import TasksList from './tasksList/TasksList';
 import VotersList from './voterList/VotersList';
 import Community from './community/Community';
@@ -21,8 +22,11 @@ const Router =() => (
 		<Switch>
 			<Route exact path = {routes.login}
 				   component = { Authorization(Login, [guest]) } />
+
 			<Route exact path = {routes.register}
 				   component = { Authorization(Register, [guest, captain, admin]) } />
+			<Route exact path = {routes.makelist}
+				   component = { Authorization(Makelist, [guest]) } />
 			<Route exact path = {routes.pageDown}
 				   component = { Page_50_X } />
 			<Route exact path = {routes.invites}

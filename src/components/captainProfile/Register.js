@@ -90,7 +90,7 @@ class Register extends Component {
 		};
 
 		return (
-			<div className='btw-register btw-container'>
+			<div className='btw-identity btw-register'>
 
 				<YouTube
 					videoId="2g811Eo7K8U"
