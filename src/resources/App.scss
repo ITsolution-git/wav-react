@@ -1,5 +1,79 @@
-@font-face {
-  font-family: Gotham;
-  src: url(fonts/Gotham_Rounded_Light.otf);
-}
+@import "./captainProfile/register.scss";
+@import "./captainProfile/makelist.scss";
 @import './login/login.scss';
+
+@font-face {
+	font-family: Gotham;
+	src: url(fonts/Gotham_Rounded_Light.otf);
+}
+
+.btw-identity {
+	$margin_top: 50px;
+	$max_width: 900px;
+
+	$font_size_title: 30px;
+	$font_size_desc: 17px;
+	$font_size_input: 17px;
+	$font_size_label: 15px;
+
+	$font_weight_normal: 400;
+	$font_weight_bold: 600;
+
+	$input_field_height: 50px;
+	$input_field_space: 30px;
+
+	margin: auto;
+    margin-top: $margin_top;
+    width: $max_width;
+    text-align: center;
+    font-family: Verdana,Arial,sans-serif;
+
+    .intro {
+        margin-top: $margin_top;
+        text-align: center;
+    }
+
+    .intro-title {
+        font-size: $font_size_title;
+    }
+
+    .intro-desc {
+        margin-top: 30px;
+        font-size: $font_size_desc;
+    }
+
+    form {
+        width: $max_width - 300px;
+        margin: auto;
+        margin-top: 70px;
+
+        label {
+            margin-bottom: 15px;
+            font-weight: $font_weight_normal;
+            font-size: $font_size_label;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #D3D6DC;
+            vertical-align: middle;
+            color: #0D1C3D;
+            height: $input_field_height;
+            font-size: $font_size_input;
+    
+            &:focus {
+                border-color: #006BA6;
+            }
+		}
+		
+		span {
+			color: red;
+		}
+
+        .form-group {
+            margin-bottom: $input_field_space;
+        }
+    }
+}
