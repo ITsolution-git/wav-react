@@ -22,8 +22,9 @@ const Router =() => (
 		<Switch>
 			<Route exact path = {routes.login}
 				   component = { Authorization(Login, [guest], routes.login) } />
+
 			<Route exact path = {routes.register}
-				   component = { Authorization(Register, [guest]) } />
+				   component = { Authorization(Register, [guest, captain, admin]) } />
 			<Route exact path = {routes.makelist}
 				   component = { Authorization(Makelist, [guest]) } />
 			<Route exact path = {routes.pageDown}
