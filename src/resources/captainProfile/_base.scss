@@ -1,8 +1,6 @@
-@import '../shared/sizes.scss';
-@import '../shared/components.scss';
+.btw-identity {
 
-.btw-register {
-    margin: auto;
+	margin: auto;
     margin-top: $margin_top;
     width: $max_width;
     text-align: center;
@@ -12,7 +10,6 @@
         margin-top: $margin_top;
         text-align: center;
     }
-
 
     .intro-title {
         font-size: $font_size_title;
@@ -29,29 +26,20 @@
         margin-top: 70px;
 
         label {
-            @extend .btw-label;
             margin-bottom: 15px;
+            @extend .btw-label;
         }
 
         input {
             @extend .btw-input;
+		}
+		
+        span {
+          color: red;
         }
 
-        span {
-            color: red;
-        }
-        
         .form-group {
             margin-bottom: $input_field_space;
         }
-    }
-
-    #btn_signup button {
-        @extend .btw-button;
-        margin-top: $input_field_space;
-    }
-
-    .video {
-        width: 80%;
     }
 }

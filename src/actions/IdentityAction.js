@@ -5,6 +5,7 @@ import IdentityService from '../services/IdentityService'
 import History from '../utility/History'
 import authStorage  from '../storage/AuthStorage';
 import { redirectToHome } from '../helpers/AuthHelper';
+import routes from '../constants/Routes';
 
 const IdentityAction = {
 	setRedirectUrl,
@@ -94,7 +95,7 @@ function btwRegister(identity) {
 					dispatch(success(response));
 					localStorage.setItem('username', identity.username);
 					//show success page or redirect to login page with username
-					History.push('/captainProfile/Makelist');
+					History.push(routes.makelist);
 					History.go();
 				},
 				error => {
