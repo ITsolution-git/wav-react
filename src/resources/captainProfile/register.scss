@@ -25,9 +25,8 @@
         margin-top: 70px;
 
         label {
+            @extend .btw-label;
             margin-bottom: 15px;
-            font-weight: $font_weight_normal;
-            font-size: $font_size_label;
         }
 
         input {

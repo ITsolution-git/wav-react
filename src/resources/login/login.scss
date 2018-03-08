@@ -6,13 +6,12 @@
   align-items: center;
   justify-content: center;
   .btw-form {
+    margin-top: 8%;
     width: 30%;
     .form-group {
       label {
-        display: block;
+        @extend .btw-label;
         margin-bottom: 15px;
-        font-weight: $font_weight_normal;
-        font-size: $font_size_label;
       }
 
       input {
