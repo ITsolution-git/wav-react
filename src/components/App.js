@@ -1,24 +1,21 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Header from './layout/Header';
+import Footer from './layout/Footer';
 import Router from './Router';
 import '../resources/App.css';
 
 
 class App extends Component {
 
-
 	render() {
 		return (
 			<div className="App">
-				<Navbar />
+				<Header />
 				<Router />
 				<Footer />
 			</div>
 		);
 	}
 }
-
-
 
 export default App;
