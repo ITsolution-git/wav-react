@@ -21,7 +21,7 @@ const Router =() => (
 	<router history={ History }>
 		<Switch>
 			<Route exact path = {routes.login}
-				   component = { Authorization(Login, [guest], routes.login) } />
+				   component = { Authorization(Login, [guest]) } />
 
 			<Route exact path = {routes.register}
 				   component = { Authorization(Register, [guest, captain, admin]) } />

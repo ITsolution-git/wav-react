@@ -1,13 +1,14 @@
-@import "./captainProfile/register.scss";
-@import "./captainProfile/makelist.scss";
-@import './login/login.scss';
-
 @font-face {
 	font-family: Gotham;
 	src: url(fonts/Gotham_Rounded_Light.otf);
 }
 
+@import './captainProfile/register.scss';
+@import './captainProfile/makelist.scss';
+@import './login/login.scss';
+
 .btw-identity {
+
 	$margin_top: 50px;
 	$max_width: 900px;
 

@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import IdentityAction from "../../actions/IdentityAction";
 import YouTube from "react-youtube";
 
-import '../../resources/captainProfile/register.css'
 import { textValidation, emailValidation } from '../../utility/FormValidation'
 class Register extends Component {
 

@@ -1,17 +1,5 @@
-$margin_top: 50px;
-$max_width: 900px;
-
-$font_size_title: 30px;
-$font_size_desc: 17px;
-$font_size_input: 17px;
-$font_size_label: 15px;
-
-$font_weight_normal: 400;
-$font_weight_bold: 600;
-
-$input_field_height: 50px;
-$input_field_space: 30px;
-
+@import '../shared/sizes.scss';
+@import '../shared/components.scss';
 
 .btw-login {
   height: 100%;
@@ -21,47 +9,23 @@ $input_field_space: 30px;
   align-items: center;
   justify-content: center;
   .btw-form {
+    margin-top: 8%;
     width: 30%;
     .form-group {
       label {
-        display: block;
+        @extend .btw-label;
         margin-bottom: 15px;
-        font-weight: $font_weight_normal;
-        font-size: $font_size_label;
       }
 
       input {
-        display: block;
-        width: 100%;
-        padding: 14px;
-        border: 1px solid #D3D6DC;
-        vertical-align: middle;
-        color: #0D1C3D;
-        height: $input_field_height;
-        font-size: $font_size_input;
-
-        &:focus {
-          border-color: #006BA6;
-        }
+        @extend .btw-input
       }
     }
 
     button {
+      @extend .btw-button;
       width: 100%;
-      border: none;
-      border-radius: 0;
-      padding: 0 50px;
       margin-top: $input_field_space;
-      font-family: Verdana,Arial,sans-serif;
-      font-size: $font_size_input;
-      font-weight: $font_weight_bold;
-      height: $input_field_height + 10px;
-      background-color: #006BA6;
-      transition: background-color .2s ease,color .2s ease,border-color .2s ease;
-
-      &:hover {
-        background-color: #003B71;
-      }
     }
   }
 

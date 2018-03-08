@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import authStorage from '../../storage/AuthStorage';
-import { redirectToHome} from '../../helpers/AuthHelper';
+import { redirectToHome } from '../../helpers/AuthHelper';
 
 const Authorization = (RouteComponent, roles) => {
     return class WithAuthorization extends Component {
