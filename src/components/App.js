@@ -5,8 +5,7 @@ import Router from './Router';
 
 
 
-
-
+import '../resources/App.css'
 
 class App extends Component {
 
