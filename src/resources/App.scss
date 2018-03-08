@@ -3,9 +3,10 @@
 	src: url(fonts/Gotham_Rounded_Light.otf);
 }
 
-@import '../shared/sizes.scss';
-@import '../shared/components.scss';
-@import './captainProfile/base.scss';
-@import './captainProfile/register.scss';
-@import './captainProfile/makelist.scss';
-@import './login/login.scss';
+@import './shared/_sizes.scss';
+@import './shared/_components.scss';
+
+@import './captainProfile/_base.scss';
+@import './captainProfile/_register.scss';
+@import './captainProfile/_makelist.scss';
+@import './login/_login.scss';
