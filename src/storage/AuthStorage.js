@@ -8,6 +8,7 @@ export default {
 
 function saveTokenInfo(token) {
     const userObj = parseJwt(token);
+    userObj.role = userObj.role || roles.captain;
     localStorage.setItem('user', JSON.stringify(userObj));
 }
 
