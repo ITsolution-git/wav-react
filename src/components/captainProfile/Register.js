@@ -4,6 +4,7 @@ import IdentityAction from "../../actions/IdentityAction";
 import YouTube from "react-youtube";
 
 import '../../resources/captainProfile/register.css'
+import { textValidation, emailValidation } from '../../utility/FormValidation'
 class Register extends Component {
 
 
@@ -17,6 +18,14 @@ class Register extends Component {
 				password       : '',
 				confirmPassword: '',
 				email          : ''
+			},
+			isValid:{
+				firstname      : true,
+				lastname       : true,
+				username       : true,
+				password       : true,
+				confirmPassword: true,
+				email          : true
 			}
 		}
 	}
@@ -29,7 +38,46 @@ class Register extends Component {
 		})
 	}
 
+	validateRegisterFields(field, event) {
+
+		let validation = Object.assign({}, this.state.isValid);
+
+		if ( field == 'email' ) {
+			validation[field] = emailValidation(event.target.value);
+		} else if ( field == 'confirmPassword' ) {
+			validation[field] = this.state.btwIdentity.password == event.target.value
+		} else {
+			validation[field] = textValidation(event.target.value);
+		}
+		this.setState({
+			isValid: validation
+		})
+	}
+
 	btwRegister(event) {
+
+		let validation = Object.assign({}, this.state.isValid);
+
+		for (let key in this.state.btwIdentity) {
+			if ( key == 'email' ) {
+				validation[key] = emailValidation(this.state.btwIdentity[key]);
+			} else if ( key == 'confirmPassword' ) {
+				validation[key] = this.state.btwIdentity.password == this.state.btwIdentity[key]
+			} else {
+				validation[key] = textValidation(this.state.btwIdentity[key]);
+			}
+		}
+
+		this.setState({
+			isValid: validation
+		})
+
+		for (let key in this.state.btwIdentity) {
+			if (validation[key] == false) {
+				return ;
+			}
+		}
+
 		this.props.btwRegister(this.state.btwIdentity)
 	}
 
@@ -68,14 +116,18 @@ class Register extends Component {
 							<label className="pull-left" htmlFor="firstname">First Name</label>
 							<input type="text" className="input-field" id="firstname" ref="firstname"
 								required="" aria-required="true"
-								onChange={this.updateRegisterFields.bind(this, 'firstname')}></input>
+								onChange={this.updateRegisterFields.bind(this, 'firstname')}
+								onBlur={this.validateRegisterFields.bind(this, 'firstname')}></input>
+							{ !this.state.isValid.firstname && <span className="pull-left">* First Name is not valid *</span> }
 						</div>
 
 						<div className="form-group col-xs-6">
 							<label className="pull-left" htmlFor="lastname">Last Name</label>
 							<input type="text" className="input-field" id="lastname" ref="lastname"
 								required="" aria-required="true"
-								onChange={this.updateRegisterFields.bind(this, 'lastname')}></input>
+								onChange={this.updateRegisterFields.bind(this, 'lastname')}
+								onBlur={this.validateRegisterFields.bind(this, 'lastname')}></input>
+							{ !this.state.isValid.lastname && <span className="pull-left">* Last Name is not valid *</span> }
 						</div>
 					</div>
 
@@ -83,28 +135,36 @@ class Register extends Component {
 						<label className="pull-left" htmlFor="username">Username</label>
 						<input type="text" className="input-field" id="username" ref="username"
 							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'username')}></input>
+							onChange={this.updateRegisterFields.bind(this, 'username')}
+							onBlur={this.validateRegisterFields.bind(this, 'username')}></input>
+						{ !this.state.isValid.username && <span className="pull-left">* Username is not valid *</span> }
 					</div>
 
 					<div className="form-group">
 						<label className="pull-left" htmlFor="email">Email</label>
 						<input type="email" className="input-field" id="email" ref="email"
 							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'email')}></input>
+							onChange={this.updateRegisterFields.bind(this, 'email')}
+							onBlur={this.validateRegisterFields.bind(this, 'email')}></input>
+						{ !this.state.isValid.email && <span className="pull-left">* Email is not valid *</span> }
 					</div>
 
 					<div className="form-group">
 						<label className="pull-left" htmlFor="password">Password</label>
 						<input type="password" className="input-field" id="password" ref="password"
 							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'password')}></input>
+							onChange={this.updateRegisterFields.bind(this, 'password')}
+							onBlur={this.validateRegisterFields.bind(this, 'password')}></input>
+						{ !this.state.isValid.password && <span className="pull-left">* Password is not valid *</span> }
 					</div>
 
 					<div className="form-group">
 						<label className="pull-left" htmlFor="confirmPassword">Confirm Password</label>
 						<input type="password" className="input-field" id="confirmPassword" ref="confirmPassword"
 							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}></input>
+							onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}
+							onBlur={this.validateRegisterFields.bind(this, 'confirmPassword')}></input>
+						{ !this.state.isValid.confirmPassword && <span className="pull-left">* Confirm Password is not valid *</span> }
 					</div>
 				</form>
 				<div id="btn_signup">

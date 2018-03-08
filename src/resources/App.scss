@@ -1,5 +1,6 @@
 @import "./captainProfile/register.scss";
 @import "./captainProfile/makelist.scss";
+@import './login/login.scss';
 
 @font-face {
 	font-family: Gotham;
@@ -65,7 +66,11 @@
             &:focus {
                 border-color: #006BA6;
             }
-        }
+		}
+		
+		span {
+			color: red;
+		}
 
         .form-group {
             margin-bottom: $input_field_space;

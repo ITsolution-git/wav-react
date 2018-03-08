@@ -1,8 +1,10 @@
+import localStorage from 'localStorage';
+
 import IdentityConstants from '../constants/IdentityConstants'
 import IdentityService from '../services/IdentityService'
 import History from '../utility/History'
-import localStorage from 'localStorage'
-
+import authStorage  from '../storage/AuthStorage';
+import { redirectToHome } from '../helpers/AuthHelper';
 
 const IdentityAction = {
 	setRedirectUrl,
@@ -33,14 +35,16 @@ function btwSignOn(username, password, source) {
 			.then(
 				response => {
 					dispatch(success(response, source));
+                    authStorage.saveTokenInfo(response.token);
+                    // TODO check for usages and remove this code
 					localStorage.setItem('token', response.token);
 					localStorage.setItem('issuedAt', response.issuedAt);
 					localStorage.setItem('expires', response.expires);
 					localStorage.setItem('loginSource', source);
 					localStorage.setItem('isAuthenticated', 'true');
 					localStorage.setItem('username', username);
-					History.push('landingPage/ContactsLandingPage');
-					History.go()
+
+					redirectToHome();
 				},
 				error => {
 					dispatch(failure(error));

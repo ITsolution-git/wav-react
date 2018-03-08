@@ -2,7 +2,7 @@ export const emailValidation = (...args) => {
 
   const checkIfValid = (element) => {
     if (typeof element === 'string') {
-      if (!(element.length <=30 && element.length >= 5 && !!(element.match(/.+@.+/)) ) ) {
+      if (!(element.length <=30 && element.length >= 5 && !!(element.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) ) ) {
         return false
       }
       return true;
@@ -16,7 +16,7 @@ export const emailValidation = (...args) => {
     if (typeof element === 'object') {
       let { email } = element;
       if (typeof email === "string") {
-          if (!(email.length <=30 && email.length >= 5 && !!(email.match(/.+@.+/)) ) ) {
+          if (!(email.length <=30 && email.length >= 5 && !!(email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) ) ) {
             return false
           }
         return true;
