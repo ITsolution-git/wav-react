@@ -1,0 +1,11 @@
+.btw-register {
+
+    #btn_signup button {
+        @extend .btw-button;
+        margin-top: $input_field_space;
+    }
+
+    .video {
+        width: 80%;
+    }
+}

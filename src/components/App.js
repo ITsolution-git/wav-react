@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Router from './Router';
-import '../resources/App.css';
+import '../styles/App.css';
 
 
 class App extends Component {
