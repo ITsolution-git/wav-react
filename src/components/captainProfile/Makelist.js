@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import IdentityAction from "../../actions/IdentityAction";
 import YouTube from "react-youtube";
 
-import '../../resources/captainProfile/makelist.css'
 import { textValidation } from '../../utility/FormValidation'
 class Makelist extends Component {
 
