@@ -22,7 +22,7 @@ const Router =() => (
 			<Route exact path = {routes.login}
 				   component = { Authorization(Login, [guest], routes.login) } />
 			<Route exact path = {routes.register}
-				   component = { Authorization(Register, [captain, admin]) } />
+				   component = { Authorization(Register, [guest, captain, admin]) } />
 			<Route exact path = {routes.pageDown}
 				   component = { Page_50_X } />
 			<Route exact path = {routes.invites}
