@@ -1,5 +1,13 @@
 .btw-header {
   .btw-off-header {
+    .navbar-nav {
+      width: 85%;
+      text-align: center;
+      > li {
+        float: none;
+        display: inline-block;
+      }
+    }
     nav {
       background-color: #F8FAFC;
       a {
@@ -15,5 +23,6 @@
   }
   .btw-logo {
     width: 60px;
+    margin-left: 2%;
   }
 }
