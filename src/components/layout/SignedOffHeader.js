@@ -29,7 +29,7 @@ export default class SignedOffHeader extends Component {
                             How you can contribute
                         </NavItem>
                     </Nav>
-                </Navbar>;
+                </Navbar>
             </Col>
         )
     }
