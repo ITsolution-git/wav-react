@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import GoogleAction from "../actions/GoogleAction";
+import GoogleAction from "../../actions/GoogleAction";
 
 class HeaderDropdown extends Component {
 

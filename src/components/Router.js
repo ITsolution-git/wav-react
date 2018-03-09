@@ -11,6 +11,13 @@ import VotersList from './voterList/VotersList';
 import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
+
+// static pages
+import WhyKp from './static/WhyKp';
+import ShopPlans from './static/ShopPlans';
+import DoctorsLocations from './static/DoctorsLocations';
+import HealthWellness from './static/HealthWellness';
+
 import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
 import roles from '../constants/Roles';
@@ -22,7 +29,6 @@ const Router =() => (
 		<Switch>
 			<Route exact path = {routes.login}
 				   component = { Authorization(Login, [guest]) } />
-
 			<Route exact path = {routes.register}
 				   component = { Authorization(Register, [guest, captain, admin]) } />
 			<Route exact path = {routes.makelist}
@@ -41,6 +47,11 @@ const Router =() => (
 				   component = { Authorization(CaptainsDashboard, [captain]) } />
 			<Route exact path = {routes.adminDashboard}
 				   component = { Authorization(AdminDashBoard, [admin]) } />
+			// static route pages
+            <Route exact path = {routes.whyKp} component = { WhyKp } />
+            <Route exact path = {routes.shopPlans} component = { ShopPlans } />
+            <Route exact path = {routes.doctorsLocations} component = { DoctorsLocations } />
+            <Route exact path = {routes.healthWellness} component = { HealthWellness } />
 		</Switch>
 	</router>
 );

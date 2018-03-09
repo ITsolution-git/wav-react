@@ -1,0 +1,13 @@
+@font-face {
+	font-family: Gotham;
+	src: url(../resources/fonts/Gotham_Rounded_Light.otf);
+}
+
+@import 'shared/sizes.scss';
+@import 'shared/components.scss';
+@import 'layout/header.scss';
+
+@import 'captainProfile/base.scss';
+@import 'captainProfile/register.scss';
+@import 'captainProfile/makelist.scss';
+@import 'login/login.scss';

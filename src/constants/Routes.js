@@ -8,5 +8,11 @@ export default {
     community: '/community',
     captainsDashboard: '/captainsDashboard',
     adminDashboard: '/adminDashboard',
-    login: '/'
+    login: '/',
+
+    // static pages
+    whyKp: '/whyKP',
+    shopPlans: '/shopPlans',
+    doctorsLocations: '/doctorsLocations',
+    healthWellness: '/healthWellness'
 }

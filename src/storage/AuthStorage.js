@@ -3,6 +3,7 @@ import roles from '../constants/Roles';
 export default {
     saveTokenInfo,
     getLoggedUser,
+    isAuthenticated,
     getCurrentRole
 };
 
@@ -18,6 +19,10 @@ function getLoggedUser() {
 
 function getCurrentRole() {
     return getLoggedUser().role || roles.guest;
+}
+
+function isAuthenticated() {
+    return !!getLoggedUser().email;
 }
 
 function parseJwt (token) {
