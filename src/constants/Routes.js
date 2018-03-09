@@ -11,8 +11,6 @@ export default {
     login: '/',
 
     // static pages
-    whyKp: '/whyKP',
-    shopPlans: '/shopPlans',
-    doctorsLocations: '/doctorsLocations',
-    healthWellness: '/healthWellness'
+    whyBetheWave: '/whyBetheWave',
+    howContribute: '/howYouCanContribute'
 }

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class DoctorsLocations extends Component {
+class HowContribute extends Component {
     render() {
         return (
             <div>
-                Doctors & Locations
+                How you can contribute
             </div>
         );
     }
 }
 
-export default DoctorsLocations;
+export default HowContribute;

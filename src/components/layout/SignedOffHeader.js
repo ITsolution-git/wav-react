@@ -22,20 +22,14 @@ export default class SignedOffHeader extends Component {
                 </Row>
                 <Navbar>
                     <Nav>
-                        <NavItem eventKey={1} onClick={() => this.onLink(routes.whyKp)} >
-                           Why KP
+                        <NavItem eventKey={1} onClick={() => this.onLink(routes.whyBetheWave)} >
+                           Why Bethewave
                         </NavItem>
-                        <NavItem eventKey={2} onClick={() => this.onLink(routes.shopPlans)} >
-                            Shop Plans
-                        </NavItem>
-                        <NavItem eventKey={3} onClick={() => this.onLink(routes.doctorsLocations)} >
-                            Doctors & Locations
-                        </NavItem>
-                        <NavItem eventKey={4} onClick={() => this.onLink(routes.healthWellness)} >
-                            Health & Wellness
+                        <NavItem eventKey={2} onClick={() => this.onLink(routes.howContribute)} >
+                            How you can contribute
                         </NavItem>
                     </Nav>
-                </Navbar>;
+                </Navbar>
             </Col>
         )
     }

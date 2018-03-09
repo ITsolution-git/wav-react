@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class HealthWellness extends Component {
+class WhyBethewave extends Component {
     render() {
         return (
             <div>
-                Health & Wellness
+                Why Bethewave
             </div>
         );
     }
 }
 
-export default HealthWellness;
+export default WhyBethewave;
