@@ -11,7 +11,6 @@ import VoterContants from '../constants/VoterConstants';
 const IdentityAction = {
 	setRedirectUrl,
 	btwSignOn,
-	btwMakelist,
 	btwRegister,
 	isSignedIn,
 	getBtwUserProfile
@@ -84,26 +83,6 @@ function btwSignOn(username, password, source) {
 			source    : source,
 			error     : error,
 			isError: true
-		}
-	}
-}
-
-function btwMakelist(makelist) {
-
-	return dispatch => {
-		return new Promise(resolve => {
-			setTimeout(() => {
-			  	resolve();
-			}, 10);
-		}).then(() => {
-			dispatch(persist(makelist));
-		});
-	}
-
-	function persist(makelist) {
-		return {
-			type           : VoterContants.VOTER_MAKELIST_PERSIST,
-			makelist       : makelist,
 		}
 	}
 }
