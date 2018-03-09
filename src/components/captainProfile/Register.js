@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import IdentityAction from "../../actions/IdentityAction";
 import YouTube from "react-youtube";
 
-import { textValidation, emailValidation } from '../../utility/FormValidation'
+import { textValidation, emailValidation, passwordValidation } from '../../utility/FormValidation'
 class Register extends Component {
 
 
@@ -43,6 +43,8 @@ class Register extends Component {
 
 		if ( field == 'email' ) {
 			validation[field] = emailValidation(event.target.value);
+		} else if ( field == 'password' ) {
+			validation[field] = passwordValidation(event.target.value);
 		} else if ( field == 'confirmPassword' ) {
 			validation[field] = this.state.btwIdentity.password == event.target.value
 		} else {
@@ -60,6 +62,8 @@ class Register extends Component {
 		for (let key in this.state.btwIdentity) {
 			if ( key == 'email' ) {
 				validation[key] = emailValidation(this.state.btwIdentity[key]);
+			} else if ( key == 'password' ) {
+				validation[key] = passwordValidation(this.state.btwIdentity[key]);
 			} else if ( key == 'confirmPassword' ) {
 				validation[key] = this.state.btwIdentity.password == this.state.btwIdentity[key]
 			} else {
