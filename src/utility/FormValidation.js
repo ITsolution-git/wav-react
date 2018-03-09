@@ -35,6 +35,43 @@ export const emailValidation = (...args) => {
   return booleanResult;
 }
 
+export const passwordValidation = (...args) => {
+
+  const checkIfValid = (element) => {
+    if (typeof element === 'string') {
+      if (!(element.length >= 6 && !!(element.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)) ) ) {
+        return false
+      }
+      return true;
+    }
+    if (Array.isArray(element)) {
+      let result = element.reduce((previous, current) => {
+        return previous && checkIfValid(current);
+      }, true)
+      return result //will be a boolean
+    }
+    if (typeof element === 'object') {
+      let { password } = element;
+      if (typeof password === "string") {
+          if (!(password.length >= 6 && !!(password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)) ) ) {
+            return false
+          }
+        return true;
+      }
+      return false;
+    }
+    // if given element is neither a string, object, nor array
+    return false;
+
+  }
+
+  let booleanResult = args.reduce((previousBoolean, currentArg) => {
+    return previousBoolean && checkIfValid(currentArg);
+  }, true)
+
+  return booleanResult;
+}
+
 //**Objects that include first name or last name fields must have the property names as 'firstName' or 'lastName'**
 export const textValidation = (...args) => {
 
