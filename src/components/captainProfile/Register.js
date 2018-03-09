@@ -167,7 +167,7 @@ class Register extends Component {
 							required="" aria-required="true"
 							onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}
 							onBlur={this.validateRegisterFields.bind(this, 'confirmPassword')}></input>
-						{ !this.state.isValid.confirmPassword && <span className="pull-left">* Confirm Password is not valid *</span> }
+						{ !this.state.isValid.confirmPassword && <span className="pull-left">* The passwords do not match *</span> }
 					</div>
 				</form>
 				<div id="btn_signup">
