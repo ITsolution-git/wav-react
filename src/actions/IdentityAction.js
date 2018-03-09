@@ -6,6 +6,7 @@ import History from '../utility/History'
 import authStorage  from '../storage/AuthStorage';
 import { redirectToHome } from '../helpers/AuthHelper';
 import routes from '../constants/Routes';
+import VoterContants from '../constants/VoterConstants';
 
 const IdentityAction = {
 	setRedirectUrl,
@@ -101,7 +102,7 @@ function btwMakelist(makelist) {
 
 	function persist(makelist) {
 		return {
-			type           : IdentityConstants.IDENTITY_MAKELIST_PERSIST,
+			type           : VoterContants.VOTER_MAKELIST_PERSIST,
 			makelist       : makelist,
 		}
 	}

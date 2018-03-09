@@ -3,6 +3,7 @@ import {getBtwUserProfile, isSignedIn, btwRegister, btwSignOn, btwMakelist} from
 import IdentityConstants from '../../constants/IdentityConstants'
 import isEqual from 'lodash/isequal'
 import {expect} from 'chai';
+import VoterContants from "../../constants/VoterConstants";
 
 
 const identity = {
@@ -120,7 +121,7 @@ describe('btwMakelist', () => {
 
 	it('should return the btwMakelist persist', () => {
 		expect(isEqual(btwMakelist({}, {
-			type           : IdentityConstants.IDENTITY_MAKELIST_PERSIST,
+			type           : VoterContants.VOTER_MAKELIST_PERSIST,
 			makelist	   : makelist
 		}), {
 			makelist       : makelist

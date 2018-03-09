@@ -5,6 +5,7 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import VoterContants from "../../constants/VoterConstants";
 
 
 const middlewares = [thunk];
@@ -167,7 +168,7 @@ describe('btwMakelist', () => {
 
 			const expectedActions = [
 				{
-					type       	   : IdentityConstants.IDENTITY_MAKELIST_PERSIST,
+					type       	   : VoterContants.VOTER_MAKELIST_PERSIST,
 					makelist       : makelist
 				},
 			]
