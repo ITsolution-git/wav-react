@@ -2,6 +2,7 @@ import {combineReducers} from "redux";
 import IdentityConstants from "../constants/IdentityConstants";
 import dateFromNum from 'date-from-num';
 import GoogleConstants from "../constants/GoogleConstants";
+import VoterContants from "../constants/VoterConstants";
 
 /*let token = localStorage.getItem('token');
 let tokenExpiryEpoc = localStorage.getItem('expires');

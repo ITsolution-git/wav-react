@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger'
+import logger from 'redux-logger';
+import { loadState, saveState } from '../storage/StateStorage';
 
-import { GoogleReducer, FacebookReducer, IdentityReducer } from '../reducers';
+import { GoogleReducer, FacebookReducer, IdentityReducer, VoterReducer } from '../reducers';
 
 
 
@@ -21,15 +22,29 @@ export default {
 		const combinedReducers = combineReducers({
 			google: GoogleReducer,
 			facebook: FacebookReducer,
-			identity: IdentityReducer
+			identity: IdentityReducer,
+			voter: VoterReducer
 		});
 
+		const persistedState = loadState();
 
 		if (initialState){
-			store = createStore(combinedReducers, initialState, applyMiddleware(thunk));
+			const state = Object.assign(initialState, persistedState);
+			store = createStore(combinedReducers, state, applyMiddleware(thunk));
 			return store
 		}
-		store  = createStore(combinedReducers, applyMiddleware(thunk, logger));
+		
+		store  = createStore(combinedReducers, persistedState, applyMiddleware(thunk, logger));
+
+		store.subscribe(() => {
+			saveState({
+				voter: {
+					btwMakelist: {
+						makelist: store.getState().voter.btwMakelist.makelist
+					}
+				}
+			});
+		})
 		return  store
 	}
 }

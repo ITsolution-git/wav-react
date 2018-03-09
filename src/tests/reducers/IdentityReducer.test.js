@@ -3,6 +3,7 @@ import {getBtwUserProfile, isSignedIn, btwRegister, btwSignOn} from "../../reduc
 import IdentityConstants from '../../constants/IdentityConstants'
 import isEqual from 'lodash/isequal'
 import {expect} from 'chai';
+import VoterContants from "../../constants/VoterConstants";
 
 
 const identity = {

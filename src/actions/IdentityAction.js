@@ -6,6 +6,7 @@ import History from '../utility/History'
 import authStorage  from '../storage/AuthStorage';
 import { redirectToHome } from '../helpers/AuthHelper';
 import routes from '../constants/Routes';
+import VoterContants from '../constants/VoterConstants';
 
 const IdentityAction = {
 	setRedirectUrl,

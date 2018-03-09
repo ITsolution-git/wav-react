@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import IdentityAction from "../../actions/IdentityAction";
+import VoterAction from "../../actions/VoterAction";
 import YouTube from "react-youtube";
 
 import { textValidation } from '../../utility/FormValidation'
@@ -69,6 +69,8 @@ class Makelist extends Component {
 				return ;
 			}
 		}
+
+		this.props.btwMakelist(this.state.makelistNames)
 	}
 
 	render() {
@@ -184,6 +186,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
+	btwMakelist: (makelist) => dispatch(VoterAction.btwMakelist(makelist))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Makelist);
