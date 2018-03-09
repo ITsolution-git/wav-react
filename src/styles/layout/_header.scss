@@ -33,5 +33,22 @@
       }
       background-color: #0D1C3D;
     }
+    .btw-avatar {
+      float: left;
+      margin-right: 12px;
+    }
+    .btw-nav-dropdown {
+      li {
+        list-style-type: none;
+        a {
+          color: grey;
+        }
+        .caret {
+          border-top: 9px dashed;
+          border-right: 12px solid transparent;
+          border-left: 12px solid transparent;
+        }
+      }
+    }
   }
 }
