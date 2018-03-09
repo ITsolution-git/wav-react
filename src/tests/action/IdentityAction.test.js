@@ -144,3 +144,37 @@ describe('btwRegister', () => {
 		})
 	})
 })
+
+
+/* Test Makelist */
+describe('btwMakelist', () => {
+
+	/* Persist Test */
+	describe('Persist makelist', () => {
+
+		const makelist = {
+			"firstname1" 	: "firstname1",
+			"lastname1" 	: "lastname1",
+			"firstname2"    : "firstname2",
+			"lastname3"		: "lastname2",
+			"firstname3" 	: "firstname3",
+			"lastname3" 	: "lastname3",
+			"firstname4"    : "firstname4",
+			"lastname4"		: "lastname4",
+		}
+
+		it('it should dispatch a success', () => {
+
+			const expectedActions = [
+				{
+					type       	   : IdentityConstants.IDENTITY_MAKELIST_PERSIST,
+					makelist       : makelist
+				},
+			]
+			const store = mockStore({response : []});
+			return store.dispatch( IdentityAction.btwMakelist( makelist ) ).then( () => {
+				expect(store.getActions()).to.deep.equal(expectedActions)
+			} )
+		})
+	})
+})

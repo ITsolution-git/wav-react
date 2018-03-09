@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger'
+import logger from 'redux-logger';
+import { loadState, saveState } from '../storage/LocalStorage';
 
 import { GoogleReducer, FacebookReducer, IdentityReducer } from '../reducers';
 
@@ -24,12 +25,25 @@ export default {
 			identity: IdentityReducer
 		});
 
+		const persistedState = loadState();
 
 		if (initialState){
-			store = createStore(combinedReducers, initialState, applyMiddleware(thunk));
+			const state = Object.assign(initialState, persistedState);
+			store = createStore(combinedReducers, state, applyMiddleware(thunk));
 			return store
 		}
-		store  = createStore(combinedReducers, applyMiddleware(thunk, logger));
+		
+		store  = createStore(combinedReducers, persistedState, applyMiddleware(thunk, logger));
+
+		store.subscribe(() => {
+			saveState({
+				identity: {
+					btwMakelist: {
+						makelist: store.getState().identity.btwMakelist.makelist
+					}
+				}
+			});
+		})
 		return  store
 	}
 }

@@ -1,5 +1,5 @@
 
-import {getBtwUserProfile, isSignedIn, btwRegister, btwSignOn} from "../../reducers/IdentityReducer";
+import {getBtwUserProfile, isSignedIn, btwRegister, btwSignOn, btwMakelist} from "../../reducers/IdentityReducer";
 import IdentityConstants from '../../constants/IdentityConstants'
 import isEqual from 'lodash/isequal'
 import {expect} from 'chai';
@@ -17,6 +17,17 @@ const response = {
 const error = {
 	status: 503,
 	message: 'something went wrong'
+}
+
+const makelist = {
+	"firstname1" 	: "firstname1",
+	"lastname1" 	: "lastname1",
+	"firstname2"    : "firstname2",
+	"lastname3"		: "lastname2",
+	"firstname3" 	: "firstname3",
+	"lastname3" 	: "lastname3",
+	"firstname4"    : "firstname4",
+	"lastname4"		: "lastname4",
 }
 
 describe('getBtwUserProfile', () => {
@@ -99,6 +110,22 @@ describe('btwRegister', () => {
 		})).to.be.true
 	});
 
+})
+
+describe('btwMakelist', () => {
+
+	it('should return the btwMakelist initial state', () => {
+		expect(isEqual(btwMakelist({}, {}), {})).to.be.true
+	});
+
+	it('should return the btwMakelist persist', () => {
+		expect(isEqual(btwMakelist({}, {
+			type           : IdentityConstants.IDENTITY_MAKELIST_PERSIST,
+			makelist	   : makelist
+		}), {
+			makelist       : makelist
+		})).to.be.true
+	});
 })
 
 describe('btwSignOn', ()=> {

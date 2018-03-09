@@ -10,6 +10,7 @@ import routes from '../constants/Routes';
 const IdentityAction = {
 	setRedirectUrl,
 	btwSignOn,
+	btwMakelist,
 	btwRegister,
 	isSignedIn,
 	getBtwUserProfile
@@ -82,6 +83,26 @@ function btwSignOn(username, password, source) {
 			source    : source,
 			error     : error,
 			isError: true
+		}
+	}
+}
+
+function btwMakelist(makelist) {
+
+	return dispatch => {
+		return new Promise(resolve => {
+			setTimeout(() => {
+			  	resolve();
+			}, 10);
+		}).then(() => {
+			dispatch(persist(makelist));
+		});
+	}
+
+	function persist(makelist) {
+		return {
+			type           : IdentityConstants.IDENTITY_MAKELIST_PERSIST,
+			makelist       : makelist,
 		}
 	}
 }

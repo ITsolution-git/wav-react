@@ -86,6 +86,21 @@ export function btwRegister(state = {}, action) {
 	}
 }
 
+export function btwMakelist(state = {}, action) {
+
+	switch (action.type) {
+
+		case IdentityConstants.IDENTITY_MAKELIST_PERSIST:
+			return Object.assign({}, state, {
+				makelist: action.makelist
+			});
+
+		default:
+			return state
+
+	}
+}
+
 export function isSignedIn(state = {
 	isAuthenticated: false
 }, action) {
@@ -151,6 +166,7 @@ const IdentityReducer = combineReducers({
 	btwSignOn,
 	btwRegister,
 	isSignedIn,
+	btwMakelist,
 	getBtwUserProfile
 })
 

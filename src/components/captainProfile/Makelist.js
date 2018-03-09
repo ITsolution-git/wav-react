@@ -69,6 +69,8 @@ class Makelist extends Component {
 				return ;
 			}
 		}
+
+		this.props.btwMakelist(this.state.makelistNames)
 	}
 
 	render() {
@@ -184,6 +186,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
+	btwMakelist: (makelist) => dispatch(IdentityAction.btwMakelist(makelist))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Makelist);

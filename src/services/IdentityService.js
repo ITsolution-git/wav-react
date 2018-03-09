@@ -66,7 +66,6 @@ function getUserProfile(token, username) {
 		}
 	})
 		.then(response => {
-			console.log('Service ' + response)
 			if (response.data.status !== 200) {
 				return Promise.reject(response.data);
 			}
