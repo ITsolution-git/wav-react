@@ -17,12 +17,21 @@
         color: black;
       }
     }
+    .btw-logo {
+      width: 60px;
+      margin-left: 2%;
+    }
   }
-  .btw-on-header {
 
-  }
-  .btw-logo {
-    width: 60px;
-    margin-left: 2%;
+  .btw-on-header {
+    nav {
+      a {
+        color: white;
+      }
+      a:hover {
+        color: #DBE8F8;
+      }
+      background-color: #0D1C3D;
+    }
   }
 }
