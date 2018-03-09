@@ -17,12 +17,41 @@
         color: black;
       }
     }
+    .btw-logo {
+      width: 60px;
+      margin-left: 2%;
+    }
   }
-  .btw-on-header {
 
-  }
-  .btw-logo {
-    width: 60px;
-    margin-left: 2%;
+  .btw-on-header {
+    nav {
+      a {
+        color: white;
+      }
+      a:hover {
+        color: #DBE8F8;
+      }
+      a:focus {
+        color: white;
+      }
+      background-color: #0D1C3D;
+    }
+    .btw-avatar {
+      float: left;
+      margin-right: 12px;
+    }
+    .btw-nav-dropdown {
+      li {
+        list-style-type: none;
+        a {
+          color: grey;
+        }
+        .caret {
+          border-top: 9px dashed;
+          border-right: 12px solid transparent;
+          border-left: 12px solid transparent;
+        }
+      }
+    }
   }
 }

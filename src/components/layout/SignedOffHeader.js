@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Col, Row, Image, Navbar, Nav, NavItem } from 'react-bootstrap';
-import History from '../../utility/History';
 
 import logo  from '../../resources/images/logo.png';
 import { redirectToHome } from '../../helpers/AuthHelper';
 import routes from '../../constants/Routes';
 
-export default class SignedOffHeader extends Component {
+class SignedOffHeader extends Component {
+    constructor(props, context) {
+        super(props, context);
+    }
+
     onLink = (route) => {
-        History.push(route);
-        History.go()
+        this.props.history.push(route)
     };
 
     render() {
@@ -34,3 +37,5 @@ export default class SignedOffHeader extends Component {
         )
     }
 }
+
+export default withRouter(SignedOffHeader);
