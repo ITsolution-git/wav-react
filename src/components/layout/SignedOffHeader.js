@@ -16,7 +16,7 @@ export default class SignedOffHeader extends Component {
         return (
             <Col className="btw-off-header">
                 <Row>
-                    <Col md={12}>
+                    <Col mdOffset={4} md={8}>
                         <Image src={logo} className='btw-logo' onClick={redirectToHome} />
                     </Col>
                 </Row>
