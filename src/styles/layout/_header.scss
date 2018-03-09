@@ -1,8 +1,19 @@
 .btw-header {
   .btw-off-header {
-
+    nav {
+      background-color: #F8FAFC;
+      a {
+        color: #353C4C;
+      }
+      a:hover {
+        color: black;
+      }
+    }
   }
   .btw-on-header {
 
+  }
+  .btw-logo {
+    width: 60px;
   }
 }

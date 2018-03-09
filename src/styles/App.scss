@@ -3,11 +3,11 @@
 	src: url(../resources/fonts/Gotham_Rounded_Light.otf);
 }
 
-@import 'shared/sizes';
-@import 'shared/components';
-@import 'layout/header';
+@import 'shared/sizes.scss';
+@import 'shared/components.scss';
+@import 'layout/header.scss';
 
-@import 'captainProfile/base';
-@import 'captainProfile/register';
-@import 'captainProfile/makelist';
-@import 'login/login';
+@import 'captainProfile/base.scss';
+@import 'captainProfile/register.scss';
+@import 'captainProfile/makelist.scss';
+@import 'login/login.scss';
