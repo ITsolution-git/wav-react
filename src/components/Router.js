@@ -13,10 +13,8 @@ import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
 
 // static pages
-import WhyKp from './static/WhyKp';
-import ShopPlans from './static/ShopPlans';
-import DoctorsLocations from './static/DoctorsLocations';
-import HealthWellness from './static/HealthWellness';
+import WhyBethewave from './static/WhyBethewave';
+import HowContribute from './static/HowContribute';
 
 import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
@@ -48,10 +46,8 @@ const Router =() => (
 			<Route exact path = {routes.adminDashboard}
 				   component = { Authorization(AdminDashBoard, [admin]) } />
 			// static route pages
-            <Route exact path = {routes.whyKp} component = { WhyKp } />
-            <Route exact path = {routes.shopPlans} component = { ShopPlans } />
-            <Route exact path = {routes.doctorsLocations} component = { DoctorsLocations } />
-            <Route exact path = {routes.healthWellness} component = { HealthWellness } />
+            <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
+            <Route exact path = {routes.howContribute} component = { HowContribute } />
 		</Switch>
 	</router>
 );
