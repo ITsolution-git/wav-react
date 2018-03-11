@@ -33,3 +33,28 @@
   font-weight: $font_weight_normal;
   font-size: $font_size_label;
 }
+
+.btw-select {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid #D3D6DC;
+  vertical-align: middle;
+  color: #0D1C3D;
+  height: $input_field_height;
+  font-size: $font_size_input;
+  background-color: white;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+
+  background: url(https://upload.wikimedia.org/wikipedia/commons/f/f1/MediaWiki_Vector_skin_action_arrow.svg) 96% / 8% no-repeat;
+
+  &:focus {
+    border-color: #006BA6;
+  }
+}

@@ -11,6 +11,7 @@ import VotersList from './voterList/VotersList';
 import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
+import VoterDetail from './voter/VoterDetail';
 
 // static pages
 import WhyBethewave from './static/WhyBethewave';
@@ -45,6 +46,8 @@ const Router =() => (
 				   component = { Authorization(CaptainsDashboard, [captain]) } />
 			<Route exact path = {routes.adminDashboard}
 				   component = { Authorization(AdminDashBoard, [admin]) } />
+			<Route exact path = {routes.voterDetail}
+				   component = { Authorization(VoterDetail, [admin, guest]) } />
 			// static route pages
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
             <Route exact path = {routes.howContribute} component = { HowContribute } />
