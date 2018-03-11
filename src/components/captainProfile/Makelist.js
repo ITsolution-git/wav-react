@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import VoterAction from "../../actions/VoterAction";
 import YouTube from "react-youtube";
+import routes from '../../constants/Routes';
+import History from '../../utility/History';
 
 import { textValidation } from '../../utility/FormValidation'
 class Makelist extends Component {
@@ -71,6 +73,9 @@ class Makelist extends Component {
 		}
 
 		this.props.btwMakelist(this.state.makelistNames)
+
+		History.push(routes.voterDetail, {'voter_num': 1});
+		History.go();
 	}
 
 	render() {
