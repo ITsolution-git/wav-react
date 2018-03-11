@@ -9,6 +9,7 @@ export default {
     captainsDashboard: '/captainsDashboard',
     adminDashboard: '/adminDashboard',
     login: '/',
+    voterDetail: '/voterDetail',
 
     // static pages
     whyBetheWave: '/whyBetheWave',
