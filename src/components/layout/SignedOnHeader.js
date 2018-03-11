@@ -23,7 +23,6 @@ class SignedOnHeader extends Component {
 
     getCaptainLinks = () => {
         return [
-            { route: routes.register, title: 'Register' },
             { route: routes.invites, title: 'Invites' },
             { route: routes.tasksList, title: 'Tasks' },
             { route: routes.voterList, title: 'Voters' },
@@ -34,7 +33,6 @@ class SignedOnHeader extends Component {
 
     getAdminLinks = () => {
         return [
-            { route: routes.register, title: 'Register' },
             { route: routes.invites, title: 'Invites' },
             { route: routes.community, title: 'Community' },
             { route: routes.adminDashboard, title: 'Dashboard' }
