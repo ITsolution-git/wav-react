@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux'
-import VoterAction from "../../actions/VoterAction";
-import YouTube from "react-youtube";
+import {connect} from 'react-redux';
 
-import { textValidation } from '../../utility/FormValidation'
+import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
 class VoterDetail extends Component {
 
 
@@ -34,15 +32,70 @@ class VoterDetail extends Component {
 	}
 
 	updateVoterFields(field, event) {
+
 		let fields = Object.assign({}, this.state.voterDetail);
 		fields[field] = event.target.value;
+
 		this.setState({
 			voterDetail: fields
+		})
+
+		// check if it is valid for select tag
+		if ( field === "state" || field === "gender" ) {
+
+			let validation = Object.assign({}, this.state.isValid);
+			validation[field] = event.target.value == "" ? false : true;
+
+			this.setState({
+				isValid: validation
+			})
+		}
+	}
+
+	validateVoterFields(field, event) {
+
+		let validation = Object.assign({}, this.state.isValid);
+
+		if (field === "email") {
+			validation[field] = emailValidation(event.target.value);
+		} else if (field === "phone") {
+			validation[field] = phoneValidation(parseInt(event.target.value));
+		} else if (field === "zip") {
+			validation[field] = zipCodeValidation(event.target.value);
+		} else {
+			validation[field] = event.target.value == "" ? false : true;
+		}
+
+		this.setState({
+			isValid: validation
 		})
 	}
     
     onNext(event) {
-		console.log(this.state.voterDetail);
+		
+		let validation = Object.assign({}, this.state.isValid);
+
+		for (let key in this.state.voterDetail) {
+			if (key === "email") {
+				validation[key] = emailValidation(this.state.voterDetail[key]);
+			} else if (key === "phone") {
+				validation[key] = phoneValidation(parseInt(this.state.voterDetail[key]));
+			} else if (key === "zip") {
+				validation[key] = zipCodeValidation(this.state.voterDetail[key]);
+			} else {
+				validation[key] = this.state.voterDetail[key] == "" ? false : true;
+			}
+		}
+
+		this.setState({
+			isValid: validation
+		})
+
+		for (let key in this.state.makelistNames) {
+			if (validation[key] == false) {
+				return ;
+			}
+		}
 	}
 
 	render() {
@@ -70,7 +123,9 @@ class VoterDetail extends Component {
 							<label className="pull-left" htmlFor="city">City</label>
 							<input type="text" className="input-field" id="city" ref="city"
 								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'city')}></input>
+								onChange={this.updateVoterFields.bind(this, 'city')}
+								onBlur={this.validateVoterFields.bind(this, 'city')}></input>
+							{ !this.state.isValid.city && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 
 						<div className="form-group col-xs-6">
@@ -78,12 +133,13 @@ class VoterDetail extends Component {
 							<select className="input-field" id="state" ref="state"
 								required="" aria-required="true"
 								onChange={this.updateVoterFields.bind(this, 'state')}>
-								<option></option>
+								<option value=""></option>
 								<option value="CA">CA</option>
 								<option value="TX">TX</option>
 								<option value="FL">FL</option>
 								<option value="CO">CO</option>
 							</select>
+							{ !this.state.isValid.state && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 					</div>
 
@@ -92,7 +148,9 @@ class VoterDetail extends Component {
 							<label className="pull-left" htmlFor="address">Address</label>
 							<input type="text" className="input-field" id="address" ref="address"
 								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'address')}></input>
+								onChange={this.updateVoterFields.bind(this, 'address')}
+								onBlur={this.validateVoterFields.bind(this, 'address')}></input>
+							{ !this.state.isValid.address && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 					</div>
 
@@ -101,7 +159,9 @@ class VoterDetail extends Component {
 							<label className="pull-left" htmlFor="birthday">Birthday</label>
 							<input type="date" className="input-field" id="birthday" ref="birthday"
 								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'birthday')}></input>
+								onChange={this.updateVoterFields.bind(this, 'birthday')}
+								onBlur={this.validateVoterFields.bind(this, 'birthday')}></input>
+							{ !this.state.isValid.birthday && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 
 						<div className="form-group col-xs-6">
@@ -109,10 +169,11 @@ class VoterDetail extends Component {
 							<select className="input-field" id="gender" ref="gender"
 								required="" aria-required="true"
 								onChange={this.updateVoterFields.bind(this, 'gender')}>
-								<option></option>
+								<option value=""></option>
 								<option value="male">Male</option>
 								<option value="female">Female</option>
 							</select>
+							{ !this.state.isValid.gender && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 					</div>
 
@@ -121,16 +182,20 @@ class VoterDetail extends Component {
 							<label className="pull-left" htmlFor="email">Email</label>
 							<input type="email" className="input-field" id="email" ref="email"
 								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'email')}></input>
+								onChange={this.updateVoterFields.bind(this, 'email')}
+								onBlur={this.validateVoterFields.bind(this, 'email')}></input>
+							{ !this.state.isValid.email && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 					</div>
 
 					<div className="row">
 						<div className="form-group col-xs-12">
 							<label className="pull-left" htmlFor="phone">Phone</label>
-							<input type="tel" className="input-field" id="phone" ref="phone"
+							<input type="number" className="input-field" id="phone" ref="phone"
 								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'phone')}></input>
+								onChange={this.updateVoterFields.bind(this, 'phone')}
+								onBlur={this.validateVoterFields.bind(this, 'phone')}></input>
+							{ !this.state.isValid.phone && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 					</div>
 
@@ -139,7 +204,9 @@ class VoterDetail extends Component {
 							<label className="pull-left" htmlFor="zip">Zip</label>
 							<input type="text" className="input-field" id="zip" ref="zip"
 								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'zip')}></input>
+								onChange={this.updateVoterFields.bind(this, 'zip')}
+								onBlur={this.validateVoterFields.bind(this, 'zip')}></input>
+							{ !this.state.isValid.zip && <span className="pull-left">* Input is not valid *</span> }
 						</div>
 					</div>
 
