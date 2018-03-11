@@ -1,4 +1,4 @@
-import IdentityAction from "../../actions/IdentityAction";
+import IdentityAction from "../../actions/SignOnAction";
 import IdentityConstants from "../../constants/IdentityConstants";
 import { expect } from 'chai'
 import configureMockStore from 'redux-mock-store'
