@@ -43,12 +43,10 @@ export function btwRegister(identity) {
 
 export function getBtwUserProfile() {
 	return dispatch => {
-		let token = localStorage.getItem('token');
-		let username = localStorage.getItem('username');
 		dispatch(initializeRequest(appDataTypes.profile));
-		return IdentityService.getUserProfile(token, username).then(
+		return IdentityService.getUserProfile(authStorage.getToken(), authStorage.getLoggedUser().username).then(
 				response => {
-					dispatch(loadDataSuccess(appDataTypes.profile, response))
+					dispatch(loadDataSuccess(appDataTypes.profile, response.userInformation))
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.profile, error.data));

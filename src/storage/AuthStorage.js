@@ -4,6 +4,7 @@ export default {
     saveTokenInfo,
     getLoggedUser,
     isAuthenticated,
+    getToken,
     getCurrentRole
 };
 
@@ -16,6 +17,10 @@ function saveTokenInfo(token) {
 
 function getLoggedUser() {
     return JSON.parse(localStorage.getItem('user')) || {};
+}
+
+function getToken() {
+    return localStorage.getItem('token');
 }
 
 function getCurrentRole() {
