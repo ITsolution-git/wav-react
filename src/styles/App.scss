@@ -5,6 +5,7 @@
 	src: url(../resources/fonts/Gotham_Rounded_Light.otf);
 }
 
+@import 'shared/style.scss';
 @import 'shared/sizes.scss';
 @import 'shared/components.scss';
 @import 'layout/header.scss';
@@ -15,5 +16,7 @@
 
 @import 'voter/base.scss';
 @import 'voter/detail.scss';
+
+@import 'errorPages/general.scss';
 
 @import 'login/login.scss';

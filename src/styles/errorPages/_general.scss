@@ -1,0 +1,10 @@
+.btw-error {
+    width: $max_width;
+    text-align: center;
+    margin: auto;
+    margin-top: 20vh;
+
+    .btn-general-go-back {
+        @extend .btw-button;
+    }
+}
