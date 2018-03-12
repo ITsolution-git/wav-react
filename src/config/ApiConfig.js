@@ -1,0 +1,1 @@
+export const testApiHost = 'https://btwapi-18.herokuapp.com';

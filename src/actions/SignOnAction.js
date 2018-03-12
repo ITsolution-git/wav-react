@@ -44,43 +44,19 @@ export function btwRegister(identity) {
 	};
 }
 
-function getBtwUserProfile() {
+export function getBtwUserProfile() {
 	return dispatch => {
 		let token = localStorage.getItem('token');
 		let username = localStorage.getItem('username');
-		dispatch(request(token));
-		return IdentityService.getUserProfile(token, username)
-			.then(
+		dispatch(initializeRequest(appDataTypes.profile));
+		return IdentityService.getUserProfile(token, username).then(
 				response => {
-					dispatch(success(response))
+					dispatch(loadDataSuccess(appDataTypes.profile, response))
 				},
 				error => {
-					dispatch(failure(error.data));
+					dispatch(loadDataFailure(appDataTypes.profile, error.data));
 				})
-	}
-	//if at this point, Token has expired, Clear the cookies, Route the user to login page
-
-	function request(token) {
-		return {
-			type: IdentityConstants.IDENTITY_BTW_USERPROFILE_REQUEST,
-			token: token
-		}
-	}
-
-	function success(response) {
-		return {
-			type: IdentityConstants.IDENTITY_BTW_USERPROFILE_SUCCESS,
-			response: response
-		}
-	}
-
-	function failure(error) {
-		return {
-			type: IdentityConstants.IDENTITY_BTW_USERPROFILE_FAILURE,
-			error: error
-
-		}
-	}
+	};
 }
 
 function validateTokenValidity(expires, issuedAt){
