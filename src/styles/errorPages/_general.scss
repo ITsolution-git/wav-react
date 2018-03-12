@@ -2,9 +2,18 @@
     width: $max_width;
     text-align: center;
     margin: auto;
-    margin-top: 20vh;
+    margin-top: 10vh;
 
     .btn-general-go-back {
         @extend .btw-button;
+    }
+
+    div {
+        border: 1px solid red;
+        padding: 30px;
+    }
+
+    img {
+        margin-bottom: 40px;
     }
 }

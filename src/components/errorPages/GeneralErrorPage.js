@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import routes from '../../constants/Routes';
 import History from '../../utility/History';
+import exclamation from '../../resources/images/exclamation.png';
 
 class GeneralErrorPage extends Component {
 
@@ -19,6 +20,7 @@ class GeneralErrorPage extends Component {
 
         return (
             <div className='btw-error'>
+                <img src={ exclamation } width={150} height={150}></img>
                 <div>
                     <h3>Sorry ....Something went wrong .... Please try again later</h3>
                     <br/><br/><br/>
