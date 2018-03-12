@@ -1,83 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 
-import GoogleAction from '../actions/GoogleAction';
-import IdentityAction from '../actions/IdentityAction';
-import { googleClientId,  api_Key } from '../config/ApiKeys';
-
+import appDataTypes from '../constants/AppDataTypes';
+import { btwSignOn } from '../actions/SignOnAction';
 
 class Login extends Component {
-
-	constructor() {
-		super();
+	constructor(props, context) {
+		super(props, context);
 		this.state = {
-			google         : {
-				socialId         : googleClientId,
-				apiKey           : api_Key,
-				fetchBasicProfile: false,
-				contacts         : '',
-				accessInformation: ''
-			},
-			facebook       : {},
-			isFetching     : false,
-			isAuthenticated: false,
-			btwIdentity    : {
-				username: '',
-				password: ''
-			}
-		}
+			username: '',
+			password: ''
+        };
 	}
 
-
-	updateLogonFields(field, event) {
-		let identity = Object.assign({}, this.state.btwIdentity);
-		identity [field] = event.target.value;
-		this.setState({
-			btwIdentity: identity
-		})
-	}
+	updateLogonFields = (event, field) => {
+		this.setState({[field]: event.target.value});
+	};
 
 	btwSignOn() {
-		this.props.btwSignOn(this.state.btwIdentity, 'btw');
-	}
-
-	componentDidMount() {
-		//this.props.isSignedIn('login');
-		//this.props.initializeGoogle(this.state.google, 'google');
+		const { username, password } = this.state;
+		this.props.actions.btwSignOn(username, password, 'btw');
 	}
 
 	render() {
-		const { isError } = this.props;
+		const { error } = this.props;
 
 		return (
 			<div className="btw-login">
 				<div className="btw-form">
                     <div className="card-content">
                         <p id="loginHeader">Log into your account</p>
-                        { isError && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
+                        { error && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
                     </div>
                     <div className="form-group">
                         <label className="pull-left">Username</label>
                         <input type="text" className="input-field" id="username" ref="username"
                                required="" aria-required="true"
-                               onChange={this.updateLogonFields.bind(this, 'username')}></input>
+                               onChange={event => this.updateLogonFields(event, 'username')} />
                     </div>
                     <div className="form-group">
                         <label className="pull-left">Password</label>
                         <input type="password" className="input-field" id="password" ref="password"
                                required="" aria-required="true"
-                               onChange={this.updateLogonFields.bind(this, 'password')}></input>
+                               onChange={event => this.updateLogonFields(event, 'password')} />
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary" onClick={this.btwSignOn.bind(this, 'btwSignOn')}>
                             Login
                         </button>
                     </div>
-                    {/*<div id="googlebtn" className='btn-general btn'>*/}
-                    {/*<span className='icon'></span>*/}
-                    {/*<span className="btw-buttonText">Login with Google</span>*/}
-                    {/*</div>*/}
                     <h8>Not registered? <Link to='/captainProfile/Register'>Register as a Captain</Link></h8>
 				</div>
 			</div>
@@ -86,17 +59,14 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-	const { isError } = state.identity.btwSignOn;
-	return {
-		isError
-	}
-}
+	const { error } = state.app[appDataTypes.signOn];
+	return { error };
+};
 
-
-const mapDispatchToProps = (dispatch) => ({
-	initializeGoogle: (google, source) => dispatch(GoogleAction.initGoogle(google.socialId, google.fetchBasicProfile, source)),
-	isSignedIn      : (page) => dispatch(GoogleAction.isSignedIn(page)),
-	btwSignOn       : (btwIdentity, source) => dispatch(IdentityAction.btwSignOn(btwIdentity.username, btwIdentity.password, source))
-})
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators({ btwSignOn }, dispatch)
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

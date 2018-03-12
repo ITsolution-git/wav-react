@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import IdentityAction from "../../actions/IdentityAction";
+import { btwRegister } from "../../actions/SignOnAction";
 import YouTube from "react-youtube";
 
 import { textValidation, emailValidation, passwordValidation } from '../../utility/FormValidation'
@@ -184,7 +184,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-	btwRegister: (btwIdentity) => dispatch(IdentityAction.btwRegister(btwIdentity))
+	btwRegister: (btwIdentity) => dispatch(btwRegister(btwIdentity))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
