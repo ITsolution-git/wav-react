@@ -86,8 +86,6 @@ class Register extends Component {
 
 	render() {
 		const opts = {
-			height: '390',
-			width: '640',
 			playerVars: { // https://developers.google.com/youtube/player_parameters
 			  autoplay: 0
 			}
@@ -96,12 +94,14 @@ class Register extends Component {
 		return (
 			<div className='btw-identity btw-register'>
 
-				<YouTube
-					videoId="2g811Eo7K8U"
-					opts={opts}
-					className="video"
-					onReady={this._onReady}
-				/>
+				<div>
+					<YouTube
+						videoId="2g811Eo7K8U"
+						opts={opts}
+						className="video"
+						onReady={this._onReady}
+					/>
+				</div>
 
 				<div className="intro">
 					<p className="intro-title">
