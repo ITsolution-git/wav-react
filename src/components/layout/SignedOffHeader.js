@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Col, Row, Image, Navbar, Nav, NavItem } from 'react-bootstrap';
 
+import BaseComponent from '../../components/shared/BaseComponent';
 import logo  from '../../resources/images/logo.png';
-import { redirectToHome } from '../../helpers/AuthHelper';
+import { getHomeRoute } from '../../helpers/AuthHelper';
 import routes from '../../constants/Routes';
 
-class SignedOffHeader extends Component {
+class SignedOffHeader extends BaseComponent {
     constructor(props, context) {
         super(props, context);
     }
-
-    onLink = (route) => {
-        this.props.history.push(route)
-    };
 
     render() {
         return (
             <Col className="btw-off-header">
                 <Row>
                     <Col mdOffset={4} md={8}>
-                        <Image src={logo} className='btw-logo' onClick={redirectToHome} />
+                        <Image src={logo} className='btw-logo' onClick={() => this.onLink(getHomeRoute())} />
                     </Col>
                 </Row>
                 <Navbar>

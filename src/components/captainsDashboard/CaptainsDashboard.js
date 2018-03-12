@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import appDataTypes from '../../constants/AppDataTypes';
+
 
 class CaptainsDashboard extends Component {
     render() {
@@ -10,4 +14,10 @@ class CaptainsDashboard extends Component {
     }
 }
 
-export default CaptainsDashboard;
+const mapStateToProps = (state) => {
+    const { data } = state.app[appDataTypes.profile];
+    return { profile: data };
+};
+
+
+export default connect(mapStateToProps)(CaptainsDashboard);

@@ -1,10 +1,8 @@
 import localStorage from 'localStorage';
 
-import IdentityConstants from '../constants/IdentityConstants'
 import IdentityService from '../services/IdentityService'
 import History from '../utility/History'
 import authStorage  from '../storage/AuthStorage';
-import { redirectToHome } from '../helpers/AuthHelper';
 import routes from '../constants/Routes';
 import appDataTypes from '../constants/AppDataTypes';
 import {
@@ -18,9 +16,8 @@ export function btwSignOn(username, password, source) {
 		dispatch(initializeRequest(appDataTypes.signOn));
 		IdentityService.login(username, password).then(
 			response => {
+                authStorage.saveTokenInfo(response.token);
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
-				authStorage.saveTokenInfo(response.token);
-				redirectToHome();
 			},
 			error => {
 				dispatch(loadDataFailure(appDataTypes.signOn, error.response.data.message));
