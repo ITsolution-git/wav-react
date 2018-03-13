@@ -1,4 +1,5 @@
 import History from '../utility/History';
+import localStorage from 'localStorage';
 
 import authStorage from '../storage/AuthStorage';
 import roles from '../constants/Roles';
@@ -19,5 +20,11 @@ export function getHomeRoute() {
 
 export function redirectToHome() {
     History.push(getHomeRoute());
+    History.go()
+}
+
+export function logout() {
+    localStorage.clear();
+    History.push(routes.login);
     History.go()
 }

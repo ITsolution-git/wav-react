@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { ApiHost } from '../config/ApiConfig';
+import { getAsync, postAsync } from '../helpers/RequestHelper';
 
 const IdentityService = {
 	login,
@@ -9,62 +11,41 @@ const IdentityService = {
 
 
 function login(username, password) {
-	return axios({
-		method : 'POST',
-		url    : 'https://btwapi-18.herokuapp.com/user/login',
-		data   : {
-			"username": username,
-			"password": password
+	return postAsync({
+		url: `${ApiHost}/user/login`,
+		data: {
+			username,
+			password
 		},
-		headers: {
-			"Content-Type": "application/json",
-		}
-	})
-		.then(response => {
-			if (!response.data.token) {
-				return Promise.reject(response.data);
-			}
-			return response.data;
-		})
-}
-
-function register(state) {
-    return axios({
-        method: 'POST',
-        url: 'https://btwapi-18.herokuapp.com/user/register',
-        data: {
-            "username": state.username,
-            "password": state.password,
-            "email": state.email,
-            "firstname": state.firstname,
-            "lastname": state.lastname
-        },
-        headers: {
-            "Content-Type": "application/json",
+		includeToken: false
+	}).then(response => {
+		if (!response.data.token) {
+            return Promise.reject(response.data);
         }
-    });
+        return response.data;
+	});
+}
+
+function register({ username, password, email, firstname, lastname}) {
+	return postAsync({
+		url: `${ApiHost}/user/register`,
+		data: {
+			username,
+			password,
+			email,
+			firstname,
+			lastname
+		},
+		includeToken: false
+	});
 }
 
 
-function getUserProfile(token, username) {
-	return axios({
-		method : 'GET',
-		url    : 'https://btwapi-18.herokuapp.com/api/v1/getUser',
-		params: {
-
-		},
-		headers: {
-			"Content-Type"  : "application/json",
-			"x-access-token": token,
-			"x-key": username
-		}
-	})
-		.then(response => {
-			if (response.data.status !== 200) {
-				return Promise.reject(response.data);
-			}
-			return response.data;
-		})
+function getUserProfile(username) {
+	return getAsync({
+		url: `${ApiHost}/api/v1/getUser`,
+		headers: {'x-key': username }
+	});
 }
 
 
