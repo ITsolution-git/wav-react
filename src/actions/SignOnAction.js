@@ -47,7 +47,7 @@ export function getBtwUserProfile() {
 					dispatch(loadDataSuccess(appDataTypes.profile, response.data.userInformation))
 				},
 				error => {
-					dispatch(loadDataFailure(appDataTypes.profile, error.data));
+					dispatch(loadDataFailure(appDataTypes.profile, error));
 				})
 	};
 }

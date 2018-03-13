@@ -5,7 +5,12 @@ export function parseJwt (token) {
 }
 
 export function isTokenValid(token) {
-    const parsedToken = parseJwt(token);
-    const nowInMilliseconds = new Date().getTime();
-    return parsedToken.expiresAt > nowInMilliseconds;
+    try {
+        const parsedToken = parseJwt(token);
+        const nowInMilliseconds = new Date().getTime();
+        return parsedToken.expiresAt > nowInMilliseconds;
+    }
+    catch (e) {
+        return false;
+    }
 }

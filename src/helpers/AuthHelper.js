@@ -1,4 +1,5 @@
 import History from '../utility/History';
+import localStorage from 'localStorage';
 
 import authStorage from '../storage/AuthStorage';
 import roles from '../constants/Roles';
