@@ -45,8 +45,11 @@ class Register extends Component {
 			validation[field] = emailValidation(event.target.value);
 		} else if ( field == 'password' ) {
 			validation[field] = passwordValidation(event.target.value);
+			if ( validation[field] ) {
+				validation['confirmPassword'] = this.state.btwIdentity.password == this.state.btwIdentity.confirmPassword
+			}
 		} else if ( field == 'confirmPassword' ) {
-			validation[field] = this.state.btwIdentity.password == event.target.value
+			validation[field] = this.state.btwIdentity.password == event.target.value || this.state.btwIdentity.password == ""
 		} else {
 			validation[field] = textValidation(event.target.value);
 		}
@@ -167,7 +170,7 @@ class Register extends Component {
 							required="" aria-required="true"
 							onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}
 							onBlur={this.validateRegisterFields.bind(this, 'confirmPassword')}></input>
-						{ !this.state.isValid.confirmPassword && <span className="pull-left">* The passwords do not match *</span> }
+						{ this.state.isValid.password && !this.state.isValid.confirmPassword && <span className="pull-left">* The passwords do not match *</span> }
 					</div>
 				</form>
 				<div id="btn_signup">
