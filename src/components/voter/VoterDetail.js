@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
+
 class VoterDetail extends Component {
 
 
@@ -104,6 +105,12 @@ class VoterDetail extends Component {
 		const firstName = makelist['firstname' + voter_num];
 		const lastName = makelist['lastname' + voter_num];
 
+		// Make states array from json object
+		var stateArr = [];
+		Object.keys(States).forEach(function(key){
+			stateArr.push(States[key]);
+		})
+
 		return (
 			<div className='btw-voter btw-voter-detail'>
 
@@ -134,10 +141,7 @@ class VoterDetail extends Component {
 								required="" aria-required="true"
 								onChange={this.updateVoterFields.bind(this, 'state')}>
 								<option value=""></option>
-								<option value="CA">CA</option>
-								<option value="TX">TX</option>
-								<option value="FL">FL</option>
-								<option value="CO">CO</option>
+								{ stateArr.map( (item) => (<option value={item}>{item}</option>) ) }
 							</select>
 							{ !this.state.isValid.state && <span className="pull-left">* Input is not valid *</span> }
 						</div>
