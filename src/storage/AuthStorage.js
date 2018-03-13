@@ -1,3 +1,4 @@
+import localStorage from 'localStorage';
 import roles from '../constants/Roles';
 
 export default {

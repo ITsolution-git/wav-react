@@ -1,5 +1,3 @@
-import localStorage from 'localStorage';
-
 import IdentityService from '../services/IdentityService'
 import History from '../utility/History'
 import authStorage  from '../storage/AuthStorage';
@@ -30,7 +28,7 @@ export function btwRegister(identity) {
 		dispatch(initializeRequest(appDataTypes.register));
 		return IdentityService.register(identity).then(
 				response => {
-					dispatch(loadDataSuccess(appDataTypes.register, response));
+					dispatch(loadDataSuccess(appDataTypes.register, response.data));
 					//show success page or redirect to login page with username
 					History.push(routes.makelist);
 					History.go();
