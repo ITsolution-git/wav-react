@@ -41,7 +41,7 @@ class VoterDetail extends Component {
 		})
 
 		// check if it is valid for select tag
-		if ( field === "state" || field === "gender" ) {
+		if ( field === "state" || field === "city" ) {
 
 			let validation = Object.assign({}, this.state.isValid);
 			validation[field] = event.target.value == "" ? false : true;
@@ -57,12 +57,12 @@ class VoterDetail extends Component {
 		let validation = Object.assign({}, this.state.isValid);
 
 		if (field === "email") {
-			validation[field] = emailValidation(event.target.value);
+			validation[field] = event.target.value === "" || emailValidation(event.target.value);
 		} else if (field === "phone") {
-			validation[field] = phoneValidation(parseInt(event.target.value));
+			validation[field] = event.target.value === "" || phoneValidation(parseInt(event.target.value));
 		} else if (field === "zip") {
-			validation[field] = zipCodeValidation(event.target.value);
-		} else {
+			validation[field] = event.target.value === "" || zipCodeValidation(event.target.value);
+		} else if (field === "state" || field === "city"){
 			validation[field] = event.target.value == "" ? false : true;
 		}
 
@@ -77,12 +77,12 @@ class VoterDetail extends Component {
 
 		for (let key in this.state.voterDetail) {
 			if (key === "email") {
-				validation[key] = emailValidation(this.state.voterDetail[key]);
+				validation[key] = this.state.voterDetail[key] === "" || emailValidation(this.state.voterDetail[key]);
 			} else if (key === "phone") {
-				validation[key] = phoneValidation(parseInt(this.state.voterDetail[key]));
+				validation[key] = this.state.voterDetail[key] === "" || phoneValidation(parseInt(this.state.voterDetail[key]));
 			} else if (key === "zip") {
-				validation[key] = zipCodeValidation(this.state.voterDetail[key]);
-			} else {
+				validation[key] = this.state.voterDetail[key] === "" || zipCodeValidation(this.state.voterDetail[key]);
+			} else if (key === "state" || key === "city"){
 				validation[key] = this.state.voterDetail[key] == "" ? false : true;
 			}
 		}
@@ -120,16 +120,16 @@ class VoterDetail extends Component {
 				<form>
 					<div className="row">
 						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="city">City</label>
+							<label className="pull-left" htmlFor="city">City *</label>
 							<input type="text" className="input-field" id="city" ref="city"
 								required="" aria-required="true"
 								onChange={this.updateVoterFields.bind(this, 'city')}
 								onBlur={this.validateVoterFields.bind(this, 'city')}></input>
-							{ !this.state.isValid.city && <span className="pull-left">* Input is not valid *</span> }
+							{ !this.state.isValid.city && <span className="pull-left">* City is required *</span> }
 						</div>
 
 						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="state">State</label>
+							<label className="pull-left" htmlFor="state">State *</label>
 							<select className="input-field" id="state" ref="state"
 								required="" aria-required="true"
 								onChange={this.updateVoterFields.bind(this, 'state')}>
@@ -139,7 +139,7 @@ class VoterDetail extends Component {
 								<option value="FL">FL</option>
 								<option value="CO">CO</option>
 							</select>
-							{ !this.state.isValid.state && <span className="pull-left">* Input is not valid *</span> }
+							{ !this.state.isValid.state && <span className="pull-left">* State is required *</span> }
 						</div>
 					</div>
 
