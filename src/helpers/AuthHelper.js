@@ -21,3 +21,9 @@ export function redirectToHome() {
     History.push(getHomeRoute());
     History.go()
 }
+
+export function logout() {
+    localStorage.clear();
+    History.push(routes.login);
+    History.go()
+}
