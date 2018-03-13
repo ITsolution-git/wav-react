@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
+import History from '../../utility/History';
+import routes from '../../constants/Routes';
 
 class VoterDetail extends Component {
 
@@ -99,6 +101,11 @@ class VoterDetail extends Component {
 		}
 	}
 
+	goBackToHomePage() {
+			History.push(routes.login);
+			History.go();
+	}
+
 	render() {
 		const { makelist } = this.props.makelist;
 		const { voter_num } = this.props.location.state;
@@ -113,7 +120,10 @@ class VoterDetail extends Component {
 
 		return (
 			<div className='btw-voter btw-voter-detail'>
-
+				<button className='btn btn-primary btn-general-go-back' style={{'float': 'left'}}
+								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
+						Go back
+				</button>
 				<div className="intro">
 					<p className="intro-title">
                         { firstName + " " + lastName }

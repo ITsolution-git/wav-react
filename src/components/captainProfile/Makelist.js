@@ -78,11 +78,19 @@ class Makelist extends Component {
 		History.go();
 	}
 
+	goBackToHomePage() {
+			History.push( routes.login );
+			History.go();
+	}
+
 	render() {
 
 		return (
 			<div className='btw-identity btw-makelist'>
-
+				<button className='btn btn-primary btn-general-go-back' style={{'float': 'left'}}
+								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
+						Go back 
+				</button>
 				<div className="intro">
 					<p className="intro-title">
                         Generate Lorem Ipsum placeholder text

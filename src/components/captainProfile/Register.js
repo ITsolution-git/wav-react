@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import { btwRegister } from "../../actions/SignOnAction";
 import YouTube from "react-youtube";
+import History from '../../utility/History';
+import routes from '../../constants/Routes';
 
 import { textValidation, emailValidation, passwordValidation } from '../../utility/FormValidation'
 class Register extends Component {
@@ -87,6 +89,11 @@ class Register extends Component {
 		this.props.btwRegister(this.state.btwIdentity)
 	}
 
+	goBackToHomePage() {
+			History.push(routes.login);
+			History.go();
+	}
+
 	render() {
 		const opts = {
 			playerVars: { // https://developers.google.com/youtube/player_parameters
@@ -96,7 +103,10 @@ class Register extends Component {
 
 		return (
 			<div className='btw-identity btw-register'>
-
+				<button className='btn btn-primary btn-general-go-back' style={{'float': 'left'}}
+								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
+						Go back
+				</button>
 				<div>
 					<YouTube
 						videoId="2g811Eo7K8U"
