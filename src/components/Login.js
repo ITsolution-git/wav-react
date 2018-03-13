@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
+import BaseComponent from '../components/shared/BaseComponent';
 import appDataTypes from '../constants/AppDataTypes';
 import { btwSignOn } from '../actions/SignOnAction';
+import { getHomeRoute } from '../helpers/AuthHelper';
 
-class Login extends Component {
+
+class Login extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -22,6 +26,12 @@ class Login extends Component {
 	btwSignOn() {
 		const { username, password } = this.state;
 		this.props.actions.btwSignOn(username, password, 'btw');
+	}
+
+    componentWillReceiveProps(props)  {
+		if (props.isSuccess) {
+			this.onLink(getHomeRoute());
+		}
 	}
 
 	render() {
@@ -59,8 +69,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-	const { error } = state.app[appDataTypes.signOn];
-	return { error };
+	const { error, isSuccess } = state.app[appDataTypes.signOn];
+	return {
+		error,
+        isSuccess
+	};
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -69,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

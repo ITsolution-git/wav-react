@@ -1,10 +1,6 @@
-import localStorage from 'localStorage';
-
-import IdentityConstants from '../constants/IdentityConstants'
 import IdentityService from '../services/IdentityService'
 import History from '../utility/History'
 import authStorage  from '../storage/AuthStorage';
-import { redirectToHome } from '../helpers/AuthHelper';
 import routes from '../constants/Routes';
 import appDataTypes from '../constants/AppDataTypes';
 import {
@@ -18,9 +14,8 @@ export function btwSignOn(username, password, source) {
 		dispatch(initializeRequest(appDataTypes.signOn));
 		IdentityService.login(username, password).then(
 			response => {
+                authStorage.saveTokenInfo(response.token);
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
-				authStorage.saveTokenInfo(response.token);
-				redirectToHome();
 			},
 			error => {
 				dispatch(loadDataFailure(appDataTypes.signOn, error.response.data.message));
@@ -33,7 +28,7 @@ export function btwRegister(identity) {
 		dispatch(initializeRequest(appDataTypes.register));
 		return IdentityService.register(identity).then(
 				response => {
-					dispatch(loadDataSuccess(appDataTypes.register, response));
+					dispatch(loadDataSuccess(appDataTypes.register, response.data));
 					//show success page or redirect to login page with username
 					History.push(routes.makelist);
 					History.go();
@@ -46,12 +41,10 @@ export function btwRegister(identity) {
 
 export function getBtwUserProfile() {
 	return dispatch => {
-		let token = localStorage.getItem('token');
-		let username = localStorage.getItem('username');
 		dispatch(initializeRequest(appDataTypes.profile));
-		return IdentityService.getUserProfile(token, username).then(
+		return IdentityService.getUserProfile(authStorage.getToken(), authStorage.getLoggedUser().username).then(
 				response => {
-					dispatch(loadDataSuccess(appDataTypes.profile, response))
+					dispatch(loadDataSuccess(appDataTypes.profile, response.userInformation))
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.profile, error.data));

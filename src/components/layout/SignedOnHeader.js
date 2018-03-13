@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import {
     Navbar,
@@ -11,15 +11,12 @@ import {
 } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
+import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
 import authStorage from '../../storage/AuthStorage';
 
-class SignedOnHeader extends Component {
-
-    onLink = (route) => {
-        this.props.history.push(route)
-    };
+class SignedOnHeader extends BaseComponent {
 
     getCaptainLinks = () => {
         return [
