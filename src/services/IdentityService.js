@@ -29,26 +29,20 @@ function login(username, password) {
 }
 
 function register(state) {
-	return axios({
-		method : 'POST',
-		url    : 'https://btwapi-18.herokuapp.com/user/register',
-		data   : {
-			"username" : state.username,
-			"password" : state.password,
-			"email"    : state.email,
-			"firstname": state.firstname,
-			"lastname" : state.lastname
-		},
-		headers: {
-			"Content-Type": "application/json",
-		}
-	})
-		.then(response => {
-			if (response.data.status !== 200) {
-				return Promise.reject(response);
-			}
-			return response.data;
-		})
+    return axios({
+        method: 'POST',
+        url: 'https://btwapi-18.herokuapp.com/user/register',
+        data: {
+            "username": state.username,
+            "password": state.password,
+            "email": state.email,
+            "firstname": state.firstname,
+            "lastname": state.lastname
+        },
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
 }
 
 
