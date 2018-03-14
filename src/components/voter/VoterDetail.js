@@ -120,7 +120,7 @@ class VoterDetail extends Component {
 
 		return (
 			<div className='btw-voter btw-voter-detail'>
-				<button className='btn btn-primary' style={{'left': '5%', 'position': 'absolute', 'border-radius': '0'}}
+				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
 								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
 						Go back
 				</button>
