@@ -87,9 +87,9 @@ class Makelist extends Component {
 
 		return (
 			<div className='btw-identity btw-makelist'>
-				<button className='btn btn-primary btn-general-go-back' style={{'float': 'left'}}
+				<button className='btn btn-primary' style={{'left': '5%', 'position': 'absolute','border-radius': '0'}}
 								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
-						Go back 
+						Go back
 				</button>
 				<div className="intro">
 					<p className="intro-title">
