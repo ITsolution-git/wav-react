@@ -5,6 +5,10 @@
         margin-top: $input_field_space;
     }
 
+    button {
+      @extend .btw-button;
+    }
+
     .video {
         width: 80%;
         height: 400px;
