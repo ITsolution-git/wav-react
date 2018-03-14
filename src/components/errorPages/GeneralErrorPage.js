@@ -1,23 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import routes from '../../constants/Routes';
-import History from '../../utility/History';
 import exclamation from '../../resources/images/exclamation.png';
+import { logout } from '../../helpers/AuthHelper';
 
-class GeneralErrorPage extends Component {
+import BaseComponent from '../shared/BaseComponent';
 
-    constructor( props ) {
-        
-        super( props );
+class GeneralErrorPage extends BaseComponent {
+    constructor( props, context ) {
+        super(props, context);
     }
 
-    goBackToHomePage() {
-        History.push( routes.makelist );
-        History.go();
+    componentWillMount() {
+        setTimeout(() => {
+            logout();
+        }, 3000)
     }
 
     render() {
-        const { componentStack, error } = this.props;
-
         return (
             <div className='btw-error'>
                 <img src={ exclamation } width={150} height={150}></img>
@@ -25,8 +26,8 @@ class GeneralErrorPage extends Component {
                     <h3>Sorry ....Something went wrong .... Please try again later</h3>
                     <br/><br/><br/>
                     <button className='btn btn-primary btn-general-go-back' 
-                            onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
-                        Go back list page
+                            onClick={() => this.onLink(routes.login)}>
+                        Back to login page
                     </button>
                 </div>
 			</div>
@@ -34,4 +35,4 @@ class GeneralErrorPage extends Component {
     }
 }
 
-export default GeneralErrorPage;
+export default withRouter(GeneralErrorPage);
