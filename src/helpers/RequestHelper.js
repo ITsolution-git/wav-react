@@ -29,7 +29,6 @@ function makeRequest(requestData, includeToken) {
         const token = authStorage.getToken();
         if (!isTokenValid(token)) {
             logout();
-            return Promise.reject();
         }
         requestData.headers['x-access-token'] = token;
     }
