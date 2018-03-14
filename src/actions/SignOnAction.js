@@ -8,7 +8,6 @@ import {
 	loadDataSuccess,
 	loadDataFailure
 } from './AppAction';
-import { logout } from '../helpers/AuthHelper';
 
 export function btwSignOn(username, password, source) {
 	return dispatch => {
@@ -49,7 +48,6 @@ export function getBtwUserProfile() {
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.profile, error));
-                    logout();
 				})
 	};
 }

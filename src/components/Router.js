@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import History from '../utility/History';
-import Page_50_X from './errorPages/Page_50_X';
+import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import SendInvite from './invites/SendInvite';
 import Register from './captainProfile/Register';
 import Makelist from './captainProfile/Makelist';
@@ -33,7 +33,7 @@ const Router =() => (
 			<Route exact path = {routes.makelist}
 				   component = { Authorization(Makelist, [guest]) } />
 			<Route exact path = {routes.pageDown}
-				   component = { Page_50_X } />
+				   component = { GeneralErrorPage } />
 			<Route exact path = {routes.invites}
 				   component = { Authorization(SendInvite, [captain, admin]) } />
 			<Route exact path = {routes.tasksList}

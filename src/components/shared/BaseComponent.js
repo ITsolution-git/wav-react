@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import { getHomeRoute } from '../../helpers/AuthHelper';
+
+
 class BaseComponent extends Component {
     constructor(props, context) {
         super(props, context);
@@ -7,6 +10,10 @@ class BaseComponent extends Component {
 
     onLink = (route) => {
         this.props.history.push(route)
+    };
+
+    redirectToHome = () => {
+        this.onLink( getHomeRoute());
     };
 }
 

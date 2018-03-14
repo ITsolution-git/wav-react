@@ -1,8 +1,9 @@
 import axios from 'axios';
+import History from '../utility/History';
 
 import authStorage from '../storage/AuthStorage';
 import { isTokenValid } from '../helpers/TokenHelper';
-import { logout } from '../helpers/AuthHelper';
+import routes from '../constants/Routes';
 
 export function postAsync({ url, data = {}, headers = {}, includeToken = true }) {
     const requestData = {
@@ -28,14 +29,28 @@ function makeRequest(requestData, includeToken) {
     if (includeToken) {
         const token = authStorage.getToken();
         if (!isTokenValid(token)) {
-            logout();
+            toErrorPage();
+            return Promise.reject();
         }
         requestData.headers['x-access-token'] = token;
     }
-    return axios(requestData);
+    return axios(requestData)
+        .then(response => {
+            return Promise.resolve(response);
+        })
+        .catch(error => {
+            toErrorPage();
+            return Promise.reject(error);
+        });
 }
 
 function mergeHeaders(headers = {}) {
     let defaultHeader =  { "Content-Type": "application/json" };
     return Object.assign({}, defaultHeader, headers);
+}
+
+
+function toErrorPage() {
+    History.push(routes.pageDown);
+    History.go();
 }

@@ -22,7 +22,6 @@
     "react-bootstrap": "^0.32.1",
     "react-classnames": "^0.1.2",
     "react-dom": "^16.2.0",
-    "react-error-boundary": "^1.2.1",
     "react-facebook-login-component": "^0.9.1",
     "react-fontawesome": "^1.6.1",
     "react-form": "^2.16.1",
