@@ -8,6 +8,7 @@ import {
 	loadDataSuccess,
 	loadDataFailure
 } from './AppAction';
+import { logout } from '../helpers/AuthHelper';
 
 export function btwSignOn(username, password, source) {
 	return dispatch => {
@@ -48,20 +49,7 @@ export function getBtwUserProfile() {
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.profile, error));
+                    logout();
 				})
 	};
-}
-
-function validateTokenValidity(expires, issuedAt){
-	let isTokenValid = false;
-	let twentyMinutes = new Date();
-	twentyMinutes.setDate(twentyMinutes.getDate()+ 0.0098);
-
-	if (expires >=issuedAt){
-		if ((expires - issuedAt) > (twentyMinutes)){
-			isTokenValid = true;
-			return isTokenValid;
-		}
-	}
-	return isTokenValid;
 }

@@ -8,7 +8,7 @@ export function isTokenValid(token) {
     try {
         const parsedToken = parseJwt(token);
         const nowInMilliseconds = new Date().getTime();
-        return parsedToken.expiresAt > nowInMilliseconds;
+        return parsedToken.expiresAt - nowInMilliseconds > 0;
     }
     catch (e) {
         return false;
