@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
     Navbar,
@@ -15,6 +16,7 @@ import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
 import authStorage from '../../storage/AuthStorage';
+import appDataTypes from "../../constants/AppDataTypes";
 
 class SignedOnHeader extends BaseComponent {
 
@@ -43,6 +45,7 @@ class SignedOnHeader extends BaseComponent {
     };
 
     render() {
+        const { profile: { isSuccess, data } } = this.props;
         return (
             <div className='btw-on-header'>
                 <Row>
@@ -50,7 +53,7 @@ class SignedOnHeader extends BaseComponent {
                         <FontAwesome className='btw-avatar'
                                      name='user-circle'
                                      size='3x' />
-                        <NavDropdown eventKey={1} title="" id="nav-dropdown">
+                        <NavDropdown eventKey={1} title={isSuccess ? data.firstname : ''} id="nav-dropdown">
                             <MenuItem eventKey={1.1}>Profile</MenuItem>
                             <MenuItem eventKey={1.2}>Settings</MenuItem>
                             <MenuItem eventKey={1.3}>Sign out</MenuItem>
@@ -74,4 +77,11 @@ class SignedOnHeader extends BaseComponent {
     }
 }
 
-export default withRouter(SignedOnHeader)
+
+const mapStateToProps = (state) => {
+    const profile = state.app[appDataTypes.profile];
+    return { profile };
+};
+
+
+export default connect(mapStateToProps)(withRouter(SignedOnHeader));
