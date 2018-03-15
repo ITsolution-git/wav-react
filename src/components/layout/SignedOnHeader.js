@@ -18,8 +18,28 @@ import roles from '../../constants/Roles';
 import { logout } from '../../helpers/AuthHelper';
 import authStorage from '../../storage/AuthStorage';
 import appDataTypes from "../../constants/AppDataTypes";
+import { bindActionCreators } from 'redux';
+import { getBtwUserProfile } from '../../actions/SignOnAction';
 
 class SignedOnHeader extends BaseComponent {
+    componentWillMount() {
+        this.checkForLoadingProfile(this.props);
+    }
+
+    checkForLoadingProfile(props) {
+        const { profile:
+            {
+                isSuccess,
+                error
+            },
+            location: {
+                pathname
+            },
+            actions } = props;
+        if (!isSuccess && !error && pathname !== routes.pageDown) {
+            actions.getBtwUserProfile();
+        }
+    }
 
     getCaptainLinks = () => {
         return [
@@ -49,7 +69,7 @@ class SignedOnHeader extends BaseComponent {
         const { profile: { isSuccess, data } } = this.props;
         return (
             <div className='btw-on-header'>
-                <Row>
+                <Row className='dropdown-div'>
                     <Col md={2} mdOffset={10} className='btw-nav-dropdown'>
                         <FontAwesome className='btw-avatar'
                                      name='user-circle'
@@ -84,5 +104,11 @@ const mapStateToProps = (state) => {
     return { profile };
 };
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators({ getBtwUserProfile }, dispatch)
+    };
+};
 
-export default connect(mapStateToProps)(withRouter(SignedOnHeader));
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignedOnHeader));

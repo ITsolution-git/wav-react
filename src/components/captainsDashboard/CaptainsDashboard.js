@@ -7,20 +7,8 @@ import FontAwesome from 'react-fontawesome';
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
-import { getBtwUserProfile } from "../../actions/SignOnAction";
-
 
 class CaptainsDashboard extends BaseComponent {
-    componentWillMount() {
-        this.checkForLoadingProfile(this.props);
-    }
-
-    checkForLoadingProfile(props) {
-        const { profile: { isSuccess, error }, actions } = props;
-        if (!isSuccess && !error) {
-            actions.getBtwUserProfile();
-        }
-    }
 
     render() {
         const { profile: { data, isSuccess } } = this.props;
@@ -91,8 +79,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ getBtwUserProfile }, dispatch)
+        actions: bindActionCreators({ }, dispatch)
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CaptainsDashboard));
+export default connect(mapStateToProps)(withRouter(CaptainsDashboard));
