@@ -5,27 +5,27 @@ import authStorage from '../storage/AuthStorage';
 import { isTokenValid } from '../helpers/TokenHelper';
 import routes from '../constants/Routes';
 
-export function postAsync({ url, data = {}, headers = {}, includeToken = true }) {
+export function postAsync({ url, data = {}, headers = {}, includeToken = true, failRedirect = true }) {
     const requestData = {
         url,
         data,
         method: 'POST',
         headers: mergeHeaders(headers)
     };
-    return makeRequest(requestData, includeToken);
+    return makeRequest(requestData, includeToken, failRedirect);
 }
 
-export function getAsync({ url, params = {}, headers = {}, includeToken = true }) {
+export function getAsync({ url, params = {}, headers = {}, includeToken = true, failRedirect = true }) {
     const requestData = {
         url,
         params,
         method: 'GET',
         headers: mergeHeaders(headers),
     };
-    return makeRequest(requestData, includeToken);
+    return makeRequest(requestData, includeToken, failRedirect);
 }
 
-function makeRequest(requestData, includeToken) {
+function makeRequest(requestData, includeToken, failRedirect) {
     if (includeToken) {
         const token = authStorage.getToken();
         if (!isTokenValid(token)) {
@@ -39,7 +39,9 @@ function makeRequest(requestData, includeToken) {
             return Promise.resolve(response);
         })
         .catch(error => {
-            toErrorPage();
+            if (failRedirect) {
+                toErrorPage();
+            }
             return Promise.reject(error);
         });
 }

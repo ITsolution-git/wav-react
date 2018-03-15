@@ -17,7 +17,8 @@ function login(username, password) {
 			username,
 			password
 		},
-		includeToken: false
+		includeToken: false,
+		failRedirect: false
 	}).then(response => {
 		if (!response.data.token) {
             return Promise.reject(response.data);
@@ -36,7 +37,8 @@ function register({ username, password, email, firstname, lastname}) {
 			firstname,
 			lastname
 		},
-		includeToken: false
+		includeToken: false,
+		failRedirect: false
 	});
 }
 
