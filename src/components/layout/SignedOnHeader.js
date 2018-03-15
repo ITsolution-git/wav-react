@@ -14,6 +14,7 @@ import FontAwesome from 'react-fontawesome';
 import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
+import { logout } from '../../helpers/AuthHelper';
 import authStorage from '../../storage/AuthStorage';
 
 class SignedOnHeader extends BaseComponent {
@@ -53,7 +54,7 @@ class SignedOnHeader extends BaseComponent {
                         <NavDropdown eventKey={1} title="" id="nav-dropdown">
                             <MenuItem eventKey={1.1}>Profile</MenuItem>
                             <MenuItem eventKey={1.2}>Settings</MenuItem>
-                            <MenuItem eventKey={1.3}>Sign out</MenuItem>
+                            <MenuItem eventKey={1.3} onClick={() => logout()}>Sign out</MenuItem>
                         </NavDropdown>
                     </Col>
                 </Row>
