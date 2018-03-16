@@ -32,14 +32,15 @@ class SignedOnHeader extends BaseComponent {
                 isSuccess,
                 error
             },
-            location: {
-                pathname
-            },
             actions } = props;
-        if (!isSuccess && !error && pathname !== routes.pageDown) {
+        if (!isSuccess && !error && this.getCurrentRoute() !== routes.pageDown) {
             actions.getBtwUserProfile();
         }
     }
+
+    getCurrentRoute = () => {
+        return this.props.location.pathname;
+    };
 
     getCaptainLinks = () => {
         return [
@@ -67,6 +68,8 @@ class SignedOnHeader extends BaseComponent {
 
     render() {
         const { profile: { isSuccess, data } } = this.props;
+        const name = isSuccess ? data.firstname : '';
+
         return (
             <div className='btw-on-header'>
                 <Row className='dropdown-div'>
@@ -74,7 +77,7 @@ class SignedOnHeader extends BaseComponent {
                         <FontAwesome className='btw-avatar'
                                      name='user-circle'
                                      size='3x' />
-                        <NavDropdown eventKey={1} title={isSuccess ? data.firstname : ''} id="nav-dropdown">
+                        <NavDropdown eventKey={1} title={name} id="nav-dropdown">
                             <MenuItem eventKey={1.1}>Profile</MenuItem>
                             <MenuItem eventKey={1.2}>Settings</MenuItem>
                             <MenuItem eventKey={1.3} onClick={() => logout()}>Sign out</MenuItem>
