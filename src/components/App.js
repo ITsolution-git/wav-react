@@ -8,9 +8,11 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
+			<div className='btw-app'>
 				<Header />
-					<Router />
+				<div className='btw-content'>
+                    <Router />
+				</div>
 				<Footer />
 			</div>
 		);
