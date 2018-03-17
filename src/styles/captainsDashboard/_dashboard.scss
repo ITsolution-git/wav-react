@@ -65,9 +65,9 @@ $link-icon-size: 85px;
         background-color: darken(#37C1D1, 9%);
       }
       .count {
-        border: 2px solid black;
+        border: 2px solid lighten(black, 45%);
         padding: 0px 6px 0px 4px;
-        color: black;
+        color: lighten(black, 45%);
         border-radius: 50%;
         margin-left: 3px;
       }
