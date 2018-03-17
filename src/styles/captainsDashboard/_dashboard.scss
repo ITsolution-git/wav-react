@@ -4,107 +4,78 @@ $tasks-icon-size: 110px;
 $link-icon-size: 85px;
 
 .btw-captains-dashboard {
-  text-align: center;
-  .name {
-    font-size: 26px;
+  .button-base {
+    margin-top: 30px;
+    cursor: pointer;
   }
-  .flex-center {
+  .icon-div {
+    @extend .button-base;
     display: flex;
     align-items: center;
-    justify-content: center;
+    height: 120px;
+    color: #F8FAFC;
+    padding-left: 20px;
   }
-  .icons-container {
-    width: 35%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-  }
-  .blue-circle {
-    color: $brand_color_blue;
-    border-radius: 50%;
-    border: 3px solid $brand_color_blue;
-  }
-  .grey-circle {
-    border-radius: 50%;
-    position: relative;
-    border: 1px solid lightgray;
+  .button-text {
+    padding-left: 22px;
+    font-size: 20px;
   }
   .tasks {
-    width: $tasks-icon-size;
-    height: $tasks-icon-size;
-    margin: 20px;
-    cursor: pointer;
-    position: relative;
+    background-color: #8DA3CA;
+    &:hover {
+      background-color: darken(#8DA3CA, 20%);
+    }
   }
-  .link-icon {
-    width: $link-icon-size;
-    height: $link-icon-size;
-    margin-bottom: 10px;
-    cursor: pointer;
+  .voters {
+    background-color: #B6B7B2;
+    &:hover {
+      background-color: darken(#B6B7B2, 20%);
+    }
   }
-
-  .bold-text {
-    font-weight: bold;
+  .invites {
+    background-color: #006BA6;
+    &:hover {
+      background-color: darken(#006BA6, 20%);
+    }
   }
-
-  .green-text {
-    color: $brand_color_green;
+  .forum {
+    background-color: #A2B3A4;
+    &:hover {
+      background-color: darken(#A2B3A4, 20%);
+    }
   }
-  .blue-text {
-    color: $brand_color_blue;
-  }
-  .blue-label {
-    font-size: 17px;
-    @extend .blue-text;
-  }
-  .tasks-label {
-    font-size: 22px;
-  }
-
-  .dynamic-content {
-    border: 1px solid lightgray;
-    margin-top: 50px;
-    height: 200px;
-  }
-
-  // inners numbers
-  .level {
-    position: absolute;
-    color: white;
-    top: 33%;
-  }
-
-  .notification {
-    position: absolute;
-    top: -9px;
-    right: -11px;
-    color: red;
-    border: 2px solid red;
-    border-radius: 50%;
-    width: 31px;
-    height: 31px;
-    font-size: 21px;
-    font-weight: bold;
-  }
-
-  // partial circle
-  .arc {
-    overflow: hidden;
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    right: 50%;
-    bottom: 50%;
-    transform-origin: 100% 100%;
-    transform: rotate(90deg) skewX(30deg);
-  }
-  .arc:before {
-    box-sizing: border-box;
-    display: block;
-    border: solid 5px $brand_color_green;
-    width: 200%; height: 200%;
-    border-radius: 50%;
-    transform: skewX(-30deg);
-    content: '';
+  .right-column {
+    @extend .button-base;
+    height: 270px;
+    background-color: #37C1D1;
+    color: #F8FAFC;
+    .label {
+      text-decoration: underline;
+      text-decoration-color: #F8FAFC;
+    }
+    font-size: 19px;
+    div {
+      padding: 15px 0 15px 0;
+      span {
+        padding-left: 25px;
+      }
+    }
+    .notification {
+      &:hover {
+        background-color: darken(#37C1D1, 9%);
+      }
+      .count {
+        border: 2px solid lighten(black, 45%);
+        padding: 0px 6px 0px 4px;
+        color: lighten(black, 45%);
+        border-radius: 50%;
+        margin-left: 3px;
+      }
+    }
+    .community {
+      &:hover {
+        background-color: darken(#37C1D1, 9%);
+      }
+    }
   }
 }
