@@ -13,6 +13,7 @@ import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
 import VoterDetail from './voter/VoterDetail';
 import Forum from './community/Forum';
+import Reports from './reports/Reports';
 
 // static pages
 import WhyBethewave from './static/WhyBethewave';
@@ -36,19 +37,21 @@ const Router =() => (
 			<Route exact path = {routes.pageDown}
 				   component = { GeneralErrorPage } />
 			<Route exact path = {routes.invites}
-				   component = { Authorization(SendInvite, [captain, admin]) } />
+				   component = { Authorization(SendInvite, [captain]) } />
 			<Route exact path = {routes.tasksList}
 				   component = { Authorization(TasksList, [captain]) } />
 			<Route exact path = {routes.voterList}
 				   component = { Authorization(VotersList, [captain]) } />
 			<Route exact path = {routes.community}
-				   component = { Authorization(Community, [captain, admin]) } />
+				   component = { Authorization(Community, [captain]) } />
             <Route exact path = {routes.forum}
                    component = { Authorization(Forum, [captain]) } />
 			<Route exact path = {routes.captainsDashboard}
 				   component = { Authorization(CaptainsDashboard, [captain]) } />
 			<Route exact path = {routes.adminDashboard}
 				   component = { Authorization(AdminDashBoard, [admin]) } />
+            <Route exact path = {routes.reports}
+                   component = { Authorization(Reports, [admin]) } />
 			<Route exact path = {routes.voterDetail}
 				   component = { Authorization(VoterDetail, [admin, guest]) } />
 			// static route pages

@@ -11,6 +11,7 @@ export default {
     login: '/',
     voterDetail: '/voterDetail',
     forum: '/forum',
+    reports: '/reports',
 
     // static pages
     whyBetheWave: '/whyBetheWave',
