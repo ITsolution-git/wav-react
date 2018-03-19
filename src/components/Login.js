@@ -15,7 +15,8 @@ class Login extends BaseComponent {
 		super(props, context);
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			emptyField: null
         };
 	}
 
@@ -25,7 +26,11 @@ class Login extends BaseComponent {
 
 	btwSignOn() {
 		const { username, password } = this.state;
-		this.props.actions.btwSignOn(username, password, 'btw');
+		if (!username.length || !password.length) {
+			this.setState({emptyField: true});
+		} else {
+			this.props.actions.btwSignOn(username, password, 'btw');
+		}
 	}
 
     componentWillReceiveProps(props)  {
@@ -49,12 +54,14 @@ class Login extends BaseComponent {
                         <input type="text" className="input-field" id="username" ref="username"
                                required="" aria-required="true"
                                onChange={event => this.updateLogonFields(event, 'username')} />
+												{!this.state.username.length && this.state.emptyField && <span> ** Enter a username </span> }
                     </div>
                     <div className="form-group">
                         <label className="pull-left">Password</label>
                         <input type="password" className="input-field" id="password" ref="password"
                                required="" aria-required="true"
                                onChange={event => this.updateLogonFields(event, 'password')} />
+												{!this.state.password.length && this.state.emptyField && <span> ** Enter a password </span> }
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary" onClick={this.btwSignOn.bind(this, 'btwSignOn')}>
