@@ -4,9 +4,11 @@ import NavImage from '../layout/NavImage';
 class AdminDashboard extends Component {
     render() {
         return (
-            <div className='container'>
+            <div>
                 <NavImage />
-                Admin dashboard
+                <div className='container'>
+                    Admin dashboard
+                </div>
             </div>
         );
     }

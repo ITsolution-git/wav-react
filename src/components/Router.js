@@ -12,6 +12,7 @@ import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
 import VoterDetail from './voter/VoterDetail';
+import Forum from './community/Forum';
 
 // static pages
 import WhyBethewave from './static/WhyBethewave';
@@ -42,6 +43,8 @@ const Router =() => (
 				   component = { Authorization(VotersList, [captain]) } />
 			<Route exact path = {routes.community}
 				   component = { Authorization(Community, [captain, admin]) } />
+            <Route exact path = {routes.forum}
+                   component = { Authorization(Forum, [captain]) } />
 			<Route exact path = {routes.captainsDashboard}
 				   component = { Authorization(CaptainsDashboard, [captain]) } />
 			<Route exact path = {routes.adminDashboard}

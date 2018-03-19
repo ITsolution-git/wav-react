@@ -19,20 +19,21 @@ class CaptainsDashboard extends BaseComponent {
               notificationCount = 5;
 
         return (
-            <div className='container btw-captains-dashboard'>
+            <div>
                 <NavImage />
-                { isSuccess &&
+                <div className='container btw-captains-dashboard'>
+                    { isSuccess &&
                     <Row>
                         <Col md={8}>
                             <Row>
                                 <Col md={6}>
-                                    <div className='icon-div tasks'>
+                                    <div className='icon-div tasks' onClick={() => this.onLink(routes.tasksList)}>
                                         <FontAwesome name='tasks' size='3x'/>
                                         <span className='button-text'>Your Tasks</span>
                                     </div>
                                 </Col>
                                 <Col md={6}>
-                                    <div className='icon-div voters'>
+                                    <div className='icon-div voters' onClick={() => this.onLink(routes.voterList)}>
                                         <FontAwesome name='thumbs-up' size='3x'/>
                                         <span className='button-text'>
                                             Voters <span>
@@ -44,7 +45,7 @@ class CaptainsDashboard extends BaseComponent {
                             </Row>
                             <Row>
                                 <Col md={6}>
-                                    <div className='icon-div invites'>
+                                    <div className='icon-div invites' onClick={() => this.onLink(routes.invites)}>
                                         <FontAwesome name='envelope-open'  size='3x' />
                                         <span className='button-text'>
                                             Invites <span>
@@ -54,7 +55,7 @@ class CaptainsDashboard extends BaseComponent {
                                     </div>
                                 </Col>
                                 <Col md={6}>
-                                    <div className='icon-div forum'>
+                                    <div className='icon-div forum' onClick={() => this.onLink(routes.forum)}>
                                         <FontAwesome name='comments' size='3x'/>
                                         <span className='button-text'>Forum</span>
                                     </div>
@@ -70,14 +71,15 @@ class CaptainsDashboard extends BaseComponent {
                                       {notificationCount}
                                     </span>
                                 </div>
-                                <div className='community'>
+                                <div className='community' onClick={() => this.onLink(routes.community)}>
                                     <FontAwesome name='users' size='2x' />
                                     <span className='label'>Community</span>
                                 </div>
                             </div>
                         </Col>
                     </Row>
-                }
+                    }
+                </div>
             </div>
         )
     }
