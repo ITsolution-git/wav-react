@@ -10,6 +10,7 @@ export default {
     adminDashboard: '/adminDashboard',
     login: '/',
     voterDetail: '/voterDetail',
+    forum: '/forum',
 
     // static pages
     whyBetheWave: '/whyBetheWave',
