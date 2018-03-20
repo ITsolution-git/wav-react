@@ -41,7 +41,7 @@ class Login extends BaseComponent {
 
 	render() {
 		const { error } = this.props;
-
+		let { password, username, emptyField } = this.state;
 		return (
 			<div className="btw-login">
 				<div className="btw-form">
@@ -54,14 +54,14 @@ class Login extends BaseComponent {
                         <input type="text" className="input-field" id="username" ref="username"
                                required="" aria-required="true"
                                onChange={event => this.updateLogonFields(event, 'username')} />
-												{!this.state.username.length && this.state.emptyField && <span> ** Enter username </span> }
+												{!username && emptyField && <span style={{'color': 'red'}}> ** Enter username </span> }
                     </div>
                     <div className="form-group">
                         <label className="pull-left">Password</label>
                         <input type="password" className="input-field" id="password" ref="password"
                                required="" aria-required="true"
                                onChange={event => this.updateLogonFields(event, 'password')} />
-												{!this.state.password.length && this.state.emptyField && <span> ** Enter password </span> }
+												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary" onClick={this.btwSignOn.bind(this, 'btwSignOn')}>
