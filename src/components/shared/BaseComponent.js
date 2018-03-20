@@ -8,8 +8,8 @@ class BaseComponent extends Component {
         super(props, context);
     }
 
-    onLink = (route) => {
-        this.props.history.push(route)
+    onLink = (route, params) => {
+        this.props.history.push(route, params)
     };
 
     redirectToHome = () => {

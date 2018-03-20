@@ -1,94 +1,81 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
 import VoterAction from "../../actions/VoterAction";
-import YouTube from "react-youtube";
 import routes from '../../constants/Routes';
-import History from '../../utility/History';
 
-import { textValidation } from '../../utility/FormValidation'
-class Makelist extends Component {
+import { textValidation } from '../../utility/FormValidation';
+import BaseComponent from '../shared/BaseComponent';
 
+const firstNamePrefix = 'firstname',
+	  lastNamePrefix = 'lastname',
+	  invalidPrefix = 'invalid',
+	  numberOfNames = 4;
 
-	constructor() {
-		super();
-		this.state = {
-			makelistNames:{
-				firstname1      : '',
-				lastname1       : '',
-				firstname2      : '',
-				lastname2       : '',
-				firstname3      : '',
-				lastname3       : '',
-				firstname4      : '',
-				lastname4       : '',
-			},
-			isValid:{
-				firstname1      : true,
-				lastname1       : true,
-				firstname2      : true,
-				lastname2       : true,
-				firstname3      : true,
-				lastname3       : true,
-				firstname4      : true,
-				lastname4       : true,
-			}
-		}
+class Makelist extends BaseComponent {
+	constructor(props, context) {
+		super(props, context);
+		this.state = {};
 	}
 
-	updateMakelistFields(field, event) {
-		let fields = Object.assign({}, this.state.makelistNames);
-		fields[field] = event.target.value;
-		this.setState({
-			makelistNames: fields
-		})
-	}
+	updateMakelistFields = (field, event) => {
+		this.setState({[field]: event.target.value });
+	};
 	
-	validateRegisterFields(field, event) {
+	validateRegisterFields = (field, event) => {
+		const isValid = textValidation(event.target.value);
+		this.setState({ [`${field}${invalidPrefix}`]: !isValid });
+	};
 
-		let validation = Object.assign({}, this.state.isValid);
-		validation[field] = textValidation(event.target.value);
+	getNamesArray = (prefix) => {
+		return Array(numberOfNames).fill(0).map((e, i) => `${prefix}${i + 1}`);
+	};
 
-		this.setState({
-			isValid: validation
-		})
-	}
-    
-    onNext(event) {
-		console.log(this.state.makelistNames)
 
-		let validation = Object.assign({}, this.state.isValid);
+    onNext = () => {
+    	const stateNames = this.getNamesArray(firstNamePrefix).concat(this.getNamesArray(lastNamePrefix));
+    	const validationObj = {},
+			  namesObj = {};
 
-		for (let key in this.state.makelistNames) {
-			validation[key] = textValidation(this.state.makelistNames[key]);
+    	stateNames.forEach(name => {
+    		const nameVal = this.state[name] || '';
+            validationObj[`${name}${invalidPrefix}`] = !textValidation(nameVal);
+            namesObj[name] = nameVal;
+		});
+
+        this.setState(validationObj);
+    	const isInvalid = Object.values(validationObj).some(val => val);
+
+    	if (isInvalid) {
+    		return;
 		}
 
-		this.setState({
-			isValid: validation
-		})
-
-		for (let key in this.state.makelistNames) {
-			if (validation[key] == false) {
-				return ;
-			}
-		}
-
-		this.props.btwMakelist(this.state.makelistNames)
-
-		History.push(routes.voterDetail, {'voter_num': 1});
-		History.go();
-	}
+		this.props.btwMakelist(namesObj);
+    	this.onLink(routes.voterDetail, {'voter_num': 1});
+	};
 
 	goBackToHomePage() {
-			History.push( routes.login );
-			History.go();
+    	this.onLink(routes.login);
 	}
 
-	render() {
+	renderField = ({ name, label }) => {
+		return (
+            <div className="form-group col-xs-6">
+                <label className="pull-left" htmlFor={name}>{ label }</label>
+                <input type="text" className="input-field" id={name} ref={name}
+                       required="" aria-required="true"
+                       onChange={e => this.updateMakelistFields(name, e)}
+                       onBlur={e => this.validateRegisterFields(name, e)} />
+                { this.state[`${name}${invalidPrefix}`] && <span className="pull-left">* Input is not valid *</span> }
+            </div>
+		)
+	};
 
+	render() {
 		return (
 			<div className='btw-identity btw-makelist'>
 				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
+								onClick={this.goBackToHomePage}>
 						Go back
 				</button>
 				<div className="intro">
@@ -102,91 +89,17 @@ class Makelist extends Component {
 				</div>
 
 				<form>
-					<div className="row">
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="firstname1">First Name</label>
-							<input type="text" className="input-field" id="firstname1" ref="firstname1"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'firstname1')}
-								onBlur={this.validateRegisterFields.bind(this, 'firstname1')}></input>
-							{ !this.state.isValid.firstname1 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="lastname1">Last Name</label>
-							<input type="text" className="input-field" id="lastname1" ref="lastname1"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'lastname1')}
-								onBlur={this.validateRegisterFields.bind(this, 'lastname1')}></input>
-							{ !this.state.isValid.lastname1 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
-
-					<div className="row">
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="firstname2">First Name</label>
-							<input type="text" className="input-field" id="firstname2" ref="firstname2"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'firstname2')}
-								onBlur={this.validateRegisterFields.bind(this, 'firstname2')}></input>
-							{ !this.state.isValid.firstname2 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="lastname2">Last Name</label>
-							<input type="text" className="input-field" id="lastname2" ref="lastname2"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'lastname2')}
-								onBlur={this.validateRegisterFields.bind(this, 'lastname2')}></input>
-							{ !this.state.isValid.lastname2 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
-
-					<div className="row">
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="firstname3">First Name</label>
-							<input type="text" className="input-field" id="firstname3" ref="firstname3"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'firstname3')}
-								onBlur={this.validateRegisterFields.bind(this, 'firstname3')}></input>
-							{ !this.state.isValid.firstname3 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="lastname3">Last Name</label>
-							<input type="text" className="input-field" id="lastname3" ref="lastname3"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'lastname3')}
-								onBlur={this.validateRegisterFields.bind(this, 'lastname3')}></input>
-							{ !this.state.isValid.lastname3 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
-                    <div className="row">
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="firstname4">First Name</label>
-							<input type="text" className="input-field" id="firstname4" ref="firstname4"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'firstname4')}
-								onBlur={this.validateRegisterFields.bind(this, 'firstname4')}></input>
-							{ !this.state.isValid.firstname4 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="lastname4">Last Name</label>
-							<input type="text" className="input-field" id="lastname4" ref="lastname4"
-								required="" aria-required="true"
-								onChange={this.updateMakelistFields.bind(this, 'lastname4')}
-								onBlur={this.validateRegisterFields.bind(this, 'lastname4')}></input>
-							{ !this.state.isValid.lastname4 && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
+					{ Array(numberOfNames).fill(0).map((e,i)=> {
+						return (
+                            <div key={i} className="row">
+                                { this.renderField({ name: `${firstNamePrefix}${i + 1}`, label: 'First Name'})}
+                                { this.renderField({ name: `${lastNamePrefix}${i + 1}`, label: 'Last Name'})}
+                            </div>
+						)
+                    })}
 				</form>
 				<div id="btn_next">
-					<button className="btn btn-primary" onClick={this.onNext.bind(this, 'btwSignOn')}>Next</button>
+					<button className="btn btn-primary" onClick={this.onNext}>Next</button>
 				</div>
 			</div>
 		);
@@ -195,11 +108,11 @@ class Makelist extends Component {
 
 const mapStateToProps = (state) => {
 	return {}
-}
+};
 
 
 const mapDispatchToProps = (dispatch) => ({
 	btwMakelist: (makelist) => dispatch(VoterAction.btwMakelist(makelist))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Makelist);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Makelist));
