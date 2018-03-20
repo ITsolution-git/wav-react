@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import VoterAction from "../../actions/VoterAction";
 import routes from '../../constants/Routes';
-import History from '../../utility/History';
 
 import { textValidation } from '../../utility/FormValidation';
 import BaseComponent from '../shared/BaseComponent';
@@ -34,11 +33,14 @@ class Makelist extends BaseComponent {
 
 
     onNext = () => {
-    	const stateNames = this.getNamesArray(firstNamePrefix)
-								.concat(this.getNamesArray(lastNamePrefix));
-    	const validationObj = {};
+    	const stateNames = this.getNamesArray(firstNamePrefix).concat(this.getNamesArray(lastNamePrefix));
+    	const validationObj = {},
+			  namesObj = {};
+
     	stateNames.forEach(name => {
-            validationObj[`${name}${invalidPrefix}`] = !textValidation(this.state[name] || '');
+    		const nameVal = this.state[name] || '';
+            validationObj[`${name}${invalidPrefix}`] = !textValidation(nameVal);
+            namesObj[name] = nameVal;
 		});
 
         this.setState(validationObj);
@@ -48,9 +50,8 @@ class Makelist extends BaseComponent {
     		return;
 		}
 
-		this.props.btwMakelist(this.state);
-		History.push(routes.voterDetail, {'voter_num': 1});
-		History.go();
+		this.props.btwMakelist(namesObj);
+    	this.onLink(routes.voterDetail, {'voter_num': 1});
 	};
 
 	goBackToHomePage() {
@@ -74,7 +75,7 @@ class Makelist extends BaseComponent {
 		return (
 			<div className='btw-identity btw-makelist'>
 				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
+								onClick={this.goBackToHomePage}>
 						Go back
 				</button>
 				<div className="intro">
