@@ -10,6 +10,9 @@ export default {
     adminDashboard: '/adminDashboard',
     login: '/',
     voterDetail: '/voterDetail',
+    matchList: '/matchList',
+    voterSuccess: '/voterSuccess',
+    voterError: '/voterError',
     forum: '/forum',
     reports: '/reports',
 

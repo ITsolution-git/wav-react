@@ -9,8 +9,8 @@ import routes from '../../constants/Routes';
 import { textValidation } from '../../utility/FormValidation';
 import BaseComponent from '../shared/BaseComponent';
 
-const firstNamePrefix = 'firstname',
-	  lastNamePrefix = 'lastname',
+const firstNamePrefix = voterConstants.FIRST_NAME_PREIX,
+	  lastNamePrefix = voterConstants.LAST_NAME_PREFIX,
 	  invalidPrefix = 'invalid',
 	  numberOfNames = voterConstants.VOTERS_COUNT;
 

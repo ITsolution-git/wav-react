@@ -1,0 +1,27 @@
+.btw-match-list {
+    button {
+      @extend .btw-button;
+    }
+    #btn_not_sure button {
+      @extend .btw-button;
+      margin-top: $input_field_space;
+    }
+    .match-list {
+      .name-row {
+        cursor: pointer;
+        &:hover > div {
+          background-color: darken(#3C98D9, 7%);
+        }
+        & > div {
+          padding: 14px;
+          margin-top: 13px;
+          height: 60px;
+          color: white;
+          background-color: #3C98D9;
+        }
+        .name-info {
+          font-size: 18px;
+        }
+      }
+    }
+}

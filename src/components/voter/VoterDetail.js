@@ -1,39 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { Row, Col, Button } from 'react-bootstrap';
+import qs from 'query-string';
 
 import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
 import routes from '../../constants/Routes';
-
+import voterConstants from '../../constants/VoterConstants';
+import { voterDetailsPersist, matchListPersist  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
+import NextButton from './NextButton';
+
 
 class VoterDetail extends BaseComponent {
-	constructor(props) {
-		super(props);
+	constructor(props, context) {
+		super(props, context);
+		const emptyVoterObj = this.getEmptyObject();
+		const loadPrevious = this.isLoadPrevious();
+		const { currentNumber, voterDetails } = this.props.voter;
 		this.state = {
-			voterDetail:{
-				city      		: '',
-				state       	: '',
-				address      	: '',
-				birthday       	: '',
-				gender      	: '',
-				email       	: '',
-				phone      		: '',
-				zip       		: '',
-			},
-			isValid:{
-				city      		: true,
-				state       	: true,
-				address      	: true,
-				birthday       	: true,
-				gender      	: true,
-				email       	: true,
-				phone      		: true,
-				zip       		: true,
-			}
-		}
+			voterDetail: loadPrevious ?
+				{ ...emptyVoterObj, ...voterDetails[currentNumber] }
+				: emptyVoterObj,
+			isValid: this.getEmptyObject(true)
+		};
 	}
+
+	getEmptyObject = (initValue = '') => {
+		return {
+            city: initValue,
+            state: initValue,
+            address: initValue,
+            birthday: initValue,
+            gender: initValue,
+            email: initValue,
+            phone: initValue,
+            zip: initValue,
+        }
+	};
 
 	updateVoterFields(field, event) {
 		const { value } = event.target;
@@ -51,16 +57,17 @@ class VoterDetail extends BaseComponent {
 	}
 
 	validateInput(name, value) {
-		if (!value) {
-			return false;
-		}
 		switch (name) {
 			case 'email':
-				return emailValidation(value);
+				return !value || emailValidation(value);
 			case 'phone':
-				return phoneValidation(parseInt(value));
+				return !value || phoneValidation(parseInt(value));
 			case 'zip':
-				return zipCodeValidation(value);
+				return !value || zipCodeValidation(value);
+			case 'state':
+                return !!value;
+			case 'city':
+				return !!value;
 			default:
 				return true;
 		}
@@ -74,65 +81,68 @@ class VoterDetail extends BaseComponent {
     
     onNext = () => {
 		const { voterDetail, isValid } = this.state;
-		let validation = Object.assign({}, isValid);
+		let validation = [...isValid];
 		Object.keys(voterDetail).forEach(key => {
             validation[key] = this.validateInput(key, voterDetail[key]);
 		});
 
 		this.setState({ isValid: validation });
-	};
 
-	goBackToHomePage() {
-		this.onLink(routes.login);
-	}
+		if (Object.values(validation).every(val => val)) {
+			const { voterDetailsPersist, matchListPersist } = this.props.actions;
+            voterDetailsPersist(voterDetail);
+            matchListPersist(voterDetail);
+            this.onLink(routes.matchList);
+		}
+	};
 
 	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
 		const width = isWholeRow ? 12 : 6;
+		const { voterDetail, isValid } = this.state;
 		return (
             <div className={`form-group col-xs-${width}`}>
                 <label className="pull-left" htmlFor={name}>{ label }</label>
                 <input type={type} className="input-field" id={name} ref={name}
                        required="" aria-required="true"
+					   value={voterDetail[name]}
                        onChange={this.updateVoterFields.bind(this, name)}
                        onBlur={this.validateVoterFields.bind(this, name)} />
-                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
+                { !isValid[name] && <span className="pull-left">{ errorText }</span> }
             </div>
 		);
 	};
 
 	renderDropdownField = (name, label, options, errorText) => {
+        const { voterDetail, isValid } = this.state;
 		return (
             <div className="form-group col-xs-6">
                 <label className="pull-left" htmlFor={name}>{ label }</label>
                 <select className="input-field" id={name} ref={name}
                         required="" aria-required="true"
+						value={voterDetail[name]}
                         onChange={this.updateVoterFields.bind(this, name)}>
                     <option value="" />
                     { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
                 </select>
-                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
+                { !isValid[name] && <span className="pull-left">{ errorText }</span> }
             </div>
 		)
 	};
 
+    isLoadPrevious = () => {
+        const { search } = this.props.location || {};
+        return qs.parse(search).loadPrevious;
+    };
+
 	render() {
-		const { makeList, currentNumber } = this.props.voter;
-		const firstName = makeList['firstname' + currentNumber];
-		const lastName = makeList['lastname' + currentNumber];
-
-		// Make states array from json object
-		var stateArr = [];
-		Object.keys(States).forEach(function(key){
-			stateArr.push(States[key]);
-		})
-
-		const notValidInput = '* Input is not valid *';
+		const { makeList, currentNumber } = this.props.voter,
+			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
+			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
+			loadPrevious = this.isLoadPrevious(),
+			notValidInput = '* Input is not valid *';
 		return (
 			<div className='btw-voter btw-voter-detail'>
-				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={this.goBackToHomePage}>
-						Go back
-				</button>
+				{ this.renderBackToHome() }
 				<div className="intro">
 					<p className="intro-title">
                         { firstName + " " + lastName }
@@ -144,7 +154,7 @@ class VoterDetail extends BaseComponent {
 				<form>
 					<div className="row">
 						{ this.renderTextField('city', 'City *', '* City is required *', false) }
-						{ this.renderDropdownField('state', 'State *', stateArr, '* State is required *') }
+						{ this.renderDropdownField('state', 'State *', Object.values(States), '* State is required *') }
 					</div>
 					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
 					<div className="row">
@@ -155,9 +165,16 @@ class VoterDetail extends BaseComponent {
 					<div className="row">{ this.renderTextField('phone', 'Phone', notValidInput, true, 'number') }</div>
 					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>
-				<div id="btn_next">
-					<button className="btn btn-primary" onClick={this.onNext}>Next</button>
-				</div>
+				<Row>
+                    { loadPrevious && <Col mdOffset={3} md={3}>
+                        <NextButton title='Next Name' />
+                    </Col> }
+                    <Col md={loadPrevious ? 3 : 12}>
+                        <Button className="btn btn-primary" onClick={this.onNext}>
+                            { loadPrevious ? 'Resubmit' : 'Next' }
+                        </Button>
+                    </Col>
+				</Row>
 			</div>
 		);
 	}
@@ -170,8 +187,10 @@ const mapStateToProps = (state) => {
 };
 
 
-const mapDispatchToProps = (dispatch) => ({
-
-});
+const mapDispatchToProps = (dispatch) => {
+	return {
+        actions: bindActionCreators({ voterDetailsPersist, matchListPersist }, dispatch)
+	}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VoterDetail));
