@@ -2,41 +2,45 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { Row, Col, Button } from 'react-bootstrap';
+import qs from 'query-string';
 
 import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
 import routes from '../../constants/Routes';
 import voterConstants from '../../constants/VoterConstants';
 import { voterDetailsPersist, matchListPersist  } from '../../actions/VoterAction';
-
 import BaseComponent from '../shared/BaseComponent';
+import NextButton from './NextButton';
+
 
 class VoterDetail extends BaseComponent {
-	constructor(props) {
-		super(props);
+	constructor(props, context) {
+		super(props, context);
+		const emptyVoterObj = this.getEmptyObject();
+		const loadPrevious = this.isLoadPrevious();
+		const { currentNumber, voterDetails } = this.props.voter;
 		this.state = {
-			voterDetail:{
-				city      		: '',
-				state       	: '',
-				address      	: '',
-				birthday       	: '',
-				gender      	: '',
-				email       	: '',
-				phone      		: '',
-				zip       		: '',
-			},
-			isValid:{
-				city      		: true,
-				state       	: true,
-				address      	: true,
-				birthday       	: true,
-				gender      	: true,
-				email       	: true,
-				phone      		: true,
-				zip       		: true,
-			}
-		}
+			voterDetail: loadPrevious ?
+				{ ...emptyVoterObj, ...voterDetails[currentNumber] }
+				: emptyVoterObj,
+			isValid: this.getEmptyObject(true)
+		};
+		console.log(this.state);
 	}
+
+	getEmptyObject = (initValue = '') => {
+		return {
+            city: initValue,
+            state: initValue,
+            address: initValue,
+            birthday: initValue,
+            gender: initValue,
+            email: initValue,
+            phone: initValue,
+            zip: initValue,
+        }
+	};
 
 	updateVoterFields(field, event) {
 		const { value } = event.target;
@@ -95,39 +99,49 @@ class VoterDetail extends BaseComponent {
 
 	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
 		const width = isWholeRow ? 12 : 6;
+		const { voterDetail, isValid } = this.state;
 		return (
             <div className={`form-group col-xs-${width}`}>
                 <label className="pull-left" htmlFor={name}>{ label }</label>
                 <input type={type} className="input-field" id={name} ref={name}
                        required="" aria-required="true"
+					   value={voterDetail[name]}
                        onChange={this.updateVoterFields.bind(this, name)}
                        onBlur={this.validateVoterFields.bind(this, name)} />
-                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
+                { !isValid[name] && <span className="pull-left">{ errorText }</span> }
             </div>
 		);
 	};
 
 	renderDropdownField = (name, label, options, errorText) => {
+        const { voterDetail, isValid } = this.state;
 		return (
             <div className="form-group col-xs-6">
                 <label className="pull-left" htmlFor={name}>{ label }</label>
                 <select className="input-field" id={name} ref={name}
                         required="" aria-required="true"
+						value={voterDetail[name]}
                         onChange={this.updateVoterFields.bind(this, name)}>
                     <option value="" />
                     { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
                 </select>
-                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
+                { !isValid[name] && <span className="pull-left">{ errorText }</span> }
             </div>
 		)
 	};
 
-	render() {
-		const { makeList, currentNumber } = this.props.voter;
-		const firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`];
-		const lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`];
+    isLoadPrevious = () => {
+        const { search } = this.props.location || {};
+        return qs.parse(search).loadPrevious;
+    };
 
-		const notValidInput = '* Input is not valid *';
+	render() {
+		const { makeList, currentNumber } = this.props.voter,
+			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
+			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
+			loadPrevious = this.isLoadPrevious(),
+			notValidInput = '* Input is not valid *';
+
 		return (
 			<div className='btw-voter btw-voter-detail'>
 				{ this.renderBackToHome() }
@@ -153,9 +167,16 @@ class VoterDetail extends BaseComponent {
 					<div className="row">{ this.renderTextField('phone', 'Phone', notValidInput, true, 'number') }</div>
 					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>
-				<div id="btn_next">
-					<button className="btn btn-primary" onClick={this.onNext}>Next</button>
-				</div>
+				<Row>
+                    { loadPrevious && <Col mdOffset={3} md={3}>
+                        <NextButton title='Next Name' />
+                    </Col> }
+                    <Col md={loadPrevious ? 3 : 12}>
+                        <Button className="btn btn-primary" onClick={this.onNext}>
+                            { loadPrevious ? 'Resubmit' : 'Next' }
+                        </Button>
+                    </Col>
+				</Row>
 			</div>
 		);
 	}

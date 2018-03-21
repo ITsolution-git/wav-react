@@ -51,7 +51,7 @@ export function matchListPersist(voterDetails) {
                 "voterstatus": "active"
             },
             {
-                "matchRate": 0.7,
+                "matchRate": 0.89,
                 "firstname": "DIANE3",
                 "lastname": "TURNER3",
                 "regaddrline1": "922 E ADAMS BLVD",

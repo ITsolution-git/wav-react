@@ -13,6 +13,8 @@ import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
 import VoterDetail from './voter/VoterDetail';
 import MatchList from './voter/MatchList';
+import VoterSuccess from './voter/VoterSuccess';
+import VoterError from './voter/VoterError';
 import Forum from './community/Forum';
 import Reports from './reports/Reports';
 
@@ -57,6 +59,10 @@ const Router =() => (
 				   component = { Authorization(VoterDetail, [admin, guest]) } />
             <Route exact path = {routes.matchList}
                    component = { Authorization(MatchList, [admin, guest]) } />
+            <Route exact path = {routes.voterSuccess}
+                   component = { Authorization(VoterSuccess, [admin, guest]) } />
+            <Route exact path = {routes.voterError}
+                   component = { Authorization(VoterError, [admin, guest]) } />
 			// static route pages
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
             <Route exact path = {routes.howContribute} component = { HowContribute } />

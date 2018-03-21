@@ -9,7 +9,8 @@ export default function voterReducer(state = InitialState.voter, action) {
             return { ...state, makeList: action.makeList };
 		}
         case VoterContants.VOTER_NEXT_MUMBER_PERSIST: {
-            return { ...state, currentNumber: state.currentNumber++ };
+        	const nextNumber = state.currentNumber + 1;
+            return { ...state, currentNumber: nextNumber };
         }
         case VoterContants.VOTER_MATCHLIST_PERSIST: {
             return { ...state, matchList: action.matchList };
