@@ -9,7 +9,7 @@ import {
 	loadDataFailure
 } from './AppAction';
 
-export function btwSignOn(username, password, source) {
+export function btwSignOn(username, password) {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.signOn));
 		IdentityService.login(username, password).then(
@@ -29,7 +29,7 @@ export function btwRegister(identity) {
 		return IdentityService.register(identity).then(
 				response => {
 					dispatch(loadDataSuccess(appDataTypes.register, response.data));
-					//show success page or redirect to login page with username
+					authStorage.saveRegisteredCreds(identity.username, identity.password);
 					History.push(routes.makelist);
 					History.go();
 				},

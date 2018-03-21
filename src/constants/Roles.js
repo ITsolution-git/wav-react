@@ -1,5 +1,6 @@
 export default {
     captain: 'captain',
     admin: 'admin',
-    guest: 'guest'
+    guest: 'guest',
+    registered: 'registered'
 }

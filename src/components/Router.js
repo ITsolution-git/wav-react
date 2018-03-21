@@ -26,17 +26,17 @@ import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
 import roles from '../constants/Roles';
 
-const { captain, admin, guest } = roles;
+const { captain, admin, registered, guest } = roles;
 
 const Router =() => (
 	<router history={ History }>
 		<Switch>
 			<Route exact path = {routes.login}
-				   component = { Authorization(Login, [guest]) } />
+				   component = { Authorization(Login, [guest, registered]) } />
 			<Route exact path = {routes.register}
-				   component = { Authorization(Register, [guest, captain, admin]) } />
+				   component = { Authorization(Register, [guest, registered, captain, admin]) } />
 			<Route exact path = {routes.makelist}
-				   component = { Authorization(MakeList, [guest]) } />
+				   component = { Authorization(MakeList, [registered]) } />
 			<Route exact path = {routes.pageDown}
 				   component = { GeneralErrorPage } />
 			<Route exact path = {routes.invites}
@@ -56,13 +56,13 @@ const Router =() => (
             <Route exact path = {routes.reports}
                    component = { Authorization(Reports, [admin]) } />
 			<Route exact path = {routes.voterDetail}
-				   component = { Authorization(VoterDetail, [admin, guest]) } />
+				   component = { Authorization(VoterDetail, [registered]) } />
             <Route exact path = {routes.matchList}
-                   component = { Authorization(MatchList, [admin, guest]) } />
+                   component = { Authorization(MatchList, [registered]) } />
             <Route exact path = {routes.voterSuccess}
-                   component = { Authorization(VoterSuccess, [admin, guest]) } />
+                   component = { Authorization(VoterSuccess, [registered]) } />
             <Route exact path = {routes.voterError}
-                   component = { Authorization(VoterError, [admin, guest]) } />
+                   component = { Authorization(VoterError, [registered]) } />
 			// static route pages
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
             <Route exact path = {routes.howContribute} component = { HowContribute } />

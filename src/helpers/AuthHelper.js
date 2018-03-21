@@ -12,9 +12,10 @@ export function getHomeRoute() {
             return routes.captainsDashboard;
         case roles.admin:
             return routes.adminDashboard;
-        case roles.guest: {
+        case roles.guest:
             return routes.login;
-        }
+        case roles.registered:
+            return routes.login
     }
 }
 
