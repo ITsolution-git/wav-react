@@ -27,13 +27,9 @@ export default {
 
 		store.subscribe(() => {
 			saveState({
-				voter: {
-					btwMakelist: {
-						makelist: store.getState().voter.btwMakelist.makelist
-					}
-				}
+				voter: store.getState().voter
 			});
-		})
+		});
 		return  store
 	}
 }

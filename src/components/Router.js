@@ -5,7 +5,7 @@ import History from '../utility/History';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import SendInvite from './invites/SendInvite';
 import Register from './captainProfile/Register';
-import Makelist from './captainProfile/Makelist';
+import Makelist from './captainProfile/MakeList';
 import TasksList from './tasksList/TasksList';
 import VotersList from './voterList/VotersList';
 import Community from './community/Community';

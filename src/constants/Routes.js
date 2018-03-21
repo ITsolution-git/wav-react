@@ -1,6 +1,6 @@
 export default {
     register: '/captainProfile/Register',
-    makelist: '/captainProfile/Makelist',
+    makelist: '/captainProfile/MakeList',
     pageDown: '/errorPages/Page_50_X',
     invites: '/invites/SendInvite',
     tasksList: '/tasksList',
