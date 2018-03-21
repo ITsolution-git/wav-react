@@ -19,7 +19,6 @@ class NextButton extends BaseComponent {
             const { username, password } = authStorage.getRegisteredCreds() || {};
             actions.resetVoterState();
             actions.btwSignOn(username, password);
-            authStorage.clearRegisteredCreds();
             this.redirectToHome();
             return;
         }

@@ -15,6 +15,7 @@ export function btwSignOn(username, password) {
 		IdentityService.login(username, password).then(
 			response => {
                 authStorage.saveTokenInfo(response.token);
+                authStorage.clearRegisteredCreds();
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
 			},
 			error => {
