@@ -1,18 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import VoterAction from "../../actions/VoterAction";
-import routes from '../../constants/Routes';
+import { bindActionCreators } from 'redux';
 
+import voterConstants from '../../constants/VoterConstants';
+import { makeListPersist } from '../../actions/VoterAction';
+import routes from '../../constants/Routes';
 import { textValidation } from '../../utility/FormValidation';
 import BaseComponent from '../shared/BaseComponent';
 
 const firstNamePrefix = 'firstname',
 	  lastNamePrefix = 'lastname',
 	  invalidPrefix = 'invalid',
-	  numberOfNames = 4;
+	  numberOfNames = voterConstants.VOTERS_COUNT;
 
-class Makelist extends BaseComponent {
+class MakeList extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {};
@@ -50,8 +52,8 @@ class Makelist extends BaseComponent {
     		return;
 		}
 
-		this.props.btwMakelist(namesObj);
-    	this.onLink(routes.voterDetail, {'voter_num': 1});
+		this.props.actions.makeListPersist(namesObj);
+    	this.onLink(routes.voterDetail);
 	};
 
 	goBackToHomePage() {
@@ -112,7 +114,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-	btwMakelist: (makelist) => dispatch(VoterAction.btwMakelist(makelist))
+    actions: bindActionCreators({ makeListPersist }, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Makelist));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MakeList));

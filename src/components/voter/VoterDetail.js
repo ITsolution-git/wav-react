@@ -1,13 +1,14 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
-import History from '../../utility/History';
 import routes from '../../constants/Routes';
 
-class VoterDetail extends Component {
+import BaseComponent from '../shared/BaseComponent';
 
-
+class VoterDetail extends BaseComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -35,82 +36,89 @@ class VoterDetail extends Component {
 	}
 
 	updateVoterFields(field, event) {
-
+		const { value } = event.target;
 		let fields = Object.assign({}, this.state.voterDetail);
-		fields[field] = event.target.value;
+		fields[field] = value;
 
-		this.setState({
-			voterDetail: fields
-		})
+		this.setState({ voterDetail: fields });
 
 		// check if it is valid for select tag
 		if ( field === "state" || field === "city" ) {
-
 			let validation = Object.assign({}, this.state.isValid);
-			validation[field] = event.target.value == "" ? false : true;
+			validation[field] = !!value;
+			this.setState({ isValid: validation });
+		}
+	}
 
-			this.setState({
-				isValid: validation
-			})
+	validateInput(name, value) {
+		if (!value) {
+			return false;
+		}
+		switch (name) {
+			case 'email':
+				return emailValidation(value);
+			case 'phone':
+				return phoneValidation(parseInt(value));
+			case 'zip':
+				return zipCodeValidation(value);
+			default:
+				return true;
 		}
 	}
 
 	validateVoterFields(field, event) {
-
 		let validation = Object.assign({}, this.state.isValid);
-
-		if (field === "email") {
-			validation[field] = event.target.value === "" || emailValidation(event.target.value);
-		} else if (field === "phone") {
-			validation[field] = event.target.value === "" || phoneValidation(parseInt(event.target.value));
-		} else if (field === "zip") {
-			validation[field] = event.target.value === "" || zipCodeValidation(event.target.value);
-		} else if (field === "state" || field === "city"){
-			validation[field] = event.target.value == "" ? false : true;
-		}
-
-		this.setState({
-			isValid: validation
-		})
+		validation[field] = this.validateInput(field, event.target.value);
+		this.setState({ isValid: validation });
 	}
     
-    onNext(event) {
-		
-		let validation = Object.assign({}, this.state.isValid);
+    onNext = () => {
+		const { voterDetail, isValid } = this.state;
+		let validation = Object.assign({}, isValid);
+		Object.keys(voterDetail).forEach(key => {
+            validation[key] = this.validateInput(key, voterDetail[key]);
+		});
 
-		for (let key in this.state.voterDetail) {
-			if (key === "email") {
-				validation[key] = this.state.voterDetail[key] === "" || emailValidation(this.state.voterDetail[key]);
-			} else if (key === "phone") {
-				validation[key] = this.state.voterDetail[key] === "" || phoneValidation(parseInt(this.state.voterDetail[key]));
-			} else if (key === "zip") {
-				validation[key] = this.state.voterDetail[key] === "" || zipCodeValidation(this.state.voterDetail[key]);
-			} else if (key === "state" || key === "city"){
-				validation[key] = this.state.voterDetail[key] == "" ? false : true;
-			}
-		}
-
-		this.setState({
-			isValid: validation
-		})
-
-		for (let key in this.state.makelistNames) {
-			if (validation[key] == false) {
-				return ;
-			}
-		}
-	}
+		this.setState({ isValid: validation });
+	};
 
 	goBackToHomePage() {
-			History.push(routes.login);
-			History.go();
+		this.onLink(routes.login);
 	}
 
+	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
+		const width = isWholeRow ? 12 : 6;
+		return (
+            <div className={`form-group col-xs-${width}`}>
+                <label className="pull-left" htmlFor={name}>{ label }</label>
+                <input type={type} className="input-field" id={name} ref={name}
+                       required="" aria-required="true"
+                       onChange={this.updateVoterFields.bind(this, name)}
+                       onBlur={this.validateVoterFields.bind(this, name)} />
+                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
+            </div>
+		);
+	};
+
+	renderDropdownField = (name, label, options, errorText) => {
+		return (
+            <div className="form-group col-xs-6">
+                <label className="pull-left" htmlFor={name}>{ label }</label>
+                <select className="input-field" id={name} ref={name}
+                        required="" aria-required="true"
+                        onChange={this.updateVoterFields.bind(this, name)}>
+                    <option value="" />
+                    { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
+                </select>
+                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
+            </div>
+		)
+	};
+
 	render() {
-		const { makelist } = this.props.makelist;
-		const { voter_num } = this.props.location.state;
-		const firstName = makelist['firstname' + voter_num];
-		const lastName = makelist['lastname' + voter_num];
+		const { makeList, currentNumber } = this.props.voter;
+		const firstName = makeList['firstname' + currentNumber];
+		const lastName = makeList['lastname' + currentNumber];
 
 		// Make states array from json object
 		var stateArr = [];
@@ -118,115 +126,37 @@ class VoterDetail extends Component {
 			stateArr.push(States[key]);
 		})
 
+		const notValidInput = '* Input is not valid *';
 		return (
 			<div className='btw-voter btw-voter-detail'>
 				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
+								onClick={this.goBackToHomePage}>
 						Go back
 				</button>
 				<div className="intro">
 					<p className="intro-title">
                         { firstName + " " + lastName }
 					</p>
-
 					<p className="intro-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 					</p>
 				</div>
-
 				<form>
 					<div className="row">
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="city">City *</label>
-							<input type="text" className="input-field" id="city" ref="city"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'city')}
-								onBlur={this.validateVoterFields.bind(this, 'city')}></input>
-							{ !this.state.isValid.city && <span className="pull-left">* City is required *</span> }
-						</div>
-
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="state">State *</label>
-							<select className="input-field" id="state" ref="state"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'state')}>
-								<option value=""></option>
-								{ stateArr.map( (item) => (<option value={item}>{item}</option>) ) }
-							</select>
-							{ !this.state.isValid.state && <span className="pull-left">* State is required *</span> }
-						</div>
+						{ this.renderTextField('city', 'City *', '* City is required *', false) }
+						{ this.renderDropdownField('state', 'State *', stateArr, '* State is required *') }
 					</div>
-
+					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
 					<div className="row">
-						<div className="form-group col-xs-12">
-							<label className="pull-left" htmlFor="address">Address</label>
-							<input type="text" className="input-field" id="address" ref="address"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'address')}
-								onBlur={this.validateVoterFields.bind(this, 'address')}></input>
-							{ !this.state.isValid.address && <span className="pull-left">* Input is not valid *</span> }
-						</div>
+                        { this.renderTextField('birthday', 'Birthday', notValidInput, false, 'date') }
+                        { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
-
-					<div className="row">
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="birthday">Birthday</label>
-							<input type="date" className="input-field" id="birthday" ref="birthday"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'birthday')}
-								onBlur={this.validateVoterFields.bind(this, 'birthday')}></input>
-							{ !this.state.isValid.birthday && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="gender">Gender</label>
-							<select className="input-field" id="gender" ref="gender"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'gender')}>
-								<option value=""></option>
-								<option value="male">Male</option>
-								<option value="female">Female</option>
-							</select>
-							{ !this.state.isValid.gender && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
-					<div className="row">
-						<div className="form-group col-xs-12">
-							<label className="pull-left" htmlFor="email">Email</label>
-							<input type="email" className="input-field" id="email" ref="email"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'email')}
-								onBlur={this.validateVoterFields.bind(this, 'email')}></input>
-							{ !this.state.isValid.email && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
-					<div className="row">
-						<div className="form-group col-xs-12">
-							<label className="pull-left" htmlFor="phone">Phone</label>
-							<input type="number" className="input-field" id="phone" ref="phone"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'phone')}
-								onBlur={this.validateVoterFields.bind(this, 'phone')}></input>
-							{ !this.state.isValid.phone && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
-					<div className="row">
-						<div className="form-group col-xs-12">
-							<label className="pull-left" htmlFor="zip">Zip</label>
-							<input type="text" className="input-field" id="zip" ref="zip"
-								required="" aria-required="true"
-								onChange={this.updateVoterFields.bind(this, 'zip')}
-								onBlur={this.validateVoterFields.bind(this, 'zip')}></input>
-							{ !this.state.isValid.zip && <span className="pull-left">* Input is not valid *</span> }
-						</div>
-					</div>
-
+					<div className="row">{ this.renderTextField('email', 'Email', notValidInput, true, 'email') }</div>
+					<div className="row">{ this.renderTextField('phone', 'Phone', notValidInput, true, 'number') }</div>
+					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>
 				<div id="btn_next">
-					<button className="btn btn-primary" onClick={this.onNext.bind(this, 'btwSignOn')}>Next</button>
+					<button className="btn btn-primary" onClick={this.onNext}>Next</button>
 				</div>
 			</div>
 		);
@@ -235,12 +165,13 @@ class VoterDetail extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		makelist: state.voter.btwMakelist
+		voter: state.voter
 	}
-}
+};
 
 
 const mapDispatchToProps = (dispatch) => ({
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(VoterDetail);
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VoterDetail));
