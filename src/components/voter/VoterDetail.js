@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
 import routes from '../../constants/Routes';
+import voterConstants from '../../constants/VoterConstants';
 
 import BaseComponent from '../shared/BaseComponent';
 
@@ -51,16 +52,17 @@ class VoterDetail extends BaseComponent {
 	}
 
 	validateInput(name, value) {
-		if (!value) {
-			return false;
-		}
 		switch (name) {
 			case 'email':
-				return emailValidation(value);
+				return !value || emailValidation(value);
 			case 'phone':
-				return phoneValidation(parseInt(value));
+				return !value || phoneValidation(parseInt(value));
 			case 'zip':
-				return zipCodeValidation(value);
+				return !value || zipCodeValidation(value);
+			case 'state':
+                return !!value;
+			case 'city':
+				return !!value;
 			default:
 				return true;
 		}
@@ -81,10 +83,6 @@ class VoterDetail extends BaseComponent {
 
 		this.setState({ isValid: validation });
 	};
-
-	goBackToHomePage() {
-		this.onLink(routes.login);
-	}
 
 	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
 		const width = isWholeRow ? 12 : 6;
@@ -117,20 +115,14 @@ class VoterDetail extends BaseComponent {
 
 	render() {
 		const { makeList, currentNumber } = this.props.voter;
-		const firstName = makeList['firstname' + currentNumber];
-		const lastName = makeList['lastname' + currentNumber];
-
-		// Make states array from json object
-		var stateArr = [];
-		Object.keys(States).forEach(function(key){
-			stateArr.push(States[key]);
-		})
+		const firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`];
+		const lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`];
 
 		const notValidInput = '* Input is not valid *';
 		return (
 			<div className='btw-voter btw-voter-detail'>
 				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={this.goBackToHomePage}>
+								onClick={() => this.onLink(routes.login)}>
 						Go back
 				</button>
 				<div className="intro">
@@ -144,7 +136,7 @@ class VoterDetail extends BaseComponent {
 				<form>
 					<div className="row">
 						{ this.renderTextField('city', 'City *', '* City is required *', false) }
-						{ this.renderDropdownField('state', 'State *', stateArr, '* State is required *') }
+						{ this.renderDropdownField('state', 'State *', Object.values(States), '* State is required *') }
 					</div>
 					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
 					<div className="row">
