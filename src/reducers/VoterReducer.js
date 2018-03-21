@@ -6,7 +6,6 @@ import InitialState from '../constants/InitialState';
 export default function voterReducer(state = InitialState.voter, action) {
 	switch (action.type) {
 		case VoterContants.VOTER_MAKELIST_PERSIST: {
-			debugger;
             return { ...state, makeList: action.makeList };
 		}
         case VoterContants.VOTER_NEXT_MUMBER_PERSIST: {
