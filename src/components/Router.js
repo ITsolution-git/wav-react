@@ -5,13 +5,14 @@ import History from '../utility/History';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import SendInvite from './invites/SendInvite';
 import Register from './captainProfile/Register';
-import Makelist from './captainProfile/MakeList';
+import MakeList from './voter/MakeList';
 import TasksList from './tasksList/TasksList';
 import VotersList from './voterList/VotersList';
 import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
 import VoterDetail from './voter/VoterDetail';
+import MatchList from './voter/MatchList';
 import Forum from './community/Forum';
 import Reports from './reports/Reports';
 
@@ -33,7 +34,7 @@ const Router =() => (
 			<Route exact path = {routes.register}
 				   component = { Authorization(Register, [guest, captain, admin]) } />
 			<Route exact path = {routes.makelist}
-				   component = { Authorization(Makelist, [guest]) } />
+				   component = { Authorization(MakeList, [guest]) } />
 			<Route exact path = {routes.pageDown}
 				   component = { GeneralErrorPage } />
 			<Route exact path = {routes.invites}
@@ -54,6 +55,8 @@ const Router =() => (
                    component = { Authorization(Reports, [admin]) } />
 			<Route exact path = {routes.voterDetail}
 				   component = { Authorization(VoterDetail, [admin, guest]) } />
+            <Route exact path = {routes.matchList}
+                   component = { Authorization(MatchList, [admin, guest]) } />
 			// static route pages
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
             <Route exact path = {routes.howContribute} component = { HowContribute } />

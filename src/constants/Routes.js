@@ -10,6 +10,7 @@ export default {
     adminDashboard: '/adminDashboard',
     login: '/',
     voterDetail: '/voterDetail',
+    matchList: '/matchList',
     forum: '/forum',
     reports: '/reports',
 

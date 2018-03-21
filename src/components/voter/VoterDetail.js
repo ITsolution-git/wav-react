@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
 import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
 import routes from '../../constants/Routes';
 import voterConstants from '../../constants/VoterConstants';
+import { voterDetailsPersist, matchListPersist  } from '../../actions/VoterAction';
 
 import BaseComponent from '../shared/BaseComponent';
 
@@ -76,12 +78,19 @@ class VoterDetail extends BaseComponent {
     
     onNext = () => {
 		const { voterDetail, isValid } = this.state;
-		let validation = Object.assign({}, isValid);
+		let validation = [...isValid];
 		Object.keys(voterDetail).forEach(key => {
             validation[key] = this.validateInput(key, voterDetail[key]);
 		});
 
 		this.setState({ isValid: validation });
+
+		if (Object.values(validation).every(val => val)) {
+			const { voterDetailsPersist, matchListPersist } = this.props.actions;
+            voterDetailsPersist(voterDetail);
+            matchListPersist(voterDetail);
+            this.onLink(routes.matchList);
+		}
 	};
 
 	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
@@ -121,10 +130,7 @@ class VoterDetail extends BaseComponent {
 		const notValidInput = '* Input is not valid *';
 		return (
 			<div className='btw-voter btw-voter-detail'>
-				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={() => this.onLink(routes.login)}>
-						Go back
-				</button>
+				{ this.renderBackToHome() }
 				<div className="intro">
 					<p className="intro-title">
                         { firstName + " " + lastName }
@@ -162,8 +168,10 @@ const mapStateToProps = (state) => {
 };
 
 
-const mapDispatchToProps = (dispatch) => ({
-
-});
+const mapDispatchToProps = (dispatch) => {
+	return {
+        actions: bindActionCreators({ voterDetailsPersist, matchListPersist }, dispatch)
+	}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VoterDetail));
