@@ -2,6 +2,7 @@ import VoterContants from '../constants/VoterConstants';
 
 export function makeListPersist(makeList) {
 	return dispatch => {
+	    dispatch(resetVoterState());
         dispatch(persist(makeList));
 	};
 

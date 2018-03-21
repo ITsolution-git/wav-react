@@ -26,7 +26,6 @@ class VoterDetail extends BaseComponent {
 				: emptyVoterObj,
 			isValid: this.getEmptyObject(true)
 		};
-		console.log(this.state);
 	}
 
 	getEmptyObject = (initValue = '') => {
@@ -141,7 +140,6 @@ class VoterDetail extends BaseComponent {
 			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
 			loadPrevious = this.isLoadPrevious(),
 			notValidInput = '* Input is not valid *';
-
 		return (
 			<div className='btw-voter btw-voter-detail'>
 				{ this.renderBackToHome() }

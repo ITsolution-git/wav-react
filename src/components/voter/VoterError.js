@@ -1,18 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import { bindActionCreators } from 'redux';
+import qs from 'query-string';
 
 import BaseComponent from '../shared/BaseComponent';
-import { makeListPersist } from "../../actions/VoterAction";
-import routes from '../../constants/Routes';
+import NextButton from './NextButton';
 
-class VoterSuccess extends BaseComponent {
+
+class VoterError extends BaseComponent {
     render() {
-        const { matchList } = this.props.voter;
+        const { search } = this.props.location || {};
+        const params = qs.parse(search);
+        const { firstname, lastname } = params;
+
         return (
             <div className='btw-voter btw-voter-success'>
-                voter error
+                <div>Error</div>
+                { firstname } { lastname }
+                <div>
+                    <NextButton />
+                </div>
             </div>
         );
     }
@@ -24,9 +31,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ makeListPersist }, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VoterSuccess));
+export default connect(mapStateToProps)(withRouter(VoterError));
