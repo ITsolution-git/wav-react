@@ -14,7 +14,7 @@ class VoterError extends BaseComponent {
         const { firstname, lastname } = params;
 
         return (
-            <div className='btw-voter btw-voter-success'>
+            <div className='btw-voter btw-voter-error'>
                 <div>Error</div>
                 { firstname } { lastname }
                 <div>
