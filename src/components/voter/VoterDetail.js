@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import States from '../../constants/States';
-import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
+import states from '../../constants/States';
+import validationTypes from '../../constants/ValidationTypes';
 import routes from '../../constants/Routes';
 import voterConstants from '../../constants/VoterConstants';
 import { voterDetailsPersist, matchListPersist  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
 import NextButton from './NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
+import  { validate } from '../../utility/InputValidator';
 
 
 class VoterDetail extends BaseComponent {
@@ -57,20 +58,14 @@ class VoterDetail extends BaseComponent {
 	}
 
 	validateInput(name, value) {
-		switch (name) {
-			case 'email':
-				return !value || emailValidation(value);
-			case 'phone':
-				return !value || phoneValidation(parseInt(value));
-			case 'zip':
-				return !value || zipCodeValidation(value);
-			case 'state':
-                return !!value;
-			case 'city':
-				return !!value;
-			default:
-				return true;
+		const { email, phone, zip } = validationTypes;
+		if ([ email, phone, zip].includes(name)) {
+			return !value || validate(name, value);
 		}
+		if (['state', 'city'].includes(name)) {
+            return !!value;
+		}
+		return true;
 	}
 
 	validateVoterFields(field, event) {
@@ -96,38 +91,58 @@ class VoterDetail extends BaseComponent {
 		}
 	};
 
-	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
-		const width = isWholeRow ? 12 : 6;
-		const { voterDetail, isValid } = this.state;
+	renderInputDiv = (width, label, name, input, errorText) => {
 		return (
             <div className={`form-group col-xs-${width}`}>
                 <label className="pull-left" htmlFor={name}>{ label }</label>
-                <input type={type} className="input-field" id={name} ref={name}
-                       required="" aria-required="true"
-					   value={voterDetail[name]}
-                       onChange={this.updateVoterFields.bind(this, name)}
-                       onBlur={this.validateVoterFields.bind(this, name)} />
-                { !isValid[name] && <span className="pull-left">{ errorText }</span> }
-            </div>
+				{ input }
+                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
+			</div>
 		);
 	};
 
+	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
+		const width = isWholeRow ? 12 : 6;
+		const input = (
+            <input type={type} className='input-field'
+                   value={ this.state.voterDetail[name]}
+                   onChange={this.updateVoterFields.bind(this, name)}
+                   onBlur={this.validateVoterFields.bind(this, name)} />
+		);
+		return this.renderInputDiv(width, label, name, input, errorText);
+	};
+
 	renderDropdownField = (name, label, options, errorText) => {
-        const { voterDetail, isValid } = this.state;
-		return (
-            <div className="form-group col-xs-6">
-                <label className="pull-left" htmlFor={name}>{ label }</label>
-                <select className="input-field" id={name} ref={name}
-                        required="" aria-required="true"
-						value={voterDetail[name]}
+        const input =(
+            <select className="input-field"
+                    value={this.state.voterDetail[name]}
+                    onChange={this.updateVoterFields.bind(this, name)}>
+                <option value="" />
+                { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
+            </select>
+		);
+		return this.renderInputDiv(6, label, name, input, errorText);
+	};
+
+    renderAgeDropdown = () => {
+    	const name = 'birthday',
+			  // 18 because user should be adult
+			  fromYear = (new Date()).getFullYear() - 18,
+			  // let select 100 years
+			  options = Array(100).fill(0).map((e,i)=> fromYear - i);
+        const input = (
+            <Fragment>
+                <select className="input-field"
+                        value={this.state.voterDetail[name]}
                         onChange={this.updateVoterFields.bind(this, name)}>
                     <option value="" />
                     { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
                 </select>
-                { !isValid[name] && <span className="pull-left">{ errorText }</span> }
-            </div>
-		)
-	};
+                <div>You must be 18 years and above</div>
+            </Fragment>
+        );
+        return this.renderInputDiv(6, 'Year of birth', 'birthday', input, '* Input is not valid *');
+    };
 
     isLoadPrevious = () => {
     	return getUrlParam(this.props, 'loadPrevious');
@@ -153,11 +168,11 @@ class VoterDetail extends BaseComponent {
 				<form>
 					<div className="row">
 						{ this.renderTextField('city', 'City *', '* City is required *', false) }
-						{ this.renderDropdownField('state', 'State *', Object.values(States), '* State is required *') }
+						{ this.renderDropdownField('state', 'State *', Object.values(states), '* State is required *') }
 					</div>
 					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
 					<div className="row">
-                        { this.renderTextField('birthday', 'Birthday', notValidInput, false, 'date') }
+                        { this.renderAgeDropdown() }
                         { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
 					<div className="row">{ this.renderTextField('email', 'Email', notValidInput, true, 'email') }</div>
