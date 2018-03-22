@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Button } from 'react-bootstrap';
-import qs from 'query-string';
 
 import States from '../../constants/States';
 import { emailValidation, phoneValidation, zipCodeValidation } from '../../utility/FormValidation';
@@ -12,6 +11,7 @@ import voterConstants from '../../constants/VoterConstants';
 import { voterDetailsPersist, matchListPersist  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
 import NextButton from './NextButton';
+import { getUrlParam } from '../../helpers/UrlHelper';
 
 
 class VoterDetail extends BaseComponent {
@@ -130,8 +130,7 @@ class VoterDetail extends BaseComponent {
 	};
 
     isLoadPrevious = () => {
-        const { search } = this.props.location || {};
-        return qs.parse(search).loadPrevious;
+    	return getUrlParam(this.props, 'loadPrevious');
     };
 
 	render() {
@@ -145,7 +144,7 @@ class VoterDetail extends BaseComponent {
 				{ this.renderBackToHome() }
 				<div className="intro">
 					<p className="intro-title">
-                        { firstName + " " + lastName }
+                        { firstName || '' + " " + lastName || '' }
 					</p>
 					<p className="intro-desc">
                     	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

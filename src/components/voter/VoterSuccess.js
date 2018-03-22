@@ -5,14 +5,12 @@ import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../shared/BaseComponent';
 import NextButton from './NextButton';
-import qs from "query-string";
+import { getUrlParams } from '../../helpers/UrlHelper';
 
 
 class VoterSuccess extends BaseComponent {
     render() {
-        const { search } = this.props.location || {};
-        const params = qs.parse(search);
-        const { firstname, lastname } = params;
+        const { firstname = '', lastname = ''} = getUrlParams(this.props);
         return (
             <div className='btw-voter btw-voter-success'>
                 <div className="full-name">
