@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import VoterAction from "../../actions/VoterAction";
+import { makeListPersist } from "../../actions/VoterAction";
 import VoterContants from "../../constants/VoterConstants";
 
 
@@ -29,14 +29,17 @@ describe('btwMakelist', () => {
 
 			const expectedActions = [
 				{
-					type       	   : VoterContants.VOTER_MAKELIST_PERSIST,
-					makelist       : makelist
+					type: VoterContants.VOTER_RESET_STATE
 				},
-			]
+				{
+					type: VoterContants.VOTER_MAKELIST_PERSIST,
+					makeList: makelist
+				},
+			];
 			const store = mockStore({response : []});
-			return store.dispatch( VoterAction.btwMakelist( makelist ) ).then( () => {
-				expect(store.getActions()).to.deep.equal(expectedActions)
-			} )
+
+			store.dispatch( makeListPersist( makelist ) );
+            expect(store.getActions()).to.deep.equal(expectedActions);
 		})
 	})
 })
