@@ -62,10 +62,9 @@ class VoterDetail extends BaseComponent {
 		if ([ email, phone, zip].includes(name)) {
 			return !value || validate(name, value);
 		}
-		if (['state', 'city'].includes(name)) {
-            return !!value;
-		}
-		return true;
+		return ['state', 'city'].includes(name)
+			? !!value
+			: true;
 	}
 
 	validateVoterFields(field, event) {
@@ -138,7 +137,7 @@ class VoterDetail extends BaseComponent {
                     <option value="" />
                     { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
                 </select>
-                <div>You must be 18 years and above</div>
+                <div>voter should be 18years and above</div>
             </Fragment>
         );
         return this.renderInputDiv(6, 'Year of birth', 'birthday', input, '* Input is not valid *');
