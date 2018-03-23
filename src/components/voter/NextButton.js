@@ -10,6 +10,8 @@ import { btwSignOn } from '../../actions/SignOnAction';
 import routes from '../../constants/Routes';
 import voterConstants from '../../constants/VoterConstants';
 import authStorage from '../../storage/AuthStorage';
+import {getHomeRoute} from "../../helpers/AuthHelper";
+import appDataTypes from "../../constants/AppDataTypes";
 
 class NextButton extends BaseComponent {
 
@@ -19,12 +21,18 @@ class NextButton extends BaseComponent {
             const { username, password } = authStorage.getRegisteredCreds() || {};
             actions.resetVoterState();
             actions.btwSignOn(username, password);
-            this.redirectToHome();
             return;
         }
         actions.nextNumberPersist();
         this.onLink(routes.voterDetail);
     };
+
+    componentWillReceiveProps(props)  {
+        if (props.loginSuccess) {
+            this.onLink(getHomeRoute());
+        }
+    }
+
 
     render() {
         const { title = 'Next' } = this.props;
@@ -39,7 +47,8 @@ class NextButton extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        voter: state.voter
+        voter: state.voter,
+        loginSuccess: state.app[appDataTypes.signOn].isSuccess
     }
 };
 
