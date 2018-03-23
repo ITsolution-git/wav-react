@@ -3,7 +3,8 @@ import {
     emailValidation,
     passwordValidation,
     phoneValidation,
-    zipCodeValidation
+    zipCodeValidation,
+    textValidation
 } from './FormValidation';
 import validationTypes from '../constants/ValidationTypes';
 
@@ -20,6 +21,6 @@ export function validate(type, value) {
         case validationTypes.zip:
             return zipCodeValidation(value);
         default:
-            return true;
+            return textValidation(value);
     }
 }

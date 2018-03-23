@@ -1,35 +1,31 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
-import { btwRegister } from "../../actions/SignOnAction";
-import YouTube from "react-youtube";
-import History from '../../utility/History';
-import routes from '../../constants/Routes';
+import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { btwRegister } from '../../actions/SignOnAction';
+import YouTube from 'react-youtube';
 
-import { textValidation, emailValidation, passwordValidation } from '../../utility/FormValidation'
-class Register extends Component {
+import { validate } from '../../utility/InputValidator';
+import BaseComponent from '../shared/BaseComponent';
 
-
+class Register extends BaseComponent {
 	constructor() {
 		super();
 		this.state = {
-			btwIdentity:{
-				firstname      : '',
-				lastname       : '',
-				username       : '',
-				password       : '',
-				confirmPassword: '',
-				email          : ''
-			},
-			isValid:{
-				firstname      : true,
-				lastname       : true,
-				username       : true,
-				password       : true,
-				confirmPassword: true,
-				email          : true
-			}
+			btwIdentity: this.getEmptyState(),
+			isValid: this.getEmptyState(true)
 		}
 	}
+
+	getEmptyState = (initValue = '') => {
+		return {
+            firstname: initValue,
+            lastname: initValue,
+            username: initValue,
+            password: initValue,
+            confirmPassword: initValue,
+            email: initValue
+        };
+	};
 
 	updateRegisterFields(field, event) {
 		let identity = Object.assign({}, this.state.btwIdentity);
@@ -40,59 +36,44 @@ class Register extends Component {
 	}
 
 	validateRegisterFields(field, event) {
+		const { btwIdentity, isValid } = this.state,
+			{ value } = event.target;
+		let validation = { ...isValid };
 
-		let validation = Object.assign({}, this.state.isValid);
+		validation[field] = field === 'confirmPassword'
+			? btwIdentity.password === value
+			: validate(field, value);
 
-		if ( field == 'email' ) {
-			validation[field] = emailValidation(event.target.value);
-		} else if ( field == 'password' ) {
-			validation[field] = passwordValidation(event.target.value);
-			if ( validation[field] ) {
-				validation['confirmPassword'] = this.state.btwIdentity.password == this.state.btwIdentity.confirmPassword
-			}
-		} else if ( field == 'confirmPassword' ) {
-			validation[field] = this.state.btwIdentity.password == event.target.value || this.state.btwIdentity.password == ""
-		} else {
-			validation[field] = textValidation(event.target.value);
-		}
-		this.setState({
-			isValid: validation
-		})
+		this.setState({ isValid: validation });
 	}
 
 	btwRegister(event) {
+		const { isValid, btwIdentity } = this.state;
+		let validation = { ...isValid };
+        Object.keys(btwIdentity).forEach(key => {
+        	validation[key] = key === 'confirmPassword'
+				? btwIdentity.password === btwIdentity[key]
+				: validate(key,  btwIdentity[key]);
+        });
 
-		let validation = Object.assign({}, this.state.isValid);
+		this.setState({ isValid: validation });
 
-		for (let key in this.state.btwIdentity) {
-			if ( key == 'email' ) {
-				validation[key] = emailValidation(this.state.btwIdentity[key]);
-			} else if ( key == 'password' ) {
-				validation[key] = passwordValidation(this.state.btwIdentity[key]);
-			} else if ( key == 'confirmPassword' ) {
-				validation[key] = this.state.btwIdentity.password == this.state.btwIdentity[key]
-			} else {
-				validation[key] = textValidation(this.state.btwIdentity[key]);
-			}
-		}
-
-		this.setState({
-			isValid: validation
-		})
-
-		for (let key in this.state.btwIdentity) {
-			if (validation[key] == false) {
-				return ;
-			}
-		}
-
-		this.props.btwRegister(this.state.btwIdentity)
+		return Object.keys(btwIdentity).some(key => !validation[key])
+			? true
+			: this.props.btwRegister(btwIdentity);
 	}
 
-	goBackToHomePage() {
-			History.push(routes.login);
-			History.go();
-	}
+	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
+		return (
+            <div className={`form-group col-xs-${colWidth}`}>
+                <label className="pull-left" htmlFor={name}>{label}</label>
+                <input type={inputType} className="input-field"
+                       onChange={this.updateRegisterFields.bind(this, name)}
+                       onBlur={this.validateRegisterFields.bind(this, name)} />
+                { !this.state.isValid[name] && <span className="pull-left">{ errorMsg }</span> }
+            </div>
+		)
+	};
 
 	render() {
 		const opts = {
@@ -103,10 +84,7 @@ class Register extends Component {
 
 		return (
 			<div className='btw-identity btw-register'>
-				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={this.goBackToHomePage.bind(this, 'backToHomePage')}>
-						Go back
-				</button>
+				{ this.renderBackToHome()}
 				<div>
 					<YouTube
 						videoId="2g811Eo7K8U"
@@ -115,73 +93,23 @@ class Register extends Component {
 						onReady={this._onReady}
 					/>
 				</div>
-
 				<div className="intro">
 					<p className="intro-title">
 						What's the best way to stay in touch with you ?
 					</p>
-
 					<p className="intro-desc">
 						As a member, you can rely on timely reminders for appointments and screenings to keep you healthy. Tell us the best ways to reach you, so you can get the most from your care experience.
 					</p>
 				</div>
-
 				<form>
 					<div className="row">
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="firstname">First Name</label>
-							<input type="text" className="input-field" id="firstname" ref="firstname"
-								required="" aria-required="true"
-								onChange={this.updateRegisterFields.bind(this, 'firstname')}
-								onBlur={this.validateRegisterFields.bind(this, 'firstname')}></input>
-							{ !this.state.isValid.firstname && <span className="pull-left">* First Name is not valid *</span> }
-						</div>
-
-						<div className="form-group col-xs-6">
-							<label className="pull-left" htmlFor="lastname">Last Name</label>
-							<input type="text" className="input-field" id="lastname" ref="lastname"
-								required="" aria-required="true"
-								onChange={this.updateRegisterFields.bind(this, 'lastname')}
-								onBlur={this.validateRegisterFields.bind(this, 'lastname')}></input>
-							{ !this.state.isValid.lastname && <span className="pull-left">* Last Name is not valid *</span> }
-						</div>
+						{ this.renderInput('firstname', 'First Name', 'text', 6, '* First Name is not valid *') }
+                        { this.renderInput('lastname', 'Last Name', 'text', 6, '* Last Name is not valid *') }
 					</div>
-
-					<div className="form-group">
-						<label className="pull-left" htmlFor="username">Username</label>
-						<input type="text" className="input-field" id="username" ref="username"
-							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'username')}
-							onBlur={this.validateRegisterFields.bind(this, 'username')}></input>
-						{ !this.state.isValid.username && <span className="pull-left">* Username is not valid *</span> }
-					</div>
-
-					<div className="form-group">
-						<label className="pull-left" htmlFor="email">Email</label>
-						<input type="email" className="input-field" id="email" ref="email"
-							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'email')}
-							onBlur={this.validateRegisterFields.bind(this, 'email')}></input>
-						{ !this.state.isValid.email && <span className="pull-left">* Email is not valid *</span> }
-					</div>
-
-					<div className="form-group">
-						<label className="pull-left" htmlFor="password">Password</label>
-						<input type="password" className="input-field" id="password" ref="password"
-							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'password')}
-							onBlur={this.validateRegisterFields.bind(this, 'password')}></input>
-						{ !this.state.isValid.password && <span className="pull-left">* Password is not valid *</span> }
-					</div>
-
-					<div className="form-group">
-						<label className="pull-left" htmlFor="confirmPassword">Confirm Password</label>
-						<input type="password" className="input-field" id="confirmPassword" ref="confirmPassword"
-							required="" aria-required="true"
-							onChange={this.updateRegisterFields.bind(this, 'confirmPassword')}
-							onBlur={this.validateRegisterFields.bind(this, 'confirmPassword')}></input>
-						{ this.state.isValid.password && !this.state.isValid.confirmPassword && <span className="pull-left">* The passwords do not match *</span> }
-					</div>
+                    { this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
+                    { this.renderInput('email', 'Email', 'email', 0, '* Email is not valid *') }
+                    { this.renderInput('password', 'Password', 'password', 0, '* Password is not valid *') }
+                    { this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
 				</form>
 				<div id="btn_signup">
 					<button className="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
@@ -193,11 +121,11 @@ class Register extends Component {
 
 const mapStateToProps = (state) => {
 	return {}
-}
+};
 
 
 const mapDispatchToProps = (dispatch) => ({
 	btwRegister: (btwIdentity) => dispatch(btwRegister(btwIdentity))
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register));
