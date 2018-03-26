@@ -2,11 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import { makeListPersist } from "../../actions/VoterAction";
 import routes from '../../constants/Routes';
+import MatchItem from './shared/MatchItem';
 
 class MatchList extends BaseComponent {
     onNameClick = (person) => {
@@ -37,29 +37,10 @@ class MatchList extends BaseComponent {
                 </div>
                 <div className='match-list'>
                     { matchList.sort((person1, person2) => person2.matchRate - person1.matchRate)
-                        .map((person, i) => {
-                        const {
-                            firstname,
-                            lastname,
-                            regaddrline1,
-                            regaddrline2,
-                            regaddrcity,
-                            regaddrstate
-                        } = person;
-                        return (
-                            <Row className='name-row' key={i} onClick={() => this.onNameClick(person)}>
-                                <Col mdOffset={2} md={4}>
-                                    <div className='name-info'>
-                                        { firstname } { lastname }
-                                    </div>
-                                </Col>
-                                <Col md={4}>
-                                    <div>{ regaddrline1 }, { regaddrline2 }</div>
-                                    <div>{ regaddrcity }, { regaddrstate }</div>
-                                </Col>
-                            </Row>
-                        )
-                    })}
+                        .map((person, i) => <MatchItem key={i}
+                                                       onClick={() => this.onNameClick(person)}
+                                                       person={person} />
+                    )}
                 </div>
                 <div id="btn_not_sure">
                     <button className="btn btn-primary" onClick={this.onNotSureClick}>Not sure</button>
