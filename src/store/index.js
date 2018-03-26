@@ -2,6 +2,8 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { loadState, saveState } from '../storage/StateStorage';
+import authStorage from '../storage/AuthStorage';
+import roles from '../constants/Roles';
 import reducers from '../reducers';
 
 let store;
@@ -26,9 +28,11 @@ export default {
 		store  = createStore(combinedReducers, persistedState, applyMiddleware(thunk, logger));
 
 		store.subscribe(() => {
-			saveState({
-				voter: store.getState().voter
-			});
+			if (authStorage.getCurrentRole() === roles.registered) {
+                saveState({
+                    voter: store.getState().voter
+                });
+			}
 		});
 		return  store
 	}
