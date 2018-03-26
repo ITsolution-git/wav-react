@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../shared/BaseComponent';
-import NextButton from './NextButton';
+import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
 
 

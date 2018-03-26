@@ -4,14 +4,14 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Button } from 'react-bootstrap';
 
-import BaseComponent from '../shared/BaseComponent';
-import { nextNumberPersist, resetVoterState } from '../../actions/VoterAction';
-import { btwSignOn } from '../../actions/SignOnAction';
-import routes from '../../constants/Routes';
-import voterConstants from '../../constants/VoterConstants';
-import authStorage from '../../storage/AuthStorage';
-import {getHomeRoute} from "../../helpers/AuthHelper";
-import appDataTypes from "../../constants/AppDataTypes";
+import BaseComponent from '../../shared/BaseComponent';
+import { nextNumberPersist, resetVoterState } from '../../../actions/VoterAction';
+import { btwSignOn } from '../../../actions/SignOnAction';
+import routes from '../../../constants/Routes';
+import voterConstants from '../../../constants/VoterConstants';
+import authStorage from '../../../storage/AuthStorage';
+import {getHomeRoute} from "../../../helpers/AuthHelper";
+import appDataTypes from "../../../constants/AppDataTypes";
 
 class NextButton extends BaseComponent {
 

@@ -10,7 +10,7 @@ import routes from '../../constants/Routes';
 import voterConstants from '../../constants/VoterConstants';
 import { voterDetailsPersist, matchListPersist  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
-import NextButton from './NextButton';
+import NextButton from './shared/NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
 import  { validate } from '../../utility/InputValidator';
 
