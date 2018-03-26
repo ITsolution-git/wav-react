@@ -56,10 +56,6 @@ class MakeList extends BaseComponent {
     	this.onLink(routes.voterDetail);
 	};
 
-	goBackToHomePage() {
-    	this.onLink(routes.login);
-	}
-
 	renderField = ({ name, label }) => {
 		return (
             <div className="form-group col-xs-6">
@@ -76,10 +72,7 @@ class MakeList extends BaseComponent {
 	render() {
 		return (
 			<div className='btw-identity btw-makelist'>
-				<button className='btn btn-primary' style={{'left': '2%', 'position': 'absolute'}}
-								onClick={this.goBackToHomePage}>
-						Go back
-				</button>
+				{ this.renderBackToHome()}
 				<div className="intro">
 					<p className="intro-title">
                         Generate Lorem Ipsum placeholder text
