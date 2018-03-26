@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { btwRegister } from '../../actions/SignOnAction';
 import YouTube from 'react-youtube';
+import classNames from 'classnames';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
@@ -82,6 +83,15 @@ class Register extends BaseComponent {
 			}
 		};
 
+		const passwordErrorMsg = (
+			<div>
+				<div>At least one special character</div>
+				<div>At least one number</div>
+				<div>At lease one upper case character</div>
+				<div>Minimum of 7</div>
+			</div>
+		);
+
 		return (
 			<div className='btw-identity btw-register'>
 				{ this.renderBackToHome()}
@@ -108,7 +118,9 @@ class Register extends BaseComponent {
 					</div>
                     { this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
                     { this.renderInput('email', 'Email', 'email', 0, '* Email is not valid *') }
-                    { this.renderInput('password', 'Password', 'password', 0, '* Password is not valid *') }
+					<div className={classNames({'password-div': !this.state.isValid['password'] })}>
+                        { this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
+					</div>
                     { this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
 				</form>
 				<div id="btn_signup">

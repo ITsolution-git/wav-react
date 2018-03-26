@@ -1,4 +1,8 @@
 .btw-register {
+    .password-div {
+        height: 173px;
+        text-align: left;
+    }
 
     #btn_signup button {
         @extend .btw-button;
