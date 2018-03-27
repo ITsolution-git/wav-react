@@ -1,15 +1,14 @@
+import { ApiHost } from '../config/ApiConfig';
+import { getAsync, postAsync } from '../helpers/RequestHelper';
 
-import axios from 'axios';
-
-
-
-const VoterService = {
-	addVoter
+export default {
+    loadVoterList
 };
 
-function addVoter(){
-	
+
+function loadVoterList(userId, username) {
+    return getAsync({
+        url: `${ApiHost}/api/v1/getVoters?userid=${userId}&username=${username}`,
+        headers: {'x-key': username }
+    });
 }
-
-
-export default VoterService
