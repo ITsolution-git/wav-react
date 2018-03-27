@@ -9,26 +9,10 @@
     }
     .match-list {
       .name-row {
-        height: auto;
+        @extend .voter-row;
         cursor: pointer;
-        background-color: #3C98D9;
-        margin-top: 13px;
-        padding: 14px;
-        color: white;
         &:hover {
           background-color: darken(#3C98D9, 7%);
-        }
-        .name-info {
-          font-size: 18px;
-        }
-        .more-info {
-          text-align: left;
-        }
-        .link {
-          text-decoration: underline;
-          &:hover {
-            color: darken(white, 10%);
-          }
         }
       }
     }

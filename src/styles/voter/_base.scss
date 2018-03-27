@@ -1,5 +1,4 @@
 .btw-voter {
-
 	margin: auto;
     margin-top: $margin_top;
     width: $max_width;
@@ -44,6 +43,28 @@
 
         select {
             @extend .btw-select;
+        }
+    }
+}
+
+.voter-row {
+    height: auto;
+    background-color: #3C98D9;
+    margin-top: 13px;
+    padding: 14px;
+    color: white;
+
+    .name-info {
+        font-size: 18px;
+    }
+    .more-info {
+        text-align: left;
+    }
+    .link {
+        cursor: pointer;
+        text-decoration: underline;
+        &:hover {
+            color: darken(white, 10%);
         }
     }
 }
