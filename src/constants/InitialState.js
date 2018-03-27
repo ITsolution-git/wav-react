@@ -11,5 +11,11 @@ export default {
         voterDetails: {},
         currentNumber: 1,
         matchList: []
+    },
+    voterList: {
+        voters: [],
+        isFetching: false,
+        isSuccess: false,
+        error: null
     }
 }

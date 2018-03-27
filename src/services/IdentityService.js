@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { ApiHost } from '../config/ApiConfig';
 import { getAsync, postAsync } from '../helpers/RequestHelper';
 
