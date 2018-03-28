@@ -1,0 +1,24 @@
+.btw-voter-list {
+  width: 50%;
+  button {
+    @extend .btw-button;
+  }
+  .voters-list {
+    .name-row {
+      @extend .voter-row;
+      .registered-icon {
+        font-size: 23px;
+        color: #91E45B;
+      }
+      .not-registered-icon {
+        color: #F3BE0C;
+        font-size: 23px;
+      }
+      .action-icon {
+        padding-left: 15px;
+        cursor: pointer;
+        font-size: 22px;
+      }
+    }
+  }
+}

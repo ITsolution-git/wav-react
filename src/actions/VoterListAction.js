@@ -1,20 +1,18 @@
 import VoterContants from '../constants/VoterConstants';
 import voterService from '../services/VoterService';
-import appDataTypes from '../constants/AppDataTypes';
+import authStorage from '../storage/AuthStorage';
 
 export function loadVoterList() {
-    return (dispatch, getState) => {
+    return dispatch => {
         dispatch(actionRequest());
-        setTimeout(() => {
-            const { id, username } = getState().app[appDataTypes.profile].data;
-            voterService.loadVoterList(id, username).then(
-                response => {
-                    dispatch(actionSuccess(response.data.voters));
-                },
-                error => {
-                    dispatch(actionError(error.response.data.message));
-                });
-        }, 2000);
+        const { userid, username } = authStorage.getLoggedUser();
+        voterService.loadVoterList(userid, username).then(
+            response => {
+                dispatch(actionSuccess(response.data.voters));
+            },
+            error => {
+                dispatch(actionError(error.response.data.message));
+            });
     };
 
     function actionRequest() {
@@ -25,5 +23,25 @@ export function loadVoterList() {
     }
     function actionError(error) {
         return { type: VoterContants.VOTER_LIST_ERROR, error };
+    }
+}
+
+
+export function updateVoter(data) {
+    return dispatch => {
+        voterService.updateVoter(data).then(
+            result => {
+                dispatch(actionSuccess(data));
+            },
+            error => {
+                dispatch(actionError(error));
+            });
+    };
+
+    function actionSuccess(data) {
+        return { type: VoterContants.VOTER_UPDATE_SUCCESS, data };
+    }
+    function actionError(error) {
+        return { type: VoterContants.VOTER_UPDATE_ERROR, error };
     }
 }

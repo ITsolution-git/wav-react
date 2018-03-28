@@ -5,6 +5,17 @@ import authStorage from '../storage/AuthStorage';
 import { isTokenValid } from '../helpers/TokenHelper';
 import routes from '../constants/Routes';
 
+
+export function patchAsync({ url, data = {}, headers = {}, includeToken = true, failRedirect = true }) {
+    const requestData = {
+        url,
+        data,
+        method: 'PATCH',
+        headers: mergeHeaders(headers)
+    };
+    return makeRequest(requestData, includeToken, failRedirect);
+}
+
 export function postAsync({ url, data = {}, headers = {}, includeToken = true, failRedirect = true }) {
     const requestData = {
         url,
