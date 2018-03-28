@@ -25,3 +25,23 @@ export function loadVoterList() {
         return { type: VoterContants.VOTER_LIST_ERROR, error };
     }
 }
+
+
+export function updateVoter(data) {
+    return dispatch => {
+        voterService.updateVoter(data).then(
+            result => {
+                dispatch(actionSuccess(data));
+            },
+            error => {
+                dispatch(actionError(error));
+            });
+    };
+
+    function actionSuccess(data) {
+        return { type: VoterContants.VOTER_UPDATE_SUCCESS, data };
+    }
+    function actionError(error) {
+        return { type: VoterContants.VOTER_UPDATE_ERROR, error };
+    }
+}

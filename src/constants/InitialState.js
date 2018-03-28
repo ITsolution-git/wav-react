@@ -16,6 +16,7 @@ export default {
         voters: [],
         isFetching: false,
         isSuccess: false,
-        error: null
+        error: null,
+        updateVoterError: null
     }
 }

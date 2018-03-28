@@ -3,9 +3,10 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-
 import FontAwesome from 'react-fontawesome';
-import { loadVoterList } from '../../actions/VoterListAction';
+
+import AddEditDialog from './AddEditDialog';
+import { updateVoter } from '../../actions/VoterListAction';
 import BaseComponent from '../shared/BaseComponent';
 
 
@@ -13,12 +14,17 @@ class VoterItem extends BaseComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            moreEnabled: false
+            moreEnabled: false,
+            showEditModal: false
         }
     }
 
+    closeEditModal = () => {
+      this.setState({ showEditModal: false });
+    };
+
     render() {
-        const { moreEnabled } = this.state;
+        const { moreEnabled, showEditModal } = this.state;
         let {
             firstname,
             lastname,
@@ -60,9 +66,21 @@ class VoterItem extends BaseComponent {
                         : <FontAwesome className='not-registered-icon' name='exclamation-circle' /> }
                 </Col>
                 <Col md={2}>
-                    <FontAwesome className='action-icon' name='pencil' />
-                    <FontAwesome className='action-icon' name='trash' />
+                    <FontAwesome className='action-icon'
+                                 onClick={() => this.setState({ showEditModal: true })}
+                                 name='pencil' />
+                    <FontAwesome className='action-icon'
+                                 name='trash' />
                 </Col>
+                <AddEditDialog show={showEditModal}
+                               title='Edit Voter'
+                               voter={this.props.voter}
+                               submitText='Edit'
+                               onSubmit={data => {
+                                   this.props.actions.updateVoter(data);
+                                   this.closeEditModal();
+                               } }
+                               onClose={this.closeEditModal} />
             </Row>
         );
     }
@@ -73,7 +91,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ loadVoterList }, dispatch)
+    actions: bindActionCreators({ updateVoter }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VoterItem));

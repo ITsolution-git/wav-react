@@ -1,3 +1,5 @@
+import update from 'immutability-helper';
+
 import VoterContants from '../constants/VoterConstants';
 import InitialState from '../constants/InitialState';
 
@@ -11,6 +13,14 @@ export default function voterListReducer(state = InitialState.voterList, action)
         }
         case VoterContants.VOTER_LIST_ERROR: {
             return { ...state, ...{ error: action.error, isFetching: false, isSuccess: false }};
+        }
+        case VoterContants.VOTER_UPDATE_SUCCESS: {
+            const { data } = action;
+            const voterIndex = state.voters.findIndex(voter => voter._id === data._id);
+            return update(state, { voters: { [voterIndex]: { $set: data } } });
+        }
+        case VoterContants.VOTER_UPDATE_ERROR: {
+            return { ...state, updateVoterError: action.error };
         }
         default:
             return state
