@@ -6,7 +6,8 @@ import { bindActionCreators } from "redux";
 import FontAwesome from 'react-fontawesome';
 
 import AddEditDialog from './AddEditDialog';
-import { updateVoter } from '../../actions/VoterListAction';
+import ConfirmationDialog from '../shared/ConfirmationDialog';
+import { updateVoter, deleteVoter } from '../../actions/VoterListAction';
 import BaseComponent from '../shared/BaseComponent';
 
 
@@ -15,7 +16,8 @@ class VoterItem extends BaseComponent {
         super(props, context);
         this.state = {
             moreEnabled: false,
-            showEditModal: false
+            showEditModal: false,
+            showDeleteModal: false
         }
     }
 
@@ -23,8 +25,12 @@ class VoterItem extends BaseComponent {
       this.setState({ showEditModal: false });
     };
 
+    closeDeleteModal = () => {
+      this.setState({ showDeleteModal: false });
+    };
+
     render() {
-        const { moreEnabled, showEditModal } = this.state;
+        const { moreEnabled, showEditModal, showDeleteModal } = this.state;
         let {
             firstname,
             lastname,
@@ -70,17 +76,28 @@ class VoterItem extends BaseComponent {
                                  onClick={() => this.setState({ showEditModal: true })}
                                  name='pencil' />
                     <FontAwesome className='action-icon'
+                                 onClick={() => this.setState({ showDeleteModal: true })}
                                  name='trash' />
                 </Col>
                 <AddEditDialog show={showEditModal}
                                title='Edit Voter'
                                voter={this.props.voter}
                                submitText='Edit'
+                               disableEmail
                                onSubmit={data => {
                                    this.props.actions.updateVoter(data);
                                    this.closeEditModal();
                                } }
                                onClose={this.closeEditModal} />
+                <ConfirmationDialog show={showDeleteModal}
+                                    title='Delete voter'
+                                    description='Are you sure you want to delete voter?'
+                                    submitText='Yes'
+                                    onSubmit={data => {
+                                        this.props.actions.deleteVoter(data);
+                                        this.closeDeleteModal();
+                                    } }
+                                    onClose={this.closeDeleteModal} />
             </Row>
         );
     }
@@ -91,7 +108,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ updateVoter }, dispatch)
+    actions: bindActionCreators({ updateVoter, deleteVoter }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VoterItem));

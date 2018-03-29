@@ -17,6 +17,8 @@ export default {
         isFetching: false,
         isSuccess: false,
         error: null,
-        updateVoterError: null
+        updateVoterError: null,
+        addVoterError: null,
+        deleteVoterError: null
     }
 }

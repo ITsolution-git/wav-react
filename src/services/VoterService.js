@@ -4,7 +4,9 @@ import authStorage from '../storage/AuthStorage';
 
 export default {
     loadVoterList,
-    updateVoter
+    updateVoter,
+    addVoter,
+    deleteVoter
 };
 
 
@@ -23,6 +25,23 @@ function updateVoter(data) {
         data
     })
 }
+
+function addVoter(data) {
+    return patchAsync({
+        url: `${ApiHost}/api/v1/updateVoter`,
+        headers: getHeaders(),
+        data
+    })
+}
+
+function deleteVoter(data) {
+    return patchAsync({
+        url: `${ApiHost}/api/v1/updateVoter`,
+        headers: getHeaders(),
+        data
+    })
+}
+
 
 function getHeaders() {
     return { 'x-key': authStorage.getLoggedUser().username };
