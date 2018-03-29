@@ -8,13 +8,12 @@ import { loadVoterList, addVoter } from '../../actions/VoterListAction';
 import BaseComponent from '../shared/BaseComponent';
 import VoterItem from './VoterItem';
 import AddEditDialog from './AddEditDialog';
-import routes from "../../constants/Routes";
 
 class VotersList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-          showAddDialog: ''
+          showAddDialog: false
         };
     }
 
