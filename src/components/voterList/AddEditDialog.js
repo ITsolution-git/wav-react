@@ -39,7 +39,7 @@ export default class AddEditDialog extends BaseComponent {
             onClose,
             submitText,
             title='',
-            disableEmail = true
+            disableEmail = false
         } = this.props;
         const { gender } = this.state;
         return (
@@ -50,14 +50,15 @@ export default class AddEditDialog extends BaseComponent {
                 </Modal.Header>
                 <Modal.Body>
                     <Form horizontal>
-                        { disableEmail && <FormGroup>
+                        <FormGroup>
                             <Col md={12}>
                                 Email
                                 <FormControl type="email"
-                                             disabled
+                                             disabled={disableEmail}
+                                             onChange={e => this.setState({ email: e.target.value })}
                                              value={this.state['email'] || ''} />
                             </Col>
-                        </FormGroup> }
+                        </FormGroup>
                         <FormGroup>
                             { this.renderField('firstname', 'First name') }
                             { this.renderField('lastname', 'Last name') }

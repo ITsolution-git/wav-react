@@ -4,6 +4,7 @@
     @extend .btw-button;
   }
   .voters-list {
+    width: 98%;
     .name-row {
       @extend .voter-row;
       .registered-icon {

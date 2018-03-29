@@ -45,3 +45,43 @@ export function updateVoter(data) {
         return { type: VoterContants.VOTER_UPDATE_ERROR, error };
     }
 }
+
+export function addVoter(data) {
+    return dispatch => {
+        dispatch(actionSuccess(data));
+        // voterService.addVoter(data).then(
+        //     result => {
+        //         dispatch(actionSuccess(data));
+        //     },
+        //     error => {
+        //         dispatch(actionError(error));
+        //     });
+    };
+
+    function actionSuccess(data) {
+        return { type: VoterContants.VOTER_ADD_SUCCESS, data };
+    }
+    function actionError(error) {
+        return { type: VoterContants.VOTER_ADD_ERROR, error };
+    }
+}
+
+export function deleteVoter(data) {
+    return dispatch => {
+        dispatch(actionSuccess(data));
+        // voterService.deleteVoter(data).then(
+        //     result => {
+        //         dispatch(actionSuccess(data));
+        //     },
+        //     error => {
+        //         dispatch(actionError(error));
+        //     });
+    };
+
+    function actionSuccess(data) {
+        return { type: VoterContants.VOTER_DELETE_SUCCESS, data };
+    }
+    function actionError(error) {
+        return { type: VoterContants.VOTER_DELETE_ERROR, error };
+    }
+}
