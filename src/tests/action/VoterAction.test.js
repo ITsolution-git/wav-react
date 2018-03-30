@@ -106,7 +106,15 @@ describe('matchList', () => {
                 "regaddrline2": "APT 9",
                 "regaddrcity": "LOS ANGELES",
                 "regaddrstate": "CA",
-                "voterstatus": "active"
+                "voterstatus": "active",
+                "gender": "female",
+                "birthdate": "1954-05-30",
+                "mailaddrline1": "2743 GILMORE LN",
+                "mailaddrline2": "APT 3",
+                "mailaddrcity": "OROVILLE",
+                "mailaddrstate": "CA",
+                "mailaddrzip": "95966",
+                "phone": "914-232-9901"
             },
             {
                 "matchRate": 0.9,
@@ -116,7 +124,15 @@ describe('matchList', () => {
                 "regaddrline2": "APT 9",
                 "regaddrcity": "LOS ANGELES",
                 "regaddrstate": "CA",
-                "voterstatus": "active"
+                "voterstatus": "active",
+                "gender": "female",
+                "birthdate": "1954-05-30",
+                "mailaddrline1": "2743 GILMORE LN",
+                "mailaddrline2": "APT 3",
+                "mailaddrcity": "OROVILLE",
+                "mailaddrstate": "CA",
+                "mailaddrzip": "95966",
+                "phone": "914-232-9901"
             },
             {
                 "matchRate": 0.89,
@@ -126,7 +142,15 @@ describe('matchList', () => {
                 "regaddrline2": "APT 9",
                 "regaddrcity": "LOS ANGELES",
                 "regaddrstate": "CA",
-                "voterstatus": "offline"
+                "voterstatus": "offline",
+                "gender": "female",
+                "birthdate": "1954-05-30",
+                "mailaddrline1": "2743 GILMORE LN",
+                "mailaddrline2": "APT 3",
+                "mailaddrcity": "OROVILLE",
+                "mailaddrstate": "CA",
+                "mailaddrzip": "95966",
+                "phone": "914-232-9901"
             },
             {
                 "matchRate": 0.81,
@@ -136,7 +160,15 @@ describe('matchList', () => {
                 "regaddrline2": "APT 9",
                 "regaddrcity": "LOS ANGELES",
                 "regaddrstate": "CA",
-                "voterstatus": "active"
+                "voterstatus": "active",
+                "gender": "female",
+                "birthdate": "1954-05-30",
+                "mailaddrline1": "2743 GILMORE LN",
+                "mailaddrline2": "APT 3",
+                "mailaddrcity": "OROVILLE",
+                "mailaddrstate": "CA",
+                "mailaddrzip": "95966",
+                "phone": "914-232-9901"
             }
         ];
 
