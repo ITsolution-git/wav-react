@@ -6,7 +6,7 @@ export function loadVoterList() {
     return dispatch => {
         dispatch(actionRequest());
         const { userid, username } = authStorage.getLoggedUser();
-        voterService.loadVoterList(userid, username).then(
+        return voterService.loadVoterList(userid, username).then(
             response => {
                 dispatch(actionSuccess(response.data.voters));
             },
@@ -29,7 +29,7 @@ export function loadVoterList() {
 
 export function updateVoter(data) {
     return dispatch => {
-        voterService.updateVoter(data).then(
+        return voterService.updateVoter(data).then(
             result => {
                 dispatch(actionSuccess(data));
             },
