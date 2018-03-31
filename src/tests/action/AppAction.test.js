@@ -51,7 +51,7 @@ describe('getBtwUserProfile tests', () => {
 		})
 	})
 
-})
+});
 
 /* Test Register */
 describe('btwRegister', () => {
