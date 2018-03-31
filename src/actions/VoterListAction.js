@@ -34,7 +34,7 @@ export function updateVoter(data) {
                 dispatch(actionSuccess(data));
             },
             error => {
-                dispatch(actionError(error));
+                dispatch(actionError(error.response.data.message));
             });
     };
 
@@ -57,7 +57,7 @@ export function addVoter(data) {
                 dispatch(actionSuccess(data));
             },
             error => {
-                dispatch(actionError(error));
+                dispatch(actionError(error.response.data.message));
             });
     };
 
@@ -76,7 +76,7 @@ export function deleteVoter(data) {
                 dispatch(actionSuccess(data));
             },
             error => {
-                dispatch(actionError(error));
+                dispatch(actionError(error.response.data.message));
             });
     };
 
