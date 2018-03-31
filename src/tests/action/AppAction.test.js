@@ -11,8 +11,10 @@ import AppConstants from '../../constants/AppConstants';
 import AppDataTypes from '../../constants/AppDataTypes';
 import { testApiHost } from '../../config/ApiConfig';
 
+import userAuthenticator from '../shared/UserAuthenticator';
 
 describe('getBtwUserProfile tests', () => {
+    userAuthenticator.loginCaptain();
 	const response = {
 		"status"         : 200,
 		"message"        : "User information successfully retrieved",
@@ -26,14 +28,11 @@ describe('getBtwUserProfile tests', () => {
 			"address"    : "1550 Acme street",
 			"phonenumber": "7765564732"
 		}
-	}
+	};
+
 	it('it should dispatch a success', () => {
 		let mockAdapter = new MockAdapter(axios);
-		mockAdapter.onGet(`${testApiHost}/api/v1/getUser`).reply(200, {
-			data: {
-				response
-			}
-		});
+		mockAdapter.onGet(`${testApiHost}/api/v1/getUser`).reply(200, response);
 
 		const expectedActions = [
             {
@@ -43,12 +42,12 @@ describe('getBtwUserProfile tests', () => {
             {
                 dataType: AppDataTypes.profile,
                 type: AppConstants.LOAD_DATA_SUCCESS,
-                response
+                data: response.userInformation
             }
-		]
+		];
 		const store = mockStore({response : []});
 		return store.dispatch(getBtwUserProfile()).then(() => {
-			expect(expectedActions).to.deep.equal(expectedActions)
+			expect(store.getActions()).to.deep.equal(expectedActions)
 		})
 	})
 
