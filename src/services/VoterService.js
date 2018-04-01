@@ -1,5 +1,5 @@
 import { ApiHost } from '../config/ApiConfig';
-import {getAsync, patchAsync, postAsync} from '../helpers/RequestHelper';
+import { getAsync, patchAsync, postAsync, deleteAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
 
 export default {
@@ -35,8 +35,8 @@ function addVoter(data) {
 }
 
 function deleteVoter(data) {
-    return patchAsync({
-        url: `${ApiHost}/api/v1/updateVoter`,
+    return deleteAsync({
+        url: `${ApiHost}/api/v1/deleteVoter`,
         headers: getHeaders(),
         data
     })

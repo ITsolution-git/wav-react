@@ -5,6 +5,15 @@ import authStorage from '../storage/AuthStorage';
 import { isTokenValid } from '../helpers/TokenHelper';
 import routes from '../constants/Routes';
 
+export function deleteAsync({ url, data = {}, headers = {}, includeToken = true, failRedirect = true }) {
+    const requestData = {
+        url,
+        data,
+        method: 'DELETE',
+        headers: mergeHeaders(headers)
+    };
+    return makeRequest(requestData, includeToken, failRedirect);
+}
 
 export function patchAsync({ url, data = {}, headers = {}, includeToken = true, failRedirect = true }) {
     const requestData = {

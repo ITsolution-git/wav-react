@@ -34,7 +34,7 @@ export function updateVoter(data) {
                 dispatch(actionSuccess(data));
             },
             error => {
-                dispatch(actionError(error));
+                dispatch(actionError(error.response.data.message));
             });
     };
 
@@ -52,14 +52,13 @@ export function addVoter(data) {
             oid: authStorage.getLoggedUser().userid
         };
 
-        actionSuccess(data);
-        // voterService.addVoter(data).then(
-        //     result => {
-        //         dispatch(actionSuccess(data));
-        //     },
-        //     error => {
-        //         dispatch(actionError(error));
-        //     });
+        return voterService.addVoter(data).then(
+            result => {
+                dispatch(actionSuccess(data));
+            },
+            error => {
+                dispatch(actionError(error.response.data.message));
+            });
     };
 
     function actionSuccess(data) {
@@ -72,14 +71,13 @@ export function addVoter(data) {
 
 export function deleteVoter(data) {
     return dispatch => {
-        dispatch(actionSuccess(data));
-        // voterService.deleteVoter(data).then(
-        //     result => {
-        //         dispatch(actionSuccess(data));
-        //     },
-        //     error => {
-        //         dispatch(actionError(error));
-        //     });
+        return voterService.deleteVoter({ email: data.email }).then(
+            result => {
+                dispatch(actionSuccess(data));
+            },
+            error => {
+                dispatch(actionError(error.response.data.message));
+            });
     };
 
     function actionSuccess(data) {

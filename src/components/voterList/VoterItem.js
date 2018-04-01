@@ -93,8 +93,8 @@ class VoterItem extends BaseComponent {
                                     title='Delete voter'
                                     description='Are you sure you want to delete voter?'
                                     submitText='Yes'
-                                    onSubmit={data => {
-                                        this.props.actions.deleteVoter(data);
+                                    onSubmit={() => {
+                                        this.props.actions.deleteVoter(this.props.voter);
                                         this.closeDeleteModal();
                                     } }
                                     onClose={this.closeDeleteModal} />
