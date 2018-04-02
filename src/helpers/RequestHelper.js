@@ -4,6 +4,7 @@ import History from '../utility/History';
 import authStorage from '../storage/AuthStorage';
 import { isTokenValid } from '../helpers/TokenHelper';
 import routes from '../constants/Routes';
+import environment from '../constants/Env';
 
 export function deleteAsync({ url, data = {}, headers = {}, includeToken = true, failRedirect = true }) {
     const requestData = {
@@ -59,7 +60,7 @@ function makeRequest(requestData, includeToken, failRedirect) {
             return Promise.resolve(response);
         })
         .catch(error => {
-            if (failRedirect) {
+            if (process.env.NODE_ENV !== environment.test && failRedirect) {
                 toErrorPage();
             }
             return Promise.reject(error);
