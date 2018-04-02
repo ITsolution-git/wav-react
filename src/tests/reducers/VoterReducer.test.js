@@ -1,4 +1,3 @@
-import isEqual from 'lodash/isequal'
 import { expect } from 'chai';
 import voterReducer from '../../reducers/VoterReducer';
 import VoterContants from '../../constants/VoterConstants';
@@ -71,45 +70,41 @@ const matchList = [
 
 describe('initialState', () => {
     it('should return the voter initial state', () => {
-        expect(isEqual(voterReducer(InitialState.voter, {}), InitialState.voter)).to.be.true
+        expect(voterReducer(InitialState.voter, {})).to.deep.equal(InitialState.voter)
     });
 });
 
 describe('makeList', () => {
 	it('should return the makeList persist', () => {
-		expect(isEqual(voterReducer(InitialState.voter, {
+		expect(voterReducer(InitialState.voter, {
 			type: VoterContants.VOTER_MAKELIST_PERSIST,
 			makeList: makelist
-			}), {... InitialState.voter, ... { makeList: makelist }}
-		)).to.be.true
+			})).to.deep.equal({... InitialState.voter, ... { makeList: makelist }})
 	});
 });
 
 describe('nextNumber', () => {
     it('should return the next voter number persist', () => {
-        expect(isEqual(voterReducer(InitialState.voter, {
+        expect(voterReducer(InitialState.voter, {
                 type: VoterContants.VOTER_NEXT_MUMBER_PERSIST,
-            }), {... InitialState.voter, ... { currentNumber: 2 }}
-        )).to.be.true
+            })).to.deep.equal({... InitialState.voter, ... { currentNumber: 2 }})
     });
 });
 
 describe('voterDetails', () => {
     it('should return voter details persist', () => {
-        expect(isEqual(voterReducer(InitialState.voter, {
+        expect(voterReducer(InitialState.voter, {
                 type: VoterContants.VOTER_DETAILS_PERSIST,
                 voterDetails
-            }), {... InitialState.voter, ... { voterDetails: { 1: voterDetails } }}
-        )).to.be.true
+            })).to.deep.equal({... InitialState.voter, ... { voterDetails: { 1: voterDetails } }})
     });
 });
 
 describe('matchList', () => {
     it('should return match list persist', () => {
-        expect(isEqual(voterReducer(InitialState.voter, {
+        expect(voterReducer(InitialState.voter, {
                 type: VoterContants.VOTER_MATCHLIST_PERSIST,
                 matchList
-            }), {... InitialState.voter, ... { matchList }}
-        )).to.be.true
+            })).to.deep.equal({... InitialState.voter, ... { matchList }})
     });
 });

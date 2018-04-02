@@ -1,4 +1,3 @@
-import isEqual from 'lodash/isequal'
 import { expect } from 'chai';
 
 import appReducer from '../../reducers/AppReducer';
@@ -6,10 +5,6 @@ import AppConstants from '../../constants/AppConstants';
 import AppDataTypes from '../../constants/AppDataTypes';
 import initialState from '../../constants/InitialState';
 
-const identity = {
-    username: "testUser",
-    password: "password"
-};
 const response = {
     status: 200,
     message: 'success'
@@ -22,115 +17,112 @@ const error = {
 
 describe('getBtwUserProfile', () => {
     it('should return the appReducer initial state', () => {
-        expect(isEqual(appReducer(initialState.app, {}), initialState.app)).to.be.true
+        expect(appReducer(initialState.app, {})).to.deep.equal(initialState.app)
     });
 
     it('should handle getUserProfile request', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
             type: AppConstants.INITIALIZE_REQUEST,
             dataType: AppDataTypes.profile
-            }).profile.isFetching, true
-        )).to.be.true
+            }).profile.isFetching).to.be.true
     });
 
     it('should handle getUserProfile success', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
             type: AppConstants.LOAD_DATA_SUCCESS,
             dataType: AppDataTypes.profile,
             data: response
-        }).profile, {
+        }).profile).to.deep.equal({
             isFetching: false,
             data: response,
             isSuccess: true,
             error: ''
-        })).to.be.true
+        })
     });
 
 
     it('should handle getUserProfile failure', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
             type: AppConstants.LOAD_DATA_FAILURE,
             dataType: AppDataTypes.profile,
             error
-        }).profile, {
+        }).profile).to.deep.equal({
             isFetching: false,
             data: {},
             isSuccess: false,
             error
-        })).to.be.true
+        })
     });
 });
 
 describe('btwRegister', () => {
 
     it('should return the btwRegister request', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
                 type: AppConstants.INITIALIZE_REQUEST,
                 dataType: AppDataTypes.register
-            }).register.isFetching, true
-        )).to.be.true
+            }).register.isFetching).to.be.true
     });
 
     it('should return the btwRegister success', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
             type: AppConstants.LOAD_DATA_SUCCESS,
             dataType: AppDataTypes.register,
             data: response
-        }).register, {
+        }).register).to.deep.equal({
             isFetching: false,
             data: response,
             isSuccess: true,
             error: ''
-        })).to.be.true
+        })
     });
 
     it('should return the btwRegister failure', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
             type: AppConstants.LOAD_DATA_FAILURE,
             dataType: AppDataTypes.register,
             error
-        }).register, {
+        }).register).to.deep.equal({
             isFetching: false,
             data: {},
             isSuccess: false,
             error
-        })).to.be.true
+        })
     });
 
 });
 
 describe('btwSignOn', ()=> {
     it('should return the btwSignOn request ', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
                 type: AppConstants.INITIALIZE_REQUEST,
                 dataType: AppDataTypes.signOn
-            }).signOn.isFetching, true
-        )).to.be.true
+            }).signOn.isFetching).to.be.true
     });
 
     it('should return the btwSignOn success ', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
             type: AppConstants.LOAD_DATA_SUCCESS,
             dataType: AppDataTypes.signOn,
             data: response
-        }).signOn, {
+        }).signOn).to.deep.equal({
             isFetching: false,
             data: response,
             isSuccess: true,
             error: ''
-        })).to.be.true
+        })
     });
 
     it('should return the btwSignOn failure ', () => {
-        expect(isEqual(appReducer(initialState.app, {
+        expect(appReducer(initialState.app, {
             type: AppConstants.LOAD_DATA_FAILURE,
             dataType: AppDataTypes.signOn,
             error
-        }).signOn, {
+        }).signOn).to.deep.equal({
             isFetching: false,
             data: {},
             isSuccess: false,
             error
-        })).to.be.true
+        })
     });
 });
