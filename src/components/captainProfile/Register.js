@@ -7,6 +7,8 @@ import classNames from 'classnames';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
+import appDataTypes from '../../constants/AppDataTypes';
+import routes from '../../constants/Routes';
 
 class Register extends BaseComponent {
 	constructor() {
@@ -76,6 +78,12 @@ class Register extends BaseComponent {
 		)
 	};
 
+	componentWillReceiveProps(props) {
+		if (props.isSuccess) {
+			this.onLink(routes.makelist);
+		}
+	}
+
 	render() {
 		const opts = {
 			playerVars: { // https://developers.google.com/youtube/player_parameters
@@ -132,7 +140,11 @@ class Register extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-	return {}
+    const { error, isSuccess } = state.app[appDataTypes.register];
+    return {
+        error,
+        isSuccess
+    };
 };
 
 

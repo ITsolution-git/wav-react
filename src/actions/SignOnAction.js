@@ -1,7 +1,5 @@
-import IdentityService from '../services/IdentityService'
-import History from '../utility/History'
+import IdentityService from '../services/IdentityService';
 import authStorage  from '../storage/AuthStorage';
-import routes from '../constants/Routes';
 import appDataTypes from '../constants/AppDataTypes';
 import {
 	initializeRequest,
@@ -29,10 +27,8 @@ export function btwRegister(identity) {
 		dispatch(initializeRequest(appDataTypes.register));
 		return IdentityService.register(identity).then(
 				response => {
+                    authStorage.saveRegisteredCreds(identity.username, identity.password);
 					dispatch(loadDataSuccess(appDataTypes.register, response.data));
-					authStorage.saveRegisteredCreds(identity.username, identity.password);
-					History.push(routes.makelist);
-					History.go();
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.register, error.response.data));
