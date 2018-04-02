@@ -1,4 +1,3 @@
-import isEqual from 'lodash/isequal'
 import { expect } from 'chai';
 import voterListReducer from '../../reducers/VoterListReducer';
 import VoterContants from '../../constants/VoterConstants';
@@ -45,7 +44,7 @@ const voters = [
 
 describe('initialState', () => {
     it('should return the voter list initial state', () => {
-        expect(isEqual(voterListReducer(InitialState.voterList, {}), InitialState.voterList)).to.be.true
+        expect(voterListReducer(InitialState.voterList, {})).to.deep.equal(InitialState.voterList)
     });
 });
 
@@ -56,7 +55,7 @@ describe('loadVoterList', () => {
             }),
             expectedResult = {... InitialState.voterList, ...{ isFetching: true }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 
     it('should return loadVoterList success', () => {
@@ -66,7 +65,7 @@ describe('loadVoterList', () => {
             }),
             expectedResult = {... InitialState.voterList, ...{ isFetching: false, isSuccess: true, voters }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 
     it('should return loadVoterList failure', () => {
@@ -77,7 +76,7 @@ describe('loadVoterList', () => {
             }),
             expectedResult = {... InitialState.voterList, ...{ isFetching: false, isSuccess: false, error }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 });
 
@@ -88,7 +87,7 @@ describe('add voter', () => {
                 data: voters[0]
             }),
             expectedResult = {...InitialState.voterList, ...{ voters: [voters[0]] }};
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 
     it('should return addVoter failure', () => {
@@ -99,7 +98,7 @@ describe('add voter', () => {
             }),
             expectedResult = {... InitialState.voterList, ...{ addVoterError: error }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 });
 
@@ -111,7 +110,7 @@ describe('delete voter', () => {
             }),
             expectedResult = {...InitialState.voterList, ...{ voters: [voters[1]] }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 
     it('should return deleteVoter failure', () => {
@@ -122,7 +121,7 @@ describe('delete voter', () => {
             }),
             expectedResult = {... InitialState.voterList, ...{ deleteVoterError: error }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 });
 
@@ -141,7 +140,7 @@ describe('update voter', () => {
             }),
             expectedResult = {...InitialState.voterList, ...{ voters: expectedVoters }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 
     it('should return updateVoter failure', () => {
@@ -152,6 +151,6 @@ describe('update voter', () => {
             }),
             expectedResult = {... InitialState.voterList, ...{ updateVoterError: error }};
 
-        expect(isEqual(actualResult, expectedResult)).to.be.true
+        expect(actualResult).to.deep.equal(expectedResult)
     });
 });
