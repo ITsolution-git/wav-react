@@ -26,13 +26,13 @@ class CaptainsDashboard extends BaseComponent {
                     <Row>
                         <Col md={8}>
                             <Row>
-                                <Col md={6}>
+                                <Col md={6} xs={6}>
                                     <div className='icon-div tasks' onClick={() => this.onLink(routes.tasksList)}>
                                         <FontAwesome name='tasks' size='3x'/>
                                         <span className='button-text'>Your Tasks</span>
                                     </div>
                                 </Col>
-                                <Col md={6}>
+                                <Col md={6} xs={6}>
                                     <div className='icon-div voters' onClick={() => this.onLink(routes.voterList)}>
                                         <FontAwesome name='thumbs-up' size='3x'/>
                                         <span className='button-text'>
@@ -44,7 +44,7 @@ class CaptainsDashboard extends BaseComponent {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={6}>
+                                <Col md={6} xs={6}>
                                     <div className='icon-div invites' onClick={() => this.onLink(routes.invites)}>
                                         <FontAwesome name='envelope-open'  size='3x' />
                                         <span className='button-text'>
@@ -54,7 +54,7 @@ class CaptainsDashboard extends BaseComponent {
                                         </span>
                                     </div>
                                 </Col>
-                                <Col md={6}>
+                                <Col md={6} xs={6}>
                                     <div className='icon-div forum' onClick={() => this.onLink(routes.forum)}>
                                         <FontAwesome name='comments' size='3x'/>
                                         <span className='button-text'>Forum</span>

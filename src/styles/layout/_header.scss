@@ -28,6 +28,12 @@
       margin-bottom: 0;
       padding: 9px;
     }
+    .navbar-default {
+      border: none;
+      & .navbar-collapse {
+        border: none;
+      }
+    }
     .dropdown-div {
       margin: 10px 0 10px 0;
     }
