@@ -1,20 +1,52 @@
 .btw-voter-list {
-  width: 50%;
+  @include respond-to($phone) {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 90%;
+  }
+
+  @include respond-to($desktop) {
+    width: 50%;
+  }
+
   button {
     @extend .btw-button;
   }
+
   .voters-list {
-    width: 98%;
+    margin-bottom: 2%;
+    @include respond-to($phone) {
+      width: 100%;
+    }
+    @include respond-to($desktop) {
+      width: 98%;
+    }
+
     .name-row {
       @extend .voter-row;
-      .registered-icon {
+
+      & > div {
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+
+      padding-top: 10px;
+      padding-bottom: 10px;
+
+      .status-icon {
         font-size: 23px;
+      }
+
+      .registered-icon {
+        @extend .status-icon;
         color: #91E45B;
       }
+
       .not-registered-icon {
+        @extend .status-icon;
         color: #F3BE0C;
-        font-size: 23px;
       }
+
       .action-icon {
         padding-left: 15px;
         cursor: pointer;

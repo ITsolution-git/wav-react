@@ -1,7 +1,14 @@
 .btw-button {
   border: none;
   border-radius: 0;
-  padding: 0 50px;
+
+  @include respond-to($phone) {
+    padding: 0 $button-padding_mobile;
+  }
+  @include respond-to($desktop) {
+    padding: 0 $button-padding;
+  }
+
   font-family: Verdana,Arial,sans-serif;
   font-size: $font_size_input;
   font-weight: $font_weight_bold;
