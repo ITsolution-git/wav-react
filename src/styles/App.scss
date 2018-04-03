@@ -6,8 +6,11 @@
 }
 
 @import 'shared/style.scss';
+@import 'shared/mixins';
 @import 'shared/sizes.scss';
 @import 'shared/components.scss';
+@import 'shared/_sharedclasses.scss';
+
 @import 'layout/header.scss';
 @import 'layout/navimage.scss';
 @import 'layout/layout.scss';

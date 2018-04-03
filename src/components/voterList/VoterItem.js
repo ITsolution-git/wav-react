@@ -47,12 +47,17 @@ class VoterItem extends BaseComponent {
 
         return (
             <Row className='name-row'>
-                <Col md={4}>
+                <Col md={3} xs={10}>
                     <div className='name-info'>
                         { firstname } { lastname }
                     </div>
                 </Col>
-                <Col md={4}>
+                <Col md={2} xs={2}>
+                    { isRegistered
+                        ? <FontAwesome className='registered-icon' name='check-circle' />
+                        : <FontAwesome className='not-registered-icon' name='exclamation-circle' /> }
+                </Col>
+                <Col md={5} xs={12} className='no-padding'>
                     <div>{ address }, { city }, { state }</div>
                     { moreEnabled &&
                     <div className='more-info'>
@@ -66,12 +71,7 @@ class VoterItem extends BaseComponent {
                         this.setState({ moreEnabled: !moreEnabled });
                     }}>{ moreEnabled ? 'Show less' : 'Show more' }</div>
                 </Col>
-                <Col md={2}>
-                    { isRegistered
-                        ? <FontAwesome className='registered-icon' name='check-circle' />
-                        : <FontAwesome className='not-registered-icon' name='exclamation-circle' /> }
-                </Col>
-                <Col md={2}>
+                <Col md={2} xs={12}>
                     <FontAwesome className='action-icon'
                                  onClick={() => this.setState({ showEditModal: true })}
                                  name='pencil' />
