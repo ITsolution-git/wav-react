@@ -4,8 +4,12 @@ $tasks-icon-size: 110px;
 $link-icon-size: 85px;
 
 .btw-captains-dashboard {
+  .block-padding {
+    padding-left: 1%;
+    padding-right: 1%;
+  }
   .button-base {
-    margin-top: 30px;
+    margin-top: 5%;
     cursor: pointer;
   }
   .icon-div {
@@ -46,7 +50,7 @@ $link-icon-size: 85px;
   }
   .right-column {
     @extend .button-base;
-    height: 270px;
+    height: 260px;
     background-color: #37C1D1;
     color: #F8FAFC;
     .label {

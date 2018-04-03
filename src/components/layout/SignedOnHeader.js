@@ -85,16 +85,19 @@ class SignedOnHeader extends BaseComponent {
                     </Col>
                 </Row>
                 <Navbar>
-                    <Nav>
-                        { this.resolveLinks().map((link, i) => {
-                                return (
-                                    <NavItem key={i} eventKey={i} onClick={() => this.onLink(link.route)} >
-                                        { link.title }
-                                    </NavItem>
-                                );
-                            })
-                        }
-                    </Nav>
+                    <Navbar.Toggle />
+                    <Navbar.Collapse>
+                        <Nav>
+                            { this.resolveLinks().map((link, i) => {
+                                    return (
+                                        <NavItem key={i} eventKey={i} onClick={() => this.onLink(link.route)} >
+                                            { link.title }
+                                        </NavItem>
+                                    );
+                                })
+                            }
+                        </Nav>
+                    </Navbar.Collapse>
                 </Navbar>
             </div>
         )
