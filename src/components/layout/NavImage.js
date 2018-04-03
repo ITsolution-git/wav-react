@@ -3,8 +3,8 @@ import { Image } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from "../../constants/AppDataTypes";
-import {withRouter} from "react-router-dom";
-import {connect} from "react-redux";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Header extends BaseComponent {
     getImagePath = () => {
@@ -17,12 +17,11 @@ class Header extends BaseComponent {
         const { profile: { isSuccess, data } } = this.props;
         const name = isSuccess ? data.firstname : '';
 
-        return (
+        return !this.isMobile() ?
             <div className="btw-nav-image">
                 <div className='btw-name'>Welcome {name}</div>
                 <Image className='btw-image' src={this.getImagePath()} />
-            </div>
-        );
+            </div> : null
     }
 }
 

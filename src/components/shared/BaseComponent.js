@@ -18,6 +18,10 @@ class BaseComponent extends Component {
         this.onLink( getHomeRoute());
     };
 
+    isMobile = () => {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+
     renderBackToHome = (style) => {
         style = style || {'left': '2%', 'position': 'absolute'};
         return (
