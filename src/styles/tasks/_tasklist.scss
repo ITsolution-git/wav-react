@@ -1,0 +1,28 @@
+.bwt-task-list {
+  margin-top: 3%;
+  text-align: center;
+  @include respond-to($desktop) {
+    width: 40%;
+  }
+
+  button {
+    @extend .btw-button;
+  }
+
+  .task-list {
+    height: auto;
+    margin-top: 13px;
+    color: white;
+
+    .task {
+      font-size: 1.35em;
+      cursor: pointer;
+      background-color: #3C98D9;
+      padding: 4%;
+      margin-bottom: 3%;
+      &:hover {
+        background-color: darken(#3C98D9, 10%);
+      }
+    }
+  }
+}
