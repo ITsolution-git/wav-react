@@ -20,5 +20,11 @@ export default {
         updateVoterError: null,
         addVoterError: null,
         deleteVoterError: null
+    },
+    taskList: {
+        tasks: [],
+        isFetching: false,
+        isSuccess: false,
+        error: null
     }
 }
