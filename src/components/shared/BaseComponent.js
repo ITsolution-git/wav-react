@@ -22,8 +22,12 @@ class BaseComponent extends Component {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     };
 
+    isDesktop = () => {
+        return !this.isMobile();
+    };
+
     renderBackToHome = (style) => {
-        style = style || {'left': '2%', 'position': 'absolute'};
+        style = this.isDesktop() ? style || {'left': '2%', 'position': 'absolute'} : null;
         return (
             <Button className='btn btn-primary' style={style}
                     onClick={() => this.onLink(routes.login)}>

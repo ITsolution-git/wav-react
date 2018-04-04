@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { Row, Col } from 'react-bootstrap';
 
 import voterConstants from '../../constants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';
@@ -71,8 +72,8 @@ class MakeList extends BaseComponent {
 
 	render() {
 		return (
-			<div className='btw-identity btw-makelist'>
-				{ this.renderBackToHome()}
+			<div className='btw-identity btw-makelist container'>
+				{ this.isDesktop() && this.renderBackToHome()}
 				<div className="intro">
 					<p className="intro-title">
                         Generate Lorem Ipsum placeholder text
@@ -93,9 +94,16 @@ class MakeList extends BaseComponent {
 						)
                     })}
 				</form>
-				<div id="btn_next">
-					<button className="btn btn-primary" onClick={this.onNext}>Next</button>
-				</div>
+				<Row>
+					<Col xs={6}>
+						{ this.isMobile() && this.renderBackToHome()}
+					</Col>
+					<Col md={12} xs={6}>
+                        <div>
+                            <button className="btn btn-primary" onClick={this.onNext}>Next</button>
+                        </div>
+					</Col>
+				</Row>
 			</div>
 		);
 	}

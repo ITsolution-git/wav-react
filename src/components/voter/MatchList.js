@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import { makeListPersist } from "../../actions/VoterAction";
@@ -26,7 +27,7 @@ class MatchList extends BaseComponent {
         const { matchList } = this.props.voter;
         return (
             <div className='btw-voter btw-match-list'>
-                { this.renderBackToHome() }
+                { this.isDesktop() && this.renderBackToHome() }
                 <div className="intro">
                     <p className="intro-title">
                         Possible match
@@ -42,9 +43,16 @@ class MatchList extends BaseComponent {
                                                        person={person} />
                     )}
                 </div>
-                <div id="btn_not_sure">
-                    <button className="btn btn-primary" onClick={this.onNotSureClick}>Not sure</button>
-                </div>
+                <Row>
+                    <Col xs={6}>
+                        { this.isMobile() && this.renderBackToHome()}
+                    </Col>
+                    <Col xs={6} md={12}>
+                        <div id="btn_not_sure">
+                            <button className="btn btn-primary" onClick={this.onNotSureClick}>Not sure</button>
+                        </div>
+                    </Col>
+                </Row>
             </div>
         );
     }

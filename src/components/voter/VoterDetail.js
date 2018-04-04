@@ -101,7 +101,7 @@ class VoterDetail extends BaseComponent {
 	};
 
 	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
-		const width = isWholeRow ? 12 : 6;
+		const width = isWholeRow || this.isMobile() ? 12 : 6;
 		const input = (
             <input type={type} className='input-field'
                    value={ this.state.voterDetail[name]}
@@ -120,7 +120,7 @@ class VoterDetail extends BaseComponent {
                 { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
             </select>
 		);
-		return this.renderInputDiv(6, label, name, input, errorText);
+		return this.renderInputDiv(this.isMobile() ? 12 : 6, label, name, input, errorText);
 	};
 
     renderAgeDropdown = () => {
@@ -140,7 +140,7 @@ class VoterDetail extends BaseComponent {
                 <div>voter should be 18years and above</div>
             </Fragment>
         );
-        return this.renderInputDiv(6, 'Year of birth', 'birthday', input, '* Input is not valid *');
+        return this.renderInputDiv(this.isMobile() ? 12 : 6, 'Year of birth', 'birthday', input, '* Input is not valid *');
     };
 
     isLoadPrevious = () => {
@@ -154,8 +154,8 @@ class VoterDetail extends BaseComponent {
 			loadPrevious = this.isLoadPrevious(),
 			notValidInput = '* Input is not valid *';
 		return (
-			<div className='btw-voter btw-voter-detail'>
-				{ this.renderBackToHome() }
+			<div className='btw-voter btw-voter-detail container'>
+				{ this.isDesktop() && this.renderBackToHome() }
 				<div className="intro">
 					<p className="intro-title">
                         { firstName || '' + " " + lastName || '' }
@@ -179,12 +179,15 @@ class VoterDetail extends BaseComponent {
 					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>
 				<Row>
-                    { loadPrevious && <Col mdOffset={3} md={3}>
-                        <NextButton title='Next Name' />
-                    </Col> }
-                    <Col md={loadPrevious ? 3 : 12}>
+                    <Col mdOffset={3} md={3} xs={6}>
+						{ loadPrevious ?
+                            <NextButton title='Next Name' />
+							: this.isMobile && this.renderBackToHome()
+                        }
+                    </Col>
+                    <Col md={3} xs={6}>
                         <Button className="btn btn-primary" onClick={this.onNext}>
-                            { loadPrevious ? 'Resubmit' : 'Next' }
+                            {loadPrevious ? 'Resubmit' : 'Next'}
                         </Button>
                     </Col>
 				</Row>

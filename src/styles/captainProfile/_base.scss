@@ -1,8 +1,9 @@
 .btw-identity {
-
+    @include respond-to($desktop) {
+        width: $max_width;
+    }
 	margin: auto;
     margin-top: $margin_top;
-    width: $max_width;
     text-align: center;
 
     .intro {
@@ -20,7 +21,10 @@
     }
 
     form {
-        width: $max_width - 300px;
+        @include respond-to($desktop) {
+            width: $max_width - 300px;
+        }
+
         margin: auto;
         margin-top: 70px;
 

@@ -1,5 +1,7 @@
 .btw-match-list {
-    width: 42%;
+    @include respond-to($desktop) {
+      width: 42%;
+    }
     button {
       @extend .btw-button;
     }

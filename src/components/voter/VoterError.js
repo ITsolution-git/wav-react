@@ -13,7 +13,7 @@ class VoterError extends BaseComponent {
         const { firstname = '', lastname = ''} = getUrlParams(this.props);
 
         return (
-            <div className='btw-voter btw-voter-error'>
+            <div className='btw-voter btw-voter-error container'>
                 <div className='error-icon'>
                     <FontAwesome name='exclamation-triangle' />
                 </div>

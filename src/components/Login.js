@@ -43,7 +43,7 @@ class Login extends BaseComponent {
 		const { error } = this.props;
 		let { password, username, emptyField } = this.state;
 		return (
-			<div className="btw-login">
+			<div className="btw-login container">
 				<div className="btw-form">
                     <div className="card-content">
                         <p id="loginHeader">Log into your account</p>
