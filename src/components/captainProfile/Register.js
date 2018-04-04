@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { btwRegister } from '../../actions/SignOnAction';
 import YouTube from 'react-youtube';
 import classNames from 'classnames';
+import { Row, Col } from 'react-bootstrap';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
@@ -99,10 +100,10 @@ class Register extends BaseComponent {
 				<div>Minimum of 7</div>
 			</div>
 		);
-
+		const nameWidth = this.isMobile() ? 12 : 6;
 		return (
-			<div className='btw-identity btw-register'>
-				{ this.renderBackToHome()}
+			<div className='btw-identity btw-register container'>
+				{ this.isDesktop() && this.renderBackToHome()}
 				<div>
 					<YouTube
 						videoId="2g811Eo7K8U"
@@ -121,8 +122,8 @@ class Register extends BaseComponent {
 				</div>
 				<form>
 					<div className="row">
-						{ this.renderInput('firstname', 'First Name', 'text', 6, '* First Name is not valid *') }
-                        { this.renderInput('lastname', 'Last Name', 'text', 6, '* Last Name is not valid *') }
+						{ this.renderInput('firstname', 'First Name', 'text', nameWidth, '* First Name is not valid *') }
+                        { this.renderInput('lastname', 'Last Name', 'text', nameWidth, '* Last Name is not valid *') }
 					</div>
                     { this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
                     { this.renderInput('email', 'Email', 'email', 0, '* Email is not valid *') }
@@ -131,9 +132,16 @@ class Register extends BaseComponent {
 					</div>
                     { this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
 				</form>
-				<div id="btn_signup">
-					<button className="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
-				</div>
+				<Row>
+					<Col xs={6}>
+						{ this.isMobile() && this.renderBackToHome()}
+					</Col>
+					<Col md={12} xs={6}>
+                        <div id="btn_signup">
+                            <button className="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
+                        </div>
+					</Col>
+				</Row>
 			</div>
 		);
 	}

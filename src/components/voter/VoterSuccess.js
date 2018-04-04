@@ -12,7 +12,7 @@ class VoterSuccess extends BaseComponent {
     render() {
         const { firstname = '', lastname = ''} = getUrlParams(this.props);
         return (
-            <div className='btw-voter btw-voter-success'>
+            <div className='btw-voter btw-voter-success container'>
                 <div className="full-name">
                     {firstname } { lastname }
                 </div>
