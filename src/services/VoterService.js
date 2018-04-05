@@ -1,4 +1,4 @@
-import { ApiHost } from '../config/ApiConfig';
+import config from '../config/ApiConfig';
 import { getAsync, patchAsync, postAsync, deleteAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
 
@@ -13,14 +13,14 @@ export default {
 
 function loadVoterList(userId, username) {
     return getAsync({
-        url: `${ApiHost}/api/v1/getVoters?userid=${userId}&username=${username}`,
+        url: `${config.apiHost}/api/v1/getVoters?userid=${userId}&username=${username}`,
         headers: getHeaders()
     });
 }
 
 function updateVoter(data) {
     return patchAsync({
-        url: `${ApiHost}/api/v1/updateVoter`,
+        url: `${config.apiHost}/api/v1/updateVoter`,
         headers: getHeaders(),
         data
     })
@@ -28,7 +28,7 @@ function updateVoter(data) {
 
 function addVoter(data) {
     return postAsync({
-        url: `${ApiHost}/api/v1/addVoter`,
+        url: `${config.apiHost}/api/v1/addVoter`,
         headers: getHeaders(),
         data
     })
@@ -36,7 +36,7 @@ function addVoter(data) {
 
 function deleteVoter(data) {
     return deleteAsync({
-        url: `${ApiHost}/api/v1/deleteVoter`,
+        url: `${config.apiHost}/api/v1/deleteVoter`,
         headers: getHeaders(),
         data
     })

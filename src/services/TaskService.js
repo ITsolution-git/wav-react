@@ -1,4 +1,4 @@
-import { ApiHost } from '../config/ApiConfig';
+import config from '../config/ApiConfig';
 import { getAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
 
@@ -8,7 +8,7 @@ export default {
 
 function loadTaskList(userId) {
     return getAsync({
-        url: `${ApiHost}/api/v1/task/getTasks?userid=${userId}`,
+        url: `${config.apiHost}/api/v1/task/getTasks?userid=${userId}`,
         headers: getHeaders()
     });
 }

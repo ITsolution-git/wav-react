@@ -1,4 +1,4 @@
-import { ApiHost } from '../config/ApiConfig';
+import config from '../config/ApiConfig';
 import { getAsync, postAsync } from '../helpers/RequestHelper';
 
 const IdentityService = {
@@ -7,10 +7,9 @@ const IdentityService = {
 	getUserProfile,
 };
 
-
 function login(username, password) {
 	return postAsync({
-		url: `${ApiHost}/user/login`,
+		url: `${config.apiHost}/user/login`,
 		data: {
 			username,
 			password
@@ -27,7 +26,7 @@ function login(username, password) {
 
 function register({ username, password, email, firstname, lastname}) {
 	return postAsync({
-		url: `${ApiHost}/user/register`,
+		url: `${config.apiHost}/user/register`,
 		data: {
 			username,
 			password,
@@ -43,7 +42,7 @@ function register({ username, password, email, firstname, lastname}) {
 
 function getUserProfile(username) {
 	return getAsync({
-		url: `${ApiHost}/api/v1/getUser`,
+		url: `${config.apiHost}/api/v1/getUser`,
 		headers: {'x-key': username }
 	});
 }

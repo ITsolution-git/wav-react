@@ -14,7 +14,7 @@ import {
 } from '../../actions/VoterListAction';
 import VoterContants from '../../constants/VoterConstants';
 import InitialState from "../../constants/InitialState";
-import {testApiHost} from "../../config/ApiConfig";
+import config from "../../config/ApiConfig";
 import userAuthenticator from '../shared/UserAuthenticator';
 
 userAuthenticator.loginCaptain();
@@ -67,7 +67,7 @@ const mockAdapter = new MockAdapter(axios);
 
 describe('loadVoterList', () => {
     it('it should dispatch success', () => {
-        mockAdapter.onGet(`${testApiHost}/api/v1/getVoters?userid=5a6991bbd399dc000452cf9e&username=testUser`).reply(200, votersResponse );
+        mockAdapter.onGet(`${config.apiHost}/api/v1/getVoters?userid=5a6991bbd399dc000452cf9e&username=testUser`).reply(200, votersResponse );
 
         const expectedActions = [
             {
@@ -91,7 +91,7 @@ describe('loadVoterList', () => {
             "message": "Parameters mismatch"
         };
 
-        mockAdapter.onGet(`${testApiHost}/api/v1/getVoters?userid=5a6991bbd399dc000452cf9e&username=testUser`).reply(422, response);
+        mockAdapter.onGet(`${config.apiHost}/api/v1/getVoters?userid=5a6991bbd399dc000452cf9e&username=testUser`).reply(422, response);
 
         const expectedActions = [
             {
@@ -118,7 +118,7 @@ describe('updateVoter', () => {
             "message": "Voter update successful"
         };
 
-        mockAdapter.onPatch(`${testApiHost}/api/v1/updateVoter`).reply(200, response);
+        mockAdapter.onPatch(`${config.apiHost}/api/v1/updateVoter`).reply(200, response);
 
         const expectedActions = [
             {
@@ -139,7 +139,7 @@ describe('updateVoter', () => {
             "message": "Unauthorized"
         };
 
-        mockAdapter.onPatch(`${testApiHost}/api/v1/updateVoter`).reply(401, response);
+        mockAdapter.onPatch(`${config.apiHost}/api/v1/updateVoter`).reply(401, response);
 
         const expectedActions = [
             {
@@ -164,7 +164,7 @@ describe('addVoter', () => {
             "message": "Voter add successful"
         };
 
-        mockAdapter.onPost(`${testApiHost}/api/v1/addVoter`).reply(200, response);
+        mockAdapter.onPost(`${config.apiHost}/api/v1/addVoter`).reply(200, response);
 
         const expectedActions = [
             {
@@ -185,7 +185,7 @@ describe('addVoter', () => {
             "message": "Unauthorized"
         };
 
-        mockAdapter.onPost(`${testApiHost}/api/v1/addVoter`).reply(401, response);
+        mockAdapter.onPost(`${config.apiHost}/api/v1/addVoter`).reply(401, response);
 
         const expectedActions = [
             {
@@ -209,7 +209,7 @@ describe('deleteVoter', () => {
             "message": "Voter delete successful"
         };
 
-        mockAdapter.onDelete(`${testApiHost}/api/v1/deleteVoter`).reply(200, response);
+        mockAdapter.onDelete(`${config.apiHost}/api/v1/deleteVoter`).reply(200, response);
 
         const expectedActions = [
             {
@@ -230,7 +230,7 @@ describe('deleteVoter', () => {
             "message": "Unauthorized"
         };
 
-        mockAdapter.onDelete(`${testApiHost}/api/v1/deleteVoter`).reply(401, response);
+        mockAdapter.onDelete(`${config.apiHost}/api/v1/deleteVoter`).reply(401, response);
 
         const expectedActions = [
             {
