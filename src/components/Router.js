@@ -17,6 +17,12 @@ import VoterSuccess from './voter/VoterSuccess';
 import VoterError from './voter/VoterError';
 import Forum from './community/Forum';
 import Reports from './reports/Reports';
+import AddVoterTask from './tasks/AddVoterTask';
+import LiteratureTextTask from './tasks/LiteratureTextTask';
+import LiteratureVideoTask from './tasks/LiteratureVideoTask';
+import RecruitingCaptainTask from './tasks/RecruitingCaptainTask';
+import RegisterVoterTask from './tasks/RegisterVoterTask';
+import UpdateProfileTask from './tasks/UpdateProfileTask';
 
 // static pages
 import WhyBethewave from './static/WhyBethewave';
@@ -35,8 +41,6 @@ const Router =() => (
 				   component = { Authorization(Login, [guest, registered]) } />
 			<Route exact path = {routes.register}
 				   component = { Authorization(Register, [guest, registered, captain, admin]) } />
-			<Route exact path = {routes.makelist}
-				   component = { Authorization(MakeList, [registered]) } />
 			<Route exact path = {routes.pageDown}
 				   component = { GeneralErrorPage } />
 			<Route exact path = {routes.invites}
@@ -55,6 +59,10 @@ const Router =() => (
 				   component = { Authorization(AdminDashBoard, [admin]) } />
             <Route exact path = {routes.reports}
                    component = { Authorization(Reports, [admin]) } />
+
+			// voter onboarding
+            <Route exact path = {routes.makelist}
+                   component = { Authorization(MakeList, [registered]) } />
 			<Route exact path = {routes.voterDetail}
 				   component = { Authorization(VoterDetail, [registered]) } />
             <Route exact path = {routes.matchList}
@@ -63,6 +71,23 @@ const Router =() => (
                    component = { Authorization(VoterSuccess, [registered]) } />
             <Route exact path = {routes.voterError}
                    component = { Authorization(VoterError, [registered]) } />
+
+			// tasks
+            <Route exact path = {routes.addVoterTask}
+                   component = { Authorization(AddVoterTask, [captain]) } />
+            <Route exact path = {routes.addVoterTask}
+                   component = { Authorization(AddVoterTask, [captain]) } />
+            <Route exact path = {routes.literatureTextTask}
+                   component = { Authorization(LiteratureTextTask, [captain]) } />
+            <Route exact path = {routes.literatureVideoTask}
+                   component = { Authorization(LiteratureVideoTask, [captain]) } />
+            <Route exact path = {routes.recruitingCaptainTask}
+                   component = { Authorization(RecruitingCaptainTask, [captain]) } />
+            <Route exact path = {routes.registerVoterTask}
+                   component = { Authorization(RegisterVoterTask, [captain]) } />
+            <Route exact path = {routes.updateProfileTask}
+                   component = { Authorization(UpdateProfileTask, [captain]) } />
+
 			// static route pages
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
             <Route exact path = {routes.howContribute} component = { HowContribute } />
