@@ -9,7 +9,7 @@ const mockStore = configureMockStore(middlewares);
 import { btwRegister, getBtwUserProfile } from '../../actions/SignOnAction';
 import AppConstants from '../../constants/AppConstants';
 import AppDataTypes from '../../constants/AppDataTypes';
-import { testApiHost } from '../../config/ApiConfig';
+import config from '../../config/ApiConfig';
 
 import userAuthenticator from '../shared/UserAuthenticator';
 
@@ -32,7 +32,7 @@ describe('getBtwUserProfile tests', () => {
 
 	it('it should dispatch a success', () => {
 		let mockAdapter = new MockAdapter(axios);
-		mockAdapter.onGet(`${testApiHost}/api/v1/getUser`).reply(200, response);
+		mockAdapter.onGet(`${config.apiHost}/api/v1/getUser`).reply(200, response);
 
 		const expectedActions = [
             {
@@ -84,7 +84,7 @@ describe('btwRegister', () => {
 
 		it('it should dispatch a success', () => {
 			let mockAdapter = new MockAdapter(axios);
-			mockAdapter.onPost(`${testApiHost}/user/register`).reply(200, response);
+			mockAdapter.onPost(`${config.apiHost}/user/register`).reply(200, response);
 
 			const expectedActions = [
 				{
@@ -123,7 +123,7 @@ describe('btwRegister', () => {
 
 		it('it should dispatch a failure', () => {
 			let mockAdapter = new MockAdapter(axios);
-			mockAdapter.onPost(`${testApiHost}/user/register`).reply(400,error);
+			mockAdapter.onPost(`${config.apiHost}/user/register`).reply(400,error);
 
 			const expectedActions = [
                 {
