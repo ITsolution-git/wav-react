@@ -1,5 +1,7 @@
 import envConsts from '../constants/Env';
 
+console.log(process);
+
 const env = process.env.NODE_ENV;
 let config = null;
 
