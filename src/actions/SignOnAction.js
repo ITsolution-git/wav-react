@@ -17,7 +17,9 @@ export function btwSignOn(username, password) {
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
 			},
 			error => {
-				dispatch(loadDataFailure(appDataTypes.signOn, error.response.data.message));
+				const { response } = error;
+				const msgError = response ? response.data.message : 'Something went wrong while signing in';
+				dispatch(loadDataFailure(appDataTypes.signOn, msgError));
 			});
 	};
 }
