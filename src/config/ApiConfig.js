@@ -1,6 +1,7 @@
+import dotenv from 'dotenv'
 import envConsts from '../constants/Env';
 
-console.log(process);
+dotenv.config();
 
 const env = process.env.NODE_ENV;
 let config = null;
