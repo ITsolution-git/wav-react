@@ -10,14 +10,16 @@ import {
 export function btwSignOn(username, password) {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.signOn));
-		IdentityService.login(username, password).then(
+		IdentityService.login( password).then(
 			response => {
                 authStorage.saveTokenInfo(response.token);
                 authStorage.clearRegisteredCreds();
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
 			},
 			error => {
-				dispatch(loadDataFailure(appDataTypes.signOn, error.response.data.message));
+				const { response } = error;
+				const msgError = response ? response.data.message : 'Something went wrong while signing in';
+				dispatch(loadDataFailure(appDataTypes.signOn, msgError));
 			});
 	};
 }
