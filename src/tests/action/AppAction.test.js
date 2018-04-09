@@ -84,6 +84,7 @@ describe('btwRegister', () => {
 
 		it('it should dispatch a success', () => {
 			let mockAdapter = new MockAdapter(axios);
+			mockAdapter.onPost(`${config.apiHost}/user/login`).reply(200, {});
 			mockAdapter.onPost(`${config.apiHost}/user/register`).reply(200, response);
 
 			const expectedActions = [
@@ -92,9 +93,8 @@ describe('btwRegister', () => {
                     type: AppConstants.INITIALIZE_REQUEST
 				},
 				{
-                    dataType: AppDataTypes.register,
-                    type: AppConstants.LOAD_DATA_SUCCESS,
-					data: response
+                    dataType: AppDataTypes.signOn,
+                    type: AppConstants.INITIALIZE_REQUEST
 				}
 			];
 

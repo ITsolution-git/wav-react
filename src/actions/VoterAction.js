@@ -48,7 +48,7 @@ export function matchListPersist(voterDetails) {
         }};
 
         dispatch(actionRequest());
-        voterService.addVoter(postData).then(
+        return voterService.addVoter(postData).then(
            result => {
                 const { data } = result.data;
                 if (data) {

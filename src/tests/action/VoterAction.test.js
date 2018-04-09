@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 
 import {
 	makeListPersist,
@@ -11,10 +13,14 @@ import {
 } from '../../actions/VoterAction';
 import VoterContants from '../../constants/VoterConstants';
 import InitialState from "../../constants/InitialState";
+import userAuthenticator from "../shared/UserAuthenticator";
+import config from "../../config/ApiConfig";
 
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
+
+userAuthenticator.loginCaptain();
 
 /* Voter actions tests */
 describe('makelist', () => {
@@ -85,6 +91,88 @@ describe('voterDetails', () => {
 describe('matchList', () => {
 
     describe('Persist matchList', () => {
+       const response = {
+            "status": 200,
+            "data": {
+                "ctRecords": [
+                    {
+                        "matchRate": 0.8076923,
+                        "firstname": "DIANE1",
+                        "lastname": "TURNER1",
+                        "regaddrline1": "922 E ADAMS BLVD",
+                        "regaddrline2": "APT 9",
+                        "regaddrcity": "LOS ANGELES",
+                        "regaddrstate": "CA",
+                        "voterstatus": "active",
+                        "gender": "female",
+                        "birthdate": "1954-05-30",
+                        "mailaddrline1": "2743 GILMORE LN",
+                        "mailaddrline2": "APT 3",
+                        "mailaddrcity": "OROVILLE",
+                        "mailaddrstate": "CA",
+                        "mailaddrzip": "95966",
+                        "phone": "914-232-9901"
+                    },
+                    {
+                        "matchRate": 0.9,
+                        "firstname": "DIANE2",
+                        "lastname": "TURNER2",
+                        "regaddrline1": "922 E ADAMS BLVD",
+                        "regaddrline2": "APT 9",
+                        "regaddrcity": "LOS ANGELES",
+                        "regaddrstate": "CA",
+                        "voterstatus": "active",
+                        "gender": "female",
+                        "birthdate": "1954-05-30",
+                        "mailaddrline1": "2743 GILMORE LN",
+                        "mailaddrline2": "APT 3",
+                        "mailaddrcity": "OROVILLE",
+                        "mailaddrstate": "CA",
+                        "mailaddrzip": "95966",
+                        "phone": "914-232-9901"
+                    },
+                    {
+                        "matchRate": 0.89,
+                        "firstname": "DIANE3",
+                        "lastname": "TURNER3",
+                        "regaddrline1": "922 E ADAMS BLVD",
+                        "regaddrline2": "APT 9",
+                        "regaddrcity": "LOS ANGELES",
+                        "regaddrstate": "CA",
+                        "voterstatus": "offline",
+                        "gender": "female",
+                        "birthdate": "1954-05-30",
+                        "mailaddrline1": "2743 GILMORE LN",
+                        "mailaddrline2": "APT 3",
+                        "mailaddrcity": "OROVILLE",
+                        "mailaddrstate": "CA",
+                        "mailaddrzip": "95966",
+                        "phone": "914-232-9901"
+                    },
+                    {
+                        "matchRate": 0.81,
+                        "firstname": "DIANE4",
+                        "lastname": "TURNER4",
+                        "regaddrline1": "922 E ADAMS BLVD",
+                        "regaddrline2": "APT 9",
+                        "regaddrcity": "LOS ANGELES",
+                        "regaddrstate": "CA",
+                        "voterstatus": "active",
+                        "gender": "female",
+                        "birthdate": "1954-05-30",
+                        "mailaddrline1": "2743 GILMORE LN",
+                        "mailaddrline2": "APT 3",
+                        "mailaddrcity": "OROVILLE",
+                        "mailaddrstate": "CA",
+                        "mailaddrzip": "95966",
+                        "phone": "914-232-9901"
+                    }
+                ]
+            }
+       };
+
+        const mockAdapter = new MockAdapter(axios);
+        mockAdapter.onPost(`${config.apiHost}/api/v1/addVoter`).reply(200, response);
 
         const voterDetails = {
             address: "Morozna st. 21",
@@ -97,97 +185,22 @@ describe('matchList', () => {
             zip: "79066"
         };
 
-        const matchList = [
-            {
-                "matchRate": 0.8076923,
-                "firstname": "DIANE1",
-                "lastname": "TURNER1",
-                "regaddrline1": "922 E ADAMS BLVD",
-                "regaddrline2": "APT 9",
-                "regaddrcity": "LOS ANGELES",
-                "regaddrstate": "CA",
-                "voterstatus": "active",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
-            },
-            {
-                "matchRate": 0.9,
-                "firstname": "DIANE2",
-                "lastname": "TURNER2",
-                "regaddrline1": "922 E ADAMS BLVD",
-                "regaddrline2": "APT 9",
-                "regaddrcity": "LOS ANGELES",
-                "regaddrstate": "CA",
-                "voterstatus": "active",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
-            },
-            {
-                "matchRate": 0.89,
-                "firstname": "DIANE3",
-                "lastname": "TURNER3",
-                "regaddrline1": "922 E ADAMS BLVD",
-                "regaddrline2": "APT 9",
-                "regaddrcity": "LOS ANGELES",
-                "regaddrstate": "CA",
-                "voterstatus": "offline",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
-            },
-            {
-                "matchRate": 0.81,
-                "firstname": "DIANE4",
-                "lastname": "TURNER4",
-                "regaddrline1": "922 E ADAMS BLVD",
-                "regaddrline2": "APT 9",
-                "regaddrcity": "LOS ANGELES",
-                "regaddrstate": "CA",
-                "voterstatus": "active",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
-            }
-        ];
-
         it('it should dispatch two actions', () => {
 
             const expectedActions = [
 				{
-					type: VoterContants.VOTER_MATCHLIST_PERSIST,
-                    matchList: []
+					type: VoterContants.VOTER_MATCHLIST_REQUEST
 				},
                 {
                     type: VoterContants.VOTER_MATCHLIST_PERSIST,
-                    matchList: matchList
+                    matchList: response.data.ctRecords
                 },
             ];
             const store = mockStore(InitialState);
 
-            store.dispatch( matchListPersist( voterDetails ));
-            expect(store.getActions()).to.deep.equal(expectedActions);
+            store.dispatch( matchListPersist( voterDetails )).then(() => {
+                expect(store.getActions()).to.deep.equal(expectedActions);
+            });
         })
     })
 });

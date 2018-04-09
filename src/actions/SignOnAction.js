@@ -10,7 +10,7 @@ import {
 export function btwSignOn(username, password, onSuccess = () => {}) {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.signOn));
-		IdentityService.login(username, password).then(
+		return IdentityService.login(username, password).then(
 			response => {
                 authStorage.saveTokenInfo(response.token);
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
