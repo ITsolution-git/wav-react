@@ -1,4 +1,6 @@
 import VoterContants from '../constants/VoterConstants';
+import voterService from '../services/VoterService';
+import authStorage from '../storage/AuthStorage';
 
 export function makeListPersist(makeList) {
 	return dispatch => {
@@ -21,95 +23,71 @@ export function voterDetailsPersist(details) {
     }
 }
 
+export function resetMatchList() {
+    return dispatch => {
+        dispatch(actionReset());
+    };
+
+    function actionReset() {
+        return { type: VoterContants.VOTER_MATCHLIST_RESET }   ;
+    }
+}
+
 export function matchListPersist(voterDetails) {
     return (dispatch, getState) => {
     	const { currentNumber, makeList } = getState().voter,
     		firstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${VoterContants.LAST_NAME_PREFIX}${currentNumber}`];
-    	// clear previous match list
-    	dispatch(persist([]));
 
-    	// call to match list service will be here
-    	const matchList = [
-    		{
-				"matchRate": 0.8076923,
-				"firstname": "DIANE1",
-				"lastname": "TURNER1",
-				"regaddrline1": "922 E ADAMS BLVD",
-				"regaddrline2": "APT 9",
-				"regaddrcity": "LOS ANGELES",
-				"regaddrstate": "CA",
-				"voterstatus": "active",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
-        	},
-            {
-                "matchRate": 0.9,
-                "firstname": "DIANE2",
-                "lastname": "TURNER2",
-                "regaddrline1": "922 E ADAMS BLVD",
-                "regaddrline2": "APT 9",
-                "regaddrcity": "LOS ANGELES",
-                "regaddrstate": "CA",
-                "voterstatus": "active",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
-            },
-            {
-                "matchRate": 0.89,
-                "firstname": "DIANE3",
-                "lastname": "TURNER3",
-                "regaddrline1": "922 E ADAMS BLVD",
-                "regaddrline2": "APT 9",
-                "regaddrcity": "LOS ANGELES",
-                "regaddrstate": "CA",
-                "voterstatus": "offline",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
-            },
-            {
-                "matchRate": 0.81,
-                "firstname": "DIANE4",
-                "lastname": "TURNER4",
-                "regaddrline1": "922 E ADAMS BLVD",
-                "regaddrline2": "APT 9",
-                "regaddrcity": "LOS ANGELES",
-                "regaddrstate": "CA",
-                "voterstatus": "active",
-                "gender": "female",
-                "birthdate": "1954-05-30",
-                "mailaddrline1": "2743 GILMORE LN",
-                "mailaddrline2": "APT 3",
-                "mailaddrcity": "OROVILLE",
-                "mailaddrstate": "CA",
-                "mailaddrzip": "95966",
-                "phone": "914-232-9901"
+        const postData = { ...voterDetails, ...{
+    	    firstname: firstName,
+            lastname: lastName,
+            userid: {
+                oid: authStorage.getLoggedUser().userid
             }
-        ];
-    	// update with new data
-        dispatch(persist(matchList));
+        }};
+
+        dispatch(actionRequest());
+        voterService.addVoter(postData).then(
+           result => {
+                const { data } = result.data;
+                if (data) {
+                    dispatch(actionSuccess(data.ctRecords));
+                    return;
+                }
+                dispatch(actionError(result.data.message));
+           },
+           error => {
+               dispatch(actionError(error.response.data.message));
+           }
+        );
     };
 
-    function persist(matchList) {
+    function actionRequest() {
+        return { type: VoterContants.VOTER_MATCHLIST_REQUEST };
+    }
+    function actionSuccess(matchList) {
         return { type: VoterContants.VOTER_MATCHLIST_PERSIST, matchList }
+    }
+    function actionError(error) {
+        return { type: VoterContants.VOTER_MATCHLIST_ERROR, error }
+    }
+}
+
+export function registerVoter() {
+    return (dispatch, getState) => {
+        const { currentNumber, voterDetails } = getState().voter;
+        const details = voterDetails[currentNumber];
+        const patchData = {
+            email: details.email,
+            registration_metadata: {
+                isRegistered: true
+            }
+        };
+        voterService.updateRegisteredVoter(patchData).then(
+            result => {},
+            error => {}
+        );
     }
 }
 
