@@ -7,16 +7,12 @@ export default {
     getLoggedUser,
     isAuthenticated,
     getToken,
-    getCurrentRole,
-    saveRegisteredCreds,
-    getRegisteredCreds,
-    clearRegisteredCreds
+    getCurrentRole
 };
 
 const sessionKeys = {
     token: 'token',
-    user: 'user',
-    registeredCreds: 'registeredCreds'
+    user: 'user'
 };
 
 function saveTokenInfo(token) {
@@ -35,20 +31,7 @@ function getToken() {
 }
 
 function getCurrentRole() {
-    return getLoggedUser().role ||
-        (getRegisteredCreds() ? roles.registered : roles.guest);
-}
-
-function saveRegisteredCreds(username, password) {
-    localStorage.setItem(sessionKeys.registeredCreds, JSON.stringify({ username, password }));
-}
-
-function getRegisteredCreds() {
-    return JSON.parse(localStorage.getItem(sessionKeys.registeredCreds));
-}
-
-function clearRegisteredCreds() {
-    localStorage.removeItem(sessionKeys.registeredCreds);
+    return getLoggedUser().role || roles.guest;
 }
 
 function isAuthenticated() {

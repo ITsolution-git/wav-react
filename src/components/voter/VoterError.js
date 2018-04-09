@@ -6,11 +6,16 @@ import FontAwesome from 'react-fontawesome';
 import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
+import voterConstants from '../../constants/VoterConstants';
 
 
 class VoterError extends BaseComponent {
     render() {
-        const { firstname = '', lastname = ''} = getUrlParams(this.props);
+        const { makeList, currentNumber } = this.props.voter,
+            firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
+            lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`];
+
+        const { firstname = firstName, lastname = lastName} = getUrlParams(this.props);
 
         return (
             <div className='btw-voter btw-voter-error container'>

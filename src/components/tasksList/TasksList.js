@@ -2,16 +2,48 @@ import React  from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { Button, Row, Col } from 'react-bootstrap';
-import classNames from 'classnames';
+import { Row, Col } from 'react-bootstrap';
 
 import { loadTaskList } from '../../actions/TaskListAction';
+import routes from '../../constants/Routes';
+import taskIds from '../../constants/TaskIds';
 import BaseComponent from '../shared/BaseComponent';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
     }
+
+    goToTask = taskId => {
+        let taskRoute = null;
+        switch (taskId) {
+            case taskIds.addVoterId: {
+                taskRoute = routes.addVoterTask;
+                break;
+            }
+            case taskIds.literatureTextId: {
+                taskRoute = routes.literatureTextTask;
+                break;
+            }
+            case taskIds.literatureVideoId: {
+                taskRoute = routes.literatureVideoTask;
+                break;
+            }
+            case taskIds.recruitingVoterId: {
+                taskRoute = routes.recruitingCaptainTask;
+                break;
+            }
+            case taskIds.registerVoterId: {
+                taskRoute = routes.registerVoterTask;
+                break;
+            }
+            case taskIds.updateProfileId: {
+                taskRoute = routes.updateProfileTask;
+                break;
+            }
+        }
+        this.onLink(taskRoute);
+    };
 
     componentWillMount() {
         const { actions, taskList: { isSuccess, error } } = this.props;
@@ -28,7 +60,9 @@ class TaskList extends BaseComponent {
                 <div className='task-list'>
                     { tasks.map((task, i) => {
                         return (
-                            <Col key={i} md={16} xs={16} className='task'>
+                            <Col key={i} md={16} xs={16}
+                                 onClick={() => this.goToTask(task.task_group_id)}
+                                 className='task' >
                                 <div>{ task.task_description }</div>
                             </Col>
                         )

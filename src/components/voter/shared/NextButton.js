@@ -9,8 +9,7 @@ import { nextNumberPersist, resetVoterState } from '../../../actions/VoterAction
 import { btwSignOn } from '../../../actions/SignOnAction';
 import routes from '../../../constants/Routes';
 import voterConstants from '../../../constants/VoterConstants';
-import authStorage from '../../../storage/AuthStorage';
-import {getHomeRoute} from "../../../helpers/AuthHelper";
+import { getHomeRoute } from "../../../helpers/AuthHelper";
 import appDataTypes from "../../../constants/AppDataTypes";
 
 class NextButton extends BaseComponent {
@@ -18,9 +17,8 @@ class NextButton extends BaseComponent {
     onNext = () => {
         const { voter, actions } = this.props;
         if (voter.currentNumber === voterConstants.VOTERS_COUNT) {
-            const { username, password } = authStorage.getRegisteredCreds() || {};
             actions.resetVoterState();
-            actions.btwSignOn(username, password);
+            this.redirectToHome();
             return;
         }
         actions.nextNumberPersist();

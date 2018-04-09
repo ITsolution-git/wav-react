@@ -6,9 +6,8 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 import states from '../../constants/States';
 import validationTypes from '../../constants/ValidationTypes';
-import routes from '../../constants/Routes';
 import voterConstants from '../../constants/VoterConstants';
-import { voterDetailsPersist, matchListPersist  } from '../../actions/VoterAction';
+import { voterDetailsPersist, matchListPersist, resetMatchList  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
@@ -37,7 +36,7 @@ class VoterDetail extends BaseComponent {
             birthday: initValue,
             gender: initValue,
             email: initValue,
-            phone: initValue,
+            phonenumber: initValue,
             zip: initValue,
         }
 	};
@@ -58,8 +57,8 @@ class VoterDetail extends BaseComponent {
 	}
 
 	validateInput(name, value) {
-		const { email, phone, zip } = validationTypes;
-		if ([ email, phone, zip].includes(name)) {
+		const { email, phonenumber, zip } = validationTypes;
+		if ([ email, phonenumber, zip].includes(name)) {
 			return !value || validate(name, value);
 		}
 		return ['state', 'city'].includes(name)
@@ -86,7 +85,6 @@ class VoterDetail extends BaseComponent {
 			const { voterDetailsPersist, matchListPersist } = this.props.actions;
             voterDetailsPersist(voterDetail);
             matchListPersist(voterDetail);
-            this.onLink(routes.matchList);
 		}
 	};
 
@@ -147,12 +145,29 @@ class VoterDetail extends BaseComponent {
     	return getUrlParam(this.props, 'loadPrevious');
     };
 
+    componentWillReceiveProps(props){
+    	const { voter: { voterRoute, matchListError } } = props;
+    	if (voterRoute) {
+            this.onLink(voterRoute);
+		}
+		if (matchListError) {
+    	    const isValid = {... this.state.isValid };
+    	    isValid.email = false;
+    	    this.setState({ isValid });
+        }
+	}
+
+	componentWillMount() {
+    	this.props.actions.resetMatchList();
+	}
+
 	render() {
-		const { makeList, currentNumber } = this.props.voter,
+		const { makeList, currentNumber, matchListError } = this.props.voter,
 			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
 			loadPrevious = this.isLoadPrevious(),
 			notValidInput = '* Input is not valid *';
+
 		return (
 			<div className='btw-voter btw-voter-detail container'>
 				{ this.isDesktop() && this.renderBackToHome() }
@@ -174,8 +189,8 @@ class VoterDetail extends BaseComponent {
                         { this.renderAgeDropdown() }
                         { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
-					<div className="row">{ this.renderTextField('email', 'Email', notValidInput, true, 'email') }</div>
-					<div className="row">{ this.renderTextField('phone', 'Phone', notValidInput, true, 'number') }</div>
+					<div className="row">{ this.renderTextField('email', 'Email', matchListError || notValidInput, true, 'email') }</div>
+					<div className="row">{ this.renderTextField('phonenumber', 'Phone', notValidInput, true, 'number') }</div>
 					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>
 				<Row>
@@ -205,7 +220,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-        actions: bindActionCreators({ voterDetailsPersist, matchListPersist }, dispatch)
+        actions: bindActionCreators({ voterDetailsPersist, matchListPersist, resetMatchList }, dispatch)
 	}
 };
 

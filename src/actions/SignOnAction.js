@@ -7,14 +7,14 @@ import {
 	loadDataFailure
 } from './AppAction';
 
-export function btwSignOn(username, password) {
+export function btwSignOn(username, password, onSuccess = () => {}) {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.signOn));
-		IdentityService.login(username, password).then(
+		return IdentityService.login(username, password).then(
 			response => {
                 authStorage.saveTokenInfo(response.token);
-                authStorage.clearRegisteredCreds();
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
+                onSuccess();
 			},
 			error => {
 				const { response } = error;
@@ -29,8 +29,10 @@ export function btwRegister(identity) {
 		dispatch(initializeRequest(appDataTypes.register));
 		return IdentityService.register(identity).then(
 				response => {
-                    authStorage.saveRegisteredCreds(identity.username, identity.password);
-					dispatch(loadDataSuccess(appDataTypes.register, response.data));
+					const { username, password } = identity;
+					dispatch(btwSignOn(username, password, () => {
+                        dispatch(loadDataSuccess(appDataTypes.register, response.data));
+					}));
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.register, error.response.data));

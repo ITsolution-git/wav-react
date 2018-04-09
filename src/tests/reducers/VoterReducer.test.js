@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import voterReducer from '../../reducers/VoterReducer';
 import VoterContants from '../../constants/VoterConstants';
 import InitialState from '../../constants/InitialState';
+import routes from '../../constants/Routes';
 
 const makelist = {
 	"firstname1" 	: "firstname1",
@@ -105,6 +106,9 @@ describe('matchList', () => {
         expect(voterReducer(InitialState.voter, {
                 type: VoterContants.VOTER_MATCHLIST_PERSIST,
                 matchList
-            })).to.deep.equal({... InitialState.voter, ... { matchList }})
+            })).to.deep.equal({... InitialState.voter, ... {
+                matchList,
+                voterRoute: routes.matchList
+            }})
     });
 });

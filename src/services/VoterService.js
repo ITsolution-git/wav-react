@@ -5,6 +5,7 @@ import authStorage from '../storage/AuthStorage';
 export default {
     loadVoterList,
     updateVoter,
+    updateRegisteredVoter,
     addVoter,
     deleteVoter
 };
@@ -16,6 +17,14 @@ function loadVoterList(userId, username) {
         url: `${config.apiHost}/api/v1/getVoters?userid=${userId}&username=${username}`,
         headers: getHeaders()
     });
+}
+
+function updateRegisteredVoter(data) {
+    return patchAsync({
+        url: `${config.apiHost}/api/v1/updateVoterRegistration`,
+        headers: getHeaders(),
+        data
+    })
 }
 
 function updateVoter(data) {
@@ -30,7 +39,8 @@ function addVoter(data) {
     return postAsync({
         url: `${config.apiHost}/api/v1/addVoter`,
         headers: getHeaders(),
-        data
+        data,
+        failRedirect: false
     })
 }
 

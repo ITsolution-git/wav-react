@@ -5,26 +5,45 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
-import { makeListPersist } from "../../actions/VoterAction";
+import { makeListPersist, registerVoter } from "../../actions/VoterAction";
 import routes from '../../constants/Routes';
 import MatchItem from './shared/MatchItem';
+import ConfirmationDialog from '../shared/ConfirmationDialog';
 
 class MatchList extends BaseComponent {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+          showConfirmModal: false
+        };
+    }
+
     onNameClick = (person) => {
-        const routePage = person.voterstatus === 'active'
-            ? routes.voterSuccess
-            : routes.voterError;
-        const { firstname, lastname } = person;
-        const fullRoute = `${routePage}?firstname=${firstname}&lastname=${lastname}`;
-        this.onLink(fullRoute);
+        this.currentPerson = person;
+        if (person.voterstatus === 'active') {
+            this.setState({ showConfirmModal: true });
+            return;
+        }
+        this.redirectToPage(routes.voterError);
     };
+
+    redirectToPage(route) {
+        const { firstname, lastname } = this.currentPerson;
+        const fullRoute = `${route}?firstname=${firstname}&lastname=${lastname}`;
+        this.onLink(fullRoute);
+    }
 
     onNotSureClick = () => {
         this.onLink(`${routes.voterDetail}?loadPrevious=true`);
     };
 
+    onCloseConfirmModal = () => {
+        this.setState({ showConfirmModal: false });
+    };
+
     render() {
         const { matchList } = this.props.voter;
+        const { showConfirmModal } = this.state;
         return (
             <div className='btw-voter btw-match-list'>
                 { this.isDesktop() && this.renderBackToHome() }
@@ -53,6 +72,16 @@ class MatchList extends BaseComponent {
                         </div>
                     </Col>
                 </Row>
+                <ConfirmationDialog show={showConfirmModal}
+                                    title='Register voter'
+                                    description='Are you sure you want to register this voter?'
+                                    submitText='Yes'
+                                    onSubmit={() => {
+                                        this.props.actions.registerVoter();
+                                        this.redirectToPage(routes.voterSuccess);
+                                        this.onCloseConfirmModal();
+                                    } }
+                                    onClose={this.onCloseConfirmModal} />
             </div>
         );
     }
@@ -66,7 +95,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ makeListPersist }, dispatch)
+    actions: bindActionCreators({ makeListPersist, registerVoter }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MatchList));
