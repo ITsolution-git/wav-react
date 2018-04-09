@@ -30,7 +30,8 @@ function addVoter(data) {
     return postAsync({
         url: `${config.apiHost}/api/v1/addVoter`,
         headers: getHeaders(),
-        data
+        data,
+        failRedirect: false
     })
 }
 

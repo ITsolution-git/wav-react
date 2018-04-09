@@ -9,7 +9,10 @@ export default {
     voter: {
         makeList: {},
         voterDetails: {},
+        voterRoute: '',
         currentNumber: 1,
+        matchListError: null,
+        matchListFetching: false,
         matchList: []
     },
     voterList: {

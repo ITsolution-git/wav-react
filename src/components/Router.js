@@ -32,15 +32,15 @@ import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
 import roles from '../constants/Roles';
 
-const { captain, admin, registered, guest } = roles;
+const { captain, admin, guest } = roles;
 
 const Router =() => (
 	<router history={ History }>
 		<Switch>
 			<Route exact path = {routes.login}
-				   component = { Authorization(Login, [guest, registered]) } />
+				   component = { Authorization(Login, [guest]) } />
 			<Route exact path = {routes.register}
-				   component = { Authorization(Register, [guest, registered, captain, admin]) } />
+				   component = { Authorization(Register, [guest, captain, admin]) } />
 			<Route exact path = {routes.pageDown}
 				   component = { GeneralErrorPage } />
 			<Route exact path = {routes.invites}
@@ -62,15 +62,15 @@ const Router =() => (
 
 			// voter onboarding
             <Route exact path = {routes.makelist}
-                   component = { Authorization(MakeList, [registered]) } />
+                   component = { Authorization(MakeList, [captain]) } />
 			<Route exact path = {routes.voterDetail}
-				   component = { Authorization(VoterDetail, [registered]) } />
+				   component = { Authorization(VoterDetail, [captain]) } />
             <Route exact path = {routes.matchList}
-                   component = { Authorization(MatchList, [registered]) } />
+                   component = { Authorization(MatchList, [captain]) } />
             <Route exact path = {routes.voterSuccess}
-                   component = { Authorization(VoterSuccess, [registered]) } />
+                   component = { Authorization(VoterSuccess, [captain]) } />
             <Route exact path = {routes.voterError}
-                   component = { Authorization(VoterError, [registered]) } />
+                   component = { Authorization(VoterError, [captain]) } />
 
 			// tasks
             <Route exact path = {routes.addVoterTask}

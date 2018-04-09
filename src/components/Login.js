@@ -29,7 +29,7 @@ class Login extends BaseComponent {
 		if (!username.length || !password.length) {
 			this.setState({emptyField: true});
 		} else {
-			this.props.actions.btwSignOn(username, password, 'btw');
+			this.props.actions.btwSignOn(username, password);
 		}
 	}
 
@@ -64,7 +64,7 @@ class Login extends BaseComponent {
 												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-primary" onClick={this.btwSignOn.bind(this, 'btwSignOn')}>
+                        <button className="btn btn-primary" onClick={this.btwSignOn.bind(this)}>
                             Login
                         </button>
                     </div>

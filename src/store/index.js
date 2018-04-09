@@ -28,7 +28,7 @@ export default {
 		store  = createStore(combinedReducers, persistedState, applyMiddleware(thunk, logger));
 
 		store.subscribe(() => {
-			if (authStorage.getCurrentRole() === roles.registered) {
+			if (authStorage.getCurrentRole() === roles.captain) {
                 saveState({
                     voter: store.getState().voter
                 });
