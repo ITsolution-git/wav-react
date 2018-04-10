@@ -74,7 +74,7 @@ class MatchList extends BaseComponent {
                 </Row>
                 <ConfirmationDialog show={showConfirmModal}
                                     title='Register voter'
-                                    description='Are you sure you want to register this voter?'
+                                    description='Are you sure this is the voter you intend to add to your list?'
                                     submitText='Yes'
                                     onSubmit={() => {
                                         this.props.actions.registerVoter();

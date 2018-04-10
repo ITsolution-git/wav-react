@@ -82,6 +82,12 @@ class Register extends BaseComponent {
 	componentWillReceiveProps(props) {
 		if (props.isSuccess) {
 			this.onLink(routes.makelist);
+			return;
+		}
+		if (props.error) {
+            const isValid = {... this.state.isValid };
+            isValid.email = false;
+            this.setState({ isValid });
 		}
 	}
 
@@ -100,6 +106,7 @@ class Register extends BaseComponent {
 				<div>Minimum of 7</div>
 			</div>
 		);
+		const { error } = this.props;
 		const nameWidth = this.isMobile() ? 12 : 6;
 		return (
 			<div className='btw-identity btw-register container'>
@@ -126,7 +133,7 @@ class Register extends BaseComponent {
                         { this.renderInput('lastname', 'Last Name', 'text', nameWidth, '* Last Name is not valid *') }
 					</div>
                     { this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
-                    { this.renderInput('email', 'Email', 'email', 0, '* Email is not valid *') }
+                    { this.renderInput('email', 'Email', 'email', 0, error || '* Email is not valid *') }
 					<div className={classNames({'password-div': !this.state.isValid['password'] })}>
                         { this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
 					</div>
