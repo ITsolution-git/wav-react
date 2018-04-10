@@ -5,11 +5,16 @@
 	src: url(../resources/fonts/Gotham_Rounded_Light.otf);
 }
 
+html {
+	font-size: 21px;
+}
+
 @import 'shared/style.scss';
 @import 'shared/mixins';
 @import 'shared/sizes.scss';
 @import 'shared/components.scss';
-@import 'shared/_sharedclasses.scss';
+@import 'shared/sharedclasses.scss';
+@import 'shared/titles.scss';
 
 @import 'layout/header.scss';
 @import 'layout/navimage.scss';
@@ -36,3 +41,4 @@
 
 @import 'tasks/tasklist.scss';
 @import 'tasks/taskworkflow.scss';
+@import 'tasks/stepper.scss';

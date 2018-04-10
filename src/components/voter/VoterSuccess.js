@@ -19,7 +19,7 @@ class VoterSuccess extends BaseComponent {
                 <div className='success-icon'>
                     <FontAwesome name='check-circle' />
                 </div>
-                <div className='registered'>Successfully registered</div>
+                <div className='success-text'>Successfully registered</div>
                 <div className='try-next'>Let's try 'Next' name</div>
                 <div className='next-button'>
                     <NextButton />
