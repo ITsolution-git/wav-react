@@ -29,6 +29,11 @@ export function btwRegister(identity) {
 		dispatch(initializeRequest(appDataTypes.register));
 		return IdentityService.register(identity).then(
 				response => {
+					const { data } = response;
+					if (data.message === 'A user with that email address already exists') {
+						dispatch(loadDataFailure(appDataTypes.register, data.message));
+						return;
+					}
 					const { username, password } = identity;
 					dispatch(btwSignOn(username, password, () => {
                         dispatch(loadDataSuccess(appDataTypes.register, response.data));
