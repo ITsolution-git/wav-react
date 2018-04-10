@@ -24,6 +24,12 @@ class Login extends BaseComponent {
 		this.setState({[field]: event.target.value});
 	};
 
+	onKeyPress = (e) => {
+		if(e.key === 'Enter' || e.which === 13) {
+			this.btwSignOn();
+		}
+	}
+
 	btwSignOn() {
 		const { username, password } = this.state;
 		if (!username.length || !password.length) {
@@ -44,7 +50,7 @@ class Login extends BaseComponent {
 		let { password, username, emptyField } = this.state;
 		return (
 			<div className="btw-login container">
-				<div className="btw-form">
+				<div className="btw-form" onKeyPress={this.onKeyPress}>
                     <div className="card-content">
                         <p id="loginHeader">Log into your account</p>
                         { error && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
