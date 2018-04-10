@@ -43,8 +43,8 @@ class LeftStepper extends BaseComponent {
                         <Stepper activeStep={activeStep} orientation="vertical">
                             { steps.map((step, index) => {
                                 return (
-                                    <Step key={index} classes={{ root: 'stepper-circle'}}>
-                                        <StepLabel classes={{label: 'stepper-label'}}>{step.label}</StepLabel>
+                                    <Step key={index}>
+                                        <StepLabel>{step.label}</StepLabel>
                                     </Step>
                                 )
                             })}

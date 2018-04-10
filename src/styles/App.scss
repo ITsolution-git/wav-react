@@ -5,6 +5,10 @@
 	src: url(../resources/fonts/Gotham_Rounded_Light.otf);
 }
 
+html {
+	font-size: 21px;
+}
+
 @import 'shared/style.scss';
 @import 'shared/mixins';
 @import 'shared/sizes.scss';

@@ -1,5 +1,6 @@
 export default {
     signOn: 'signOn',
     register: 'register',
-    profile: 'profile'
+    profile: 'profile',
+    voterRegisterTask: 'voterRegisterTask'
 }
