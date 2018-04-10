@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { FormLabel } from 'material-ui/Form';
 
 import BaseComponent from '../../shared/BaseComponent';
-import appDataTypes from "../../../constants/AppDataTypes";
+import appDataTypes from '../../../constants/AppDataTypes';
 import RadioButtons from '../../shared/RadioButtons';
 
 class ContactType extends BaseComponent {
