@@ -12,6 +12,7 @@ import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
 import  { validate } from '../../utility/InputValidator';
+import { getAgeYears } from '../../helpers/InputHelper';
 
 
 class VoterDetail extends BaseComponent {
@@ -123,10 +124,8 @@ class VoterDetail extends BaseComponent {
 
     renderAgeDropdown = () => {
     	const name = 'birthday',
-			  // 18 because user should be adult
-			  fromYear = (new Date()).getFullYear() - 18,
-			  // let select 100 years
-			  options = Array(100).fill(0).map((e,i)=> fromYear - i);
+			  options = getAgeYears();
+
         const input = (
             <Fragment>
                 <select className="input-field"

@@ -50,20 +50,20 @@ class LeftStepper extends BaseComponent {
                             })}
                         </Stepper>
                     </Col>
-                    <Col md={9} className='stepper-content'>
-                        { steps.length > 0 && steps[activeStep].component }
+                    <Col md={9}>
+                        <div className='stepper-content'>
+                            { steps.length > 0 && steps[activeStep].component }
+                        </div>
+                        <Row>
+                            <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
+                                <Button> Back </Button>
+                            </Col>
+                            <Col md={4} xs={6} onClick={this.handleNext}>
+                                <Button> { activeStep === steps.length - 1 ? 'Finish' : 'Next' } </Button>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
-                <div>
-                    <Row>
-                        <Col mdOffset={5} md={3} xs={6} onClick={this.handleBack}>
-                            <Button> Back </Button>
-                        </Col>
-                        <Col md={4} xs={6} onClick={this.handleNext}>
-                            <Button> { activeStep === steps.length - 1 ? 'Finish' : 'Next' } </Button>
-                        </Col>
-                    </Row>
-                </div>
             </div>
         );
     }
