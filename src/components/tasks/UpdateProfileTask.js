@@ -83,11 +83,7 @@ class UpdateProfileTask extends TaskBase {
 
     renderContent = (name, input) => {
         return (
-            <Grid alignItems='center'
-                  justify='center'
-                  container
-                  key={name}
-                  direction='column'>
+            <Grid key={name}>
                 <FormLabel>
                     { input }
                 </FormLabel>

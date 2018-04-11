@@ -11,18 +11,20 @@ export default class Dropdown extends InputBase {
     render() {
         const { values = [], label = '', value = '' } = this.props;
         return (
-            <FormControl>
-                <InputLabel>{ label }</InputLabel>
-                <Select
-                    value={value}
-                    onChange={this.handleChange}>
-                    { values.map(this.mapItem).map((item, index) => {
-                        return (
-                            <MenuItem key={index} value={item.value}>{ item.label}</MenuItem>
-                        )
-                    })}
-                </Select>
-            </FormControl>
+            <div style={{ height: '100px', width: '100px'}}>
+                <FormControl>
+                    <InputLabel classes={{ formControl: 'btw-dropdown'}}>{ label }</InputLabel>
+                    <Select
+                        value={value}
+                        onChange={this.handleChange}>
+                        { values.map(this.mapItem).map((item, index) => {
+                            return (
+                                <MenuItem key={index} value={item.value}>{ item.label}</MenuItem>
+                            )
+                        })}
+                    </Select>
+                </FormControl>
+            </div>
         );
     }
 }
