@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControl } from 'material-ui/Form';
 import TextField from 'material-ui/TextField';
 
-import InputBase from '../BaseComponent';
+import InputBase from './InputBase';
 
 export default class InputText extends InputBase {
     constructor(props, context) {
