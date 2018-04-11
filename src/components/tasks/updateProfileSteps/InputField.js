@@ -5,24 +5,22 @@ import { bindActionCreators } from "redux";
 import { FormLabel } from 'material-ui/Form';
 
 import BaseComponent from '../../shared/BaseComponent';
+import Dropdown from '../../shared/inputs/Dropdown';
+import InputText from '../../shared/inputs/InputText';
 import RadioButtons from '../../shared/inputs/RadioButtons';
 
-class ReportBack extends BaseComponent {
-    getValues = () => {
-        return [
-            { value: 'yes', label: 'Yes' },
-            { value: 'no', label: 'No '},
-            { value: 'maybe', label: 'Maybe '}
-        ]
+class InputField extends BaseComponent {
+    renderInput = () => {
+        const { name } = this.props;
+
     };
+
     render() {
         return (
             <div>
                 <FormLabel component="legend">
-                    Report back
+                    { this.renderInput() }
                 </FormLabel>
-                <RadioButtons title='Are they registered?'
-                              values={ this.getValues() } />
             </div>
         );
     }
@@ -38,4 +36,4 @@ const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({ }, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ReportBack));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(InputField));

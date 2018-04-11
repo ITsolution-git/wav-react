@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import {withRouter} from "react-router-dom";
 import {bindActionCreators} from "redux";
 
-import BaseComponent from '../shared/BaseComponent';
+import TaskBase from './shared/TaskBase';
 
-class AddVoterTask extends BaseComponent {
+class AddVoterTask extends TaskBase {
 
     render() {
         return (

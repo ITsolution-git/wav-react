@@ -3,6 +3,7 @@ import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Router from './Router';
 import '../styles/App.css';
+import '../extensions';
 
 class App extends Component {
 

@@ -4,12 +4,12 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 
 import Stepper from './shared/LetfStepper';
-import BaseComponent from '../shared/BaseComponent';
+import TaskBase from './shared/TaskBase';
 import ContactType from './registerSteps/ContactType';
 import ReportBack from './registerSteps/ReportBack';
 import TaskSuccess from './shared/TaskSuccess';
 
-class RegisterVoterTask extends BaseComponent {
+class RegisterVoterTask extends TaskBase {
     getSteps = () => {
         return [
             { label: 'Register', component: <ContactType /> },

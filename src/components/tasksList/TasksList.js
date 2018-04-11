@@ -42,7 +42,8 @@ class TaskList extends BaseComponent {
                 break;
             }
         }
-        this.onLink(taskRoute);
+
+        this.onLink(`${taskRoute}?taskId=${taskId}`);
     };
 
     componentWillMount() {

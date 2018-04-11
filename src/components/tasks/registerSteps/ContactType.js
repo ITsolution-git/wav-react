@@ -6,7 +6,7 @@ import { FormLabel } from 'material-ui/Form';
 
 import BaseComponent from '../../shared/BaseComponent';
 import appDataTypes from '../../../constants/AppDataTypes';
-import RadioButtons from '../../shared/RadioButtons';
+import RadioButtons from '../../shared/inputs/RadioButtons';
 
 class ContactType extends BaseComponent {
     getValues = () => {

@@ -1,24 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {withRouter} from "react-router-dom";
-import {bindActionCreators} from "redux";
+import { withRouter } from "react-router-dom";
+import { bindActionCreators } from "redux";
 
-import BaseComponent from '../shared/BaseComponent';
+import TaskBase from './shared/TaskBase';
+import Stepper from './shared/LetfStepper';
+import { getTaskData } from '../../helpers/TaskHelper';
 
-class UpdateProfileTask extends BaseComponent {
+class UpdateProfileTask extends TaskBase {
+
+    getSteps = () => {
+        const { captain_metaData, voter_metaData = {} } = this.props.taskData || {};
+        const fields = captain_metaData
+            ? captain_metaData
+            : voter_metaData.fields;
+
+        return fields.map(field => {
+            return {
+                label: field.capitalize(),
+                component: null
+            }
+          });
+    };
 
     render() {
         return (
-            <div>
-                Update profile task
+            <div className='btw-task container'>
+                <Stepper steps={this.getSteps()} />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-
+        taskData: getTaskData(state, ownProps)
     }
 };
 
