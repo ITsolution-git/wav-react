@@ -2,19 +2,15 @@ import React from 'react';
 import Radio, { RadioGroup } from 'material-ui/Radio';
 import { FormControlLabel, FormLabel } from 'material-ui/Form';
 
-import BaseComponent from './BaseComponent';
+import InputBase from './InputBase';
 
-export default class RadioButtons extends BaseComponent {
+export default class RadioButtons extends InputBase {
     constructor(props, context) {
         super(props, context);
         this.state = {
             value: null
         }
     }
-
-    handleChange = event => {
-        this.setState({ value: event.target.value });
-    };
 
     render() {
         const { values = [], title = '' } = this.props;

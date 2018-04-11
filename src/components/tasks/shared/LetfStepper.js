@@ -51,7 +51,7 @@ class LeftStepper extends BaseComponent {
                         </Stepper>
                     </Col>
                     <Col md={9} className='stepper-content'>
-                        { steps[activeStep].component }
+                        { steps.length > 0 && steps[activeStep].component }
                     </Col>
                 </Row>
                 <div>
