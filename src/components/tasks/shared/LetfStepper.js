@@ -56,10 +56,12 @@ class LeftStepper extends BaseComponent {
                         </div>
                         <Row>
                             <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
-                                <Button> Back </Button>
+                                <Button disabled={activeStep === 0}> Back </Button>
                             </Col>
                             <Col md={4} xs={6} onClick={this.handleNext}>
-                                <Button> { activeStep === steps.length - 1 ? 'Finish' : 'Next' } </Button>
+                                <Button disabled={!steps[activeStep].valid}>
+                                    { activeStep === steps.length - 1 ? 'Finish' : 'Next' }
+                                </Button>
                             </Col>
                         </Row>
                     </Col>

@@ -8,7 +8,7 @@ export default class RadioButtons extends InputBase {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            value: null
+            value: ''
         }
     }
 

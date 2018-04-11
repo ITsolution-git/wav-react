@@ -18,6 +18,7 @@ export default class InputBase extends BaseComponent {
     };
 
     handleChange = event => {
-        this.setState({ value: event.target.value });
+        const { onChange } = this.props;
+        onChange(event.target.value);
     };
 }
