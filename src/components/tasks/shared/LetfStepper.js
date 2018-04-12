@@ -36,7 +36,7 @@ class LeftStepper extends BaseComponent {
         const { steps = [] } = this.props;
         const { activeStep } = this.state;
 
-        return (
+        return steps.length > 0 ? (
             <div className='btw-stepper'>
                 <Row>
                     <Col md={3}>
@@ -55,7 +55,7 @@ class LeftStepper extends BaseComponent {
                               alignItems='center'
                               justify='center'
                               container >
-                            { steps.length > 0 && steps[activeStep].component }
+                            { steps[activeStep].component }
                         </Grid>
                         <Row>
                             <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
@@ -70,7 +70,7 @@ class LeftStepper extends BaseComponent {
                     </Col>
                 </Row>
             </div>
-        );
+        ) : null;
     }
 }
 

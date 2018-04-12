@@ -6,11 +6,12 @@ import InputBase from './InputBase';
 
 export default class InputText extends InputBase {
     render() {
-        const { label = '',  value = ''} = this.props;
+        const { label = '',  value = '', type } = this.props;
         return (
             <div>
                 <FormControl>
                     <TextField
+                        type={type}
                         label={label}
                         value={value}
                         onChange={this.handleChange}

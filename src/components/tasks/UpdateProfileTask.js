@@ -57,7 +57,7 @@ class UpdateProfileTask extends TaskBase {
             case address:
                 return this.renderInput(address, 'Address');
             case phoneNumber:
-                return this.renderInput(phoneNumber, 'Phone Number');
+                return this.renderInput(phoneNumber, 'Phone Number', 'phone');
             case dateOfBirth:
                 return this.renderDropdown(dateOfBirth, 'Date of Birth', getAgeYears());
             case zipCode:
@@ -68,6 +68,7 @@ class UpdateProfileTask extends TaskBase {
     renderInput = (name, label, type) => {
         return this.formatStep(label, name,
             <InputText label={label}
+                       type={type}
                        value={this.state[name]}
                        onChange={val => this.handleChange(name, val)} />
         );
