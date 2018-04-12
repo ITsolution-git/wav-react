@@ -33,7 +33,7 @@ class RegisterVoterTask extends TaskBase {
                                 value={ this.state[isRegistered] } />,
 
               valid: this.validateField(isRegistered) },
-            { label: 'Success', component: <TaskSuccess /> }
+            { label: 'Success', component: <TaskSuccess />, valid: true }
         ];
     };
 
