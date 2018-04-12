@@ -73,11 +73,19 @@ export default class AddEditDialog extends BaseComponent {
                                     <option value="female">Female</option>
                                 </FormControl>
                             </Col>
-                            { this.renderField('city', 'City') }
+                            { this.renderField('phonenumber', 'Phone') }
                         </FormGroup>
                         <FormGroup>
-                            { this.renderField('address', 'Address') }
-                            { this.renderField('phonenumber', 'Phone') }
+                            <Col md={12}>
+                                Address
+                                <FormControl type="text"
+                                             onChange={e => this.setState({ 'address': e.target.value })}
+                                             value={this.state['address'] || ''} />
+                            </Col>
+                        </FormGroup>
+                        <FormGroup>
+                            { this.renderField('state', 'State') }
+                            { this.renderField('city', 'City') }
                         </FormGroup>
                     </Form>
                 </Modal.Body>
