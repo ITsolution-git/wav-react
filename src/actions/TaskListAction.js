@@ -1,4 +1,4 @@
-import TaskConstants from '../constants/TaskConstants';
+import { TaskConstants } from '../constants/TaskConstants';
 import taskService from '../services/TaskService';
 import authStorage from '../storage/AuthStorage';
 

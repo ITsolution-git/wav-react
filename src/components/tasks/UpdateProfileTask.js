@@ -19,72 +19,85 @@ const fieldTypes = {
     state: 'state',
     gender: 'gender',
     city: 'city',
+    address: 'address',
     phoneNumber: 'phonenumber',
     dateOfBirth: 'dateofbirth',
     zipCode: 'zipcode'
 };
 
 class UpdateProfileTask extends TaskBase {
+    constructor(props, context) {
+      super(props, context);
+      this.state = {};
+    }
 
     resolveStepData = (field) => {
+        const {
+            firstName,
+            lastName,
+            state,
+            gender,
+            city,
+            address,
+            phoneNumber,
+            dateOfBirth,
+            zipCode
+        } = fieldTypes;
         switch (field) {
-            case fieldTypes.firstName: {
-                const label = 'First Name';
-                return this.formatStep(label, <InputText label={label} />);
-            }
-            case fieldTypes.lastName: {
-                const label = 'Last Name';
-                return this.formatStep(label, <InputText label={label} />);
-            }
-            case fieldTypes.state: {
-                const label = 'State',
-                      parsedStates = Object.keys(States);
-                return this.formatStep(label, <Dropdown label={label} values={parsedStates} />);
-            }
-            case fieldTypes.gender: {
-                const label = 'Gender';
-                return this.formatStep(label, <Dropdown label={label} values={['Male', 'Female']} />);
-            }
-            case fieldTypes.city: {
-                const label = 'City';
-                return this.formatStep(label, <InputText label={label} />);
-            }
-            case fieldTypes.phoneNumber: {
-                const label = 'Phone Number';
-                return this.formatStep(label, <InputText label={label} />);
-            }
-            case fieldTypes.dateOfBirth: {
-                const label = 'Date of Birth';
-                return this.formatStep(label, <Dropdown label={label} values={getAgeYears()} />)
-            }
-            case fieldTypes.zipCode: {
-                const label = 'Zip Code';
-                return this.formatStep(label, <InputText label={label} />);
-            }
-            default: {
-                return {};
-            }
+            case firstName:
+                return this.renderInput(firstName, 'First Name');
+            case lastName:
+                return this.renderInput(lastName, 'Last Name');
+            case state:
+                return this.renderDropdown(state, 'State', Object.keys(States));
+            case gender:
+                return this.renderDropdown(gender, 'Gender', ['Male', 'Female']);
+            case city:
+                return this.renderInput(city, 'City');
+            case address:
+                return this.renderInput(address, 'Address');
+            case phoneNumber:
+                return this.renderInput(phoneNumber, 'Phone Number', 'phone');
+            case dateOfBirth:
+                return this.renderDropdown(dateOfBirth, 'Date of Birth', getAgeYears());
+            case zipCode:
+                return this.renderInput(zipCode, 'Zip Code');
         }
     };
 
-    formatStep = (label, input) => {
-       return {
-           label,
-           component: this.renderContent(input)
-       }
+    renderInput = (name, label, type) => {
+        return this.formatStep(label, name,
+            <InputText label={label}
+                       type={type}
+                       value={this.state[name]}
+                       onChange={val => this.handleChange(name, val)} />
+        );
     };
 
-    renderContent = (input) => {
+    renderDropdown = (name, label, values) => {
+        return this.formatStep(label, name,
+            <Dropdown label={label}
+                      value={this.state[name]}
+                      values={values}
+                      onChange={val => this.handleChange(name, val)} />)
+    };
+
+    renderContent = (name, input) => {
         return (
-            <Grid alignItems='center'
-                  justify='center'
-                  container
-                  direction='column'>
+            <Grid key={name}>
                 <FormLabel>
                     { input }
                 </FormLabel>
             </Grid>
         )
+    };
+
+    formatStep = (label, name, input) => {
+        return {
+            label,
+            component: this.renderContent(name, input),
+            valid: this.validateField(name)
+        }
     };
 
     getSteps = () => {
