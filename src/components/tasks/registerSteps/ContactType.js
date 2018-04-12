@@ -19,11 +19,16 @@ class ContactType extends BaseComponent {
     };
 
     render() {
-        const { currentUser: { data }, onChange, value = '' } = this.props;
+        const {
+            currentUser: { data },
+            onChange,
+            value = '',
+            voterData: { firstname = '', lastname = ''}
+        } = this.props;
         return (
             <div>
                 <FormLabel component="legend">
-                    Hi { data.firstname } for today, we will need you to reach out to Peter Mccain to see if they are registered to vote
+                    Hi { data.firstname } for today, we will need you to reach out to { firstname } { lastname } to see if they are registered to vote
                 </FormLabel>
                 <RadioButtons title='How did you contact them?'
                               onChange={val => onChange(RegisterTaskConstants.contactMode, val)}

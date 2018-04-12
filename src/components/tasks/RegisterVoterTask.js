@@ -19,12 +19,12 @@ class RegisterVoterTask extends TaskBase {
 
     getSteps = () => {
         const { contactMode, isRegistered } = RegisterTaskConstants;
-        const { taskData } = this.props;
-        console.log(taskData);
+        const { voter_metaData = {} } = this.props.taskData || {};
 
         return [
             { label: 'Register', component:
                     <ContactType onChange={this.handleChange}
+                                 voterData={voter_metaData}
                                  value={ this.state[contactMode] }/>,
               valid: this.validateField(contactMode) },
 
