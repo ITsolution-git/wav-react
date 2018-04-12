@@ -55,8 +55,10 @@ class SignedOnHeader extends BaseComponent {
 
     getAdminLinks = () => {
         return [
-            { route: routes.reports, title: 'Reports' },
-            { route: routes.adminDashboard, title: 'Dashboard' }
+            { route: routes.adminDashboard, title: 'Messages' },
+            { route: routes.adminDashboard, title: 'Manage Captains' },
+            { route: routes.adminDashboard, title: 'Manage Voters' },
+            { route: routes.adminDashboard, title: 'Forum' }
         ]
     };
 
