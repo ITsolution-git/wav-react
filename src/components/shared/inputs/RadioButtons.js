@@ -5,19 +5,13 @@ import { FormControlLabel, FormLabel } from 'material-ui/Form';
 import InputBase from './InputBase';
 
 export default class RadioButtons extends InputBase {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            value: ''
-        }
-    }
 
     render() {
-        const { values = [], title = '' } = this.props;
+        const { values = [], title = '', value = '' } = this.props;
         return (
             <div>
                 <FormLabel>{ title }</FormLabel>
-                <RadioGroup value={this.state.value} onChange={this.handleChange}>
+                <RadioGroup value={value} onChange={this.handleChange}>
                     { values.map((radio, index) => {
                         return  <FormControlLabel
                             key={index}

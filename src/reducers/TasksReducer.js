@@ -1,6 +1,4 @@
-import update from 'immutability-helper';
-
-import TaskConstants from '../constants/TaskConstants';
+import { TaskConstants } from '../constants/TaskConstants';
 import InitialState from '../constants/InitialState';
 
 export default function taskListReducer(state = InitialState.taskList, action) {

@@ -8,15 +8,36 @@ import TaskBase from './shared/TaskBase';
 import ContactType from './registerSteps/ContactType';
 import ReportBack from './registerSteps/ReportBack';
 import TaskSuccess from './shared/TaskSuccess';
+import { RegisterTaskConstants } from '../../constants/TaskConstants';
+import {getTaskData} from "../../helpers/TaskHelper";
 
 class RegisterVoterTask extends TaskBase {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {};
+    }
+
     getSteps = () => {
+        const { contactMode, isRegistered } = RegisterTaskConstants;
+        const { taskData } = this.props;
+        console.log(taskData);
+
         return [
-            { label: 'Register', component: <ContactType /> },
-            { label: 'Report back', component: <ReportBack /> },
+            { label: 'Register', component:
+                    <ContactType onChange={this.handleChange}
+                                 value={ this.state[contactMode] }/>,
+              valid: this.validateField(contactMode) },
+
+            { label: 'Report back', component:
+                    <ReportBack onChange={this.handleChange}
+                                value={ this.state[isRegistered] } />,
+
+              valid: this.validateField(isRegistered) },
             { label: 'Success', component: <TaskSuccess /> }
         ];
     };
+
+
 
     render() {
         return (
@@ -27,9 +48,9 @@ class RegisterVoterTask extends TaskBase {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-
+        taskData: getTaskData(state, ownProps)
     }
 };
 
