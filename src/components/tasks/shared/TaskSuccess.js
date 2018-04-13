@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../../shared/BaseComponent';
