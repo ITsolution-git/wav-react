@@ -33,11 +33,14 @@ class RegisterVoterTask extends TaskBase {
                                 value={ this.state[isRegistered] } />,
 
               valid: this.validateField(isRegistered) },
-            { label: 'Success', component: <TaskSuccess />, valid: true }
+            { label: 'Success', component: <TaskSuccess data={ this.getTaskData() } />, valid: true }
         ];
     };
 
-
+    getTaskData = () => {
+        const { taskData = {}} = this.props;
+        return { ...this.state, taskid: taskData._id };
+    };
 
     render() {
         return (

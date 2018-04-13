@@ -5,8 +5,13 @@ import { bindActionCreators } from "redux";
 import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../../shared/BaseComponent';
+import { updateTask } from '../../../actions/TaskAction';
 
 class TaskSuccess extends BaseComponent {
+    componentWillMount() {
+        const { actions, data } = this.props;
+        actions.updateTask(data);
+    }
 
     render() {
         return (
@@ -19,13 +24,11 @@ class TaskSuccess extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    return {
-
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ }, dispatch)
+    actions: bindActionCreators({ updateTask }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TaskSuccess));

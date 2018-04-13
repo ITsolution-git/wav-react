@@ -11,9 +11,7 @@ import HelpButton from '../shared/HelpButton';
 class LeftStepper extends BaseComponent {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            activeStep: 0
-        }
+        this.state = { activeStep: 0 };
     }
 
     handleNext = () => {
