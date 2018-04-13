@@ -112,7 +112,7 @@ class UpdateProfileTask extends TaskBase {
     render() {
         return (
             <div className='btw-task container'>
-                <Stepper steps={this.getSteps()} />
+                <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
             </div>
         );
     }

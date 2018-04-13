@@ -8,7 +8,12 @@
     }
   }
   .btw-help {
-    cursor: pointer;
-    font-size: 30px;
+    .btw-help-icon {
+      cursor: pointer;
+      font-size: 30px;
+    }
   }
+}
+.dialog-help-title {
+  width: 350px;
 }

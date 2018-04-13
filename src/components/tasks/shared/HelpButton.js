@@ -11,9 +11,8 @@ import Dialog, {
 import FontAwesome from 'react-fontawesome';
 
 import InputText from '../../shared/inputs/InputText';
-
 import BaseComponent from '../../shared/BaseComponent';
-import { getTaskData } from "../../../helpers/TaskHelper";
+import { sendHelpQuestion } from '../../../actions/TaskAction';
 
 class HelpButton extends BaseComponent {
     constructor(props, context) {
@@ -32,23 +31,31 @@ class HelpButton extends BaseComponent {
         this.setState({ open: false });
     };
 
+    onSubmit = () => {
+        const { actions, task, checkpoint } = this.props;
+        const messageObj = {
+           question: this.state.value,
+           task,
+           checkpoint
+        };
+        actions.sendHelpQuestion(JSON.stringify(messageObj));
+        this.handleClose();
+    };
+
     render() {
         const { value } = this.state;
-        const { taskData = {}, checkpoint = '' } = this.props;
-        console.log(this.props);
+        const { task = '', checkpoint = '' } = this.props;
+
         return (
-            <div>
+            <div className='btw-help'>
                 <FontAwesome name='question-circle'
-                             className='btw-help'
+                             className='btw-help-icon'
                              onClick={this.handleClickOpen} />
-                <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    aria-labelledby="form-dialog-title"
-                >
+                <Dialog open={this.state.open}
+                    onClose={this.handleClose}>
                     <DialogContent>
-                        <DialogContentText>
-                            Task: {  }
+                        <DialogContentText classes={{ root: 'dialog-help-title'}}>
+                            Task: { task }
                         </DialogContentText>
                         <DialogContentText>
                             Checkpoint: { checkpoint }
@@ -64,7 +71,8 @@ class HelpButton extends BaseComponent {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose}>
+                        <Button onClick={this.onSubmit}
+                                disabled={!value}>
                             Submit
                         </Button>
                         <Button onClick={this.handleClose}>
@@ -78,14 +86,11 @@ class HelpButton extends BaseComponent {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(ownProps);
-    return {
-        taskData: getTaskData(state, ownProps)
-    }
+    return {}
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ }, dispatch)
+    actions: bindActionCreators({ sendHelpQuestion }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HelpButton));

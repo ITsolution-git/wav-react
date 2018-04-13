@@ -33,10 +33,15 @@ class LeftStepper extends BaseComponent {
         });
     };
 
-    render() {
-        const { steps = [] } = this.props;
-        const { activeStep } = this.state;
+    currentCheckpoint = () => {
+        const { steps } = this.props;
+        return steps.length > 0 && steps[this.state.activeStep];
+    };
 
+    render() {
+        const { steps = [], taskData = {} } = this.props;
+        const { activeStep } = this.state;
+        const currentCheckpoint = this.currentCheckpoint();
         return steps.length > 0 ? (
             <div className='btw-stepper'>
                 <Row>
@@ -53,14 +58,14 @@ class LeftStepper extends BaseComponent {
                     </Col>
                     <Col md={9}>
                         <div className='stepper-content'>
-                            <Col mdOffset={11} md={1}>
-                                <HelpButton />
+                            <Col mdOffset={11} md={1} xsOffset={10}>
+                                <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
                             </Col>
                             <Grid alignItems='center'
                                   justify='center'
                                   className='input-block'
                                   container >
-                                { steps[activeStep].component }
+                                { currentCheckpoint.component }
                             </Grid>
                         </div>
                         <Row>
@@ -68,7 +73,7 @@ class LeftStepper extends BaseComponent {
                                 <Button disabled={activeStep === 0}> Back </Button>
                             </Col>
                             <Col md={4} xs={6} onClick={this.handleNext}>
-                                <Button disabled={!steps[activeStep].valid}>
+                                <Button disabled={!currentCheckpoint.valid}>
                                     { activeStep === steps.length - 1 ? 'Finish' : 'Next' }
                                 </Button>
                             </Col>
