@@ -65,7 +65,7 @@ class MatchList extends BaseComponent {
                     </Col>
                     <Col xs={6} md={12}>
                         <div id="btn_not_sure">
-                            <button className="btn btn-primary" onClick={this.onNotSureClick}>Takes them to next voter</button>
+                            <button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>
                         </div>
                     </Col>
                 </Row>
