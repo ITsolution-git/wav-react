@@ -1,10 +1,10 @@
-import dotenv from 'dotenv'
 import envConsts from '../constants/Env';
-
-dotenv.config();
 
 const env = process.env.NODE_ENV;
 let config = null;
+
+console.log(env);
+console.log(process.env);
 
 switch (env) {
     case envConsts.prod: {
