@@ -188,7 +188,7 @@ class VoterDetail extends BaseComponent {
                         { this.renderAgeDropdown() }
                         { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
-					<div className="row">{ this.renderTextField('email', 'Email', matchListError || notValidInput, true, 'email') }</div>
+					<div className="row">{ this.renderTextField('email', 'Email *', '* Email is required *', matchListError || notValidInput, true, 'email') }</div>
 					<div className="row">{ this.renderTextField('phonenumber', 'Phone', notValidInput, true, 'number') }</div>
 					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>
