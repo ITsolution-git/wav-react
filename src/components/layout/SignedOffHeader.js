@@ -24,12 +24,12 @@ class SignedOffHeader extends BaseComponent {
                     <Navbar.Toggle />
                     <Navbar.Collapse>
                         <Nav>
-                            <NavItem eventKey={1} onClick={() => this.onLink(routes.whyBetheWave)} >
+                            {/*<NavItem eventKey={1} onClick={() => this.onLink(routes.whyBetheWave)} >
                                Why Bethewave
                             </NavItem>
                             <NavItem eventKey={2} onClick={() => this.onLink(routes.howContribute)} >
                                 How you can contribute
-                            </NavItem>
+                            </NavItem>*/}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

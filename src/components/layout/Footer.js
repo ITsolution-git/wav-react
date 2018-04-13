@@ -6,9 +6,7 @@ class Footer extends Component {
 		return (
 			<div className='footer-nav-bar'>
 				<ul>
-					<li>Links 1</li>
-					<li>Links 2</li>
-					<li>Links 3</li>
+
 				</ul>
 			</div>
 		);
