@@ -37,7 +37,6 @@ export default class AddEditDialog extends BaseComponent {
 		let isValid = true;
 
 		for (let key in fields) {
-			console.log(this.validateInput(fields[key], this.state.voter[fields[key]]));
 			isValid = isValid && this.validateInput(fields[key], this.state.voter[fields[key]]);
 		}
 
@@ -79,8 +78,9 @@ export default class AddEditDialog extends BaseComponent {
 	};
 
 	onSubmitInner = () => {
-
-		this.props.onSubmit(this.state.voter);
+		const { _id, ...voter } = this.state.voter;
+		voter.userid = _id;
+		this.props.onSubmit(voter);
 	};
 
 	render() {
@@ -117,7 +117,7 @@ export default class AddEditDialog extends BaseComponent {
 							<Col md={6}>
 								Gender
 								<FormControl componentClass="select"
-								             value={gender}
+								             value={gender || ''}
 								             onChange={e => this.onChange('gender', e.target.value)} >
 									<option value="male">Male</option>
 									<option value="female">Female</option>
