@@ -6,7 +6,7 @@ import Button from 'material-ui/Button';
 import Dialog, {
     DialogActions,
     DialogContent,
-    DialogContentText,
+    DialogTitle
 } from 'material-ui/Dialog';
 import FontAwesome from 'react-fontawesome';
 
@@ -28,7 +28,7 @@ class HelpButton extends BaseComponent {
     };
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ open: false, value: '' });
     };
 
     onSubmit = () => {
@@ -44,7 +44,6 @@ class HelpButton extends BaseComponent {
 
     render() {
         const { value } = this.state;
-        const { task = '', checkpoint = '' } = this.props;
 
         return (
             <div className='btw-help'>
@@ -53,13 +52,8 @@ class HelpButton extends BaseComponent {
                              onClick={this.handleClickOpen} />
                 <Dialog open={this.state.open}
                     onClose={this.handleClose}>
+                    <DialogTitle>What is your inquiry/question about?</DialogTitle>
                     <DialogContent>
-                        <DialogContentText classes={{ root: 'dialog-help-title'}}>
-                            Task: { task }
-                        </DialogContentText>
-                        <DialogContentText>
-                            Checkpoint: { checkpoint }
-                        </DialogContentText>
                         <InputText label='Your question'
                                    autoFocus
                                    multiline

@@ -4,7 +4,8 @@ import authStorage from '../storage/AuthStorage';
 
 export default {
     loadTaskList,
-    sendHelpQuestion
+    sendHelpQuestion,
+    updateTask
 };
 
 function loadTaskList(userId) {
@@ -21,6 +22,15 @@ function sendHelpQuestion(data) {
         headers: getHeaders()
     });
 }
+
+function updateTask(data) {
+    return postAsync({
+        url: `${config.apiHost}/api/v1/task/updateTask`,
+        data,
+        headers: getHeaders()
+    });
+}
+
 function getHeaders() {
     return { 'x-key': authStorage.getLoggedUser().username };
 }
