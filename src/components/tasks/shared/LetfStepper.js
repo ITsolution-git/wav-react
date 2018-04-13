@@ -6,6 +6,7 @@ import routes from '../../../constants/Routes';
 import Grid from 'material-ui/Grid';
 
 import BaseComponent from '../../shared/BaseComponent';
+import HelpButton from '../shared/HelpButton';
 
 class LeftStepper extends BaseComponent {
     constructor(props, context) {
@@ -51,12 +52,17 @@ class LeftStepper extends BaseComponent {
                         </Stepper>
                     </Col>
                     <Col md={9}>
-                        <Grid className='stepper-content'
-                              alignItems='center'
-                              justify='center'
-                              container >
-                            { steps[activeStep].component }
-                        </Grid>
+                        <div className='stepper-content'>
+                            <Col mdOffset={11} md={1}>
+                                <HelpButton />
+                            </Col>
+                            <Grid alignItems='center'
+                                  justify='center'
+                                  className='input-block'
+                                  container >
+                                { steps[activeStep].component }
+                            </Grid>
+                        </div>
                         <Row>
                             <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
                                 <Button disabled={activeStep === 0}> Back </Button>
