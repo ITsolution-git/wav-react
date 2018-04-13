@@ -9,78 +9,28 @@ import {
     FormControl
 } from 'react-bootstrap';
 
-import states from '../../constants/States';
-import  { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
 
 export default class AddEditDialog extends BaseComponent {
     constructor(props, context) {
         super(props, context);
         const { voter = {}} = this.props;
-        this.state = {
-            'voter' : voter,
-            'isValid' : false
-        }
+        this.state = voter;
     }
 
-    validateInput(name, value) {
-		if (name === 'email') {
-			return validate(name, value);
-        }
-		return ['firstname', 'lastname', 'state', 'city'].includes(name)
-			? !!value
-			: true;
-    }
-
-    validate() {
-        let fields = ['firstname', 'lastname', 'state', 'city', 'email'];
-        let isValid = true;
-
-        for (let key in fields) {
-            console.log(this.validateInput(fields[key], this.state.voter[fields[key]]));
-            isValid = isValid && this.validateInput(fields[key], this.state.voter[fields[key]]);
-        }
-
-        this.setState({ 'isValid' : isValid });
-    }
-
-    onChange(name, value) {
-
-        let voter = Object.assign({}, this.state.voter);
-        voter[name] = value;
-        this.setState({'voter' : voter}, () => {
-            this.validate();
-        });
-    }
-    
     renderField = (name, label) => {
         return (
             <Col md={6}>
                 { label }
                 <FormControl type="text"
-                             value={this.state.voter[name] || ''}
-                             onChange={(e) => this.onChange(name, e.target.value)}/>
+                             value={this.state[name] || ''}
+                             onChange={(e) => this.setState({ [name]: e.target.value })}/>
             </Col>
         )
     };
 
-    renderDropdownField = (name, label, options) => {
-        return (
-            <Col md={6}>
-                { label }
-                    <FormControl componentClass="select"
-                                value={this.state.voter[name] || ''}
-                                onChange={(e) => this.onChange(name, e.target.value)}>
-                        <option value="" />
-                        { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
-                    </FormControl>
-            </Col>
-		);
-	};
-
     onSubmitInner = () => {
-
-        this.props.onSubmit(this.state.voter);
+        this.props.onSubmit(this.state);
     };
 
     render() {
@@ -91,7 +41,7 @@ export default class AddEditDialog extends BaseComponent {
             title='',
             disableEmail = false
         } = this.props;
-        const { gender } = this.state.voter;
+        const { gender } = this.state;
         return (
             <Modal show={show}
                    onHide={onClose}>
@@ -105,8 +55,8 @@ export default class AddEditDialog extends BaseComponent {
                                 Email
                                 <FormControl type="email"
                                              disabled={disableEmail}
-                                             onChange={e => this.onChange('email', e.target.value)}
-                                             value={this.state.voter['email'] || ''} />
+                                             onChange={e => this.setState({ email: e.target.value })}
+                                             value={this.state['email'] || ''} />
                             </Col>
                         </FormGroup>
                         <FormGroup>
@@ -118,7 +68,7 @@ export default class AddEditDialog extends BaseComponent {
                                 Gender
                                 <FormControl componentClass="select"
                                              value={gender}
-                                             onChange={e => this.onChange('gender', e.target.value)} >
+                                             onChange={e => this.setState({ gender: e.target.value })} >
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </FormControl>
@@ -129,12 +79,12 @@ export default class AddEditDialog extends BaseComponent {
                             <Col md={12}>
                                 Address
                                 <FormControl type="text"
-                                             onChange={e => this.onChange('address', e.target.value)}
-                                             value={this.state.voter['address'] || ''} />
+                                             onChange={e => this.setState({ 'address': e.target.value })}
+                                             value={this.state['address'] || ''} />
                             </Col>
                         </FormGroup>
                         <FormGroup>
-                            { this.renderDropdownField('state', 'State', Object.values(states)) }
+                            { this.renderField('state', 'State') }
                             { this.renderField('city', 'City') }
                         </FormGroup>
                     </Form>
@@ -142,7 +92,7 @@ export default class AddEditDialog extends BaseComponent {
                 <Modal.Footer>
                     <Row>
                         <Col md={12} className="btn-container">
-                            <Button className='btn-primary' disabled={!this.state.isValid} onClick={this.onSubmitInner}>{submitText}</Button>
+                            <Button className='btn-primary' onClick={this.onSubmitInner}>{submitText}</Button>
                             <Button className='btn-primary' onClick={onClose}>Cancel</Button>
                         </Col>
                     </Row>
