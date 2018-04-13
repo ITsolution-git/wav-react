@@ -1,0 +1,81 @@
+.btw-header {
+  .btw-off-header {
+    .navbar-nav {
+      width: 85%;
+      text-align: center;
+      > li {
+        float: none;
+        display: inline-block;
+      }
+    }
+    nav {
+      background-color: #F8FAFC;
+      a {
+        color: #353C4C;
+      }
+      a:hover {
+        color: black;
+      }
+    }
+    .btw-logo {
+      width: 60px;
+      margin-left: 2%;
+    }
+  }
+
+  .btw-on-header {
+    .navbar {
+      margin-bottom: 0;
+      padding: 9px;
+    }
+    .navbar-default {
+      border: none;
+      & .navbar-collapse {
+        border: none;
+      }
+    }
+    .dropdown-div {
+      margin: 10px 0 10px 0;
+    }
+    nav {
+      a {
+        color: white;
+        font-size: 17px;
+      }
+      a:hover {
+        color: #DBE8F8;
+      }
+      a:focus {
+        color: white;
+      }
+      background-color: #0D1C3D;
+    }
+    .btw-avatar {
+      float: left;
+      margin-right: 12px;
+    }
+    .btw-nav-dropdown {
+      li {
+        list-style-type: none;
+        a {
+          color: grey;
+        }
+        .dropdown-toggle {
+          font-size: 20px;
+        }
+        .caret {
+          border-top: 6px dashed;
+          border-right: 8px solid transparent;
+          border-left: 8px solid transparent;
+        }
+      }
+      .dropdown-menu {
+        min-width: 200px;
+        font-size: 15px;
+        li {
+          margin: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.btw-task {
+  margin-top: 3%;
+  @include respond-to($desktop) {
+    width: 60%;
+  }
+  button {
+    color: white;
+    @extend .btw-button;
+  }
+  .success-icon {
+    color: #67C100;
+    text-align: center;
+    font-size: 150px;
+  }
+}

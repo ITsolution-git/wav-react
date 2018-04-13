@@ -1,0 +1,44 @@
+@import '~font-awesome/css/font-awesome.css';
+
+@font-face {
+	font-family: Gotham;
+	src: url(../resources/fonts/Gotham_Rounded_Light.otf);
+}
+
+html {
+	font-size: 21px;
+}
+
+@import 'shared/style.scss';
+@import 'shared/mixins';
+@import 'shared/sizes.scss';
+@import 'shared/components.scss';
+@import 'shared/sharedclasses.scss';
+@import 'shared/titles.scss';
+
+@import 'layout/header.scss';
+@import 'layout/navimage.scss';
+@import 'layout/layout.scss';
+
+@import 'captainProfile/base.scss';
+@import 'captainProfile/register.scss';
+@import 'captainProfile/makelist.scss';
+
+@import 'voter/base.scss';
+@import 'voter/detail.scss';
+@import 'voter/matchlist.scss';
+@import 'voter/success.scss';
+@import 'voter/error.scss';
+
+@import 'voterList/voterlist.scss';
+
+@import 'errorPages/general.scss';
+
+@import 'login/login.scss';
+
+@import 'captainsDashboard/dashboard.scss';
+@import 'adminDashboard/dashboard.scss';
+
+@import 'tasks/tasklist.scss';
+@import 'tasks/taskworkflow.scss';
+@import 'tasks/stepper.scss';

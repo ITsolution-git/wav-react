@@ -1,12 +1,12 @@
+import voterReducer from './VoterReducer';
+import voterListReducer from './VoterListReducer';
+import appReducer from './AppReducer';
+import taskListReducer from './TasksReducer';
 
-import IdentityReducer from './IdentityReducer';
-import GoogleReducer from './GoogleReducer';
-import FacebookReducer from './FacebookReducer';
-import FormReducer from './FormReducer'
-
-export {
-	IdentityReducer,
-	GoogleReducer,
-	FacebookReducer,
-	FormReducer
+//this is where you insert your reducers into the store
+export default  {
+    app: appReducer,
+    voter: voterReducer,
+    voterList: voterListReducer,
+    taskList: taskListReducer
 }

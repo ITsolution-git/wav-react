@@ -1,0 +1,48 @@
+.btw-identity {
+    @include respond-to($desktop) {
+        width: $max_width;
+    }
+	margin: auto;
+    margin-top: $margin_top;
+    text-align: center;
+
+    .intro {
+        margin-top: $margin_top;
+        text-align: center;
+    }
+
+    .intro-title {
+        font-size: $font_size_title;
+    }
+
+    .intro-desc {
+        margin-top: 30px;
+        font-size: $font_size_desc;
+    }
+
+    form {
+        @include respond-to($desktop) {
+            width: $max_width - 300px;
+        }
+
+        margin: auto;
+        margin-top: 70px;
+
+        label {
+            margin-bottom: 15px;
+            @extend .btw-label;
+        }
+
+        input {
+            @extend .btw-input;
+		}
+		
+        span {
+          color: red;
+        }
+
+        .form-group {
+            margin-bottom: $input_field_space;
+        }
+    }
+}

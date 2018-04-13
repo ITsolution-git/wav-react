@@ -1,0 +1,20 @@
+.btw-voter-error {
+  .error-icon {
+    color: #FF6766;
+    font-size: 200px;
+  }
+  .cant-find {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: grey;
+  }
+  .ok-text {
+    margin-bottom: 6%;
+    font-weight: bold;
+    font-size: 17px;
+    color: grey;
+  }
+  button {
+    @extend .btw-button;
+  }
+}

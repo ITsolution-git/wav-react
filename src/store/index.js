@@ -1,14 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger'
-
-import { GoogleReducer, FacebookReducer, IdentityReducer, FormReducer } from '../reducers';
-
-
+import logger from 'redux-logger';
+import { loadState, saveState } from '../storage/StateStorage';
+import authStorage from '../storage/AuthStorage';
+import roles from '../constants/Roles';
+import reducers from '../reducers';
 
 let store;
-
-
 
 export default {
 
@@ -17,20 +15,25 @@ export default {
 	configure: (initialState) => {
 
 		//the store is a combination of reducers
-		//this is where you insert your reducers into the store
-		const combinedReducers = combineReducers({
-			google: GoogleReducer,
-			facebook: FacebookReducer,
-			identity: IdentityReducer,
-			form: FormReducer
-		});
+		const combinedReducers = combineReducers(reducers);
 
+		const persistedState = loadState();
 
 		if (initialState){
-			store = createStore(combinedReducers, initialState, applyMiddleware(thunk));
+			const state = Object.assign(initialState, persistedState);
+			store = createStore(combinedReducers, state, applyMiddleware(thunk));
 			return store
 		}
-		store  = createStore(combinedReducers, applyMiddleware(thunk, logger));
+		
+		store  = createStore(combinedReducers, persistedState, applyMiddleware(thunk, logger));
+
+		store.subscribe(() => {
+			if (authStorage.getCurrentRole() === roles.captain) {
+                saveState({
+                    voter: store.getState().voter
+                });
+			}
+		});
 		return  store
 	}
 }

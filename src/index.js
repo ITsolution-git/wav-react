@@ -5,7 +5,6 @@ import store from './store/index'
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import App from './components/App';
-import './resources/main.scss';
 
 
 import registerServiceWorker from './registerServiceWorker';
@@ -17,7 +16,7 @@ const app = (
 			<App/>
 		</BrowserRouter>
 	</Provider>
-)
+);
 
 
 ReactDOM.render(app, document.getElementById('root'));

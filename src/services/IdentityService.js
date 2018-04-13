@@ -1,5 +1,5 @@
-import axios from 'axios';
-
+import config from '../config/ApiConfig';
+import { getAsync, postAsync } from '../helpers/RequestHelper';
 
 const IdentityService = {
 	login,
@@ -7,71 +7,44 @@ const IdentityService = {
 	getUserProfile,
 };
 
-
 function login(username, password) {
-	return axios({
-		method : 'POST',
-		url    : 'https://btwapi-18.herokuapp.com/user/login',
-		data   : {
-			"username": username,
-			"password": password
+	return postAsync({
+		url: `${config.apiHost}/user/login`,
+		data: {
+			username,
+			password
 		},
-		headers: {
-			"Content-Type": "application/json",
-		}
-	})
-		.then(response => {
-			if (!response.data.token) {
-				return Promise.reject(response.data);
-			}
-			return response.data;
-		})
+		includeToken: false,
+		failRedirect: false
+	}).then(response => {
+		if (!response.data.token) {
+            return Promise.reject(response.data);
+        }
+        return response.data;
+	});
 }
 
-function register(state) {
-	return axios({
-		method : 'POST',
-		url    : 'https://btwapi-18.herokuapp.com/user/register',
-		data   : {
-			"username" : state.username,
-			"password" : state.password,
-			"email"    : state.email,
-			"firstname": state.firstname,
-			"lastname" : state.lastname
+function register({ username, password, email, firstname, lastname}) {
+	return postAsync({
+		url: `${config.apiHost}/user/register`,
+		data: {
+			username,
+			password,
+			email,
+			firstname,
+			lastname
 		},
-		headers: {
-			"Content-Type": "application/json",
-		}
-	})
-		.then(response => {
-			if (response.data.status !== 200) {
-				return Promise.reject(response);
-			}
-			return response.data;
-		})
+		includeToken: false,
+		failRedirect: false
+	});
 }
 
 
-function getUserProfile(token, username) {
-	return axios({
-		method : 'GET',
-		url    : 'https://btwapi-18.herokuapp.com/api/v1/getUser',
-		params: {
-
-		},
-		headers: {
-			"Content-Type"  : "application/json",
-			"x-access-token": token,
-			"x-key": username
-		}
-	})
-		.then(response => {
-			console.log('Service ' + response)
-			if (response.data.status !== 200) {
-				return Promise.reject(response.data);
-			}
-			return response.data;
-		})
+function getUserProfile(username) {
+	return getAsync({
+		url: `${config.apiHost}/api/v1/getUser`,
+		headers: {'x-key': username }
+	});
 }
 
 
