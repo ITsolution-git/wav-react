@@ -36,15 +36,15 @@ class CaptainsDashboard extends BaseComponent {
                                     <div className='icon-div voters' onClick={() => this.onLink(routes.voterList)}>
                                         <FontAwesome name='thumbs-up' size='3x'/>
                                         <span className='button-text'>
-                                            Voters <span>
+                                            Voters {/*<span>
                                                 (<b>{votersCount}</b>)
-                                            </span>
+                                            </span>*/}
                                         </span>
                                     </div>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={6} xs={6} className='block-padding'>
+                                {/*<Col md={6} xs={6} className='block-padding'>
                                     <div className='icon-div invites' onClick={() => this.onLink(routes.invites)}>
                                         <FontAwesome name='envelope-open'  size='3x' />
                                         <span className='button-text'>
@@ -59,10 +59,10 @@ class CaptainsDashboard extends BaseComponent {
                                         <FontAwesome name='comments' size='3x'/>
                                         <span className='button-text'>Forum</span>
                                     </div>
-                                </Col>
+                                </Col>*/}
                             </Row>
                         </Col>
-                        <Col md={4} className='block-padding'>
+                        {/*<Col md={4} className='block-padding'>
                             <div className='right-column'>
                                 <div className='notification'>
                                     <FontAwesome name='bell'  size='2x'/>
@@ -76,7 +76,7 @@ class CaptainsDashboard extends BaseComponent {
                                     <span className='label'>Community</span>
                                 </div>
                             </div>
-                        </Col>
+                        </Col>*/}
                     </Row>
                     }
                 </div>
