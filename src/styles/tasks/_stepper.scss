@@ -1,8 +1,19 @@
 .btw-stepper {
   .stepper-content {
     border: 1px solid lightgray;
-    min-height: 290px;
     margin-bottom: 2%;
     padding: 2%;
+    .input-block {
+      min-height: 290px;
+    }
   }
+  .btw-help {
+    .btw-help-icon {
+      cursor: pointer;
+      font-size: 30px;
+    }
+  }
+}
+.dialog-help-title {
+  width: 350px;
 }

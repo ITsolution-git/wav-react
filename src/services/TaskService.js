@@ -1,9 +1,10 @@
 import config from '../config/ApiConfig';
-import { getAsync } from '../helpers/RequestHelper';
+import { getAsync, postAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
 
 export default {
-    loadTaskList
+    loadTaskList,
+    sendHelpQuestion
 };
 
 function loadTaskList(userId) {
@@ -13,6 +14,13 @@ function loadTaskList(userId) {
     });
 }
 
+function sendHelpQuestion(data) {
+    return postAsync({
+        url: `${config.apiHost}/api/v1/message/createMessage`,
+        data,
+        headers: getHeaders()
+    });
+}
 function getHeaders() {
     return { 'x-key': authStorage.getLoggedUser().username };
 }
