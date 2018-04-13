@@ -49,10 +49,7 @@ class MatchList extends BaseComponent {
                 { this.isDesktop() && this.renderBackToHome() }
                 <div className="intro">
                     <p className="intro-title">
-                        Possible match
-                    </p>
-                    <p className="intro-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        Is one of these people your friend?
                     </p>
                 </div>
                 <div className='match-list'>
@@ -68,7 +65,7 @@ class MatchList extends BaseComponent {
                     </Col>
                     <Col xs={6} md={12}>
                         <div id="btn_not_sure">
-                            <button className="btn btn-primary" onClick={this.onNotSureClick}>Not sure</button>
+                            <button className="btn btn-primary" onClick={this.onNotSureClick}>Takes them to next voter</button>
                         </div>
                     </Col>
                 </Row>

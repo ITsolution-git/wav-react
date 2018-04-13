@@ -6,7 +6,7 @@ class Footer extends Component {
 		return (
 			<div className='footer-nav-bar'>
 				<ul>
-
+					
 				</ul>
 			</div>
 		);

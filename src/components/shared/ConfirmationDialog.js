@@ -31,7 +31,7 @@ export default class ConfirmationDialog extends BaseComponent {
                     <Row>
                         <Col md={12} className="btn-container">
                             <Button className='btn-primary' onClick={onSubmit}>{submitText}</Button>
-                            <Button className='btn-primary' onClick={onClose}>Cancel</Button>
+                            <Button className='btn-primary' onClick={onClose}>No</Button>
                         </Col>
                     </Row>
                 </Modal.Footer>
