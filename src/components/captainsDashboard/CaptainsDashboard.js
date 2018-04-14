@@ -8,7 +8,6 @@ import FontAwesome from 'react-fontawesome';
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
-import NavImage from '../layout/NavImage';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -20,7 +19,6 @@ class CaptainsDashboard extends BaseComponent {
 
         return (
             <div>
-                <NavImage />
                 <div className='container btw-captains-dashboard'>
                     { isSuccess &&
                     <Row>
