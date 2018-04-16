@@ -14,7 +14,7 @@ class VoterSuccess extends BaseComponent {
         return (
             <div className='btw-voter btw-voter-success container'>
                 <div className="full-name">
-                    {firstname } { lastname }
+                    {firstname } { lastname } { ' is registered to vote! ' }
                 </div>
                 <div className='success-icon'>
                     <FontAwesome name='check-circle' />

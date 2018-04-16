@@ -121,10 +121,7 @@ class Register extends BaseComponent {
 				</div>
 				<div className="intro">
 					<p className="intro-title">
-						What's the best way to stay in touch with you ?
-					</p>
-					<p className="intro-desc">
-						As a member, you can rely on timely reminders for appointments and screenings to keep you healthy. Tell us the best ways to reach you, so you can get the most from your care experience.
+						Your Information
 					</p>
 				</div>
 				<form>

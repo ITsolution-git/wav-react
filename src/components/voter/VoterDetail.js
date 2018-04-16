@@ -174,10 +174,10 @@ class VoterDetail extends BaseComponent {
 				{ this.isDesktop() && this.renderBackToHome() }
 				<div className="intro">
 					<p className="intro-title">
-                        { firstName || '' + " " + lastName || '' }
+					{ 'Tell us more about ' + firstName || '' + " " + lastName || '' }
 					</p>
 					<p className="intro-desc">
-                    	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						The more information you provide, the more accurately we can verify if they are registered to vote. (Don’t worry, we’ll NEVER share this information with anybody else.) 
 					</p>
 				</div>
 				<form>

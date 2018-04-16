@@ -37,10 +37,7 @@ class VotersList extends BaseComponent {
                 { !this.isMobile() && this.renderBackToHome()}
                 <div className="intro">
                     <p className="intro-title">
-                        Generate Lorem Ipsum placeholder text
-                    </p>
-                    <p className="intro-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        My Voters
                     </p>
                     <div style={{clear: 'both'}}></div>
                     <div className='voters-list'>
