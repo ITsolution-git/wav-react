@@ -19,3 +19,17 @@ export function sendHelpQuestion(message) {
             });
     };
 }
+
+export function updateTask(data) {
+    return dispatch => {
+        dispatch(initializeRequest(appDataTypes.updateTask));
+        data.userid = authStorage.getLoggedUser().userid;
+        return taskService.updateTask(data).then(
+            response => {
+                dispatch(loadDataSuccess(appDataTypes.updateTask, response));
+            },
+            response => {
+                dispatch(loadDataFailure(appDataTypes.updateTask, response.data.message));
+            });
+    };
+}

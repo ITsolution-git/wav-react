@@ -1,10 +1,9 @@
-import dotenv from 'dotenv'
 import envConsts from '../constants/Env';
 
-dotenv.config();
-
-const env = process.env.NODE_ENV;
+const env = process.env.REACT_APP_ENV || process.env.NODE_ENV;
 let config = null;
+
+console.log(env);
 
 switch (env) {
     case envConsts.prod: {

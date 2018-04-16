@@ -4,6 +4,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import routes from '../../../constants/Routes';
 import Grid from 'material-ui/Grid';
+import Tooltip from 'material-ui/Tooltip';
 
 import BaseComponent from '../../shared/BaseComponent';
 import HelpButton from '../shared/HelpButton';
@@ -11,9 +12,7 @@ import HelpButton from '../shared/HelpButton';
 class LeftStepper extends BaseComponent {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            activeStep: 0
-        }
+        this.state = { activeStep: 0 };
     }
 
     handleNext = () => {
@@ -59,7 +58,11 @@ class LeftStepper extends BaseComponent {
                     <Col md={9}>
                         <div className='stepper-content'>
                             <Col mdOffset={11} md={1} xsOffset={10}>
-                                <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
+                                <Tooltip title="Questions about this task? contact us">
+                                    <div>
+                                        <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
+                                    </div>
+                                </Tooltip>
                             </Col>
                             <Grid alignItems='center'
                                   justify='center'

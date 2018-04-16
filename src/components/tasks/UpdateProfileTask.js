@@ -12,6 +12,7 @@ import Dropdown from '../shared/inputs/Dropdown';
 import InputText from '../shared/inputs/InputText';
 import States from '../../constants/States';
 import { getAgeYears } from '../../helpers/InputHelper';
+import TaskSuccess from './shared/TaskSuccess';
 
 const fieldTypes = {
     firstName: 'firstname',
@@ -101,12 +102,26 @@ class UpdateProfileTask extends TaskBase {
     };
 
     getSteps = () => {
-        const {captain_metaData = [], voter_metaData = {}} = this.props.taskData || {};
+        const {
+            captain_metaData = [],
+            voter_metaData = {}
+        } = this.props.taskData || {};
+
         const fields = captain_metaData.length > 0
             ? captain_metaData
             : voter_metaData.fields || [];
 
-        return fields.map(this.resolveStepData);
+        return [ ...fields.map(this.resolveStepData), {
+            label: 'Success',
+            component: <TaskSuccess data={this.getTaskData()} />,
+            valid: true }
+        ];
+    };
+
+    getTaskData = () => {
+        const { taskData = {}} = this.props,
+            type = taskData.captain_metaData ? 'captain_metaData' : 'voter_metaData';
+        return { [type]: this.state, taskid: taskData._id };
     };
 
     render() {

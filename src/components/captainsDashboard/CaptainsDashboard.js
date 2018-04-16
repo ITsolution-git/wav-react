@@ -8,19 +8,29 @@ import FontAwesome from 'react-fontawesome';
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
-import NavImage from '../layout/NavImage';
+
+import { loadVoterList } from '../../actions/VoterListAction';
+import { loadTaskList } from '../../actions/TaskListAction';
 
 class CaptainsDashboard extends BaseComponent {
 
+    constructor(props) {
+        super(props);
+        
+        const { profile: { data } } = props;
+
+        this.props.actions.loadVoterList(data.id, data.username);
+        this.props.actions.loadTaskList(data.id);
+	}
+
     render() {
-        const { profile: { data, isSuccess } } = this.props;
+        const { profile: { data, isSuccess }, voters_count, tasks_count } = this.props;
         const votersCount = 27,
               invitesCount = 20,
               notificationCount = 5;
 
         return (
             <div>
-                <NavImage />
                 <div className='container btw-captains-dashboard'>
                     { isSuccess &&
                     <Row>
@@ -30,21 +40,23 @@ class CaptainsDashboard extends BaseComponent {
                                     <div className='icon-div tasks' onClick={() => this.onLink(routes.tasksList)}>
                                         <FontAwesome name='tasks' size='3x'/>
                                         <span className='button-text'>Your Tasks</span>
+                                        { tasks_count ? <span className='count'>{tasks_count}</span> : '' }
                                     </div>
                                 </Col>
                                 <Col md={6} xs={6} className='block-padding'>
                                     <div className='icon-div voters' onClick={() => this.onLink(routes.voterList)}>
                                         <FontAwesome name='thumbs-up' size='3x'/>
                                         <span className='button-text'>
-                                            Voters <span>
+                                            Voters {/*<span>
                                                 (<b>{votersCount}</b>)
-                                            </span>
+                                            </span>*/}
                                         </span>
+                                        { voters_count ? <span className='count'>{voters_count}</span> : '' }
                                     </div>
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={6} xs={6} className='block-padding'>
+                                {/*<Col md={6} xs={6} className='block-padding'>
                                     <div className='icon-div invites' onClick={() => this.onLink(routes.invites)}>
                                         <FontAwesome name='envelope-open'  size='3x' />
                                         <span className='button-text'>
@@ -59,10 +71,10 @@ class CaptainsDashboard extends BaseComponent {
                                         <FontAwesome name='comments' size='3x'/>
                                         <span className='button-text'>Forum</span>
                                     </div>
-                                </Col>
+                                </Col>*/}
                             </Row>
                         </Col>
-                        <Col md={4} className='block-padding'>
+                        {/*<Col md={4} className='block-padding'>
                             <div className='right-column'>
                                 <div className='notification'>
                                     <FontAwesome name='bell'  size='2x'/>
@@ -76,7 +88,7 @@ class CaptainsDashboard extends BaseComponent {
                                     <span className='label'>Community</span>
                                 </div>
                             </div>
-                        </Col>
+                        </Col>*/}
                     </Row>
                     }
                 </div>
@@ -87,14 +99,20 @@ class CaptainsDashboard extends BaseComponent {
 
 const mapStateToProps = (state) => {
     const profile = state.app[appDataTypes.profile];
-    return { profile };
+    const voters_count = state.voterList.count;
+    const tasks_count = state.taskList.count;
+    return { 
+        profile,
+        voters_count,
+        tasks_count
+    };
 };
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ }, dispatch)
+        actions: bindActionCreators({ loadVoterList, loadTaskList }, dispatch)
     };
 };
 
-export default connect(mapStateToProps)(withRouter(CaptainsDashboard));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CaptainsDashboard));

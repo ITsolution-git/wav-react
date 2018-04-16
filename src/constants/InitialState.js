@@ -19,6 +19,7 @@ export default {
     },
     voterList: {
         voters: [],
+        count: 0,
         isFetching: false,
         isSuccess: false,
         error: null,
@@ -28,6 +29,7 @@ export default {
     },
     taskList: {
         tasks: [],
+        count: 0,
         isFetching: false,
         isSuccess: false,
         error: null

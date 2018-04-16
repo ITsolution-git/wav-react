@@ -99,11 +99,12 @@ class VoterDetail extends BaseComponent {
 		);
 	};
 
-	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
+	renderTextField = (name, label, errorText, isWholeRow = true, type='text', disabled=false) => {
 		const width = isWholeRow || this.isMobile() ? 12 : 6;
 		const input = (
             <input type={type} className='input-field'
                    value={ this.state.voterDetail[name]}
+                   disabled={disabled}
                    onChange={this.updateVoterFields.bind(this, name)}
                    onBlur={this.validateVoterFields.bind(this, name)} />
 		);
@@ -165,7 +166,8 @@ class VoterDetail extends BaseComponent {
 			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
 			loadPrevious = this.isLoadPrevious(),
-			notValidInput = '* Input is not valid *';
+			notValidInput = '* Input is not valid *',
+			emailDisabled = loadPrevious;
 
 		return (
 			<div className='btw-voter btw-voter-detail container'>
@@ -188,7 +190,7 @@ class VoterDetail extends BaseComponent {
                         { this.renderAgeDropdown() }
                         { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
-					<div className="row">{ this.renderTextField('email', 'Email *', '* Email is required *', matchListError || notValidInput, true, 'email') }</div>
+					<div className="row">{ this.renderTextField('email', 'Email *', matchListError || notValidInput, true, 'email', emailDisabled) }</div>
 					<div className="row">{ this.renderTextField('phonenumber', 'Phone', notValidInput, true, 'number') }</div>
 					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>

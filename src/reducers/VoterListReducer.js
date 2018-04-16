@@ -12,7 +12,7 @@ export default function voterListReducer(state = InitialState.voterList, action)
             return { ...state, isFetching: true };
         }
         case VoterContants.VOTER_LIST_SUCCESS: {
-            return { ...state, ...{ voters: action.voters, isFetching: false, isSuccess: true }};
+            return { ...state, ...{ voters: action.voters, isFetching: false, isSuccess: true, count: action.voters.length }};
         }
         case VoterContants.VOTER_LIST_ERROR: {
             return { ...state, ...{ error: action.error, isFetching: false, isSuccess: false }};
