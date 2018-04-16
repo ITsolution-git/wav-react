@@ -11,6 +11,7 @@ import routes from '../../../constants/Routes';
 import voterConstants from '../../../constants/VoterConstants';
 import { getHomeRoute } from "../../../helpers/AuthHelper";
 import appDataTypes from "../../../constants/AppDataTypes";
+import boardingTypes from '../../../constants/VoterBoardingType';
 
 class NextButton extends BaseComponent {
 
@@ -31,15 +32,24 @@ class NextButton extends BaseComponent {
         }
     }
 
+    componentWillMount() {
+        const { boardingType } = this.props.voter;
+        if (boardingType === boardingTypes.voterList) {
+            setTimeout(() => {
+                this.onLink(routes.voterList);
+            }, 3000);
+        }
+    }
 
     render() {
-        const { title = 'Next' } = this.props;
-        return (
-            <Button className='btn btn-primary'
-                    onClick={this.onNext}>
-                { title }
-            </Button>
-        );
+        const { title = 'Next', voter: { boardingType } } = this.props;
+        return boardingType === boardingTypes.register
+            ? (
+                <Button className='btn btn-primary'
+                        onClick={this.onNext}>
+                    { title }
+                </Button>
+            ) : null;
     }
 }
 

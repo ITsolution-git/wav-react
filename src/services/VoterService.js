@@ -23,7 +23,8 @@ function updateRegisteredVoter(data) {
     return patchAsync({
         url: `${config.apiHost}/api/v1/updateVoterRegistration`,
         headers: getHeaders(),
-        data
+        data,
+        failRedirect: false
     })
 }
 

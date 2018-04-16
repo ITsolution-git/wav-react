@@ -76,10 +76,9 @@ export function matchListPersist(voterDetails) {
 
 export function registerVoter() {
     return (dispatch, getState) => {
-        const { currentNumber, voterDetails } = getState().voter;
-        const details = voterDetails[currentNumber];
+        const { voterDetails } = getState().voter;
         const patchData = {
-            email: details.email,
+            email: voterDetails.email,
             registration_metadata: {
                 isRegistered: true
             }
@@ -108,5 +107,16 @@ export function resetVoterState() {
 
     function persist() {
         return { type: VoterContants.VOTER_RESET_STATE }
+    }
+}
+
+
+export function setBoardingType(type) {
+    return dispatch => {
+        dispatch(persist(type));
+    };
+
+    function persist(type) {
+        return { type: VoterContants.VOTER_BOARDING_TYPE_PERSIST, boardingType: type }
     }
 }

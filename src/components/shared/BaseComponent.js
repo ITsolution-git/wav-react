@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
+import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
 import routes from "../../constants/Routes";
 
@@ -11,7 +12,7 @@ class BaseComponent extends Component {
     }
 
     onLink = (route, params) => {
-        this.props.history.push(route, params)
+        history.push(route, params);
     };
 
     redirectToHome = () => {

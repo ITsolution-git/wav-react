@@ -13,6 +13,7 @@ import {
     deleteVoter
 } from '../../actions/VoterListAction';
 import VoterContants from '../../constants/VoterConstants';
+import boardingtypes from '../../constants/VoterBoardingType';
 import InitialState from "../../constants/InitialState";
 import config from "../../config/ApiConfig";
 import userAuthenticator from '../shared/UserAuthenticator';
@@ -170,6 +171,10 @@ describe('addVoter', () => {
             {
                 type: VoterContants.VOTER_ADD_SUCCESS,
                 data: voterToAdd
+            },
+            {
+                type: VoterContants.VOTER_BOARDING_TYPE_PERSIST,
+                boardingType: boardingtypes.voterList
             }
         ];
         const store = mockStore(InitialState);

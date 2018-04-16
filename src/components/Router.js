@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Router , Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import History from '../utility/History';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
@@ -34,8 +34,8 @@ import roles from '../constants/Roles';
 
 const { captain, admin, guest } = roles;
 
-const Router =() => (
-	<router history={ History }>
+const router =() => (
+	<Router history={ History }>
 		<Switch>
 			<Route exact path = {routes.login}
 				   component = { Authorization(Login, [guest]) } />
@@ -92,7 +92,7 @@ const Router =() => (
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
             <Route exact path = {routes.howContribute} component = { HowContribute } />
 		</Switch>
-	</router>
+	</Router>
 );
 
-export default Router;
+export default router;

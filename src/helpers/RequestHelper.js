@@ -75,5 +75,4 @@ function mergeHeaders(headers = {}) {
 
 function toErrorPage() {
     History.push(routes.pageDown);
-    History.go();
 }
