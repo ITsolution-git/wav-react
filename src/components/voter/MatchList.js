@@ -49,7 +49,7 @@ class MatchList extends BaseComponent {
                 { this.isDesktop() && this.renderBackToHome() }
                 <div className="intro">
                     <p className="intro-title">
-                        Is one of these people your friend?
+                        { matchList.length ? 'Is one of these people your friend?' : 'Our search returned no results' }
                     </p>
                 </div>
                 <div className='match-list'>
