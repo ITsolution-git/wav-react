@@ -97,7 +97,7 @@ describe('voterDetails', () => {
         expect(voterReducer(InitialState.voter, {
                 type: VoterContants.VOTER_DETAILS_PERSIST,
                 voterDetails
-            })).to.deep.equal({... InitialState.voter, ... { voterDetails: { 1: voterDetails } }})
+            })).to.deep.equal({... InitialState.voter, ... { voterDetails }})
     });
 });
 

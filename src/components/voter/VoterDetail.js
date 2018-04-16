@@ -20,10 +20,10 @@ class VoterDetail extends BaseComponent {
 		super(props, context);
 		const emptyVoterObj = this.getEmptyObject();
 		const loadPrevious = this.isLoadPrevious();
-		const { currentNumber, voterDetails } = this.props.voter;
+		const { voterDetails } = this.props.voter;
 		this.state = {
 			voterDetail: loadPrevious ?
-				{ ...emptyVoterObj, ...voterDetails[currentNumber] }
+				{ ...emptyVoterObj, ...voterDetails }
 				: emptyVoterObj,
 			isValid: this.getEmptyObject(true)
 		};

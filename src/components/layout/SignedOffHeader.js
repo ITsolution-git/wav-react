@@ -5,7 +5,6 @@ import { Col, Row, Image, Navbar, Nav, NavItem } from 'react-bootstrap';
 import BaseComponent from '../../components/shared/BaseComponent';
 import logo  from '../../resources/images/logo.png';
 import { getHomeRoute } from '../../helpers/AuthHelper';
-import routes from '../../constants/Routes';
 
 class SignedOffHeader extends BaseComponent {
     constructor(props, context) {
