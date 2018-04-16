@@ -1,11 +1,13 @@
 import VoterContants from '../constants/VoterConstants';
 import voterService from '../services/VoterService';
 import authStorage from '../storage/AuthStorage';
+import boardingTypes from "../constants/VoterBoardingType";
 
 export function makeListPersist(makeList) {
 	return dispatch => {
 	    dispatch(resetVoterState());
         dispatch(persist(makeList));
+        dispatch(setBoardingType(boardingTypes.register));
 	};
 
 	function persist(makeList) {
