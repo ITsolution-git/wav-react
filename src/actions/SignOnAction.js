@@ -4,6 +4,8 @@ import IdentityService from '../services/IdentityService';
 import authStorage  from '../storage/AuthStorage';
 import appDataTypes from '../constants/AppDataTypes';
 import pubsubConstants from '../constants/PubSubConstants';
+import boardingTypes from '../constants/VoterBoardingType';
+import { setBoardingType } from './VoterAction';
 
 import {
 	initializeRequest,
@@ -40,6 +42,7 @@ export function btwRegister(identity) {
 						return;
 					}
 					const { username, password } = identity;
+					dispatch(setBoardingType(boardingTypes.register));
 					dispatch(btwSignOn(username, password, () => {
                         dispatch(loadDataSuccess(appDataTypes.register, response.data));
 					}));
