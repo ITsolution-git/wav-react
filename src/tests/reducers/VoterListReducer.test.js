@@ -63,7 +63,7 @@ describe('loadVoterList', () => {
                 type: VoterContants.VOTER_LIST_SUCCESS,
                 voters
             }),
-            expectedResult = {... InitialState.voterList, ...{ isFetching: false, isSuccess: true, voters }};
+            expectedResult = {... InitialState.voterList, ...{ isFetching: false, isSuccess: true, voters, count: 2 }};
 
         expect(actualResult).to.deep.equal(expectedResult)
     });
