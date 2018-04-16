@@ -94,14 +94,14 @@ describe('btwRegister', () => {
                     dataType: AppDataTypes.register,
                     type: AppConstants.INITIALIZE_REQUEST
 				},
+                {
+                    type: VoterContants.VOTER_BOARDING_TYPE_PERSIST,
+                    boardingType: boardingTypes.register
+                },
 				{
                     dataType: AppDataTypes.signOn,
                     type: AppConstants.INITIALIZE_REQUEST
-				},
-                {
-                    type: VoterContants.VOTER_BOARDING_TYPE_PERSIST,
-                    boardingType: boardingTypes.voterList
-                }
+				}
 			];
 
 			const store = mockStore({response : []});
