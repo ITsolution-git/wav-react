@@ -78,8 +78,8 @@ export default class AddEditDialog extends BaseComponent {
 	};
 
 	onSubmitInner = () => {
-		const { _id, ...voter } = this.state.voter;
-		voter.userid = _id;
+		const voter = {...this.state.voter};
+		voter.userid = voter._id;
 		this.props.onSubmit(voter);
 	};
 

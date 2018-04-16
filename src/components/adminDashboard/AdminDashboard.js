@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
-import NavImage from '../layout/NavImage';
 import routes from '../../constants/Routes';
 import BaseComponent from '../shared/BaseComponent';
 
@@ -10,7 +9,6 @@ class AdminDashboard extends BaseComponent {
     render() {
         return (
             <div>
-                <NavImage />
                 <div className='container btw-admin-dashboard'>
                     <Row>
                         <Col md={8}>
