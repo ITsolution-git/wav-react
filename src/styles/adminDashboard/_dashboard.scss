@@ -53,6 +53,12 @@
     }
   }
 
+  .count {
+    border: 2px solid red;
+    padding: 0px 6px 0px 4px;
+    color: red;
+    margin-left: 10px;
+  }
 
   .right-column {
     @extend .button-base;

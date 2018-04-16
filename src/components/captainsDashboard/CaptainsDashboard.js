@@ -9,10 +9,22 @@ import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 
+import { loadVoterList } from '../../actions/VoterListAction';
+import { loadTaskList } from '../../actions/TaskListAction';
+
 class CaptainsDashboard extends BaseComponent {
 
+    constructor(props) {
+        super(props);
+        
+        const { profile: { data } } = props;
+
+        this.props.actions.loadVoterList(data.id, data.username);
+        this.props.actions.loadTaskList(data.id);
+	}
+
     render() {
-        const { profile: { data, isSuccess } } = this.props;
+        const { profile: { data, isSuccess }, voters_count, tasks_count } = this.props;
         const votersCount = 27,
               invitesCount = 20,
               notificationCount = 5;
@@ -28,6 +40,7 @@ class CaptainsDashboard extends BaseComponent {
                                     <div className='icon-div tasks' onClick={() => this.onLink(routes.tasksList)}>
                                         <FontAwesome name='tasks' size='3x'/>
                                         <span className='button-text'>Your Tasks</span>
+                                        { tasks_count ? <span className='count'>{tasks_count}</span> : '' }
                                     </div>
                                 </Col>
                                 <Col md={6} xs={6} className='block-padding'>
@@ -38,6 +51,7 @@ class CaptainsDashboard extends BaseComponent {
                                                 (<b>{votersCount}</b>)
                                             </span>*/}
                                         </span>
+                                        { voters_count ? <span className='count'>{voters_count}</span> : '' }
                                     </div>
                                 </Col>
                             </Row>
@@ -85,14 +99,20 @@ class CaptainsDashboard extends BaseComponent {
 
 const mapStateToProps = (state) => {
     const profile = state.app[appDataTypes.profile];
-    return { profile };
+    const voters_count = state.voterList.count;
+    const tasks_count = state.taskList.count;
+    return { 
+        profile,
+        voters_count,
+        tasks_count
+    };
 };
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ }, dispatch)
+        actions: bindActionCreators({ loadVoterList, loadTaskList }, dispatch)
     };
 };
 
-export default connect(mapStateToProps)(withRouter(CaptainsDashboard));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CaptainsDashboard));

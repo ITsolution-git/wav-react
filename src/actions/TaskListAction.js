@@ -8,7 +8,7 @@ export function loadTaskList() {
         const { userid } = authStorage.getLoggedUser();
         return taskService.loadTaskList(userid).then(
             response => {
-                dispatch(actionSuccess(response.data.tasks));
+                dispatch(actionSuccess(response.data));
             },
             error => {
                 dispatch(actionError(error.response.data.message));
@@ -18,8 +18,8 @@ export function loadTaskList() {
     function actionRequest() {
         return { type: TaskConstants.TASK_LIST_REQUEST };
     }
-    function actionSuccess(tasks) {
-        return { type: TaskConstants.TASK_LIST_SUCCESS, tasks };
+    function actionSuccess(data) {
+        return { type: TaskConstants.TASK_LIST_SUCCESS, data };
     }
     function actionError(error) {
         return { type: TaskConstants.TASK_LIST_ERROR, error };
