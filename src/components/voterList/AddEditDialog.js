@@ -41,7 +41,7 @@ export default class AddEditDialog extends BaseComponent {
 			: true;
 	}
 
-	validate(callback) {
+	validateAll(callback) {
 		let fields = ['firstname', 'lastname', 'state', 'city', 'email', 'phonenumber'];
 		let validation = {};
 		validation['isValid'] = true;
@@ -58,47 +58,78 @@ export default class AddEditDialog extends BaseComponent {
 		});
 	}
 
+	validateRequired(name, value) {
+
+		let validation = this.state;
+		validation.validation[name === 'phonenumber' ? 'phone' : name] = this.validateInput(name, value);
+		this.setState(validation);
+	}
+
 	onChange(name, value) {
 
 		let voter = Object.assign({}, this.state.voter); 
 		voter[name] = value;
-		this.setState({'voter' : voter});
+		this.setState({'voter' : voter}, () => {
+
+			this.validateRequired(name, value);
+		});
+
 	}
 
-	renderField = (name, label, type="text") => {
+	renderField = (name, label, error, type="text") => {
 		return (
 			<Col md={6}>
 				{ label }
 				<FormControl type={type}
 				             value={this.state.voter[name] || ''}
-				             onChange={(e) => this.onChange(name, e.target.value)}/>
-				{ !this.state.validation[name] && <span className="pull-left">* {label} is not valid *</span> }
+				             onChange={(e) => this.onChange(name, e.target.value)}
+							 onBlur={(e) => this.validateRequired(name, e.target.value)}/>
+				{ !this.state.validation[name] && <span className="pull-left" style={{color:"red"}}>{error}</span> }
 			</Col>
 		)
 	};
 
-	renderDropdownField = (name, label, options) => {
+	renderDropdownField = (name, label, error, options) => {
 		return (
 			<Col md={6}>
 				{ label }
 				<FormControl componentClass="select"
 				             value={this.state.voter[name] || ''}
-				             onChange={(e) => this.onChange(name, e.target.value)}>
+				             onChange={(e) => this.onChange(name, e.target.value)}
+							 onBlur={(e) => this.validateRequired(name, e.target.value)}>
 					<option value="" />
 					{ options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
 				</FormControl>
-				{ !this.state.validation[name] && <span className="pull-left">* {label} is not valid *</span> }
+				{ !this.state.validation[name] && <span className="pull-left" style={{color:"red"}}>{error}</span> }
 			</Col>
 		);
 	};
 
 	onSubmitInner = () => {
-		this.validate( () => {
+		this.validateAll( () => {
 			const voter = {...this.state.voter};
 			voter.userid = voter._id;
 			this.props.onSubmit(voter);
 		})
 	};
+
+	onCloseDialog = () => {
+		const { onClose, voter = {} } = this.props;
+
+		this.setState({
+			'voter' : voter,
+			'validation' : {
+				'isValid' : false,
+				'firstname': true,
+				'lastname': true,
+				'state': true,
+				'city': true,
+				'email': true,
+				'phonenumber': true
+			}
+		})
+		onClose();
+	}
 
 	render() {
 		const {
@@ -111,7 +142,7 @@ export default class AddEditDialog extends BaseComponent {
 		const { gender } = this.state.voter;
 		return (
 			<Modal show={show}
-			       onHide={onClose}>
+			       onHide={this.onCloseDialog}>
 				<Modal.Header>
 					<Modal.Title>{title}</Modal.Title>
 				</Modal.Header>
@@ -119,17 +150,18 @@ export default class AddEditDialog extends BaseComponent {
 					<Form horizontal>
 						<FormGroup>
 							<Col md={12}>
-								Email
+								Email *
 								<FormControl type="email"
 								             disabled={disableEmail}
-								             onChange={e => this.onChange('email', e.target.value)}
+											 onChange={e => this.onChange('email', e.target.value)}
+											 onBlur={(e) => this.validateRequired('email', e.target.value)}
 								             value={this.state.voter['email'] || ''} />
-								{ !this.state.validation['email'] && <span className="pull-left">* Email is not valid *</span> }
+								{ !this.state.validation['email'] && <span className="pull-left" style={{color:"red"}}>* Email is not valid *</span> }
 							</Col>
 						</FormGroup>
 						<FormGroup>
-							{ this.renderField('firstname', 'First name') }
-							{ this.renderField('lastname', 'Last name') }
+							{ this.renderField('firstname', 'First name *', '* First name is not valid *') }
+							{ this.renderField('lastname', 'Last name *', '* Last name is not valid *') }
 						</FormGroup>
 						<FormGroup>
 							<Col md={6}>
@@ -141,7 +173,7 @@ export default class AddEditDialog extends BaseComponent {
 									<option value="female">Female</option>
 								</FormControl>
 							</Col>
-							{ this.renderField('phonenumber', 'Phone', 'number') }
+							{ this.renderField('phonenumber', 'Phone', '* 10~11 digits are required *', 'number') }
 						</FormGroup>
 						<FormGroup>
 							<Col md={12}>
@@ -152,8 +184,8 @@ export default class AddEditDialog extends BaseComponent {
 							</Col>
 						</FormGroup>
 						<FormGroup>
-							{ this.renderDropdownField('state', 'State', Object.values(states)) }
-							{ this.renderField('city', 'City') }
+							{ this.renderDropdownField('state', 'State *', '* State is not valid *', Object.values(states)) }
+							{ this.renderField('city', 'City *', '* City is not valid *') }
 						</FormGroup>
 					</Form>
 				</Modal.Body>
@@ -161,7 +193,7 @@ export default class AddEditDialog extends BaseComponent {
 					<Row>
 						<Col md={12} className="btn-container">
 							<Button className='btn-primary' onClick={this.onSubmitInner}>{submitText}</Button>
-							<Button className='btn-primary' onClick={onClose}>Cancel</Button>
+							<Button className='btn-primary' onClick={this.onCloseDialog}>Cancel</Button>
 						</Col>
 					</Row>
 				</Modal.Footer>
