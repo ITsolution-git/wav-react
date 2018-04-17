@@ -5,7 +5,7 @@ import InitialState from '../constants/InitialState';
 
 export default function voterListReducer(state = InitialState.voterList, action) {
     const getVoterIndex = (data) => {
-        return state.voters.findIndex(voter => voter._id === data._id);
+        return state.voters.findIndex(voter => voter.email === data.email);
     };
     switch (action.type) {
         case VoterContants.VOTER_LIST_REQUEST: {
@@ -18,9 +18,11 @@ export default function voterListReducer(state = InitialState.voterList, action)
             return { ...state, ...{ error: action.error, isFetching: false, isSuccess: false }};
         }
         case VoterContants.VOTER_UPDATE_SUCCESS: {
-            const { data } = action;
-            const voterIndex = getVoterIndex(data);
-            return update(state, { voters: { [voterIndex]: { $set: data } } });
+            const { data } = action,
+              voterIndex = getVoterIndex(data),
+              updatedVoter = { ...state.voters[voterIndex], ...data };
+            
+            return update(state, { voters: { [voterIndex]: { $set: updatedVoter } } });
         }
         case VoterContants.VOTER_UPDATE_ERROR: {
             return { ...state, updateVoterError: action.error };
