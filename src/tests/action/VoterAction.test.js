@@ -15,6 +15,7 @@ import VoterContants from '../../constants/VoterConstants';
 import InitialState from "../../constants/InitialState";
 import userAuthenticator from "../shared/UserAuthenticator";
 import config from "../../config/ApiConfig";
+import boardingTypes from "../../constants/VoterBoardingType";
 
 
 const middlewares = [thunk];
@@ -48,6 +49,10 @@ describe('makelist', () => {
 					type: VoterContants.VOTER_MAKELIST_PERSIST,
 					makeList: makelist
 				},
+                {
+                    type: VoterContants.VOTER_BOARDING_TYPE_PERSIST,
+                    boardingType: boardingTypes.register
+                }
 			];
 			const store = mockStore(InitialState);
 

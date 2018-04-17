@@ -16,7 +16,7 @@ const Authorization = (RouteComponent, roles) => {
                 return <RouteComponent {...this.props} />
             }
             redirectToHome();
-
+            return null;
         }
     };
 };

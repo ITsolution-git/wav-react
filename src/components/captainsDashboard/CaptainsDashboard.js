@@ -8,7 +8,7 @@ import FontAwesome from 'react-fontawesome';
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
-
+import authStorage from '../../storage/AuthStorage';
 import { loadVoterList } from '../../actions/VoterListAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 
@@ -16,15 +16,14 @@ class CaptainsDashboard extends BaseComponent {
 
     constructor(props) {
         super(props);
-        
-        const { profile: { data } } = props;
 
-        this.props.actions.loadVoterList(data.id, data.username);
-        this.props.actions.loadTaskList(data.id);
+        const { userid, username } = authStorage.getLoggedUser();
+        this.props.actions.loadVoterList(userid, username);
+        this.props.actions.loadTaskList(userid);
 	}
 
     render() {
-        const { profile: { data, isSuccess }, voters_count, tasks_count } = this.props;
+        const { profile: { isSuccess }, voters_count, tasks_count } = this.props;
         const votersCount = 27,
               invitesCount = 20,
               notificationCount = 5;
@@ -101,7 +100,7 @@ const mapStateToProps = (state) => {
     const profile = state.app[appDataTypes.profile];
     const voters_count = state.voterList.count;
     const tasks_count = state.taskList.count;
-    return { 
+    return {
         profile,
         voters_count,
         tasks_count
