@@ -44,7 +44,9 @@ export function matchListPersist(voterDetails, resubmit = false) {
         const postData = { ...voterDetails, ...{
     	    firstname: firstName,
             lastname: lastName,
-            userid: authStorage.getLoggedUser().userid
+            userid: {
+                oid: authStorage.getLoggedUser().userid
+            }
         }};
 
         dispatch(actionRequest());

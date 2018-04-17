@@ -52,8 +52,10 @@ export function updateVoter(data) {
 
 export function addVoter(data) {
     return dispatch => {
-        data.userid = authStorage.getLoggedUser().userid;
-        
+        data.userid = {
+            oid: authStorage.getLoggedUser().userid
+        };
+
         return voterService.addVoter(data).then(
             result => {
                 dispatch(actionSuccess(data));
