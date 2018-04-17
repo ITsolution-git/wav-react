@@ -84,8 +84,9 @@ class VoterDetail extends BaseComponent {
 
 		if (Object.values(validation).every(val => val)) {
 			const { voterDetailsPersist, matchListPersist } = this.props.actions;
+
             voterDetailsPersist(voterDetail);
-            matchListPersist(voterDetail);
+            matchListPersist(voterDetail, this.isLoadPrevious());
 		}
 	};
 

@@ -7,6 +7,7 @@ export default {
     updateVoter,
     updateRegisteredVoter,
     addVoter,
+    retryAdd,
     deleteVoter
 };
 
@@ -39,6 +40,15 @@ function updateVoter(data) {
 function addVoter(data) {
     return postAsync({
         url: `${config.apiHost}/api/v1/addVoter`,
+        headers: getHeaders(),
+        data,
+        failRedirect: false
+    })
+}
+
+function retryAdd(data) {
+    return postAsync({
+        url: `${config.apiHost}/api/v1/retryAddVoter`,
         headers: getHeaders(),
         data,
         failRedirect: false
