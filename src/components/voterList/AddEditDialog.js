@@ -19,12 +19,21 @@ export default class AddEditDialog extends BaseComponent {
 		const { voter = {}} = this.props;
 		this.state = {
 			'voter' : voter,
-			'isValid' : false
+			'validation' : {
+				'isValid' : false,
+				'firstname': true,
+				'lastname': true,
+				'state': true,
+				'city': true,
+				'email': true,
+				'phonenumber': true
+			}
 		}
 	}
 
 	validateInput(name, value) {
-		if (name === 'email') {
+		name = name === 'phonenumber' ? 'phone' : name;
+		if (name === 'email' || name === 'phone') {
 			return validate(name, value);
 		}
 		return ['firstname', 'lastname', 'state', 'city'].includes(name)
@@ -32,33 +41,38 @@ export default class AddEditDialog extends BaseComponent {
 			: true;
 	}
 
-	validate() {
-		let fields = ['firstname', 'lastname', 'state', 'city', 'email'];
-		let isValid = true;
+	validate(callback) {
+		let fields = ['firstname', 'lastname', 'state', 'city', 'email', 'phonenumber'];
+		let validation = {};
+		validation['isValid'] = true;
 
 		for (let key in fields) {
-			isValid = isValid && this.validateInput(fields[key], this.state.voter[fields[key]]);
+			validation[fields[key]] = this.validateInput(fields[key], this.state.voter[fields[key]]);
+			validation['isValid'] = validation['isValid'] && validation[fields[key]];
 		}
 
-		this.setState({ 'isValid' : isValid });
+		this.setState({ 'validation' : validation }, () => {
+			if (validation['isValid'] === true) {
+				callback();
+			}
+		});
 	}
 
 	onChange(name, value) {
 
-		let voter = Object.assign({}, this.state.voter);
+		let voter = Object.assign({}, this.state.voter); 
 		voter[name] = value;
-		this.setState({'voter' : voter}, () => {
-			this.validate();
-		});
+		this.setState({'voter' : voter});
 	}
 
-	renderField = (name, label) => {
+	renderField = (name, label, type="text") => {
 		return (
 			<Col md={6}>
 				{ label }
-				<FormControl type="text"
+				<FormControl type={type}
 				             value={this.state.voter[name] || ''}
 				             onChange={(e) => this.onChange(name, e.target.value)}/>
+				{ !this.state.validation[name] && <span className="pull-left">* {label} is not valid *</span> }
 			</Col>
 		)
 	};
@@ -73,14 +87,17 @@ export default class AddEditDialog extends BaseComponent {
 					<option value="" />
 					{ options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
 				</FormControl>
+				{ !this.state.validation[name] && <span className="pull-left">* {label} is not valid *</span> }
 			</Col>
 		);
 	};
 
 	onSubmitInner = () => {
-		const voter = {...this.state.voter};
-		voter.userid = voter._id;
-		this.props.onSubmit(voter);
+		this.validate( () => {
+			const voter = {...this.state.voter};
+			voter.userid = voter._id;
+			this.props.onSubmit(voter);
+		})
 	};
 
 	render() {
@@ -107,6 +124,7 @@ export default class AddEditDialog extends BaseComponent {
 								             disabled={disableEmail}
 								             onChange={e => this.onChange('email', e.target.value)}
 								             value={this.state.voter['email'] || ''} />
+								{ !this.state.validation['email'] && <span className="pull-left">* Email is not valid *</span> }
 							</Col>
 						</FormGroup>
 						<FormGroup>
@@ -123,7 +141,7 @@ export default class AddEditDialog extends BaseComponent {
 									<option value="female">Female</option>
 								</FormControl>
 							</Col>
-							{ this.renderField('phonenumber', 'Phone') }
+							{ this.renderField('phonenumber', 'Phone', 'number') }
 						</FormGroup>
 						<FormGroup>
 							<Col md={12}>
@@ -142,7 +160,7 @@ export default class AddEditDialog extends BaseComponent {
 				<Modal.Footer>
 					<Row>
 						<Col md={12} className="btn-container">
-							<Button className='btn-primary' disabled={!this.state.isValid} onClick={this.onSubmitInner}>{submitText}</Button>
+							<Button className='btn-primary' onClick={this.onSubmitInner}>{submitText}</Button>
 							<Button className='btn-primary' onClick={onClose}>Cancel</Button>
 						</Col>
 					</Row>
