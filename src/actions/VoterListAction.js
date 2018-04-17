@@ -52,9 +52,7 @@ export function updateVoter(data) {
 
 export function addVoter(data) {
     return dispatch => {
-        data.userid = {
-            oid: authStorage.getLoggedUser().userid
-        };
+        data.userid = authStorage.getLoggedUser().userid;
 
         return voterService.addVoter(data).then(
             result => {
