@@ -1,6 +1,12 @@
+import PubSub from 'pubsub-js';
+
 import IdentityService from '../services/IdentityService';
 import authStorage  from '../storage/AuthStorage';
 import appDataTypes from '../constants/AppDataTypes';
+import pubsubConstants from '../constants/PubSubConstants';
+import boardingTypes from '../constants/VoterBoardingType';
+import { setBoardingType } from './VoterAction';
+
 import {
 	initializeRequest,
 	loadDataSuccess,
@@ -13,6 +19,7 @@ export function btwSignOn(username, password, onSuccess = () => {}) {
 		return IdentityService.login(username, password).then(
 			response => {
                 authStorage.saveTokenInfo(response.token);
+                PubSub.publish(pubsubConstants.onAuthChange, true);
 				dispatch(loadDataSuccess(appDataTypes.signOn, response));
                 onSuccess();
 			},
@@ -35,6 +42,7 @@ export function btwRegister(identity) {
 						return;
 					}
 					const { username, password } = identity;
+					dispatch(setBoardingType(boardingTypes.register));
 					dispatch(btwSignOn(username, password, () => {
                         dispatch(loadDataSuccess(appDataTypes.register, response.data));
 					}));

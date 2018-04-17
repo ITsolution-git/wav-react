@@ -46,12 +46,13 @@ export default function voterReducer(state = InitialState.voter, action) {
 		}
 		case VoterContants.VOTER_DETAILS_PERSIST: {
 			const { voterDetails } = action;
-			return update(state, { voterDetails: {
-				[state.currentNumber]: { $set: voterDetails }
-			}});
+			return update(state, { voterDetails: { $set: voterDetails } });
 		}
 		case VoterContants.VOTER_RESET_STATE: {
 			return InitialState.voter;
+		}
+		case VoterContants.VOTER_BOARDING_TYPE_PERSIST: {
+            return { ...state, boardingType: action.boardingType }
 		}
 		default:
 			return state

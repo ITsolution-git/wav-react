@@ -1,4 +1,5 @@
 import appDataTypes from './AppDataTypes';
+import voterBoardingType from './VoterBoardingType';
 
 export default {
     app: {
@@ -10,6 +11,7 @@ export default {
         makeList: {},
         voterDetails: {},
         voterRoute: '',
+        boardingType: voterBoardingType.register,
         currentNumber: 1,
         matchListError: null,
         matchListFetching: false,
@@ -17,6 +19,7 @@ export default {
     },
     voterList: {
         voters: [],
+        count: 0,
         isFetching: false,
         isSuccess: false,
         error: null,
@@ -26,6 +29,7 @@ export default {
     },
     taskList: {
         tasks: [],
+        count: 0,
         isFetching: false,
         isSuccess: false,
         error: null

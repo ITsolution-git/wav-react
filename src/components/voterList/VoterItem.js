@@ -91,7 +91,7 @@ class VoterItem extends BaseComponent {
                                onClose={this.closeEditModal} />
                 <ConfirmationDialog show={showDeleteModal}
                                     title='Delete voter'
-                                    description='Are you sure you want to delete voter?'
+                                    description='This will remove the voter’s information from your records. You will have to enter their information again if you want to re-add them. Confirm?'
                                     submitText='Yes'
                                     onSubmit={() => {
                                         this.props.actions.deleteVoter(this.props.voter);

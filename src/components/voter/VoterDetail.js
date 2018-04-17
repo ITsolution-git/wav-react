@@ -20,10 +20,10 @@ class VoterDetail extends BaseComponent {
 		super(props, context);
 		const emptyVoterObj = this.getEmptyObject();
 		const loadPrevious = this.isLoadPrevious();
-		const { currentNumber, voterDetails } = this.props.voter;
+		const { voterDetails } = this.props.voter;
 		this.state = {
 			voterDetail: loadPrevious ?
-				{ ...emptyVoterObj, ...voterDetails[currentNumber] }
+				{ ...emptyVoterObj, ...voterDetails }
 				: emptyVoterObj,
 			isValid: this.getEmptyObject(true)
 		};
@@ -99,11 +99,12 @@ class VoterDetail extends BaseComponent {
 		);
 	};
 
-	renderTextField = (name, label, errorText, isWholeRow = true, type='text') => {
+	renderTextField = (name, label, errorText, isWholeRow = true, type='text', disabled=false) => {
 		const width = isWholeRow || this.isMobile() ? 12 : 6;
 		const input = (
             <input type={type} className='input-field'
                    value={ this.state.voterDetail[name]}
+                   disabled={disabled}
                    onChange={this.updateVoterFields.bind(this, name)}
                    onBlur={this.validateVoterFields.bind(this, name)} />
 		);
@@ -165,17 +166,18 @@ class VoterDetail extends BaseComponent {
 			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
 			loadPrevious = this.isLoadPrevious(),
-			notValidInput = '* Input is not valid *';
+			notValidInput = '* Input is not valid *',
+			emailDisabled = loadPrevious;
 
 		return (
 			<div className='btw-voter btw-voter-detail container'>
 				{ this.isDesktop() && this.renderBackToHome() }
 				<div className="intro">
 					<p className="intro-title">
-                        { firstName || '' + " " + lastName || '' }
+					{ 'Tell us more about ' + firstName || '' + " " + lastName || '' }
 					</p>
 					<p className="intro-desc">
-                    	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+						The more information you provide, the more accurately we can verify if they are registered to vote. (Don’t worry, we’ll NEVER share this information with anybody else.) 
 					</p>
 				</div>
 				<form>
@@ -188,7 +190,7 @@ class VoterDetail extends BaseComponent {
                         { this.renderAgeDropdown() }
                         { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
-					<div className="row">{ this.renderTextField('email', 'Email *', '* Email is required *', matchListError || notValidInput, true, 'email') }</div>
+					<div className="row">{ this.renderTextField('email', 'Email *', matchListError || notValidInput, true, 'email', emailDisabled) }</div>
 					<div className="row">{ this.renderTextField('phonenumber', 'Phone', notValidInput, true, 'number') }</div>
 					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
 				</form>

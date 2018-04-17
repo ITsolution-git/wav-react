@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 import BaseComponent from '../shared/BaseComponent';
 import { makeListPersist, registerVoter } from "../../actions/VoterAction";
 import routes from '../../constants/Routes';
+import boardingTypes from '../../constants/VoterBoardingType';
 import MatchItem from './shared/MatchItem';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
 
@@ -42,17 +43,14 @@ class MatchList extends BaseComponent {
     };
 
     render() {
-        const { matchList } = this.props.voter;
+        const { matchList, boardingType } = this.props.voter;
         const { showConfirmModal } = this.state;
         return (
             <div className='btw-voter btw-match-list'>
                 { this.isDesktop() && this.renderBackToHome() }
                 <div className="intro">
                     <p className="intro-title">
-                        Possible match
-                    </p>
-                    <p className="intro-desc">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        { matchList.length ? 'Is one of these people your friend?' : 'Our search returned no results' }
                     </p>
                 </div>
                 <div className='match-list'>
@@ -66,11 +64,12 @@ class MatchList extends BaseComponent {
                     <Col xs={6}>
                         { this.isMobile() && this.renderBackToHome()}
                     </Col>
-                    <Col xs={6} md={12}>
-                        <div id="btn_not_sure">
-                            <button className="btn btn-primary" onClick={this.onNotSureClick}>Not sure</button>
-                        </div>
-                    </Col>
+                    { boardingType === boardingTypes.register &&
+                        <Col xs={6} md={12}>
+                            <div id="btn_not_sure">
+                                <button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>
+                            </div>
+                        </Col> }
                 </Row>
                 <ConfirmationDialog show={showConfirmModal}
                                     title='Register voter'

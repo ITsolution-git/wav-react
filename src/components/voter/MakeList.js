@@ -76,11 +76,13 @@ class MakeList extends BaseComponent {
 				{ this.isDesktop() && this.renderBackToHome()}
 				<div className="intro">
 					<p className="intro-title">
-                        Generate Lorem Ipsum placeholder text
+						Are your friends registered to vote?
 					</p>
 
 					<p className="intro-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						Let’s check! Enter the name of 4 friends who you think might not be registered or are less likely to vote. <br/><br/>
+
+						*The info we collect is only for checking if your friends are registered. We’re a nonprofit and never will sell you or your friends’ data.*  
 					</p>
 				</div>
 

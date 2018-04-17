@@ -22,7 +22,7 @@ class VoterError extends BaseComponent {
                 <div className='error-icon'>
                     <FontAwesome name='exclamation-triangle' />
                 </div>
-                <div className='cant-find'>We cant find '{ firstname } { lastname }'</div>
+                <div className='cant-find'>We cant find '{ firstname } { lastname }' in the voter registry.</div>
                 <div className='ok-text'>That's okay we will come back to this person.</div>
                 <div>
                     <NextButton />
