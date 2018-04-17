@@ -85,7 +85,9 @@ class VoterItem extends BaseComponent {
                                submitText='Edit'
                                disableEmail
                                onSubmit={data => {
-                                   this.props.actions.updateVoter(data);
+                                   const { _id, registration_metadata, voter_characteristics,
+                                       ...voterToUpdate} = data;
+                                   this.props.actions.updateVoter(voterToUpdate);
                                    this.closeEditModal();
                                } }
                                onClose={this.closeEditModal} />
