@@ -88,9 +88,15 @@ export function registerVoter() {
             }
         };
         voterService.updateRegisteredVoter(patchData).then(
-            result => {},
+            result => {
+                dispatch(updateVoter(patchData));
+            },
             error => {}
         );
+    };
+
+    function updateVoter(data) {
+        return { type: VoterContants.VOTER_UPDATE_SUCCESS, data };
     }
 }
 
