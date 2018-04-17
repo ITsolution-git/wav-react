@@ -33,5 +33,12 @@ export default {
         isFetching: false,
         isSuccess: false,
         error: null
-    }
+    },
+    chats: {
+        chats: [],
+        isFetching: false,
+        isSuccess: false,
+        error: null
+    },
+    messages: {}
 }
