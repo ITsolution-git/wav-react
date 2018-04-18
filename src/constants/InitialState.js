@@ -36,6 +36,7 @@ export default {
     },
     chats: {
         chats: [],
+        selectedChatId: 0,
         isFetching: false,
         isSuccess: false,
         error: null
