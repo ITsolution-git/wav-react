@@ -1,11 +1,13 @@
 import VoterContants from '../constants/VoterConstants';
 import voterService from '../services/VoterService';
 import authStorage from '../storage/AuthStorage';
+import boardingTypes from "../constants/VoterBoardingType";
 
 export function makeListPersist(makeList) {
 	return dispatch => {
 	    dispatch(resetVoterState());
         dispatch(persist(makeList));
+        dispatch(setBoardingType(boardingTypes.register));
 	};
 
 	function persist(makeList) {
@@ -33,7 +35,7 @@ export function resetMatchList() {
     }
 }
 
-export function matchListPersist(voterDetails) {
+export function matchListPersist(voterDetails, resubmit = false) {
     return (dispatch, getState) => {
     	const { currentNumber, makeList } = getState().voter,
     		firstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber}`],
@@ -42,13 +44,14 @@ export function matchListPersist(voterDetails) {
         const postData = { ...voterDetails, ...{
     	    firstname: firstName,
             lastname: lastName,
-            userid: {
-                oid: authStorage.getLoggedUser().userid
-            }
+            userid: authStorage.getLoggedUser().userid
         }};
 
         dispatch(actionRequest());
-        return voterService.addVoter(postData).then(
+        const addVoterService = resubmit
+            ? voterService.retryAdd
+            : voterService.addVoter;
+        return addVoterService(postData).then(
            result => {
                 const { data } = result.data;
                 if (data) {
@@ -78,15 +81,22 @@ export function registerVoter() {
     return (dispatch, getState) => {
         const { voterDetails } = getState().voter;
         const patchData = {
+            userid: authStorage.getLoggedUser().userid,
             email: voterDetails.email,
             registration_metadata: {
                 isRegistered: true
             }
         };
         voterService.updateRegisteredVoter(patchData).then(
-            result => {},
+            result => {
+                dispatch(updateVoter(patchData));
+            },
             error => {}
         );
+    };
+
+    function updateVoter(data) {
+        return { type: VoterContants.VOTER_UPDATE_SUCCESS, data };
     }
 }
 

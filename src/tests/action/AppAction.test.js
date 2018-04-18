@@ -12,8 +12,6 @@ import AppDataTypes from '../../constants/AppDataTypes';
 import config from '../../config/ApiConfig';
 
 import userAuthenticator from '../shared/UserAuthenticator';
-import VoterContants from "../../constants/VoterConstants";
-import boardingTypes from "../../constants/VoterBoardingType";
 
 describe('getBtwUserProfile tests', () => {
     userAuthenticator.loginCaptain();
@@ -94,10 +92,6 @@ describe('btwRegister', () => {
                     dataType: AppDataTypes.register,
                     type: AppConstants.INITIALIZE_REQUEST
 				},
-                {
-                    type: VoterContants.VOTER_BOARDING_TYPE_PERSIST,
-                    boardingType: boardingTypes.register
-                },
 				{
                     dataType: AppDataTypes.signOn,
                     type: AppConstants.INITIALIZE_REQUEST

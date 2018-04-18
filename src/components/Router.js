@@ -23,6 +23,7 @@ import LiteratureVideoTask from './tasks/LiteratureVideoTask';
 import RecruitingCaptainTask from './tasks/RecruitingCaptainTask';
 import RegisterVoterTask from './tasks/RegisterVoterTask';
 import UpdateProfileTask from './tasks/UpdateProfileTask';
+import MessageList from './messages/MessageList';
 
 // static pages
 import WhyBethewave from './static/WhyBethewave';
@@ -55,8 +56,10 @@ const router =() => (
                    component = { Authorization(Forum, [captain]) } />
 			<Route exact path = {routes.captainsDashboard}
 				   component = { Authorization(CaptainsDashboard, [captain]) } />
-			<Route exact path = {routes.adminDashboard}
-				   component = { Authorization(AdminDashBoard, [admin]) } />
+			<Route exact path = {routes.messageList}
+				   component = { Authorization(MessageList, [admin]) } />
+            <Route exact path = {routes.adminDashboard}
+                   component = { Authorization(AdminDashBoard, [admin]) } />
             <Route exact path = {routes.reports}
                    component = { Authorization(Reports, [admin]) } />
 

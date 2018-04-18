@@ -8,6 +8,7 @@ export default {
     community: '/community',
     captainsDashboard: '/captainsDashboard',
     adminDashboard: '/adminDashboard',
+    messageList: '/messageList',
     login: '/',
     voterDetail: '/voterDetail',
     matchList: '/matchList',
