@@ -60,7 +60,7 @@ class HelpButton extends BaseComponent {
                                    rows='4'
                                    value={value}
                                    fullWidth
-                                   margin='normal'
+                                   margin='dense'
                                    onChange={val => this.setState({ value: val })}
                         />
                     </DialogContent>
