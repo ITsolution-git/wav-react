@@ -47,7 +47,11 @@ class VoterDetail extends BaseComponent {
 		let fields = Object.assign({}, this.state.voterDetail);
 		fields[field] = value;
 
-		this.setState({ voterDetail: fields });
+		this.setState({ voterDetail: fields }, () => {
+			let validation = Object.assign({}, this.state.isValid);
+			validation[field] = this.validateInput(field, value);
+			this.setState({ isValid: validation });
+		});
 
 		// check if it is valid for select tag
 		if ( field === "state" || field === "city" ) {
@@ -58,9 +62,13 @@ class VoterDetail extends BaseComponent {
 	}
 
 	validateInput(name, value) {
-		const { email, phonenumber, zip } = validationTypes;
-		if ([ email, phonenumber, zip].includes(name)) {
+		name = name === 'phonenumber' ? 'phone' : name;
+		const { email, phone, zip } = validationTypes;
+		if ([ phone, zip].includes(name)) {
 			return !value || validate(name, value);
+		}
+		if (email === name ) {
+			return value!=='' && validate(name, value);
 		}
 		return ['state', 'city'].includes(name)
 			? !!value
@@ -107,7 +115,7 @@ class VoterDetail extends BaseComponent {
                    value={ this.state.voterDetail[name]}
                    disabled={disabled}
                    onChange={this.updateVoterFields.bind(this, name)}
-                   onBlur={this.validateVoterFields.bind(this, name)} />
+				   onBlur={this.validateVoterFields.bind(this, name)} />
 		);
 		return this.renderInputDiv(width, label, name, input, errorText);
 	};
@@ -186,14 +194,14 @@ class VoterDetail extends BaseComponent {
 						{ this.renderTextField('city', 'City *', '* City is required *', false) }
 						{ this.renderDropdownField('state', 'State *', Object.values(states), '* State is required *') }
 					</div>
-					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
+					<div className="row">{ this.renderTextField('email', 'Email *', matchListError || '* Email is not valid *', true, 'email', emailDisabled) }</div>
 					<div className="row">
                         { this.renderAgeDropdown() }
                         { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
-					<div className="row">{ this.renderTextField('email', 'Email *', matchListError || notValidInput, true, 'email', emailDisabled) }</div>
-					<div className="row">{ this.renderTextField('phonenumber', 'Phone', notValidInput, true, 'number') }</div>
-					<div className="row">{ this.renderTextField('zip', 'Zip', notValidInput) }</div>
+					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
+					<div className="row">{ this.renderTextField('phonenumber', 'Phone', '* 10~11 digits are required *', true, 'number') }</div>
+					<div className="row">{ this.renderTextField('zip', 'Zip', '* 5 digits are required *', true, 'number') }</div>
 				</form>
 				<Row>
                     <Col mdOffset={3} md={3} xs={6}>

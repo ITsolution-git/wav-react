@@ -7,7 +7,7 @@ export default {
     CO: 'CO',
     CT: 'CT',
     DE: 'DE',
-    FL: 'AL',
+    FL: 'FL',
     GA: 'GA',
     HI: 'HI',
     ID: 'ID',
