@@ -115,11 +115,12 @@ export default class AddEditDialog extends BaseComponent {
 			const voter = {...this.state.voter};
 			voter.userid = voter._id;
 			this.props.onSubmit(voter);
+			this.initState();
 		})
 	};
 
-	onCloseDialog = () => {
-		const { onClose, voter = {} } = this.props;
+	initState = () => {
+		const { voter = {} } = this.props;
 
 		this.setState({
 			'voter' : voter,
@@ -133,6 +134,10 @@ export default class AddEditDialog extends BaseComponent {
 				'phonenumber': true
 			}
 		})
+	}
+	onCloseDialog = () => {
+		const { onClose } = this.props;
+		this.initState();
 		onClose();
 	}
 
