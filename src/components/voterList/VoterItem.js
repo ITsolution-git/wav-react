@@ -63,7 +63,6 @@ class VoterItem extends BaseComponent {
                     <div className='more-info'>
                         <div>Email: { email } </div>
                         <div>Phone: { phonenumber }</div>
-                        <div>Status: { isRegistered ? 'Registered' : 'Not registered'}</div>
                         <div>Gender: { gender }</div>
                     </div> }
                     <div className='link' onClick={e => {
