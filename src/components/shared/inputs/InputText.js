@@ -1,5 +1,5 @@
 import React from 'react';
-import Input from 'material-ui/Input';
+import TextField from 'material-ui/TextField';
 
 import InputBase from './InputBase';
 
@@ -7,7 +7,7 @@ export default class InputText extends InputBase {
     render() {
         const { value = '', ...restProps } = this.props;
         return (
-            <Input
+            <TextField
                 {...restProps}
                 value={value}
                 onChange={this.handleChange}

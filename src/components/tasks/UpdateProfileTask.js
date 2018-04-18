@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { FormLabel } from 'material-ui/Form';
-import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
 
 import TaskBase from './shared/TaskBase';
 import Stepper from './shared/LetfStepper';
@@ -84,12 +84,24 @@ class UpdateProfileTask extends TaskBase {
     };
 
     renderContent = (name, input) => {
+        const { voter_metaData: {
+            firstname,
+            lastname,
+            city,
+            state
+        } } = this.props.taskData || {};
+
         return (
-            <Grid key={name}>
+            <React.Fragment key={name}>
+                { this.isVoterTask()
+                    && <Typography gutterBottom>
+                        { firstname } { lastname } from { city }, { state } needs to have the following information about them updated
+                       </Typography>
+                }
                 <FormLabel>
                     { input }
                 </FormLabel>
-            </Grid>
+            </React.Fragment>
         )
     };
 
@@ -122,6 +134,11 @@ class UpdateProfileTask extends TaskBase {
         const { taskData = {}} = this.props,
             type = taskData.captain_metaData ? 'captain_metaData' : 'voter_metaData';
         return { [type]: this.state, taskid: taskData._id };
+    };
+
+    isVoterTask = () => {
+        const { taskData = {}} = this.props;
+        return !!taskData.voter_metaData;
     };
 
     render() {
