@@ -1,6 +1,7 @@
 .btw-button {
   border: none;
   border-radius: 0;
+  color: white;
 
   @include respond-to($phone) {
     padding: 0 $button-padding_mobile;
@@ -12,7 +13,7 @@
   font-family: Verdana,Arial,sans-serif;
   font-size: $font_size_input;
   font-weight: $font_weight_bold;
-  height: $input_field_height + 10px;
+  height: $input_field_height;
   background-color: #006BA6;
   transition: background-color .2s ease,color .2s ease,border-color .2s ease;
 
