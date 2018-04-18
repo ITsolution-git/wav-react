@@ -4,6 +4,10 @@
     margin-bottom: 2%;
     padding: 2%;
     .input-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
       min-height: 290px;
     }
   }

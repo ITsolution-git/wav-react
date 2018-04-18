@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Typography from 'material-ui/Typography';
+import Input from 'material-ui/Input';
 import { Row, Col, Button } from 'react-bootstrap';
 
 import { loadMessages } from '../../actions/MessagesAction';
-import InputText from '../shared/inputs/InputText';
 import BaseComponent from '../shared/BaseComponent';
 
 class ChatBody extends BaseComponent {
@@ -77,7 +77,7 @@ class ChatBody extends BaseComponent {
                                     )
                                 })}
                                 <div className='controls'>
-                                    <InputText placeholder='Compose...'
+                                    <Input placeholder='Compose...'
                                                autoFocus
                                                multiline
                                                rows='3'
@@ -88,10 +88,10 @@ class ChatBody extends BaseComponent {
 
                                     />
                                     <Row>
-                                        <Col md={3}>
+                                        <Col md={3} xs={6}>
                                             <Button disabled={!value}>Send</Button>
                                         </Col>
-                                        <Col md={3} onClick={() => this.setState({ value: ''})}>
+                                        <Col md={3} xs={6} onClick={() => this.setState({ value: ''})}>
                                             <Button>Cancel</Button>
                                         </Col>
                                     </Row>

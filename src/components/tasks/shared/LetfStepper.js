@@ -3,7 +3,6 @@ import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
 import { Row, Col, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import routes from '../../../constants/Routes';
-import Grid from 'material-ui/Grid';
 import Tooltip from 'material-ui/Tooltip';
 
 import BaseComponent from '../../shared/BaseComponent';
@@ -57,19 +56,18 @@ class LeftStepper extends BaseComponent {
                     </Col>
                     <Col md={9}>
                         <div className='stepper-content'>
-                            <Col mdOffset={11} md={1} xsOffset={10}>
-                                <Tooltip title="Questions about this task? contact us">
-                                    <div>
-                                        <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
-                                    </div>
-                                </Tooltip>
-                            </Col>
-                            <Grid alignItems='center'
-                                  justify='center'
-                                  className='input-block'
-                                  container >
+                            <Row>
+                                <Col mdOffset={11} md={1} xsOffset={10}>
+                                    <Tooltip title="Questions about this task? contact us">
+                                        <div>
+                                            <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
+                                        </div>
+                                    </Tooltip>
+                                </Col>
+                            </Row>
+                            <div className='input-block'>
                                 { currentCheckpoint.component }
-                            </Grid>
+                            </div>
                         </div>
                         <Row>
                             <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
