@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Typography from 'material-ui/Typography';
 import classnames from 'classnames';
+import Moment from 'react-moment';
 
 import BaseComponent from '../shared/BaseComponent';
 import ChatBody from './ChatBody';
@@ -35,7 +36,11 @@ class MessageList extends BaseComponent {
                                             <div>{ chat.message }...</div>
                                         </Col>
                                         <Col md={4}>
-                                            <div> { chat.date }</div>
+                                            <div>
+                                                <Moment format="MM-DD HH:mm">
+                                                    { chat.date }
+                                                </Moment>
+                                            </div>
                                         </Col>
                                     </Row>
                                 )
