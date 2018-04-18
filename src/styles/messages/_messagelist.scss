@@ -1,3 +1,31 @@
+$height: 600px;
+
 .btw-message-list {
   margin-top: 2%;
+  .chat-content {
+    margin-top: 1%;
+    .chats {
+      border: 1px solid lightgray;
+      height: $height;
+      color: white;
+      overflow-y: auto;
+      overflow-x: hidden;
+      .chat {
+        border-bottom: 2px solid white;
+        background-color: #7892C0;
+        cursor: pointer;
+        padding: 6% 2% 6% 4%;
+        &.selected {
+          background-color: darken(#7892C0, 15%);
+        }
+        &:hover {
+          background-color: darken(#7892C0, 7%);
+        }
+      }
+    }
+    .chat-body {
+      height: $height;
+      border: 1px solid lightgray;
+    }
+  }
 }
