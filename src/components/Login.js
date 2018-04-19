@@ -74,7 +74,7 @@ class Login extends BaseComponent {
                             Login
                         </button>
                     </div>
-                    <h8>Not registered? <Link to='/captainProfile/Register'>Register as a Captain</Link></h8>
+                   {/* <h8>Not registered? <Link to='/captainProfile/Register'>Register as a Captain</Link></h8>*/}
 				</div>
 			</div>
 		);

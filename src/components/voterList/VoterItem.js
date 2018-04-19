@@ -58,12 +58,11 @@ class VoterItem extends BaseComponent {
                         : <FontAwesome className='not-registered-icon' name='exclamation-circle' /> }
                 </Col>
                 <Col md={5} xs={12} className='no-padding'>
-                    <div>{ address }, { city }, { state }</div>
+                    <div>{ address }{ address ? ', ' : ''}{ city }{ city ? ', ':'' }{ state }</div>
                     { moreEnabled &&
                     <div className='more-info'>
                         <div>Email: { email } </div>
                         <div>Phone: { phonenumber }</div>
-                        <div>Status: { isRegistered ? 'Registered' : 'Not registered'}</div>
                         <div>Gender: { gender }</div>
                     </div> }
                     <div className='link' onClick={e => {

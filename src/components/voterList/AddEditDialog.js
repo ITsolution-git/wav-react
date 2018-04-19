@@ -32,9 +32,14 @@ export default class AddEditDialog extends BaseComponent {
 	}
 
 	validateInput(name, value) {
-		name = name === 'phonenumber' ? 'phone' : name;
-		if (name === 'email' || name === 'phone') {
+
+		if (name === 'email') {
 			return validate(name, value);
+		} else if (name === 'phonenumber') {
+			if (value && value !== '') {
+				return validate('phone', value);
+			}
+			return true;
 		}
 		return ['firstname', 'lastname', 'state', 'city'].includes(name)
 			? !!value
@@ -109,11 +114,12 @@ export default class AddEditDialog extends BaseComponent {
 		this.validateAll( () => {
 			const voter = {...this.state.voter};
 			this.props.onSubmit(voter);
+			this.initState();
 		})
 	};
 
-	onCloseDialog = () => {
-		const { onClose, voter = {} } = this.props;
+	initState = () => {
+		const { voter = {} } = this.props;
 
 		this.setState({
 			'voter' : voter,
@@ -127,6 +133,10 @@ export default class AddEditDialog extends BaseComponent {
 				'phonenumber': true
 			}
 		})
+	}
+	onCloseDialog = () => {
+		const { onClose } = this.props;
+		this.initState();
 		onClose();
 	}
 
@@ -168,6 +178,7 @@ export default class AddEditDialog extends BaseComponent {
 								<FormControl componentClass="select"
 								             value={gender || ''}
 								             onChange={e => this.onChange('gender', e.target.value)} >
+									<option value=""></option>
 									<option value="male">Male</option>
 									<option value="female">Female</option>
 								</FormControl>
