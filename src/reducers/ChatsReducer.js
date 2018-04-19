@@ -13,6 +13,9 @@ export default function chatsReducer(state = InitialState.chats, action) {
         case MessagesConstants.LOAD_CHAT_FAILURE: {
             return { ...state, ...{ error: action.error, isFetching: false, isSuccess: false }};
         }
+        case MessagesConstants.SELECT_CHAT: {
+            return { ...state, selectedChatId: action.chatId };
+        }
         default:
             return state
     }

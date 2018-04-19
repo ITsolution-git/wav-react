@@ -3,6 +3,7 @@ import voterListReducer from './VoterListReducer';
 import appReducer from './AppReducer';
 import taskListReducer from './TasksReducer';
 import chatsReduer from './ChatsReducer';
+import messagesReducer from './MessagesReducer';
 
 //this is where you insert your reducers into the store
 export default  {
@@ -10,5 +11,6 @@ export default  {
     voter: voterReducer,
     voterList: voterListReducer,
     taskList: taskListReducer,
-    chats: chatsReduer
+    chats: chatsReduer,
+    messages: messagesReducer
 }
