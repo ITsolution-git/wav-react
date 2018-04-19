@@ -5,10 +5,8 @@ import Typography from 'material-ui/Typography';
 import Input from 'material-ui/Input';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import authStorage from '../../storage/AuthStorage';
 import { loadMessages } from '../../actions/MessagesAction';
 import BaseComponent from '../shared/BaseComponent';
-import roles from '../../constants/Roles';
 
 class ChatBody extends BaseComponent {
     constructor(props, context) {
@@ -22,16 +20,14 @@ class ChatBody extends BaseComponent {
         const {
             messages: {
                 isSuccess,
-                isFetching,
                 error
             },
             actions: { loadMessages },
-            chatId,
-            chat
+            chatId
         } = props;
 
-        if (chatId && !isFetching && !isSuccess && !error) {
-            loadMessages(chatId, chat);
+        if (!isSuccess && !error) {
+            loadMessages(chatId);
         }
     }
 
@@ -76,14 +72,7 @@ class ChatBody extends BaseComponent {
                                 { messages.map((msg, i) => {
                                     return (
                                         <div key={i}>
-                                            {authStorage.getCurrentRole() === roles.admin
-                                                ? msg.isAdmin
-                                                    ? this.renderTo('Admin', msg.message)
-                                                    : this.renderFrom('User', msg.message)
-                                                : msg.isAdmin
-                                                    ? this.renderFrom('Admin', msg.message)
-                                                    : this.renderTo('User', msg.message)
-                                            }
+                                            { msg.isAdmin ? this.renderTo('Admin', msg.message) : this.renderFrom('User', msg.message) }
                                         </div>
                                     )
                                 })}
@@ -118,12 +107,10 @@ class ChatBody extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { messages } = state;
-    const { selectedChatId, chats = [] } = state.chats;
+    const { messages, chats: { selectedChatId } } = state;
     return {
         chatId: selectedChatId,
-        messages: messages[selectedChatId] || {},
-        chat: chats.find(chat => chat._id === selectedChatId)
+        messages: messages[selectedChatId] || {}
     }
 };
 
