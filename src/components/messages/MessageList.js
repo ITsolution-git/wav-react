@@ -12,10 +12,7 @@ import { loadChats, selectChat } from "../../actions/MessagesAction";
 
 class MessageList extends BaseComponent {
     componentWillMount() {
-        const { actions, chats: { isSuccess, error } } = this.props;
-        if (!isSuccess && !error) {
-            actions.loadChats();
-        }
+        this.props.actions.loadChats();
     }
 
     render() {
@@ -45,6 +42,10 @@ class MessageList extends BaseComponent {
                                     </Row>
                                 )
                             })}
+                            { chats.length === 0 &&
+                                <div className='msg-text'>
+                                    <Typography>No conversations</Typography>
+                                </div> }
                         </div>
                     </Col>
                     <Col md={8}>
