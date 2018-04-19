@@ -20,16 +20,16 @@ class AdminDashboard extends BaseComponent {
                                         <span className='ml-2 count'>7</span>
                                     </div>
                                 </Col>
-                                <Col md={6} xs={6} className='block-padding'>
+                               {/* <Col md={6} xs={6} className='block-padding'>
                                     <div className='icon-div manage-captains' onClick={() => this.onLink(routes.adminDashboard)}>
                                         <FontAwesome name='thumbs-up' size='3x'/>
                                         <span className='button-text'>Manage Captains</span>
                                         <span className='ml-2 count'>3</span>
                                     </div>
-                                </Col>
+                                </Col>*/}
                             </Row>
                             <Row>
-                                <Col md={6} xs={6} className='block-padding'>
+                                {/*<Col md={6} xs={6} className='block-padding'>
                                     <div className='icon-div manage-voters' onClick={() => this.onLink(routes.adminDashboard)}>
                                         <FontAwesome name='envelope-open'  size='3x' />
                                         <span className='button-text'>Manage Voters</span>
@@ -42,13 +42,13 @@ class AdminDashboard extends BaseComponent {
                                         <span className='button-text'>Forum</span>
                                         <span className='count'>12</span>
                                     </div>
-                                </Col>
+                                </Col>*/}
                             </Row>
                         </Col>
-                        <Col md={4} className='block-padding' >
+                        {/*<Col md={4} className='block-padding' >
                             <div className="right-column">
                             </div>
-                        </Col>
+                        </Col>*/}
                     </Row>
                 </div>
             </div>
