@@ -44,11 +44,11 @@ class SignedOnHeader extends BaseComponent {
 
     getCaptainLinks = () => {
         return [
-            { route: routes.invites, title: 'Invites' },
+           // { route: routes.invites, title: 'Invites' },
             { route: routes.tasksList, title: 'Tasks' },
             { route: routes.voterList, title: 'Voters' },
-            { route: routes.community, title: 'Community' },
-            { route: routes.forum, title: 'Forum' },
+           // { route: routes.community, title: 'Community' },
+           // { route: routes.forum, title: 'Forum' },
             { route: routes.captainsDashboard, title: 'Dashboard' }
         ]
     };
@@ -56,9 +56,9 @@ class SignedOnHeader extends BaseComponent {
     getAdminLinks = () => {
         return [
             { route: routes.adminDashboard, title: 'Messages' },
-            { route: routes.adminDashboard, title: 'Manage Captains' },
-            { route: routes.adminDashboard, title: 'Manage Voters' },
-            { route: routes.adminDashboard, title: 'Forum' }
+            //{ route: routes.adminDashboard, title: 'Manage Captains' },
+            //{ route: routes.adminDashboard, title: 'Manage Voters' },
+            //{ route: routes.adminDashboard, title: 'Forum' }
         ]
     };
 
