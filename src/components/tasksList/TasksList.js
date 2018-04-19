@@ -14,9 +14,9 @@ class TaskList extends BaseComponent {
         super(props, context);
     }
 
-    goToTask = taskId => {
+    goToTask = (taskId, groupId) => {
         let taskRoute = null;
-        switch (taskId) {
+        switch (groupId) {
             case taskIds.addVoterId: {
                 taskRoute = routes.addVoterTask;
                 break;
@@ -62,7 +62,7 @@ class TaskList extends BaseComponent {
                     { tasks.map((task, i) => {
                         return (
                             <Col key={i} md={16} xs={16}
-                                 onClick={() => this.goToTask(task.task_group_id)}
+                                 onClick={() => this.goToTask(task._id, task.task_group_id)}
                                  className='task' >
                                 <div>{ task.task_description }</div>
                             </Col>
