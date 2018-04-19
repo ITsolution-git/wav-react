@@ -11,15 +11,17 @@ import routes from '../../constants/Routes';
 import authStorage from '../../storage/AuthStorage';
 import { loadVoterList } from '../../actions/VoterListAction';
 import { loadTaskList } from '../../actions/TaskListAction';
+import { getBtwUserProfile } from '../../actions/SignOnAction';
 
 class CaptainsDashboard extends BaseComponent {
 
     constructor(props) {
         super(props);
-
+        const { actions } = this.props;
         const { userid, username } = authStorage.getLoggedUser();
-        this.props.actions.loadVoterList(userid, username);
-        this.props.actions.loadTaskList(userid);
+        actions.loadVoterList(userid, username);
+        actions.loadTaskList(userid);
+        actions.getBtwUserProfile();
 	}
 
     render() {
@@ -55,22 +57,29 @@ class CaptainsDashboard extends BaseComponent {
                                 </Col>
                             </Row>
                             <Row>
-                                {/*<Col md={6} xs={6} className='block-padding'>
-                                    <div className='icon-div invites' onClick={() => this.onLink(routes.invites)}>
-                                        <FontAwesome name='envelope-open'  size='3x' />
-                                        <span className='button-text'>
-                                            Invites <span>
-                                                (<b>{invitesCount}</b>)
-                                            </span>
-                                        </span>
+                                <Col md={6} xs={6} className='block-padding'>
+                                    <div className='icon-div messages' onClick={() => this.onLink(routes.messageList)}>
+                                        <FontAwesome name='tasks' size='3x'/>
+                                        <span className='button-text'>Messages</span>
+                                        <span className='ml-2 count'>7</span>
                                     </div>
                                 </Col>
-                                <Col md={6} xs={6} className='block-padding'>
-                                    <div className='icon-div forum' onClick={() => this.onLink(routes.forum)}>
-                                        <FontAwesome name='comments' size='3x'/>
-                                        <span className='button-text'>Forum</span>
-                                    </div>
-                                </Col>*/}
+                                {/*<Col md={6} xs={6} className='block-padding'>*/}
+                                    {/*<div className='icon-div invites' onClick={() => this.onLink(routes.invites)}>*/}
+                                        {/*<FontAwesome name='envelope-open'  size='3x' />*/}
+                                        {/*<span className='button-text'>*/}
+                                            {/*Invites <span>*/}
+                                                {/*(<b>{invitesCount}</b>)*/}
+                                            {/*</span>*/}
+                                        {/*</span>*/}
+                                    {/*</div>*/}
+                                {/*</Col>*/}
+                                {/*<Col md={6} xs={6} className='block-padding'>*/}
+                                    {/*<div className='icon-div forum' onClick={() => this.onLink(routes.forum)}>*/}
+                                        {/*<FontAwesome name='comments' size='3x'/>*/}
+                                        {/*<span className='button-text'>Forum</span>*/}
+                                    {/*</div>*/}
+                                {/*</Col>*/}
                             </Row>
                         </Col>
                         {/*<Col md={4} className='block-padding'>
@@ -110,7 +119,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ loadVoterList, loadTaskList }, dispatch)
+        actions: bindActionCreators({ loadVoterList, loadTaskList, getBtwUserProfile }, dispatch)
     };
 };
 

@@ -57,7 +57,7 @@ const router =() => (
 			<Route exact path = {routes.captainsDashboard}
 				   component = { Authorization(CaptainsDashboard, [captain]) } />
 			<Route exact path = {routes.messageList}
-				   component = { Authorization(MessageList, [admin]) } />
+				   component = { Authorization(MessageList, [captain, admin]) } />
             <Route exact path = {routes.adminDashboard}
                    component = { Authorization(AdminDashBoard, [admin]) } />
             <Route exact path = {routes.reports}

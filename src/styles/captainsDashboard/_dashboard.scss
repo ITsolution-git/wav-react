@@ -30,6 +30,12 @@ $link-icon-size: 85px;
       background-color: darken(#8DA3CA, 20%);
     }
   }
+  .messages {
+    background-color: #006BA6;
+    &:hover {
+      background-color: darken(#006BA6, 20%);
+    }
+  }
   .voters {
     background-color: #B6B7B2;
     &:hover {
