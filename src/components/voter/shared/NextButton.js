@@ -6,11 +6,8 @@ import { Button } from 'react-bootstrap';
 
 import BaseComponent from '../../shared/BaseComponent';
 import { nextNumberPersist, resetVoterState } from '../../../actions/VoterAction';
-import { btwSignOn } from '../../../actions/SignOnAction';
 import routes from '../../../constants/Routes';
 import voterConstants from '../../../constants/VoterConstants';
-import { getHomeRoute } from "../../../helpers/AuthHelper";
-import appDataTypes from "../../../constants/AppDataTypes";
 import boardingTypes from '../../../constants/VoterBoardingType';
 
 class NextButton extends BaseComponent {
@@ -25,12 +22,6 @@ class NextButton extends BaseComponent {
         actions.nextNumberPersist();
         this.onLink(routes.voterDetail);
     };
-
-    componentWillReceiveProps(props)  {
-        if (props.loginSuccess) {
-            this.onLink(getHomeRoute());
-        }
-    }
 
     componentWillMount() {
         const { boardingType } = this.props.voter;
@@ -55,13 +46,12 @@ class NextButton extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        voter: state.voter,
-        loginSuccess: state.app[appDataTypes.signOn].isSuccess
+        voter: state.voter
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ nextNumberPersist, resetVoterState, btwSignOn }, dispatch)
+    actions: bindActionCreators({ nextNumberPersist, resetVoterState }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NextButton));
