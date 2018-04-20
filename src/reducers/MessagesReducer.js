@@ -24,6 +24,13 @@ export default function messagesReducer(state = InitialState.chats, action) {
                     error
                 }};
         }
+        case MessagesConstants.ADD_MESSAGE: {
+            const { chatId, message } = action;
+            const { messages } = state[chatId];
+            return { ...state, [chatId]: {
+                    messages: [...messages, message]
+                }};
+        }
         default:
             return state
     }

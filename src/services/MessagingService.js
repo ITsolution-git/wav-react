@@ -4,7 +4,8 @@ import authStorage from '../storage/AuthStorage';
 
 export default {
     loadChats,
-    loadConversation
+    loadConversation,
+    sendMessage
 };
 
 function loadChats() {
@@ -21,6 +22,13 @@ function loadConversation(chatId) {
     });
 }
 
+function sendMessage(data) {
+    return postAsync({
+        url: `${config.apiHost}/api/v1/message/sendMessage`,
+        headers: getHeaders(),
+        data
+    });
+}
 function getHeaders() {
     return { 'x-key': authStorage.getLoggedUser().username };
 }
