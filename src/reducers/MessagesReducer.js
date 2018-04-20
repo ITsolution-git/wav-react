@@ -1,5 +1,3 @@
-import update from 'immutability-helper';
-
 import MessagesConstants from '../constants/MessagesConstants';
 import InitialState from '../constants/InitialState';
 

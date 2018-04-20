@@ -48,7 +48,7 @@ class ChatBody extends BaseComponent {
         return (
             <div className='msg-from'>
                 <Typography variant='caption'>{ user }</Typography>
-                <div className='msg-box'>{ message }</div>
+                <div className='msg-box'>{ this.formatMessage(message) }</div>
             </div>
         )
     };
@@ -56,10 +56,24 @@ class ChatBody extends BaseComponent {
     renderTo = (user, message) => {
         return (
             <div className='msg-to'>
-                <div className='msg-box'>{ message }</div>
+                <div className='msg-box'>{ this.formatMessage(message) }</div>
                 <Typography variant='caption'>{ user }</Typography>
             </div>
         )
+    };
+
+    formatMessage = (msg) => {
+        const jsonMsg = msg.parseJson();
+        if (jsonMsg) {
+            return (
+                <div>
+                    <div>Task: { jsonMsg.task }</div>
+                    <div>Checkpoint: { jsonMsg.checkpoint } </div>
+                    <div>Question: { jsonMsg.question }</div>
+                </div>
+            )
+        }
+        return msg;
     };
 
     sendMessage = () => {
