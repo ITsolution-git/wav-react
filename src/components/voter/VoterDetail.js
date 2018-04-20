@@ -13,6 +13,7 @@ import NextButton from './shared/NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
 import  { validate } from '../../utility/InputValidator';
 import { getAgeYears } from '../../helpers/InputHelper';
+import Spinner from '../shared/Spinner';
 
 
 class VoterDetail extends BaseComponent {
@@ -171,7 +172,12 @@ class VoterDetail extends BaseComponent {
 	}
 
 	render() {
-		const { makeList, currentNumber, matchListError } = this.props.voter,
+		const {
+			makeList,
+			currentNumber,
+			matchListError,
+			matchListFetching
+		} = this.props.voter,
 			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
 			loadPrevious = this.isLoadPrevious(),
@@ -211,11 +217,14 @@ class VoterDetail extends BaseComponent {
                         }
                     </Col>
                     <Col md={3} xs={6}>
-                        <Button className="btn btn-primary" onClick={this.onNext}>
+                        <Button className="btn btn-primary"
+								disabled={matchListFetching}
+								onClick={this.onNext}>
                             {loadPrevious ? 'Resubmit' : 'Next'}
                         </Button>
                     </Col>
 				</Row>
+                <Spinner loading={matchListFetching} height={130} />
 			</div>
 		);
 	}

@@ -7,6 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 import { loadTaskList } from '../../actions/TaskListAction';
 import routes from '../../constants/Routes';
 import taskIds from '../../constants/TaskIds';
+import Spinner from '../shared/Spinner';
 import BaseComponent from '../shared/BaseComponent';
 
 class TaskList extends BaseComponent {
@@ -54,10 +55,15 @@ class TaskList extends BaseComponent {
     }
 
     render() {
-        const { taskList: { tasks = []}} = this.props;
+        const { taskList: {
+            tasks = [],
+            isFetching
+        }} = this.props;
+
         return (
             <div className='bwt-task-list container'>
                 { !this.isMobile() && this.renderBackToHome()}
+                <Spinner height={300} loading={isFetching} />
                 <div className='task-list'>
                     { tasks.map((task, i) => {
                         return (

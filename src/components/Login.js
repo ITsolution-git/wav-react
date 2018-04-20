@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import BaseComponent from '../components/shared/BaseComponent';
 import appDataTypes from '../constants/AppDataTypes';
 import { btwSignOn } from '../actions/SignOnAction';
 import { getHomeRoute } from '../helpers/AuthHelper';
+import Spinner from '../components/shared/Spinner';
 
 
 class Login extends BaseComponent {
@@ -28,7 +28,7 @@ class Login extends BaseComponent {
 		if(e.key === 'Enter' || e.which === 13) {
 			this.btwSignOn();
 		}
-	}
+	};
 
 	btwSignOn() {
 		const { username, password } = this.state;
@@ -46,8 +46,8 @@ class Login extends BaseComponent {
 	}
 
 	render() {
-		const { error } = this.props;
-		let { password, username, emptyField } = this.state;
+		const { error, isFetching } = this.props;
+		const { password, username, emptyField } = this.state;
 		return (
 			<div className="btw-login container">
 				<div className="btw-form" onKeyPress={this.onKeyPress}>
@@ -70,10 +70,13 @@ class Login extends BaseComponent {
 												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
                     </div>
                     <div className="form-group">
-                        <button className="btn btn-primary" onClick={this.btwSignOn.bind(this)}>
+                        <button className="btn btn-primary"
+								disabled={isFetching}
+								onClick={this.btwSignOn.bind(this)}>
                             Login
                         </button>
                     </div>
+					<Spinner loading={isFetching} size={50} />
                    {/* <h8>Not registered? <Link to='/captainProfile/Register'>Register as a Captain</Link></h8>*/}
 				</div>
 			</div>
@@ -82,9 +85,10 @@ class Login extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-	const { error, isSuccess } = state.app[appDataTypes.signOn];
+	const { error, isSuccess, isFetching } = state.app[appDataTypes.signOn];
 	return {
 		error,
+        isFetching,
         isSuccess
 	};
 };
