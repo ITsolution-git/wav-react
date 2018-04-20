@@ -86,6 +86,20 @@ class ChatBody extends BaseComponent {
         this.setState({ value: ''});
     };
 
+    scrollToBottom = () => {
+        if (this.messagesEnd) {
+            this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
     render() {
         const {
             chatId,
@@ -112,6 +126,7 @@ class ChatBody extends BaseComponent {
                                         </div>
                                     )
                                 })}
+                                <div ref={(el) => { this.messagesEnd = el; }} ></div>
                                 <div className='controls'>
                                     <Input placeholder='Compose...'
                                                autoFocus
