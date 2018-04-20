@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import HttpsRedirect from 'react-https-redirect';
 
 import store from './store/index'
-import {Provider} from 'react-redux';
-import {BrowserRouter} from 'react-router-dom';
 import App from './components/App';
 
 
@@ -12,9 +13,11 @@ import registerServiceWorker from './registerServiceWorker';
 
 const app = (
 	<Provider store={store.configure(null)}>
-		<BrowserRouter>
-			<App/>
-		</BrowserRouter>
+		<HttpsRedirect>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+		</HttpsRedirect>
 	</Provider>
 );
 
