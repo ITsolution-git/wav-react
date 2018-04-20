@@ -9,6 +9,7 @@ import { loadVoterList, addVoter } from '../../actions/VoterListAction';
 import BaseComponent from '../shared/BaseComponent';
 import VoterItem from './VoterItem';
 import AddEditDialog from './AddEditDialog';
+import Spinner from '../shared/Spinner';
 
 class VotersList extends BaseComponent {
     constructor(props, context) {
@@ -31,7 +32,10 @@ class VotersList extends BaseComponent {
 
     render() {
         const { showAddDialog } = this.state;
-        const { voterList: { voters = []}} = this.props;
+        const { voterList: {
+            voters = [],
+            isFetching
+        }} = this.props;
         return (
             <div className='btw-voter btw-voter-list'>
                 { !this.isMobile() && this.renderBackToHome()}
@@ -40,6 +44,7 @@ class VotersList extends BaseComponent {
                         My Voters
                     </p>
                     <div style={{clear: 'both'}}></div>
+                    <Spinner height={300} loading={isFetching} />
                     <div className='voters-list'>
                         { voters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
                     </div>

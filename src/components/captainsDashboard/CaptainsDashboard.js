@@ -12,6 +12,7 @@ import authStorage from '../../storage/AuthStorage';
 import { loadVoterList } from '../../actions/VoterListAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import { getBtwUserProfile } from '../../actions/SignOnAction';
+import Spinner from '../shared/Spinner';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -25,14 +26,19 @@ class CaptainsDashboard extends BaseComponent {
 	}
 
     render() {
-        const { profile: { isSuccess }, voters_count, tasks_count } = this.props;
-        const votersCount = 27,
-              invitesCount = 20,
-              notificationCount = 5;
+        const {
+            profile: {
+                isSuccess,
+                isFetching
+            },
+            voters_count,
+            tasks_count
+        } = this.props;
 
         return (
             <div>
                 <div className='container btw-captains-dashboard'>
+                    <Spinner loading={isFetching} height={300} />
                     { isSuccess &&
                     <Row>
                         <Col md={8}>
