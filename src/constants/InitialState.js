@@ -44,7 +44,6 @@ export default {
     messages: {},
     user: {
         users: {},
-        count: 0,
         isFetching: false,
         isSuccess: false,
         error: null
