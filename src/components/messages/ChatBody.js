@@ -6,7 +6,7 @@ import Input from 'material-ui/Input';
 import { Row, Col, Button } from 'react-bootstrap';
 
 import authStorage from '../../storage/AuthStorage';
-import { loadMessages } from '../../actions/MessagesAction';
+import { loadMessages, sendMessage } from '../../actions/MessagesAction';
 import BaseComponent from '../shared/BaseComponent';
 import roles from '../../constants/Roles';
 
@@ -21,6 +21,7 @@ class ChatBody extends BaseComponent {
     componentWillReceiveProps(props) {
         const {
             messages: {
+                messages = [],
                 isSuccess,
                 isFetching,
                 error
@@ -30,7 +31,7 @@ class ChatBody extends BaseComponent {
             chat
         } = props;
 
-        if (chatId && !isFetching && !isSuccess && !error) {
+        if (messages.length === 0 && chatId && !isFetching && !isSuccess && !error) {
             loadMessages(chatId, chat);
         }
     }
@@ -59,6 +60,16 @@ class ChatBody extends BaseComponent {
                 <Typography variant='caption'>{ user }</Typography>
             </div>
         )
+    };
+
+    sendMessage = () => {
+        const {
+            actions: { sendMessage },
+            chatId
+        } = this.props;
+
+        sendMessage(chatId, this.state.value);
+        this.setState({ value: ''});
     };
 
     render() {
@@ -95,12 +106,12 @@ class ChatBody extends BaseComponent {
                                                value={value}
                                                fullWidth
                                                disableUnderline={true}
-                                               onChange={val => this.setState({ value: val })}
+                                               onChange={e => this.setState({ value: e.target.value })}
 
                                     />
                                     <Row>
                                         <Col md={3} xs={6}>
-                                            <Button disabled={!value}>Send</Button>
+                                            <Button disabled={!value} onClick={this.sendMessage}>Send</Button>
                                         </Col>
                                         <Col md={3} xs={6} onClick={() => this.setState({ value: ''})}>
                                             <Button>Cancel</Button>
@@ -128,7 +139,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ loadMessages }, dispatch)
+    actions: bindActionCreators({ loadMessages, sendMessage }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBody);

@@ -1,5 +1,6 @@
 import MessagesConstants from '../constants/MessagesConstants';
 import authStorage from '../storage/AuthStorage';
+import roles from '../constants/Roles';
 import MessagingService from '../services/MessagingService';
 
 export function loadChats() {
@@ -47,7 +48,9 @@ export function loadMessages(chatId, chat) {
                     let message = { ...chat };
                     message.isAdmin = false;
                     dispatch(actionSuccess(chatId, [ message ]));
+                    return;
                 }
+                dispatch(actionSuccess(chatId, messages));
             },
             error => {
                 dispatch(actionError(error.data.message));
@@ -63,5 +66,27 @@ export function loadMessages(chatId, chat) {
     }
     function actionError(chatId, error) {
         return { type: MessagesConstants.LOAD_MESSAGES_FAILURE, chatId, error };
+    }
+}
+
+export function sendMessage(chatId, message) {
+    return dispatch => {
+        const data = {
+            message,
+            userid: authStorage.getLoggedUser().userid,
+            isAdmin: authStorage.getCurrentRole() === roles.admin,
+            base_id: chatId
+        };
+
+        return MessagingService.sendMessage(data).then(
+            response => {
+                dispatch(action(chatId, data));
+            },
+            error => {}
+        )
+    };
+
+    function action(chatId, message) {
+      return { type: MessagesConstants.ADD_MESSAGE, chatId, message };
     }
 }
