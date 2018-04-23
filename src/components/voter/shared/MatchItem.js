@@ -20,7 +20,6 @@ export default class MatchItem extends BaseComponent {
             regaddrline2,
             regaddrcity,
             regaddrstate,
-            voterstatus,
             gender,
             birthdate,
             mailaddrline1,
@@ -48,7 +47,6 @@ export default class MatchItem extends BaseComponent {
                             <div>Phone: { phone }</div>
                             <div>Birthday: { birthdate }</div>
                             <div>Mail Address: { }</div>
-                            <div>Status: { voterstatus }</div>
                             <div>Gender: { gender }</div>
                         </div> }
                     <div className='link' onClick={e => {
