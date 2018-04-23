@@ -28,6 +28,8 @@ import MessageList from './messages/MessageList';
 // static pages
 import WhyBethewave from './static/WhyBethewave';
 import HowContribute from './static/HowContribute';
+import TermsOfUse from './static/TermsOfUse';
+import PrivacyPolicy from './static/PrivacyPolicy';
 
 import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
@@ -94,6 +96,8 @@ const router =() => (
 			// static route pages
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
             <Route exact path = {routes.howContribute} component = { HowContribute } />
+            <Route exact path = {routes.termsOfUse} component = { TermsOfUse } />
+            <Route exact path = {routes.privacyPolicy} component = { PrivacyPolicy } />
 		</Switch>
 	</Router>
 );
