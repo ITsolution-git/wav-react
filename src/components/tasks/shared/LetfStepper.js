@@ -1,12 +1,13 @@
 import React from 'react';
+import PubSub from "pubsub-js";
 import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
 import { Row, Col, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
-import routes from '../../../constants/Routes';
 import Tooltip from 'material-ui/Tooltip';
 
 import BaseComponent from '../../shared/BaseComponent';
 import HelpButton from '../shared/HelpButton';
+import pubsubConstants from "../../../constants/PubSubConstants";
 
 class LeftStepper extends BaseComponent {
     constructor(props, context) {
@@ -17,7 +18,7 @@ class LeftStepper extends BaseComponent {
     handleNext = () => {
         const { activeStep } = this.state;
         if (activeStep + 1 === this.props.steps.length) {
-            this.onLink(routes.tasksList);
+            PubSub.publish(pubsubConstants.onTaskComplete);
             return;
         }
         this.setState({

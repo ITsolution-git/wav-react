@@ -3,6 +3,8 @@ import authStorage from '../storage/AuthStorage';
 import { initializeRequest, loadDataSuccess, loadDataFailure } from './AppAction';
 import appDataTypes from '../constants/AppDataTypes';
 import { loadTaskList } from './TaskListAction';
+import history from '../utility/History';
+import routes from '../constants/Routes';
 
 export function sendHelpQuestion(message) {
     return dispatch => {
@@ -29,6 +31,7 @@ export function updateTask(data) {
             response => {
                 dispatch(loadDataSuccess(appDataTypes.updateTask, response));
                 dispatch(loadTaskList());
+                history.push(routes.tasksList);
             },
             response => {
                 dispatch(loadDataFailure(appDataTypes.updateTask, response.data.message));
