@@ -88,6 +88,9 @@ class TermsOfUse extends Component {
 
                 <p>
                 If you have any questions about these Terms, please contact us.<br/>
+                <ul>
+                    <li>By email: hi@bethewave.vote</li>
+                </ul>
                 </p><br/>
             </div>
         );
