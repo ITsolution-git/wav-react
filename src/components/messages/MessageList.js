@@ -18,6 +18,24 @@ class MessageList extends BaseComponent {
         }
     }
 
+    formatMessage = (msg) => {
+        const jsonMsg = msg.parseJson();
+        if (jsonMsg) {
+            return (
+                <div>
+                    <div>Task: { jsonMsg.task }</div>
+                    <div>Question: { this.cutMsg(jsonMsg.question )}</div>
+                </div>
+            )
+        }
+        return this.cutMsg(msg);
+    };
+
+    cutMsg = (msg) => {
+        return `${msg.substring(0,100)}...`;
+    };
+
+
     render() {
         const { chats, selectedChatId } = this.props.chats;
 
@@ -33,7 +51,7 @@ class MessageList extends BaseComponent {
                                          className={classnames('chat', { 'selected': chat._id === selectedChatId })}
                                          onClick={() => this.props.actions.selectChat(chat._id) }>
                                         <Col md={8}>
-                                            <div>{ chat.message }...</div>
+                                            <div>{ this.formatMessage(chat.message) }</div>
                                         </Col>
                                         <Col md={4}>
                                             <div>

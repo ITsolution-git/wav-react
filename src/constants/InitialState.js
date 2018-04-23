@@ -41,5 +41,11 @@ export default {
         isSuccess: false,
         error: null
     },
-    messages: {}
+    messages: {},
+    user: {
+        users: {},
+        isFetching: false,
+        isSuccess: false,
+        error: null
+    }
 }

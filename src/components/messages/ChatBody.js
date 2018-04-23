@@ -4,8 +4,8 @@ import { bindActionCreators } from "redux";
 import Typography from 'material-ui/Typography';
 import Input from 'material-ui/Input';
 import { Row, Col, Button } from 'react-bootstrap';
-
-import { loadMessages } from '../../actions/MessagesAction';
+import authStorage from '../../storage/AuthStorage';
+import { loadMessages, sendMessage } from '../../actions/MessagesAction';
 import BaseComponent from '../shared/BaseComponent';
 
 class ChatBody extends BaseComponent {
@@ -19,6 +19,7 @@ class ChatBody extends BaseComponent {
     componentWillReceiveProps(props) {
         const {
             messages: {
+                messages = [],
                 isSuccess,
                 error
             },
@@ -26,8 +27,9 @@ class ChatBody extends BaseComponent {
             chatId
         } = props;
 
-        if (!isSuccess && !error) {
-            loadMessages(chatId);
+        if (messages.length === 0 && chatId && !isFetching && !isSuccess && !error) {
+            loadMessages(chatId, chat);
+
         }
     }
 
@@ -43,7 +45,7 @@ class ChatBody extends BaseComponent {
         return (
             <div className='msg-from'>
                 <Typography variant='caption'>{ user }</Typography>
-                <div className='msg-box'>{ message }</div>
+                <div className='msg-box'>{ this.formatMessage(message) }</div>
             </div>
         )
     };
@@ -51,11 +53,49 @@ class ChatBody extends BaseComponent {
     renderTo = (user, message) => {
         return (
             <div className='msg-to'>
-                <div className='msg-box'>{ message }</div>
+                <div className='msg-box'>{ this.formatMessage(message) }</div>
                 <Typography variant='caption'>{ user }</Typography>
             </div>
         )
     };
+
+    formatMessage = (msg) => {
+        const jsonMsg = msg.parseJson();
+        if (jsonMsg) {
+            return (
+                <div>
+                    <div>Task: { jsonMsg.task }</div>
+                    <div>Checkpoint: { jsonMsg.checkpoint } </div>
+                    <div>Question: { jsonMsg.question }</div>
+                </div>
+            )
+        }
+        return msg;
+    };
+
+    sendMessage = () => {
+        const {
+            actions: { sendMessage },
+            chatId
+        } = this.props;
+
+        sendMessage(chatId, this.state.value);
+        this.setState({ value: ''});
+    };
+
+    scrollToBottom = () => {
+        if (this.messagesEnd) {
+            this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
 
     render() {
         const {
@@ -76,6 +116,7 @@ class ChatBody extends BaseComponent {
                                         </div>
                                     )
                                 })}
+                                <div ref={(el) => { this.messagesEnd = el; }} ></div>
                                 <div className='controls'>
                                     <Input placeholder='Compose...'
                                                autoFocus
@@ -84,12 +125,12 @@ class ChatBody extends BaseComponent {
                                                value={value}
                                                fullWidth
                                                disableUnderline={true}
-                                               onChange={val => this.setState({ value: val })}
+                                               onChange={e => this.setState({ value: e.target.value })}
 
                                     />
                                     <Row>
                                         <Col md={3} xs={6}>
-                                            <Button disabled={!value}>Send</Button>
+                                            <Button disabled={!value} onClick={this.sendMessage}>Send</Button>
                                         </Col>
                                         <Col md={3} xs={6} onClick={() => this.setState({ value: ''})}>
                                             <Button>Cancel</Button>
@@ -115,7 +156,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ loadMessages }, dispatch)
+    actions: bindActionCreators({ loadMessages, sendMessage }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBody);

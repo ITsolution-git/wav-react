@@ -27,15 +27,11 @@ $height: 600px;
     .chat-body {
       height: $height;
       border: 1px solid lightgray;
-      .msg-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-      }
+      position: relative;
       .messages {
-        height: 100%;
-        position: relative;
+        height: 67%;
+        overflow-y: auto;
+        overflow-x: hidden;
         .msg {
           display: flex;
           align-items: center;
@@ -55,16 +51,22 @@ $height: 600px;
           background-color: #7892C0;
           color: white;
         }
-
-        .controls {
-          padding: 2%;
-          width: 100%;
-          height: 180px;
-          bottom: 0;
-          border-top: 1px solid lightgray;
-          position: absolute;
-        }
       }
+      .controls {
+        padding: 2%;
+        width: 100%;
+        height: 180px;
+        bottom: 0;
+        border-top: 1px solid lightgray;
+        position: absolute;
+      }
+    }
+
+    .msg-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
 
     button {

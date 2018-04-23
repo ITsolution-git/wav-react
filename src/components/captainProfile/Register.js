@@ -5,6 +5,7 @@ import { btwRegister } from '../../actions/SignOnAction';
 import YouTube from 'react-youtube';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
@@ -109,43 +110,45 @@ class Register extends BaseComponent {
 		const { error } = this.props;
 		const nameWidth = this.isMobile() ? 12 : 6;
 		return (
-			<div className='btw-identity btw-register container'>
-				{ this.isDesktop() && this.renderBackToHome()}
-				<div>
-					<YouTube
-						videoId="2g811Eo7K8U"
-						opts={opts}
-						className="video"
-						onReady={this._onReady}
-					/>
-				</div>
-				<div className="intro">
-					<p className="intro-title">
-						Your Information
-					</p>
-				</div>
-				<form>
-					<div className="row">
-						{ this.renderInput('firstname', 'First Name', 'text', nameWidth, '* First Name is not valid *') }
-                        { this.renderInput('lastname', 'Last Name', 'text', nameWidth, '* Last Name is not valid *') }
+			<div>
+				<h8 className="pull-right" style={{ marginTop: '-30px', marginRight: '30px'}}>Already registered? <Link to='/'>Sign in here</Link></h8>
+				<div className='btw-identity btw-register container'>
+					<div>
+						<YouTube
+							videoId="2g811Eo7K8U"
+							opts={opts}
+							className="video"
+							onReady={this._onReady}
+						/>
 					</div>
-                    { this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
-                    { this.renderInput('email', 'Email', 'email', 0, error || '* Email is not valid *') }
-					<div className={classNames({'password-div': !this.state.isValid['password'] })}>
-                        { this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
+					<div className="intro">
+						<p className="intro-title">
+							Your Information
+						</p>
 					</div>
-                    { this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
-				</form>
-				<Row>
-					<Col xs={6}>
-						{ this.isMobile() && this.renderBackToHome()}
-					</Col>
-					<Col md={12} xs={6}>
-                        <div id="btn_signup">
-                            <button className="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
-                        </div>
-					</Col>
-				</Row>
+					<form>
+						<div className="row">
+							{ this.renderInput('firstname', 'First Name', 'text', nameWidth, '* First Name is not valid *') }
+							{ this.renderInput('lastname', 'Last Name', 'text', nameWidth, '* Last Name is not valid *') }
+						</div>
+						{ this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
+						{ this.renderInput('email', 'Email', 'email', 0, error || '* Email is not valid *') }
+						<div className={classNames({'password-div': !this.state.isValid['password'] })}>
+							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
+						</div>
+						{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
+					</form>
+					<Row>
+						<Col xs={6}>
+							{ this.isMobile() && this.renderBackToHome()}
+						</Col>
+						<Col md={12} xs={6}>
+							<div id="btn_signup">
+								<button className="btn btn-primary" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up</button>
+							</div>
+						</Col>
+					</Row>
+				</div>
 			</div>
 		);
 	}

@@ -2,6 +2,7 @@ import taskService from '../services/TaskService';
 import authStorage from '../storage/AuthStorage';
 import { initializeRequest, loadDataSuccess, loadDataFailure } from './AppAction';
 import appDataTypes from '../constants/AppDataTypes';
+import { loadTaskList } from './TaskListAction';
 
 export function sendHelpQuestion(message) {
     return dispatch => {
@@ -27,6 +28,7 @@ export function updateTask(data) {
         return taskService.updateTask(data).then(
             response => {
                 dispatch(loadDataSuccess(appDataTypes.updateTask, response));
+                dispatch(loadTaskList());
             },
             response => {
                 dispatch(loadDataFailure(appDataTypes.updateTask, response.data.message));

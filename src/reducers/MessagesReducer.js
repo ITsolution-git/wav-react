@@ -1,5 +1,3 @@
-import update from 'immutability-helper';
-
 import MessagesConstants from '../constants/MessagesConstants';
 import InitialState from '../constants/InitialState';
 
@@ -22,6 +20,13 @@ export default function messagesReducer(state = InitialState.chats, action) {
                     isFetching: false,
                     isSuccess: false,
                     error
+                }};
+        }
+        case MessagesConstants.ADD_MESSAGE: {
+            const { chatId, message } = action;
+            const { messages } = state[chatId];
+            return { ...state, [chatId]: {
+                    messages: [...messages, message]
                 }};
         }
         default:
