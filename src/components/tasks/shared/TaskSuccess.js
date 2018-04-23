@@ -1,4 +1,5 @@
 import React from 'react';
+import PubSub from "pubsub-js";
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -6,11 +7,18 @@ import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../../shared/BaseComponent';
 import { updateTask } from '../../../actions/TaskAction';
+import pubsubConstants from "../../../constants/PubSubConstants";
 
 class TaskSuccess extends BaseComponent {
     componentWillMount() {
-        const { actions, data } = this.props;
-        actions.updateTask(data);
+        this.taskSubscription = PubSub.subscribe(pubsubConstants.onTaskComplete, type => {
+            const { actions, data } = this.props;
+            actions.updateTask(data);
+        });
+    }
+
+    componentWillUnmount() {
+        PubSub.unsubscribe(this.taskSubscription);
     }
 
     render() {

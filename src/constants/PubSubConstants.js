@@ -1,3 +1,4 @@
 export default {
-    onAuthChange: 'onAuthChange'
+    onAuthChange: 'onAuthChange',
+    onTaskComplete: 'onTaskComplete'
 }
