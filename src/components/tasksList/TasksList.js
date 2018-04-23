@@ -18,8 +18,8 @@ class TaskList extends BaseComponent {
     goToTask = (taskId, groupId) => {
         let taskRoute = null;
         switch (groupId) {
-            case taskIds.addVoterId: {
-                taskRoute = routes.addVoterTask;
+            case taskIds.updateYourProfileId: {
+                taskRoute = routes.updateProfileTask;
                 break;
             }
             case taskIds.literatureTextId: {
@@ -38,7 +38,11 @@ class TaskList extends BaseComponent {
                 taskRoute = routes.registerVoterTask;
                 break;
             }
-            case taskIds.updateProfileId: {
+            case taskIds.addVoterId: {
+                taskRoute = routes.addVoterTask;
+                break;
+            }
+            case taskIds.updateVoterProfileId: {
                 taskRoute = routes.updateProfileTask;
                 break;
             }
