@@ -39,61 +39,61 @@ const router =() => (
 	<Router history={ History }>
 		<Switch>
 			<Route exact path = {routes.login}
-				   component = { Authorization(Login, [guest]) } />
+			       component = { Authorization(Login, [guest]) } />
 			<Route exact path = {routes.register}
-				   component = { Authorization(Register, [guest, captain, admin]) } />
+			       component = { Authorization(Register, [guest, captain, admin]) } />
 			<Route exact path = {routes.pageDown}
-				   component = { GeneralErrorPage } />
+			       component = { GeneralErrorPage } />
 			<Route exact path = {routes.invites}
-				   component = { Authorization(SendInvite, [captain]) } />
+			       component = { Authorization(SendInvite, [captain]) } />
 			<Route exact path = {routes.tasksList}
-				   component = { Authorization(TasksList, [captain]) } />
+			       component = { Authorization(TasksList, [captain]) } />
 			<Route exact path = {routes.voterList}
-				   component = { Authorization(VotersList, [captain]) } />
+			       component = { Authorization(VotersList, [captain]) } />
 			<Route exact path = {routes.community}
-				   component = { Authorization(Community, [captain]) } />
-            <Route exact path = {routes.forum}
-                   component = { Authorization(Forum, [captain]) } />
+			       component = { Authorization(Community, [captain]) } />
+			<Route exact path = {routes.forum}
+			       component = { Authorization(Forum, [captain]) } />
 			<Route exact path = {routes.captainsDashboard}
-				   component = { Authorization(CaptainsDashboard, [captain]) } />
+			       component = { Authorization(CaptainsDashboard, [captain]) } />
 			<Route exact path = {routes.messageList}
-				   component = { Authorization(MessageList, [admin]) } />
-            <Route exact path = {routes.adminDashboard}
-                   component = { Authorization(AdminDashBoard, [admin]) } />
-            <Route exact path = {routes.reports}
-                   component = { Authorization(Reports, [admin]) } />
+			       component = { Authorization(MessageList, [admin]) } />
+			<Route exact path = {routes.adminDashboard}
+			       component = { Authorization(AdminDashBoard, [admin]) } />
+			<Route exact path = {routes.reports}
+			       component = { Authorization(Reports, [admin]) } />
 
 			// voter onboarding
-            <Route exact path = {routes.makelist}
-                   component = { Authorization(MakeList, [captain]) } />
+			<Route exact path = {routes.makelist}
+			       component = { Authorization(MakeList, [captain]) } />
 			<Route exact path = {routes.voterDetail}
-				   component = { Authorization(VoterDetail, [captain]) } />
-            <Route exact path = {routes.matchList}
-                   component = { Authorization(MatchList, [captain]) } />
-            <Route exact path = {routes.voterSuccess}
-                   component = { Authorization(VoterSuccess, [captain]) } />
-            <Route exact path = {routes.voterError}
-                   component = { Authorization(VoterError, [captain]) } />
+			       component = { Authorization(VoterDetail, [captain]) } />
+			<Route exact path = {routes.matchList}
+			       component = { Authorization(MatchList, [captain]) } />
+			<Route exact path = {routes.voterSuccess}
+			       component = { Authorization(VoterSuccess, [captain]) } />
+			<Route exact path = {routes.voterError}
+			       component = { Authorization(VoterError, [captain]) } />
 
 			// tasks
-            <Route exact path = {routes.addVoterTask}
-                   component = { Authorization(AddVoterTask, [captain]) } />
-            <Route exact path = {routes.addVoterTask}
-                   component = { Authorization(AddVoterTask, [captain]) } />
-            <Route exact path = {routes.literatureTextTask}
-                   component = { Authorization(LiteratureTextTask, [captain]) } />
-            <Route exact path = {routes.literatureVideoTask}
-                   component = { Authorization(LiteratureVideoTask, [captain]) } />
-            <Route exact path = {routes.recruitingCaptainTask}
-                   component = { Authorization(RecruitingCaptainTask, [captain]) } />
-            <Route exact path = {routes.registerVoterTask}
-                   component = { Authorization(RegisterVoterTask, [captain]) } />
-            <Route exact path = {routes.updateProfileTask}
-                   component = { Authorization(UpdateProfileTask, [captain]) } />
+			<Route exact path = {routes.addVoterTask}
+			       component = { Authorization(AddVoterTask, [captain]) } />
+			<Route exact path = {routes.addVoterTask}
+			       component = { Authorization(AddVoterTask, [captain]) } />
+			<Route exact path = {routes.literatureTextTask}
+			       component = { Authorization(LiteratureTextTask, [captain]) } />
+			<Route exact path = {routes.literatureVideoTask}
+			       component = { Authorization(LiteratureVideoTask, [captain]) } />
+			<Route exact path = {routes.recruitingCaptainTask}
+			       component = { Authorization(RecruitingCaptainTask, [captain]) } />
+			<Route exact path = {routes.registerVoterTask}
+			       component = { Authorization(RegisterVoterTask, [captain]) } />
+			<Route exact path = {routes.updateProfileTask}
+			       component = { Authorization(UpdateProfileTask, [captain]) } />
 
 			// static route pages
-            <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
-            <Route exact path = {routes.howContribute} component = { HowContribute } />
+			<Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
+			<Route exact path = {routes.howContribute} component = { HowContribute } />
 		</Switch>
 	</Router>
 );
