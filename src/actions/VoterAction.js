@@ -1,7 +1,14 @@
 import VoterContants from '../constants/VoterConstants';
 import voterService from '../services/VoterService';
 import authStorage from '../storage/AuthStorage';
-import boardingTypes from "../constants/VoterBoardingType";
+import boardingTypes from '../constants/VoterBoardingType';
+import routes from '../constants/Routes';
+import history from '../utility/History';
+
+let boardingInfo = {
+    noResultsCount: 0,
+    maxEmptyCount: 2
+};
 
 export function makeListPersist(makeList) {
 	return dispatch => {
@@ -55,6 +62,13 @@ export function matchListPersist(voterDetails, resubmit = false) {
            result => {
                 const { data } = result.data;
                 if (data) {
+                    boardingInfo.noResultsCount = data.count === 0 ? boardingInfo.noResultsCount + 1 : 0;
+                    if (boardingInfo.noResultsCount >= boardingInfo.maxEmptyCount) {
+                        boardingInfo.noResultsCount = 0;
+                        history.push(routes.voterError);
+                        return;
+                    }
+
                     dispatch(actionSuccess(data.ctRecords));
                     return;
                 }
