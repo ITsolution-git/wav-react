@@ -67,7 +67,6 @@ class CaptainsDashboard extends BaseComponent {
                                     <div className='icon-div messages' onClick={() => this.onLink(routes.messageList)}>
                                         <FontAwesome name='tasks' size='3x'/>
                                         <span className='button-text'>Messages</span>
-                                        <span className='ml-2 count'>7</span>
                                     </div>
                                 </Col>
                                 {/*<Col md={6} xs={6} className='block-padding'>*/}
