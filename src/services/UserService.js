@@ -1,5 +1,5 @@
 import config from '../config/ApiConfig';
-import { getAsync, postAsync } from '../helpers/RequestHelper';
+import { getAsync } from '../helpers/RequestHelper';
 import authStorage from "../storage/AuthStorage";
 
 const UserService = {
@@ -8,7 +8,7 @@ const UserService = {
 
 function loadUser(userId) {
     return getAsync({
-        url: `${config.apiHost}/api/v1/getUser`,
+        url: `${config.apiHost}/api/v1/getUserById?${userId}`,
         headers: getHeaders()
     });
 }
