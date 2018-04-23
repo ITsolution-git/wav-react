@@ -15,39 +15,54 @@ class TaskList extends BaseComponent {
         super(props, context);
     }
 
-    goToTask = (taskId, groupId) => {
-        let taskRoute = null;
-        switch (groupId) {
+    resolveTaskData = (task) => {
+        const {
+            task_group_id,
+            task_description,
+            voter_metaData: {
+                firstname,
+                lastname
+            } = {}
+        } = task;
+        task.route = null;
+        task.description = task_description;
+
+        switch (task_group_id) {
             case taskIds.updateYourProfileId: {
-                taskRoute = routes.updateProfileTask;
+                task.route = routes.updateProfileTask;
                 break;
             }
             case taskIds.literatureTextId: {
-                taskRoute = routes.literatureTextTask;
+                task.route = routes.literatureTextTask;
                 break;
             }
             case taskIds.literatureVideoId: {
-                taskRoute = routes.literatureVideoTask;
+                task.route = routes.literatureVideoTask;
                 break;
             }
             case taskIds.recruitingVoterId: {
-                taskRoute = routes.recruitingCaptainTask;
+                task.route = routes.recruitingCaptainTask;
                 break;
             }
             case taskIds.registerVoterId: {
-                taskRoute = routes.registerVoterTask;
+                task.description = `Help ${firstname} ${lastname} get registered`;
+                task.route = routes.registerVoterTask;
                 break;
             }
             case taskIds.addVoterId: {
-                taskRoute = routes.addVoterTask;
+                task.route = routes.addVoterTask;
                 break;
             }
             case taskIds.updateVoterProfileId: {
-                taskRoute = routes.updateProfileTask;
+                task.description = `Update ${firstname} ${lastname}'s profile`;
+                task.route = routes.updateProfileTask;
                 break;
             }
         }
+        return task;
+    };
 
+    goToTask = (taskId, taskRoute) => {
         this.onLink(`${taskRoute}?taskId=${taskId}`);
     };
 
@@ -70,11 +85,12 @@ class TaskList extends BaseComponent {
                 <Spinner height={300} loading={isFetching} />
                 <div className='task-list'>
                     { tasks.map((task, i) => {
+                        const taskData = this.resolveTaskData(task);
                         return (
                             <Col key={i} md={16} xs={16}
-                                 onClick={() => this.goToTask(task._id, task.task_group_id)}
+                                 onClick={() => this.goToTask(taskData._id, taskData.route)}
                                  className='task' >
-                                <div>{ task.task_description }</div>
+                                <div>{ taskData.description }</div>
                             </Col>
                         )
                     })}
