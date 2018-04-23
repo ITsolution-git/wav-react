@@ -7,12 +7,16 @@ import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
 import boardingTypes from '../../constants/VoterBoardingType';
+import VoterContants from "../../constants/VoterConstants";
 
 class VoterSuccess extends BaseComponent {
 
     render() {
         const { firstname = '', lastname = ''} = getUrlParams(this.props);
-        const { boardingType } = this.props.voter;
+        const { boardingType, currentNumber, makeList } = this.props.voter,
+            nextFirstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber + 1}`],
+            nextLastName = makeList[`${VoterContants.LAST_NAME_PREFIX}${currentNumber + 1}`];
+
         return (
             <div className='btw-voter btw-voter-success container'>
                 <div className="full-name">
@@ -24,7 +28,7 @@ class VoterSuccess extends BaseComponent {
                 <div className='success-text'>Successfully registered</div>
                 { boardingType === boardingTypes.register &&
                     <div>
-                        <div className='try-next'>Let's try 'Next' name</div>
+                        { nextFirstName && <div className='try-next'>Lets see if { nextFirstName } { nextLastName } is registered to vote</div> }
                         <div className='next-button'>
                             <NextButton />
                         </div>
