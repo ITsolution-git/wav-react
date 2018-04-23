@@ -7,11 +7,11 @@ import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
 import voterConstants from '../../constants/VoterConstants';
-
+import boardingTypes from '../../constants/VoterBoardingType';
 
 class VoterError extends BaseComponent {
     render() {
-        const { makeList, currentNumber } = this.props.voter,
+        const { makeList, currentNumber, boardingType } = this.props.voter,
             firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
             lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`];
 
@@ -24,9 +24,9 @@ class VoterError extends BaseComponent {
                 </div>
                 <div className='cant-find'>We cant find '{ firstname } { lastname }' in the voter registry.</div>
                 <div className='ok-text'>That's okay we will come back to this person.</div>
-                <div>
+                { boardingType === boardingTypes.register && <div>
                     <NextButton />
-                </div>
+                </div> }
             </div>
         );
     }
