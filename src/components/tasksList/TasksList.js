@@ -27,8 +27,6 @@ class TaskList extends BaseComponent {
         task.route = null;
         task.description = task_description;
 
-        console.log(task);
-
         switch (task_group_id) {
             case taskIds.updateYourProfileId: {
                 task.route = routes.updateProfileTask;
