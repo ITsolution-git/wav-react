@@ -44,20 +44,32 @@ class ChatBody extends BaseComponent {
       );
     };
 
-    renderFrom = (user, message) => {
+    renderFrom = (message, isAdmin) => {
         return (
             <div className='msg-from'>
-                <Typography variant='caption'>{ user }</Typography>
+                <Typography variant='caption'>{ this.getUsername(isAdmin) }</Typography>
                 <div className='msg-box'>{ this.formatMessage(message) }</div>
             </div>
         )
     };
 
-    renderTo = (user, message) => {
+    renderTo = (message, isAdmin) => {
         return (
             <div className='msg-to'>
                 <div className='msg-box'>{ this.formatMessage(message) }</div>
-                <Typography variant='caption'>{ user }</Typography>
+                <Typography variant='caption'>{ this.getUsername(isAdmin, true) }</Typography>
+            </div>
+        )
+    };
+
+    getUsername = (isAdmin, isTo) => {
+        const { user_info: { user: { username } = {} } = {} } = this.props.chat || {},
+            resolvedUsername = isTo ? authStorage.getLoggedUser().username : username,
+            isAdminText = isAdmin && ' (admin)' || '';
+        return (
+            <div>
+                <div>{ resolvedUsername }</div>
+                <div>{ isAdminText }</div>
             </div>
         )
     };
@@ -115,13 +127,13 @@ class ChatBody extends BaseComponent {
                                 { messages.map((msg, i) => {
                                     return (
                                         <div key={i}>
-                                            {authStorage.getCurrentRole() === roles.admin
+                                            { authStorage.getCurrentRole() === roles.admin
                                                 ? msg.isAdmin
-                                                    ? this.renderTo('Admin', msg.message)
-                                                    : this.renderFrom('User', msg.message)
+                                                    ? this.renderTo(msg.message, true)
+                                                    : this.renderFrom(msg.message)
                                                 : msg.isAdmin
-                                                    ? this.renderFrom('Admin', msg.message)
-                                                    : this.renderTo('User', msg.message)
+                                                    ? this.renderFrom(msg.message, true)
+                                                    : this.renderTo(msg.message)
                                             }
                                         </div>
                                     )
