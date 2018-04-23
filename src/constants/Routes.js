@@ -24,5 +24,7 @@ export default {
     updateProfileTask: '/task/updateProfile',
     // static pages
     whyBetheWave: '/whyBetheWave',
-    howContribute: '/howYouCanContribute'
+    howContribute: '/howYouCanContribute',
+    termsOfUse: '/termsOfUse',
+    privacyPolicy: '/privacyPolicy'  
 }

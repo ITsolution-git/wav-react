@@ -17,7 +17,8 @@ class Register extends BaseComponent {
 		super();
 		this.state = {
 			btwIdentity: this.getEmptyState(),
-			isValid: this.getEmptyState(true)
+			isValid: this.getEmptyState(true),
+			termsAndPrivacy: -1
 		}
 	}
 
@@ -37,6 +38,12 @@ class Register extends BaseComponent {
 		identity[field] = event.target.value;
 		this.setState({
 			btwIdentity: identity
+		})
+	}
+
+	onTermsAndPrivacy(event) {
+		this.setState({
+			termsAndPrivacy: this.state.termsAndPrivacy === -1 ? 1 : 1 - this.state.termsAndPrivacy
 		})
 	}
 
@@ -62,6 +69,12 @@ class Register extends BaseComponent {
         });
 
 		this.setState({ isValid: validation });
+
+		if (this.state.termsAndPrivacy < 1) {
+
+			this.setState({ termsAndPrivacy: 0 });
+			return;
+		}
 
 		return Object.keys(btwIdentity).some(key => !validation[key])
 			? true
@@ -104,7 +117,7 @@ class Register extends BaseComponent {
 				<div>At least one special character</div>
 				<div>At least one number</div>
 				<div>At lease one upper case character</div>
-				<div>Minimum of 7</div>
+				<div>Minimum of 7 characters</div>
 			</div>
 		);
 		const { error } = this.props;
@@ -115,7 +128,7 @@ class Register extends BaseComponent {
 				<div className='btw-identity btw-register container'>
 					<div>
 						<YouTube
-							videoId="2g811Eo7K8U"
+							videoId="qSTwrt8oE3g"
 							opts={opts}
 							className="video"
 							onReady={this._onReady}
@@ -137,9 +150,26 @@ class Register extends BaseComponent {
 							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
 						</div>
 						{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
+						<div className="">
+							<div className="row margin0">
+								<div className="col-xs-1 padding0">
+									<input 
+										type="checkbox" 
+										value=""
+										onClick={this.onTermsAndPrivacy.bind(this)}/>
+								</div>
+								<div className="col-xs-11 padding0 terms-privacy">
+									<label>
+										I have read and understood the term of use and by signing up, I agree to Bethewave's <Link to='/termsOfUse'>Terms of Use</Link> and <Link to='/privacyPolicy'>Privacy Policy</Link>
+									</label>
+								</div>
+							</div>
+							{ this.state.termsAndPrivacy === 0 && <span className="pull-left">Terms and Privacy is required</span> }
+						</div>
+						<br/><br/>
 					</form>
 					<Row>
-						<Col xs={6}>
+						<Col xs={6}>	
 							{ this.isMobile() && this.renderBackToHome()}
 						</Col>
 						<Col md={12} xs={6}>

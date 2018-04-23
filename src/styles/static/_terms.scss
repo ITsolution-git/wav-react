@@ -1,0 +1,8 @@
+.btw-terms {
+    @include respond-to($desktop) {
+        width: $max_width;
+    }
+	margin: auto;
+    margin-top: $margin_top;
+    text-align: left;
+}
