@@ -84,6 +84,7 @@ class TaskList extends BaseComponent {
                 { !this.isMobile() && this.renderBackToHome()}
                 <Spinner height={300} loading={isFetching} />
                 <div className='task-list'>
+                    { !tasks.length && <h1 style={{color:"black"}}>You have no new tasks.</h1>}
                     { tasks.map((task, i) => {
                         const taskData = this.resolveTaskData(task);
                         return (
