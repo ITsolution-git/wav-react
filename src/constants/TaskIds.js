@@ -1,5 +1,5 @@
 export default {
-    updateProfileId: 'TS_GRP_001',
+    updateProfileId: 'TS_GRP_008',
     literatureVideoId: 'TS_GRP_002',
     literatureTextId: 'TS_GRP_003',
     registerVoterId: 'TS_GRP_004',
