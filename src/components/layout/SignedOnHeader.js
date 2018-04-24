@@ -11,6 +11,9 @@ import {
     MenuItem
 } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+import Dialog, { DialogContent } from 'material-ui/Dialog';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
@@ -22,6 +25,11 @@ import { bindActionCreators } from 'redux';
 import { getBtwUserProfile } from '../../actions/SignOnAction';
 
 class SignedOnHeader extends BaseComponent {
+
+    state = {
+        showInfoModal: false
+    };
+
     componentWillMount() {
         this.checkForLoadingProfile(this.props);
     }
@@ -68,18 +76,36 @@ class SignedOnHeader extends BaseComponent {
             : this.getAdminLinks();
     };
 
+    handleHeaderClick = (e) => {
+        const { makelist, voterDetail, matchList, voterSuccess, voterError } = routes;
+        const { pathname } = this.props.history.location;
+        if ([ makelist, voterDetail, matchList, voterSuccess, voterError ].includes(pathname)
+            && !this.state.showInfoModal) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.setState({ showInfoModal: true });
+        }
+    };
+
+    onCloseInfoModal = () => {
+        this.setState({ showInfoModal: false })
+    };
+
     render() {
-        const { profile: { isSuccess, data } } = this.props;
-        const name = isSuccess ? data.firstname : '';
+        const { profile: { isSuccess, data } } = this.props,
+            { showInfoModal } = this.state,
+            name = isSuccess && data.firstname || '';
 
         return (
-            <div className='btw-on-header'>
+            <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
                 <Row className='dropdown-div'>
                     <Col md={2} mdOffset={10} className='btw-nav-dropdown'>
                         <FontAwesome className='btw-avatar'
                                      name='user-circle'
                                      size='3x' />
-                        <NavDropdown eventKey={1} title={name} id="nav-dropdown">
+                        <NavDropdown eventKey={1}
+                                     title={name}
+                                     id="nav-dropdown">
                             <MenuItem eventKey={1.1}>Profile</MenuItem>
                             <MenuItem eventKey={1.2}>Settings</MenuItem>
                             <MenuItem eventKey={1.3} onClick={() => logout()}>Sign out</MenuItem>
@@ -101,6 +127,15 @@ class SignedOnHeader extends BaseComponent {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
+                <Dialog open={showInfoModal}
+                        onClose={this.onCloseInfoModal}>
+                    <DialogContent>
+                        <Typography gutterBottom>Please complete the flow first and then you can access these features</Typography>
+                        <Button color='primary'
+                                variant='raised'
+                                onClick={this.onCloseInfoModal}>Ok</Button>
+                    </DialogContent>
+                </Dialog>
             </div>
         )
     }

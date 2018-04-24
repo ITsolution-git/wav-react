@@ -8,10 +8,19 @@ import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
 import boardingTypes from '../../constants/VoterBoardingType';
 import VoterContants from "../../constants/VoterConstants";
+import routes from "../../constants/Routes";
 
 class VoterSuccess extends BaseComponent {
 
-    render() {
+    componentWillMount() {
+        if (this.props.voter.boardingType === boardingTypes.voterList) {
+            setTimeout(() => {
+                this.onLink(routes.voterList);
+            }, 2000);
+        }
+    }
+
+     render() {
         const { firstname = '', lastname = ''} = getUrlParams(this.props);
         const { boardingType, currentNumber, makeList } = this.props.voter,
             nextFirstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber + 1}`],
