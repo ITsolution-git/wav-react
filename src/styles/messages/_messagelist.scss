@@ -40,15 +40,22 @@ $height: 600px;
         .msg-from {
           @extend .msg;
           justify-content: flex-start;
+          .msg-box {
+            @extend .msg-box-shared;
+            background-color: #91E45B;
+          }
         }
         .msg-to {
           @extend .msg;
           justify-content: flex-end;
+          .msg-box {
+            @extend .msg-box-shared;
+            background-color: #3C98D9;
+          }
         }
-        .msg-box {
+        .msg-box-shared {
           margin: 0 2% 0 2%;
           padding: 2%;
-          background-color: #7892C0;
           color: white;
         }
       }
