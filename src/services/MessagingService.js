@@ -1,6 +1,7 @@
 import config from '../config/ApiConfig';
 import { getAsync, postAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
+import roles from '../constants/Roles';
 
 export default {
     loadChats,
@@ -10,7 +11,7 @@ export default {
 
 function loadChats() {
     return getAsync({
-        url: `${config.apiHost}/api/v1/message/getMessageQueue`,
+        url: `${config.apiHost}/api/v1/message/getMessageQueue?userid=${ authStorage.getLoggedUser().userid}&isAdmin=${ authStorage.getCurrentRole() === roles.admin }`,
         headers: getHeaders()
     });
 }
