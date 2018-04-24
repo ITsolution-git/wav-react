@@ -42,7 +42,7 @@ $height: 600px;
           justify-content: flex-start;
           .msg-box {
             @extend .msg-box-shared;
-            background-color: #3C98D9;
+            background-color: #91E45B;
           }
         }
         .msg-to {
@@ -50,7 +50,7 @@ $height: 600px;
           justify-content: flex-end;
           .msg-box {
             @extend .msg-box-shared;
-            background-color: #91E45B;
+            background-color: #3C98D9;
           }
         }
         .msg-box-shared {
