@@ -34,6 +34,10 @@ export default class Paginator extends BaseComponent {
         }
     }
 
+    componentWillMount() {
+        this.onParentItemsChange();
+    }
+
     render () {
         const { current } = this.state;
         const { items = [] } = this.props;
