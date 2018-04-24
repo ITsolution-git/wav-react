@@ -10,12 +10,14 @@ import BaseComponent from '../shared/BaseComponent';
 import VoterItem from './VoterItem';
 import AddEditDialog from './AddEditDialog';
 import Spinner from '../shared/Spinner';
+import Paginator from '../shared/Paginator';
 
 class VotersList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-          showAddDialog: false
+          showAddDialog: false,
+          currentVoters: []
         };
     }
 
@@ -31,7 +33,10 @@ class VotersList extends BaseComponent {
     };
 
     render() {
-        const { showAddDialog } = this.state;
+        const {
+            showAddDialog,
+            currentVoters
+        } = this.state;
         const { voterList: {
             voters = [],
             isFetching
@@ -46,7 +51,7 @@ class VotersList extends BaseComponent {
                     <div style={{clear: 'both'}}></div>
                     <Spinner height={300} loading={isFetching} />
                     <div className='voters-list'>
-                        { voters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
+                        { currentVoters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
                     </div>
                     <Row>
                         <Col md={6} xs={6}>
@@ -60,6 +65,8 @@ class VotersList extends BaseComponent {
                         </Col>
                     </Row>
                 </div>
+                <Paginator items={voters}
+                           onItemsChange={items => this.setState({ currentVoters: items })}/>
                 <AddEditDialog show={showAddDialog}
                                title='Add Voter'
                                submitText='Add'
