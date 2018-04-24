@@ -1,0 +1,14 @@
+.btw-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+.rc-pagination {
+  font-size: 19px;
+  li {
+    border-radius: 0;
+    min-width: 38px;
+    height: 38px;
+    line-height: 38px;
+  }
+}
