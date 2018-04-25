@@ -3,21 +3,16 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
-import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
 import boardingTypes from '../../constants/VoterBoardingType';
 import VoterContants from "../../constants/VoterConstants";
-import routes from "../../constants/Routes";
+import ResultBase from './shared/ResultBase';
 
-class VoterSuccess extends BaseComponent {
+class VoterSuccess extends ResultBase {
 
     componentWillMount() {
-        if (this.props.voter.boardingType === boardingTypes.voterList) {
-            setTimeout(() => {
-                this.onLink(routes.voterList);
-            }, 2000);
-        }
+        this.checkRedirectVoterList();
     }
 
      render() {
