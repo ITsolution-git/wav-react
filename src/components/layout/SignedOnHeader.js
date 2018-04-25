@@ -78,8 +78,10 @@ class SignedOnHeader extends BaseComponent {
 
     handleHeaderClick = (e) => {
         const { makelist, voterDetail, matchList, voterSuccess, voterError } = routes;
-        const { pathname } = this.props.history.location;
-        if ([ makelist, voterDetail, matchList, voterSuccess, voterError ].includes(pathname)
+        const { pathname } = this.props.history.location,
+            boardingRoutes = [ makelist, voterDetail, matchList, voterSuccess, voterError ]
+                .map(route => route.toLowerCase());
+        if (boardingRoutes.includes(pathname.toLowerCase())
             && !this.state.showInfoModal) {
             e.preventDefault();
             e.stopPropagation();
