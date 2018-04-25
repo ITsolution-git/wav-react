@@ -1,0 +1,31 @@
+.btw-verify {
+    .password-div {
+        height: 173px;
+        text-align: left;
+    }
+
+    #btn_signup button {
+        @extend .btw-button;
+    }
+
+    button {
+      @extend .btw-button;
+    }
+
+    .video {
+        width: 80%;
+        height: 400px;
+    }
+
+    .padding0 {
+        padding: 0;
+    }
+
+    .margin0 {
+        margin: 0;
+    }
+
+    .terms-privacy {
+        margin-left: -20px;
+    }
+}

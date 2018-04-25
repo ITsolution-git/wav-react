@@ -22,6 +22,9 @@ export default {
     recruitingCaptainTask: '/task/recruitingCaptains',
     registerVoterTask: '/task/registerVoters',
     updateProfileTask: '/task/updateProfile',
+    verifyCaptain: '/changePassword/verify',
+    changePassword: '/changePassword/change',
+    forgotPassword: '/changePassword/request',
     // static pages
     whyBetheWave: '/whyBetheWave',
     howContribute: '/howYouCanContribute',
