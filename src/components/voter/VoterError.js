@@ -3,13 +3,17 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
-import BaseComponent from '../shared/BaseComponent';
+import ResultBase from './shared/ResultBase';
 import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
 import voterConstants from '../../constants/VoterConstants';
 import boardingTypes from '../../constants/VoterBoardingType';
 
-class VoterError extends BaseComponent {
+class VoterError extends ResultBase {
+    componentWillMount() {
+        this.checkRedirectVoterList();
+    }
+
     render() {
         const { makeList, currentNumber, boardingType } = this.props.voter,
             firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
