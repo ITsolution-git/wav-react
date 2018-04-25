@@ -9,6 +9,7 @@ export function loadChats() {
         return MessagingService.loadChats().then(
             response => {
                 const { data: { queue = []} = {}} = response;
+                queue.sortByDate('date', false);
                 dispatch(actionSuccess(queue));
             },
             error => {

@@ -9,8 +9,13 @@ import Moment from 'react-moment';
 import BaseComponent from '../shared/BaseComponent';
 import ChatBody from './ChatBody';
 import { loadChats, selectChat } from "../../actions/MessagesAction";
+import Paginator from '../shared/Paginator';
 
 class MessageList extends BaseComponent {
+    state = {
+      currentChats: []
+    };
+
     componentWillMount() {
         this.props.actions.loadChats();
     }
@@ -34,15 +39,15 @@ class MessageList extends BaseComponent {
 
 
     render() {
-        const { chats, selectedChatId } = this.props.chats;
-
+        const { chats, selectedChatId } = this.props.chats,
+            { currentChats } = this.state;
         return (
             <div className='container btw-message-list'>
                 <Typography>Message list</Typography>
                 <Row className='chat-content'>
                     <Col md={4}>
                         <div className='chats'>
-                            { chats.map((chat, i) => {
+                            { currentChats.map((chat, i) => {
                                 return (
                                     <Row key={i}
                                          className={classnames('chat', { 'selected': chat._id === selectedChatId })}
@@ -64,6 +69,9 @@ class MessageList extends BaseComponent {
                                 <div className='msg-text'>
                                     <Typography>No conversations</Typography>
                                 </div> }
+                            <Paginator items={chats}
+                                       pageSize={5}
+                                       onItemsChange={items => this.setState({ currentChats: items })}/>
                         </div>
                     </Col>
                     <Col md={8}>
