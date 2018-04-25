@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { forgotPasswordRequest } from '../../actions/PasswordRequestAction';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
@@ -52,9 +53,9 @@ class ForgotPassword extends BaseComponent {
 
 		this.setState({ isValid: validation });
 
-		// return Object.keys(info).some(key => !validation[key])
-		// 	? true
-		// 	: this.props.btwRegister(btwIdentity);
+		return Object.keys(info).some(key => !validation[key])
+			? true
+			: this.props.forgotPasswordRequest(info.email);
 	}
 
 	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
@@ -70,15 +71,10 @@ class ForgotPassword extends BaseComponent {
 	};
 
 	componentWillReceiveProps(props) {
-		// if (props.isSuccess) {
-		// 	this.onLink(routes.makelist);
-		// 	return;
-		// }
-		// if (props.error) {
-        //     const isValid = {... this.state.isValid };
-        //     isValid.email = false;
-        //     this.setState({ isValid });
-		// }
+		if (props.isSuccess) {
+			this.onLink(routes.makelist);
+			return;
+		}
 	}
 
 	render() {
@@ -115,16 +111,15 @@ class ForgotPassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { error, isSuccess } = state.app[appDataTypes.register];
+    const { isSuccess } = state.request;
     return {
-        error,
         isSuccess
     };
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
-	// btwRegister: (btwIdentity) => dispatch(btwRegister(btwIdentity))
+	forgotPasswordRequest: (email) => dispatch(forgotPasswordRequest(email))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ForgotPassword));
