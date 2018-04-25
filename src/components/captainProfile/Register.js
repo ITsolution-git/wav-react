@@ -141,8 +141,8 @@ class Register extends BaseComponent {
 					</div>
 					<form>
 						<div className="row">
-							{ this.renderInput('firstname', 'First Name', 'text', nameWidth, '* First Name is not valid *') }
-							{ this.renderInput('lastname', 'Last Name', 'text', nameWidth, '* Last Name is not valid *') }
+							{ this.renderInput('firstname', 'First Name (Legal)', 'text', nameWidth, '* First Name is not valid *') }
+							{ this.renderInput('lastname', 'Last Name (Legal)', 'text', nameWidth, '* Last Name is not valid *') }
 						</div>
 						{ this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
 						{ this.renderInput('email', 'Email', 'email', 0, error || '* Email is not valid *') }

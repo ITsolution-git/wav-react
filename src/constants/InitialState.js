@@ -42,6 +42,7 @@ export default {
         error: null
     },
     messages: {},
+    request: {},
     user: {
         users: {},
         isFetching: false,

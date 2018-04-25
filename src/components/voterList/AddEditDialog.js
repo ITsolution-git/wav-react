@@ -169,8 +169,8 @@ export default class AddEditDialog extends BaseComponent {
 							</Col>
 						</FormGroup>
 						<FormGroup>
-							{ this.renderField('firstname', 'First name *', '* First name is not valid *') }
-							{ this.renderField('lastname', 'Last name *', '* Last name is not valid *') }
+							{ this.renderField('firstname', 'First name (Legal) *', '* First name is not valid *') }
+							{ this.renderField('lastname', 'Last name (Legal) *', '* Last name is not valid *') }
 						</FormGroup>
 						<FormGroup>
 							<Col md={6}>

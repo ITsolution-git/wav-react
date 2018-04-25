@@ -1,0 +1,3 @@
+export default {
+    PASSWORD_RESET_REQUEST: 'PASSWORD_RESET_REQUEST'
+}
