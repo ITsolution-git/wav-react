@@ -1,19 +1,17 @@
 import InitialState from '../constants/InitialState';
+import UserSearchConstants from '../constants/reducerConstants/UserSearchConstants';
 
-export default function chatsReducer(state = InitialState.chats, action) {
+export default function userSearchReducer(state = InitialState.userSearch, action) {
 
     switch (action.type) {
-        case MessagesConstants.LOAD_CHAT_REQUEST: {
+        case UserSearchConstants.USER_SEARCH_REQUEST: {
             return { ...state, isFetching: true };
         }
-        case MessagesConstants.LOAD_CHAT_SUCCESS: {
-            return { ...state, ...{ chats: action.chats, isFetching: false, isSuccess: true }};
+        case UserSearchConstants.USER_SEARCH_SUCCESS: {
+            return { ...state, ...{ users: action.users, isFetching: false, isSuccess: true }};
         }
-        case MessagesConstants.LOAD_CHAT_FAILURE: {
+        case UserSearchConstants.USER_SEARCH_ERROR: {
             return { ...state, ...{ error: action.error, isFetching: false, isSuccess: false }};
-        }
-        case MessagesConstants.SELECT_CHAT: {
-            return { ...state, selectedChatId: action.chatId };
         }
         default:
             return state

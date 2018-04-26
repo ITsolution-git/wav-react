@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 
-import VoterContants from '../constants/VoterConstants';
+import VoterContants from '../constants/reducerConstants/VoterConstants';
 import InitialState from '../constants/InitialState';
 import routes from '../constants/Routes';
 

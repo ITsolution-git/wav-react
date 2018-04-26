@@ -7,7 +7,7 @@ import Typography from 'material-ui/Typography';
 import BaseComponent from '../../shared/BaseComponent';
 import appDataTypes from '../../../constants/AppDataTypes';
 import RadioButtons from '../../shared/inputs/RadioButtons';
-import { RegisterTaskConstants } from '../../../constants/TaskConstants';
+import { RegisterTaskConstants } from '../../../constants/reducerConstants/TaskConstants';
 
 class ContactType extends BaseComponent {
 

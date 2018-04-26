@@ -8,7 +8,7 @@ import TaskBase from './shared/TaskBase';
 import ContactType from './registerSteps/ContactType';
 import ReportBack from './registerSteps/ReportBack';
 import TaskSuccess from './shared/TaskSuccess';
-import { RegisterTaskConstants } from '../../constants/TaskConstants';
+import { RegisterTaskConstants } from '../../constants/reducerConstants/TaskConstants';
 import {getTaskData} from "../../helpers/TaskHelper";
 
 class RegisterVoterTask extends TaskBase {

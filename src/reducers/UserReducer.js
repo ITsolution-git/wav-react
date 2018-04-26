@@ -1,4 +1,4 @@
-import UserConstants from '../constants/UserConstants';
+import UserConstants from '../constants/reducerConstants/UserConstants';
 import InitialState from '../constants/InitialState';
 
 export default function userReducer(state = InitialState.user, action) {

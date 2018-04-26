@@ -11,7 +11,7 @@ import {
     nextNumberPersist,
     resetVoterState
 } from '../../actions/VoterAction';
-import VoterContants from '../../constants/VoterConstants';
+import VoterContants from '../../constants/reducerConstants/VoterConstants';
 import InitialState from "../../constants/InitialState";
 import userAuthenticator from "../shared/UserAuthenticator";
 import config from "../../config/ApiConfig";

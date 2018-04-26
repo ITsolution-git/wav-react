@@ -1,4 +1,4 @@
-import UserConstansts from '../constants/UserConstants';
+import UserConstansts from '../constants/reducerConstants/UserConstants';
 import UserService from '../services/UserService';
 
 export function loadUser(userId) {

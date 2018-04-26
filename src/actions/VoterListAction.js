@@ -1,4 +1,4 @@
-import VoterContants from '../constants/VoterConstants';
+import VoterContants from '../constants/reducerConstants/VoterConstants';
 import BoardingTypes from '../constants/VoterBoardingType';
 import voterService from '../services/VoterService';
 import authStorage from '../storage/AuthStorage';

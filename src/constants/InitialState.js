@@ -48,5 +48,11 @@ export default {
         isFetching: false,
         isSuccess: false,
         error: null
+    },
+    userSearch: {
+        users: [],
+        isFetching: false,
+        isSuccess: false,
+        error: null
     }
 }

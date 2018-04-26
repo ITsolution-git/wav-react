@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 import BaseComponent from '../../shared/BaseComponent';
 import { nextNumberPersist, resetVoterState } from '../../../actions/VoterAction';
 import routes from '../../../constants/Routes';
-import voterConstants from '../../../constants/VoterConstants';
+import voterConstants from '../../../constants/reducerConstants/VoterConstants';
 import boardingTypes from '../../../constants/VoterBoardingType';
 
 class NextButton extends BaseComponent {

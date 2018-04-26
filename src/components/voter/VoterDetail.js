@@ -6,7 +6,7 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 import states from '../../constants/States';
 import validationTypes from '../../constants/ValidationTypes';
-import voterConstants from '../../constants/VoterConstants';
+import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { voterDetailsPersist, matchListPersist, resetMatchList  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
