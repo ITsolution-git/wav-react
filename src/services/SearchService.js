@@ -1,5 +1,5 @@
 import config from '../config/ApiConfig';
-import { postAsync } from '../helpers/RequestHelper';
+import { postAsync, getAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
 import roles from '../constants/Roles';
 
@@ -17,7 +17,7 @@ function searchVoters(data) {
 }
 
 function searchCaptains(data) {
-    return postAsync({
+    return getAsync({
         url: `${config.apiHost}/api/v1/user/searchUser`,
         data: data,
         headers: getHeaders()
