@@ -1,4 +1,3 @@
-import MessagesConstants from '../constants/reducerConstants/MessagesConstants';
 import InitialState from '../constants/InitialState';
 
 export default function chatsReducer(state = InitialState.chats, action) {

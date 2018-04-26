@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import appReducer from '../../reducers/AppReducer';
-import AppConstants from '../../constants/AppConstants';
+import AppConstants from '../../constants/reducerConstants/AppConstants';
 import AppDataTypes from '../../constants/AppDataTypes';
 import initialState from '../../constants/InitialState';
 

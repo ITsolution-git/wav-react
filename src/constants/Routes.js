@@ -22,6 +22,8 @@ export default {
     recruitingCaptainTask: '/task/recruitingCaptains',
     registerVoterTask: '/task/registerVoters',
     updateProfileTask: '/task/updateProfile',
+    voterFilter: '/voterFilter',
+    captainFilter: '/captainFilter',
     // static pages
     whyBetheWave: '/whyBetheWave',
     howContribute: '/howYouCanContribute',
