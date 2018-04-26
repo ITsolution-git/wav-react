@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 
-import VoterContants from '../constants/VoterConstants';
+import VoterContants from '../constants/reducerConstants/VoterConstants';
 import InitialState from '../constants/InitialState';
 
 export default function voterListReducer(state = InitialState.voterList, action) {

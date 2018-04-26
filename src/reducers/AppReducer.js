@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 
-import appConstants from '../constants/AppConstants';
+import appConstants from '../constants/reducerConstants/AppConstants';
 import initialState from '../constants/InitialState';
 
 // this reducer used to store simple object data e. g signIn, signUp profile details and so on

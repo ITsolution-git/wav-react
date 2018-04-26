@@ -6,7 +6,7 @@ import { FormLabel } from 'material-ui/Form';
 
 import BaseComponent from '../../shared/BaseComponent';
 import RadioButtons from '../../shared/inputs/RadioButtons';
-import { RegisterTaskConstants } from '../../../constants/TaskConstants';
+import { RegisterTaskConstants } from '../../../constants/reducerConstants/TaskConstants';
 
 class ReportBack extends BaseComponent {
     getValues = () => {

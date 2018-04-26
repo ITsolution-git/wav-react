@@ -24,6 +24,8 @@ import RecruitingCaptainTask from './tasks/RecruitingCaptainTask';
 import RegisterVoterTask from './tasks/RegisterVoterTask';
 import UpdateProfileTask from './tasks/UpdateProfileTask';
 import MessageList from './messages/MessageList';
+import VoterFilter from './filters/VoterFilter';
+import CaptainFilter from './filters/CaptainFilter';
 
 import VerifyCaptain from './changePassword/verifyCaptain';
 import ChangePassword from './changePassword/changePassword';
@@ -96,6 +98,12 @@ const router =() => (
                    component = { Authorization(RegisterVoterTask, [captain]) } />
             <Route exact path = {routes.updateProfileTask}
                    component = { Authorization(UpdateProfileTask, [captain]) } />
+
+			// filters
+            <Route exact path = {routes.voterFilter}
+                   component = { Authorization(VoterFilter, [admin]) } />
+            <Route exact path = {routes.captainFilter}
+                   component = { Authorization(CaptainFilter, [admin]) } />
 
 			// static route pages
             <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />

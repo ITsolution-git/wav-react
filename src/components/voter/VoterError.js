@@ -6,7 +6,7 @@ import FontAwesome from 'react-fontawesome';
 import ResultBase from './shared/ResultBase';
 import NextButton from './shared/NextButton';
 import { getUrlParams } from '../../helpers/UrlHelper';
-import voterConstants from '../../constants/VoterConstants';
+import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import boardingTypes from '../../constants/VoterBoardingType';
 
 class VoterError extends ResultBase {

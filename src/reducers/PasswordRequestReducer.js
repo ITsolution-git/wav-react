@@ -1,4 +1,4 @@
-import PasswordRequestConstants from '../constants/PasswordRequestConstants';
+import PasswordRequestConstants from '../constants/reducerConstants/PasswordRequestConstants';
 import InitialState from '../constants/InitialState';
 
 export default function passwordRequestReducer(state = InitialState.request, action) {

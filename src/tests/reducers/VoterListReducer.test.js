@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import voterListReducer from '../../reducers/VoterListReducer';
-import VoterContants from '../../constants/VoterConstants';
+import VoterContants from '../../constants/reducerConstants/VoterConstants';
 import InitialState from '../../constants/InitialState';
 
 const voters = [

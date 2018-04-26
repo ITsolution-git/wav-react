@@ -48,5 +48,14 @@ export default {
         isFetching: false,
         isSuccess: false,
         error: null
+    },
+    userSearch: {
+        voters: [],
+        captains: [],
+        isFetching: false,
+        isVoterSuccess: false,
+        isCaptainSuccess: false,
+        voterError: null,
+        captainError: null
     }
 }

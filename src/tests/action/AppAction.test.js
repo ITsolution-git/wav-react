@@ -7,7 +7,7 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 import { btwRegister, getBtwUserProfile } from '../../actions/SignOnAction';
-import AppConstants from '../../constants/AppConstants';
+import AppConstants from '../../constants/reducerConstants/AppConstants';
 import AppDataTypes from '../../constants/AppDataTypes';
 import config from '../../config/ApiConfig';
 
