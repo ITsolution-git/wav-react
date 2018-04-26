@@ -13,19 +13,46 @@ import {
 
 
 class VoterFilter extends BaseComponent {
+    state ={
+        firstNameChecked: false,
+        firstName: ''
+    };
+
+    handleChange = (name, value) => {
+
+    };
+
+    onSearchClick = () => {
+        this.loadVoterSearch();
+    };
+
+    loadVoterSearch = () => {
+        this.props.actions.searchVoters();
+    };
+
+    componentWillMount() {
+        if (this.props.userSearch.voters.length === 0) {
+            this.loadVoterSearch();
+        }
+    }
 
     render() {
-        const { voters = [] } = this.props.userSearch;
+        const {
+            voters = [],
+            isFetching
+        } = this.props.userSearch;
         return (
             <div className='btw-user-search container'>
                 <Row>
-                    <Col md={7} className='users' >
-                        <UsersList />
-                    </Col>
                     <Col md={5} className='input-filters' >
                         <FirstNameInput />
                         <LastNameInput />
-                        <Button>Search</Button>
+                        <Button onClick={this.onSearchClick}>Search</Button>
+                    </Col>
+                    <Col md={7} className='users' >
+                        <UsersList users={voters}
+                                   isFetching={isFetching}
+                                   isVoter={true} />
                     </Col>
                 </Row>
             </div>

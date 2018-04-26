@@ -7,7 +7,7 @@ export function searchVoters(data) {
         dispatch(actionRequest());
         return searchService.searchVoters(data).then(
             response => {
-                dispatch(actionSuccess(response.data));
+                dispatch(actionSuccess(response.data.voters));
             },
             error => {
                 dispatch(actionError(error.response.data.message));
@@ -32,7 +32,7 @@ export function searchCaptains(data) {
         dispatch(actionRequest());
         return searchService.searchCaptains(data).then(
             response => {
-                dispatch(actionSuccess(response.data));
+                dispatch(actionSuccess(response.data.users.map(item => item.user)));
             },
             error => {
                 dispatch(actionError(error.response.data.message));

@@ -17,7 +17,8 @@ class InputBase extends BaseComponent {
 
     handleParentChange = () => {
         const { checked, value } = this.state;
-        this.props.onChange(checked, value);
+        const { onChange = () => {}} = this.props;
+        onChange(checked, value);
     };
 
     renderCheckbox = (label) => {
