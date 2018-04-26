@@ -8,6 +8,7 @@ import appDataTypes from '../constants/AppDataTypes';
 import { btwSignOn } from '../actions/SignOnAction';
 import { getHomeRoute } from '../helpers/AuthHelper';
 import Spinner from '../components/shared/Spinner';
+import { Link } from 'react-router-dom';
 
 
 class Login extends BaseComponent {
@@ -69,6 +70,9 @@ class Login extends BaseComponent {
                                onChange={event => this.updateLogonFields(event, 'password')} />
 												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
                     </div>
+					{/*<div className="pull-right">
+						<Link to='/changePassword/request'>Forgot your password?</Link>
+					</div>*/}
                     <div className="form-group">
                         <button className="btn btn-primary"
 								disabled={isFetching}

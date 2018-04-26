@@ -5,6 +5,7 @@ import taskListReducer from './TasksReducer';
 import chatsReducer from './ChatsReducer';
 import messagesReducer from './MessagesReducer';
 import userReducer from './UserReducer';
+import passwordRequestReducer from './PasswordRequestReducer';
 
 //this is where you insert your reducers into the store
 export default  {
@@ -14,5 +15,6 @@ export default  {
     taskList: taskListReducer,
     chats: chatsReducer,
     messages: messagesReducer,
-    user: userReducer
+    user: userReducer,
+    request: passwordRequestReducer
 }

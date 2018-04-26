@@ -1,0 +1,54 @@
+.btw-change-password {
+    @include respond-to($desktop) {
+        width: $max_width;
+    }
+	margin: auto;
+    margin-top: $margin_top;
+    text-align: center;
+
+    .intro {
+        margin-top: $margin_top;
+        text-align: center;
+    }
+
+    .intro-title {
+        font-size: $font_size_title;
+    }
+
+    .intro-desc {
+        margin-top: 30px;
+        font-size: $font_size_desc;
+    }
+
+    form {
+        @include respond-to($desktop) {
+            width: $max_width - 300px;
+        }
+
+        margin: auto;
+        margin-top: 70px;
+
+        label {
+            margin-bottom: 15px;
+            @extend .btw-label;
+        }
+
+        input {
+            @extend .btw-input;
+        }
+        
+        select {
+            @extend .btw-select;
+
+            background: url(https://upload.wikimedia.org/wikipedia/commons/f/f1/MediaWiki_Vector_skin_action_arrow.svg) 98% / 5% no-repeat;
+        }
+		
+        span {
+          color: red;
+        }
+
+        .form-group {
+            margin-bottom: $input_field_space;
+        }
+    }
+}

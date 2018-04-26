@@ -24,6 +24,10 @@ export default {
     updateProfileTask: '/task/updateProfile',
     voterFilter: '/voterFilter',
     captainFilter: '/captainFilter',
+    verifyCaptain: '/changePassword/verify',
+    changePassword: '/changePassword/change',
+    forgotPassword: '/changePassword/request',
+
     // static pages
     whyBetheWave: '/whyBetheWave',
     howContribute: '/howYouCanContribute',

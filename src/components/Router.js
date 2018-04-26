@@ -27,6 +27,10 @@ import MessageList from './messages/MessageList';
 import VoterFilter from './filters/VoterFilter';
 import CaptainFilter from './filters/CaptainFilter';
 
+import VerifyCaptain from './changePassword/verifyCaptain';
+import ChangePassword from './changePassword/changePassword';
+import ForgotPassword from './changePassword/forgotPassword';
+
 // static pages
 import WhyBethewave from './static/WhyBethewave';
 import HowContribute from './static/HowContribute';
@@ -106,6 +110,11 @@ const router =() => (
             <Route exact path = {routes.howContribute} component = { HowContribute } />
             <Route exact path = {routes.termsOfUse} component = { TermsOfUse } />
             <Route exact path = {routes.privacyPolicy} component = { PrivacyPolicy } />
+
+            // change changePassword
+            <Route exact path = {routes.verifyCaptain} component = { VerifyCaptain } />
+            <Route exact path = {routes.changePassword} component = { ChangePassword } />
+            <Route exact path = {routes.forgotPassword} component = { ForgotPassword } />
 		</Switch>
 	</Router>
 );
