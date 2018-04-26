@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { changePasswordRequest } from '../../actions/PasswordRequestAction';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -15,7 +16,8 @@ class ChangePassword extends BaseComponent {
 		super();
 		this.state = {
 			info: this.getEmptyState(),
-			isValid: this.getEmptyState(true)
+			isValid: this.getEmptyState(true),
+			isChangedPassword: true
 		}
 	}
 
@@ -57,9 +59,18 @@ class ChangePassword extends BaseComponent {
 
 		this.setState({ isValid: validation });
 
-		// return Object.keys(info).some(key => !validation[key])
-		// 	? true
-		// 	: this.props.btwRegister(btwIdentity);
+		if (!this.props.location.state.id) {
+			return true;
+		}
+
+		let param = this.props.location.state.id;
+
+		if (Object.keys(info).some(key => !validation[key])) {
+			return true;
+		} else {
+			info["userid"] = param;
+			return this.props.changePasswordRequest(info);
+		}
 	}
 
 	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
@@ -75,15 +86,12 @@ class ChangePassword extends BaseComponent {
 	};
 
 	componentWillReceiveProps(props) {
-		// if (props.isSuccess) {
-		// 	this.onLink(routes.makelist);
-		// 	return;
-		// }
-		// if (props.error) {
-        //     const isValid = {... this.state.isValid };
-        //     isValid.email = false;
-        //     this.setState({ isValid });
-		// }
+		if (props.isChangedPassword) {
+			this.onLink(routes.login);
+			return;
+		} else {
+			this.setState({ "isChangedPassword": false});
+		}
 	}
 
 	render() {
@@ -107,6 +115,8 @@ class ChangePassword extends BaseComponent {
 						</p>
 					</div>
 					<form>
+						{ !this.state.isChangedPassword && <span style={{ fontSize: "18px" }}>Password doesn't not reset</span> }
+						<br/><br/>
 						<div className={classNames({'password-div': !this.state.isValid['password'] })}>
 							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
 						</div>
@@ -130,16 +140,15 @@ class ChangePassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { error, isSuccess } = state.app[appDataTypes.register];
+    const { isChangedPassword } = state.request;
     return {
-        error,
-        isSuccess
+		isChangedPassword
     };
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
-	// btwRegister: (btwIdentity) => dispatch(btwRegister(btwIdentity))
+	changePasswordRequest: (info) => dispatch(changePasswordRequest(info))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ChangePassword));

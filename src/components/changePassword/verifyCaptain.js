@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-// import { btwRegister } from '../../actions/SignOnAction';
+import { verifyUserRequest } from '../../actions/PasswordRequestAction';
 import classNames from 'classnames';
 import { Row, Col, FormControl } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { getUrlParams } from '../../helpers/UrlHelper';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
@@ -17,7 +18,8 @@ class VerifyCaptain extends BaseComponent {
 		super();
 		this.state = {
 			captainInfo: this.getEmptyState(),
-			isValid: this.getEmptyState(true)
+			isValid: this.getEmptyState(true),
+			isVerified: true
 		}
 	}
 
@@ -25,9 +27,7 @@ class VerifyCaptain extends BaseComponent {
 		return {
             username: initValue,
             firstname: initValue,
-            lastname: initValue,
-            city: initValue,
-            state: initValue
+            lastname: initValue
         };
 	};
 
@@ -44,12 +44,9 @@ class VerifyCaptain extends BaseComponent {
         const { captainInfo, isValid } = this.state,
             { value } = event.target;
             
-            console.log(captainInfo)
 		let validation = { ...isValid };
 
-        validation[field] = field === 'state' ?
-            value !== ""
-            : validate(field, value);
+        validation[field] = validate(field, value);
 
 		this.setState({ isValid: validation });
 	}
@@ -63,9 +60,14 @@ class VerifyCaptain extends BaseComponent {
 
 		this.setState({ isValid: validation });
 
-		// return Object.keys(captainInfo).some(key => !validation[key])
-		// 	? true
-		// 	: this.props.btwRegister(btwIdentity);
+		let param = getUrlParams(this.props, 'email');
+
+		if (Object.keys(captainInfo).some(key => !validation[key])) {
+			return true;
+		} else {
+			captainInfo["email"] = param.email;
+			return this.props.verifyUserRequest(captainInfo);
+		}
 	}
 
 	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
@@ -79,35 +81,15 @@ class VerifyCaptain extends BaseComponent {
             </div>
 		)
     };
-    
-    renderDropdownField = (name, label, error, options, colWidth = 12) => {
-		return (
-			<div className={`form-group col-xs-${colWidth}`}>
-				<label className="pull-left" htmlFor={name}>{label}</label>
-                <select
-                             className="input-field btw-select"
-				             value={this.state.captainInfo[name] || ''}
-				             onChange={this.updateCaptainFields.bind(this, name)}
-                             onBlur={this.validateCaptainFields.bind(this, name)} >
-					<option value="" />
-					{ options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
-				</select>
-				{ !this.state.isValid[name] && <span className="pull-left" style={{color:"red"}}>{error}</span> }
-			</div>
-		);
-	};
 
 	componentWillReceiveProps(props) {
 
-		// if (props.isSuccess) {
-		// 	this.onLink(routes.makelist);
-		// 	return;
-		// }
-		// if (props.error) {
-        //     const isValid = {... this.state.isValid };
-        //     isValid.email = false;
-        //     this.setState({ isValid });
-		// }
+		if (props.isSuccess) {
+			this.onLink(routes.changePassword, { "id": props.user._id.toString() });
+			return;
+		} else {
+			this.setState({ "isVerified": false});
+		}
 	}
 
 	render() {
@@ -124,13 +106,13 @@ class VerifyCaptain extends BaseComponent {
 						</p>
 					</div>
 					<form>
+						{ !this.state.isVerified && <span style={{ fontSize: "18px" }}>User doesn't exist</span> }
+						<br/><br/>
 						<div className="row">
 							{ this.renderInput('firstname', 'First Name (Legal)', 'text', nameWidth, '* First Name is not valid *') }
 							{ this.renderInput('lastname', 'Last Name (Legal)', 'text', nameWidth, '* Last Name is not valid *') }
 						</div>
                         { this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
-                        { this.renderDropdownField('state', 'State', '* State is not valid *', Object.values(states), 0) }
-						{ this.renderInput('city', 'City', 'text', 0, '* City is not valid *') }
 						<br/><br/>
 					</form>
 					<Row>
@@ -150,16 +132,16 @@ class VerifyCaptain extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { error, isSuccess } = state.app[appDataTypes.register];
+    const { isSuccess, user } = state.request;
     return {
-        error,
-        isSuccess
+		isSuccess,
+		user
     };
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
-	//btwRegister: (btwIdentity) => dispatch(btwRegister(btwIdentity))
+	verifyUserRequest: (data) => dispatch(verifyUserRequest(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VerifyCaptain));
