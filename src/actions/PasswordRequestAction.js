@@ -1,4 +1,4 @@
-import PasswordRequestContants from '../constants/PasswordRequestConstants';
+import PasswordRequestContants from '../constants/reducerConstants/PasswordRequestConstants';
 import PasswordRequestService from '../services/PasswordRequestService';
 
 export function forgotPasswordRequest(email) {

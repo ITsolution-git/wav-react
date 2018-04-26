@@ -1,4 +1,4 @@
-import appConstants from '../constants/AppConstants';
+import appConstants from '../constants/reducerConstants/AppConstants';
 
 export function initializeRequest(dataType) {
     return {

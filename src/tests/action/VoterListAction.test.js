@@ -12,7 +12,7 @@ import {
     updateVoter,
     deleteVoter
 } from '../../actions/VoterListAction';
-import VoterContants from '../../constants/VoterConstants';
+import VoterContants from '../../constants/reducerConstants/VoterConstants';
 import boardingtypes from '../../constants/VoterBoardingType';
 import InitialState from "../../constants/InitialState";
 import config from "../../config/ApiConfig";

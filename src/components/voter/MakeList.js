@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 
-import voterConstants from '../../constants/VoterConstants';
+import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';
 import routes from '../../constants/Routes';
 import { textValidation } from '../../utility/FormValidation';

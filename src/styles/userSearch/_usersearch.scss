@@ -1,0 +1,21 @@
+.btw-user-search {
+  margin-top: 2%;
+  .users {
+    padding:  0 2% 0 2%;
+    border: 1px solid lightgray;
+    .user-list {
+      .name-row {
+        @extend .voter-row;
+      }
+    }
+  }
+  .input-filters {
+    padding: 2%;
+    border: 1px solid lightgray;
+  }
+
+  button {
+    margin-top: 7%;
+    @extend .btw-button;
+  }
+}

@@ -70,9 +70,9 @@ class Login extends BaseComponent {
                                onChange={event => this.updateLogonFields(event, 'password')} />
 												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
                     </div>
-					<div className="pull-right">
+					{/*<div className="pull-right">
 						<Link to='/changePassword/request'>Forgot your password?</Link>
-					</div>
+					</div>*/}
                     <div className="form-group">
                         <button className="btn btn-primary"
 								disabled={isFetching}

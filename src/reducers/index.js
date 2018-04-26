@@ -6,6 +6,7 @@ import chatsReducer from './ChatsReducer';
 import messagesReducer from './MessagesReducer';
 import userReducer from './UserReducer';
 import passwordRequestReducer from './PasswordRequestReducer';
+import userSearchReducer from './UserSearchReducer';
 
 //this is where you insert your reducers into the store
 export default  {
@@ -16,5 +17,6 @@ export default  {
     chats: chatsReducer,
     messages: messagesReducer,
     user: userReducer,
-    request: passwordRequestReducer
+    request: passwordRequestReducer,
+    userSearch: userSearchReducer
 }

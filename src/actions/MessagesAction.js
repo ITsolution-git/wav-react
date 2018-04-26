@@ -1,4 +1,4 @@
-import MessagesConstants from '../constants/MessagesConstants';
+import MessagesConstants from '../constants/reducerConstants/MessagesConstants';
 import authStorage from '../storage/AuthStorage';
 import roles from '../constants/Roles';
 import MessagingService from '../services/MessagingService';
@@ -9,6 +9,7 @@ export function loadChats() {
         return MessagingService.loadChats().then(
             response => {
                 const { data: { queue = []} = {}} = response;
+                queue.sortByDate('date', false);
                 dispatch(actionSuccess(queue));
             },
             error => {
