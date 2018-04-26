@@ -50,9 +50,12 @@ export default {
         error: null
     },
     userSearch: {
-        users: [],
+        voters: [],
+        captains: [],
         isFetching: false,
-        isSuccess: false,
-        error: null
+        isVoterSuccess: false,
+        isCaptainSuccess: false,
+        voterError: null,
+        captainError: null
     }
 }
