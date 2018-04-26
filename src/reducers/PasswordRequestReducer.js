@@ -6,6 +6,18 @@ export default function passwordRequestReducer(state = InitialState.request, act
         case PasswordRequestConstants.PASSWORD_RESET_REQUEST: {
             return { ...state, isSuccess: true };
         }
+        case PasswordRequestConstants.VERIFY_USER_SUCCEEDED:  {
+            return { ...state, isSuccess: true, user: action.user };
+        }
+        case PasswordRequestConstants.VERIFY_USER_FAILED:  {
+            return { ...state, isSuccess: false };
+        }
+        case PasswordRequestConstants.CHANGE_PASSWORD_SUCCEEDED:  {
+            return { ...state, isChangedPassword: true };
+        }
+        case PasswordRequestConstants.CHANGE_PASSWORD_FAILED:  {
+            return { ...state, isChangedPassword: false };
+        }
         default:
             return state
     }
