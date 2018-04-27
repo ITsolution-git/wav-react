@@ -64,7 +64,7 @@ class Login extends BaseComponent {
 						<p id="loginHeader">Log into your account </p>
                         { error && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
                     </div>
-					{ !this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
+					{ this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
 					<br/><br/>
                     <div className="form-group">
                         <label className="pull-left">Username</label>
