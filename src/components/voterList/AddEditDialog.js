@@ -158,6 +158,10 @@ export default class AddEditDialog extends BaseComponent {
 				<Modal.Body>
 					<Form horizontal>
 						<FormGroup>
+							{ this.renderField('city', 'City *', '* City is not valid *') }
+							{ this.renderDropdownField('state', 'State *', '* State is not valid *', Object.values(states)) }
+						</FormGroup>
+						<FormGroup>
 							<Col md={12}>
 								Email *
 								<FormControl type="email"
@@ -193,10 +197,7 @@ export default class AddEditDialog extends BaseComponent {
 								             value={this.state.voter['address'] || ''} />
 							</Col>
 						</FormGroup>
-						<FormGroup>
-							{ this.renderDropdownField('state', 'State *', '* State is not valid *', Object.values(states)) }
-							{ this.renderField('city', 'City *', '* City is not valid *') }
-						</FormGroup>
+						
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
