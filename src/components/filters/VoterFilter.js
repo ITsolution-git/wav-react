@@ -64,7 +64,9 @@ class VoterFilter extends BaseComponent {
 
         Object.values(voterFields).forEach(field => {
             if (voter[field + checkedConst]) {
-                data[field] = voter[field];
+                data[field] = field === voterFields.isRegistered
+                    ? !!voter[field]
+                    : voter[field];
             }
         });
 
@@ -94,7 +96,7 @@ class VoterFilter extends BaseComponent {
         return (
             <div className='btw-user-search container'>
                 <Row>
-                    <Col md={4} className='input-filters' >
+                    <Col md={3} className='input-filters' >
                         <Typography variant='subheading' gutterBottom>
                             Voter
                         </Typography>
@@ -121,7 +123,7 @@ class VoterFilter extends BaseComponent {
                         <ZipCodeInput onChange={(checked, value) => this.handleChange(captainFields.zipCode, checked, value, false )} />
                         <Button onClick={this.onSearchClick}>Search</Button>
                     </Col>
-                    <Col md={8} className='users' >
+                    <Col md={9} className='users' >
                         <UsersList users={voters}
                                    isFetching={isFetching}
                                    isVoter={true} />

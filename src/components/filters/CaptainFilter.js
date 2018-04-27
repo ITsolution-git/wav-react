@@ -58,7 +58,7 @@ class CaptainFilter extends BaseComponent {
         return (
             <div className='btw-user-search container'>
                 <Row>
-                    <Col md={4} className='input-filters' >
+                    <Col md={3} className='input-filters' >
                         <UsernameInput onChange={(checked, value) => this.handleChange(captainFields.username, checked, value)} />
                         <EmailInput onChange={(checked, value) => this.handleChange(captainFields.email, checked, value)} />
                         <FirstNameInput onChange={(checked, value) => this.handleChange(captainFields.firstName, checked, value)} />
@@ -69,7 +69,7 @@ class CaptainFilter extends BaseComponent {
                         <ZipCodeInput onChange={(checked, value) => this.handleChange(captainFields.zipCode, checked, value)} />
                         <Button onClick={this.onSearchClick}>Search</Button>
                     </Col>
-                    <Col md={8} className='users' >
+                    <Col md={9} className='users' >
                         <UsersList users={captains}
                                    isFetching={isFetching}
                                    isVoter={false} />

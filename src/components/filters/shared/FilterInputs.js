@@ -50,10 +50,10 @@ class InputBase extends SharedInputBase {
         const { value } = this.state;
         return (
             <Row>
-                <Col md={6} xs={6} className='no-padding'>
+                <Col md={7} xs={7} className='no-padding'>
                     { this.renderCheckbox(label) }
                 </Col>
-                <Col md={6} xs={6} >
+                <Col md={5} xs={5} className='no-padding'>
                     <Input value={value}
                            type={type}
                            className='text-input'
@@ -67,10 +67,10 @@ class InputBase extends SharedInputBase {
         const { value } = this.state;
         return (
             <Row>
-                <Col md={6} xs={6} className='no-padding'>
+                <Col md={7} xs={7} className='no-padding'>
                     { this.renderCheckbox(label) }
                 </Col>
-                <Col md={6} xs={6} >
+                <Col md={5} xs={5} className='no-padding'>
                     <Select
                         value={value}
                         onChange={this.handleInputChange}>
@@ -178,8 +178,8 @@ export class IsRegisteredInput extends InputBase {
     state = this.baseState;
     render () {
         return this.renderDropdownRow('Is Registered', [
-            { value: 'yes', label: 'Yes' },
-            { value: 'no', label: 'No' },
+            { value: 'true', label: 'Yes' },
+            { value: 'false', label: 'No' },
         ]);
     }
 }
