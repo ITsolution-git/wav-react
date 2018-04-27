@@ -12,6 +12,12 @@
   .input-filters {
     padding: 2%;
     border: 1px solid lightgray;
+    .text-input {
+      width: 90%;
+    }
+    .checkbox-label {
+      margin-left: 0;
+    }
   }
 
   button {

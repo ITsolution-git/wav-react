@@ -1,11 +1,20 @@
 import React from 'react';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import { FormControlLabel } from 'material-ui/Form';
+import { Row, Col } from 'react-bootstrap';
 import Checkbox from 'material-ui/Checkbox';
 import Input from 'material-ui/Input';
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
 
-import BaseComponent from '../../shared/BaseComponent';
+import { getAgeYears } from '../../../helpers/InputHelper';
+import States from '../../../constants/States';
+import SharedInputBase from '../../shared/inputs/InputBase';
 
-class InputBase extends BaseComponent {
+class InputBase extends SharedInputBase {
+    baseState = {
+        checked: false,
+        value: ''
+    };
 
     handleInputChange = (e) => {
         this.setState({ value: e.target.value }, this.handleParentChange);
@@ -24,6 +33,7 @@ class InputBase extends BaseComponent {
     renderCheckbox = (label) => {
         return (
             <FormControlLabel
+                classes={{ root: 'checkbox-label' }}
                 control={
                     <Checkbox
                         checked={this.state.checked}
@@ -34,42 +44,142 @@ class InputBase extends BaseComponent {
                 label={label}
             />
         )
-    }
+    };
+
+    renderInputRow = (label, type = 'text' ) => {
+        const { value } = this.state;
+        return (
+            <Row>
+                <Col md={6} xs={6} className='no-padding'>
+                    { this.renderCheckbox(label) }
+                </Col>
+                <Col md={6} xs={6} >
+                    <Input value={value}
+                           type={type}
+                           className='text-input'
+                           onChange={this.handleInputChange} />
+                </Col>
+            </Row>
+        )
+    };
+
+    renderDropdownRow = (label, values) => {
+        const { value } = this.state;
+        return (
+            <Row>
+                <Col md={6} xs={6} className='no-padding'>
+                    { this.renderCheckbox(label) }
+                </Col>
+                <Col md={6} xs={6} >
+                    <Select
+                        value={value}
+                        onChange={this.handleInputChange}>
+                        { values.map(this.mapItem).map((item, index) => {
+                            return (
+                                <MenuItem key={index} value={item.value}>{ item.label}</MenuItem>
+                            )
+                        })}
+                    </Select>
+                </Col>
+            </Row>
+        )
+    };
 }
 
 export class FirstNameInput extends InputBase {
-    state = {
-        checked: false,
-        value: ''
-    };
-
+    state = this.baseState;
     render () {
-        const { value } = this.state;
-        return (
-            <FormGroup row>
-                { this.renderCheckbox('First Name') }
-                <Input value={value}
-                       onChange={this.handleInputChange} />
-            </FormGroup>
-        );
+        return this.renderInputRow('First Name');
     }
 }
 
 
 export class LastNameInput extends InputBase {
-    state = {
-        checked: false,
-        value: ''
-    };
-
+    state = this.baseState;
     render () {
-        const { value } = this.state;
-        return (
-            <FormGroup row>
-                { this.renderCheckbox('Last Name') }
-                <Input value={value}
-                       onChange={this.handleInputChange} />
-            </FormGroup>
-        );
+        return this.renderInputRow('Last Name');
+    }
+}
+
+export class EmailInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderInputRow('Email', 'email');
+    }
+}
+
+export class UsernameInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderInputRow('Username');
+    }
+}
+
+export class CityInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderInputRow('City');
+    }
+}
+
+export class AddressInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderInputRow('Address');
+    }
+}
+
+export class PhoneInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderInputRow('Phone', 'tel');
+    }
+}
+
+export class ZipCodeInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderInputRow('ZipCode', 'number');
+    }
+}
+
+export class DateOfBirthInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderDropdownRow('Date Of Birth', getAgeYears());
+    }
+}
+
+export class VoterStatusInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderInputRow('Voter Status');
+    }
+}
+
+export class StateInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderDropdownRow('State', Object.keys(States));
+    }
+}
+
+export class GenderInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderDropdownRow('Gender', [
+            { value: 'male', label: 'Male' },
+            { value: 'female', label: 'Female' },
+        ]);
+    }
+}
+
+export class IsRegisteredInput extends InputBase {
+    state = this.baseState;
+    render () {
+        return this.renderDropdownRow('Is Registered', [
+            { value: 'yes', label: 'Yes' },
+            { value: 'no', label: 'No' },
+        ]);
     }
 }

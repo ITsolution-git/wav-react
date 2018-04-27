@@ -8,7 +8,13 @@ import { searchCaptains } from '../../actions/UserSearchAction';
 import UsersList from './shared/UsersList';
 import {
     FirstNameInput,
-    LastNameInput
+    LastNameInput,
+    EmailInput,
+    UsernameInput,
+    AddressInput,
+    PhoneInput,
+    ZipCodeInput,
+    DateOfBirthInput
 } from './shared/FilterInputs';
 
 
@@ -44,12 +50,18 @@ class CaptainFilter extends BaseComponent {
         return (
             <div className='btw-user-search container'>
                 <Row>
-                    <Col md={5} className='input-filters' >
+                    <Col md={4} className='input-filters' >
+                        <UsernameInput />
+                        <EmailInput />
                         <FirstNameInput />
                         <LastNameInput />
+                        <AddressInput />
+                        <PhoneInput />
+                        <DateOfBirthInput />
+                        <ZipCodeInput />
                         <Button onClick={this.onSearchClick}>Search</Button>
                     </Col>
-                    <Col md={7} className='users' >
+                    <Col md={8} className='users' >
                         <UsersList users={captains}
                                    isFetching={isFetching}
                                    isVoter={false} />
