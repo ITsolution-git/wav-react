@@ -17,7 +17,8 @@ class Login extends BaseComponent {
 		this.state = {
 			username: '',
 			password: '',
-			emptyField: null
+			emptyField: null,
+			isReset: false
         };
 	}
 
@@ -46,16 +47,25 @@ class Login extends BaseComponent {
 		}
 	}
 
+	componentDidMount() {
+		if (this.props.location.state) {
+			this.setState({isReset: this.props.location.state.isReset})
+		}
+	}
+
 	render() {
 		const { error, isFetching } = this.props;
 		const { password, username, emptyField } = this.state;
+
 		return (
 			<div className="btw-login container">
 				<div className="btw-form" onKeyPress={this.onKeyPress}>
                     <div className="card-content">
-                        <p id="loginHeader">Log into your account</p>
+						<p id="loginHeader">Log into your account </p>
                         { error && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
                     </div>
+					{ !this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
+					<br/><br/>
                     <div className="form-group">
                         <label className="pull-left">Username</label>
                         <input type="text" className="input-field" id="username" ref="username"

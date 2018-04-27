@@ -9,14 +9,14 @@ export function forgotPasswordRequest(email) {
 
         return PasswordRequestService.forgotPasswordRequest(data).then(
             response => {
-                dispatch(action());
+                dispatch(action(response.data.request_id != undefined));
             },
             error => {}
         )
     };
 
-    function action() {
-        return { type: PasswordRequestContants.PASSWORD_RESET_REQUEST };
+    function action(isUserFound) {
+        return { type: PasswordRequestContants.PASSWORD_RESET_REQUEST, isUserFound };
     }
 }
 

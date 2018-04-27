@@ -87,7 +87,7 @@ class ChangePassword extends BaseComponent {
 
 	componentWillReceiveProps(props) {
 		if (props.isChangedPassword) {
-			this.onLink(routes.login);
+			this.onLink(routes.login, { isReset: true });
 			return;
 		} else {
 			this.setState({ "isChangedPassword": false});

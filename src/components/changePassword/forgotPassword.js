@@ -16,7 +16,8 @@ class ForgotPassword extends BaseComponent {
 		super();
 		this.state = {
 			info: this.getEmptyState(),
-			isValid: this.getEmptyState(true)
+			isValid: this.getEmptyState(true),
+			isUserFound: -1
 		}
 	}
 
@@ -71,9 +72,16 @@ class ForgotPassword extends BaseComponent {
 	};
 
 	componentWillReceiveProps(props) {
-		if (props.isSuccess) {
-			this.onLink(routes.makelist);
-			return;
+		if (props.isUserFound) {
+			this.setState({
+				isUserFound: 1
+			})
+		}
+
+		if (!props.isUserFound) {
+			this.setState({
+				isUserFound: 0
+			})
 		}
 	}
 
@@ -90,6 +98,9 @@ class ForgotPassword extends BaseComponent {
                         We will send you an email to reset your password
 						</p>
 					</div>
+					<br/>
+					{ this.state.isUserFound === 0 && <span style={{ fontSize: "18px", color: "red" }}>User doesn't exist</span> }
+					{ this.state.isUserFound === 1 && <span style={{ fontSize: "18px", color: "green" }}>Reset password request sent</span> }
 					<form>
 						{ this.renderInput('email', 'Email', 'email', 0, error || '* Email is not valid *') }
 						<br/><br/>
@@ -100,7 +111,7 @@ class ForgotPassword extends BaseComponent {
 						</Col>
 						<Col md={12} xs={6}>
 							<div id="btn_signup">
-								<button className="btn btn-primary" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>Send Request</button>
+								<button className="btn btn-primary" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} >Send Request</button>
 							</div>
 						</Col>
 					</Row>
@@ -111,9 +122,9 @@ class ForgotPassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { isSuccess } = state.request;
+    const { isUserFound } = state.request;
     return {
-        isSuccess
+        isUserFound
     };
 };
 
