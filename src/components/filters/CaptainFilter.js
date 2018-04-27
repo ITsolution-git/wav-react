@@ -16,24 +16,32 @@ import {
     ZipCodeInput,
     DateOfBirthInput
 } from './shared/FilterInputs';
+import { captainFields } from './shared/SharedHelper';
+
+const checkedConst = 'checked';
 
 
 class CaptainFilter extends BaseComponent {
-    state ={
-        firstNameChecked: false,
-        firstName: ''
-    };
 
-    handleChange = (name, value) => {
-
+    handleChange = (name, checked, value) => {
+        this.setState({
+            [name + checkedConst]: checked,
+            [name]: value
+        })
     };
 
     onSearchClick = () => {
-        this.loadCaptainSearch();
+        let data = {};
+        Object.values(captainFields).forEach(field => {
+           if (this.state[field + checkedConst]) {
+               data[field] = this.state[field];
+           }
+        });
+        this.loadCaptainSearch(data);
     };
 
-    loadCaptainSearch = () => {
-        this.props.actions.searchCaptains();
+    loadCaptainSearch = (data) => {
+        this.props.actions.searchCaptains(data);
     };
 
     componentWillMount() {
@@ -51,14 +59,14 @@ class CaptainFilter extends BaseComponent {
             <div className='btw-user-search container'>
                 <Row>
                     <Col md={4} className='input-filters' >
-                        <UsernameInput />
-                        <EmailInput />
-                        <FirstNameInput />
-                        <LastNameInput />
-                        <AddressInput />
-                        <PhoneInput />
-                        <DateOfBirthInput />
-                        <ZipCodeInput />
+                        <UsernameInput onChange={(checked, value) => this.handleChange(captainFields.username, checked, value)} />
+                        <EmailInput onChange={(checked, value) => this.handleChange(captainFields.email, checked, value)} />
+                        <FirstNameInput onChange={(checked, value) => this.handleChange(captainFields.firstName, checked, value)} />
+                        <LastNameInput onChange={(checked, value) => this.handleChange(captainFields.lastName, checked, value)} />
+                        <AddressInput onChange={(checked, value) => this.handleChange(captainFields.address, checked, value)} />
+                        <PhoneInput onChange={(checked, value) => this.handleChange(captainFields.phone, checked, value)} />
+                        <DateOfBirthInput onChange={(checked, value) => this.handleChange(captainFields.dateOfBirth, checked, value)} />
+                        <ZipCodeInput onChange={(checked, value) => this.handleChange(captainFields.zipCode, checked, value)} />
                         <Button onClick={this.onSearchClick}>Search</Button>
                     </Col>
                     <Col md={8} className='users' >

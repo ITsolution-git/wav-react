@@ -1,7 +1,6 @@
 import config from '../config/ApiConfig';
 import { postAsync, getAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
-import roles from '../constants/Roles';
 
 export default {
     searchVoters,
@@ -19,7 +18,7 @@ function searchVoters(data) {
 function searchCaptains(data) {
     return getAsync({
         url: `${config.apiHost}/api/v1/user/searchUser`,
-        data: data,
+        params: data,
         headers: getHeaders()
     });
 }

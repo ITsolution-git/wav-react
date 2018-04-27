@@ -51,7 +51,7 @@ export default class UserItem extends BaseComponent {
                 <div>Role: { role }</div>
                 <div>Phone: { phonenumber }</div>
                 <div>Address: { address }</div>
-                <div>Date of birth: { dateofbirth }</div>
+                <div>Date of birth: { dateofbirth.date }</div>
                 <div>ZipCode: { zipcode } </div>
             </div>
         )
