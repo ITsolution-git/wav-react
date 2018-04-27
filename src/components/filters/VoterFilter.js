@@ -2,13 +2,25 @@ import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col, Button } from 'react-bootstrap';
+import Typography from 'material-ui/Typography';
 
 import BaseComponent from '../shared/BaseComponent';
 import { searchVoters} from '../../actions/UserSearchAction';
 import UsersList from './shared/UsersList';
 import {
     FirstNameInput,
-    LastNameInput
+    LastNameInput,
+    StateInput,
+    GenderInput,
+    EmailInput,
+    UsernameInput,
+    CityInput,
+    AddressInput,
+    PhoneInput,
+    ZipCodeInput,
+    DateOfBirthInput,
+    IsRegisteredInput,
+    VoterStatusInput
 } from './shared/FilterInputs';
 
 
@@ -44,12 +56,34 @@ class VoterFilter extends BaseComponent {
         return (
             <div className='btw-user-search container'>
                 <Row>
-                    <Col md={5} className='input-filters' >
+                    <Col md={4} className='input-filters' >
+                        <Typography variant='subheading' gutterBottom>
+                            Voter
+                        </Typography>
                         <FirstNameInput />
                         <LastNameInput />
+                        <EmailInput />
+                        <StateInput />
+                        <GenderInput />
+                        <CityInput />
+                        <AddressInput />
+                        <PhoneInput />
+                        <IsRegisteredInput />
+                        <VoterStatusInput />
+                        <Typography variant='subheading' gutterBottom>
+                            Captain
+                        </Typography>
+                        <UsernameInput />
+                        <EmailInput />
+                        <FirstNameInput />
+                        <LastNameInput />
+                        <AddressInput />
+                        <PhoneInput />
+                        <DateOfBirthInput />
+                        <ZipCodeInput />
                         <Button onClick={this.onSearchClick}>Search</Button>
                     </Col>
-                    <Col md={7} className='users' >
+                    <Col md={8} className='users' >
                         <UsersList users={voters}
                                    isFetching={isFetching}
                                    isVoter={true} />
