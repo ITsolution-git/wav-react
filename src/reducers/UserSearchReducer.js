@@ -5,7 +5,7 @@ export default function userSearchReducer(state = InitialState.userSearch, actio
 
     switch (action.type) {
         case UserSearchConstants.USER_SEARCH_REQUEST: {
-            return { ...state, isFetching: true };
+            return { ...state, isFetching: true, voters: [], captains: []  };
         }
         case UserSearchConstants.VOTER_SEARCH_SUCCESS: {
             return { ...state, ...{ voters: action.voters, isFetching: false, isVoterSuccess: true }};

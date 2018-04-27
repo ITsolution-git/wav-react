@@ -56,16 +56,19 @@ class VoterFilter extends BaseComponent {
     };
 
     onSearchClick = () => {
-        let data = {};
+        let data = {
+            captain: {}
+        };
+
         const { voter, captain } = this.state;
 
-        Object.keys(voterFields).forEach(field => {
+        Object.values(voterFields).forEach(field => {
             if (voter[field + checkedConst]) {
                 data[field] = voter[field];
             }
         });
 
-        Object.keys(captainFields).forEach(field => {
+        Object.values(captainFields).forEach(field => {
            if (captain[field + checkedConst]) {
                data.captain[field] = captain[field];
            }
@@ -73,8 +76,8 @@ class VoterFilter extends BaseComponent {
         this.loadVoterSearch(data);
     };
 
-    loadVoterSearch = () => {
-        this.props.actions.searchVoters();
+    loadVoterSearch = (data) => {
+        this.props.actions.searchVoters(data);
     };
 
     componentWillMount() {

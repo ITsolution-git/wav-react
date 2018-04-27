@@ -32,7 +32,7 @@ class CaptainFilter extends BaseComponent {
 
     onSearchClick = () => {
         let data = {};
-        Object.keys(captainFields).forEach(field => {
+        Object.values(captainFields).forEach(field => {
            if (this.state[field + checkedConst]) {
                data[field] = this.state[field];
            }
@@ -40,8 +40,8 @@ class CaptainFilter extends BaseComponent {
         this.loadCaptainSearch(data);
     };
 
-    loadCaptainSearch = () => {
-        this.props.actions.searchCaptains();
+    loadCaptainSearch = (data) => {
+        this.props.actions.searchCaptains(data);
     };
 
     componentWillMount() {
