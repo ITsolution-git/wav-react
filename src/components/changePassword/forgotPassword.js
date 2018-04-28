@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { forgotPasswordRequest } from '../../actions/PasswordRequestAction';
+import Spinner from '../../components/shared/Spinner';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
@@ -17,7 +18,7 @@ class ForgotPassword extends BaseComponent {
 		this.state = {
 			info: this.getEmptyState(),
 			isValid: this.getEmptyState(true),
-			isUserFound: -1
+			requestStatus: -1
 		}
 	}
 
@@ -54,9 +55,12 @@ class ForgotPassword extends BaseComponent {
 
 		this.setState({ isValid: validation });
 
-		return Object.keys(info).some(key => !validation[key])
-			? true
-			: this.props.forgotPasswordRequest(info.email);
+		if ( Object.keys(info).some(key => !validation[key]) ) {
+			return true
+		} else {
+			this.setState({ requestStatus: 2 })
+			return this.props.forgotPasswordRequest(info.email);
+		}
 	}
 
 	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
@@ -74,20 +78,20 @@ class ForgotPassword extends BaseComponent {
 	componentWillReceiveProps(props) {
 		if (props.isUserFound) {
 			this.setState({
-				isUserFound: 1
+				requestStatus: 1
 			})
 		}
 
 		if (!props.isUserFound) {
 			this.setState({
-				isUserFound: 0
+				requestStatus: 0
 			})
 		}
 	}
 
 	render() {
 
-		const { error } = this.props;
+		const { error, isFetching } = this.props;
 		const nameWidth = this.isMobile() ? 12 : 6;
 		return (
 			<div>
@@ -99,8 +103,8 @@ class ForgotPassword extends BaseComponent {
 						</p>
 					</div>
 					<br/>
-					{ this.state.isUserFound === 0 && <span style={{ fontSize: "18px", color: "red" }}>User doesn't exist</span> }
-					{ this.state.isUserFound === 1 && <span style={{ fontSize: "18px", color: "green" }}>Reset password request sent</span> }
+					{ this.state.requestStatus === 0 && <span style={{ fontSize: "18px", color: "red" }}>User doesn't exist</span> }
+					{ this.state.requestStatus === 1 && <span style={{ fontSize: "18px", color: "green" }}>Reset password request sent</span> }
 					<form>
 						{ this.renderInput('email', 'Email', 'email', 0, error || '* Email is not valid *') }
 						<br/><br/>
@@ -111,8 +115,9 @@ class ForgotPassword extends BaseComponent {
 						</Col>
 						<Col md={12} xs={6}>
 							<div id="btn_signup">
-								<button className="btn btn-primary" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} >Send Request</button>
+								<button className="btn btn-primary" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} disabled={ (isFetching || this.state.requestStatus === 1) ? "disabled" : ""}>Send Request</button>
 							</div>
+							<Spinner loading={isFetching} size={50} />
 						</Col>
 					</Row>
 				</div>
@@ -122,9 +127,10 @@ class ForgotPassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { isUserFound } = state.request;
+    const { isUserFound, isFetching } = state.request;
     return {
-        isUserFound
+		isUserFound,
+		isFetching
     };
 };
 

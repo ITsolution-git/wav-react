@@ -7,16 +7,25 @@ export function forgotPasswordRequest(email) {
             captainEmail: email
         };
 
+        dispatch(actionRequest());
         return PasswordRequestService.forgotPasswordRequest(data).then(
             response => {
-                dispatch(action(response.data.request_id != undefined));
+                dispatch(actionSucceeded(response.data.request_id != undefined));
             },
-            error => {}
+            error => {
+                dispatch(actionFailed(error));
+            }
         )
     };
 
-    function action(isUserFound) {
-        return { type: PasswordRequestContants.PASSWORD_RESET_REQUEST, isUserFound };
+    function actionSucceeded(isUserFound) {
+        return { type: PasswordRequestContants.PASSWORD_RESET_SUCCEEDED, isUserFound };
+    }
+    function actionRequest() {
+        return { type: PasswordRequestContants.PASSWORD_RESET_REQUEST };
+    }
+    function actionFailed(err) {
+        return { type: PasswordRequestContants.PASSWORD_RESET_FAILED, err };
     }
 }
 
