@@ -158,7 +158,7 @@ class Register extends BaseComponent {
 										value=""
 										onClick={this.onTermsAndPrivacy.bind(this)}/>
 								</div>
-								<div className="col-xs-11 padding0 terms-privacy">
+								<div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
 									<label>
 										I have read and understood the term of use and by signing up, I agree to Bethewave's <Link target="_blank" to='/termsOfUse'>Terms of Use</Link> and <Link target="_blank" to='/privacyPolicy'>Privacy Policy</Link>
 									</label>
