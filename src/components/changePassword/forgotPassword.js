@@ -12,6 +12,8 @@ import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 
+import history from '../../utility/History';
+
 class ForgotPassword extends BaseComponent {
 	constructor() {
 		super();
@@ -45,6 +47,10 @@ class ForgotPassword extends BaseComponent {
 
 		this.setState({ isValid: validation });
 	}
+
+	onLink = (route, params) => {
+        history.push(route, params);
+    };
 
 	onForgotPassword(event) {
 		const { isValid, info } = this.state;
@@ -116,6 +122,7 @@ class ForgotPassword extends BaseComponent {
 						<Col md={12} xs={6}>
 							<div id="btn_signup">
 								<button className="btn btn-primary" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} disabled={ (isFetching || this.state.requestStatus === 1) ? "disabled" : ""}>Send Request</button>
+								<button className="btn btn-primary" style={{ marginLeft: "15px"}} onClick={() => this.onLink(routes.login)}>Go Back</button>
 							</div>
 							<Spinner loading={isFetching} size={50} />
 						</Col>
