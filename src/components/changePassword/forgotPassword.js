@@ -82,7 +82,7 @@ class ForgotPassword extends BaseComponent {
 			})
 		}
 
-		if (!props.isUserFound) {
+		if (props.isUserFound === false) {
 			this.setState({
 				requestStatus: 0
 			})
