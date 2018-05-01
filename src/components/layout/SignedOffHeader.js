@@ -14,8 +14,8 @@ class SignedOffHeader extends BaseComponent {
     render() {
         return (
             <Col className="btw-off-header">
-                <Row>
-                    <Col mdOffset={4} md={8}>
+                <Row className="mb-1">
+                    <Col mdOffset={1} md={8}>
                         <Image src={logo} className='btw-logo' onClick={() => this.onLink(getHomeRoute())} />
                     </Col>
                 </Row>
