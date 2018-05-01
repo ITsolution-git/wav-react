@@ -14,6 +14,7 @@ import FontAwesome from 'react-fontawesome';
 import Dialog, { DialogContent } from 'material-ui/Dialog';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
+import classNames from 'classnames';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
@@ -27,7 +28,8 @@ import { getBtwUserProfile } from '../../actions/SignOnAction';
 class SignedOnHeader extends BaseComponent {
 
     state = {
-        showInfoModal: false
+        showInfoModal: false,
+        activeItem: this.props.location.pathname
     };
 
     componentWillMount() {
@@ -95,10 +97,22 @@ class SignedOnHeader extends BaseComponent {
     };
 
     render() {
-        const { profile: { isSuccess, data } } = this.props,
-            { showInfoModal } = this.state,
+        const {
+            profile: {
+                isSuccess,
+                data
+            },
+            location: {
+                pathname
+            }
+        } = this.props,
+            {
+                showInfoModal,
+                activeItem
+            } = this.state,
             name = isSuccess && data.firstname || '';
 
+        console.log(this.props);
         return (
             <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
                 <Row className='dropdown-div'>
@@ -121,7 +135,13 @@ class SignedOnHeader extends BaseComponent {
                         <Nav>
                             { this.resolveLinks().map((link, i) => {
                                     return (
-                                        <NavItem key={i} eventKey={i} onClick={() => this.onLink(link.route)} >
+                                        <NavItem key={i}
+                                                 className={classNames({ 'active-menu': link.route === activeItem })}
+                                                 eventKey={i}
+                                                 onClick={() => {
+                                                     this.setState({ activeItem: link.route });
+                                                     this.onLink(link.route)
+                                                 }} >
                                             { link.title }
                                         </NavItem>
                                     );
