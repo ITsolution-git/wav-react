@@ -10,6 +10,7 @@ import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
+import Spinner from '../../components/shared/Spinner';
 
 class ForgotPassword extends BaseComponent {
 	constructor() {
@@ -59,6 +60,10 @@ class ForgotPassword extends BaseComponent {
 			: this.props.forgotPasswordRequest(info.email);
 	}
 
+	onBack(e) {
+		this.props.history.goBack();
+	}
+
 	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
 		return (
             <div className={`form-group col-xs-${colWidth}`}>
@@ -87,7 +92,7 @@ class ForgotPassword extends BaseComponent {
 
 	render() {
 
-		const { error } = this.props;
+		const { error, isFetching } = this.props;
 		const nameWidth = this.isMobile() ? 12 : 6;
 		return (
 			<div>
@@ -111,8 +116,10 @@ class ForgotPassword extends BaseComponent {
 						</Col>
 						<Col md={12} xs={6}>
 							<div id="btn_signup">
-								<button className="btn btn-primary" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} >Send Request</button>
+								<button className="btn btn-primary mr-1" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} >Send Request</button>
+								<button className="btn btn-primary" onClick={this.onBack.bind(this, 'onBack')} >Go Back</button>
 							</div>
+							<Spinner loading={isFetching} size={50} />
 						</Col>
 					</Row>
 				</div>
@@ -122,9 +129,10 @@ class ForgotPassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { isUserFound } = state.request;
+    const { isUserFound, isFetching } = state.request;
     return {
-        isUserFound
+		isUserFound,
+		isFetching
     };
 };
 

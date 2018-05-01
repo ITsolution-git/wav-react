@@ -4,7 +4,13 @@ import InitialState from '../constants/InitialState';
 export default function passwordRequestReducer(state = InitialState.request, action) {
     switch (action.type) {
         case PasswordRequestConstants.PASSWORD_RESET_REQUEST: {
-            return { ...state, isUserFound: action.isUserFound };
+            return { ...state, isFetching: true };
+        }
+        case PasswordRequestConstants.PASSWORD_RESET_SUCCEEDED: {
+            return { ...state, isUserFound: action.isUserFound, isFetching: false };
+        }
+        case PasswordRequestConstants.PASSWORD_RESET_FAILED: {
+            return { ...state, isUserFound: false, isFetching: false, err: action.err };
         }
         case PasswordRequestConstants.VERIFY_USER_SUCCEEDED:  {
             return { ...state, isSuccess: true, user: action.user };
