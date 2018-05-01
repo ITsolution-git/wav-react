@@ -36,6 +36,7 @@ import WhyBethewave from './static/WhyBethewave';
 import HowContribute from './static/HowContribute';
 import TermsOfUse from './static/TermsOfUse';
 import PrivacyPolicy from './static/PrivacyPolicy';
+import Faq from './static/Faq';
 
 import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
@@ -110,6 +111,7 @@ const router =() => (
             <Route exact path = {routes.howContribute} component = { HowContribute } />
             <Route exact path = {routes.termsOfUse} component = { TermsOfUse } />
             <Route exact path = {routes.privacyPolicy} component = { PrivacyPolicy } />
+            <Route exact path = {routes.faq} component = { Faq } />
 
             // change changePassword
             <Route exact path = {routes.verifyCaptain} component = { VerifyCaptain } />
