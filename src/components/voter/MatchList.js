@@ -57,6 +57,9 @@ class MatchList extends BaseComponent {
                                 'Our search returned no results'
                         }
                     </p>
+                    <p className="intro-title">
+                        { matchList.length ? "Click to select" : "" }
+                    </p>
                 </div>
                 <div className='match-list'>
                     { matchList.sort((person1, person2) => person2.matchRate - person1.matchRate)
