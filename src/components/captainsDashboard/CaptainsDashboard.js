@@ -156,10 +156,10 @@ class CaptainsDashboard extends BaseComponent {
                     <DialogTitle>Welcome { data.firstname } { data.lastname }</DialogTitle>
                     <DialogContent classes={{root: 'splash-modal'}}>
                         <DialogContentText>
-                            { tasks.length === 0 && 'You have no latest tasks'}
-                            { tasks.length !== 0 && 'Here is you latest tasks'}
+                            { tasks.length === 0 && 'You have no the latest tasks'}
+                            { tasks.length !== 0 && 'Here is your the latest task'}
                         </DialogContentText>
-                        { tasks.slice(0, 4).map((item, i) => {
+                        { tasks.slice(0, 1).map((item, i) => {
                             const task = resolveTaskData(item);
                             return (
                                 <div key={i}

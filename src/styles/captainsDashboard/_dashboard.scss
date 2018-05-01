@@ -99,7 +99,7 @@ $link-icon-size: 85px;
   padding: 2%;
   border: 1px solid lightgray;
   text-align: center;
-  margin-bottom: 2%;
+  margin: 3% 0 3% 0;
   background-color: #3C98D9;
   color: white;
   cursor: pointer;
@@ -107,5 +107,5 @@ $link-icon-size: 85px;
 
 .splash-modal {
   min-width: 600px;
-  min-height: 200px;
+  min-height: 150px;
 }
