@@ -4,6 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
@@ -12,7 +19,9 @@ import authStorage from '../../storage/AuthStorage';
 import { loadVoterList } from '../../actions/VoterListAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import { getBtwUserProfile } from '../../actions/SignOnAction';
+import { resolveTaskData } from '../../helpers/TaskHelper';
 import Spinner from '../shared/Spinner';
+import appStorage from '../../storage/AppStorage';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -23,17 +32,53 @@ class CaptainsDashboard extends BaseComponent {
         actions.loadVoterList(userid, username);
         actions.loadTaskList(userid);
         actions.getBtwUserProfile();
+        this.state = {
+            showSplashModal: false
+        }
 	}
+
+	onCloseSplashModal = (onComplete = () => {}) => {
+        this.setState({ showSplashModal: false }, () => {
+            appStorage.unsetSplashShown();
+            onComplete();
+        });
+    };
+
+    goToTask = (taskId, taskRoute) => {
+        this.onCloseSplashModal(() => {
+            this.onLink(`${taskRoute}?taskId=${taskId}`)
+        });
+    };
+
+    onSplashSubmitClick = () => {
+        this.onCloseSplashModal(() => {
+            this.onLink(routes.tasksList);
+        });
+    };
+
+    componentWillReceiveProps(props) {
+        const { taskList, profile } = props;
+        if (appStorage.isSplashShown() && !taskList.isFetching && !profile.isFetching) {
+            this.setState({ showSplashModal: true });
+        }
+    }
 
     render() {
         const {
             profile: {
                 isSuccess,
+                data = {},
                 isFetching
             },
             voters_count,
-            tasks_count
+            taskList: {
+                tasks,
+                count
+            }
         } = this.props;
+
+        const tasks_count = count;
+        const { showSplashModal } = this.state;
 
         return (
             <div>
@@ -105,6 +150,39 @@ class CaptainsDashboard extends BaseComponent {
                     </Row>
                     }
                 </div>
+                <Dialog
+                    open={showSplashModal}
+                    onClose={() => this.onCloseSplashModal()}>
+                    <DialogTitle>Welcome { data.firstname } { data.lastname }</DialogTitle>
+                    <DialogContent classes={{root: 'splash-modal'}}>
+                        <DialogContentText>
+                            { tasks.length === 0 && 'You have no latest tasks'}
+                            { tasks.length !== 0 && 'Here is you latest tasks'}
+                        </DialogContentText>
+                        { tasks.slice(0, 4).map((item, i) => {
+                            const task = resolveTaskData(item);
+                            return (
+                                <div key={i}
+                                     onClick={() => this.goToTask(task._id, task.route)}
+                                     className='latest-task'>
+                                    <div>{ task.description }</div>
+                                </div>
+                            )
+                        })}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button color='primary'
+                                variant='raised'
+                                onClick={this.onSplashSubmitClick}>
+                            Go to Tasks
+                        </Button>
+                        <Button onClick={() => this.onCloseSplashModal()}
+                                color='primary'
+                                variant='raised'>
+                            Dismiss
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }
@@ -113,11 +191,11 @@ class CaptainsDashboard extends BaseComponent {
 const mapStateToProps = (state) => {
     const profile = state.app[appDataTypes.profile];
     const voters_count = state.voterList.count;
-    const tasks_count = state.taskList.count;
+
     return {
         profile,
         voters_count,
-        tasks_count
+        taskList: state.taskList
     };
 };
 
