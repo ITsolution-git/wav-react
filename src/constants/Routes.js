@@ -32,5 +32,6 @@ export default {
     whyBetheWave: '/whyBetheWave',
     howContribute: '/howYouCanContribute',
     termsOfUse: '/termsOfUse',
-    privacyPolicy: '/privacyPolicy'  
+    privacyPolicy: '/privacyPolicy',
+    faq: '/faq'
 }
