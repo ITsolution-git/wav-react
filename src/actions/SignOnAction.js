@@ -4,6 +4,7 @@ import IdentityService from '../services/IdentityService';
 import authStorage  from '../storage/AuthStorage';
 import appDataTypes from '../constants/AppDataTypes';
 import pubsubConstants from '../constants/PubSubConstants';
+import appStorage from '../storage/AppStorage';
 
 import {
 	initializeRequest,
@@ -17,8 +18,9 @@ export function btwSignOn(username, password, onSuccess = () => {}) {
 		return IdentityService.login(username, password).then(
 			response => {
                 authStorage.saveTokenInfo(response.token);
+                appStorage.setSplashShown();
                 PubSub.publish(pubsubConstants.onAuthChange, true);
-				dispatch(loadDataSuccess(appDataTypes.signOn, response));
+                dispatch(loadDataSuccess(appDataTypes.signOn, response));
                 onSuccess();
 			},
 			error => {
