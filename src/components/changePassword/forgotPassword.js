@@ -97,6 +97,7 @@ class ForgotPassword extends BaseComponent {
 		return (
 			<div>
 				<div className='btw-change-password btw-verify container'>
+					{ !this.isMobile() && this.renderBackToHome()}
 					<div className="intro">
 						<p className="intro-title">
                         Enter the email you used to register an account with us.
@@ -116,8 +117,7 @@ class ForgotPassword extends BaseComponent {
 						</Col>
 						<Col md={12} xs={6}>
 							<div id="btn_signup">
-								<button className="btn btn-primary mr-1" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} >Send Request</button>
-								<button className="btn btn-primary" onClick={this.onBack.bind(this, 'onBack')} >Go Back</button>
+								<button className="btn btn-primary" onClick={this.onForgotPassword.bind(this, 'onForgotPassword')} >Send Request</button>
 							</div>
 							<Spinner loading={isFetching} size={50} />
 						</Col>
