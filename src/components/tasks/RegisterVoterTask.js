@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
+import { Row, Col } from 'react-bootstrap';
 
 import Stepper from './shared/LetfStepper';
 import TaskBase from './shared/TaskBase';
@@ -45,7 +46,14 @@ class RegisterVoterTask extends TaskBase {
     render() {
         return (
             <div className='btw-task container'>
-                <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                <Row>
+                    <Col md={8}>
+                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                    </Col>
+
+                    <Col md={3} xs={12} className="btw-task-info" style={{marginLeft: (this.isMobile() ? "0" : "80px")}}>
+                    </Col>
+                </Row>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 .btw-task {
   margin-top: 3%;
   @include respond-to($desktop) {
-    width: 60%;
+    width: 80%;
   }
   button {
     color: white;
@@ -11,5 +11,9 @@
     color: #67C100;
     text-align: center;
     font-size: 150px;
+  }
+  .btw-task-info {
+    border: 1px solid lightgray;
+    height: 400px;
   }
 }
