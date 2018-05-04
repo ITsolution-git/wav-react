@@ -17,13 +17,18 @@ class LeftStepper extends BaseComponent {
 
     handleNext = () => {
         const { activeStep } = this.state;
-        if (activeStep + 1 === this.props.steps.length) {
-            PubSub.publish(pubsubConstants.onTaskComplete);
-            return;
+        const { steps } = this.props;
+        PubSub.publish(pubsubConstants.onTaskNext);
+
+        if (steps[activeStep].nextEnabled !== false) {
+            if (activeStep + 1 === steps.length) {
+                PubSub.publish(pubsubConstants.onTaskComplete);
+                return;
+            }
+            this.setState({
+                activeStep: activeStep + 1,
+            });
         }
-        this.setState({
-            activeStep: activeStep + 1,
-        });
     };
 
     handleBack = () => {

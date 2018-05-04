@@ -5,6 +5,18 @@ export const TaskConstants = {
 };
 
 export const RegisterTaskConstants = {
-    contactMode: 'contactMode',
-    isRegistered: 'isRegistered'
+    hasSpeak: 'hasSpeak',
+    thinkRegistered: 'thinkRegistered',
+    confirmRegistered: 'confirmRegistered',
+    finalConfirmRegistered: 'finalConfirmRegistered'
+};
+
+export const RegisterSubSteps = {
+    byDefault: 'byDefault',
+    firstYes: 'firstYes',
+    secondYes: 'secondYes',
+    firstNext: 'firstNext',
+    thirdYes: 'thirdYes',
+    firstNo: 'firstNo',
+    secondNext: 'secondNext'
 };
