@@ -144,6 +144,7 @@ class RegisterVoterTask extends TaskBase {
         return (
             <div className='btw-task container'>
                 <Row>
+                    { this.renderBackToHome() }
                     <Col md={8}>
                         <Stepper steps={this.getSteps()}
                                  taskData={this.props.taskData} />

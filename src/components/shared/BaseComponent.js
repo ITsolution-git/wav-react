@@ -28,7 +28,7 @@ class BaseComponent extends Component {
     };
 
     renderBackToHome = (style) => {
-        style = this.isDesktop() ? style || {'left': '2%', 'position': 'absolute'} : null;
+        style = this.isDesktop() ? style || {'left': '1%', 'position': 'absolute'} : null;
         return (
             <Button className='btn btn-primary' style={style}
                     onClick={() => this.onLink(routes.login)}>
