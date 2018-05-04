@@ -48,7 +48,6 @@ class MatchList extends BaseComponent {
         const { showConfirmModal } = this.state;
         return (
             <div className='btw-voter btw-match-list'>
-                { this.isDesktop() && this.renderBackToHome() }
                 <div className="intro">
                     <p className="intro-title">
                         { matchList.length > 1 ? 
@@ -70,9 +69,6 @@ class MatchList extends BaseComponent {
                     )}
                 </div>
                 <Row>
-                    <Col xs={6}>
-                        { this.isMobile() && this.renderBackToHome()}
-                    </Col>
                     { boardingType === boardingTypes.register &&
                         <Row className='bottom-buttons'>
                             <Col xs={8} md={8}>
