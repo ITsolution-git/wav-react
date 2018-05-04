@@ -5,9 +5,8 @@
     button {
       @extend .btw-button;
     }
-    #btn_not_sure button {
-      @extend .btw-button;
-      margin-top: $input_field_space;
+    .bottom-buttons {
+      margin-top: $input_field_space
     }
     .match-list {
       .name-row {
