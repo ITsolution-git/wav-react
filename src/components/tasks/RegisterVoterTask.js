@@ -47,8 +47,6 @@ class RegisterVoterTask extends TaskBase {
     };
 
     render() {
-        console.log('-----------------')
-        console.log(this.props.taskData)
         return (
             <div className='btw-task container'>
                 <Row>
