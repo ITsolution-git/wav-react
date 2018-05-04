@@ -15,5 +15,18 @@
   .btw-task-info {
     border: 1px solid lightgray;
     height: 400px;
+
+    .title {
+      font-size: 20px;
+    }
+
+    .description {
+      font-size: 16px;
+    }
+
+    .section {
+      margin-left: 10px;
+      margin-top: 10px;
+    }
   }
 }
