@@ -91,14 +91,16 @@ export function matchListPersist(voterDetails, resubmit = false) {
     }
 }
 
-export function registerVoter() {
+export function registerVoter(voter) {
     return (dispatch, getState) => {
         const { voterDetails } = getState().voter;
+
         const patchData = {
             userid: authStorage.getLoggedUser().userid,
             email: voterDetails.email,
             registration_metadata: {
-                isRegistered: true
+                isRegistered: true,
+                voterStatus: voter.voterstatus
             }
         };
         voterService.updateRegisteredVoter(patchData).then(

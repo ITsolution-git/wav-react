@@ -84,7 +84,7 @@ class MatchList extends BaseComponent {
                                     description='Are you sure this is the voter you intend to add to your list?'
                                     submitText='Yes'
                                     onSubmit={() => {
-                                        this.props.actions.registerVoter();
+                                        this.props.actions.registerVoter(this.currentPerson);
                                         this.redirectToPage(routes.voterSuccess);
                                         this.onCloseConfirmModal();
                                     } }
