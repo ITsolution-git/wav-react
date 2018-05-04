@@ -19,10 +19,7 @@ class TaskList extends BaseComponent {
     };
 
     componentWillMount() {
-        const { actions, taskList: { isSuccess, error } } = this.props;
-        if (!isSuccess && !error) {
-            actions.loadTaskList();
-        }
+        this.props.actions.loadTaskList();
     }
 
     render() {
