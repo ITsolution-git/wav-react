@@ -147,8 +147,8 @@ class UpdateProfileTask extends TaskBase {
 
     render() {
         return (
-
             <div className='btw-task container'>
+                { this.renderBackToHome() }
                 <Row>
                     <Col md={8}>
                         <Stepper steps={this.getSteps()} taskData={this.props.taskData} />

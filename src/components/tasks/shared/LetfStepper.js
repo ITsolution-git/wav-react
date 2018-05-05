@@ -21,15 +21,20 @@ class LeftStepper extends BaseComponent {
 
     handleNext = () => {
         const { activeStep } = this.state;
+        const { steps } = this.props;
         const { actions } = this.props;
-        if (activeStep + 1 === this.props.steps.length) {
-            PubSub.publish(pubsubConstants.onTaskComplete);
-            actions.getBtwUserProfile();
-            return;
+        PubSub.publish(pubsubConstants.onTaskNext);
+
+        if (steps[activeStep].nextEnabled !== false) {
+            if (activeStep + 1 === steps.length) {
+                PubSub.publish(pubsubConstants.onTaskComplete);
+                actions.getBtwUserProfile();
+                return;
+            }
+            this.setState({
+                activeStep: activeStep + 1,
+            });
         }
-        this.setState({
-            activeStep: activeStep + 1,
-        });
     };
 
     handleBack = () => {
@@ -78,7 +83,7 @@ class LeftStepper extends BaseComponent {
                         </div>
                         <Row>
                             <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
-                                <Button disabled={activeStep === 0}> Back </Button>
+                                { activeStep !== 0 && <Button> Back </Button> }
                             </Col>
                             <Col md={4} xs={6} onClick={this.handleNext}>
                                 <Button disabled={!currentCheckpoint.valid}>

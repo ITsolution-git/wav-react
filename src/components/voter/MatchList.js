@@ -10,6 +10,7 @@ import routes from '../../constants/Routes';
 import boardingTypes from '../../constants/VoterBoardingType';
 import MatchItem from './shared/MatchItem';
 import ConfirmationDialog from '../shared/ConfirmationDialog';
+import NextButton from './shared/NextButton';
 
 class MatchList extends BaseComponent {
     constructor(props, context) {
@@ -47,7 +48,6 @@ class MatchList extends BaseComponent {
         const { showConfirmModal } = this.state;
         return (
             <div className='btw-voter btw-match-list'>
-                { this.isDesktop() && this.renderBackToHome() }
                 <div className="intro">
                     <p className="intro-title">
                         { matchList.length > 1 ? 
@@ -69,15 +69,15 @@ class MatchList extends BaseComponent {
                     )}
                 </div>
                 <Row>
-                    <Col xs={6}>
-                        { this.isMobile() && this.renderBackToHome()}
-                    </Col>
                     { boardingType === boardingTypes.register &&
-                        <Col xs={6} md={12}>
-                            <div id="btn_not_sure">
+                        <Row className='bottom-buttons'>
+                            <Col xs={8} md={8}>
                                 <button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>
-                            </div>
-                        </Col> }
+                            </Col>
+                            <Col xs={4} md={4}>
+                                <NextButton title='Skip'/>
+                            </Col>
+                        </Row> }
                 </Row>
                 <ConfirmationDialog show={showConfirmModal}
                                     title='Register voter'

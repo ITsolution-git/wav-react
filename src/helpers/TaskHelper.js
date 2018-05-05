@@ -37,7 +37,7 @@ export function resolveTaskData(task) {
             break;
         }
         case taskIds.registerVoterId: {
-            task.description = `Help ${firstname} ${lastname} get registered`;
+            task.description = `Help ${firstname} ${lastname} register to vote`;
             task.route = routes.registerVoterTask;
             break;
         }

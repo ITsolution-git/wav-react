@@ -6,11 +6,21 @@ import { Row, Col } from 'react-bootstrap';
 
 import Stepper from './shared/LetfStepper';
 import TaskBase from './shared/TaskBase';
-import ContactType from './registerSteps/ContactType';
-import ReportBack from './registerSteps/ReportBack';
+import HaveContact, {
+    FirstYes,
+    SecondYes,
+    FirstNext,
+    FirstNo,
+    SecondNext
+} from './registerSteps/HaveContact';
+import HowToRegister from './registerSteps/HowToRegister';
+import WhyRegister from './registerSteps/WhyRegister';
 import TaskSuccess from './shared/TaskSuccess';
-import { RegisterTaskConstants } from '../../constants/reducerConstants/TaskConstants';
-import {getTaskData} from "../../helpers/TaskHelper";
+import {
+    RegisterTaskConstants,
+    RegisterSubSteps
+} from '../../constants/reducerConstants/TaskConstants';
+import { getTaskData } from "../../helpers/TaskHelper";
 
 import imgPhone from '../../resources/images/phone.png'
 import imgReward from '../../resources/images/reward.png'
@@ -18,25 +28,105 @@ import imgReward from '../../resources/images/reward.png'
 class RegisterVoterTask extends TaskBase {
     constructor(props, context) {
         super(props, context);
-        this.state = {};
+        this.state = {
+            nextEnabled: false,
+            subComponent: RegisterSubSteps.byDefault
+        };
     }
 
-    getSteps = () => {
-        const { contactMode, isRegistered } = RegisterTaskConstants;
+    onNextClick = (subComponent) => {
+        this.setState({ subComponent });
+    };
+
+    handleSuccess = (name, val) => {
+        if (val === 'yes') {
+            this.setState({ nextEnabled: true });
+        }
+        this.handleChange(name, val);
+    }
+
+    getSubComponent = () => {
+        const {
+            hasSpeak,
+            thinkRegistered,
+            confirmRegistered,
+            finalConfirmRegistered
+        } = RegisterTaskConstants;
         const { voter_metaData = {} } = this.props.taskData || {};
 
-        return [
-            { label: 'Register', component:
-                    <ContactType onChange={this.handleChange}
+        let component = null,
+            valid = true;
+
+        switch (this.state.subComponent) {
+            case RegisterSubSteps.byDefault: {
+                component = (
+                    <HaveContact onChange={this.handleChange}
                                  voterData={voter_metaData}
-                                 value={ this.state[contactMode] }/>,
-              valid: this.validateField(contactMode) },
+                                 onSubmit={this.onNextClick}
+                                 value={ this.state[hasSpeak] } />
+                );
+                valid = this.validateField(hasSpeak);
+                break;
+            }
+            case RegisterSubSteps.firstYes: {
+                component = (
+                    <FirstYes onChange={this.handleChange}
+                              voterData={voter_metaData}
+                              onSubmit={this.onNextClick}
+                              value={ this.state[thinkRegistered]} />
+                );
+                valid = this.validateField(thinkRegistered);
+                break;
+            }
+            case RegisterSubSteps.secondYes: {
+                component = (
+                    <SecondYes voterData={voter_metaData}
+                               onSubmit={this.onNextClick} />
+                );
+                valid = true;
+                break;
+            }
+            case RegisterSubSteps.firstNext: {
+                component = (
+                    <FirstNext onChange={this.handleSuccess}
+                      voterData={voter_metaData}
+                      onSubmit={this.onNextClick}
+                      value={this.state[confirmRegistered]} />
+                );
+                valid = this.validateField(confirmRegistered);
+                break;
+            }
+            case RegisterSubSteps.firstNo: {
+                component = (
+                    <FirstNo voterData={voter_metaData}
+                             onSubmit={this.onNextClick} />
+                );
+                valid = true;
+                break;
+            }
+            case RegisterSubSteps.secondNext: {
+                component = (
+                    <SecondNext onChange={this.handleSuccess}
+                               voterData={voter_metaData}
+                               onSubmit={this.onNextClick}
+                               value={this.state[finalConfirmRegistered]} />
+                );
+                valid = this.validateField(finalConfirmRegistered);
+                break;
+            }
+        }
+        return { component, valid };
+    };
 
-            { label: 'Report back', component:
-                    <ReportBack onChange={this.handleChange}
-                                value={ this.state[isRegistered] } />,
-
-              valid: this.validateField(isRegistered) },
+    getSteps = () => {
+        const { hasSpeak } = RegisterTaskConstants,
+         { voter_metaData = {} } = this.props.taskData || {},
+         lastStep = this.getSubComponent();
+        
+        return [
+            { label: 'How to register', component: <HowToRegister />, valid: true  },
+            { label: 'Why register', component: <WhyRegister voterData={voter_metaData} />, valid: true },
+            { label: 'Get contact', component: lastStep.component, valid: lastStep.valid, nextEnabled: this.state.nextEnabled },
             { label: 'Success', component: <TaskSuccess data={ this.getTaskData() } />, valid: true }
         ];
     };
@@ -47,11 +137,17 @@ class RegisterVoterTask extends TaskBase {
     };
 
     render() {
+        const { taskData: {
+            group_info = {}
+        } = {}} = this.props;
+
         return (
             <div className='btw-task container'>
                 <Row>
+                    { this.renderBackToHome() }
                     <Col md={8}>
-                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                        <Stepper steps={this.getSteps()}
+                                 taskData={this.props.taskData} />
                     </Col>
 
                     <Col 
@@ -66,7 +162,7 @@ class RegisterVoterTask extends TaskBase {
                             </Col>
                             <Col xs={10}>
                                 <span className="title"><b>Rewards Points</b></span><br />
-                                <span className="description">This task is worth {this.props.taskData.group_info.value} points</span>
+                                <span className="description">This task is worth {group_info.value} points</span>
                             </Col>
                         </Row>
 

@@ -106,6 +106,8 @@ $link-icon-size: 85px;
 }
 
 .splash-modal {
-  min-width: 600px;
+  @include respond-to($desktop) {
+    min-width: 600px;
+  }
   min-height: 150px;
 }
