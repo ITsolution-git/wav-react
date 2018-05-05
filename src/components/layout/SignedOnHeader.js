@@ -25,6 +25,10 @@ import appDataTypes from "../../constants/AppDataTypes";
 import { bindActionCreators } from 'redux';
 import { getBtwUserProfile } from '../../actions/SignOnAction';
 
+import gold from '../../resources/images/gold.png'
+import silver from '../../resources/images/silver.png'
+import bronze from '../../resources/images/bronze.png'
+
 class SignedOnHeader extends BaseComponent {
 
     state = {
@@ -96,6 +100,55 @@ class SignedOnHeader extends BaseComponent {
         this.setState({ showInfoModal: false })
     };
 
+    renderLevel = () => {
+
+        const {
+            profile: {
+                data
+            }
+        } = this.props
+
+        let score = (data && data.points ? data.points : 0)
+        let arr = [], level = 1;
+
+        if (score < 50) {
+            arr = [null, null, bronze];
+        } else if (score < 100) {
+            level = 2;
+            arr = [null, null, silver];
+        } else if (score < 200) {
+            level = 3;
+            arr = [null, null, gold];
+        } else if (score < 500) {
+            level = 4;
+            arr = [null, gold, bronze];
+        } else if (score < 1000) {
+            level = 5;
+            arr = [null, gold, silver];
+        } else if (score < 2000) {
+            level = 6;
+            arr = [null, gold, gold];
+        } else if (score < 5000) {
+            level = 7;
+            arr = [gold, gold, bronze];
+        } else if (score < 10000) {
+            level = 8;
+            arr = [gold, gold, silver];
+        } else {
+            level = 9;
+            arr = [gold, gold, gold];
+        }
+
+        return (
+            <div className="success-level tooltip">
+                { arr[0] && <img src={arr[0]} width={30} height={30} alt="" /> }
+                { arr[1] && <img src={arr[1]} width={30} height={30} alt="" /> }
+                { arr[2] && <img src={arr[2]} width={30} height={30} alt="" /> }
+                <span class="tooltiptext">Level {level}</span>
+            </div>
+        )
+    }
+
     render() {
         const {
             profile: {
@@ -112,11 +165,13 @@ class SignedOnHeader extends BaseComponent {
             } = this.state,
             name = isSuccess && data.firstname || '';
 
-        console.log(this.props);
         return (
             <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
                 <Row className='dropdown-div'>
-                    <Col md={2} mdOffset={10} className='btw-nav-dropdown'>
+                    <Col md={2} mdOffset={8}>
+                        <div>{this.renderLevel()}</div>
+                    </Col>
+                    <Col md={2} className='btw-nav-dropdown'>
                         <FontAwesome className='btw-avatar'
                                      name='user-circle'
                                      size='3x' />
