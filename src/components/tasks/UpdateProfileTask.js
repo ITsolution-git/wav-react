@@ -137,7 +137,7 @@ class UpdateProfileTask extends TaskBase {
     getTaskData = () => {
         const { taskData = {}} = this.props,
             type = taskData.captain_metaData ? 'captain_metaData' : 'voter_metaData';
-        return { [type]: this.state, taskid: taskData._id };
+        return { [type]: this.state, taskid: taskData._id, points: taskData.group_info.value };
     };
 
     isVoterTask = () => {

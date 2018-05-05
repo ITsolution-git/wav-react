@@ -25,6 +25,7 @@ class TaskSuccess extends BaseComponent {
         return (
             <div className='success-icon'>
                 <FontAwesome name='check-circle' />
+                <div className='success-points'>+{ this.props.data.points } Points</div>
                 <div className='success-text'>Task completed</div>
             </div>
         );
