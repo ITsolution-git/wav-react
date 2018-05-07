@@ -144,9 +144,17 @@ class SignedOnHeader extends BaseComponent {
                 { arr[0] && <img src={arr[0]} width={30} height={30} alt="" /> }
                 { arr[1] && <img src={arr[1]} width={30} height={30} alt="" /> }
                 { arr[2] && <img src={arr[2]} width={30} height={30} alt="" /> }
-                <span class="tooltiptext">Level {level} : {score} earned points</span>
+                <span className="tooltiptext">Level {level} : {score} earned points</span>
             </div>
         )
+    }
+
+    isEmpty = (obj) => {
+        for(var key in obj) {
+            if(obj.hasOwnProperty(key))
+                return false;
+        }
+        return true;
     }
 
     render() {
@@ -169,7 +177,7 @@ class SignedOnHeader extends BaseComponent {
             <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
                 <Row className='dropdown-div'>
                     <Col md={2} mdOffset={8}>
-                        <div>{this.renderLevel()}</div>
+                        <div>{ !this.isEmpty(data) && data.role !== 'admin' && this.renderLevel()}</div>
                     </Col>
                     <Col md={2} className='btw-nav-dropdown'>
                         <FontAwesome className='btw-avatar'
