@@ -58,7 +58,7 @@ class MatchList extends BaseComponent {
                         }
                     </p>
                     <p className="intro-title">
-                        { matchList.length ? "Click to select" : "" }
+                        { matchList.length ? "Click on the name of your voter to select it" : "" }
                     </p>
                 </div>
                 <div className='match-list'>
