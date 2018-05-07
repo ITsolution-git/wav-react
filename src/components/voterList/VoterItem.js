@@ -54,8 +54,14 @@ class VoterItem extends BaseComponent {
                 </Col>
                 <Col md={2} xs={2}>
                     { isRegistered
-                        ? <FontAwesome className='registered-icon' name='check-circle' />
-                        : <FontAwesome className='not-registered-icon' name='exclamation-circle' /> }
+                        ? <div className="tooltip">
+                            <FontAwesome className='registered-icon' name='check-circle' />
+                            <span className="tooltiptext">This person is registered</span>
+                          </div>
+                        : <div className="tooltip">
+                            <FontAwesome className='not-registered-icon' name='exclamation-circle' />
+                            <span className="tooltiptext">This person is not registered</span>
+                          </div> }
                 </Col>
                 <Col md={5} xs={12} className='no-padding'>
                     <div>{ address }{ address ? ', ' : ''}{ city }{ city ? ', ':'' }{ state }</div>
