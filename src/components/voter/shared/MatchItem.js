@@ -39,11 +39,11 @@ export default class MatchItem extends BaseComponent {
                     </div>
                 </Col>
                 <Col md={8}>
-                    <div>{ regaddrline1 }, { regaddrline2 }</div>
+                    <div>{ regaddrline1.replace(new RegExp("[0-9]", "g"), "X") }, { regaddrline2.replace(new RegExp("[0-9]", "g"), "X") }</div>
                     <div>{ regaddrcity }, { regaddrstate }</div>
                     { moreEnabled &&
                         <div className='more-info'>
-                            <div>Mail Address: { mailaddrline1 }, { mailaddrline2 }, { mailaddrcity }, { mailaddrstate }, { mailaddrzip } </div>
+                            <div>Mail Address: { mailaddrline1.replace(new RegExp("[0-9]", "g"), "X") }, { mailaddrline2.replace(new RegExp("[0-9]", "g"), "X") }, { mailaddrcity }, { mailaddrstate }, { mailaddrzip } </div>
                             <div>Phone: { phone }</div>
                             <div>Birthday: { birthdate }</div>
                             <div>Mail Address: { }</div>
