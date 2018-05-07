@@ -147,7 +147,7 @@ class SignedOnHeader extends BaseComponent {
                 <span className="tooltiptext">Level {level} : {score} earned points</span>
             </div>
         )
-    }
+    };
 
     isEmpty = (obj) => {
         for(var key in obj) {
@@ -155,16 +155,39 @@ class SignedOnHeader extends BaseComponent {
                 return false;
         }
         return true;
-    }
+    };
+
+    renderProfileDropdown = () => {
+        const { profile: { isSuccess, data } } = this.props;
+        const name = isSuccess && data.firstname || '';
+        return (
+            <div>
+                <FontAwesome className='btw-avatar'
+                             name='user-circle'
+                             size='3x' />
+                <NavDropdown eventKey={1}
+                             title={name}
+                             id="nav-dropdown">
+                    <MenuItem eventKey={1.1}>Profile</MenuItem>
+                    <MenuItem eventKey={1.2}>Settings</MenuItem>
+                    <MenuItem eventKey={1.3} onClick={() => logout()}>Sign out</MenuItem>
+                </NavDropdown>
+            </div>
+        )
+    };
+
+    renderHeaderLevel = () => {
+        const { profile: { data } } = this.props;
+        return (
+            <div>{ !this.isEmpty(data) && data.role !== 'admin' && this.renderLevel()}</div>
+        )
+    };
 
     render() {
         const {
             profile: {
                 isSuccess,
                 data
-            },
-            location: {
-                pathname
             }
         } = this.props,
             {
@@ -175,27 +198,22 @@ class SignedOnHeader extends BaseComponent {
 
         return (
             <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
-                <Row className='dropdown-div'>
+                { this.isDesktop() && <Row className='dropdown-div'>
                     <Col md={2} mdOffset={8}>
-                        <div>{ !this.isEmpty(data) && data.role !== 'admin' && this.renderLevel()}</div>
+                        { this.renderHeaderLevel() }
                     </Col>
                     <Col md={2} className='btw-nav-dropdown'>
-                        <FontAwesome className='btw-avatar'
-                                     name='user-circle'
-                                     size='3x' />
-                        <NavDropdown eventKey={1}
-                                     title={name}
-                                     id="nav-dropdown">
-                            <MenuItem eventKey={1.1}>Profile</MenuItem>
-                            <MenuItem eventKey={1.2}>Settings</MenuItem>
-                            <MenuItem eventKey={1.3} onClick={() => logout()}>Sign out</MenuItem>
-                        </NavDropdown>
+                        { this.renderProfileDropdown() }
                     </Col>
-                </Row>
+                </Row> }
                 <Navbar>
                     <Navbar.Toggle />
                     <Navbar.Collapse>
                         <Nav>
+                            { this.isMobile() && <NavItem>
+                                                    <div className='mobile-star-level'>{ this.renderHeaderLevel() } </div>
+                                                 </NavItem> }
+                            { this.isMobile() && <div className='mobile-dropdown'> { this.renderProfileDropdown() }</div> }
                             { this.resolveLinks().map((link, i) => {
                                     return (
                                         <NavItem key={i}

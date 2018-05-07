@@ -48,6 +48,7 @@
       }
       a:hover {
         color: #DBE8F8;
+        background-color: transparent;
       }
       a:focus {
         color: white;
@@ -87,11 +88,24 @@
       float: right;
       margin-top: 8px;
     }
+
     .active-menu {
       background-color: lighten(#0D1C3D, 15%) !important;
       a {
         color: white;
       }
+    }
+  }
+
+  .mobile-dropdown {
+    margin-bottom: 22px;
+  }
+
+  .mobile-star-level {
+    div {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 15px;
     }
   }
 }
