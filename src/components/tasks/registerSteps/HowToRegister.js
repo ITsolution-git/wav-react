@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from 'redux';
 import YouTube from 'react-youtube';
 import Typography from 'material-ui/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
 
-class HowToRegister extends BaseComponent {
+export default class HowToRegister extends BaseComponent {
     render() {
         return (
             <div>
@@ -21,6 +18,7 @@ class HowToRegister extends BaseComponent {
                             autoplay: 0
                         }
                     }}
+                    onEnd={this.props.onVideoFinished}
                     className="video"
                     onReady={this._onReady}
                 />
@@ -28,15 +26,3 @@ class HowToRegister extends BaseComponent {
         );
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-
-    }
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ }, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HowToRegister));
