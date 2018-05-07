@@ -158,6 +158,18 @@ export default class AddEditDialog extends BaseComponent {
 				<Modal.Body>
 					<Form horizontal>
 						<FormGroup>
+							{ this.renderField('firstname', 'First name (Legal) *', '* First name is not valid *') }
+							{ this.renderField('lastname', 'Last name (Legal) *', '* Last name is not valid *') }
+						</FormGroup>
+						<FormGroup>
+							<Col md={12}>
+								Address
+								<FormControl type="text"
+								             onChange={e => this.onChange('address', e.target.value)}
+								             value={this.state.voter['address'] || ''} />
+							</Col>
+						</FormGroup>
+						<FormGroup>
 							{ this.renderField('city', 'City *', '* City is not valid *') }
 							{ this.renderDropdownField('state', 'State *', '* State is not valid *', Object.values(states)) }
 						</FormGroup>
@@ -173,10 +185,6 @@ export default class AddEditDialog extends BaseComponent {
 							</Col>
 						</FormGroup>
 						<FormGroup>
-							{ this.renderField('firstname', 'First name (Legal) *', '* First name is not valid *') }
-							{ this.renderField('lastname', 'Last name (Legal) *', '* Last name is not valid *') }
-						</FormGroup>
-						<FormGroup>
 							<Col md={6}>
 								Gender
 								<FormControl componentClass="select"
@@ -185,17 +193,10 @@ export default class AddEditDialog extends BaseComponent {
 									<option value=""></option>
 									<option value="male">Male</option>
 									<option value="female">Female</option>
+									<option value="other">Other</option>
 								</FormControl>
 							</Col>
 							{ this.renderField('phonenumber', 'Phone', '* 10~11 digits are required *', 'number') }
-						</FormGroup>
-						<FormGroup>
-							<Col md={12}>
-								Address
-								<FormControl type="text"
-								             onChange={e => this.onChange('address', e.target.value)}
-								             value={this.state.voter['address'] || ''} />
-							</Col>
 						</FormGroup>
 						
 					</Form>
