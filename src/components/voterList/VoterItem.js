@@ -81,7 +81,7 @@ class VoterItem extends BaseComponent {
                 <AddEditDialog show={showEditModal}
                                title='Edit Voter'
                                voter={this.props.voter}
-                               submitText='Edit'
+                               submitText='Save'
                                disableEmail
                                onSubmit={data => {
                                    const { _id, registration_metadata, voter_characteristics,
