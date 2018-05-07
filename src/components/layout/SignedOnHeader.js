@@ -144,7 +144,7 @@ class SignedOnHeader extends BaseComponent {
                 { arr[0] && <img src={arr[0]} width={30} height={30} alt="" /> }
                 { arr[1] && <img src={arr[1]} width={30} height={30} alt="" /> }
                 { arr[2] && <img src={arr[2]} width={30} height={30} alt="" /> }
-                <span class="tooltiptext">Level {level}</span>
+                <span class="tooltiptext">Level {level} : {score}</span>
             </div>
         )
     }
