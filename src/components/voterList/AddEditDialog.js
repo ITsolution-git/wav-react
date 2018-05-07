@@ -74,10 +74,7 @@ export default class AddEditDialog extends BaseComponent {
 
 		let voter = Object.assign({}, this.state.voter); 
 		voter[name] = value;
-		this.setState({'voter' : voter}, () => {
-
-			this.validateRequired(name, value);
-		});
+		this.setState({'voter' : voter});
 
 	}
 
