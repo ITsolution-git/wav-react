@@ -30,7 +30,8 @@ class RegisterVoterTask extends TaskBase {
         super(props, context);
         this.state = {
             nextEnabled: false,
-            subComponent: RegisterSubSteps.byDefault
+            subComponent: RegisterSubSteps.byDefault,
+            videoFinished: false
         };
     }
 
@@ -43,7 +44,7 @@ class RegisterVoterTask extends TaskBase {
             this.setState({ nextEnabled: true });
         }
         this.handleChange(name, val);
-    }
+    };
 
     getSubComponent = () => {
         const {
@@ -119,12 +120,11 @@ class RegisterVoterTask extends TaskBase {
     };
 
     getSteps = () => {
-        const { hasSpeak } = RegisterTaskConstants,
-         { voter_metaData = {} } = this.props.taskData || {},
+        const { voter_metaData = {} } = this.props.taskData || {},
          lastStep = this.getSubComponent();
         
         return [
-            { label: 'How to register', component: <HowToRegister />, valid: true  },
+            { label: 'How to register', component: <HowToRegister onVideoFinished={() => this.setState({ videoFinished: true }) }/>, valid: this.state.videoFinished },
             { label: 'Why register', component: <WhyRegister voterData={voter_metaData} />, valid: true },
             { label: 'Get contact', component: lastStep.component, valid: lastStep.valid, nextEnabled: this.state.nextEnabled },
             { label: 'Success', component: <TaskSuccess data={ this.getTaskData() } />, valid: true }
