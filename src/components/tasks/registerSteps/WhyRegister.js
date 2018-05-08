@@ -18,8 +18,7 @@ export default class WhyRegister extends BaseComponent {
                     We couldn’t find { firstname } { lastname } on the voter registry last time we looked.
                     But sometimes this is inaccurate.
                     <br /><br />
-                    Why? (if you hover over why, there’s a small pop-up box that explains more)
-                    The best way to verify that { firstname } { lastname } isn’t registered is to ask.
+                    Why? The best way to verify that { firstname } { lastname } isn’t registered is to ask.
                     <bt /><br />
                     Contact them and check if they think they’re registered to vote.
                     <br /><br />
