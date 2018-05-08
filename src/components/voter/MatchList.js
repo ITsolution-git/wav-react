@@ -78,6 +78,12 @@ class MatchList extends BaseComponent {
                                 <NextButton title='Skip'/>
                             </Col>
                         </Row> }
+                    { boardingType === boardingTypes.voterList &&
+                        <Row className='bottom-buttons'>
+                            <Col>
+                                <button className="btn btn-primary" onClick={() => this.onLink(routes.voterList)}>Cancel</button>
+                            </Col>
+                        </Row> }
                 </Row>
                 <ConfirmationDialog show={showConfirmModal}
                                     title='Register voter'
