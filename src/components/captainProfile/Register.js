@@ -153,10 +153,10 @@ class Register extends BaseComponent {
 						<div className="">
 							<div className="row margin0">
 								<div className="col-xs-1 padding0">
-									<input 
-										type="checkbox" 
-										value=""
-										onClick={this.onTermsAndPrivacy.bind(this)}/>
+									<label className="checkbox-container">
+										<input type="checkbox"/>
+										<span className="checkmark"></span>
+									</label>
 								</div>
 								<div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
 									<label>
