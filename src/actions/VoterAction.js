@@ -98,6 +98,7 @@ export function registerVoter(voter) {
         const patchData = {
             userid: authStorage.getLoggedUser().userid,
             email: voterDetails.email,
+            catalist_voter_information: voter,
             registration_metadata: {
                 isRegistered: true,
                 voterStatus: voter.voterstatus
