@@ -1,5 +1,4 @@
 import React from 'react';
-import YouTube from 'react-youtube';
 import Typography from 'material-ui/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
@@ -9,19 +8,11 @@ export default class HowToRegister extends BaseComponent {
         return (
             <div>
                 <Typography gutterBottom>
-                    First, watch this quick video to learn more about voter registration
+                    First, a little bit of background about voter registration.
+                    Each state sets its own rules and deadlines for voter registration. Most states allow online registration - some require that you mail in the form.
+                    California, for example, allows online registration. The deadline to register to vote in the upcoming primary is May 21.
+                    Here’s a complete list of <a href='https://www.vote.org/voter-registration-deadlines/'>state voter registration deadlines.</a>
                 </Typography>
-                <YouTube
-                    videoId="qSTwrt8oE3g"
-                    opts={{
-                        playerVars: {
-                            autoplay: 0
-                        }
-                    }}
-                    onEnd={this.props.onVideoFinished}
-                    className="video"
-                    onReady={this._onReady}
-                />
             </div>
         );
     }

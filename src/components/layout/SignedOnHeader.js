@@ -234,7 +234,7 @@ class SignedOnHeader extends BaseComponent {
                 <Dialog open={showInfoModal}
                         onClose={this.onCloseInfoModal}>
                     <DialogContent>
-                        <Typography gutterBottom>Please complete the flow first and then you can access these features</Typography>
+                        <Typography gutterBottom>Please complete the onboarding process before you can access these secured features</Typography>
                         <Button color='primary'
                                 variant='raised'
                                 onClick={this.onCloseInfoModal}>Ok</Button>
