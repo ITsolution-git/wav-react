@@ -7,6 +7,7 @@ export default {
     CO: 'CO',
     CT: 'CT',
     DE: 'DE',
+    DC: 'DC',
     FL: 'FL',
     GA: 'GA',
     HI: 'HI',
@@ -49,7 +50,4 @@ export default {
     WV: 'WV',
     WI: 'WI',
     WY: 'WY',
-    GU: 'GU',
-    PR: 'PR',
-    VI: 'VI',
 }

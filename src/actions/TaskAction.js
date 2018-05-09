@@ -1,4 +1,5 @@
 import taskService from '../services/TaskService';
+import { TaskConstants } from '../constants/reducerConstants/TaskConstants';
 import authStorage from '../storage/AuthStorage';
 import { initializeRequest, loadDataSuccess, loadDataFailure } from './AppAction';
 import appDataTypes from '../constants/AppDataTypes';
@@ -37,4 +38,29 @@ export function updateTask(data) {
                 dispatch(loadDataFailure(appDataTypes.updateTask, response.data.message));
             });
     };
+}
+
+export function getStateInfo(state) {
+    return dispatch => {
+        
+        dispatch(actionRequest())
+        return taskService.getStateInfo(state).then(
+            response => {
+                dispatch(actionSuccess(response.data.state_info));
+            },
+            error => {
+                dispatch(actionError(error));
+            })
+    };
+
+
+    function actionRequest() {
+        return { type: TaskConstants.TASK_STATE_INFO_REQUEST };
+    }
+    function actionSuccess(state_info) {
+        return { type: TaskConstants.TASK_STATE_INFO_SUCCESS, state_info };
+    }
+    function actionError(err) {
+        return { type: TaskConstants.TASK_STATE_INFO_ERROR, err };
+    }
 }
