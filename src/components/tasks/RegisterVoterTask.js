@@ -185,8 +185,8 @@ class RegisterVoterTask extends TaskBase {
             "Registration deadline by mail":        state_info['registrationDeadlineByMail'],
             "Online registration deadline":         state_info['registrationDeadlineOnline'],
             "Is early voting allowed":              state_info['earlyVotingAllowed'] ? "YES" : "NO",
-            "Is all mail allowed":                  state_info['allMailVoting'] ? "YES" : "NO",
-            "Student id accepted":                  state_info['studentIdAccepted'] ? "YES" : "NO",
+            "Is all mail (voting) allowed":         state_info['allMailVoting'] ? "YES" : "NO",
+            "Is ID needed":                         state_info['idNeeded'] ? "YES" : "NO",
         }
     }
 
