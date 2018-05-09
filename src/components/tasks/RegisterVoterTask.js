@@ -25,6 +25,11 @@ import { getTaskData } from "../../helpers/TaskHelper";
 
 import imgPhone from '../../resources/images/phone.png'
 import imgReward from '../../resources/images/reward.png'
+import imgCheck from '../../resources/images/checkmark.png'
+import imgLightBulb from '../../resources/images/lightbulb.png'
+
+import { getStateInfo } from '../../actions/TaskAction'
+import States_Special from '../../constants/States_Special'
 
 class RegisterVoterTask extends TaskBase {
     constructor(props, context) {
@@ -32,8 +37,18 @@ class RegisterVoterTask extends TaskBase {
         this.state = {
             nextEnabled: false,
             subComponent: RegisterSubSteps.byDefault,
-            linkClicked: false
+            linkClicked: false,
+            state_info: {}
         };
+
+        let state = props.taskData.voter_metaData.state;
+        props.actions.getStateInfo(state);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.state_info) {
+            this.setState({state_info: nextProps.state_info})
+        }
     }
 
     onNextClick = (subComponent) => {
@@ -137,10 +152,48 @@ class RegisterVoterTask extends TaskBase {
         return { ...this.state, taskid: taskData._id, points: taskData.group_info.value };
     };
 
+    getStateInfo = () => {
+        
+        const { taskData, state_info } = this.props;
+
+        if (!state_info) return "";
+        if (taskData.voter_metaData.age && taskData.voter_metaData.age > 17 && taskData.voter_metaData.age < 23) {
+            return {
+                "2018 Primary Election voting date":    state_info['2018PrimaryElectionVotingDate'],
+                "Registration deadline by mail":        state_info['registrationDeadlineByMail'],
+                "Online registration deadline":         state_info['registrationDeadlineOnline'],
+                "Is ID needed":                         state_info['idNeeded'] ? "YES" : "NO",
+                "Is ID required for first-time voters": state_info['idRequiredForFirstTimeVoters'] ? "YES" : "NO",
+                "Student id accepted":                  state_info['studentIdAccepted'] ? "YES" : "NO",
+            }
+        } 
+
+        if (States_Special.includes(state_info.state)) {
+            return {
+                "2018 Primary Election voting date":        state_info['2018PrimaryElectionVotingDate'],
+                "Registration deadline by mail":            state_info['registrationDeadlineByMail'],
+                "Absentee Ballot application deadline":     state_info['absenteeBallotApplicationDeadline'],
+                "Absentee Ballot deadline":                 state_info['absenteeBallotDeadline'],
+                "Is Absentee with cause allowed":           state_info['absenteeWithCause'] ? "YES" : "NO",
+                "Is Absentee without cause allowed":        state_info['absenteeWithoutCause'] ? "YES" : "NO",
+                "Is ID needed":                             state_info['idNeeded'] ? "YES" : "NO",
+            }
+        }
+
+        return {
+            "2018 Primary Election voting date":    state_info['2018PrimaryElectionVotingDate'],
+            "Registration deadline by mail":        state_info['registrationDeadlineByMail'],
+            "Online registration deadline":         state_info['registrationDeadlineOnline'],
+            "Is early voting allowed":              state_info['earlyVotingAllowed'] ? "YES" : "NO",
+            "Is all mail allowed":                  state_info['allMailVoting'] ? "YES" : "NO",
+            "Student id accepted":                  state_info['studentIdAccepted'] ? "YES" : "NO",
+        }
+    }
+
     render() {
         const { taskData: {
             group_info = {}
-        } = {}} = this.props;
+        } = {} } = this.props;
 
         return (
             <div className='btw-task container'>
@@ -159,7 +212,7 @@ class RegisterVoterTask extends TaskBase {
                         style={{marginLeft: (this.isMobile() ? "0" : "80px")}}>
                         <Row className="section">
                             <Col xs={2}>
-                                <img src={imgReward} alt="" width={40} height={40} />
+                                <img src={imgReward} alt="" width={50} height={50} />
                             </Col>
                             <Col xs={10}>
                                 <span className="title"><b>Rewards Points</b></span><br />
@@ -171,13 +224,42 @@ class RegisterVoterTask extends TaskBase {
 
                         <Row className="section">
                             <Col xs={2}>
-                                <img src={imgPhone} alt="" width={40} height={40} />
+                                <img src={imgPhone} alt="" width={50} height={50} />
                             </Col>
                             <Col xs={10}>
                                 <span className="title"><b>Contact us</b></span><br />
                                 <span className="description">(707) 408-8437</span>
                             </Col>
                         </Row>
+
+                        <hr />
+
+                        <Row className="section">
+                            <Col xs={2}>
+                                <img src={imgLightBulb} alt="" width={50} height={50} />
+                            </Col>
+                            <Col xs={10}>
+                                <span className="title"><b>Relevant information that may apply to this voter</b></span>
+                            </Col>
+                        </Row>
+
+                        <br/>
+
+                        {
+                            Object.keys(this.getStateInfo()).map(e => {
+                                return <Row className="section">
+                                            <Col xs={2} style={{padding:"0"}}>
+                                                <img src={imgCheck} className="pull-right" alt="" width={20} height={20} />
+                                            </Col>
+                                            <Col xs={10}>
+                                                <span><b>{e}</b></span><br />
+                                                <span>{ this.getStateInfo()[e] }</span>
+                                            </Col>
+                                        </Row>
+                            })
+                        }
+
+                        <br/>
                     </Col>
                 </Row>
             </div>
@@ -187,12 +269,13 @@ class RegisterVoterTask extends TaskBase {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        taskData: getTaskData(state, ownProps)
+        taskData: getTaskData(state, ownProps),
+        state_info: state.taskList.state_info
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ }, dispatch)
+    actions: bindActionCreators({ getStateInfo }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithTask(RegisterVoterTask));

@@ -5,8 +5,16 @@ import authStorage from '../storage/AuthStorage';
 export default {
     loadTaskList,
     sendHelpQuestion,
-    updateTask
+    updateTask,
+    getStateInfo
 };
+
+function getStateInfo(state) {
+    return getAsync({
+        url: `${config.apiHost}/api/v1/task/getStateInfo?state=${state}`,
+        headers: getHeaders()
+    });
+}
 
 function loadTaskList(userId) {
     return getAsync({
