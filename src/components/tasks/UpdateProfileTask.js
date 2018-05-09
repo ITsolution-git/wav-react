@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { FormLabel } from 'material-ui/Form';
 import Typography from 'material-ui/Typography';
 import { Row, Col } from 'react-bootstrap';
 
 import TaskBase from './shared/TaskBase';
+import WithTask from '../hocs/Task';
 import Stepper from './shared/LetfStepper';
 import { getTaskData } from '../../helpers/TaskHelper';
 import Dropdown from '../shared/inputs/Dropdown';
@@ -198,4 +198,4 @@ const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({ }, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(UpdateProfileTask));
+export default connect(mapStateToProps, mapDispatchToProps)(WithTask(UpdateProfileTask));
