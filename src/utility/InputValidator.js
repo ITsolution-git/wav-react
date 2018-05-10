@@ -4,7 +4,8 @@ import {
     passwordValidation,
     phoneValidation,
     zipCodeValidation,
-    textValidation
+    textValidation,
+    datetimeValidation
 } from './FormValidation';
 import validationTypes from '../constants/ValidationTypes';
 
@@ -20,6 +21,8 @@ export function validate(type, value) {
             return phoneValidation(parseInt(value));
         case validationTypes.zip:
             return zipCodeValidation(value);
+        case validationTypes.datetime:
+            return datetimeValidation(value);
         default:
             return textValidation(value);
     }

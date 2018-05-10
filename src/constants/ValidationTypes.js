@@ -3,5 +3,6 @@ export default {
     password: 'password',
     date: 'date',
     phone: 'phone',
-    zip: 'zip'
+    zip: 'zip',
+    datetime: 'datetime'
 }

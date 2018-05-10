@@ -35,7 +35,7 @@ class VoterDetail extends BaseComponent {
             city: initValue,
             state: initValue,
             address: initValue,
-            birthday: initValue,
+            dateofbirth: initValue,
             gender: initValue,
             email: initValue,
             phonenumber: initValue,
@@ -48,11 +48,7 @@ class VoterDetail extends BaseComponent {
 		let fields = Object.assign({}, this.state.voterDetail);
 		fields[field] = value;
 
-		this.setState({ voterDetail: fields }, () => {
-			let validation = Object.assign({}, this.state.isValid);
-			validation[field] = this.validateInput(field, value);
-			this.setState({ isValid: validation });
-		});
+		this.setState({ voterDetail: fields });
 
 		// check if it is valid for select tag
 		if ( field === "state" || field === "city" ) {
@@ -64,12 +60,15 @@ class VoterDetail extends BaseComponent {
 
 	validateInput(name, value) {
 		name = name === 'phonenumber' ? 'phone' : name;
-		const { email, phone, zip } = validationTypes;
+		const { email, phone, zip, datetime } = validationTypes;
 		if ([ phone, zip].includes(name)) {
 			return !value || validate(name, value);
 		}
 		if (email === name ) {
 			return value!=='' && validate(name, value);
+		}
+		if (name === 'dateofbirth' ) {
+			return !value || validate(datetime, value);
 		}
 		return ['state', 'city'].includes(name)
 			? !!value
@@ -202,7 +201,8 @@ class VoterDetail extends BaseComponent {
 					</div>
 					<div className="row">{ this.renderTextField('email', 'Email *', matchListError || '* Email is not valid *', true, 'email', emailDisabled) }</div>
 					<div className="row">
-                        { this.renderAgeDropdown() }
+						{/* { this.renderAgeDropdown() } */}
+						{ this.renderTextField('dateofbirth', 'Date of birth', '* Date is not valid *', false) }
                         { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
 					</div>
 					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
