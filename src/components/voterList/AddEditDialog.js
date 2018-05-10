@@ -26,7 +26,8 @@ export default class AddEditDialog extends BaseComponent {
 				'state': true,
 				'city': true,
 				'email': true,
-				'phonenumber': true
+				'phonenumber': true,
+				'dateofbirth': true
 			}
 		}
 	}
@@ -40,6 +41,11 @@ export default class AddEditDialog extends BaseComponent {
 				return validate('phone', value);
 			}
 			return true;
+		} else if (name === 'dateofbirth') {
+			if (value && value !== '') {
+				return validate('datetime', value);
+			}
+			return true;
 		}
 		return ['firstname', 'lastname', 'state', 'city'].includes(name)
 			? !!value
@@ -47,7 +53,7 @@ export default class AddEditDialog extends BaseComponent {
 	}
 
 	validateAll(callback) {
-		let fields = ['firstname', 'lastname', 'state', 'city', 'email', 'phonenumber'];
+		let fields = ['firstname', 'lastname', 'state', 'city', 'email', 'phonenumber', 'dateofbirth'];
 		let validation = {};
 		validation['isValid'] = true;
 
@@ -66,7 +72,7 @@ export default class AddEditDialog extends BaseComponent {
 	validateRequired(name, value) {
 
 		let validation = this.state;
-		validation.validation[name === 'phonenumber' ? 'phone' : name] = this.validateInput(name, value);
+		validation.validation[name] = this.validateInput(name, value);
 		this.setState(validation);
 	}
 
@@ -127,7 +133,8 @@ export default class AddEditDialog extends BaseComponent {
 				'state': true,
 				'city': true,
 				'email': true,
-				'phonenumber': true
+				'phonenumber': true,
+				'dateofbirth': true
 			}
 		})
 	}
@@ -164,6 +171,16 @@ export default class AddEditDialog extends BaseComponent {
 								<FormControl type="text"
 								             onChange={e => this.onChange('address', e.target.value)}
 								             value={this.state.voter['address'] || ''} />
+							</Col>
+						</FormGroup>
+						<FormGroup>
+							<Col md={12}>
+								Date of birth
+								<FormControl type="text"
+											 placeholder="mm/dd/yyyy"
+								             onChange={e => this.onChange('dateofbirth', e.target.value)}
+								             value={this.state.voter['dateofbirth'] || ''} />
+								{ !this.state.validation['dateofbirth'] && <span className="pull-left" style={{color:"red"}}>* Date is not valid *</span> }
 							</Col>
 						</FormGroup>
 						<FormGroup>
