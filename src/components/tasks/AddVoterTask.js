@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 
 import TaskBase from './shared/TaskBase';
 import WithTask from '../hocs/Task';
+import { getTaskData } from "../../helpers/TaskHelper";
 
 class AddVoterTask extends TaskBase {
 
@@ -16,14 +17,15 @@ class AddVoterTask extends TaskBase {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
-
+        taskData: getTaskData(state, ownProps)
     }
 };
 
 const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({ }, dispatch)
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithTask(AddVoterTask));
