@@ -9,6 +9,12 @@
       justify-content: space-around;
       align-items: center;
       min-height: 290px;
+      .center-row {
+         > div {
+          display: flex;
+          justify-content: center;
+        }
+      }
     }
   }
   .btw-help {

@@ -5,18 +5,24 @@ import { FormControl } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 
-export default class InputBase extends InputBase {
+import BaseComponent from '../../shared/BaseComponent';
 
+export default class InputBase extends BaseComponent {
+    baseState = {
+        value: ''
+    };
 }
 
 
 export class TextInput extends InputBase {
+    state = this.baseState;
+
     render = () => {
-        const { value = '', onChange = () => {}, ...restProps } = this.props;
+        const { onChange = () => {}, ...restProps } = this.props;
         return (
             <TextField
                 {...restProps}
-                value={value}
+                value={this.state.value}
                 onChange={onChange}
             />
         );
@@ -25,6 +31,8 @@ export class TextInput extends InputBase {
 
 
 export class Dropdown extends InputBase {
+    state = this.baseState;
+
     mapItem = (item) => {
         if (typeof item === 'string') {
             return {
@@ -39,10 +47,10 @@ export class Dropdown extends InputBase {
         const { label, onChange = () => {}, values = []} = this.props;
 
         return (
-            <FormControl>
-                <InputLabel classes={{ formControl: 'btw-dropdown'}}>{ label }</InputLabel>
+            <FormControl className='btw-validated-dropdown'>
+                <InputLabel>{ label }</InputLabel>
                 <Select
-                    value={value}
+                    value={this.state.value}
                     onChange={onChange}>
                     { values.map(this.mapItem).map((item, index) => {
                         return (

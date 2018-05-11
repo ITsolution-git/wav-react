@@ -1,11 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
 import Typography from 'material-ui/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
-import appDataTypes from '../../../constants/AppDataTypes';
 import RadioButtons from '../../shared/inputs/RadioButtons';
 import { RegisterTaskConstants, RegisterSubSteps } from '../../../constants/reducerConstants/TaskConstants';
 import PubSub from "pubsub-js";
