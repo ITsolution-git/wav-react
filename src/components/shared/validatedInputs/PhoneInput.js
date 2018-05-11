@@ -1,8 +1,15 @@
 import React from 'react';
 import InputBase, { TextInput } from './InputBase';
+import fields from '../../../constants/FieldConstants';
+import validationTypes from '../../../constants/ValidationTypes';
+import { validate } from '../../../utility/InputValidator';
 
 export default class PhoneInput extends InputBase {
     render () {
-        return <TextInput label='Phone' type='phone' {...this.props } />
+        return <TextInput label='Phone'
+                          type='phone'
+                          validator={value => validate(validationTypes.phone, value)}
+                          name={fields.phone}
+                          {...this.props } />
     }
 }

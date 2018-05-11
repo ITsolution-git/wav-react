@@ -53,8 +53,7 @@ export default class VoterDetails extends BaseComponent {
                                     required />
                     </Col>
                     <Col md={6}>
-                        <AgeInput onChange={(val, valid) => this.handleChange(fields.age, val, valid)}
-                                  required />
+                        <AgeInput onChange={(val, valid) => this.handleChange(fields.age, val, valid)} />
                     </Col>
                 </Row>
                 <Row className='center-row'>

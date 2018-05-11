@@ -9,7 +9,65 @@ import BaseComponent from '../../shared/BaseComponent';
 
 export default class InputBase extends BaseComponent {
     baseState = {
-        value: ''
+        value: '',
+        isValid: true,
+        error: ''
+    };
+
+    onChange = (e) => {
+        const { value } = e.target;
+        this.setState(({ value }), () => {
+            if (!this.state.isValid) {
+                this.validate();
+                return;
+            }
+            this.onParentChange();
+        });
+    };
+
+    onFocusOut = () => {
+      this.validate();
+    };
+
+    onParentChange = () => {
+        const { onChange, name } = this.props;
+        const { value, isValid } = this.state;
+        onChange(value, name, isValid);
+    };
+
+    validate = (props = this.props) => {
+        let error = '';
+        const { value } = this.state;
+        const {
+            label,
+            validator,
+            customError,
+            required
+        } = props;
+
+        if (required && !value) {
+            error = `${label} is required *`;
+        }
+        if (validator && value) {
+            error = !validator(value) && `${label} is incorrect`;
+        }
+        if (customError) {
+            error = customError;
+        }
+        this.setState(() => ({ error, isValid: !error }), this.onParentChange);
+    };
+
+    checkForValidation = (props) => {
+        const { customError, startValidation } = props;
+        if (customError || startValidation) {
+            this.validate();
+        }
+    };
+
+    resolveLabel = () => {
+        const { error } = this.state;
+        const { label, required } = this.props;
+        return !!error ? error : `${label} ${required && '*' || ''}`;
     };
 }
 
@@ -17,14 +75,22 @@ export default class InputBase extends BaseComponent {
 export class TextInput extends InputBase {
     state = this.baseState;
 
+    componentWillReceiveProps(props) {
+        this.checkForValidation(props);
+    }
+
     render = () => {
-        const { onChange = () => {}, label, required, ...restProps } = this.props;
+        const { label, onChange, required, validator, ...restProps } = this.props;
+        const { value, isValid } = this.state;
+
         return (
             <TextField
-                label={`${label} ${ required && '*' || ''} `}
+                error={!isValid}
+                label={this.resolveLabel()}
+                value={value}
+                onBlur={this.onFocusOut}
+                onChange={this.onChange}
                 {...restProps}
-                value={this.state.value}
-                onChange={onChange}
             />
         );
     };
@@ -33,6 +99,10 @@ export class TextInput extends InputBase {
 
 export class Dropdown extends InputBase {
     state = this.baseState;
+
+    componentWillReceiveProps(props) {
+        this.checkForValidation(props);
+    }
 
     mapItem = (item) => {
         if (typeof item === 'string') {
@@ -45,14 +115,16 @@ export class Dropdown extends InputBase {
     };
 
     render = () => {
-        const { label, required, onChange = () => {}, values = []} = this.props;
-
+        const { values = [], onChange, ...restProps} = this.props;
+        const { isValid } = this.state;
         return (
-            <FormControl className='btw-validated-dropdown'>
-                <InputLabel>{`${label} ${ required && '*' || ''}`}</InputLabel>
+            <FormControl className='btw-validated-dropdown' error={!isValid} >
+                <InputLabel>{ this.resolveLabel() }</InputLabel>
                 <Select
                     value={this.state.value}
-                    onChange={onChange}>
+                    onChange={this.onChange}
+                    onBlur={this.onFocusOut}
+                    { ...restProps }>
                     { values.map(this.mapItem).map((item, index) => {
                         return (
                             <MenuItem key={index} value={item.value}>{ item.label}</MenuItem>
