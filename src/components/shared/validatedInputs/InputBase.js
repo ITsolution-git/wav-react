@@ -18,9 +18,10 @@ export class TextInput extends InputBase {
     state = this.baseState;
 
     render = () => {
-        const { onChange = () => {}, ...restProps } = this.props;
+        const { onChange = () => {}, label, required, ...restProps } = this.props;
         return (
             <TextField
+                label={`${label} ${ required && '*' || ''} `}
                 {...restProps}
                 value={this.state.value}
                 onChange={onChange}
@@ -44,11 +45,11 @@ export class Dropdown extends InputBase {
     };
 
     render = () => {
-        const { label, onChange = () => {}, values = []} = this.props;
+        const { label, required, onChange = () => {}, values = []} = this.props;
 
         return (
             <FormControl className='btw-validated-dropdown'>
-                <InputLabel>{ label }</InputLabel>
+                <InputLabel>{`${label} ${ required && '*' || ''}`}</InputLabel>
                 <Select
                     value={this.state.value}
                     onChange={onChange}>
