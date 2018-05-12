@@ -9,6 +9,7 @@ export default class PhoneInput extends InputBase {
         return <TextInput label='Phone'
                           type='phone'
                           validator={value => validate(validationTypes.phone, value)}
+                          validatorError='10~11 digits are required'
                           name={fields.phone}
                           {...this.props } />
     }

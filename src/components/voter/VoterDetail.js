@@ -1,169 +1,73 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col, Button } from 'react-bootstrap';
 
-import states from '../../constants/States';
-import validationTypes from '../../constants/ValidationTypes';
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { voterDetailsPersist, matchListPersist, resetMatchList  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
-import  { validate } from '../../utility/InputValidator';
-import { getAgeYears } from '../../helpers/InputHelper';
 import Spinner from '../shared/Spinner';
 
+import FieldConstants from '../../constants/FieldConstants';
+import {
+	CityInput,
+	StateInput,
+	EmailInput,
+	DateOfBirthInput,
+	GenderInput,
+	AddressInput,
+	PhoneInput,
+	ZipCodeInput
+} from '../shared/validatedInputs';
 
 class VoterDetail extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
-		const emptyVoterObj = this.getEmptyObject();
 		const loadPrevious = this.isLoadPrevious();
 		const { voterDetails } = this.props.voter;
 		this.state = {
-			voterDetail: loadPrevious ?
-				{ ...emptyVoterObj, ...voterDetails }
-				: emptyVoterObj,
-			isValid: this.getEmptyObject(true)
+			startValidation: loadPrevious,
+            valid: {
+				[FieldConstants.city]: false,
+				[FieldConstants.state]: false,
+				[FieldConstants.email]: false
+			},
+			voterDetail: loadPrevious ? voterDetails : {}
 		};
 	}
 
-	getEmptyObject = (initValue = '') => {
-		return {
-            city: initValue,
-            state: initValue,
-            address: initValue,
-            dateofbirth: initValue,
-            gender: initValue,
-            email: initValue,
-            phonenumber: initValue,
-            zip: initValue,
-        }
+	handleChange = (value, isValid, name) => {
+		this.setState(state => {
+            const { voterDetail, valid } = state;
+			return {
+                voterDetail: { ...voterDetail, [name]: value },
+                valid: { ...valid, [name]: isValid }
+			}
+        });
 	};
 
-	updateVoterFields(field, event) {
-		const { value } = event.target;
-		let fields = Object.assign({}, this.state.voterDetail);
-		fields[field] = value;
-
-		this.setState({ voterDetail: fields });
-
-		// check if it is valid for select tag
-		if ( field === "state" || field === "city" ) {
-			let validation = Object.assign({}, this.state.isValid);
-			validation[field] = !!value;
-			this.setState({ isValid: validation });
-		}
-	}
-
-	validateInput(name, value) {
-		name = name === 'phonenumber' ? 'phone' : name;
-		const { email, phone, zip, datetime } = validationTypes;
-		if ([ phone, zip].includes(name)) {
-			return !value || validate(name, value);
-		}
-		if (email === name ) {
-			return value!=='' && validate(name, value);
-		}
-		if (name === 'dateofbirth' ) {
-			return !value || validate(datetime, value);
-		}
-		return ['state', 'city'].includes(name)
-			? !!value
-			: true;
-	}
-
-	validateVoterFields(field, event) {
-		let validation = Object.assign({}, this.state.isValid);
-		validation[field] = this.validateInput(field, event.target.value);
-		this.setState({ isValid: validation });
-	}
-    
     onNext = () => {
-		const { voterDetail, isValid } = this.state;
-		let validation = [...isValid];
-		Object.keys(voterDetail).forEach(key => {
-            validation[key] = this.validateInput(key, voterDetail[key]);
-		});
-
-		this.setState({ isValid: validation });
-
-		if (Object.values(validation).every(val => val)) {
-			const { voterDetailsPersist, matchListPersist } = this.props.actions;
-
+		this.setState({ startValidation: true });
+        const { voterDetail, valid } = this.state;
+        if (Object.values(valid).every(val => val)) {
+            const { voterDetailsPersist, matchListPersist } = this.props.actions;
             voterDetailsPersist(voterDetail);
             matchListPersist(voterDetail, this.isLoadPrevious());
-		}
+        }
 	};
-
-	renderInputDiv = (width, label, name, input, errorText) => {
-		return (
-            <div className={`form-group col-xs-${width}`}>
-                <label className="pull-left" htmlFor={name}>{ label }</label>
-				{ input }
-                { !this.state.isValid[name] && <span className="pull-left">{ errorText }</span> }
-			</div>
-		);
-	};
-
-	renderTextField = (name, label, errorText, isWholeRow = true, type='text', disabled=false) => {
-		const width = isWholeRow || this.isMobile() ? 12 : 6;
-		const input = (
-            <input type={type} className='input-field'
-                   value={ this.state.voterDetail[name]}
-                   disabled={disabled}
-                   onChange={this.updateVoterFields.bind(this, name)}
-				   onBlur={this.validateVoterFields.bind(this, name)} />
-		);
-		return this.renderInputDiv(width, label, name, input, errorText);
-	};
-
-	renderDropdownField = (name, label, options, errorText) => {
-        const input =(
-            <select className="input-field"
-                    value={this.state.voterDetail[name]}
-                    onChange={this.updateVoterFields.bind(this, name)}>
-                <option value="" />
-                { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
-            </select>
-		);
-		return this.renderInputDiv(this.isMobile() ? 12 : 6, label, name, input, errorText);
-	};
-
-    renderAgeDropdown = () => {
-    	const name = 'birthday',
-			  options = getAgeYears();
-
-        const input = (
-            <Fragment>
-                <select className="input-field"
-                        value={this.state.voterDetail[name]}
-                        onChange={this.updateVoterFields.bind(this, name)}>
-                    <option value="" />
-                    { options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
-                </select>
-                <div>voter should be 18years and above</div>
-            </Fragment>
-        );
-        return this.renderInputDiv(this.isMobile() ? 12 : 6, 'Year of birth', 'birthday', input, '* Input is not valid *');
-    };
 
     isLoadPrevious = () => {
     	return getUrlParam(this.props, 'loadPrevious');
     };
 
     componentWillReceiveProps(props){
-    	const { voter: { voterRoute, matchListError } } = props;
+    	const { voter: { voterRoute } } = props;
     	if (voterRoute) {
             this.onLink(voterRoute);
 		}
-		if (matchListError) {
-    	    const isValid = {... this.state.isValid };
-    	    isValid.email = false;
-    	    this.setState({ isValid });
-        }
 	}
 
 	componentWillMount() {
@@ -180,8 +84,12 @@ class VoterDetail extends BaseComponent {
 			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
 			loadPrevious = this.isLoadPrevious(),
-			notValidInput = '* Input is not valid *',
-			emailDisabled = loadPrevious;
+			emailDisabled = !!loadPrevious;
+
+		const {
+			startValidation,
+            voterDetail
+		} = this.state;
 
 		return (
 			<div className='btw-voter btw-voter-detail container'>
@@ -194,21 +102,50 @@ class VoterDetail extends BaseComponent {
 						The more information you provide, the more accurately we can verify if they are registered to vote. (Don’t worry, we’ll NEVER share this information with anybody else.) 
 					</p>
 				</div>
-				<form>
-					<div className="row">
-						{ this.renderTextField('city', 'City *', '* City is required *', false) }
-						{ this.renderDropdownField('state', 'State *', Object.values(states), '* State is required *') }
-					</div>
-					<div className="row">{ this.renderTextField('email', 'Email *', matchListError || '* Email is not valid *', true, 'email', emailDisabled) }</div>
-					<div className="row">
-						{/* { this.renderAgeDropdown() } */}
-						{ this.renderTextField('dateofbirth', 'Date of birth', '* Date is not valid *', false) }
-                        { this.renderDropdownField('gender', 'Gender', ['Male', 'Female'], notValidInput) }
-					</div>
-					<div className="row">{ this.renderTextField('address', 'Address', notValidInput) }</div>
-					<div className="row">{ this.renderTextField('phonenumber', 'Phone', '* 10~11 digits are required *', true, 'number') }</div>
-					<div className="row">{ this.renderTextField('zip', 'Zip', '* 5 digits are required *', true, 'number') }</div>
-				</form>
+				<Row>
+					<Col md={6}>
+						<CityInput onChange={this.handleChange}
+								   defaultValue={voterDetail[FieldConstants.city]}
+								   startValidation={startValidation}
+								   required />
+					</Col>
+					<Col md={6}>
+						<StateInput onChange={this.handleChange}
+									defaultValue={voterDetail[FieldConstants.state]}
+									startValidation={startValidation}
+									required />
+					</Col>
+				</Row>
+				<Col>
+					<EmailInput onChange={this.handleChange}
+								defaultValue={voterDetail[FieldConstants.email]}
+								startValidation={startValidation}
+								disabled={emailDisabled}
+								customError={matchListError}
+								required />
+				</Col>
+				<Row>
+					<Col md={6}>
+						<DateOfBirthInput defaultValue={voterDetail[FieldConstants.dateOfBirth]}
+										   onChange={this.handleChange} />
+					</Col>
+					<Col md={6}>
+						<GenderInput defaultValue={voterDetail[FieldConstants.gender]}
+									 onChange={this.handleChange} />
+					</Col>
+				</Row>
+				<Col>
+					<AddressInput defaultValue={voterDetail[FieldConstants.address]}
+								  onChange={this.handleChange} />
+				</Col>
+				<Col>
+					<PhoneInput defaultValue={voterDetail[FieldConstants.phone]}
+								onChange={this.handleChange} />
+				</Col>
+				<Col>
+					<ZipCodeInput defaultValue={voterDetail[FieldConstants.zipCode]}
+								  onChange={this.handleChange} />
+				</Col>
 				<Row>
                     <Col mdOffset={3} md={3} xs={6}>
 						{ loadPrevious ?

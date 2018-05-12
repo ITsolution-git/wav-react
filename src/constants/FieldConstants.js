@@ -1,12 +1,12 @@
 export default {
-    firstName: 'firstName',
-    lastName: 'lastName',
+    firstName: 'firstname',
+    lastName: 'lastname',
     city: 'city',
     state: 'state',
     email: 'email',
-    age: 'age',
+    dateOfBirth: 'dateofbirth',
     gender: 'gender',
     address: 'address',
-    phone: 'phone',
-    zipCode: 'zipCode'
+    phone: 'phonenumber',
+    zipCode: 'zip'
 };

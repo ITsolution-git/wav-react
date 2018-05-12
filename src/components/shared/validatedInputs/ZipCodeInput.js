@@ -9,6 +9,7 @@ export default class ZipCodeInput extends InputBase {
         return <TextInput label='Zip code'
                           type='text'
                           validator={value => validate(validationTypes.zip, value)}
+                          validatorError='5 digits are required'
                           name={fields.zipCode}
                           {...this.props } />
     }

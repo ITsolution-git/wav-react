@@ -1,7 +1,6 @@
 import React from 'react';
-import TextField from 'material-ui/TextField';
-import { InputLabel } from 'material-ui/Input';
-import { FormControl } from 'material-ui/Form';
+import Input, { InputLabel } from 'material-ui/Input';
+import { FormControl, FormHelperText } from 'material-ui/Form';
 import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 
@@ -9,7 +8,6 @@ import BaseComponent from '../../shared/BaseComponent';
 
 export default class InputBase extends BaseComponent {
     baseState = {
-        value: '',
         isValid: true,
         error: ''
     };
@@ -30,26 +28,28 @@ export default class InputBase extends BaseComponent {
     };
 
     onParentChange = () => {
-        const { onChange, name } = this.props;
-        const { value, isValid } = this.state;
-        onChange(value, name, isValid);
+        const { onChange, name, defaultValue = '' } = this.props;
+        const { value = defaultValue, isValid } = this.state;
+        onChange(value, isValid, name);
     };
 
     validate = (props = this.props) => {
         let error = '';
-        const { value } = this.state;
         const {
             label,
             validator,
             customError,
-            required
+            validatorError,
+            required,
+            defaultValue = ''
         } = props;
+        const { value = defaultValue } = this.state;
 
         if (required && !value) {
-            error = `${label} is required *`;
+            error = `${label} is required`;
         }
-        if (validator && value) {
-            error = !validator(value) && `${label} is incorrect`;
+        if (validator && value && !validator(value)) {
+            error = validatorError || `${label} is incorrect`;
         }
         if (customError) {
             error = customError;
@@ -59,16 +59,19 @@ export default class InputBase extends BaseComponent {
 
     checkForValidation = (props) => {
         const { customError, startValidation } = props;
+        if (this.props.customError === customError && this.props.startValidation === startValidation) {
+            return;
+        }
         if (customError || startValidation) {
             this.validate();
         }
     };
 
-    resolveLabel = () => {
-        const { error } = this.state;
-        const { label, required } = this.props;
-        return !!error ? error : `${label} ${required && '*' || ''}`;
-    };
+    onMount = () => {
+        if (this.props.startValidation) {
+            this.validate();
+        }
+    }
 }
 
 
@@ -79,19 +82,38 @@ export class TextInput extends InputBase {
         this.checkForValidation(props);
     }
 
-    render = () => {
-        const { label, onChange, required, validator, ...restProps } = this.props;
-        const { value, isValid } = this.state;
+    componentWillMount() {
+        this.onMount();
+    }
 
-        return (
-            <TextField
-                error={!isValid}
-                label={this.resolveLabel()}
-                value={value}
-                onBlur={this.onFocusOut}
-                onChange={this.onChange}
-                {...restProps}
-            />
+    render = () => {
+        const {
+            required,
+            disabled,
+            label,
+            placeholder,
+            defaultValue,
+            fullWidth = true
+        } = this.props;
+
+        const {
+            value = defaultValue || '',
+            isValid,
+            error
+        } = this.state;
+
+          return (
+            <FormControl error={!isValid}
+                         required={required}
+                         disabled={disabled}
+                         fullWidth={fullWidth}>
+                <InputLabel>{ label }</InputLabel>
+                <Input value={value}
+                       placeholder={placeholder}
+                       onBlur={this.onFocusOut}
+                       onChange={this.onChange} />
+                <FormHelperText classes={{root: 'btw-input-error'}}>{ error }</FormHelperText>
+            </FormControl>
         );
     };
 }
@@ -102,6 +124,10 @@ export class Dropdown extends InputBase {
 
     componentWillReceiveProps(props) {
         this.checkForValidation(props);
+    }
+
+    componentWillMount() {
+        this.onMount();
     }
 
     mapItem = (item) => {
@@ -115,22 +141,37 @@ export class Dropdown extends InputBase {
     };
 
     render = () => {
-        const { values = [], onChange, ...restProps} = this.props;
-        const { isValid } = this.state;
+        const {
+            label,
+            values = [],
+            required,
+            disabled,
+            defaultValue,
+            fullWidth = true
+        } = this.props;
+        const {
+            value = defaultValue || '',
+            error,
+            isValid
+        } = this.state;
         return (
-            <FormControl className='btw-validated-dropdown' error={!isValid} >
-                <InputLabel>{ this.resolveLabel() }</InputLabel>
+            <FormControl className='btw-validated-dropdown'
+                         error={!isValid}
+                         required={required}
+                         disabled={disabled}
+                         fullWidth={fullWidth} >
+                <InputLabel>{ label }</InputLabel>
                 <Select
-                    value={this.state.value}
+                    value={value}
                     onChange={this.onChange}
-                    onBlur={this.onFocusOut}
-                    { ...restProps }>
+                    onBlur={this.onFocusOut}>
                     { values.map(this.mapItem).map((item, index) => {
                         return (
                             <MenuItem key={index} value={item.value}>{ item.label}</MenuItem>
                         )
                     })}
                 </Select>
+                <FormHelperText>{ error }</FormHelperText>
             </FormControl>
         );
     };

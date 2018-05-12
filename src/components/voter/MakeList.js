@@ -7,8 +7,9 @@ import { Row, Col } from 'react-bootstrap';
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';
 import routes from '../../constants/Routes';
-import { textValidation } from '../../utility/FormValidation';
 import BaseComponent from '../shared/BaseComponent';
+
+import { FirstNameInput, LastNameInput } from '../shared/validatedInputs';
 
 const firstNamePrefix = voterConstants.FIRST_NAME_PREIX,
 	  lastNamePrefix = voterConstants.LAST_NAME_PREFIX,
@@ -18,16 +19,16 @@ const firstNamePrefix = voterConstants.FIRST_NAME_PREIX,
 class MakeList extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
-		this.state = {};
+		this.state = {
+			startValidation: false
+		};
 	}
 
-	updateMakelistFields = (field, event) => {
-		this.setState({[field]: event.target.value });
-	};
-	
-	validateRegisterFields = (field, event) => {
-		const isValid = textValidation(event.target.value);
-		this.setState({ [`${field}${invalidPrefix}`]: !isValid });
+	handleChange = (value, isValid, name) => {
+		this.setState({
+			[name]: value,
+			[`${name}${invalidPrefix}`]: isValid
+		});
 	};
 
 	getNamesArray = (prefix) => {
@@ -36,41 +37,29 @@ class MakeList extends BaseComponent {
 
 
     onNext = () => {
-    	const stateNames = this.getNamesArray(firstNamePrefix).concat(this.getNamesArray(lastNamePrefix));
-    	const validationObj = {},
+    	this.setState({ startValidation: true });
+
+    	const stateNames = this.getNamesArray(firstNamePrefix).concat(this.getNamesArray(lastNamePrefix)),
 			  namesObj = {};
-
-    	stateNames.forEach(name => {
-    		const nameVal = this.state[name] || '';
-            validationObj[`${name}${invalidPrefix}`] = !textValidation(nameVal);
-            namesObj[name] = nameVal;
+    	let isInvalid = false;
+		stateNames.forEach(name => {
+			if (!this.state[`${name}${invalidPrefix}`]) {
+				isInvalid = true;
+			}
+			namesObj[name] = this.state[name];
 		});
-
-        this.setState(validationObj);
-    	const isInvalid = Object.values(validationObj).some(val => val);
 
     	if (isInvalid) {
     		return;
 		}
 
+
 		this.props.actions.makeListPersist(namesObj);
     	this.onLink(routes.voterDetail);
 	};
 
-	renderField = ({ name, label }) => {
-		return (
-            <div className="form-group col-xs-6">
-                <label className="pull-left" htmlFor={name}>{ label }</label>
-                <input type="text" className="input-field" id={name} ref={name}
-                       required="" aria-required="true"
-                       onChange={e => this.updateMakelistFields(name, e)}
-                       onBlur={e => this.validateRegisterFields(name, e)} />
-                { this.state[`${name}${invalidPrefix}`] && <span className="pull-left">* Input is not valid *</span> }
-            </div>
-		)
-	};
-
 	render() {
+		const { startValidation } = this.state;
 		return (
 			<div className='btw-identity btw-makelist container'>
 				{ this.isDesktop() && this.renderBackToHome()}
@@ -85,25 +74,28 @@ class MakeList extends BaseComponent {
 						*The info we collect is only for checking if your friends are registered. We’re a nonprofit and never will sell you or your friends’ data.*  
 					</p>
 				</div>
-
-				<form>
-					{ Array(numberOfNames).fill(0).map((e,i)=> {
-						return (
-                            <div key={i} className="row">
-                                { this.renderField({ name: `${firstNamePrefix}${i + 1}`, label: 'First Name'})}
-                                { this.renderField({ name: `${lastNamePrefix}${i + 1}`, label: 'Last Name'})}
-                            </div>
-						)
-                    })}
-				</form>
+				{ Array(numberOfNames).fill(0).map((e,i)=> {
+					return (
+						<Row key={i} className="row names">
+							<Col xs={6}>
+								<FirstNameInput startValidation={startValidation}
+												 required
+												 onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
+							</Col>
+							<Col xs={6}>
+								<LastNameInput startValidation={startValidation}
+											    required
+												onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
+							</Col>
+						</Row>
+					)
+				})}
 				<Row>
 					<Col xs={6}>
 						{ this.isMobile() && this.renderBackToHome()}
 					</Col>
 					<Col md={12} xs={6}>
-                        <div>
-                            <button className="btn btn-primary" onClick={this.onNext}>Next</button>
-                        </div>
+                        <button className="btn btn-primary" onClick={this.onNext}>Next</button>
 					</Col>
 				</Row>
 			</div>
