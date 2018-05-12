@@ -80,13 +80,11 @@ class MakeList extends BaseComponent {
 							<Col xs={6}>
 								<FirstNameInput startValidation={startValidation}
 												 required
-												 fullWidth
 												 onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
 							</Col>
 							<Col xs={6}>
 								<LastNameInput startValidation={startValidation}
 											    required
-                                               fullWidth
 												onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
 							</Col>
 						</Row>

@@ -1,4 +1,4 @@
-export { default as AgeInput } from './AgeInput';
+export { default as DateOfBirthInput } from './DateOfBirthInput';
 export { default as EmailInput } from './EmailInput';
 export { default as FirstNameInput } from './FirstNameInput';
 export { default as GenderInput } from './GenderInput';
@@ -6,4 +6,6 @@ export { default as LastNameInput } from './LastNameInput';
 export { default as PhoneInput } from './PhoneInput';
 export { default as StateInput } from './StateInput';
 export { default as ZipCodeInput } from './ZipCodeInput';
+export { default as CityInput } from './CityInput';
+export { default as AddressInput } from './AddressInput';
 export { default as TextInput } from './TextInput';

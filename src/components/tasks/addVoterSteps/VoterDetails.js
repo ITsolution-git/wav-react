@@ -5,7 +5,7 @@ import {
     TextInput,
     StateInput,
     EmailInput,
-    AgeInput,
+    DateOfBirthInput,
     GenderInput,
     PhoneInput,
     ZipCodeInput
@@ -15,7 +15,7 @@ const fields = {
     city: 'city',
     state: 'state',
     email: 'email',
-    age: 'age',
+    age: 'dateOfBirth',
     gender: 'gender',
     address: 'address',
     phone: 'phone',
@@ -53,7 +53,7 @@ export default class VoterDetails extends BaseComponent {
                                     required />
                     </Col>
                     <Col md={6}>
-                        <AgeInput onChange={(val, valid) => this.handleChange(fields.age, val, valid)} />
+                        <DateOfBirthInput onChange={(val, valid) => this.handleChange(fields.age, val, valid)} />
                     </Col>
                 </Row>
                 <Row className='center-row'>

@@ -8,7 +8,6 @@ import BaseComponent from '../../shared/BaseComponent';
 
 export default class InputBase extends BaseComponent {
     baseState = {
-        value: '',
         isValid: true,
         error: ''
     };
@@ -29,21 +28,22 @@ export default class InputBase extends BaseComponent {
     };
 
     onParentChange = () => {
-        const { onChange, name } = this.props;
-        const { value, isValid } = this.state;
+        const { onChange, name, defaultValue = '' } = this.props;
+        const { value = defaultValue, isValid } = this.state;
         onChange(value, isValid, name);
     };
 
     validate = (props = this.props) => {
         let error = '';
-        const { value } = this.state;
         const {
             label,
             validator,
             customError,
             validatorError,
-            required
+            required,
+            defaultValue = ''
         } = props;
+        const { value = defaultValue } = this.state;
 
         if (required && !value) {
             error = `${label} is required`;
@@ -66,6 +66,12 @@ export default class InputBase extends BaseComponent {
             this.validate();
         }
     };
+
+    onMount = () => {
+        if (this.props.startValidation) {
+            this.validate();
+        }
+    }
 }
 
 
@@ -76,27 +82,34 @@ export class TextInput extends InputBase {
         this.checkForValidation(props);
     }
 
+    componentWillMount() {
+        this.onMount();
+    }
+
     render = () => {
         const {
             required,
             disabled,
-            fullWidth,
-            label
+            label,
+            placeholder,
+            defaultValue,
+            fullWidth = true
         } = this.props;
 
         const {
-            value,
+            value = defaultValue || '',
             isValid,
             error
         } = this.state;
 
-        return (
+          return (
             <FormControl error={!isValid}
                          required={required}
                          disabled={disabled}
                          fullWidth={fullWidth}>
                 <InputLabel>{ label }</InputLabel>
                 <Input value={value}
+                       placeholder={placeholder}
                        onBlur={this.onFocusOut}
                        onChange={this.onChange} />
                 <FormHelperText classes={{root: 'btw-input-error'}}>{ error }</FormHelperText>
@@ -113,6 +126,10 @@ export class Dropdown extends InputBase {
         this.checkForValidation(props);
     }
 
+    componentWillMount() {
+        this.onMount();
+    }
+
     mapItem = (item) => {
         if (typeof item === 'string') {
             return {
@@ -125,14 +142,15 @@ export class Dropdown extends InputBase {
 
     render = () => {
         const {
+            label,
             values = [],
             required,
             disabled,
-            fullWidth,
-            label
+            defaultValue,
+            fullWidth = true
         } = this.props;
         const {
-            value,
+            value = defaultValue || '',
             error,
             isValid
         } = this.state;
