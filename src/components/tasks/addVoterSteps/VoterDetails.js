@@ -35,7 +35,7 @@ export default class VoterDetails extends BaseComponent {
 
     render() {
         return (
-            <div style={{ width: '80%'}}>
+            <div style={{ width: '90%'}}>
                 <Row className='center-row'>
                     <Col md={6}>
                         <TextInput label='City'

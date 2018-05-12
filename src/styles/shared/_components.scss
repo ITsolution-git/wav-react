@@ -76,6 +76,12 @@
   min-width: 100% !important;
 }
 
+.btw-input-error {
+  @include respond-to($phone) {
+    font-size: 13px !important;
+  }
+}
+
 .btw-spinner {
   display: flex;
   padding: 20px 0 20px 0;
@@ -84,3 +90,4 @@
   justify-content: center;
   align-items: center;
 }
+
