@@ -48,17 +48,15 @@ export function matchListPersist(voterDetails, resubmit = false) {
     		firstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${VoterContants.LAST_NAME_PREFIX}${currentNumber}`];
 
-        const postData = { ...voterDetails, ...{
-    	    firstname: firstName,
-            lastname: lastName,
-            userid: authStorage.getLoggedUser().userid
-        }};
+    	voterDetails.firstname = voterDetails.firstname || firstName;
+    	voterDetails.lastname = voterDetails.lastname || lastName;
+    	voterDetails.userid = authStorage.getLoggedUser().userid;
 
         dispatch(actionRequest());
         const addVoterService = resubmit
             ? voterService.retryAdd
             : voterService.addVoter;
-        return addVoterService(postData).then(
+        return addVoterService(voterDetails).then(
            result => {
                 const { data } = result.data;
                 if (data) {

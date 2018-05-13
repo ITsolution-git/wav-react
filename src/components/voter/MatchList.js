@@ -5,32 +5,19 @@ import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
-import { makeListPersist, registerVoter } from "../../actions/VoterAction";
+import { registerVoter } from "../../actions/VoterAction";
 import routes from '../../constants/Routes';
 import boardingTypes from '../../constants/VoterBoardingType';
-import MatchItem from './shared/MatchItem';
-import ConfirmationDialog from '../shared/ConfirmationDialog';
+import SharedMatchList from '../shared/matchList/MatchList';
 import NextButton from './shared/NextButton';
 
 class MatchList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-          showConfirmModal: false
-        };
     }
 
-    onNameClick = (person) => {
-        this.currentPerson = person;
-        if (person.voterstatus === 'active') {
-            this.setState({ showConfirmModal: true });
-            return;
-        }
-        this.redirectToPage(routes.voterError);
-    };
-
-    redirectToPage(route) {
-        const { firstname, lastname } = this.currentPerson;
+    redirectToPage(voter, route) {
+        const { firstname, lastname } = voter;
         const fullRoute = `${route}?firstname=${firstname}&lastname=${lastname}`;
         this.onLink(fullRoute);
     }
@@ -39,13 +26,8 @@ class MatchList extends BaseComponent {
         this.onLink(`${routes.voterDetail}?loadPrevious=true`);
     };
 
-    onCloseConfirmModal = () => {
-        this.setState({ showConfirmModal: false });
-    };
-
     render() {
         const { matchList, boardingType } = this.props.voter;
-        const { showConfirmModal } = this.state;
         return (
             <div className='btw-voter btw-match-list'>
                 <div className="intro">
@@ -61,13 +43,12 @@ class MatchList extends BaseComponent {
                         { matchList.length ? "Click on the name of your voter to select it" : "" }
                     </p>
                 </div>
-                <div className='match-list'>
-                    { matchList.sort((person1, person2) => person2.matchRate - person1.matchRate)
-                        .map((person, i) => <MatchItem key={i}
-                                                       onClick={() => this.onNameClick(person)}
-                                                       person={person} />
-                    )}
-                </div>
+                <SharedMatchList onSubmitSuccess={(voter) => {
+                                    this.redirectToPage(voter, routes.voterSuccess);
+                                 }}
+                                 onSubmitError={(voter) => {
+                                     this.redirectToPage(voter, routes.voterError);
+                                 }} />
                 <Row>
                     { boardingType === boardingTypes.register &&
                         <Row className='bottom-buttons'>
@@ -85,16 +66,6 @@ class MatchList extends BaseComponent {
                             </Col>
                         </Row> }
                 </Row>
-                <ConfirmationDialog show={showConfirmModal}
-                                    title='Register voter'
-                                    description='Are you sure this is the voter you intend to add to your list?'
-                                    submitText='Yes'
-                                    onSubmit={() => {
-                                        this.props.actions.registerVoter(this.currentPerson);
-                                        this.redirectToPage(routes.voterSuccess);
-                                        this.onCloseConfirmModal();
-                                    } }
-                                    onClose={this.onCloseConfirmModal} />
             </div>
         );
     }
@@ -108,7 +79,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ makeListPersist, registerVoter }, dispatch)
+    actions: bindActionCreators({ registerVoter }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MatchList));

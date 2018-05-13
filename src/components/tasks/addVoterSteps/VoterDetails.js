@@ -2,7 +2,10 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import BaseComponent from '../../shared/BaseComponent';
 import {
-    TextInput,
+    FirstNameInput,
+    LastNameInput,
+    CityInput,
+    AddressInput,
     StateInput,
     EmailInput,
     DateOfBirthInput,
@@ -11,26 +14,32 @@ import {
     ZipCodeInput
 } from '../../shared/validatedInputs/index';
 
-const fields = {
-    city: 'city',
-    state: 'state',
-    email: 'email',
-    age: 'dateOfBirth',
-    gender: 'gender',
-    address: 'address',
-    phone: 'phone',
-    zipCode: 'zipCode'
-};
+import fieldConstants from '../../../constants/FieldConstants';
 
 export default class VoterDetails extends BaseComponent {
-    state = {};
-
-    handleChange = (name, value, isValid) => {
-
+    state = {
+        details: {},
+        valid: {
+            [fieldConstants.firstName]: false,
+            [fieldConstants.lastName]: false,
+            [fieldConstants.city]: false,
+            [fieldConstants.state]: false,
+            [fieldConstants.email]: false
+        }
     };
 
-    getData = () => {
-
+    handleChange = (value, isValid, name) => {
+        this.setState(state => {
+            const { details, valid } = state;
+            return {
+                details: { ...details, [name]: value },
+                valid: { ...valid, [name]: isValid }
+            }
+        }, () => {
+            const { details, valid } = this.state;
+            const isValid = Object.values(valid).every(val => val);
+            this.props.onChange(isValid, details);
+        });
     };
 
     render() {
@@ -38,39 +47,47 @@ export default class VoterDetails extends BaseComponent {
             <div style={{ width: '90%'}}>
                 <Row className='center-row'>
                     <Col md={6}>
-                        <TextInput label='City'
-                                   onChange={(val, valid) => this.handleChange(fields.city, val, valid)}
+                        <FirstNameInput onChange={this.handleChange}
+                                        required />
+                    </Col>
+                    <Col md={6}>
+                        <LastNameInput onChange={this.handleChange}
+                                       required />
+                    </Col>
+                </Row>
+                <Row className='center-row'>
+                    <Col md={6}>
+                        <CityInput onChange={this.handleChange}
                                    required />
                     </Col>
                     <Col md={6}>
-                        <StateInput onChange={(val, valid) => this.handleChange(fields.state, val, valid)}
+                        <StateInput onChange={this.handleChange}
                                     required />
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
-                        <EmailInput onChange={(val, valid) => this.handleChange(fields.email, val, valid)}
+                        <EmailInput onChange={this.handleChange}
                                     required />
                     </Col>
                     <Col md={6}>
-                        <DateOfBirthInput onChange={(val, valid) => this.handleChange(fields.age, val, valid)} />
+                        <DateOfBirthInput onChange={this.handleChange} />
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
-                        <GenderInput onChange={(val, valid) => this.handleChange(fields.gender, val, valid)} />
+                        <GenderInput onChange={this.handleChange} />
                     </Col>
                     <Col md={6}>
-                        <TextInput label='Address'
-                                   onChange={(val, valid) => this.handleChange(fields.address, val, valid)}/>
+                        <AddressInput onChange={this.handleChange}/>
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
-                        <PhoneInput onChange={(val, valid) => this.handleChange(fields.phone, val, valid)} />
+                        <PhoneInput onChange={this.handleChange} />
                     </Col>
                     <Col md={6}>
-                        <ZipCodeInput onChange={(val, valid) => this.handleChange(fields.zipCode, val, valid)} />
+                        <ZipCodeInput onChange={this.handleChange} />
                     </Col>
                 </Row>
             </div>
