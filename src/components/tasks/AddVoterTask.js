@@ -10,11 +10,21 @@ import VoterDetails from './addVoterSteps/VoterDetails';
 import MatchList from './addVoterSteps/MatchList';
 import TaskSuccess from './shared/TaskSuccess';
 import Stepper from './shared/LetfStepper';
+import { matchListPersist, voterDetailsPersist } from "../../actions/VoterAction";
 
 class AddVoterTask extends TaskBase {
     state = {
+        voterDetails: {},
         voterDetailsValid: false,
         matchListValid: false
+    };
+
+    onDetailsNext = () => {
+        const { voterDetails } = this.state;
+        const { voterDetailsPersist, matchListPersist } = this.props.actions;
+        voterDetailsPersist(voterDetails);
+        matchListPersist(voterDetails, this.loadPrevious);
+        this.loadPrevious = true;
     };
 
     getSteps = () => {
@@ -24,8 +34,22 @@ class AddVoterTask extends TaskBase {
         } = this.state;
 
         return [
-            { label: 'Voter Details', component: <VoterDetails onChange={ valid => this.setState({ voterDetailsValid: valid })}/>, valid: voterDetailsValid },
-            { label: 'Match List', component: <MatchList />, valid: matchListValid },
+            {
+                label: 'Voter Details',
+                component: <VoterDetails onChange={ (valid, details) => {
+                    this.setState({
+                        voterDetailsValid: valid,
+                        voterDetails: details
+                    });
+                }} />,
+                onNext: this.onDetailsNext,
+                valid: voterDetailsValid
+            },
+            {
+                label: 'Match List',
+                component: <MatchList onChange={voter => this.setState({ matchListValid: true })}/>,
+                valid: matchListValid
+            },
             { label: 'Success', component: <TaskSuccess data={ this.props.taskData } />, valid: true }
         ];
     };
@@ -49,7 +73,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ }, dispatch)
+    actions: bindActionCreators({ voterDetailsPersist, matchListPersist }, dispatch)
 });
 
 

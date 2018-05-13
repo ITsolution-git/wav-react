@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import BaseComponent from '../../shared/BaseComponent';
+import BaseComponent from '../BaseComponent';
 
 export default class MatchItem extends BaseComponent {
     constructor(props, context) {

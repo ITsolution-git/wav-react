@@ -21,11 +21,11 @@ class LeftStepper extends BaseComponent {
 
     handleNext = () => {
         const { activeStep } = this.state;
-        const { steps } = this.props;
-        const { actions } = this.props;
+        const { steps, actions } = this.props;
+        const { nextEnabled, onNext = () => {} } = steps[activeStep];
         PubSub.publish(pubsubConstants.onTaskNext);
-
-        if (steps[activeStep].nextEnabled !== false) {
+        onNext();
+        if (nextEnabled !== false) {
             if (activeStep + 1 === steps.length) {
                 PubSub.publish(pubsubConstants.onTaskComplete);
                 actions.getBtwUserProfile();
