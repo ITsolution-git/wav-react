@@ -116,7 +116,7 @@ export const textValidation = (...args) => {
 
   const checkIfValid = (element) => {
     if (typeof element === 'string') {
-      if (!(element.length <= 30 && element.length >= 3)) {
+      if (!(element.length <= 30 && element.length >= 2)) {
         return false
       }
       return true;
@@ -131,12 +131,12 @@ export const textValidation = (...args) => {
       let { firstName, lastName } = element;
       if (typeof firstName === 'string' || typeof lastName === 'string') {
         if (firstName) {
-          if (!(firstName.length <= 30 && firstName.length >= 3)) {
+          if (!(firstName.length <= 30 && firstName.length >= 2)) {
             return false
           }
         }
         if (lastName) {
-          if (!(lastName.length <= 30 && lastName.length >= 3)) {
+          if (!(lastName.length <= 30 && lastName.length >= 2)) {
             return false
           }
         }

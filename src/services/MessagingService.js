@@ -5,9 +5,18 @@ import roles from '../constants/Roles';
 
 export default {
     loadChats,
+    closeChat,
     loadConversation,
     sendMessage
 };
+
+function closeChat(data) {
+    return postAsync({
+        url: `${config.apiHost}/api/v1/message/closeMessage`,
+        data,
+        headers: getHeaders()
+    });
+}
 
 function loadChats() {
     return getAsync({

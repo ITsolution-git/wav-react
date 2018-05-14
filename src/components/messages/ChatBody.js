@@ -6,7 +6,11 @@ import Input from 'material-ui/Input';
 import { Row, Col, Button } from 'react-bootstrap';
 
 import authStorage from '../../storage/AuthStorage';
-import { loadMessages, sendMessage } from '../../actions/MessagesAction';
+import {
+    loadMessages,
+    sendMessage,
+    closeChat
+} from '../../actions/MessagesAction';
 import BaseComponent from '../shared/BaseComponent';
 import roles from '../../constants/Roles';
 
@@ -98,6 +102,14 @@ class ChatBody extends BaseComponent {
         this.setState({ value: ''});
     };
 
+    closeChat = () => {
+      const {
+          actions: { closeChat },
+          chatId
+      } = this.props;
+      closeChat(chatId);
+    };
+
     scrollToBottom = () => {
         if (this.messagesEnd) {
             this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
@@ -151,11 +163,14 @@ class ChatBody extends BaseComponent {
 
                                     />
                                     <Row>
-                                        <Col md={3} xs={6}>
+                                        <Col md={3} xs={4}>
                                             <Button disabled={!value} onClick={this.sendMessage}>Send</Button>
                                         </Col>
-                                        <Col md={3} xs={6} onClick={() => this.setState({ value: ''})}>
+                                        <Col md={3} xs={4} onClick={() => this.setState({ value: ''})}>
                                             <Button>Cancel</Button>
+                                        </Col>
+                                        <Col md={3} xs={4} onClick={this.closeChat}>
+                                            <Button>Close</Button>
                                         </Col>
                                     </Row>
                                 </div>
@@ -180,7 +195,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ loadMessages, sendMessage }, dispatch)
+    actions: bindActionCreators({ loadMessages, sendMessage, closeChat }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBody);

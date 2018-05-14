@@ -91,3 +91,22 @@ export function sendMessage(chatId, message) {
       return { type: MessagesConstants.ADD_MESSAGE, chatId, message };
     }
 }
+
+export function closeChat(chatId) {
+    return dispatch => {
+        const data = {
+            message_id: chatId
+        };
+
+        return MessagingService.closeChat(data).then(
+            response => {
+                dispatch(action(chatId));
+            },
+            error => {}
+        )
+    };
+
+    function action(chatId) {
+        return { type: MessagesConstants.CLOSE_CHAT, chatId };
+    }
+}
