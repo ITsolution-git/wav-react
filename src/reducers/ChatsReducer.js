@@ -16,6 +16,14 @@ export default function chatsReducer(state = InitialState.chats, action) {
         case MessagesConstants.SELECT_CHAT: {
             return { ...state, selectedChatId: action.chatId };
         }
+        case MessagesConstants.CLOSE_CHAT: {
+            const { chatId } = action,
+                chatIndex = state.chats.findIndex(chat => chat._id === chatId),
+                newChats = [...state.chats ];
+                newChats.splice(chatIndex, 1);
+
+            return { ...state, ...{ chats: newChats, selectedChatId: 0 } };
+        }
         default:
             return state
     }

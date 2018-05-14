@@ -16,8 +16,8 @@ const text = {
         outVal: true
     },
     testcase2:  {
-        desc: "It should return false (length<3)",
-        inVal: "qA",
+        desc: "It should return false (length<2)",
+        inVal: "q",
         outVal: false
     },
     testcase3:  {
