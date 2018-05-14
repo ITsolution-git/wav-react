@@ -1,229 +1,163 @@
 import React from 'react';
 import {
-	Modal,
 	Row,
 	Col,
-	Button,
-	Form,
-	FormGroup,
-	FormControl
+	Form
 } from 'react-bootstrap';
+import Dialog, {
+    DialogActions,
+    DialogContent,
+    DialogTitle
+} from 'material-ui/Dialog';
+import Button from 'material-ui/Button';
 
-import states from '../../constants/States';
-import  { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
 
+import fieldConstants from '../../constants/FieldConstants';
+import {
+	FirstNameInput,
+	LastNameInput,
+    CityInput,
+    StateInput,
+    EmailInput,
+    DateOfBirthInput,
+    GenderInput,
+    AddressInput,
+    PhoneInput
+} from '../shared/validatedInputs';
+
+
 export default class AddEditDialog extends BaseComponent {
-	constructor(props, context) {
-		super(props, context);
-		const { voter = {}} = this.props;
-		this.state = {
-			'voter' : voter,
-			'validation' : {
-				'isValid' : false,
-				'firstname': true,
-				'lastname': true,
-				'state': true,
-				'city': true,
-				'email': true,
-				'phonenumber': true,
-				'dateofbirth': true
-			}
-		}
+
+	componentWillMount() {
+        this.initState();
 	}
 
-	validateInput(name, value) {
-
-		if (name === 'email') {
-			return validate(name, value);
-		} else if (name === 'phonenumber') {
-			if (value && value !== '') {
-				return validate('phone', value);
-			}
-			return true;
-		} else if (name === 'dateofbirth') {
-			if (value && value !== '') {
-				return validate('datetime', value);
-			}
-			return true;
-		}
-		return ['firstname', 'lastname', 'state', 'city'].includes(name)
-			? !!value
-			: true;
-	}
-
-	validateAll(callback) {
-		let fields = ['firstname', 'lastname', 'state', 'city', 'email', 'phonenumber', 'dateofbirth'];
-		let validation = {};
-		validation['isValid'] = true;
-
-		for (let key in fields) {
-			validation[fields[key]] = this.validateInput(fields[key], this.state.voter[fields[key]]);
-			validation['isValid'] = validation['isValid'] && validation[fields[key]];
-		}
-
-		this.setState({ 'validation' : validation }, () => {
-			if (validation['isValid'] === true) {
-				callback();
-			}
-		});
-	}
-
-	validateRequired(name, value) {
-
-		let validation = this.state;
-		validation.validation[name] = this.validateInput(name, value);
-		this.setState(validation);
-	}
-
-	onChange(name, value) {
-
-		let voter = Object.assign({}, this.state.voter); 
-		voter[name] = value;
-		this.setState({'voter' : voter});
-
-	}
-
-	renderField = (name, label, error, type="text") => {
-		return (
-			<Col md={6}>
-				{ label }
-				<FormControl type={type}
-				             value={this.state.voter[name] || ''}
-				             onChange={(e) => this.onChange(name, e.target.value)}
-							 onBlur={(e) => this.validateRequired(name, e.target.value)}/>
-				{ !this.state.validation[name] && <span className="pull-left" style={{color:"red"}}>{error}</span> }
-			</Col>
-		)
-	};
-
-	renderDropdownField = (name, label, error, options) => {
-		return (
-			<Col md={6}>
-				{ label }
-				<FormControl componentClass="select"
-				             value={this.state.voter[name] || ''}
-				             onChange={(e) => this.onChange(name, e.target.value)}
-							 onBlur={(e) => this.validateRequired(name, e.target.value)}>
-					<option value="" />
-					{ options.map( (item, i) => (<option key={i} value={item}>{item}</option>) ) }
-				</FormControl>
-				{ !this.state.validation[name] && <span className="pull-left" style={{color:"red"}}>{error}</span> }
-			</Col>
-		);
-	};
+    handleChange = (value, isValid, name) => {
+        this.setState(state => {
+            const { voter, valid } = state;
+            return {
+                voter: { ...voter, [name]: value },
+                valid: { ...valid, [name]: isValid }
+            }
+        });
+    };
 
 	onSubmitInner = () => {
-		this.validateAll( () => {
-			const voter = {...this.state.voter};
-			this.props.onSubmit(voter);
-			this.initState();
-		})
+		this.setState({ startValidation: true });
+        const { voter, valid } = this.state;
+        const isValid = Object.values(valid).every(val => val);
+        if (isValid) {
+            this.props.onSubmit(voter);
+            this.initState();
+		}
 	};
 
 	initState = () => {
 		const { voter = {} } = this.props;
 
 		this.setState({
-			'voter' : voter,
-			'validation' : {
-				'isValid' : false,
-				'firstname': true,
-				'lastname': true,
-				'state': true,
-				'city': true,
-				'email': true,
-				'phonenumber': true,
-				'dateofbirth': true
+			startValidation: false,
+			voter : voter,
+			valid: {
+                [fieldConstants.firstName]: false,
+                [fieldConstants.lastName]: false,
+                [fieldConstants.city]: false,
+                [fieldConstants.state]: false,
+                [fieldConstants.email]: false
 			}
 		})
-	}
+	};
+
 	onCloseDialog = () => {
 		const { onClose } = this.props;
 		this.initState();
 		onClose();
-	}
+	};
 
 	render() {
 		const {
-			      show,
-			      onClose,
-			      submitText,
-			      title='',
-			      disableEmail = false
-		      } = this.props;
-		const { gender } = this.state.voter;
+			show,
+		    submitText,
+		    title='',
+		    disableEmail = false
+		  } = this.props;
+
+		const {
+			voter,
+            startValidation
+		} = this.state;
+
 		return (
-			<Modal show={show}
-			       onHide={this.onCloseDialog}>
-				<Modal.Header>
-					<Modal.Title>{title}</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
+			<Dialog open={show}
+                    onClose={this.onCloseDialog}>
+				<DialogTitle>{ title }</DialogTitle>
+				<DialogContent>
 					<Form horizontal>
-						<FormGroup>
-							{ this.renderField('firstname', 'First name (Legal) *', '* First name is not valid *') }
-							{ this.renderField('lastname', 'Last name (Legal) *', '* Last name is not valid *') }
-						</FormGroup>
-						<FormGroup>
-							<Col md={12}>
-								Address
-								<FormControl type="text"
-								             onChange={e => this.onChange('address', e.target.value)}
-								             value={this.state.voter['address'] || ''} />
-							</Col>
-						</FormGroup>
-						<FormGroup>
-							<Col md={12}>
-								Date of birth
-								<FormControl type="text"
-											 placeholder="mm/dd/yyyy"
-								             onChange={e => this.onChange('dateofbirth', e.target.value)}
-								             value={this.state.voter['dateofbirth'] || ''} />
-								{ !this.state.validation['dateofbirth'] && <span className="pull-left" style={{color:"red"}}>* Date is not valid *</span> }
-							</Col>
-						</FormGroup>
-						<FormGroup>
-							{ this.renderField('city', 'City *', '* City is not valid *') }
-							{ this.renderDropdownField('state', 'State *', '* State is not valid *', Object.values(states)) }
-						</FormGroup>
-						<FormGroup>
-							<Col md={12}>
-								Email *
-								<FormControl type="email"
-								             disabled={disableEmail}
-											 onChange={e => this.onChange('email', e.target.value)}
-											 onBlur={(e) => this.validateRequired('email', e.target.value)}
-								             value={this.state.voter['email'] || ''} />
-								{ !this.state.validation['email'] && <span className="pull-left" style={{color:"red"}}>* Email is not valid *</span> }
-							</Col>
-						</FormGroup>
-						<FormGroup>
+						<Row>
 							<Col md={6}>
-								Gender
-								<FormControl componentClass="select"
-								             value={gender || ''}
-								             onChange={e => this.onChange('gender', e.target.value)} >
-									<option value=""></option>
-									<option value="male">Male</option>
-									<option value="female">Female</option>
-									<option value="other">Other</option>
-								</FormControl>
+								<FirstNameInput onChange={this.handleChange}
+												startValidation={startValidation}
+												defaultValue={voter[fieldConstants.firstName]}
+												required />
 							</Col>
-							{ this.renderField('phonenumber', 'Phone', '* 10~11 digits are required *', 'number') }
-						</FormGroup>
-						
-					</Form>
-				</Modal.Body>
-				<Modal.Footer>
-					<Row>
-						<Col md={12} className="btn-container">
-							<Button className='btn-primary' onClick={this.onSubmitInner}>{submitText}</Button>
-							<Button className='btn-primary' onClick={this.onCloseDialog}>Cancel</Button>
+							<Col md={6}>
+								<LastNameInput onChange={this.handleChange}
+											   startValidation={startValidation}
+										       defaultValue={voter[fieldConstants.lastName]}
+											   required />
+							</Col>
+						</Row>
+						<Col>
+							<AddressInput onChange={this.handleChange}
+										  startValidation={startValidation}
+										  defaultValue={voter[fieldConstants.address]} />
 						</Col>
-					</Row>
-				</Modal.Footer>
-			</Modal>
+						<Col>
+							<DateOfBirthInput onChange={this.handleChange}
+											  startValidation={startValidation}
+										      defaultValue={voter[fieldConstants.dateOfBirth]}/>
+						</Col>
+						<Row>
+							<Col md={6}>
+								<CityInput onChange={this.handleChange}
+										   startValidation={startValidation}
+										   defaultValue={voter[fieldConstants.city]}
+										   required />
+							</Col>
+							<Col md={6}>
+								<StateInput onChange={this.handleChange}
+											startValidation={startValidation}
+											defaultValue={voter[fieldConstants.state]}
+											required />
+							</Col>
+						</Row>
+						<Col>
+							<EmailInput onChange={this.handleChange}
+										startValidation={startValidation}
+										defaultValue={voter[fieldConstants.email]}
+										required
+										disabled={disableEmail} />
+						</Col>
+						<Row>
+							<Col md={6}>
+								<GenderInput onChange={this.handleChange}
+											 startValidation={startValidation}
+											 defaultValue={voter[fieldConstants.gender]} />
+							</Col>
+							<Col md={6}>
+								<PhoneInput onChange={this.handleChange}
+											startValidation={startValidation}
+											defaultValue={voter[fieldConstants.phone]} />
+							</Col>
+						</Row>
+					</Form>
+				</DialogContent>
+				<DialogActions>
+                    <Button color='primary' onClick={this.onSubmitInner}>{submitText}</Button>
+                    <Button color='primary' onClick={this.onCloseDialog}>Cancel</Button>
+				</DialogActions>
+			</Dialog>
 		);
 	}
 }
