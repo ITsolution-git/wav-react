@@ -45,6 +45,19 @@ class MatchList extends BaseComponent {
         const { showConfirmModal } = this.state;
         return (
             <div>
+                <div className="intro">
+                    <p className="intro-title">
+                        { matchList.length > 1 ?
+                            'Is one of these people your friend?' :
+                            matchList.length === 1 ?
+                                'Is this your friend?' :
+                                'Our search returned no results'
+                        }
+                    </p>
+                    <p className="intro-title">
+                        { matchList.length ? "Click on the name of your voter to select it" : "" }
+                    </p>
+                </div>
                 <div className='match-list'>
                     { matchList.sort((person1, person2) => person2.matchRate - person1.matchRate)
                         .map((person, i) => <MatchItem key={i}

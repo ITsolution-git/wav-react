@@ -27,22 +27,9 @@ class MatchList extends BaseComponent {
     };
 
     render() {
-        const { matchList, boardingType } = this.props.voter;
+        const { boardingType } = this.props.voter;
         return (
             <div className='btw-voter btw-match-list'>
-                <div className="intro">
-                    <p className="intro-title">
-                        { matchList.length > 1 ? 
-                            'Is one of these people your friend?' : 
-                            matchList.length === 1 ? 
-                                'Is this your friend?' : 
-                                'Our search returned no results'
-                        }
-                    </p>
-                    <p className="intro-title">
-                        { matchList.length ? "Click on the name of your voter to select it" : "" }
-                    </p>
-                </div>
                 <SharedMatchList onSubmitSuccess={(voter) => {
                                     this.redirectToPage(voter, routes.voterSuccess);
                                  }}

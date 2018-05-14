@@ -93,7 +93,8 @@ export class TextInput extends InputBase {
             label,
             placeholder,
             defaultValue,
-            fullWidth = true
+            fullWidth = true,
+            maxLength = 50
         } = this.props;
 
         const {
@@ -111,7 +112,12 @@ export class TextInput extends InputBase {
                 <Input value={value}
                        placeholder={placeholder}
                        onBlur={this.onFocusOut}
-                       onChange={this.onChange} />
+                       onChange={e => {
+                           const { value } = e.target;
+                           if (value.length <= maxLength) {
+                               this.onChange(e);
+                           }
+                       }} />
                 <FormHelperText classes={{root: 'btw-input-error'}}>{ error }</FormHelperText>
             </FormControl>
         );

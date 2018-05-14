@@ -54,7 +54,7 @@ export default class VoterDetails extends BaseComponent {
                     </Col>
                     <Col md={6}>
                         <LastNameInput onChange={this.handleChange}
-                                       defaultValue={details[fieldConstants.firstName]}
+                                       defaultValue={details[fieldConstants.lastName]}
                                        required />
                     </Col>
                 </Row>
