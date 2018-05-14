@@ -57,5 +57,7 @@ export default {
         isCaptainSuccess: false,
         voterError: null,
         captainError: null
+    },
+    transaction: {
     }
 }

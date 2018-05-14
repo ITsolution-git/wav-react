@@ -31,6 +31,9 @@ import VerifyCaptain from './changePassword/verifyCaptain';
 import ChangePassword from './changePassword/changePassword';
 import ForgotPassword from './changePassword/forgotPassword';
 
+import LogList from './transactionLogs/LogList';
+import LogDetail from './transactionLogs/LogDetail';
+
 // static pages
 import WhyBethewave from './static/WhyBethewave';
 import HowContribute from './static/HowContribute';
@@ -117,6 +120,10 @@ const router =() => (
             <Route exact path = {routes.verifyCaptain} component = { VerifyCaptain } />
             <Route exact path = {routes.changePassword} component = { ChangePassword } />
             <Route exact path = {routes.forgotPassword} component = { ForgotPassword } />
+
+            // transaction logs
+            <Route exact path = {routes.loglist} component = { LogList } />
+            <Route exact path = {routes.logdetail} component = { LogDetail } />
 		</Switch>
 	</Router>
 );

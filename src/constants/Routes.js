@@ -28,6 +28,9 @@ export default {
     changePassword: '/changePassword/change',
     forgotPassword: '/changePassword/request',
 
+    loglist: '/transactionLogs/list',
+    logdetail: '/transactionLogs/detail',
+
     // static pages
     whyBetheWave: '/whyBetheWave',
     howContribute: '/howYouCanContribute',
