@@ -19,6 +19,12 @@ class AdminDashboard extends BaseComponent {
                                         <span className='button-text'>Messages</span>
                                     </div>
                                 </Col>
+                                <Col md={6} xs={6} className='block-padding'>
+                                    <div className='icon-div manage-voters' onClick={() => this.onLink(routes.loglist)}>
+                                        <FontAwesome name='tasks' size='3x'/>
+                                        <span className='button-text'>Transaction Logs</span>
+                                    </div>
+                                </Col>
                             </Row>
                             <Row>
                                 <Col md={6} xs={6} className='block-padding'>
