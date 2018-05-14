@@ -30,18 +30,20 @@ class AddVoterTask extends TaskBase {
     getSteps = () => {
         const {
             voterDetailsValid,
-            matchListValid
+            matchListValid,
+            voterDetails
         } = this.state;
 
         return [
             {
                 label: 'Voter Details',
                 component: <VoterDetails onChange={ (valid, details) => {
-                    this.setState({
-                        voterDetailsValid: valid,
-                        voterDetails: details
-                    });
-                }} />,
+                                                    this.setState({
+                                                        voterDetailsValid: valid,
+                                                        voterDetails: details
+                                                    });
+                                                }}
+                                         voterDetails={voterDetails} />,
                 onNext: this.onDetailsNext,
                 valid: voterDetailsValid
             },

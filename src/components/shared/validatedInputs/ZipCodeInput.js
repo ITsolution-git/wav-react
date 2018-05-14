@@ -8,6 +8,7 @@ export default class ZipCodeInput extends InputBase {
     render () {
         return <TextInput label='Zip code'
                           type='text'
+                          maxLength={5}
                           validator={value => validate(validationTypes.zip, value)}
                           validatorError='5 digits are required'
                           name={fields.zipCode}

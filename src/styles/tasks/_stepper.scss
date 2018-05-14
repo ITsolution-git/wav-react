@@ -9,11 +9,22 @@
       justify-content: space-around;
       align-items: center;
       min-height: 290px;
+      // for add voter task voter details
       .center-row {
          > div {
           display: flex;
           justify-content: center;
            margin-bottom: 30px;
+        }
+      }
+      // for add voter match list
+      .task-match-list {
+        .intro {
+          text-align: center;
+        }
+
+        .intro-title {
+          font-size: 19px;
         }
       }
     }
