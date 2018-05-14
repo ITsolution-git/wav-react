@@ -18,7 +18,7 @@ import fieldConstants from '../../../constants/FieldConstants';
 
 export default class VoterDetails extends BaseComponent {
     state = {
-        details: {},
+        details: this.props.voterDetails || {},
         valid: {
             [fieldConstants.firstName]: false,
             [fieldConstants.lastName]: false,
@@ -43,51 +43,62 @@ export default class VoterDetails extends BaseComponent {
     };
 
     render() {
+        const { details } = this.state;
         return (
             <div style={{ width: '90%'}}>
                 <Row className='center-row'>
                     <Col md={6}>
                         <FirstNameInput onChange={this.handleChange}
+                                        defaultValue={details[fieldConstants.firstName]}
                                         required />
                     </Col>
                     <Col md={6}>
                         <LastNameInput onChange={this.handleChange}
+                                       defaultValue={details[fieldConstants.firstName]}
                                        required />
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
                         <CityInput onChange={this.handleChange}
+                                   defaultValue={details[fieldConstants.city]}
                                    required />
                     </Col>
                     <Col md={6}>
                         <StateInput onChange={this.handleChange}
+                                    defaultValue={details[fieldConstants.state]}
                                     required />
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
                         <EmailInput onChange={this.handleChange}
+                                    defaultValue={details[fieldConstants.email]}
                                     required />
                     </Col>
                     <Col md={6}>
-                        <DateOfBirthInput onChange={this.handleChange} />
+                        <DateOfBirthInput onChange={this.handleChange}
+                                          defaultValue={details[fieldConstants.dateOfBirth]} />
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
-                        <GenderInput onChange={this.handleChange} />
+                        <GenderInput onChange={this.handleChange}
+                                     defaultValue={details[fieldConstants.gender]} />
                     </Col>
                     <Col md={6}>
-                        <AddressInput onChange={this.handleChange}/>
+                        <AddressInput onChange={this.handleChange}
+                                      defaultValue={details[fieldConstants.address]} />
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
-                        <PhoneInput onChange={this.handleChange} />
+                        <PhoneInput onChange={this.handleChange}
+                                    defaultValue={details[fieldConstants.phone]} />
                     </Col>
                     <Col md={6}>
-                        <ZipCodeInput onChange={this.handleChange} />
+                        <ZipCodeInput onChange={this.handleChange}
+                                      defaultValue={details[fieldConstants.zipCode]} />
                     </Col>
                 </Row>
             </div>
