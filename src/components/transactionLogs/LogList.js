@@ -100,7 +100,7 @@ class LogList extends BaseComponent {
                                         <TableRow key={index}>
                                             <TableCell>
                                                 <Link to={{ pathname: '/transactionLogs/detail', query: n}}>
-                                                    {n.timestamp || ''}
+                                                    {n.timestamp.substring(0,19).replace('T',' ') || ''}
                                                 </Link>
                                                 </TableCell>
                                             <TableCell numeric>{n.transaction_type || ''}</TableCell>
