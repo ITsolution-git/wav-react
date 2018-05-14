@@ -106,7 +106,7 @@ class LogList extends BaseComponent {
                                             <TableCell numeric>{n.transaction_type || ''}</TableCell>
                                             <TableCell numeric>{n.result || ''}</TableCell>
                                             <TableCell numeric>{typeof n.reason === 'string' ? n.reason : n.reason.statusCode}</TableCell>
-                                            <TableCell numeric>{n.chanel || ''}</TableCell>
+                                            <TableCell numeric>{n.channel || ''}</TableCell>
                                             <TableCell numeric>{n.firstname || ''}</TableCell>
                                             <TableCell numeric>{n.lastname || ''}</TableCell>
                                         </TableRow>
