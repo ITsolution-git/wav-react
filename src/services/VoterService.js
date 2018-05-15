@@ -6,6 +6,7 @@ export default {
     loadVoterList,
     updateVoter,
     updateRegisteredVoter,
+    generateTaskForUser,
     addVoter,
     retryAdd,
     deleteVoter
@@ -26,6 +27,16 @@ function updateRegisteredVoter(data) {
         headers: getHeaders(),
         data,
         failRedirect: false
+    })
+}
+
+function generateTaskForUser() {
+    return postAsync({
+        url: `${config.apiHost}/api/v1/generateTaskForUser`,
+        headers: getHeaders(),
+        data: {
+            userid: authStorage.getLoggedUser().userid
+        }
     })
 }
 

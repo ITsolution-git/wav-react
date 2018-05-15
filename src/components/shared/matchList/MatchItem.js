@@ -11,6 +11,11 @@ export default class MatchItem extends BaseComponent {
         }
     }
 
+    replaceNumbersWithX = (str) => {
+        str = str || '';
+        return str.replace(new RegExp("[0-9]", "g"), "X");
+    };
+
     render () {
         const { onClick, person } = this.props;
         const {
@@ -39,11 +44,11 @@ export default class MatchItem extends BaseComponent {
                     </div>
                 </Col>
                 <Col md={8}>
-                    <div>{ regaddrline1.replace(new RegExp("[0-9]", "g"), "X") }, { regaddrline2.replace(new RegExp("[0-9]", "g"), "X") }</div>
+                    <div>{ this.replaceNumbersWithX(regaddrline1) }, { this.replaceNumbersWithX(regaddrline2) }</div>
                     <div>{ regaddrcity }, { regaddrstate }</div>
                     { moreEnabled &&
                         <div className='more-info'>
-                            <div>Mail Address: { mailaddrline1.replace(new RegExp("[0-9]", "g"), "X") }, { mailaddrline2.replace(new RegExp("[0-9]", "g"), "X") }, { mailaddrcity }, { mailaddrstate }, { mailaddrzip } </div>
+                            <div>Mail Address: { this.replaceNumbersWithX(mailaddrline1) }, { this.replaceNumbersWithX(mailaddrline2) }, { mailaddrcity }, { mailaddrstate }, { mailaddrzip } </div>
                             <div>Phone: { phone }</div>
                             <div>Birthday: { birthdate }</div>
                             <div>Mail Address: { }</div>

@@ -10,7 +10,8 @@ import VoterDetails from './addVoterSteps/VoterDetails';
 import MatchList from './addVoterSteps/MatchList';
 import TaskSuccess from './shared/TaskSuccess';
 import Stepper from './shared/LetfStepper';
-import { matchListPersist, voterDetailsPersist } from "../../actions/VoterAction";
+import boardingTypes from '../../constants/VoterBoardingType';
+import { matchListPersist, voterDetailsPersist, setBoardingType } from "../../actions/VoterAction";
 
 class AddVoterTask extends TaskBase {
     state = {
@@ -21,9 +22,14 @@ class AddVoterTask extends TaskBase {
 
     onDetailsNext = () => {
         const { voterDetails } = this.state;
-        const { voterDetailsPersist, matchListPersist } = this.props.actions;
+        const {
+            voterDetailsPersist,
+            matchListPersist,
+            setBoardingType
+        } = this.props.actions;
         voterDetailsPersist(voterDetails);
         matchListPersist(voterDetails, this.loadPrevious);
+        setBoardingType(boardingTypes.tasks);
         this.loadPrevious = true;
     };
 
@@ -80,7 +86,11 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ voterDetailsPersist, matchListPersist }, dispatch)
+    actions: bindActionCreators({
+        voterDetailsPersist,
+        matchListPersist,
+        setBoardingType
+    }, dispatch)
 });
 
 
