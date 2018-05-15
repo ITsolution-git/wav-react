@@ -1,4 +1,8 @@
 .btw-log-details {
 
     margin-top: 40px;
+
+    button {
+        @extend .btw-button;
+    }
 }

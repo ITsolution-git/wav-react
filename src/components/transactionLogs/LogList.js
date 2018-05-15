@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Table, { TableBody, TableCell, TableHead, TableRow, TablePagination } from 'material-ui/Table'
 import Paper from 'material-ui/Paper'
 import { Button } from 'react-bootstrap';
+import localStorage from 'localStorage';
 
 import BaseComponent from '../shared/BaseComponent'
 
@@ -22,6 +23,20 @@ class LogList extends BaseComponent {
             page: 0,
             rowsPerPage: 10,
         };
+    }
+
+    componentWillUnmount() {
+        localStorage.setItem('searchFilter', this.state.searchFilter);
+    }
+
+    componentDidMount() {
+        this.setState({
+            'searchFilter': localStorage.getItem('searchFilter')
+        }, () => {
+            if (localStorage.getItem('searchFilter') !== '') {
+                this.onSearch()
+            }
+        })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -49,7 +64,6 @@ class LogList extends BaseComponent {
 
     onSearch = () => {
         if (this.state.searchFilter !== '') {
-            console.log('test')
             this.props.actions.getLogList(this.state.searchFilter)
         }
     }
@@ -71,6 +85,7 @@ class LogList extends BaseComponent {
                             type="text" 
                             className="form-control" 
                             width="100" 
+                            value={this.state.searchFilter}
                             placeholder="Input username or email"
                             onChange={this.updateSearchFilter} />
                         <Button onClick={this.onSearch}>Search</Button>
