@@ -35,13 +35,10 @@ export default function voterReducer(state = InitialState.voter, action) {
             };
         }
 		case VoterContants.VOTER_MATCHLIST_ERROR: {
-			const route = action.error !== 'A voter with that email exists'
-				? routes.voterError
-				: '';
             return { ...state,
 				matchListError: action.error,
 				matchListFetching: false,
-                voterRoute: route
+				voterRoute: routes.voterError
             };
 		}
 		case VoterContants.VOTER_DETAILS_PERSIST: {

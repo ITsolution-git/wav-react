@@ -68,9 +68,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
                     }
 
                     dispatch(actionSuccess(data.ctRecords));
-                    return;
                 }
-                dispatch(actionError(result.data.message));
            },
            error => {
                dispatch(actionError(error.response.data.message));

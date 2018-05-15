@@ -78,7 +78,6 @@ class VoterDetail extends BaseComponent {
 		const {
 			makeList,
 			currentNumber,
-			matchListError,
 			matchListFetching
 		} = this.props.voter,
 			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
@@ -121,7 +120,6 @@ class VoterDetail extends BaseComponent {
 								defaultValue={voterDetail[FieldConstants.email]}
 								startValidation={startValidation}
 								disabled={emailDisabled}
-								customError={matchListError}
 								required />
 				</Col>
 				<Row>
