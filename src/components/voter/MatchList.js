@@ -17,7 +17,7 @@ class MatchList extends BaseComponent {
     }
 
     redirectToPage(voter, route) {
-        const { firstname, lastname } = voter;
+        const { firstname = '', lastname = ''} = voter || {};
         const fullRoute = `${route}?firstname=${firstname}&lastname=${lastname}`;
         this.onLink(fullRoute);
     }

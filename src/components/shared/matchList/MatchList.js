@@ -37,7 +37,7 @@ class MatchList extends BaseComponent {
     };
 
     onSubmitError = () => {
-        this.props.onSubmitError();
+        this.props.onSubmitError(this.currentPerson);
     };
 
     render() {
