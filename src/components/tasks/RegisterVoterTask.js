@@ -192,7 +192,8 @@ class RegisterVoterTask extends TaskBase {
 
     render() {
         const { taskData: {
-            group_info = {}
+            group_info = {},
+            voter_metaData = {}
         } = {} } = this.props;
 
         return (
@@ -239,7 +240,7 @@ class RegisterVoterTask extends TaskBase {
                                 <img src={imgLightBulb} alt="" width={50} height={50} />
                             </Col>
                             <Col xs={10}>
-                                <span className="title"><b>Relevant information that may apply to this voter</b></span>
+                                <span className="title"><b>Relevant voting information that may apply to {voter_metaData.firstname + ' ' + voter_metaData.lastname}</b></span>
                             </Col>
                         </Row>
 
