@@ -26,7 +26,12 @@ class LogList extends BaseComponent {
     }
 
     componentWillUnmount() {
-        localStorage.setItem('searchFilter', this.state.searchFilter);
+        
+        if (this.props.history.location.pathname === '/transactionLogs/detail') {
+            localStorage.setItem('searchFilter', this.state.searchFilter);
+        } else {
+            localStorage.setItem('searchFilter', '');
+        }
     }
 
     componentDidMount() {
