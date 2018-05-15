@@ -64,7 +64,7 @@ class AddVoterTask extends TaskBase {
 
     getTaskData = () => {
         const { taskData = {}} = this.props;
-        return { ...this.state, taskid: taskData._id, points: taskData.group_info.value };
+        return { taskid: taskData._id, points: taskData.group_info.value };
     };
 
     render() {
