@@ -52,8 +52,13 @@ class AddVoterTask extends TaskBase {
                 component: <MatchList onChange={voter => this.setState({ matchListValid: true })}/>,
                 valid: matchListValid
             },
-            { label: 'Success', component: <TaskSuccess data={ this.props.taskData } />, valid: true }
+            { label: 'Success', component: <TaskSuccess data={ this.getTaskData() } />, valid: true }
         ];
+    };
+
+    getTaskData = () => {
+        const { taskData = {}} = this.props;
+        return { ...this.state, taskid: taskData._id, points: taskData.group_info.value };
     };
 
     render() {
