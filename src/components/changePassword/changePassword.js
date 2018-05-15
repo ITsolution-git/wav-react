@@ -23,7 +23,7 @@ class ChangePassword extends BaseComponent {
 
 	getEmptyState = (initValue = '') => {
 		return {
-            password: initValue,
+            password: initValue !== '' ? false : '',
             confirmPassword: initValue
         };
 	};

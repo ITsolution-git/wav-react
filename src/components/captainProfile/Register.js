@@ -27,7 +27,7 @@ class Register extends BaseComponent {
             firstname: initValue,
             lastname: initValue,
             username: initValue,
-            password: initValue,
+            password: initValue !== '' ? false : '',
             confirmPassword: initValue,
             email: initValue
         };
