@@ -35,7 +35,7 @@ export function updateTask(data) {
                 history.push(routes.tasksList);
             },
             response => {
-                dispatch(loadDataFailure(appDataTypes.updateTask, response.data.message));
+                dispatch(loadDataFailure(appDataTypes.updateTask, 'Something went wrong...'));
             });
     };
 }
