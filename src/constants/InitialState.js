@@ -1,5 +1,6 @@
 import appDataTypes from './AppDataTypes';
 import voterBoardingType from './VoterBoardingType';
+import errorTypes from './ErrorTypesConstants';
 
 export default {
     app: {
@@ -58,6 +59,8 @@ export default {
         voterError: null,
         captainError: null
     },
-    transaction: {
+    transaction: {},
+    error: {
+        [errorTypes.emailExists]: false
     }
 }

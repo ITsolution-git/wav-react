@@ -14,6 +14,9 @@ export default class InputBase extends BaseComponent {
 
     onChange = (e) => {
         const { value } = e.target;
+        const { onInputChange = () => {}} = this.props;
+        onInputChange(e);
+        
         this.setState(({ value }), () => {
             if (!this.state.isValid) {
                 this.validate();
@@ -23,7 +26,9 @@ export default class InputBase extends BaseComponent {
         });
     };
 
-    onFocusOut = () => {
+    onFocusOut = (e) => {
+      const { onBlur = () => {}} = this.props;
+      onBlur(e);
       this.validate();
     };
 
@@ -59,11 +64,12 @@ export default class InputBase extends BaseComponent {
 
     checkForValidation = (props) => {
         const { customError, startValidation } = props;
+
         if (this.props.customError === customError && this.props.startValidation === startValidation) {
             return;
         }
-        if (customError || startValidation) {
-            this.validate();
+        if (customError !== this.props.customError || startValidation) {
+            this.validate(props);
         }
     };
 
