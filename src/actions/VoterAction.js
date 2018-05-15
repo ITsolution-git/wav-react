@@ -91,7 +91,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
 
 export function registerVoter(voter) {
     return (dispatch, getState) => {
-        const { voterDetails } = getState().voter;
+        const { voterDetails, boardingType } = getState().voter;
 
         const patchData = {
             userid: authStorage.getLoggedUser().userid,
@@ -108,6 +108,9 @@ export function registerVoter(voter) {
             },
             error => {}
         );
+        if (boardingType !== boardingTypes.tasks ) {
+            voterService.generateTaskForUser().then(response => {}, error => {});
+        }
     };
 
     function updateVoter(data) {
