@@ -60,6 +60,10 @@ function makeRequest(requestData, includeToken, failRedirect) {
             return Promise.resolve(response);
         })
         .catch(error => {
+            // handle server down
+            if (error.request) {
+                return Promise.reject({response: { data: { message: 'No response returned from the server' }}});
+            }
             if (process.env.NODE_ENV !== environment.test && failRedirect) {
                 toErrorPage();
             }
