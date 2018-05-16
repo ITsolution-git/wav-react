@@ -54,10 +54,10 @@ export default class MatchItem extends BaseComponent {
                             <div>Mail Address: { }</div>
                             <div>Gender: { gender }</div>
                         </div> }
-                    <div className='link' onClick={e => {
+                    <span className='link' onClick={e => {
                         e.stopPropagation();
                         this.setState({ moreEnabled: !moreEnabled });
-                    }}>{ moreEnabled ? 'Show less' : 'Show more' }</div>
+                    }}>{ moreEnabled ? 'Show less' : 'Show more' }</span>
                 </Col>
             </Row>
         )

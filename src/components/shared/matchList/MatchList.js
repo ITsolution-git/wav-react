@@ -7,6 +7,7 @@ import BaseComponent from '../BaseComponent';
 import { registerVoter } from '../../../actions/VoterAction';
 import MatchItem from './MatchItem';
 import ConfirmationDialog from '../ConfirmationDialog';
+import Spinner from '../Spinner';
 
 class MatchList extends BaseComponent {
     constructor(props, context) {
@@ -41,11 +42,12 @@ class MatchList extends BaseComponent {
     };
 
     render() {
-        const { matchList } = this.props.voter;
+        const { matchList, matchListFetching } = this.props.voter;
         const { showConfirmModal } = this.state;
         return (
             <div>
-                <div className="intro">
+                <Spinner loading={matchListFetching} height={200} />
+                { !matchListFetching && <div className="intro">
                     <p className="intro-title">
                         { matchList.length > 1 ?
                             'Is one of these people your friend?' :
@@ -57,7 +59,7 @@ class MatchList extends BaseComponent {
                     <p className="intro-title">
                         { matchList.length ? "Click on the name of your voter to select it" : "" }
                     </p>
-                </div>
+                </div> }
                 <div className='match-list'>
                     { matchList.sort((person1, person2) => person2.matchRate - person1.matchRate)
                         .map((person, i) => <MatchItem key={i}
