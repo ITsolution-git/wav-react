@@ -44,7 +44,11 @@ export function resetMatchList() {
 
 export function matchListPersist(voterDetails, resubmit = false) {
     return (dispatch, getState) => {
-    	const { currentNumber, makeList } = getState().voter,
+    	const {
+    	    currentNumber,
+            makeList,
+            boardingType
+    	} = getState().voter,
     		firstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${VoterContants.LAST_NAME_PREFIX}${currentNumber}`];
 
@@ -69,6 +73,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
 
                     dispatch(actionSuccess(data.ctRecords));
                 }
+               generateTaskForUser(boardingType);
            },
            error => {
                dispatch(actionError(error.response.data.message));
@@ -106,13 +111,17 @@ export function registerVoter(voter) {
             },
             error => {}
         );
-        if (boardingType !== boardingTypes.tasks ) {
-            voterService.generateTaskForUser().then(response => {}, error => {});
-        }
+        generateTaskForUser(boardingType);
     };
-
-    function updateVoter(data) {
+    
+     function updateVoter(data) {
         return { type: VoterContants.VOTER_UPDATE_SUCCESS, data };
+    }
+}
+
+function generateTaskForUser(boardingType) {
+    if (boardingType !== boardingTypes.tasks ) {
+        voterService.generateTaskForUser().then(response => {}, error => {});
     }
 }
 

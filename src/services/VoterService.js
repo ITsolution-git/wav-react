@@ -32,7 +32,7 @@ function updateRegisteredVoter(data) {
 
 function generateTaskForUser() {
     return postAsync({
-        url: `${config.apiHost}/api/v1/generateTaskForUser`,
+        url: `${config.apiHost}/api/v1/task/generateTaskForUser`,
         headers: getHeaders(),
         data: {
             userid: authStorage.getLoggedUser().userid
