@@ -167,7 +167,6 @@ class Register extends BaseComponent {
 							</form>
 							<Row className="margin-right">
 								<Col xs={6}>	
-									{ this.isMobile() && this.renderBackToHome()}
 								</Col>
 								<Col md={12} xs={6}>
 									<div id="btn_signup">
