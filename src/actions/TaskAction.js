@@ -57,10 +57,11 @@ export function getStateInfo(state) {
     function actionRequest() {
         return { type: TaskConstants.TASK_STATE_INFO_REQUEST };
     }
-    function actionSuccess(state_info) {
-        return { type: TaskConstants.TASK_STATE_INFO_SUCCESS, state_info };
+    function actionSuccess(stateInfo) {
+        return { type: TaskConstants.TASK_STATE_INFO_SUCCESS, stateInfo };
     }
-    function actionError(err) {
-        return { type: TaskConstants.TASK_STATE_INFO_ERROR, err };
+    function actionError(error) {
+        return { type: TaskConstants.TASK_STATE_INFO_ERROR, error };
     }
 }
+

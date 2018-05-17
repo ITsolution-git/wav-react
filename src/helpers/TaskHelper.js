@@ -50,6 +50,11 @@ export function resolveTaskData(task) {
             task.route = routes.updateProfileTask;
             break;
         }
+        case taskIds.preferenceTaskId: {
+            task.description = `Contact ${firstname} ${lastname} to get their voting preferences`;
+            task.route = routes.preferenceTask;
+            break;
+        }
     }
     return task;
 }

@@ -22,6 +22,7 @@ export default {
     recruitingCaptainTask: '/task/recruitingCaptains',
     registerVoterTask: '/task/registerVoters',
     updateProfileTask: '/task/updateProfile',
+    preferenceTask: '/task/preferenceTask',
     voterFilter: '/voterFilter',
     captainFilter: '/captainFilter',
     verifyCaptain: '/changePassword/verify',

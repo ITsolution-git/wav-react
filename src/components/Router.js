@@ -23,6 +23,7 @@ import LiteratureVideoTask from './tasks/LiteratureVideoTask';
 import RecruitingCaptainTask from './tasks/RecruitingCaptainTask';
 import RegisterVoterTask from './tasks/RegisterVoterTask';
 import UpdateProfileTask from './tasks/UpdateProfileTask';
+import PreferenceTask from './tasks/PreferenceTask';
 import MessageList from './messages/MessageList';
 import VoterFilter from './filters/VoterFilter';
 import CaptainFilter from './filters/CaptainFilter';
@@ -102,7 +103,8 @@ const router =() => (
                    component = { Authorization(RegisterVoterTask, [captain]) } />
             <Route exact path = {routes.updateProfileTask}
                    component = { Authorization(UpdateProfileTask, [captain]) } />
-
+            <Route exact path = {routes.preferenceTask}
+                   component = { Authorization(PreferenceTask, [captain]) } />
 			// filters
             <Route exact path = {routes.voterFilter}
                    component = { Authorization(VoterFilter, [admin]) } />
