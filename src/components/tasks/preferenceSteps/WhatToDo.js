@@ -4,6 +4,16 @@ import Typography from 'material-ui/Typography';
 import BaseComponent from '../../shared/BaseComponent';
 
 export default class WhatToDo extends BaseComponent {
+    renderOption = (option) => {
+        return (
+            <li>
+                <Typography>
+                    <b>{ option }</b>
+                </Typography>
+            </li>
+        )
+    }
+
     render() {
         const {
             voterData: {
@@ -22,14 +32,12 @@ export default class WhatToDo extends BaseComponent {
                     <br /><br />
                     In { stateInfo['state'] }, { firstname } { lastname } has the following options:
                     <br /><br />
-                    <b>
-                        <ul>
-                        { stateInfo['earlyVotingAllowed'] && <li>Early voting.</li> }
-                        { stateInfo['absenteeWithCause'] && <li>Absentee with cause.</li> }
-                        { stateInfo['absenteeWithoutCause'] && <li>Absentee without cause.</li> }
-                        </ul>
-                    </b>
                 </Typography>
+                <ul>
+                    { stateInfo['earlyVotingAllowed'] && this.renderOption('Early voting.') }
+                    { stateInfo['absenteeWithCause'] && this.renderOption('Absentee with cause.') }
+                    { stateInfo['absenteeWithoutCause'] && this.renderOption('Absentee without cause.') }
+                </ul>
             </div>
         );
     }

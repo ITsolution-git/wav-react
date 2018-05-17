@@ -9,6 +9,8 @@ import Stepper from './shared/LetfStepper';
 import { getStateInfo } from '../../actions/TaskAction'
 import { getTaskData } from "../../helpers/TaskHelper";
 import WhatToDo from './preferenceSteps/WhatToDo';
+import AskVoter from './preferenceSteps/AskVoter';
+import TaskSuccess from './shared/TaskSuccess';
 
 class PreferenceTask extends TaskBase {
     constructor(props, context) {
@@ -26,7 +28,14 @@ class PreferenceTask extends TaskBase {
 
         return [
             { label: 'What to do', component: <WhatToDo voterData={ voter_metaData } stateInfo={stateInfo} />, valid: true },
+            { label: 'Ask voter', component: <AskVoter voterData={ voter_metaData } stateInfo={stateInfo} />, valid: true },
+            { label: 'Success', component: <TaskSuccess data={ this.getTaskData() } />, valid: true }
         ];
+    };
+
+    getTaskData = () => {
+        const { taskData = {}} = this.props;
+        return { taskid: taskData._id, points: taskData.group_info.value };
     };
 
     render() {

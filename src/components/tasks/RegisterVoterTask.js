@@ -240,8 +240,8 @@ class RegisterVoterTask extends TaskBase {
                         <br/>
 
                         {
-                            Object.keys(this.getStateInfo()).map(e => {
-                                return <Row className="section">
+                            Object.keys(this.getStateInfo()).map((e, index) => {
+                                return <Row key={index} className="section">
                                             <Col xs={2} style={{padding:"0"}}>
                                                 <img src={imgCheck} className="pull-right" alt="" width={20} height={20} />
                                             </Col>
