@@ -16,7 +16,7 @@ export default function taskListReducer(state = InitialState.taskList, action) {
             return { ...state, isFetching: true };
         }
         case TaskConstants.TASK_STATE_INFO_SUCCESS: {
-            return { ...state, ...{ state_info: action.state_info, isFetching: false, isSuccess: true }};
+            return { ...state, ...{ stateInfo: action.stateInfo, isFetching: false, isSuccess: true }};
         }
         case TaskConstants.TASK_STATE_INFO_ERROR: {
             return { ...state, ...{ error: action.error, isFetching: false, isSuccess: false }};

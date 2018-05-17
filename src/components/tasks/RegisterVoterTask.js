@@ -37,18 +37,11 @@ class RegisterVoterTask extends TaskBase {
         this.state = {
             nextEnabled: false,
             subComponent: RegisterSubSteps.byDefault,
-            linkClicked: false,
-            state_info: {}
+            linkClicked: false
         };
 
-        let state = props.taskData.voter_metaData.state;
+        const state = props.taskData.voter_metaData.state;
         props.actions.getStateInfo(state);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.state_info) {
-            this.setState({state_info: nextProps.state_info})
-        }
     }
 
     onNextClick = (subComponent) => {
@@ -154,39 +147,39 @@ class RegisterVoterTask extends TaskBase {
 
     getStateInfo = () => {
         
-        const { taskData, state_info } = this.props;
+        const { taskData, stateInfo } = this.props;
 
-        if (!state_info) return "";
+        if (!stateInfo) return "";
         if (taskData.voter_metaData.age && taskData.voter_metaData.age > 17 && taskData.voter_metaData.age < 23) {
             return {
-                "2018 Primary Election voting date":    state_info['2018PrimaryElectionVotingDate'],
-                "Registration deadline by mail":        state_info['registrationDeadlineByMail'],
-                "Online registration deadline":         state_info['registrationDeadlineOnline'],
-                "Is ID needed":                         state_info['idNeeded'] ? "YES" : "NO",
-                "Is ID required for first-time voters": state_info['idRequiredForFirstTimeVoters'] ? "YES" : "NO",
-                "Student id accepted":                  state_info['studentIdAccepted'] ? "YES" : "NO",
+                "2018 Primary Election voting date":    stateInfo['2018PrimaryElectionVotingDate'],
+                "Registration deadline by mail":        stateInfo['registrationDeadlineByMail'],
+                "Online registration deadline":         stateInfo['registrationDeadlineOnline'],
+                "Is ID needed":                         stateInfo['idNeeded'] ? "YES" : "NO",
+                "Is ID required for first-time voters": stateInfo['idRequiredForFirstTimeVoters'] ? "YES" : "NO",
+                "Student id accepted":                  stateInfo['studentIdAccepted'] ? "YES" : "NO",
             }
         } 
 
-        if (States_Special.includes(state_info.state)) {
+        if (States_Special.includes(stateInfo.state)) {
             return {
-                "2018 Primary Election voting date":        state_info['2018PrimaryElectionVotingDate'],
-                "Registration deadline by mail":            state_info['registrationDeadlineByMail'],
-                "Absentee Ballot application deadline":     state_info['absenteeBallotApplicationDeadline'],
-                "Absentee Ballot deadline":                 state_info['absenteeBallotDeadline'],
-                "Is Absentee with cause allowed":           state_info['absenteeWithCause'] ? "YES" : "NO",
-                "Is Absentee without cause allowed":        state_info['absenteeWithoutCause'] ? "YES" : "NO",
-                "Is ID needed":                             state_info['idNeeded'] ? "YES" : "NO",
+                "2018 Primary Election voting date":        stateInfo['2018PrimaryElectionVotingDate'],
+                "Registration deadline by mail":            stateInfo['registrationDeadlineByMail'],
+                "Absentee Ballot application deadline":     stateInfo['absenteeBallotApplicationDeadline'],
+                "Absentee Ballot deadline":                 stateInfo['absenteeBallotDeadline'],
+                "Is Absentee with cause allowed":           stateInfo['absenteeWithCause'] ? "YES" : "NO",
+                "Is Absentee without cause allowed":        stateInfo['absenteeWithoutCause'] ? "YES" : "NO",
+                "Is ID needed":                             stateInfo['idNeeded'] ? "YES" : "NO",
             }
         }
 
         return {
-            "2018 Primary Election voting date":    state_info['2018PrimaryElectionVotingDate'],
-            "Registration deadline by mail":        state_info['registrationDeadlineByMail'],
-            "Online registration deadline":         state_info['registrationDeadlineOnline'],
-            "Is early voting allowed":              state_info['earlyVotingAllowed'] ? "YES" : "NO",
-            "Is all mail (voting) allowed":         state_info['allMailVoting'] ? "YES" : "NO",
-            "Is ID needed":                         state_info['idNeeded'] ? "YES" : "NO",
+            "2018 Primary Election voting date":    stateInfo['2018PrimaryElectionVotingDate'],
+            "Registration deadline by mail":        stateInfo['registrationDeadlineByMail'],
+            "Online registration deadline":         stateInfo['registrationDeadlineOnline'],
+            "Is early voting allowed":              stateInfo['earlyVotingAllowed'] ? "YES" : "NO",
+            "Is all mail (voting) allowed":         stateInfo['allMailVoting'] ? "YES" : "NO",
+            "Is ID needed":                         stateInfo['idNeeded'] ? "YES" : "NO",
         }
     }
 
@@ -247,8 +240,8 @@ class RegisterVoterTask extends TaskBase {
                         <br/>
 
                         {
-                            Object.keys(this.getStateInfo()).map(e => {
-                                return <Row className="section">
+                            Object.keys(this.getStateInfo()).map((e, index) => {
+                                return <Row key={index} className="section">
                                             <Col xs={2} style={{padding:"0"}}>
                                                 <img src={imgCheck} className="pull-right" alt="" width={20} height={20} />
                                             </Col>
@@ -271,7 +264,7 @@ class RegisterVoterTask extends TaskBase {
 const mapStateToProps = (state, ownProps) => {
     return {
         taskData: getTaskData(state, ownProps),
-        state_info: state.taskList.state_info
+        stateInfo: state.taskList.stateInfo
     }
 };
 

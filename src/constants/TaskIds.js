@@ -5,5 +5,6 @@ export default {
     registerVoterId: 'TS_GRP_004',
     recruitingVoterId: 'TS_GRP_005',
     addVoterId: 'TS_GRP_006',
-    updateVoterProfileId: 'TS_GRP_008'
+    updateVoterProfileId: 'TS_GRP_008',
+    preferenceTaskId: 'TS_GRP_009'
 }
