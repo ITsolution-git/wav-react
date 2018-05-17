@@ -8,8 +8,20 @@
         display: inline-block;
       }
     }
+    .nav {
+      background: linear-gradient(to right, #0097A7, #004F7F);
+      span {
+        color: white;
+        font-family: Gotham_Narrow_Medium;
+        font-size: 24pt;
+      }
+      img {
+        margin-top: -15px;
+        margin-left: 3px;
+      }
+    }
     nav {
-      background-color: #F8FAFC;
+      background: linear-gradient(to right, #0097A7, #004F7F);
       a {
         color: #353C4C;
       }
@@ -24,6 +36,10 @@
 
     .mb-1 {
       margin-bottom: 10px;
+    }
+
+    .row {
+      margin: 0;
     }
   }
 

@@ -106,3 +106,295 @@
     }
     /* check box custom css end */
 }
+
+/** -------------------------- New Design Styles --------------------------- **/
+
+.new-btw-register {
+
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-top: $margin_top;
+    margin-bottom: $margin_top;
+    box-shadow: -3px -3px 15px rgba(0,0,0,0.2);
+
+    .row {
+        margin: 0;
+    }
+
+    .title1 {
+        font-family: Gotham_Narrow_Black;
+        font-size: 40pt;
+        color: #006699;
+    }
+
+    .title2 {
+        font-family: Gotham_Narrow_Medium;
+        font-size: 24pt;
+        color: #006699;
+    }
+
+    @include respond-to($lg) {
+        margin-left: 120px;
+        margin-right: 120px;
+
+        .row {
+            display: flex;
+        }
+    }
+
+    @include respond-to($xs) {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    @include respond-to($phone) {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .margin-right {
+        margin-right: 150px;
+
+        @include respond-to($phone) {
+            margin-right: 0;
+        }
+
+        @include respond-to($lg) {
+            margin-right: 0;
+        }
+
+        @include respond-to($xs) {
+            margin-right: 0;
+        }
+
+        @include respond-to($xl) {
+            margin-right: 150px;
+        }
+    }
+
+    button {
+        @extend .btw-button-new;
+        border-radius: 20px;
+        float: right;
+    }
+
+    form {
+
+        margin-top: 70px;
+        @extend .margin-right;
+
+        @include respond-to($xl) {
+            margin-right: 150px;
+        }
+
+        input {
+            @extend .btw-input;
+            color: #4C4C4C;
+            font-size: 14pt;
+            font-family: Gotham_Narrow_Medium;
+            border-color: #0097A7;
+            box-shadow: 0px 4px 7px -2px rgba(0,0,0,0.2);
+
+            &::placeholder { /* Firefox */
+                color: #707070;
+                opacity: 0.6;
+            }
+            
+            &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+               color: #707070;
+               opacity: 0.6;
+            }
+            
+            &::-ms-input-placeholder { /* Microsoft Edge */
+               color: #707070;
+               opacity: 0.6;
+            }
+		}
+		
+        span {
+            color: red;
+            font-size: 12pt;
+            font-family: Gotham_Narrow_Light;
+        }
+
+        .form-group {
+            margin-bottom: $input_field_space;
+            padding: 0;
+            padding-right: 20px;
+        }
+    }
+
+    .register-form {
+
+        padding: 30px;
+        border: 0.5px solid black;
+
+        @include respond-to($lg) {
+            border-right: none;
+        }
+
+        .title-line {
+            width: 200px;
+            margin-top: 10px;
+            border: 7px solid #E1A427;
+        }
+
+        .subtitle1 {
+            font-family: Gotham_Narrow_Medium;
+            font-size: 21pt;
+            color: #4C4C4C;
+            margin-top: 40px;
+        }
+    
+        .subtitle2 {
+            font-family: Gotham_Narrow_Light;
+            font-size: 17pt;
+            color: #707070;
+            margin-top: 0;
+        }
+
+        .input-form {
+            margin-top: 30px;
+        }
+    }
+
+    .register-video {
+        
+        border: 0.5px solid #595959;
+        background-color: #D8D8D8;
+
+        @include respond-to($lg) {
+            border-left: none;
+        }
+
+        padding-top: 40px;
+        text-align: center;
+
+        .video {
+            width: 70%;
+            height: 320px;
+        }
+
+        .subtitle1 {
+            font-family: Gotham_Narrow_Medium;
+            font-size: 18pt;
+            color: #4C4C4C;
+            padding-left: 15%;
+            padding-right: 5%;
+            margin-top: 15px;
+            text-align: left;
+        }
+    
+        .subtitle2 {
+            @extend .subtitle1;
+            font-family: Gotham_Narrow_Light;
+            font-size: 13pt;
+            color: #707070;
+            margin-top: 20px;
+        }
+
+        @include respond-to($phone) {
+            .video {
+                width: 100%;
+                height: 300px;
+            }
+
+            .subtitle1 {
+                padding-left: 0;
+            }
+        }
+    }
+
+    label {
+        color: rgba(112,112,112,0.6);
+        font-size: 14pt;
+        font-family: Gotham_Narrow_Medium;
+    }
+
+    .padding0 {
+        padding: 0;
+    }
+
+    .marginTermsPolicy {
+        margin-left: 20px;
+
+        @include respond-to($phone) {
+            margin-left: 0;
+        }
+    }
+
+    /* check box custom css ** no change ** */
+    .checkbox-container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-top: 13px;
+        margin-bottom: 12px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        
+        .check-label {
+            color: black;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+
+            opacity: 0.6;
+        }
+    }
+
+    .checkbox-container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 22px;
+        width: 22px;
+        background-color: transparent;
+        border: 1px solid #0097A7;
+    }
+
+    .checkbox-container:hover input ~ .checkmark,
+    .checkbox-container:hover .check-label{
+        opacity: 1;
+    }
+
+    .checkbox-container input:checked ~ .checkmark {
+        background-color: #2da9e1;
+        border-color: #2da9e1;
+        opacity: 1;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .checkbox-container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .checkbox-container .checkmark:after {
+        left: 7px;
+        top: 2px;
+        width: 6px;
+        height: 14px;
+        border: 0.5px solid white;
+        border-width: 0 2px 2px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+        opacity: 1;
+    }
+    /* check box custom css end */
+}

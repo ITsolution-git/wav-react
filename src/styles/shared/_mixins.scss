@@ -1,6 +1,12 @@
 $phone : '(max-width: 480px)';
 $desktop: '(min-width: 1200px)';
 
+$xs: '(max-width: 768px)';
+$sm: '(min-width: 768px)';
+$md: '(min-width: 992px)';
+$lg: '(min-width: 1200px)';
+$xl: '(min-width: 1600px)';
+
 @mixin respond-to($media) {
   @media only screen and #{$media} {
     @content;
