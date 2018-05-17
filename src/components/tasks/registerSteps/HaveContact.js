@@ -7,6 +7,7 @@ import { RegisterTaskConstants, RegisterSubSteps } from '../../../constants/redu
 import PubSub from "pubsub-js";
 import pubsubConstants from "../../../constants/PubSubConstants";
 import routes from '../../../constants/Routes';
+import YesNoButtons from '../shared/YesNoButtons';
 
 const options = {
     yes: 'yes',
@@ -15,28 +16,15 @@ const options = {
 
 
 class SharedComponent extends BaseComponent {
-    getValues = () => {
-        return [
-            { value: options.yes, label: 'Yes' },
-            { value: options.no, label: 'No'}
-        ]
-    };
-
     renderYesNo = (text, type) => {
         const {
             onChange,
             value = ''
         } = this.props;
         return (
-            <div>
-                <Typography gutterBottom>
-                    { text }
-                </Typography>
-                <RadioButtons title=''
-                              onChange={val => onChange(type, val)}
-                              value={value}
-                              values={ this.getValues() } />
-            </div>
+            <YesNoButtons title={text}
+                          onChange={val => onChange(type, val)}
+                          value={value} />
         );
     };
 
