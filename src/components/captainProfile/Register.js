@@ -84,10 +84,10 @@ class Register extends BaseComponent {
 	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
 		return (
             <div className={`form-group col-xs-${colWidth}`}>
-                <label className="pull-left" htmlFor={name}>{label}</label>
                 <input type={inputType} className="input-field"
                        onChange={this.updateRegisterFields.bind(this, name)}
-                       onBlur={this.validateRegisterFields.bind(this, name)} />
+					   onBlur={this.validateRegisterFields.bind(this, name)}
+					   placeholder={label} />
                 { !this.state.isValid[name] && <span className="pull-left">{ errorMsg }</span> }
             </div>
 		)
@@ -114,17 +114,108 @@ class Register extends BaseComponent {
 
 		const passwordErrorMsg = (
 			<div>
-				<div>At least one special character</div>
-				<div>At least one number</div>
-				<div>At lease one upper case character</div>
-				<div>Minimum of 7 characters</div>
+				<div>* At least one special character *</div>
+				<div>* At least one number *</div>
+				<div>* At lease one upper case character *</div>
+				<div>* Minimum of 7 characters *</div>
 			</div>
 		);
 		const { error } = this.props;
 		const nameWidth = this.isMobile() ? 12 : 6;
 		return (
 			<div>
-				<h8 className="pull-right" style={{ marginTop: '-30px', marginRight: '30px'}}>Already registered? <Link to='/'>Sign in here</Link></h8>
+
+				<div className="new-btw-register">
+					<div className="row">
+
+						<div className="col-lg-6 register-form">
+							<div className="title1">Welcome to BeTheWave!</div>
+							<div className="title2">Help your friends register & vote</div>
+							<div className="title-line"></div>
+
+							<div className="subtitle1">Create an account</div>
+							<div className="subtitle2">Don't worry! All of your info is private and won't be shared</div>
+
+							<form className="input-form">
+								<div className="row">
+									{ this.renderInput('firstname', 'First Name (Legal)', 'text', nameWidth, '* First Name is not valid *') }
+									{ this.renderInput('lastname', 'Last Name (Legal)', 'text', nameWidth, '* Last Name is not valid *') }
+								</div>
+								{ this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
+								{ this.renderInput('email', 'Email', 'email', 0, error || '* Email is not valid *') }
+								<div className={classNames({'password-div': !this.state.isValid['password'] })}>
+									{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
+								</div>
+								{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
+								<div className="">
+									<div className="row marginTermsPolicy">
+										<div className="col-xs-1 padding0">
+											<label className="checkbox-container">
+												<input type="checkbox" onClick={this.onTermsAndPrivacy.bind(this)}/>
+												<span className="checkmark"></span>
+											</label>
+										</div>
+										<div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
+											<label>
+												I have read and understood the term of use and by signing up, I agree to Bethewave's <Link target="_blank" to='/termsOfUse'>Terms of Use</Link> and <Link target="_blank" to='/privacyPolicy'>Privacy Policy</Link>
+											</label>
+										</div>
+									</div>
+									{ this.state.termsAndPrivacy === 0 && <span className="pull-left">* Terms and Privacy is required *</span> }
+								</div>
+								<br/><br/>
+							</form>
+							<Row className="margin-right">
+								<Col xs={6}>	
+									{ this.isMobile() && this.renderBackToHome()}
+								</Col>
+								<Col md={12} xs={6}>
+									<div id="btn_signup">
+										<button className="btn btn-signup" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up!</button>
+									</div>
+								</Col>
+							</Row>
+						</div>
+
+						<div className="col-lg-6 register-video">
+							<YouTube
+								videoId="qSTwrt8oE3g"
+								opts={opts}
+								className="video"
+								onReady={this._onReady}
+							/>
+							<div className="subtitle1">
+								If you're here, it's because you've agreed to help us with something really important.
+							</div>
+
+							<div className="subtitle2">
+								We need to make 2018 a wave election for progressives, and one of the most important things you can do is make sure all your progressive friends vote.
+							</div>
+
+							<div className="subtitle2">
+								BeTheWave is an app that makes this easy, and you'are one of the first people to use it. As a captain on BeTheWave, you'll list out the names of the friends you want to help and then we'll take you step by step through the process of getting them registered and to the polls.
+							</div>
+
+							<div className="subtitle2">
+								This is a prototype, and there might be some bugs and hiccups along the way. Your feedback is going to be crucial to making sure the final product is successful.
+							</div>
+
+							<div className="subtitle1">
+								Thanks for being part of this!
+							</div>
+
+							<br/>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+
+				{/* <h8 className="pull-right" style={{ marginTop: '-30px', marginRight: '30px'}}>Already registered? <Link to='/'>Sign in here</Link></h8>
 				<div className='btw-identity btw-register container'>
 					<div>
 						<YouTube
@@ -178,7 +269,7 @@ class Register extends BaseComponent {
 							</div>
 						</Col>
 					</Row>
-				</div>
+				</div> */}
 			</div>
 		);
 	}
