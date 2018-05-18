@@ -120,7 +120,7 @@ export function registerVoter(voter) {
 }
 
 function generateTaskForUser(boardingType) {
-    if (boardingType !== boardingTypes.tasks ) {
+    if (boardingType === boardingTypes.register ) {
         voterService.generateTaskForUser().then(response => {}, error => {});
     }
 }
