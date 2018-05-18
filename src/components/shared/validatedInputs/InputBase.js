@@ -5,6 +5,7 @@ import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 
 import BaseComponent from '../../shared/BaseComponent';
+import FieldConstants from '../../../constants/FieldConstants';
 
 export default class InputBase extends BaseComponent {
     baseState = {
@@ -13,10 +14,18 @@ export default class InputBase extends BaseComponent {
     };
 
     onChange = (e) => {
-        const { value } = e.target;
-        const { onInputChange = () => {}} = this.props;
+        let { value } = e.target;
+        const { onInputChange = () => {}, name} = this.props;
         onInputChange(e);
         
+        if (name === FieldConstants.dateOfBirth) {
+            if (value.length === 2 || value.length === 5) {
+                if (this.state.value.length < value.length) {
+                    value += '/'
+                }
+            }
+        }
+
         this.setState(({ value }), () => {
             if (!this.state.isValid) {
                 this.validate();
