@@ -26,8 +26,8 @@ class VoterError extends ResultBase {
                 <div className='error-icon'>
                     <FontAwesome name='exclamation-triangle' />
                 </div>
-                <div className='cant-find'>We cant find '{ firstname } { lastname }' in the voter registry.</div>
-                <div className='ok-text'>That's okay we will come back to this person.</div>
+                <div className='cant-find'>We found  '{ firstname } { lastname }' in the registry but they are not registered to vote.</div>
+                <div className='ok-text'>Don't worry we will work together to help this person get registered</div>
                 { boardingType === boardingTypes.register && <div>
                     <NextButton />
                 </div> }
