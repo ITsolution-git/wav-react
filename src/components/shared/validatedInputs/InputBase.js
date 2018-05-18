@@ -15,16 +15,8 @@ export default class InputBase extends BaseComponent {
 
     onChange = (e) => {
         let { value } = e.target;
-        const { onInputChange = () => {}, name} = this.props;
+        const { onInputChange = () => {}} = this.props;
         onInputChange(e);
-        
-        if (name === FieldConstants.dateOfBirth) {
-            if (value.length === 2 || value.length === 5) {
-                if (this.state.value.length < value.length) {
-                    value += '/'
-                }
-            }
-        }
 
         this.setState(({ value }), () => {
             if (!this.state.isValid) {
@@ -95,6 +87,9 @@ export class TextInput extends InputBase {
 
     componentWillReceiveProps(props) {
         this.checkForValidation(props);
+        if (props.defaultValue !== this.props.defaultValue) {
+            this.setState({ value: props.defaultValue || '' })
+        }
     }
 
     componentWillMount() {
