@@ -58,7 +58,8 @@ class MailRegistrationTask extends TaskBase {
             subComponent,
             haveAsked,
             haveConfirmed,
-            photoStepValid
+            photoStepValid,
+            image
         } = this.state;
 
         switch (subComponent) {
@@ -97,18 +98,21 @@ class MailRegistrationTask extends TaskBase {
                     component: (
                         <div className='registration-by-mail'>
                             <Dropzone className='drop-zone' ref={(node) => { this.dropzoneRef = node; }} onDrop={this.hanldeFiles} >
-                                <p>Drop photo here.</p>
+                                <div>
+                                    <div> { image ? 'You have uploaded an image.' : 'Drop photo here.' }</div>
+                                    { image && <img src={image.preview} />}
+                                </div>
                             </Dropzone>
                             <Row>
-                                <Col md={3}>
+                                <Col md={3} xs={6}>
                                     <Button size='small'
                                             onClick={() => { this.dropzoneRef.open() }}>Upload</Button>
                                 </Col>
-                                <Col md={3} onClick={() => this.setState({
+                                <Col md={3} xs={6}>
+                                    <Button onClick={() => this.setState({
                                         photoStepValid: true,
                                         nextEnabled: true
-                                    })}>
-                                    <Button>Skip</Button>
+                                    })}>Skip</Button>
                                 </Col>
                             </Row>
                         </div>
