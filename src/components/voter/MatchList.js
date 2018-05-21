@@ -39,10 +39,10 @@ class MatchList extends BaseComponent {
                 <Row>
                     { boardingType === boardingTypes.register &&
                         <Row className='bottom-buttons'>
-                            <Col xs={8} md={8}>
+                            <Col md={12}>
                                 <button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>
                             </Col>
-                            <Col xs={4} md={4}>
+                            <Col md={12}>
                                 <NextButton title='Skip'/>
                             </Col>
                         </Row> }
