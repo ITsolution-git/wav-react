@@ -97,7 +97,7 @@ class CaptainsDashboard extends BaseComponent {
                                 </Col>
                                 <Col md={6} xs={6} className='block-padding'>
                                     <div className='icon-div voters' onClick={() => this.onLink(routes.voterList)}>
-                                        <FontAwesome name='thumbs-up' size='3x'/>
+                                        <FontAwesome name='users' size='3x'/>
                                         <span className='button-text'>
                                             Voters {/*<span>
                                                 (<b>{votersCount}</b>)
@@ -110,7 +110,7 @@ class CaptainsDashboard extends BaseComponent {
                             <Row>
                                 <Col md={6} xs={6} className='block-padding'>
                                     <div className='icon-div messages' onClick={() => this.onLink(routes.messageList)}>
-                                        <FontAwesome name='tasks' size='3x'/>
+                                        <FontAwesome name='envelope' size='3x'/>
                                         <span className='button-text'>Messages</span>
                                     </div>
                                 </Col>
