@@ -27,6 +27,24 @@
           font-size: 19px;
         }
       }
+      // for registration by mail task
+      .registration-by-mail {
+          width: 100%;
+          .drop-zone {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            border: 2px dashed grey;
+            margin-bottom: 20px;
+            justify-content: center;
+          }
+        button {
+          padding: 0 25px;
+          height: 10px;
+          font-size: 13px;
+        }
+      }
     }
   }
   .btw-help {
