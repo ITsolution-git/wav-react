@@ -115,12 +115,13 @@ class VoterDetail extends BaseComponent {
 									required />
 					</Col>
 				</Row>
-				<Col>
+				<Col className='email-field'>
 					<EmailInput onChange={this.handleChange}
 								defaultValue={voterDetail[FieldConstants.email]}
 								startValidation={startValidation}
 								disabled={emailDisabled}
 								required />
+					<span>We only use the email address to verify voter registration, we will not share this address or contact it</span>
 				</Col>
 				<Row>
 					<Col md={6}>
