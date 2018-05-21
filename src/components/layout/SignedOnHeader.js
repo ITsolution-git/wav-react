@@ -24,10 +24,9 @@ import authStorage from '../../storage/AuthStorage';
 import appDataTypes from "../../constants/AppDataTypes";
 import { bindActionCreators } from 'redux';
 import { getBtwUserProfile } from '../../actions/SignOnAction';
-
-import gold from '../../resources/images/gold.png'
-import silver from '../../resources/images/silver.png'
-import bronze from '../../resources/images/bronze.png'
+import { getLevel, isEmpty } from './HeaderHelper';
+import pubsubConstants from "../../constants/PubSubConstants";
+import PubSub from "pubsub-js";
 
 class SignedOnHeader extends BaseComponent {
 
@@ -35,6 +34,16 @@ class SignedOnHeader extends BaseComponent {
         showInfoModal: false,
         activeItem: this.props.location.pathname
     };
+
+    componentWillUnmount() {
+        PubSub.unsubscribe(this.locationChangeSubscription);
+    }
+
+    componentDidMount() {
+        this.locationChangeSubscription = PubSub.subscribe(pubsubConstants.onLocationChange, (type, value) => {
+            this.setState({ activeItem: value });
+        });
+    }
 
     componentWillMount() {
         this.checkForLoadingProfile(this.props);
@@ -102,60 +111,12 @@ class SignedOnHeader extends BaseComponent {
     };
 
     renderLevel = () => {
-
         const {
             profile: {
                 data
             }
-        } = this.props
-
-        let score = (data && data.points ? data.points : 0)
-        let arr = [], level = 1;
-
-        if (score < 50) {
-            arr = [null, null, bronze];
-        } else if (score < 100) {
-            level = 2;
-            arr = [null, null, silver];
-        } else if (score < 200) {
-            level = 3;
-            arr = [null, null, gold];
-        } else if (score < 500) {
-            level = 4;
-            arr = [null, gold, bronze];
-        } else if (score < 1000) {
-            level = 5;
-            arr = [null, gold, silver];
-        } else if (score < 2000) {
-            level = 6;
-            arr = [null, gold, gold];
-        } else if (score < 5000) {
-            level = 7;
-            arr = [gold, gold, bronze];
-        } else if (score < 10000) {
-            level = 8;
-            arr = [gold, gold, silver];
-        } else {
-            level = 9;
-            arr = [gold, gold, gold];
-        }
-
-        return (
-            <div className="success-level tooltip">
-                { arr[0] && <img src={arr[0]} width={30} height={30} alt="" /> }
-                { arr[1] && <img src={arr[1]} width={30} height={30} alt="" /> }
-                { arr[2] && <img src={arr[2]} width={30} height={30} alt="" /> }
-                <span className="tooltiptext">Level {level} : {score} earned points</span>
-            </div>
-        )
-    };
-
-    isEmpty = (obj) => {
-        for(var key in obj) {
-            if(obj.hasOwnProperty(key))
-                return false;
-        }
-        return true;
+        } = this.props;
+        return getLevel(data);
     };
 
     renderProfileDropdown = () => {
@@ -180,22 +141,15 @@ class SignedOnHeader extends BaseComponent {
     renderHeaderLevel = () => {
         const { profile: { data } } = this.props;
         return (
-            <div>{ !this.isEmpty(data) && data.role !== 'admin' && this.renderLevel()}</div>
+            <div>{ !isEmpty(data) && data.role !== 'admin' && this.renderLevel()}</div>
         )
     };
 
     render() {
         const {
-            profile: {
-                isSuccess,
-                data
-            }
-        } = this.props,
-            {
-                showInfoModal,
-                activeItem
-            } = this.state,
-            name = isSuccess && data.firstname || '';
+            showInfoModal,
+            activeItem
+        } = this.state;
 
         return (
             <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
