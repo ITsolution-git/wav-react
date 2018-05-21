@@ -21,7 +21,7 @@ export default class TaskFail extends BaseComponent {
         return (
             <div className='error-icon'>
                 <FontAwesome name='exclamation-triangle' />
-                <div className='success-text'>Task failed</div>
+                <div className='success-text'>We will have you try it again...</div>
             </div>
         );
     }
