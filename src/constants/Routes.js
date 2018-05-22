@@ -24,6 +24,7 @@ export default {
     updateProfileTask: '/task/updateProfile',
     preferenceTask: '/task/preferenceTask',
     mailRegistrationTask: '/task/mailRegistrationTask',
+    reminderVoteTask: '/task/reminderVoteTask',
     voterFilter: '/voterFilter',
     captainFilter: '/captainFilter',
     verifyCaptain: '/changePassword/verify',
