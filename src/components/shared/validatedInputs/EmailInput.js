@@ -12,9 +12,17 @@ import errorTypes from '../../../constants/ErrorTypesConstants';
 class EmailInput extends InputBase {
 
     checkForUniqueEmail = (e) => {
+        clearTimeout(this.timeoutId);
+        const { value } = e.target;
+        this.timeoutId = setTimeout(() => {
+            this.handleUnique(value);
+        }, 3000);
+    };
+
+    handleUnique = (value) => {
         const { isVoter = true } = this.props,
             role = isVoter ? 'voter' : 'user';
-        this.props.actions.checkForUniqueEmail(e.target.value, role);
+        this.props.actions.checkForUniqueEmail(value, role);
     };
 
     render () {
@@ -22,7 +30,8 @@ class EmailInput extends InputBase {
         return <TextInput label='Email'
                           type='email'
                           customError={error}
-                          onBlur={this.checkForUniqueEmail}
+                          onInputChange={this.checkForUniqueEmail}
+                          onBlur={e => this.handleUnique(e.target.value)}
                           validator={value => validate(validationTypes.email, value)}
                           name={fields.email}
                           {...this.props } />
