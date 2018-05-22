@@ -49,6 +49,16 @@
           font-size: 13px;
         }
       }
+      // for update profile task
+      .update-profile {
+        .input-field-div {
+          display: flex;
+          justify-content: center;
+          .input-field {
+            width: 55%;
+          }
+        }
+      }
     }
   }
   .btw-help {
