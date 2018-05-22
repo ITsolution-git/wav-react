@@ -22,7 +22,7 @@ class EmailInput extends InputBase {
         return <TextInput label='Email'
                           type='email'
                           customError={error}
-                          onInputChange={this.checkForUniqueEmail}
+                          onBlur={this.checkForUniqueEmail}
                           validator={value => validate(validationTypes.email, value)}
                           name={fields.email}
                           {...this.props } />
