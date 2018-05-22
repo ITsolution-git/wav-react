@@ -1,5 +1,6 @@
 export default {
     onAuthChange: 'onAuthChange',
     onTaskComplete: 'onTaskComplete',
-    onTaskNext: 'onTaskNext'
+    onTaskNext: 'onTaskNext',
+    onLocationChange: 'onLocationChange'
 }

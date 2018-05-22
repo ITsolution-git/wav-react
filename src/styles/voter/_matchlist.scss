@@ -6,7 +6,10 @@
       @extend .btw-button;
     }
     .bottom-buttons {
-      margin-top: $input_field_space
+      margin-top: $input_field_space;
+      div {
+        margin-bottom: 16px;
+      }
     }
     .match-list {
       .name-row {

@@ -23,7 +23,8 @@ import {
     DateOfBirthInput,
     GenderInput,
     AddressInput,
-    PhoneInput
+    PhoneInput,
+	ZipCodeInput
 } from '../shared/validatedInputs';
 
 
@@ -132,13 +133,20 @@ export default class AddEditDialog extends BaseComponent {
 											required />
 							</Col>
 						</Row>
-						<Col>
-							<EmailInput onChange={this.handleChange}
-										startValidation={startValidation}
-										defaultValue={voter[fieldConstants.email]}
-										required
-										disabled={disableEmail} />
-						</Col>
+						<Row>
+                            <Col md={6}>
+                                <EmailInput onChange={this.handleChange}
+                                            startValidation={startValidation}
+                                            defaultValue={voter[fieldConstants.email]}
+                                            required
+                                            disabled={disableEmail} />
+                            </Col>
+							<Col md={6}>
+								<ZipCodeInput onChange={this.handleChange}
+											  startValidation={startValidation}
+											  defaultValue={voter[fieldConstants.zipCode]} />
+							</Col>
+						</Row>
 						<Row>
 							<Col md={6}>
 								<GenderInput onChange={this.handleChange}
