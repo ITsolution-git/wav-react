@@ -14,11 +14,11 @@
   font-size: $font_size_input;
   font-weight: $font_weight_bold;
   height: $input_field_height;
-  background-color: #006BA6;
+  background-color: #0097A7;
   transition: background-color .2s ease,color .2s ease,border-color .2s ease;
 
   &:hover {
-    background-color: #003B71;
+    background-color: #004F7F;
   }
 }
 
