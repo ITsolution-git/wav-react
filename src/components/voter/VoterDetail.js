@@ -30,14 +30,18 @@ class VoterDetail extends BaseComponent {
 		const { voterDetails } = this.props.voter;
 		this.state = {
 			startValidation: loadPrevious,
-            valid: {
-				[FieldConstants.city]: false,
-				[FieldConstants.state]: false,
-				[FieldConstants.email]: false
-			},
+            valid: this.getRequiredDefaults(),
 			voterDetail: loadPrevious ? voterDetails : {}
 		};
 	}
+
+	getRequiredDefaults = () => {
+		return {
+            [FieldConstants.city]: false,
+            [FieldConstants.state]: false,
+            [FieldConstants.email]: false
+		}
+	};
 
 	handleChange = (value, isValid, name) => {
 		this.setState(state => {
@@ -148,7 +152,12 @@ class VoterDetail extends BaseComponent {
 				<Row>
                     <Col mdOffset={3} md={3} xs={6}>
 						{ loadPrevious ?
-                            <NextButton title='Next Name' />
+                            <NextButton title='Next Name'
+										onNext={() => this.setState({
+											startValidation: false,
+											valid: this.getRequiredDefaults(),
+											voterDetail: {}
+										})} />
 							: this.isMobile && this.renderBackToHome()
                         }
                     </Col>
