@@ -5,7 +5,6 @@ import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 
 import BaseComponent from '../../shared/BaseComponent';
-import FieldConstants from '../../../constants/FieldConstants';
 
 export default class InputBase extends BaseComponent {
     baseState = {
