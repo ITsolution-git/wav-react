@@ -61,22 +61,22 @@ class Login extends BaseComponent {
 			<div className="btw-login container">
 				<div className="btw-form" onKeyPress={this.onKeyPress}>
                     <div className="card-content">
-						<p id="loginHeader">Log into your account </p>
+						<p id="loginHeader" className="title">Log into your account </p>
                         { error && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
                     </div>
 					{ this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
 					<br/><br/>
                     <div className="form-group">
-                        <label className="pull-left">Username</label>
                         <input type="text" className="input-field" id="username" ref="username"
-                               required="" aria-required="true"
+							   required="" aria-required="true"
+							   placeholder="Username"
                                onChange={event => this.updateLogonFields(event, 'username')} />
 												{!username && emptyField && <span style={{'color': 'red'}}> ** Enter username </span> }
                     </div>
                     <div className="form-group">
-                        <label className="pull-left">Password</label>
                         <input type="password" className="input-field" id="password" ref="password"
-                               required="" aria-required="true"
+							   required="" aria-required="true"
+							   placeholder="Password"
                                onChange={event => this.updateLogonFields(event, 'password')} />
 												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
                     </div>
