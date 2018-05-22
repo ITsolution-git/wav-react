@@ -25,6 +25,7 @@ import RegisterVoterTask from './tasks/RegisterVoterTask';
 import UpdateProfileTask from './tasks/UpdateProfileTask';
 import PreferenceTask from './tasks/PreferenceTask';
 import MailRegistrationTask from './tasks/MailRegistrationTask';
+import ReminderVoteTask from './tasks/ReminderVoteTask';
 import MessageList from './messages/MessageList';
 import VoterFilter from './filters/VoterFilter';
 import CaptainFilter from './filters/CaptainFilter';
@@ -108,6 +109,8 @@ const router =() => (
                    component = { Authorization(PreferenceTask, [captain]) } />
             <Route exact path = {routes.mailRegistrationTask}
                    component = { Authorization(MailRegistrationTask, [captain]) } />
+            <Route exact path = {routes.reminderVoteTask}
+                   component = { Authorization(ReminderVoteTask, [captain]) } />
 
 			// filters
             <Route exact path = {routes.voterFilter}

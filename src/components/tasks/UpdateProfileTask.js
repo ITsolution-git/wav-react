@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
-import { FormLabel } from 'material-ui/Form';
 import Typography from 'material-ui/Typography';
 import { Row, Col } from 'react-bootstrap';
 
@@ -9,14 +8,22 @@ import TaskBase from './shared/TaskBase';
 import WithTask from '../hocs/Task';
 import Stepper from './shared/LetfStepper';
 import { getTaskData } from '../../helpers/TaskHelper';
-import Dropdown from '../shared/inputs/Dropdown';
-import InputText from '../shared/inputs/InputText';
-import States from '../../constants/States';
-import { getAgeYears } from '../../helpers/InputHelper';
 import TaskSuccess from './shared/TaskSuccess';
 
 import imgPhone from '../../resources/images/phone.png'
 import imgReward from '../../resources/images/reward.png'
+import {
+    FirstNameInput,
+    LastNameInput,
+    StateInput,
+    GenderInput,
+    CityInput,
+    AddressInput,
+    PhoneInput,
+    DateOfBirthInput,
+    ZipCodeInput
+} from '../shared/validatedInputs';
+import fieldConstants from '../../constants/FieldConstants';
 
 const fieldTypes = {
     firstName: 'firstname',
@@ -30,10 +37,14 @@ const fieldTypes = {
     zipCode: 'zipcode'
 };
 
+
+
 class UpdateProfileTask extends TaskBase {
     constructor(props, context) {
       super(props, context);
-      this.state = {};
+      this.state = {
+          valid: {}
+      };
     }
 
     resolveStepData = (field) => {
@@ -50,41 +61,39 @@ class UpdateProfileTask extends TaskBase {
         } = fieldTypes;
         switch (field) {
             case firstName:
-                return this.renderInput(firstName, 'First Name');
+                return this.renderInput(firstName, 'First Name', <FirstNameInput onChange={this.onChange} required />);
             case lastName:
-                return this.renderInput(lastName, 'Last Name');
+                return this.renderInput(lastName, 'Last Name', <LastNameInput onChange={this.onChange} required />);
             case state:
-                return this.renderDropdown(state, 'State', Object.keys(States));
+                return this.renderInput(state, 'State', <StateInput onChange={this.onChange} required />);
             case gender:
-                return this.renderDropdown(gender, 'Gender', ['Male', 'Female']);
+                return this.renderInput(gender, 'Gender', <GenderInput onChange={this.onChange} required />);
             case city:
-                return this.renderInput(city, 'City');
+                return this.renderInput(city, 'City', <CityInput onChange={this.onChange} required  />);
             case address:
-                return this.renderInput(address, 'Address');
+                return this.renderInput(address, 'Address', <AddressInput onChange={this.onChange} required />);
             case phoneNumber:
-                return this.renderInput(phoneNumber, 'Phone Number', 'phone');
+                return this.renderInput(phoneNumber, 'Phone Number', <PhoneInput onChange={this.onChange} required />);
             case dateOfBirth:
-                return this.renderDropdown(dateOfBirth, 'Date of Birth', getAgeYears());
+                return this.renderInput(dateOfBirth, 'Date of Birth', <DateOfBirthInput onChange={this.onChange} required />);
             case zipCode:
-                return this.renderInput(zipCode, 'Zip Code');
+                return this.renderInput(zipCode, 'Zip Code', <ZipCodeInput onChange={this.onChange} required />);
         }
     };
 
-    renderInput = (name, label, type) => {
-        return this.formatStep(label, name,
-            <InputText label={label}
-                       type={type}
-                       value={this.state[name]}
-                       onChange={val => this.handleChange(name, val)} />
-        );
+    onChange = (value, isValid, name) => {
+        this.setState(state => {
+            const { valid } = state;
+            name = name === fieldConstants.zipCode ? fieldTypes.zipCode : name;
+            return {
+                [name]: value,
+                valid: { ...valid, [name]: isValid }
+            }
+        });
     };
 
-    renderDropdown = (name, label, values) => {
-        return this.formatStep(label, name,
-            <Dropdown label={label}
-                      value={this.state[name]}
-                      values={values}
-                      onChange={val => this.handleChange(name, val)} />)
+    renderInput = (name, label, input) => {
+        return this.formatStep(label, name, input);
     };
 
     renderContent = (name, input) => {
@@ -96,16 +105,16 @@ class UpdateProfileTask extends TaskBase {
         } } = this.props.taskData || {};
 
         return (
-            <React.Fragment key={name}>
-                { this.isVoterTask()
+            <div key={name} className='update-profile'>
+                    { this.isVoterTask()
                     && <Typography gutterBottom>
                         { firstname } { lastname } from { city }, { state } needs to have the following information about them updated
-                       </Typography>
-                }
-                <FormLabel>
-                    { input }
-                </FormLabel>
-            </React.Fragment>
+                    </Typography>
+                    }
+                <div className='input-field-div'>
+                    <div className='input-field'>{ input }</div>
+                </div>
+            </div>
         )
     };
 
@@ -113,7 +122,7 @@ class UpdateProfileTask extends TaskBase {
         return {
             label,
             component: this.renderContent(name, input),
-            valid: this.validateField(name)
+            valid: this.state.valid[name]
         }
     };
 
