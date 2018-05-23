@@ -13,7 +13,8 @@ import boardingTypes from '../../../constants/VoterBoardingType';
 class NextButton extends BaseComponent {
 
     onNext = () => {
-        const { voter, actions } = this.props;
+        const { voter, actions, onNext = () => {}}  = this.props;
+        onNext();
         if (voter.currentNumber === voterConstants.VOTERS_COUNT) {
             actions.resetVoterState();
             this.redirectToHome();

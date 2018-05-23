@@ -14,6 +14,12 @@ import getLastStep from './shared/TaskResult';
 import YesNoButtons from './shared/YesNoButtons';
 import RadioButtons from '../shared/inputs/RadioButtons';
 
+const votingTypes = {
+    byMail: 'byMail',
+    earlyVoting: 'earlyVoting',
+    electionDay: 'electionDay'
+};
+
 class PreferenceTask extends TaskBase {
     constructor(props, context) {
         super(props, context);
@@ -30,9 +36,9 @@ class PreferenceTask extends TaskBase {
 
     getVotingOptions = () => {
         return [
-            { value: 'byMail', label: 'Vote by mail' },
-            { value: 'earlyVoting', label: 'Early voting' },
-            { value: 'electionDay', label: 'Election day at polling station' }
+            { value: votingTypes.byMail, label: 'Vote by mail' },
+            { value: votingTypes.earlyVoting, label: 'Early voting' },
+            { value: votingTypes.electionDay, label: 'Election day at polling station' }
         ]
     };
 
@@ -99,7 +105,16 @@ class PreferenceTask extends TaskBase {
 
     getTaskData = () => {
         const { taskData = {}} = this.props;
-        return { ...this.state, taskid: taskData._id, points: taskData.group_info.value };
+        const { votingType } = this.state;
+        return {
+            votingPreference: {
+              mail: votingType === votingTypes.byMail,
+              earlyVoting: votingType === votingTypes.earlyVoting,
+              inPerson: votingTypes === votingTypes.electionDay
+            },
+            taskid: taskData._id,
+            points: taskData.group_info.value
+        };
     };
 
     render() {

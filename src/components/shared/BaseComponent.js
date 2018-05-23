@@ -4,7 +4,6 @@ import PubSub from "pubsub-js";
 
 import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
-import routes from "../../constants/Routes";
 import pubsubConstants from "../../constants/PubSubConstants";
 
 
