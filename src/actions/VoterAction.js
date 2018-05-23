@@ -126,6 +126,7 @@ function generateTaskForUser(boardingType) {
 }
 
 export function nextNumberPersist() {
+    boardingInfo.noResultsCount = 0;
     return dispatch => {
         dispatch(persist());
     };
