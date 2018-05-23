@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
+import Radio from 'material-ui/Radio';
+import Modal from 'material-ui/Modal';
 
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';
@@ -20,7 +22,8 @@ class MakeList extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			startValidation: false
+			startValidation: false,
+			view: 1
 		};
 	}
 
@@ -58,46 +61,99 @@ class MakeList extends BaseComponent {
     	this.onLink(routes.voterDetail);
 	};
 
+	handleClose = () => {
+		this.setState({ view: 2 });
+	};
+
 	render() {
 		const { startValidation } = this.state;
 		return (
-			<div className='btw-identity btw-makelist container'>
-				{ this.isDesktop() && this.renderBackToHome()}
-				<div className="intro">
-					<p className="intro-title">
-						Are your friends registered to vote?
-					</p>
+			<div className="btw-makelist">
+				<Modal
+					open={this.state.view === 1}
+					onClose={this.handleClose}
+					disableBackdropClick={true}
+				>
+					<div className="view1">
+						<div className="view1-title">Welcome to the Team</div>
+						<div className="view1-desc">
+							We think this is the Start of a beautiful friendship<br/><br/>
+							Speaking of Friends...
+						</div>
+						<div className="view1-nav">
+							<div className="radio1"></div>
+							<div className="radio2"></div>
+							<div className="view-next" onClick={this.handleClose}></div>
+						</div>
+					</div>
+				</Modal>
 
-					<p className="intro-desc">
-						Let’s check! Enter the name of 4 friends who you think might not be registered or are less likely to vote. <br/><br/>
+				<div className='container'>
 
-						*The info we collect is only for checking if your friends are registered. We’re a nonprofit and never will sell you or your friends’ data.*  
-					</p>
-				</div>
-				{ Array(numberOfNames).fill(0).map((e,i)=> {
-					return (
-						<Row key={i} className="row names">
+					<div className="title">
+						<div className="app-title">BeTheWave</div>
+
+						{ 
+							this.state.view === 2 && 
+							<div>
+								<span className="title">Let's Start with Four Friends</span>
+								<div className="title-line"></div>
+							</div>
+						}
+					</div>
+
+					<div className="voters-form">
+						<div className="intro">
+							<p className="intro-title">
+								We'll check Local Voter Databases to<br />
+								Find out if They're Registered to Vote.
+							</p>
+
+							<p className="intro-desc">
+								We understand that their info is private and we won't be sharing it.
+							</p>
+						</div>
+						<div className="rows mb-1">
+						{ Array(numberOfNames).fill(0).map((e,i)=> {
+							return (
+								<Row key={i} className="names">
+									<Col xs={2}>
+										<Radio 
+											checked={ !!this.state[`${firstNamePrefix}${i+1}${invalidPrefix}`] &&
+											!!this.state[`${lastNamePrefix}${i+1}${invalidPrefix}`] }
+											classes={{
+												checked: `checkbox`
+											}}
+											disabled
+										/>
+									</Col>
+									<Col xs={10}>
+										<Row>
+											<Col xs={12} md={6}>
+												<FirstNameInput startValidation={startValidation}
+																required
+																onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
+											</Col>
+											<Col xs={12} md={6}>
+												<LastNameInput startValidation={startValidation}
+																required
+																onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
+											</Col>
+										</Row>
+									</Col>
+								</Row>
+							)
+						})}
+						</div>
+						<Row>
 							<Col xs={6}>
-								<FirstNameInput startValidation={startValidation}
-												 required
-												 onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
 							</Col>
-							<Col xs={6}>
-								<LastNameInput startValidation={startValidation}
-											    required
-												onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
+							<Col md={12} xs={6}>
+								<button className="btn btn-makelist" onClick={this.onNext}>Find My Friends</button>
 							</Col>
 						</Row>
-					)
-				})}
-				<Row>
-					<Col xs={6}>
-						{ this.isMobile() && this.renderBackToHome()}
-					</Col>
-					<Col md={12} xs={6}>
-                        <button className="btn btn-primary" onClick={this.onNext}>Next</button>
-					</Col>
-				</Row>
+					</div>
+				</div>
 			</div>
 		);
 	}

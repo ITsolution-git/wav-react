@@ -84,7 +84,7 @@ class Register extends BaseComponent {
 	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
 		return (
             <div className={`form-group col-xs-${colWidth}`}>
-                <input type={inputType} className="input-field"
+                <input type={inputType} className="input-field btw-input-new"
                        onChange={this.updateRegisterFields.bind(this, name)}
 					   onBlur={this.validateRegisterFields.bind(this, name)}
 					   placeholder={label} />
