@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
-import ResultBase from './shared/ResultBase';
-import NextButton from './shared/NextButton';
-import { getUrlParams } from '../../helpers/UrlHelper';
-import voterConstants from '../../constants/reducerConstants/VoterConstants';
-import boardingTypes from '../../constants/VoterBoardingType';
+import ResultBase from './ResultBase';
+import NextButton from './NextButton';
+import { getUrlParams } from '../../../helpers/UrlHelper';
+import voterConstants from '../../../constants/reducerConstants/VoterConstants';
+import boardingTypes from '../../../constants/VoterBoardingType';
 
 class VoterError extends ResultBase {
     componentWillMount() {
@@ -26,8 +26,8 @@ class VoterError extends ResultBase {
                 <div className='error-icon'>
                     <FontAwesome name='exclamation-triangle' />
                 </div>
-                <div className='cant-find'>We found  '{ firstname } { lastname }' in the registry but they are not registered to vote.</div>
-                <div className='ok-text'>Don't worry we will work together to help this person get registered to vote</div>
+                <div className='cant-find'>{this.props.resolveTitle(firstname, lastname)}</div>
+                <div className='ok-text'>{this.props.description}</div>
                 { boardingType === boardingTypes.register && <div>
                     <NextButton />
                 </div> }

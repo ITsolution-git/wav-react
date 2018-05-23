@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 
-import NextButton from './shared/NextButton';
-import { getUrlParams } from '../../helpers/UrlHelper';
-import boardingTypes from '../../constants/VoterBoardingType';
-import VoterContants from "../../constants/reducerConstants/VoterConstants";
-import ResultBase from './shared/ResultBase';
+import NextButton from './NextButton';
+import { getUrlParams } from '../../../helpers/UrlHelper';
+import boardingTypes from '../../../constants/VoterBoardingType';
+import VoterContants from "../../../constants/reducerConstants/VoterConstants";
+import ResultBase from './ResultBase';
 
 class VoterSuccess extends ResultBase {
 

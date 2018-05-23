@@ -20,9 +20,11 @@ class EmailInput extends InputBase {
     };
 
     handleUnique = (value) => {
-        const { isVoter = true } = this.props,
+        const { isVoter = true, disabled } = this.props,
             role = isVoter ? 'voter' : 'user';
-        this.props.actions.checkForUniqueEmail(value, role);
+        if (!disabled) {
+            this.props.actions.checkForUniqueEmail(value, role);
+        }
     };
 
     render () {
