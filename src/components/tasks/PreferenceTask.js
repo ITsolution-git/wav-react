@@ -107,7 +107,7 @@ class PreferenceTask extends TaskBase {
         const { taskData = {}} = this.props;
         const { votingType } = this.state;
         return {
-            votingPreference: {
+            voting_preferences: {
               mail: votingType === votingTypes.byMail,
               earlyVoting: votingType === votingTypes.earlyVoting,
               inPerson: votingTypes === votingTypes.electionDay
