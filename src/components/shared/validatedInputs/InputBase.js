@@ -133,6 +133,57 @@ export class TextInput extends InputBase {
     };
 }
 
+export class TextInput1 extends InputBase {
+    state = this.baseState;
+
+    componentWillReceiveProps(props) {
+        this.checkForValidation(props);
+        if (props.defaultValue !== this.props.defaultValue) {
+            this.setState({ value: props.defaultValue || '' })
+        }
+    }
+
+    componentWillMount() {
+        this.onMount();
+    }
+
+    render = () => {
+        const {
+            required,
+            disabled,
+            label,
+            placeholder,
+            defaultValue,
+            fullWidth = true,
+            maxLength = 50
+        } = this.props;
+
+        const {
+            value = defaultValue || '',
+            isValid,
+            error
+        } = this.state;
+
+          return (
+            <FormControl error={!isValid}
+                         required={required}
+                         disabled={disabled}
+                         fullWidth={fullWidth}>
+                <input value={value}
+                       placeholder={label}
+                       onBlur={this.onFocusOut}
+                       className="btw-input-new"
+                       onChange={e => {
+                           const { value } = e.target;
+                           if (value.length <= maxLength) {
+                               this.onChange(e);
+                           }
+                       }} />
+                <FormHelperText classes={{root: 'btw-input-error'}}>{ error }</FormHelperText>
+            </FormControl>
+        );
+    };
+}
 
 export class Dropdown extends InputBase {
     state = this.baseState;

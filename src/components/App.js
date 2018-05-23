@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import PubSub from "pubsub-js";
-
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import Router from './Router';
@@ -16,13 +15,15 @@ class App extends Component {
 	}
 
 	render() {
+
+		let isHideHeader = this.props.location.pathname === "/captainProfile/Makelist"
 		return (
 			<div className='btw-app'>
-				<Header />
+				{ !isHideHeader && <Header /> }
 				<div className='btw-content'>
                     <Router />
 				</div>
-				<Footer />
+				{ !isHideHeader && <Footer /> }
 			</div>
 		);
 	}

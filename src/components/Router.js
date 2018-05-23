@@ -51,44 +51,43 @@ import roles from '../constants/Roles';
 const { captain, admin, guest } = roles;
 
 const router =() => (
-	<Router history={ History }>
-		<Switch>
-			<Route exact path = {routes.login}
-				   component = { Authorization(Login, [guest]) } />
-			<Route exact path = {routes.register}
-				   component = { Authorization(Register, [guest, captain, admin]) } />
-			<Route exact path = {routes.pageDown}
-				   component = { GeneralErrorPage } />
-			<Route exact path = {routes.invites}
-				   component = { Authorization(SendInvite, [captain]) } />
-			<Route exact path = {routes.tasksList}
-				   component = { Authorization(TasksList, [captain]) } />
-			<Route exact path = {routes.voterList}
-				   component = { Authorization(VotersList, [captain]) } />
-			<Route exact path = {routes.community}
-				   component = { Authorization(Community, [captain]) } />
-            <Route exact path = {routes.forum}
-                   component = { Authorization(Forum, [captain]) } />
-			<Route exact path = {routes.captainsDashboard}
-				   component = { Authorization(CaptainsDashboard, [captain]) } />
-			<Route exact path = {routes.messageList}
-				   component = { Authorization(MessageList, [captain, admin]) } />
-            <Route exact path = {routes.adminDashboard}
-                   component = { Authorization(AdminDashBoard, [admin]) } />
-            <Route exact path = {routes.reports}
-                   component = { Authorization(Reports, [admin]) } />
+    <Switch>
+        <Route exact path = {routes.login}
+                component = { Authorization(Login, [guest]) } />
+        <Route exact path = {routes.register}
+                component = { Authorization(Register, [guest, captain, admin]) } />
+        <Route exact path = {routes.pageDown}
+                component = { GeneralErrorPage } />
+        <Route exact path = {routes.invites}
+                component = { Authorization(SendInvite, [captain]) } />
+        <Route exact path = {routes.tasksList}
+                component = { Authorization(TasksList, [captain]) } />
+        <Route exact path = {routes.voterList}
+                component = { Authorization(VotersList, [captain]) } />
+        <Route exact path = {routes.community}
+                component = { Authorization(Community, [captain]) } />
+        <Route exact path = {routes.forum}
+                component = { Authorization(Forum, [captain]) } />
+        <Route exact path = {routes.captainsDashboard}
+                component = { Authorization(CaptainsDashboard, [captain]) } />
+        <Route exact path = {routes.messageList}
+                component = { Authorization(MessageList, [captain, admin]) } />
+        <Route exact path = {routes.adminDashboard}
+                component = { Authorization(AdminDashBoard, [admin]) } />
+        <Route exact path = {routes.reports}
+                component = { Authorization(Reports, [admin]) } />
 
-			// voter onboarding
-            <Route exact path = {routes.makelist}
-                   component = { Authorization(MakeList, [captain]) } />
-			<Route exact path = {routes.voterDetail}
-				   component = { Authorization(VoterDetail, [captain]) } />
-            <Route exact path = {routes.matchList}
-                   component = { Authorization(MatchList, [captain]) } />
-            <Route exact path = {routes.voterSuccess}
-                   component = { Authorization(VoterSuccess, [captain]) } />
-            <Route exact path = {routes.voterError}
-                   component = { Authorization(VoterError, [captain]) } />
+        // voter onboarding
+        <Route exact path = {routes.makelist}
+                component = { Authorization(MakeList, [captain]) } />
+        <Route exact path = {routes.voterDetail}
+                component = { Authorization(VoterDetail, [captain]) } />
+        <Route exact path = {routes.matchList}
+                component = { Authorization(MatchList, [captain]) } />
+        <Route exact path = {routes.voterSuccess}
+                component = { Authorization(VoterSuccess, [captain]) } />
+        <Route exact path = {routes.voterError}
+                component = { Authorization(VoterError, [captain]) } />
 
 			// tasks
             <Route exact path = {routes.addVoterTask}
@@ -112,29 +111,28 @@ const router =() => (
             <Route exact path = {routes.reminderVoteTask}
                    component = { Authorization(ReminderVoteTask, [captain]) } />
 
-			// filters
-            <Route exact path = {routes.voterFilter}
-                   component = { Authorization(VoterFilter, [admin]) } />
-            <Route exact path = {routes.captainFilter}
-                   component = { Authorization(CaptainFilter, [admin]) } />
+        // filters
+        <Route exact path = {routes.voterFilter}
+                component = { Authorization(VoterFilter, [admin]) } />
+        <Route exact path = {routes.captainFilter}
+                component = { Authorization(CaptainFilter, [admin]) } />
 
-			// static route pages
-            <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
-            <Route exact path = {routes.howContribute} component = { HowContribute } />
-            <Route exact path = {routes.termsOfUse} component = { TermsOfUse } />
-            <Route exact path = {routes.privacyPolicy} component = { PrivacyPolicy } />
-            <Route exact path = {routes.faq} component = { Faq } />
+        // static route pages
+        <Route exact path = {routes.whyBetheWave} component = { WhyBethewave } />
+        <Route exact path = {routes.howContribute} component = { HowContribute } />
+        <Route exact path = {routes.termsOfUse} component = { TermsOfUse } />
+        <Route exact path = {routes.privacyPolicy} component = { PrivacyPolicy } />
+        <Route exact path = {routes.faq} component = { Faq } />
 
-            // change changePassword
-            <Route exact path = {routes.verifyCaptain} component = { VerifyCaptain } />
-            <Route exact path = {routes.changePassword} component = { ChangePassword } />
-            <Route exact path = {routes.forgotPassword} component = { ForgotPassword } />
+        // change changePassword
+        <Route exact path = {routes.verifyCaptain} component = { VerifyCaptain } />
+        <Route exact path = {routes.changePassword} component = { ChangePassword } />
+        <Route exact path = {routes.forgotPassword} component = { ForgotPassword } />
 
-            // transaction logs
-            <Route exact path = {routes.loglist} component = { LogList } />
-            <Route exact path = {routes.logdetail} component = { LogDetail } />
-		</Switch>
-	</Router>
+        // transaction logs
+        <Route exact path = {routes.loglist} component = { LogList } />
+        <Route exact path = {routes.logdetail} component = { LogDetail } />
+    </Switch>
 );
 
 export default router;
