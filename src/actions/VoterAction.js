@@ -70,7 +70,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
                     boardingInfo.noResultsCount = data.count === 0 ? boardingInfo.noResultsCount + 1 : 0;
                     if (boardingInfo.noResultsCount >= boardingInfo.maxEmptyCount) {
                         boardingInfo.noResultsCount = 0;
-                        history.push(routes.voterError);
+                        history.push(routes.voterNotFoundError);
                         return;
                     }
 

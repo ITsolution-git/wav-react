@@ -34,7 +34,7 @@ class MatchList extends BaseComponent {
                                     this.redirectToPage(voter, routes.voterSuccess);
                                  }}
                                  onSubmitError={(voter) => {
-                                     this.redirectToPage(voter, routes.voterError);
+                                     this.redirectToPage(voter, routes.voterNotRegisteredError);
                                  }} />
                 <Row>
                     { boardingType === boardingTypes.register &&

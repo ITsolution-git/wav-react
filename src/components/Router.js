@@ -1,7 +1,6 @@
 import React from 'react';
-import { Router , Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Login from './Login';
-import History from '../utility/History';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import SendInvite from './invites/SendInvite';
 import Register from './captainProfile/Register';
@@ -13,8 +12,9 @@ import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
 import VoterDetail from './voter/VoterDetail';
 import MatchList from './voter/MatchList';
-import VoterSuccess from './voter/VoterSuccess';
-import VoterError from './voter/VoterError';
+import VoterSuccess from './voter/shared/VoterSuccess';
+import NotRegisteredError from './voter/NotRegisteredError';
+import NotFoundError from './voter/NoFoundError';
 import Forum from './community/Forum';
 import Reports from './reports/Reports';
 import AddVoterTask from './tasks/AddVoterTask';
@@ -86,8 +86,10 @@ const router =() => (
                 component = { Authorization(MatchList, [captain]) } />
         <Route exact path = {routes.voterSuccess}
                 component = { Authorization(VoterSuccess, [captain]) } />
-        <Route exact path = {routes.voterError}
-                component = { Authorization(VoterError, [captain]) } />
+        <Route exact path = {routes.voterNotRegisteredError}
+                component = { Authorization(NotRegisteredError, [captain]) } />
+        <Route exact path = {routes.voterNotFoundError}
+               component = { Authorization(NotFoundError, [captain]) } />
 
 			// tasks
             <Route exact path = {routes.addVoterTask}
