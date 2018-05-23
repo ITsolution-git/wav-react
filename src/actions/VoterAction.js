@@ -60,6 +60,9 @@ export function matchListPersist(voterDetails, resubmit = false) {
         const addVoterService = resubmit
             ? voterService.retryAdd
             : voterService.addVoter;
+
+        generateTaskForUser(boardingType, resubmit);
+
         return addVoterService(voterDetails).then(
            result => {
                 const { data } = result.data;
@@ -73,7 +76,6 @@ export function matchListPersist(voterDetails, resubmit = false) {
 
                     dispatch(actionSuccess(data.ctRecords));
                 }
-               generateTaskForUser(boardingType);
            },
            error => {
                dispatch(actionError(error.response.data.message));
@@ -119,8 +121,8 @@ export function registerVoter(voter) {
     }
 }
 
-function generateTaskForUser(boardingType) {
-    if (boardingType === boardingTypes.register ) {
+function generateTaskForUser(boardingType, resubmit) {
+    if (boardingType === boardingTypes.register && !resubmit) {
         voterService.generateTaskForUser().then(response => {}, error => {});
     }
 }
