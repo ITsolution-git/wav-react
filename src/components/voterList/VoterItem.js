@@ -21,6 +21,25 @@ class VoterItem extends BaseComponent {
         }
     }
 
+    replaceNumbersWithX = (str, isAddress = false) => {
+
+        if (isAddress) {
+            str = str || '';
+            str = str.replace(new RegExp("[0-9]", "g"), "X");
+            let arr = str.split(',');
+
+            if (arr.length === 1) {
+                return str;
+            } else {
+                return arr[0] + ',' + arr[1].replace(new RegExp("[0-9a-zA-Z]", "g"), "X");
+            }
+        } else {
+            str = str || '';
+            return str.replace(new RegExp("[0-9]", "g"), "X");
+        }
+        
+    };
+
     closeEditModal = () => {
       this.setState({ showEditModal: false });
     };
@@ -64,7 +83,7 @@ class VoterItem extends BaseComponent {
                           </div> }
                 </Col>
                 <Col md={5} xs={12} className='no-padding'>
-                    <div>{ address }{ address ? ', ' : ''}{ city }{ city ? ', ':'' }{ state }</div>
+                    <div>{ this.replaceNumbersWithX(address, true) }{ address ? ', ' : ''}{ this.replaceNumbersWithX(city) }{ city ? ', ':'' }{ this.replaceNumbersWithX(state) }</div>
                     { moreEnabled &&
                     <div className='more-info'>
                         <div>Email: { email } </div>
