@@ -11,7 +11,6 @@ import reducers from '../reducers';
 const combinedReducers = combineReducers(reducers);
 const rootReducer = (state, action) => {
     if (action.type === appConstants.USER_LOGOUT) {
-    	debugger;
         state = initialState;
     }
     return combinedReducers(state, action)
