@@ -68,7 +68,7 @@ const mockAdapter = new MockAdapter(axios);
 
 describe('loadVoterList', () => {
     it('it should dispatch success', () => {
-        mockAdapter.onGet(`${config.apiHost}/api/v1/getVoters?userid=5a6991bbd399dc000452cf9e&username=testUser`).reply(200, votersResponse );
+        mockAdapter.onPost(`${config.apiHost}/api/v1/getVoters`).reply(200, votersResponse );
 
         const expectedActions = [
             {
@@ -92,7 +92,7 @@ describe('loadVoterList', () => {
             "message": "Parameters mismatch"
         };
 
-        mockAdapter.onGet(`${config.apiHost}/api/v1/getVoters?userid=5a6991bbd399dc000452cf9e&username=testUser`).reply(422, response);
+        mockAdapter.onPost(`${config.apiHost}/api/v1/getVoters`).reply(422, response);
 
         const expectedActions = [
             {
