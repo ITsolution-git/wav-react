@@ -3,9 +3,11 @@ import { withRouter } from 'react-router-dom';
 
 import routes from '../../constants/Routes';
 import exclamation from '../../resources/images/exclamation.png';
-import { logout } from '../../helpers/AuthHelper';
 
 import BaseComponent from '../shared/BaseComponent';
+import {connect} from "react-redux";
+import { btwLogout } from "../../actions/SignOnAction";
+import { bindActionCreators } from "redux";
 
 class GeneralErrorPage extends BaseComponent {
     constructor( props, context ) {
@@ -14,7 +16,7 @@ class GeneralErrorPage extends BaseComponent {
 
     componentWillMount() {
         setTimeout(() => {
-            logout();
+            this.props.actions.btwLogout();
         }, 3000)
     }
 
@@ -35,4 +37,17 @@ class GeneralErrorPage extends BaseComponent {
     }
 }
 
-export default withRouter(GeneralErrorPage);
+
+
+const mapStateToProps = (state) => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators({ btwLogout }, dispatch)
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(GeneralErrorPage));

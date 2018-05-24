@@ -19,11 +19,10 @@ import classNames from 'classnames';
 import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
-import { logout } from '../../helpers/AuthHelper';
 import authStorage from '../../storage/AuthStorage';
 import appDataTypes from "../../constants/AppDataTypes";
 import { bindActionCreators } from 'redux';
-import { getBtwUserProfile } from '../../actions/SignOnAction';
+import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
 import { getLevel, isEmpty } from './HeaderHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import PubSub from "pubsub-js";
@@ -120,7 +119,7 @@ class SignedOnHeader extends BaseComponent {
     };
 
     renderProfileDropdown = () => {
-        const { profile: { isSuccess, data } } = this.props;
+        const { profile: { isSuccess, data }, actions } = this.props;
         const name = isSuccess && data.firstname || '';
         return (
             <div>
@@ -132,7 +131,7 @@ class SignedOnHeader extends BaseComponent {
                              id="nav-dropdown">
                     <MenuItem eventKey={1.1}>Profile</MenuItem>
                     <MenuItem eventKey={1.2}>Settings</MenuItem>
-                    <MenuItem eventKey={1.3} onClick={() => logout()}>Sign out</MenuItem>
+                    <MenuItem eventKey={1.3} onClick={() => actions.btwLogout()}>Sign out</MenuItem>
                 </NavDropdown>
             </div>
         )
@@ -208,7 +207,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ getBtwUserProfile }, dispatch)
+        actions: bindActionCreators({ getBtwUserProfile, btwLogout }, dispatch)
     };
 };
 

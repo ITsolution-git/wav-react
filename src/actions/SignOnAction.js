@@ -5,12 +5,15 @@ import authStorage  from '../storage/AuthStorage';
 import appDataTypes from '../constants/AppDataTypes';
 import pubsubConstants from '../constants/PubSubConstants';
 import appStorage from '../storage/AppStorage';
+import appConstants from '../constants/reducerConstants/AppConstants';
 
 import {
 	initializeRequest,
 	loadDataSuccess,
 	loadDataFailure
 } from './AppAction';
+import { logout } from '../helpers/AuthHelper';
+
 
 export function btwSignOn(username, password, onSuccess = () => {}) {
 	return dispatch => {
@@ -63,4 +66,15 @@ export function getBtwUserProfile() {
 					dispatch(loadDataFailure(appDataTypes.profile, error));
 				})
 	};
+}
+
+
+export function btwLogout() {
+	return dispatch => {
+		dispatch(logoutAction());
+        logout();
+        function logoutAction() {
+            return { type: appConstants.USER_LOGOUT };
+        }
+	}
 }

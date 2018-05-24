@@ -13,7 +13,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 const app = (
-	<Provider store={store.configure(null)}>
+	<Provider store={store.configure()}>
 		<HttpsRedirect>
             <Router history={History}>
 				<App />
