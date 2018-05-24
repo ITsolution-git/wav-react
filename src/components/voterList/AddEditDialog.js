@@ -162,8 +162,8 @@ export default class AddEditDialog extends BaseComponent {
 					</Form>
 				</DialogContent>
 				<DialogActions>
+					<Button color='primary' onClick={this.onCloseDialog}>Cancel</Button>
                     <Button color='primary' onClick={this.onSubmitInner}>{submitText}</Button>
-                    <Button color='primary' onClick={this.onCloseDialog}>Cancel</Button>
 				</DialogActions>
 			</Dialog>
 		);
