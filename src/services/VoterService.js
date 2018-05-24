@@ -1,5 +1,5 @@
 import config from '../config/ApiConfig';
-import { getAsync, patchAsync, postAsync, deleteAsync } from '../helpers/RequestHelper';
+import { patchAsync, postAsync, deleteAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
 
 export default {
@@ -15,8 +15,12 @@ export default {
 
 
 function loadVoterList(userId, username) {
-    return getAsync({
-        url: `${config.apiHost}/api/v1/getVoters?userid=${userId}&username=${username}`,
+    return postAsync({
+        data: {
+          userid: userId,
+          username
+        },
+        url: `${config.apiHost}/api/v1/getVoters`,
         headers: getHeaders()
     });
 }
