@@ -50,13 +50,8 @@
 
             .btn-makelist {
                 @extend .btw-button-new;
-                background-color: #E1A427;
                 border-radius: 10px;
                 margin-left: 70px;
-
-                &:hover {
-                    background-color: rgb(146, 100, 6);
-                }
 
                 @include respond-to($phone) {
                     margin-left: 0;

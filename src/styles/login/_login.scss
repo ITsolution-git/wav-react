@@ -33,4 +33,16 @@
     }
   }
 
+  .link {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .vertical-divider {
+    height: 18px;
+    border-left: 1.5px solid #337ab7;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
 }

@@ -80,8 +80,10 @@ class Login extends BaseComponent {
                                onChange={event => this.updateLogonFields(event, 'password')} />
 												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
                     </div>
-					<div className="pull-right">
-						<Link to='/changePassword/request'>Forgot your password?</Link>
+					<div className="link">
+						<Link to='/captainProfile/register' className="pull-left">Register</Link>
+						<div className="vertical-divider"></div>
+						<Link to='/changePassword/request' className="pull-right">Forgot your password?</Link>
 					</div>
                     <div className="form-group">
                         <button className="btn btn-primary"
