@@ -1,12 +1,9 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../../shared/BaseComponent';
-import { deleteUser } from '../../../actions/UserAction';
 
-class UserItem extends BaseComponent {
+export default class UserItem extends BaseComponent {
     state = {
       moreEnabled: false
     };
@@ -23,7 +20,7 @@ class UserItem extends BaseComponent {
                 isCompleted,
                 voterStatus
             }
-        } = this.props.user.user;
+        } = this.props.user;
         return (
             <div>
                 <div>State: { state }</div>
@@ -46,7 +43,7 @@ class UserItem extends BaseComponent {
             phonenumber,
             dateofbirth,
             zipcode
-        } = this.props.user.user;
+        } = this.props.user;
 
         return (
             <div>
@@ -60,31 +57,24 @@ class UserItem extends BaseComponent {
         )
     };
 
-    onDeleteUser = (userid) => {
-        this.props.actions.deleteUser({userid:userid})
-    }
-
     render() {
         const { moreEnabled } = this.state;
         const {
             user: {
-                user : {
-                    firstname,
-                    lastname,
-                    email
-                },
-                _id
+                firstname,
+                lastname,
+                email
             },
             isVoter = true
         } = this.props;
         return (
             <Row className='name-row'>
-                <Col md={7} xs={12}>
+                <Col md={8}>
                     <div className='name-info'>
                         { firstname } { lastname }, { email }
                     </div>
                 </Col>
-                <Col md={3} xs={6} className='no-padding'>
+                <Col md={4} className='no-padding'>
                     { moreEnabled &&
                     <div className='more-info'>
                         { isVoter ? this.renderDetailedVoterInfo() : this.renderDetailedCaptainInfo() }
@@ -94,21 +84,7 @@ class UserItem extends BaseComponent {
                         this.setState({ moreEnabled: !moreEnabled });
                     }}>{ moreEnabled ? 'Show less' : 'Show more' }</div>
                 </Col>
-                <Col md={2} xs={6}>
-                    <div className="link" onClick={this.onDeleteUser.bind(this,_id)}>Delete</div>
-                </Col>
             </Row>
         );
     }
 }
-
-const mapStateToProps = (state) => {
-    return {
-    }
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ deleteUser }, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserItem);
