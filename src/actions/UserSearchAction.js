@@ -32,7 +32,7 @@ export function searchCaptains(data) {
         dispatch(actionRequest());
         return searchService.searchCaptains(data).then(
             response => {
-                dispatch(actionSuccess(response.data.users.map(item => item.user)));
+                dispatch(actionSuccess(response.data.users));
             },
             error => {
                 dispatch(actionError(error.response.data.message));

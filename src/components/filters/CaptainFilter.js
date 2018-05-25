@@ -50,6 +50,14 @@ class CaptainFilter extends BaseComponent {
         }
     }
 
+    componentWillReceiveProps({ user }) {
+        if (user !== this.props.user) {
+            if (user.isDeleting === false && user.isDeleteSuccess) {
+                this.props.actions.searchCaptains({})
+            }
+        }
+    }
+
     render() {
         const {
             captains = [],
@@ -82,6 +90,7 @@ class CaptainFilter extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
+        user: state.user,
         userSearch: state.userSearch
     }
 };
