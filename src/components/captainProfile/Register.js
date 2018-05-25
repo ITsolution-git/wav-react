@@ -134,7 +134,7 @@ class Register extends BaseComponent {
 							<div className="title-line"></div>
 
 							<div className="subtitle1">Create an account</div>
-							<div className="subtitle2">Don't worry! All of your info is private and won't be shared</div>
+							<Link to='/' className="subtitle2">(Already have an account? Log in.)</Link>
 
 							<form className="input-form">
 								<div className="row">
