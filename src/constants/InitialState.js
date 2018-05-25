@@ -48,8 +48,6 @@ export default {
         users: {},
         isFetching: false,
         isSuccess: false,
-        isDeleteSuccess: false,
-        isDeleting: false,
         error: null
     },
     userSearch: {
