@@ -1,8 +1,6 @@
 import React from 'react';
-import Input, { InputLabel } from 'material-ui/Input';
 import { FormControl, FormHelperText } from 'material-ui/Form';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
+import Select from 'react-select';
 
 import BaseComponent from '../../shared/BaseComponent';
 
@@ -100,59 +98,6 @@ export class TextInput extends InputBase {
             required,
             disabled,
             label,
-            placeholder,
-            defaultValue,
-            fullWidth = true,
-            maxLength = 50
-        } = this.props;
-
-        const {
-            value = defaultValue || '',
-            isValid,
-            error
-        } = this.state;
-
-          return (
-            <FormControl error={!isValid}
-                         required={required}
-                         disabled={disabled}
-                         fullWidth={fullWidth}>
-                <InputLabel>{ label }</InputLabel>
-                <Input value={value}
-                       placeholder={placeholder}
-                       onBlur={this.onFocusOut}
-                       onChange={e => {
-                           const { value } = e.target;
-                           if (value.length <= maxLength) {
-                               this.onChange(e);
-                           }
-                       }} />
-                <FormHelperText classes={{root: 'btw-input-error'}}>{ error }</FormHelperText>
-            </FormControl>
-        );
-    };
-}
-
-export class TextInput1 extends InputBase {
-    state = this.baseState;
-
-    componentWillReceiveProps(props) {
-        this.checkForValidation(props);
-        if (props.defaultValue !== this.props.defaultValue) {
-            this.setState({ value: props.defaultValue || '' })
-        }
-    }
-
-    componentWillMount() {
-        this.onMount();
-    }
-
-    render = () => {
-        const {
-            required,
-            disabled,
-            label,
-            placeholder,
             defaultValue,
             fullWidth = true,
             maxLength = 50
@@ -221,23 +166,22 @@ export class Dropdown extends InputBase {
             isValid
         } = this.state;
         return (
-            <FormControl className='btw-validated-dropdown'
-                         error={!isValid}
-                         required={required}
+            <FormControl required={required}
                          disabled={disabled}
                          fullWidth={fullWidth} >
-                <InputLabel>{ label }</InputLabel>
                 <Select
+                    className='btw-validated-dropdown'
                     value={value}
-                    onChange={this.onChange}
-                    onBlur={this.onFocusOut}>
-                    { values.map(this.mapItem).map((item, index) => {
-                        return (
-                            <MenuItem key={index} value={item.value}>{ item.label}</MenuItem>
-                        )
-                    })}
-                </Select>
-                <FormHelperText>{ error }</FormHelperText>
+                    onChange={option => {
+                        const e = { target: { value: (option || {}).value || ''} };
+                        this.onChange(e);
+                    }}
+                    placeholder={label}
+                    onBlur={this.onFocusOut}
+                    options={values.map(this.mapItem)}
+                />
+                <FormHelperText classes={{root: 'btw-input-error'}}
+                                error={!isValid}>{ error }</FormHelperText>
             </FormControl>
         );
     };

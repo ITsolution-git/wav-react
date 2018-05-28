@@ -120,10 +120,27 @@
 }
 
 .btw-validated-dropdown {
-  min-width: 100% !important;
+  .Select-control {
+    border-radius: 0;
+    border: 1px solid #0097A7;
+    height: 50px;
+  }
+  .Select-placeholder, .Select-value, .Select-input{
+    font-size: 13pt;
+    line-height: 50px !important;
+  }
+  .Select-option.is-selected {
+    background-color: lighten(grey, 50%);
+  }
+
+  .Select-option.is-focused {
+    background-color: lighten(grey, 40%);
+  }
 }
 
 .btw-input-error {
+  margin-bottom: 10px !important;
+
   @include respond-to($phone) {
     font-size: 13px !important;
   }
