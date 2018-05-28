@@ -107,8 +107,8 @@ class UserItem extends BaseComponent {
                     <div className="link" onClick={e => {this.setState({showConfirmModal: true})}}>Delete</div>
                 </Col>
                 <ConfirmationDialog show={showConfirmModal}
-                    title='Delete Captain'
-                    description='Are you sure this is the user you intend to delete?'
+                    title='Warning!'
+                    description='Deleting this user will result in you deleting all their voters and related tasks. Are you sure you want to continue with deleting this user?'
                     submitText='Yes'
                     onSubmit={() => this.onDeleteUser(_id)}
                     onClose={this.onCloseConfirmModal} />
