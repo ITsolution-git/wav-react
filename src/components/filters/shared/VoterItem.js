@@ -28,9 +28,9 @@ export default class UserItem extends BaseComponent {
                 <div>City: { city}</div>
                 <div>Address: { address }</div>
                 <div>Phone: { phonenumber }</div>
-                <div>Is Registered: { isRegistered }</div>
-                <div>Is Completed: { isCompleted } </div>
-                <div>Status: { voterStatus }</div>
+                <div>Is Registered: { isRegistered ? 'True' : 'False' }</div>
+                <div>Is Completed: { isCompleted ? 'True' : 'False' } </div>
+                <div>Status: { voterStatus ? voterStatus : '' }</div>
             </div>
         )
     };
