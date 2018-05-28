@@ -1,8 +1,6 @@
 import React from 'react';
-import { InputLabel } from 'material-ui/Input';
 import { FormControl, FormHelperText } from 'material-ui/Form';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
+import Select from 'react-select';
 
 import BaseComponent from '../../shared/BaseComponent';
 
@@ -168,23 +166,22 @@ export class Dropdown extends InputBase {
             isValid
         } = this.state;
         return (
-            <FormControl className='btw-validated-dropdown'
-                         error={!isValid}
-                         required={required}
+            <FormControl required={required}
                          disabled={disabled}
                          fullWidth={fullWidth} >
-                <InputLabel>{ label }</InputLabel>
                 <Select
+                    className='btw-validated-dropdown'
                     value={value}
-                    onChange={this.onChange}
-                    onBlur={this.onFocusOut}>
-                    { values.map(this.mapItem).map((item, index) => {
-                        return (
-                            <MenuItem key={index} value={item.value}>{ item.label}</MenuItem>
-                        )
-                    })}
-                </Select>
-                <FormHelperText>{ error }</FormHelperText>
+                    onChange={option => {
+                        const e = { target: { value: (option || {}).value || ''} };
+                        this.onChange(e);
+                    }}
+                    placeholder={label}
+                    onBlur={this.onFocusOut}
+                    options={values.map(this.mapItem)}
+                />
+                <FormHelperText classes={{root: 'btw-input-error'}}
+                                error={!isValid}>{ error }</FormHelperText>
             </FormControl>
         );
     };
