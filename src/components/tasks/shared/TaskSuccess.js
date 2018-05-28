@@ -13,6 +13,10 @@ class TaskSuccess extends BaseComponent {
     componentWillMount() {
         this.taskSubscription = PubSub.subscribe(pubsubConstants.onTaskComplete, type => {
             const { actions, data } = this.props;
+            if (data.formData) {
+                actions.updateTask(data.formData, true);
+                return;
+            }
             actions.updateTask(data);
         });
     }

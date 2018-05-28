@@ -6,6 +6,7 @@ export default {
     loadTaskList,
     sendHelpQuestion,
     updateTask,
+    updateTaskWithFile,
     getStateInfo
 };
 
@@ -36,6 +37,17 @@ function updateTask(data) {
         url: `${config.apiHost}/api/v1/task/updateTask`,
         data,
         headers: getHeaders()
+    });
+}
+
+function updateTaskWithFile(data) {
+    return postAsync({
+        url: `${config.apiHost}/api/v1/task/updateTask`,
+        data,
+        headers: {
+            'x-key': authStorage.getLoggedUser().username,
+            'Content-Type': 'multipart/form-data'
+        }
     });
 }
 
