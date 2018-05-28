@@ -12,11 +12,9 @@ import WhatToDo from './reminderVoteSteps/WhatToDo';
 import TaskSuccess from './shared/TaskSuccess';
 import YesNoButtons from './shared/YesNoButtons';
 import routes from '../../constants/Routes';
-import PhotoUpload from './shared/PhotoUpload';
 
 const subSteps = {
-    haveRemind: 'haveRemind',
-    photoUpload: 'photoUpload'
+    haveRemind: 'haveRemind'
 };
 
 class ReminderVoteTask extends TaskBase {
@@ -28,9 +26,7 @@ class ReminderVoteTask extends TaskBase {
         this.state = {
             subComponent: subSteps.haveRemind,
             nextEnabled: false,
-            haveRemind: '',
-            photoStepValid: false,
-            image: null
+            haveRemind: ''
         };
     }
 
@@ -46,7 +42,6 @@ class ReminderVoteTask extends TaskBase {
         const {
             subComponent,
             haveRemind,
-            photoStepValid
         } = this.state;
 
         switch (subComponent) {
@@ -54,30 +49,13 @@ class ReminderVoteTask extends TaskBase {
                 return {
                     component: <YesNoButtons title={`Did you remind ${firstname} ${lastname}  to mail in their ballot?`}
                                              value={haveRemind}
-                                             onChange={val => this.setState({ haveRemind: val })} />,
+                                             onChange={val => this.setState({ haveRemind: val, nextEnabled: true })} />,
                     onNext: () => {
                         if (haveRemind === 'no') {
                             this.onLink(routes.tasksList);
-                            return;
                         }
-                        this.setState({ subComponent: subSteps.photoUpload });
                     },
                     valid: !!haveRemind
-                }
-            }
-            case subSteps.photoUpload: {
-                return {
-                    component: (
-                        <PhotoUpload onSkipClick={() => this.onLink(routes.tasksList)}
-                                     title={`Upload a photo confirming that ${firstname} ${lastname} mailed in their ballot.`}
-                                     onFileChange={image => this.setState({
-                                         image,
-                                         photoStepValid: true,
-                                         nextEnabled: true
-                                     })}
-                        />
-                    ),
-                    valid: photoStepValid
                 }
             }
         }
@@ -112,7 +90,7 @@ class ReminderVoteTask extends TaskBase {
 
     getTaskData = () => {
         const { taskData = {}} = this.props;
-        return { ...this.state, taskid: taskData._id, points: taskData.group_info.value };
+        return { taskid: taskData._id, points: taskData.group_info.value };
     };
 
     render() {

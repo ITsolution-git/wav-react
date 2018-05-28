@@ -24,11 +24,14 @@ export function sendHelpQuestion(message) {
     };
 }
 
-export function updateTask(data) {
+export function updateTask(data, withFile) {
     return dispatch => {
         dispatch(initializeRequest(appDataTypes.updateTask));
-        data.userid = authStorage.getLoggedUser().userid;
-        return taskService.updateTask(data).then(
+        if (!withFile) {
+            data.userid = authStorage.getLoggedUser().userid;
+        }
+        const updateEndpoint = withFile ? taskService.updateTaskWithFile : taskService.updateTask;
+        return updateEndpoint(data).then(
             response => {
                 dispatch(loadDataSuccess(appDataTypes.updateTask, response));
                 dispatch(loadTaskList());

@@ -13,6 +13,7 @@ import TaskSuccess from './shared/TaskSuccess';
 import YesNoButtons from './shared/YesNoButtons';
 import PhotoUpload from './shared/PhotoUpload';
 import routes from '../../constants/Routes';
+import authStorage from '../../storage/AuthStorage';
 
 const subSteps = {
     haveAsked: 'haveAsked',
@@ -133,7 +134,11 @@ class MailRegistrationTask extends TaskBase {
 
     getTaskData = () => {
         const { taskData = {}} = this.props;
-        return { ...this.state, taskid: taskData._id, points: taskData.group_info.value };
+        let formData = new FormData();
+        formData.append('image', this.state.image);
+        formData.append('taskid', taskData._id);
+        formData.append('userid', authStorage.getLoggedUser().userid);
+        return { formData, points: taskData.group_info.value };
     };
 
     render() {
