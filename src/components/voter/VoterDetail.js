@@ -104,6 +104,7 @@ class VoterDetail extends BaseComponent {
 					<p className="intro-desc">
 						The more information you provide, the more accurately we can verify if they are registered to vote. (Don’t worry, we’ll NEVER share this information with anybody else.) 
 					</p>
+                    { this.renderRequiredFieldMsg() }
 				</div>
 				<Row>
 					<Col md={6}>

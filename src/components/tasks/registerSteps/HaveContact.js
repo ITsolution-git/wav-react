@@ -2,7 +2,6 @@ import React from 'react';
 import Typography from 'material-ui/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
-import RadioButtons from '../../shared/inputs/RadioButtons';
 import { RegisterTaskConstants, RegisterSubSteps } from '../../../constants/reducerConstants/TaskConstants';
 import PubSub from "pubsub-js";
 import pubsubConstants from "../../../constants/PubSubConstants";

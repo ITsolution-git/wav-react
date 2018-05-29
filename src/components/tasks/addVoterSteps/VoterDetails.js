@@ -46,6 +46,7 @@ export default class VoterDetails extends BaseComponent {
         const { details } = this.state;
         return (
             <div style={{ width: '90%'}}>
+                { this.renderRequiredFieldMsg() }
                 <Row className='center-row'>
                     <Col md={6}>
                         <FirstNameInput onChange={this.handleChange}

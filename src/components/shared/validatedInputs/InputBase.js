@@ -75,7 +75,12 @@ export default class InputBase extends BaseComponent {
         if (this.props.startValidation) {
             this.validate();
         }
-    }
+    };
+
+    resolveLabel = () => {
+        const { label, required } = this.props;
+        return `${label} ${required && '*' || ''}`;
+    };
 }
 
 
@@ -97,7 +102,6 @@ export class TextInput extends InputBase {
         const {
             required,
             disabled,
-            label,
             defaultValue,
             fullWidth = true,
             type,
@@ -116,7 +120,7 @@ export class TextInput extends InputBase {
                          disabled={disabled}
                          fullWidth={fullWidth}>
                 <input value={value}
-                       placeholder={label}
+                       placeholder={this.resolveLabel()}
                        type={type}
                        onBlur={this.onFocusOut}
                        className="btw-input-new"
@@ -155,7 +159,6 @@ export class Dropdown extends InputBase {
 
     render = () => {
         const {
-            label,
             values = [],
             required,
             disabled,
@@ -178,7 +181,7 @@ export class Dropdown extends InputBase {
                         const e = { target: { value: (option || {}).value || ''} };
                         this.onChange(e);
                     }}
-                    placeholder={label}
+                    placeholder={this.resolveLabel()}
                     onBlur={this.onFocusOut}
                     options={values.map(this.mapItem)}
                 />

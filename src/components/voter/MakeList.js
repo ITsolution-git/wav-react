@@ -112,6 +112,7 @@ class MakeList extends BaseComponent {
 							<p className="intro-desc">
 								We understand that their info is private and we won't be sharing it.
 							</p>
+							{ this.renderRequiredFieldMsg() }
 						</div>
 						<div className="rows mb-1">
 						{ Array(numberOfNames).fill(0).map((e,i)=> {
