@@ -6,8 +6,10 @@ import { bindActionCreators } from 'redux';
 import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../../shared/BaseComponent';
+import Spinner from '../../shared/Spinner';
 import { updateTask } from '../../../actions/TaskAction';
 import pubsubConstants from "../../../constants/PubSubConstants";
+import appDataTypes from '../../../constants/AppDataTypes';
 
 class TaskSuccess extends BaseComponent {
     componentWillMount() {
@@ -26,18 +28,24 @@ class TaskSuccess extends BaseComponent {
     }
 
     render() {
+        const { taskRequest: { isFetching } } = this.props;
         return (
-            <div className='success-icon'>
-                <FontAwesome name='check-circle' />
-                <div className='success-points'>+{ this.props.data.points } Points</div>
-                <div className='success-text'>Task completed</div>
+            <div>
+                <div className='success-icon'>
+                    <FontAwesome name='check-circle' />
+                    <div className='success-points'>+{ this.props.data.points } Points</div>
+                    <div className='success-text'>Task completed</div>
+                </div>
+                <Spinner height={100} loading={isFetching} />
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        taskRequest: state.app[appDataTypes.updateTask] || {}
+    }
 };
 
 const mapDispatchToProps = (dispatch) => ({
