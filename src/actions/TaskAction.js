@@ -6,6 +6,7 @@ import appDataTypes from '../constants/AppDataTypes';
 import { loadTaskList } from './TaskListAction';
 import history from '../utility/History';
 import routes from '../constants/Routes';
+import { getBtwUserProfile } from './SignOnAction';
 
 export function sendHelpQuestion(message) {
     return dispatch => {
@@ -35,6 +36,7 @@ export function updateTask(data, withFile) {
             response => {
                 dispatch(loadDataSuccess(appDataTypes.updateTask, response));
                 dispatch(loadTaskList());
+                dispatch(getBtwUserProfile());
                 history.push(routes.tasksList);
             },
             response => {
