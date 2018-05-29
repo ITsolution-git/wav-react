@@ -8,5 +8,7 @@ export default {
     gender: 'gender',
     address: 'address',
     phone: 'phonenumber',
-    zipCode: 'zip'
+    zipCode: 'zip',
+    password: 'password',
+    username: 'username'
 };
