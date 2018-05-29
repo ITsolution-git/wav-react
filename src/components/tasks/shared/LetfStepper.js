@@ -5,13 +5,10 @@ import { Row, Col, Button } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import Tooltip from 'material-ui/Tooltip';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import BaseComponent from '../../shared/BaseComponent';
 import HelpButton from '../shared/HelpButton';
 import pubsubConstants from "../../../constants/PubSubConstants";
-
-import { getBtwUserProfile } from '../../../actions/SignOnAction';
 
 class LeftStepper extends BaseComponent {
     constructor(props, context) {
@@ -21,14 +18,13 @@ class LeftStepper extends BaseComponent {
 
     handleNext = () => {
         const { activeStep } = this.state;
-        const { steps, actions } = this.props;
+        const { steps } = this.props;
         const { nextEnabled, onNext = () => {} } = steps[activeStep];
         PubSub.publish(pubsubConstants.onTaskNext);
         onNext();
         if (nextEnabled !== false) {
             if (activeStep + 1 === steps.length) {
                 PubSub.publish(pubsubConstants.onTaskComplete);
-                actions.getBtwUserProfile();
                 return;
             }
             this.setState({
@@ -102,10 +98,4 @@ const mapStateToProps = (state) => {
     return {}
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators({ getBtwUserProfile }, dispatch)
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LeftStepper));
+export default connect(mapStateToProps)(withRouter(LeftStepper));
