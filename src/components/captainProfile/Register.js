@@ -91,7 +91,7 @@ class Register extends BaseComponent {
 							<div className="title1">Welcome to BeTheWave!</div>
 							<div className="title2">Help your friends register & vote</div>
 							<div className="title-line"></div>
-
+							{ this.renderRequiredFieldMsg() }
 							<div className="subtitle1">Create an account</div>
 							<Link to='/' className="subtitle2">(Already have an account? Log in.)</Link>
 
