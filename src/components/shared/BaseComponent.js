@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import PubSub from "pubsub-js";
+import Typography from 'material-ui/Typography';
 
 import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
@@ -19,6 +20,14 @@ class BaseComponent extends Component {
 
     redirectToHome = () => {
         this.onLink( getHomeRoute());
+    };
+
+    renderRequiredFieldMsg = () => {
+        return (
+            <Typography gutterBottom>
+                Fields marked with <span style={{ color: 'red'}}>*</span> are required
+            </Typography>
+        )
     };
 
     isMobile = () => {

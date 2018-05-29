@@ -95,6 +95,7 @@ export default class AddEditDialog extends BaseComponent {
 				<DialogTitle>{ title }</DialogTitle>
 				<DialogContent>
 					<Form horizontal>
+                        { this.renderRequiredFieldMsg() }
 						<Row>
 							<Col md={6}>
 								<FirstNameInput onChange={this.handleChange}
