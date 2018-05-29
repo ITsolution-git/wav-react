@@ -56,7 +56,7 @@ export function resolveTaskData(task) {
             break;
         }
         case taskIds.mailRegistrationTaskId: {
-            task.description = `Remind ${firstname} ${lastname} to signing up to vote by mail`;
+            task.description = `Remind ${firstname} ${lastname} to register to vote by mail`;
             task.route = routes.mailRegistrationTask;
             break;
         }
