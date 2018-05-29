@@ -49,7 +49,7 @@ export function getAsync({ url, params = {}, headers = {}, includeToken = true, 
 function makeRequest(requestData, includeToken, failRedirect) {
     if (includeToken) {
         const token = authStorage.getToken();
-        if (!isTokenValid(token)) {
+        if (authStorage.isAuthenticated() && !isTokenValid(token)) {
             toErrorPage();
             return Promise.reject();
         }

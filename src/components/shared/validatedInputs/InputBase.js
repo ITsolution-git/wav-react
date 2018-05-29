@@ -100,6 +100,7 @@ export class TextInput extends InputBase {
             label,
             defaultValue,
             fullWidth = true,
+            type,
             maxLength = 50
         } = this.props;
 
@@ -116,6 +117,7 @@ export class TextInput extends InputBase {
                          fullWidth={fullWidth}>
                 <input value={value}
                        placeholder={label}
+                       type={type}
                        onBlur={this.onFocusOut}
                        className="btw-input-new"
                        onChange={e => {
