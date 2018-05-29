@@ -87,11 +87,7 @@ class MailRegistrationTask extends TaskBase {
             case subSteps.photoUpload: {
                 return {
                     component: (
-                        <PhotoUpload onSkipClick={() => this.setState({
-                                            photoStepValid: true,
-                                            nextEnabled: true
-                                        })}
-                                     title='Upload an email or photo confirming that they’ve signed up.'
+                        <PhotoUpload title='Upload an email or photo confirming that they’ve signed up.'
                                      onFileChange={image => this.setState({
                                          image,
                                          photoStepValid: true,

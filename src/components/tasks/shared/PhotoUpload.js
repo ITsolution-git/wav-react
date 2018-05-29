@@ -15,7 +15,7 @@ export default class PhotoUpload extends BaseComponent {
     };
 
     render() {
-        const { onSkipClick, title ='' } = this.props;
+        const { title ='' } = this.props;
         const { image } = this.state;
         return (
             <div className='registration-by-mail'>
@@ -30,9 +30,6 @@ export default class PhotoUpload extends BaseComponent {
                     <Col md={3} xs={6}>
                         <Button size='small'
                                 onClick={() => { this.dropzoneRef.open() }}>Upload</Button>
-                    </Col>
-                    <Col md={3} xs={6}>
-                        <Button onClick={onSkipClick}>Skip</Button>
                     </Col>
                 </Row>
             </div>
