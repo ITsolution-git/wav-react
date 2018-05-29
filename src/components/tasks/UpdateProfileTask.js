@@ -186,7 +186,8 @@ class UpdateProfileTask extends TaskBase {
                                 <img src={imgPhone} alt="" width={40} height={40} />
                             </Col>
                             <Col xs={10}>
-                                <span className="title"><b>Contact us</b></span><br />
+                                <span className="title"><b>Need help?</b></span><br />
+                                <span className="description">hi@bethewave.vote</span><br/>
                                 <span className="description">(707) 408-8437</span>
                             </Col>
                         </Row>
