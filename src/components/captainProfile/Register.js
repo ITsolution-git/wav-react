@@ -41,12 +41,12 @@ class Register extends BaseComponent {
 		this.setState({ termsAndPrivacy: !this.state.termsAndPrivacy})
 	};
 
-    handleChange = (value, isValid, name) => {
+    handleChange = (value, valid, name) => {
         this.setState(state => {
-            const { btwIdentity, valid } = state;
+            const { btwIdentity, isValid } = state;
             return {
                 btwIdentity: { ...btwIdentity, [name]: value },
-                valid: { ...valid, [name]: isValid }
+                isValid: { ...isValid, [name]: valid }
             }
         });
     };
@@ -82,6 +82,7 @@ class Register extends BaseComponent {
 			termsAndPrivacy
 		} = this.state;
 
+		const { error } = this.props;
 		return (
 			<div>
 				<div className="new-btw-register">
@@ -116,9 +117,14 @@ class Register extends BaseComponent {
 								</Row>
 								<Row>
 									<Col md={12}>
-										<EmailInput onChange={this.handleChange}
+										<EmailInput onChange={(value, valid, name) => {
+														const isValid = this.props.error ? true : valid;
+														this.handleChange(value, isValid, name);
+													}}
 													isVoter={false}
 													startValidation={startValidation}
+													uniqueValidationEnabled={false}
+													customError={error}
 													required />
 									</Col>
 								</Row>
