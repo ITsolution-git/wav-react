@@ -21,11 +21,7 @@ class MatchList extends BaseComponent {
 
     onNameClick = (person) => {
         this.currentPerson = person;
-        if (person.voterstatus === 'active') {
-            this.setState({ showConfirmModal: true });
-            return;
-        }
-        this.onSubmitError(this.currentPerson);
+        this.setState({ showConfirmModal: true });
     };
 
     onCloseConfirmModal = () => {
@@ -33,6 +29,10 @@ class MatchList extends BaseComponent {
     };
 
     onSubmitSuccess = () => {
+        if (this.currentPerson.voterstatus !== 'active') {
+            this.onSubmitError(this.currentPerson);
+            return;
+        }
         const { onSubmitSuccess, actions } = this.props;
         actions.registerVoter(this.currentPerson);
         this.onCloseConfirmModal();
