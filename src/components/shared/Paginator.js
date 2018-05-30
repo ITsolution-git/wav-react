@@ -43,10 +43,12 @@ export default class Paginator extends BaseComponent {
         const { items = [] } = this.props;
         return (
             <div className='btw-paginator'>
-                <Pagination onChange={this.onPageChange}
-                            pageSize={this.getPageSize()}
-                            current={current}
-                            total={items.length} />
+                { items.length > this.getPageSize() &&
+                    <Pagination onChange={this.onPageChange}
+                                pageSize={this.getPageSize()}
+                                current={current}
+                                total={items.length}/>
+                }
             </div>
         )
     }

@@ -8,12 +8,14 @@ import { registerVoter } from '../../../actions/VoterAction';
 import MatchItem from './MatchItem';
 import ConfirmationDialog from '../ConfirmationDialog';
 import Spinner from '../Spinner';
+import Paginator from '../Paginator';
 
 class MatchList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            showConfirmModal: false
+            showConfirmModal: false,
+            currentVoters: []
         };
     }
 
@@ -43,7 +45,12 @@ class MatchList extends BaseComponent {
 
     render() {
         const { matchList, matchListFetching } = this.props.voter;
-        const { showConfirmModal } = this.state;
+        const {
+            showConfirmModal,
+            currentVoters
+        } = this.state;
+        const items = matchList.sort((person1, person2) => person2.matchRate - person1.matchRate);
+
         return (
             <div>
                 <Spinner loading={matchListFetching} height={200} />
@@ -61,12 +68,13 @@ class MatchList extends BaseComponent {
                     </p>
                 </div> }
                 <div className='match-list'>
-                    { matchList.sort((person1, person2) => person2.matchRate - person1.matchRate)
-                        .map((person, i) => <MatchItem key={i}
+                    { currentVoters.map((person, i) => <MatchItem key={i}
                                                        onClick={() => this.onNameClick(person)}
                                                        person={person} />
                         )}
                 </div>
+                <Paginator items={items}
+                           onItemsChange={items => this.setState({ currentVoters: items })}/>
                 <ConfirmationDialog show={showConfirmModal}
                                     title='Register voter'
                                     description='Are you sure this is the voter you intend to add to your list?'
