@@ -26,6 +26,7 @@ import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
 import { getLevel, isEmpty } from './HeaderHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import PubSub from "pubsub-js";
+import boardingTypes from "../../constants/VoterBoardingType";
 
 class SignedOnHeader extends BaseComponent {
 
@@ -144,6 +145,15 @@ class SignedOnHeader extends BaseComponent {
         )
     };
 
+    resolveModalMessage = () => {
+        const { pathname } = this.props.history.location;
+        const { boardingType } = this.props.voter;
+        if (pathname === routes.matchList && boardingType === boardingTypes.voterList) {
+            return 'Please select a record from the list before proceeding';
+        }
+        return 'Please complete the onboarding process before you can access these secured features';
+    };
+
     render() {
         const {
             showInfoModal,
@@ -188,7 +198,7 @@ class SignedOnHeader extends BaseComponent {
                 <Dialog open={showInfoModal}
                         onClose={this.onCloseInfoModal}>
                     <DialogContent>
-                        <Typography gutterBottom>Please complete the onboarding process before you can access these secured features</Typography>
+                        <Typography gutterBottom>{ this.resolveModalMessage() }</Typography>
                         <Button color='primary'
                                 variant='raised'
                                 onClick={this.onCloseInfoModal}>Ok</Button>
@@ -202,7 +212,10 @@ class SignedOnHeader extends BaseComponent {
 
 const mapStateToProps = (state) => {
     const profile = state.app[appDataTypes.profile];
-    return { profile };
+    return {
+        profile,
+        voter: state.voter
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
