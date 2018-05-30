@@ -11,7 +11,7 @@ export default class NotRegisteredError extends BaseComponent {
     render () {
 
         return (
-            <VoterError reslveTitle={this.resolveTitle}
+            <VoterError resolveTitle={this.resolveTitle}
                         description="Don't worry we will work together to help this person get registered to vote"
                         {...this.props } />
         )
