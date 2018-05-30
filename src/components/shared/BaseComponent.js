@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 import PubSub from "pubsub-js";
 import Typography from 'material-ui/Typography';
 
 import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
-
+import Button from './Button';
 
 class BaseComponent extends Component {
     constructor(props, context) {
@@ -41,10 +40,9 @@ class BaseComponent extends Component {
     renderBackToHome = (style) => {
         style = this.isDesktop() ? style || {'left': '1%', 'position': 'absolute'} : null;
         return (
-            <Button className='btn btn-primary' style={style}
+            <Button style={style}
                     onClick={this.redirectToHome}>
                 Go back
-
             </Button>
         );
     };

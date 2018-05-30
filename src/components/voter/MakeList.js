@@ -12,6 +12,7 @@ import routes from '../../constants/Routes';
 import BaseComponent from '../shared/BaseComponent';
 
 import { FirstNameInput, LastNameInput } from '../shared/validatedInputs';
+import Button from '../shared/Button';
 
 const firstNamePrefix = voterConstants.FIRST_NAME_PREIX,
 	  lastNamePrefix = voterConstants.LAST_NAME_PREFIX,
@@ -72,8 +73,7 @@ class MakeList extends BaseComponent {
 				<Modal
 					open={this.state.view === 1}
 					onClose={this.handleClose}
-					disableBackdropClick={true}
-				>
+					disableBackdropClick={true}>
 					<div className="view1">
 						<div className="view1-title">Welcome to the Team</div>
 						<div className="view1-desc">
@@ -150,7 +150,7 @@ class MakeList extends BaseComponent {
 							<Col xs={6}>
 							</Col>
 							<Col md={12} xs={6}>
-								<button className="btn btn-makelist" onClick={this.onNext}>Find My Friends</button>
+								<Button onClick={this.onNext}>Find My Friends</Button>
 							</Col>
 						</Row>
 					</div>

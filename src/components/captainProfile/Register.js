@@ -10,6 +10,7 @@ import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 import fieldConstants from '../../constants/FieldConstants';
+import Button from '../shared/Button';
 
 import {
 	FirstNameInput,
@@ -170,7 +171,7 @@ class Register extends BaseComponent {
 								</Col>
 								<Col md={12} xs={6}>
 									<div id="btn_signup">
-										<button className="btn btn-signup" onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up!</button>
+										<Button onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up!</Button>
 									</div>
 								</Col>
 							</Row>
