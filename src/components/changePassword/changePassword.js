@@ -4,11 +4,9 @@ import { withRouter } from 'react-router-dom';
 import { changePasswordRequest } from '../../actions/PasswordRequestAction';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
-import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 
 class ChangePassword extends BaseComponent {

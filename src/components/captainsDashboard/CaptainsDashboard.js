@@ -4,13 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-import Dialog, {
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-} from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
@@ -22,6 +15,8 @@ import { getBtwUserProfile } from '../../actions/SignOnAction';
 import { resolveTaskData } from '../../helpers/TaskHelper';
 import Spinner from '../shared/Spinner';
 import appStorage from '../../storage/AppStorage';
+import Button from '../shared/Button';
+import Dialog from '../shared/Dialog';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -114,51 +109,31 @@ class CaptainsDashboard extends BaseComponent {
                                         <span className='button-text'>Messages</span>
                                     </div>
                                 </Col>
-                                {/*<Col md={6} xs={6} className='block-padding'>*/}
-                                    {/*<div className='icon-div invites' onClick={() => this.onLink(routes.invites)}>*/}
-                                        {/*<FontAwesome name='envelope-open'  size='3x' />*/}
-                                        {/*<span className='button-text'>*/}
-                                            {/*Invites <span>*/}
-                                                {/*(<b>{invitesCount}</b>)*/}
-                                            {/*</span>*/}
-                                        {/*</span>*/}
-                                    {/*</div>*/}
-                                {/*</Col>*/}
-                                {/*<Col md={6} xs={6} className='block-padding'>*/}
-                                    {/*<div className='icon-div forum' onClick={() => this.onLink(routes.forum)}>*/}
-                                        {/*<FontAwesome name='comments' size='3x'/>*/}
-                                        {/*<span className='button-text'>Forum</span>*/}
-                                    {/*</div>*/}
-                                {/*</Col>*/}
                             </Row>
                         </Col>
-                        {/*<Col md={4} className='block-padding'>
-                            <div className='right-column'>
-                                <div className='notification'>
-                                    <FontAwesome name='bell'  size='2x'/>
-                                    <span className='label'>Notifications</span>
-                                    <span className='count'>
-                                      {notificationCount}
-                                    </span>
-                                </div>
-                                <div className='community' onClick={() => this.onLink(routes.community)}>
-                                    <FontAwesome name='users' size='2x' />
-                                    <span className='label'>Community</span>
-                                </div>
-                            </div>
-                        </Col>*/}
                     </Row>
                     }
                 </div>
                 <Dialog
-                    open={showSplashModal}
+                    title={`Welcome ${data.firstname} ${data.lastname}`}
+                    show={showSplashModal}
+                    actionButtons={
+                        <Row>
+                            <Col md={4} xs={6}>
+                                <Button size='medium' onClick={this.onSplashSubmitClick}>
+                                    Go to Tasks
+                                </Button>
+                            </Col>
+                            <Col md={3} xs={4}>
+                                <Button size='medium' onClick={() => this.onCloseSplashModal()}>
+                                    Dismiss
+                                </Button>
+                            </Col>
+                        </Row>
+                    }
                     onClose={() => this.onCloseSplashModal()}>
-                    <DialogTitle>Welcome { data.firstname } { data.lastname }</DialogTitle>
-                    <DialogContent classes={{root: 'splash-modal'}}>
-                        <DialogContentText>
-                            { tasks.length === 0 && 'You have no new tasks, please check back soon'}
-                            { tasks.length !== 0 && 'Here is your the latest task'}
-                        </DialogContentText>
+                        { tasks.length === 0 && 'You have no new tasks, please check back soon'}
+                        { tasks.length !== 0 && 'Here is your the latest task'}
                         { tasks.slice(0, 1).map((item, i) => {
                             const task = resolveTaskData(item);
                             return (
@@ -169,19 +144,6 @@ class CaptainsDashboard extends BaseComponent {
                                 </div>
                             )
                         })}
-                    </DialogContent>
-                    <DialogActions>
-                        <Button color='primary'
-                                variant='raised'
-                                onClick={this.onSplashSubmitClick}>
-                            Go to Tasks
-                        </Button>
-                        <Button onClick={() => this.onCloseSplashModal()}
-                                color='primary'
-                                variant='raised'>
-                            Dismiss
-                        </Button>
-                    </DialogActions>
                 </Dialog>
             </div>
         )
