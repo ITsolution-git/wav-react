@@ -1,18 +1,15 @@
 import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router-dom";
-import Button from 'material-ui/Button';
-import Dialog, {
-    DialogActions,
-    DialogContent,
-    DialogTitle
-} from 'material-ui/Dialog';
 import FontAwesome from 'react-fontawesome';
 
 import InputText from '../../shared/inputs/InputText';
 import BaseComponent from '../../shared/BaseComponent';
 import { sendHelpQuestion } from '../../../actions/TaskAction';
+import Dialog from '../../shared/Dialog';
+import Button from '../../shared/Button';
 
 class HelpButton extends BaseComponent {
     constructor(props, context) {
@@ -50,10 +47,26 @@ class HelpButton extends BaseComponent {
                 <FontAwesome name='question-circle'
                              className='btw-help-icon'
                              onClick={this.handleClickOpen} />
-                <Dialog open={this.state.open}
-                    onClose={this.handleClose}>
-                    <DialogTitle>What is your inquiry/question about?</DialogTitle>
-                    <DialogContent>
+                <Dialog show={this.state.open}
+                        title='What is your inquiry/question about?'
+                        actionButtons={
+                            <Row>
+                                <Col md={3}>
+                                    <Button onClick={this.onSubmit}
+                                            size='medium'
+                                            disabled={!value}>
+                                        Submit
+                                    </Button>
+                                </Col>
+                                <Col md={3}>
+                                    <Button onClick={this.handleClose}
+                                            size='medium'>
+                                        Cancel
+                                    </Button>
+                                </Col>
+                            </Row>
+                        }
+                        onClose={this.handleClose}>
                         <InputText label='Your question'
                                    autoFocus
                                    multiline
@@ -62,16 +75,6 @@ class HelpButton extends BaseComponent {
                                    fullWidth
                                    onChange={val => this.setState({ value: val })}
                         />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.onSubmit}
-                                disabled={!value}>
-                            Submit
-                        </Button>
-                        <Button onClick={this.handleClose}>
-                            Cancel
-                        </Button>
-                    </DialogActions>
                 </Dialog>
             </div>
         );

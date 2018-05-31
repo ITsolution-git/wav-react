@@ -2,16 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { verifyUserRequest } from '../../actions/PasswordRequestAction';
-import classNames from 'classnames';
-import { Row, Col, FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 import { getUrlParams } from '../../helpers/UrlHelper';
 
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
-import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
-import states from '../../constants/States';
+import Button from "../shared/Button";
 
 class VerifyCaptain extends BaseComponent {
 	constructor() {
@@ -41,7 +38,7 @@ class VerifyCaptain extends BaseComponent {
 
 	validateCaptainFields(field, event) {
 
-        const { captainInfo, isValid } = this.state,
+        const {  isValid } = this.state,
             { value } = event.target;
             
 		let validation = { ...isValid };
@@ -93,8 +90,7 @@ class VerifyCaptain extends BaseComponent {
 	}
 
 	render() {
-
-		const { error } = this.props;
+		
         const nameWidth = this.isMobile() ? 12 : 6;
         
 		return (
@@ -121,7 +117,7 @@ class VerifyCaptain extends BaseComponent {
 						</Col>
 						<Col md={12} xs={6}>
 							<div id="btn_verify">
-								<button className="btn btn-primary" onClick={this.btwVerify.bind(this, 'btwVerify')}>Submit</button>
+								<Button onClick={this.btwVerify.bind(this, 'btwVerify')}>Submit</Button>
 							</div>
 						</Col>
 					</Row>

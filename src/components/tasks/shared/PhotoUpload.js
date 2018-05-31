@@ -1,10 +1,10 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import Button from 'material-ui/Button';
 import Dropzone from 'react-dropzone';
 import Typography from 'material-ui/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
+import Button from '../../shared/Button';
 
 export default class PhotoUpload extends BaseComponent {
     state = { image: null };
@@ -28,7 +28,7 @@ export default class PhotoUpload extends BaseComponent {
                 </Dropzone>
                 <Row>
                     <Col md={3} xs={6}>
-                        <Button size='small'
+                        <Button size='medium'
                                 onClick={() => { this.dropzoneRef.open() }}>Upload</Button>
                     </Col>
                 </Row>

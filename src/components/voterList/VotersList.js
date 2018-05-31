@@ -2,7 +2,7 @@ import React  from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { Button, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import classNames from 'classnames';
 
 import { loadVoterList, addVoter } from '../../actions/VoterListAction';
@@ -11,6 +11,7 @@ import VoterItem from './VoterItem';
 import AddEditDialog from './AddEditDialog';
 import Spinner from '../shared/Spinner';
 import Paginator from '../shared/Paginator';
+import Button from '../shared/Button';
 
 class VotersList extends BaseComponent {
     constructor(props, context) {
@@ -58,10 +59,11 @@ class VotersList extends BaseComponent {
                             { this.isMobile() && this.renderBackToHome()}
                         </Col>
                         <Col md={6} xs={6} className={classNames({'no-padding': this.isMobile()})}>
-                            <Button className='pull-right btn btn-primary'
-                                    onClick={() => this.setState({ showAddDialog: true })}>
-                                Add Voter
-                            </Button>
+                            <div className='pull-right'>
+                                <Button onClick={() => this.setState({ showAddDialog: true })}>
+                                    Add Voter
+                                </Button>
+                            </div>
                         </Col>
                     </Row>
                 </div>

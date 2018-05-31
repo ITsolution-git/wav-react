@@ -2,10 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Table, { TableBody, TableCell, TableHead, TableRow, TablePagination } from 'material-ui/Table'
 import Paper from 'material-ui/Paper'
-import { Button } from 'react-bootstrap';
+
 import localStorage from 'localStorage';
 
 import BaseComponent from '../shared/BaseComponent'
+import Button from '../shared/Button';
 
 import { getLogList } from '../../actions/TransactionAction';
 import { connect } from 'react-redux'

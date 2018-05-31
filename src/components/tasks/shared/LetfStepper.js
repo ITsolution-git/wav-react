@@ -1,14 +1,14 @@
 import React from 'react';
 import PubSub from "pubsub-js";
 import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
-import Tooltip from 'material-ui/Tooltip';
 import { connect } from 'react-redux';
 
 import BaseComponent from '../../shared/BaseComponent';
 import HelpButton from '../shared/HelpButton';
 import pubsubConstants from "../../../constants/PubSubConstants";
+import Button from '../../shared/Button';
 
 class LeftStepper extends BaseComponent {
     constructor(props, context) {
@@ -66,11 +66,13 @@ class LeftStepper extends BaseComponent {
                         <div className='stepper-content'>
                             <Row>
                                 <Col mdOffset={11} md={1} xsOffset={10}>
-                                    <Tooltip title="Questions about this task? contact us">
-                                        <div>
-                                            <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
-                                        </div>
-                                    </Tooltip>
+                                        <OverlayTrigger placement="bottom"
+                                                        triggerType="hover"
+                                                        overlay={(<Tooltip id='help-tooltip'>Questions about this task? contact us</Tooltip>)}>
+                                            <div>
+                                                <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
+                                            </div>
+                                        </OverlayTrigger>
                                 </Col>
                             </Row>
                             <div className='input-block'>

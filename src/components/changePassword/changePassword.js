@@ -8,6 +8,7 @@ import { Row, Col } from 'react-bootstrap';
 import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
 import routes from '../../constants/Routes';
+import Button from '../shared/Button';
 
 class ChangePassword extends BaseComponent {
 	constructor() {
@@ -102,8 +103,7 @@ class ChangePassword extends BaseComponent {
 				<div>Minimum of 7 characters</div>
 			</div>
 		);
-		const { error } = this.props;
-		const nameWidth = this.isMobile() ? 12 : 6;
+
 		return (
 			<div>
 				<div className='btw-change-password btw-verify container'>
@@ -127,7 +127,7 @@ class ChangePassword extends BaseComponent {
 						</Col>
 						<Col md={12} xs={6}>
 							<div id="btn_signup">
-								<button className="btn btn-primary" onClick={this.onChangePassword.bind(this, 'onChangePassword')}>Change</button>
+								<Button onClick={this.onChangePassword.bind(this, 'onChangePassword')}>Change</Button>
 							</div>
 						</Col>
 					</Row>

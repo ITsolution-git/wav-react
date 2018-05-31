@@ -1,17 +1,12 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-import { Button } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 
+
 class LogDetail extends BaseComponent {
 
-    onBack = () => {
-        this.props.history.goBack();
-    }
-
     render() {
-        const style = this.isDesktop() ? style || {'left': '1%', 'position': 'absolute'} : null;
         const fields = ['Date and Time','Transaction Type','Result','Reason','Channel','First Name', 'Last Name'];
         const keys = ['timestamp','transaction_type','result','reason','chanel','firstname','lastname'];
 
@@ -21,10 +16,7 @@ class LogDetail extends BaseComponent {
 
         return (
             <div className="container btw-log-details">
-                <Button style={style} onClick={this.onBack}>
-                    Go back
-                </Button>
-
+                { this.renderBackToHome() }
                 <h2>Transaction Details</h2>
                 <br />
 
