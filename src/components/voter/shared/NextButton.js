@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { Button } from 'react-bootstrap';
 
+import Button from '../../shared/Button';
 import BaseComponent from '../../shared/BaseComponent';
 import { nextNumberPersist, resetVoterState } from '../../../actions/VoterAction';
 import routes from '../../../constants/Routes';
@@ -37,8 +37,7 @@ class NextButton extends BaseComponent {
         const { title = 'Next', voter: { boardingType } } = this.props;
         return boardingType === boardingTypes.register
             ? (
-                <Button className='btn btn-primary'
-                        onClick={this.onNext}>
+                <Button onClick={this.onNext}>
                     { title }
                 </Button>
             ) : null;

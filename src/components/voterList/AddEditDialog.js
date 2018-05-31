@@ -4,15 +4,10 @@ import {
 	Col,
 	Form
 } from 'react-bootstrap';
-import Dialog, {
-    DialogActions,
-    DialogContent,
-    DialogTitle
-} from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
 
 import BaseComponent from '../shared/BaseComponent';
-
+import Dialog from '../shared/Dialog';
+import Button from '../shared/Button';
 import fieldConstants from '../../constants/FieldConstants';
 import {
 	FirstNameInput,
@@ -90,10 +85,19 @@ export default class AddEditDialog extends BaseComponent {
 		} = this.state;
 
 		return (
-			<Dialog open={show}
-                    onClose={this.onCloseDialog}>
-				<DialogTitle>{ title }</DialogTitle>
-				<DialogContent>
+			<Dialog show={show}
+					title={title}
+					actionButtons={
+						<Row>
+							<Col md={3}>
+                                <Button size='medium' onClick={this.onCloseDialog}>Cancel</Button>
+							</Col>
+                            <Col md={3}>
+                                <Button size='medium' onClick={this.onSubmitInner}>{submitText}</Button>
+                            </Col>
+						</Row>
+					}
+					onClose={this.onCloseDialog}>
 					<Form horizontal>
                         { this.renderRequiredFieldMsg() }
 						<Row>
@@ -161,11 +165,6 @@ export default class AddEditDialog extends BaseComponent {
 							</Col>
 						</Row>
 					</Form>
-				</DialogContent>
-				<DialogActions>
-					<Button color='primary' onClick={this.onCloseDialog}>Cancel</Button>
-                    <Button color='primary' onClick={this.onSubmitInner}>{submitText}</Button>
-				</DialogActions>
 			</Dialog>
 		);
 	}

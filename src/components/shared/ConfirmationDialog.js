@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-    Modal,
-    Row,
-    Col,
-    Button
-} from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
+import Dialog from '../shared/Dialog';
+import Button from '../shared/Button';
 
 export default class ConfirmationDialog extends BaseComponent {
     render() {
@@ -19,23 +16,21 @@ export default class ConfirmationDialog extends BaseComponent {
             onSubmit
         } = this.props;
         return (
-            <Modal show={show}
-                   onHide={onClose}>
-                <Modal.Header>
-                    <Modal.Title>{title}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
+            <Dialog show={show}
+                    title={title}
+                    actionButtons={
+                        <Row>
+                            <Col md={3}>
+                                <Button className='btn-primary' onClick={onSubmit}>{submitText}</Button>
+                            </Col>
+                            <Col md={3}>
+                                <Button className='btn-primary' onClick={onClose}>No</Button>
+                            </Col>
+                        </Row>
+                    }
+                    onHide={onClose}>
                    <div>{ description }</div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Row>
-                        <Col md={12} className="btn-container">
-                            <Button className='btn-primary' onClick={onSubmit}>{submitText}</Button>
-                            <Button className='btn-primary' onClick={onClose}>No</Button>
-                        </Col>
-                    </Row>
-                </Modal.Footer>
-            </Modal>
+            </Dialog>
         );
     }
 }

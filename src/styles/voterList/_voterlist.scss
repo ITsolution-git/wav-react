@@ -9,10 +9,6 @@
     width: 50%;
   }
 
-  button {
-    @extend .btw-button;
-  }
-
   .voters-list {
     margin-bottom: 2%;
     @include respond-to($phone) {

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Typography from 'material-ui/Typography';
 import Input from 'material-ui/Input';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import authStorage from '../../storage/AuthStorage';
 import {
@@ -13,6 +13,7 @@ import {
 } from '../../actions/MessagesAction';
 import BaseComponent from '../shared/BaseComponent';
 import roles from '../../constants/Roles';
+import Button from '../shared/Button';
 
 class ChatBody extends BaseComponent {
     constructor(props, context) {

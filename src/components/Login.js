@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import BaseComponent from '../components/shared/BaseComponent';
 import appDataTypes from '../constants/AppDataTypes';
 import { btwSignOn } from '../actions/SignOnAction';
 import { getHomeRoute } from '../helpers/AuthHelper';
 import Spinner from '../components/shared/Spinner';
-import { Link } from 'react-router-dom';
-
+import Button from '../components/shared/Button';
 
 class Login extends BaseComponent {
 	constructor(props, context) {
@@ -86,14 +86,12 @@ class Login extends BaseComponent {
 						<Link to='/changePassword/request' className="pull-right">Forgot your password?</Link>
 					</div>
                     <div className="form-group">
-                        <button className="btn btn-primary"
-								disabled={isFetching}
-								onClick={this.btwSignOn.bind(this)}>
+                        <Button disabled={isFetching}
+								 onClick={this.btwSignOn.bind(this)}>
                             Login
-                        </button>
+                        </Button>
                     </div>
 					<Spinner loading={isFetching} size={50} />
-                   {/* <h8>Not registered? <Link to='/captainProfile/Register'>Register as a Captain</Link></h8>*/}
 				</div>
 			</div>
 		);

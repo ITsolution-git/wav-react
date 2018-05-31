@@ -1,6 +1,5 @@
 import React from 'react';
 
-import BaseComponent from '../../shared/BaseComponent';
 import TaskSuccess from './TaskSuccess';
 import TaskFail from './TaskFail';
 

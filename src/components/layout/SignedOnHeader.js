@@ -11,9 +11,7 @@ import {
     MenuItem
 } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-import Dialog, { DialogContent } from 'material-ui/Dialog';
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
 import classNames from 'classnames';
 
 import BaseComponent from '../../components/shared/BaseComponent';
@@ -27,6 +25,9 @@ import { getLevel, isEmpty } from './HeaderHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import PubSub from "pubsub-js";
 import boardingTypes from "../../constants/VoterBoardingType";
+
+import Dialog from '../shared/Dialog';
+import Button from '../shared/Button';
 
 class SignedOnHeader extends BaseComponent {
 
@@ -195,14 +196,11 @@ class SignedOnHeader extends BaseComponent {
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Dialog open={showInfoModal}
+                <Dialog show={showInfoModal}
+                        actionButtons={ <Button size='medium'
+                                                onClick={this.onCloseInfoModal}>Ok</Button> }
                         onClose={this.onCloseInfoModal}>
-                    <DialogContent>
-                        <Typography gutterBottom>{ this.resolveModalMessage() }</Typography>
-                        <Button color='primary'
-                                variant='raised'
-                                onClick={this.onCloseInfoModal}>Ok</Button>
-                    </DialogContent>
+                    <Typography gutterBottom>{ this.resolveModalMessage() }</Typography>
                 </Dialog>
             </div>
         )

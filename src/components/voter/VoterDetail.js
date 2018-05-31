@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { voterDetailsPersist, matchListPersist, resetMatchList  } from '../../actions/VoterAction';
@@ -10,6 +10,7 @@ import BaseComponent from '../shared/BaseComponent';
 import NextButton from './shared/NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
 import Spinner from '../shared/Spinner';
+import Button from '../shared/Button';
 
 import FieldConstants from '../../constants/FieldConstants';
 import {
@@ -163,8 +164,7 @@ class VoterDetail extends BaseComponent {
                         }
                     </Col>
                     <Col md={3} xs={6}>
-                        <Button className="btn btn-primary"
-								disabled={matchListFetching}
+                        <Button disabled={matchListFetching}
 								onClick={this.onNext}>
                             {loadPrevious ? 'Resubmit' : 'Next'}
                         </Button>
