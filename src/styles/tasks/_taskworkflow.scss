@@ -3,10 +3,6 @@
   @include respond-to($desktop) {
     width: 80%;
   }
-  button {
-    color: white;
-    @extend .btw-button;
-  }
   .success-icon {
     color: #67C100;
     text-align: center;

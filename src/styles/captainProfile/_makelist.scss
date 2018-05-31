@@ -100,13 +100,7 @@
     }
 
     #btn_next button {
-
-        @extend .btw-button;
         margin-top: $input_field_space;
-    }
-
-    button {
-      @extend .btw-button;
     }
 }
 
