@@ -3,6 +3,7 @@ import React from 'react';
 import gold from '../../resources/images/gold.png'
 import silver from '../../resources/images/silver.png'
 import bronze from '../../resources/images/bronze.png'
+import wave from '../../resources/images/wave.png';
 
 export function getLevel(data) {
 
@@ -54,4 +55,10 @@ export function isEmpty(obj) {
             return false;
     }
     return true;
+}
+
+export function renderLogo() {
+    return (
+        <img src={wave} alt="" width={160} height={30} />
+    )
 }
