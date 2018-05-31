@@ -1,11 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import Modal from 'material-ui/Modal';
 
 import BaseComponent from '../../shared/BaseComponent';
 
 export default class UserItem extends BaseComponent {
     state = {
-      moreEnabled: false
+      moreEnabled: false,
+      openImageModal: false
     };
 
     renderDetailedVoterInfo = () => {
@@ -57,24 +59,41 @@ export default class UserItem extends BaseComponent {
         )
     };
 
+    handleImageOpen = () => {
+        this.setState({ openImageModal: true });
+    };
+    
+    handleImageClose = () => {
+        this.setState({ openImageModal: false });
+    };
+
     render() {
         const { moreEnabled } = this.state;
         const {
             user: {
                 firstname,
                 lastname,
-                email
+                email,
+                image
             },
             isVoter = true
         } = this.props;
+        console.log(this.props)
         return (
             <Row className='name-row'>
-                <Col md={8}>
+                <Col md={6} xs={12}>
                     <div className='name-info'>
                         { firstname } { lastname }, { email }
                     </div>
                 </Col>
-                <Col md={4} className='no-padding'>
+                <Col md={3} xs={6}>
+                    <br/>
+                    { moreEnabled && 
+                        <div onClick={this.handleImageOpen}>
+                            { image && <img src={image} width={140} height={140}/> }
+                        </div> }
+                </Col>
+                <Col md={3} xs={6} className='no-padding'>
                     { moreEnabled &&
                     <div className='more-info'>
                         { this.renderDetailedVoterInfo() }
@@ -84,6 +103,17 @@ export default class UserItem extends BaseComponent {
                         this.setState({ moreEnabled: !moreEnabled });
                     }}>{ moreEnabled ? 'Show less' : 'Show more' }</div>
                 </Col>
+
+                <Modal
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    open={this.state.openImageModal}
+                    onClose={this.handleImageClose}
+                >
+                    <div className="image-modal">
+                        <img src={image} />
+                    </div>
+                </Modal>
             </Row>
         );
     }
