@@ -26,6 +26,7 @@ html {
 	font-size: 21px;
 }
 
+@import 'shared/_colors.scss';
 @import 'shared/style.scss';
 @import 'shared/mixins';
 @import 'shared/sizes.scss';
@@ -33,6 +34,7 @@ html {
 @import 'shared/sharedclasses.scss';
 @import 'shared/titles.scss';
 @import 'shared/components_lib.scss';
+
 
 @import 'layout/header.scss';
 @import 'layout/layout.scss';

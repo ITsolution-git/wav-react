@@ -9,7 +9,7 @@
       }
     }
     .nav {
-      background: linear-gradient(to right, #0097A7, #004F7F);
+      background: linear-gradient(to right, $primary_color, $secondary_color);
       span {
         color: white;
         font-family: Gotham_Narrow_Medium;
@@ -21,7 +21,7 @@
       }
     }
     nav {
-      background: linear-gradient(to right, #0097A7, #004F7F);
+      background: linear-gradient(to right, $primary_color, $secondary_color);
       a {
         color: #353C4C;
       }
@@ -59,8 +59,9 @@
     }
     nav {
       a {
+        font-family: Gotham_Narrow_Black;
         color: white;
-        font-size: 17px;
+        font-size: 19px;
       }
       a:hover {
         color: #DBE8F8;
@@ -69,21 +70,28 @@
       a:focus {
         color: white;
       }
-      background-color: #0D1C3D;
+      background: linear-gradient(to right, $primary_color, $secondary_color);
+    }
+    .header-icon {
+      a {
+        padding-top: 7px;
+      }
     }
     .btw-avatar {
+      font-size: 40px;
       float: left;
       margin-right: 12px;
     }
     .btw-nav-dropdown {
+      #nav-dropdown {
+        color: white;
+        background-color: transparent !important;
+      }
+      ul {
+        background-color: $primary_color !important;
+      }
       li {
         list-style-type: none;
-        a {
-          color: grey;
-        }
-        .dropdown-toggle {
-          font-size: 20px;
-        }
         .caret {
           border-top: 6px dashed;
           border-right: 8px solid transparent;
@@ -106,22 +114,8 @@
     }
 
     .active-menu {
-      background-color: lighten(#0D1C3D, 15%) !important;
-      a {
-        color: white;
-      }
+      background-color: lighten($secondary_color, 15%) !important;
     }
   }
 
-  .mobile-dropdown {
-    margin-bottom: 22px;
-  }
-
-  .mobile-star-level {
-    div {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-  }
 }

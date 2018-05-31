@@ -5,8 +5,6 @@ import {
     Navbar,
     Nav,
     NavItem,
-    Col,
-    Row,
     NavDropdown,
     MenuItem
 } from 'react-bootstrap';
@@ -28,6 +26,7 @@ import boardingTypes from "../../constants/VoterBoardingType";
 
 import Dialog from '../shared/Dialog';
 import Button from '../shared/Button';
+import { renderLogo } from './HeaderHelper';
 
 class SignedOnHeader extends BaseComponent {
 
@@ -124,18 +123,21 @@ class SignedOnHeader extends BaseComponent {
         const { profile: { isSuccess, data }, actions } = this.props;
         const name = isSuccess && data.firstname || '';
         return (
-            <div>
-                <FontAwesome className='btw-avatar'
-                             name='user-circle'
-                             size='3x' />
+            <Nav pullRight>
+                <NavItem className='header-icon'>{ this.renderHeaderLevel() }</NavItem>
+                <NavItem className='header-icon'>
+                    <FontAwesome className='btw-avatar'
+                                 name='user-circle' />
+                </NavItem>
                 <NavDropdown eventKey={1}
                              title={name}
+                             className='btw-nav-dropdown'
                              id="nav-dropdown">
                     <MenuItem eventKey={1.1}>Profile</MenuItem>
                     <MenuItem eventKey={1.2}>Settings</MenuItem>
                     <MenuItem eventKey={1.3} onClick={() => actions.btwLogout()}>Sign out</MenuItem>
                 </NavDropdown>
-            </div>
+            </Nav>
         )
     };
 
@@ -163,22 +165,18 @@ class SignedOnHeader extends BaseComponent {
 
         return (
             <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
-                { this.isDesktop() && <Row className='dropdown-div'>
-                    <Col md={2} mdOffset={8}>
-                        { this.renderHeaderLevel() }
-                    </Col>
-                    <Col md={2} className='btw-nav-dropdown'>
-                        { this.renderProfileDropdown() }
-                    </Col>
-                </Row> }
                 <Navbar>
-                    <Navbar.Toggle />
+                    <Navbar.Header pullLeft className='header-icon'>
+                        <Navbar.Brand>
+                            <a>
+                                <span style={{ fontSize: '29px'}}>Be the Wave</span>
+                                { renderLogo() }
+                            </a>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav>
-                            { this.isMobile() && <NavItem>
-                                                    <div className='mobile-star-level'>{ this.renderHeaderLevel() } </div>
-                                                 </NavItem> }
-                            { this.isMobile() && <div className='mobile-dropdown'> { this.renderProfileDropdown() }</div> }
                             { this.resolveLinks().map((link, i) => {
                                     return (
                                         <NavItem key={i}
@@ -194,6 +192,7 @@ class SignedOnHeader extends BaseComponent {
                                 })
                             }
                         </Nav>
+                        { this.renderProfileDropdown() }
                     </Navbar.Collapse>
                 </Navbar>
                 <Dialog show={showInfoModal}
