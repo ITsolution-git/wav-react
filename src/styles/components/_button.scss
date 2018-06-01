@@ -10,6 +10,11 @@
   &:hover {
     background-color: rgb(146, 100, 6);
   }
+  &:disabled, [disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
 }
 
 .button-large {
@@ -22,6 +27,7 @@
   font-size: 14pt;
   height: 50px;
 }
+
 .button-medium {
   @include respond-to($phone) {
     padding: 0 10px;
