@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PubSub from "pubsub-js";
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';

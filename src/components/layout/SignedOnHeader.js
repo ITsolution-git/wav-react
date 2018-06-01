@@ -9,7 +9,7 @@ import {
     MenuItem
 } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
 
 import BaseComponent from '../../components/shared/BaseComponent';
@@ -166,8 +166,8 @@ class SignedOnHeader extends BaseComponent {
         return (
             <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
                 <Navbar>
-                    <Navbar.Header pullLeft className='header-icon'>
-                        <Navbar.Brand>
+                    <Navbar.Header className='header-icon'>
+                        <Navbar.Brand pullLeft>
                             <a>
                                 <span style={{ fontSize: '29px'}}>Be the Wave</span>
                                 { renderLogo() }

@@ -1,5 +1,5 @@
 import React from 'react';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
 import { RegisterTaskConstants, RegisterSubSteps } from '../../../constants/reducerConstants/TaskConstants';

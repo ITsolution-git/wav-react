@@ -1,14 +1,18 @@
 import React from 'react';
 import PubSub from "pubsub-js";
-import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
-import { Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import Stepper from '@material-ui/core/Stepper';
+import Step from  '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import { Row, Col } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import BaseComponent from '../../shared/BaseComponent';
 import HelpButton from '../shared/HelpButton';
 import pubsubConstants from "../../../constants/PubSubConstants";
 import Button from '../../shared/Button';
+
 
 class LeftStepper extends BaseComponent {
     constructor(props, context) {
@@ -66,13 +70,13 @@ class LeftStepper extends BaseComponent {
                         <div className='stepper-content'>
                             <Row>
                                 <Col mdOffset={11} md={1} xsOffset={10}>
-                                        <OverlayTrigger placement="bottom"
-                                                        triggerType="hover"
-                                                        overlay={(<Tooltip id='help-tooltip'>Questions about this task? contact us</Tooltip>)}>
-                                            <div>
-                                                <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
-                                            </div>
-                                        </OverlayTrigger>
+                                    <Tooltip id="help-button"
+                                             disableFocusListener
+                                             title="Questions about this task? contact us">
+                                        <div>
+                                            <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
+                                        </div>
+                                    </Tooltip>
                                 </Col>
                             </Row>
                             <div className='input-block'>

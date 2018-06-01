@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import Modal from 'material-ui/Modal';
+import Modal from '@material-ui/core/Modal';
 
 import BaseComponent from '../../shared/BaseComponent';
 

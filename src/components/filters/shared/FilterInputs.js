@@ -1,10 +1,10 @@
 import React from 'react';
-import { FormControlLabel } from 'material-ui/Form';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Row, Col } from 'react-bootstrap';
-import Checkbox from 'material-ui/Checkbox';
-import Input from 'material-ui/Input';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
+import Checkbox from '@material-ui/core/Checkbox';
+import Input from '@material-ui/core/Input';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import { getAgeYears } from '../../../helpers/InputHelper';
 import States from '../../../constants/States';

@@ -8,14 +8,16 @@ import { loadTaskList } from '../../actions/TaskListAction';
 import Spinner from '../shared/Spinner';
 import { resolveTaskData } from '../../helpers/TaskHelper';
 import BaseComponent from '../shared/BaseComponent';
+import { getStateInfo } from '../../actions/TaskAction';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
     }
 
-    goToTask = (taskId, taskRoute) => {
-        this.onLink(`${taskRoute}?taskId=${taskId}`);
+    goToTask = (task, taskRoute) => {
+        this.props.actions.getStateInfo(task.voter_metaData.state);
+        this.onLink(`${taskRoute}?taskId=${task._id}`);
     };
 
     componentWillMount() {
@@ -38,7 +40,7 @@ class TaskList extends BaseComponent {
                         const taskData = resolveTaskData(task);
                         return (
                             <Col key={i} md={16} xs={16}
-                                 onClick={() => this.goToTask(taskData._id, taskData.route)}
+                                 onClick={() => this.goToTask(taskData, taskData.route)}
                                  className='task' >
                                 <div>{ taskData.description }</div>
                             </Col>
@@ -62,7 +64,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ loadTaskList }, dispatch)
+    actions: bindActionCreators({ loadTaskList, getStateInfo }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TaskList));

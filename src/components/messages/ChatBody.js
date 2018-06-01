@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Typography from 'material-ui/Typography';
-import Input from 'material-ui/Input';
+import Typography from '@material-ui/core/Typography';
+import Input from '@material-ui/core/Input';
 import { Row, Col } from 'react-bootstrap';
 
 import authStorage from '../../storage/AuthStorage';

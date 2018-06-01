@@ -12,6 +12,7 @@ import TaskSuccess from './shared/TaskSuccess';
 import Stepper from './shared/LetfStepper';
 import boardingTypes from '../../constants/VoterBoardingType';
 import { matchListPersist, voterDetailsPersist, setBoardingType } from "../../actions/VoterAction";
+import InformationSection from './shared/InformationSection';
 
 class AddVoterTask extends TaskBase {
     state = {
@@ -74,6 +75,7 @@ class AddVoterTask extends TaskBase {
                 <Col md={8}>
                     <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                 </Col>
+                <InformationSection taskData={this.props.taskData} />
             </div>
         );
     }
