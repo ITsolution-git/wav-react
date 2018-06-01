@@ -24,6 +24,8 @@ import RecruitingCaptainTask from './tasks/RecruitingCaptainTask';
 import RegisterVoterTask from './tasks/RegisterVoterTask';
 import UpdateProfileTask from './tasks/UpdateProfileTask';
 import PreferenceTask from './tasks/PreferenceTask';
+import RegularVoteTask from './tasks/RegularVoteTask';
+
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
 import MessageList from './messages/MessageList';
@@ -91,27 +93,29 @@ const router =() => (
         <Route exact path = {routes.voterNotFoundError}
                component = { Authorization(NotFoundError, [captain]) } />
 
-			// tasks
-            <Route exact path = {routes.addVoterTask}
-                   component = { Authorization(AddVoterTask, [captain]) } />
-            <Route exact path = {routes.addVoterTask}
-                   component = { Authorization(AddVoterTask, [captain]) } />
-            <Route exact path = {routes.literatureTextTask}
-                   component = { Authorization(LiteratureTextTask, [captain]) } />
-            <Route exact path = {routes.literatureVideoTask}
-                   component = { Authorization(LiteratureVideoTask, [captain]) } />
-            <Route exact path = {routes.recruitingCaptainTask}
-                   component = { Authorization(RecruitingCaptainTask, [captain]) } />
-            <Route exact path = {routes.registerVoterTask}
-                   component = { Authorization(RegisterVoterTask, [captain]) } />
-            <Route exact path = {routes.updateProfileTask}
-                   component = { Authorization(UpdateProfileTask, [captain]) } />
-            <Route exact path = {routes.preferenceTask}
-                   component = { Authorization(PreferenceTask, [captain]) } />
-            <Route exact path = {routes.mailRegistrationTask}
-                   component = { Authorization(MailRegistrationTask, [captain]) } />
-            <Route exact path = {routes.reminderVoteTask}
-                   component = { Authorization(ReminderVoteTask, [captain]) } />
+        // tasks
+        <Route exact path = {routes.addVoterTask}
+               component = { Authorization(AddVoterTask, [captain]) } />
+        <Route exact path = {routes.addVoterTask}
+               component = { Authorization(AddVoterTask, [captain]) } />
+        <Route exact path = {routes.literatureTextTask}
+               component = { Authorization(LiteratureTextTask, [captain]) } />
+        <Route exact path = {routes.literatureVideoTask}
+               component = { Authorization(LiteratureVideoTask, [captain]) } />
+        <Route exact path = {routes.recruitingCaptainTask}
+               component = { Authorization(RecruitingCaptainTask, [captain]) } />
+        <Route exact path = {routes.registerVoterTask}
+               component = { Authorization(RegisterVoterTask, [captain]) } />
+        <Route exact path = {routes.updateProfileTask}
+               component = { Authorization(UpdateProfileTask, [captain]) } />
+        <Route exact path = {routes.preferenceTask}
+               component = { Authorization(PreferenceTask, [captain]) } />
+        <Route exact path = {routes.mailRegistrationTask}
+               component = { Authorization(MailRegistrationTask, [captain]) } />
+        <Route exact path = {routes.reminderVoteTask}
+               component = { Authorization(ReminderVoteTask, [captain]) } />
+        <Route exact path = {routes.regularVoteTask}
+               component = { Authorization(RegularVoteTask, [captain]) } />
 
         // filters
         <Route exact path = {routes.voterFilter}

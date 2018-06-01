@@ -8,5 +8,6 @@ export default {
     updateVoterProfileId: 'TS_GRP_008',
     preferenceTaskId: 'TS_GRP_009',
     mailRegistrationTaskId: 'TS_GRP_011',
-    reminderVoteTaskId: 'TS_GRP_012'
+    reminderVoteTaskId: 'TS_GRP_012',
+    regularVoteTaskId: 'TS_GRP_014'
 }
