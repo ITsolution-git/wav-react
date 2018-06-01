@@ -63,10 +63,10 @@ class InformationSection extends BaseComponent {
                 className="btw-task-info"
                 style={{marginLeft: (this.isMobile() ? "0" : "80px")}}>
                 <Row className="section">
-                    <Col xs={2}>
+                    <Col xs={2} md={3}>
                         <img src={imgReward} alt="" width={50} height={50} />
                     </Col>
-                    <Col xs={10}>
+                    <Col xs={10} md={9}>
                         <span className="title"><b>Rewards Points</b></span><br />
                         <span className="description">This task is worth {group_info.value} points</span>
                     </Col>
@@ -75,10 +75,10 @@ class InformationSection extends BaseComponent {
                 <hr />
 
                 <Row className="section">
-                    <Col xs={2}>
+                    <Col xs={2} md={3}>
                         <img src={imgPhone} alt="" width={50} height={50} />
                     </Col>
-                    <Col xs={10}>
+                    <Col xs={10} md={9}>
                         <span className="title"><b>Need help?</b></span><br />
                         <span className="description">hi@bethewave.vote</span><br/>
                         <span className="description">(707) 408-8437</span>
@@ -88,10 +88,10 @@ class InformationSection extends BaseComponent {
                 <hr />
 
                 <Row className="section">
-                    <Col xs={2}>
+                    <Col xs={2} md={3}>
                         <img src={imgLightBulb} alt="" width={50} height={50} />
                     </Col>
-                    <Col xs={10}>
+                    <Col xs={10} md={9}>
                         <span className="title"><b>Relevant voting information that may apply to {voter_metaData.firstname + ' ' + voter_metaData.lastname}</b></span>
                     </Col>
                 </Row>
@@ -100,10 +100,10 @@ class InformationSection extends BaseComponent {
                 {
                     Object.keys(this.getStateInfo()).map((e, index) => {
                         return <Row key={index} className="section">
-                            <Col xs={2} style={{padding:"0"}}>
+                            <Col xs={2} md={3} style={{padding:"0"}}>
                                 <img src={imgCheck} className="pull-right" alt="" width={20} height={20} />
                             </Col>
-                            <Col xs={10}>
+                            <Col xs={10} md={9}>
                                 <span><b>{e}</b></span><br />
                                 <span>{ this.getStateInfo()[e] }</span>
                             </Col>
