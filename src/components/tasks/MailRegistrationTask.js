@@ -1,19 +1,18 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { bindActionCreators } from "redux";
 
 import TaskBase from './shared/TaskBase';
 import WithTask from '../hocs/Task';
 import Stepper from './shared/LetfStepper';
 import { getTaskData } from "../../helpers/TaskHelper";
-import { getStateInfo } from '../../actions/TaskAction';
 import WhatToDo from './mailRegistrationSteps/WhatToDo';
 import TaskSuccess from './shared/TaskSuccess';
 import YesNoButtons from './shared/YesNoButtons';
 import PhotoUpload from './shared/PhotoUpload';
 import routes from '../../constants/Routes';
 import authStorage from '../../storage/AuthStorage';
+import InformationSection from './shared/InformationSection';
 
 const subSteps = {
     haveAsked: 'haveAsked',
@@ -24,9 +23,6 @@ const subSteps = {
 class MailRegistrationTask extends TaskBase {
     constructor(props, context) {
         super(props, context);
-        const { actions, taskData } = this.props;
-        const state = taskData.voter_metaData.state;
-        actions.getStateInfo(state);
         this.state = {
             subComponent: subSteps.haveAsked,
             nextEnabled: false,
@@ -144,6 +140,7 @@ class MailRegistrationTask extends TaskBase {
                 <Col md={8}>
                     <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                 </Col>
+                <InformationSection taskData={this.props.taskData} />
             </div>
         );
     }
@@ -156,8 +153,4 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ getStateInfo }, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(WithTask(MailRegistrationTask));
+export default connect(mapStateToProps)(WithTask(MailRegistrationTask));

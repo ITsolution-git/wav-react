@@ -1,18 +1,17 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { bindActionCreators } from "redux";
 
 import TaskBase from './shared/TaskBase';
 import WithTask from '../hocs/Task';
 import Stepper from './shared/LetfStepper';
-import { getStateInfo } from '../../actions/TaskAction'
 import { getTaskData } from "../../helpers/TaskHelper";
 import WhatToDo from './preferenceSteps/WhatToDo';
 import AskVoter from './preferenceSteps/AskVoter';
 import getLastStep from './shared/TaskResult';
 import YesNoButtons from './shared/YesNoButtons';
 import RadioButtons from '../shared/inputs/RadioButtons';
+import InformationSection from './shared/InformationSection';
 
 const votingTypes = {
     byMail: 'byMail',
@@ -23,9 +22,6 @@ const votingTypes = {
 class PreferenceTask extends TaskBase {
     constructor(props, context) {
         super(props, context);
-        const { actions, taskData } = this.props;
-        const state = taskData.voter_metaData.state;
-        actions.getStateInfo(state);
         this.state = {
             isSuccess: true,
             nextEnabled: false,
@@ -124,6 +120,7 @@ class PreferenceTask extends TaskBase {
                 <Col md={8}>
                     <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                 </Col>
+                <InformationSection taskData={this.props.taskData} />
             </div>
         );
     }
@@ -136,8 +133,4 @@ const mapStateToProps = (state, ownProps) => {
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ getStateInfo }, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(WithTask(PreferenceTask));
+export default connect(mapStateToProps)(WithTask(PreferenceTask));
