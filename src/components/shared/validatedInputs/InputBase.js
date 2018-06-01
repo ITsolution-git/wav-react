@@ -1,5 +1,6 @@
 import React from 'react';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from 'react-select';
 
 import BaseComponent from '../../shared/BaseComponent';

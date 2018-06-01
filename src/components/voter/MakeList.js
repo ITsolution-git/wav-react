@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
-import Radio from 'material-ui/Radio';
-import Modal from 'material-ui/Modal';
+import Radio from '@material-ui/core/Radio';
+import Modal from '@material-ui/core/Modal';
 
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';

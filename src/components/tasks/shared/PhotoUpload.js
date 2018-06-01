@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
 import Button from '../../shared/Button';

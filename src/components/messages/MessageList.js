@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 import classnames from 'classnames';
 import Moment from 'react-moment';
 

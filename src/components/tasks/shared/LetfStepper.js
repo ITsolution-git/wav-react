@@ -1,6 +1,8 @@
 import React from 'react';
 import PubSub from "pubsub-js";
-import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
+import Stepper from '@material-ui/core/Stepper';
+import Step from  '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
 import { Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';

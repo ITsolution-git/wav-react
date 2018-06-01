@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col, Button } from 'react-bootstrap';
-import Typography from 'material-ui/Typography';
+import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../shared/BaseComponent';
 import { searchVoters} from '../../actions/UserSearchAction';
