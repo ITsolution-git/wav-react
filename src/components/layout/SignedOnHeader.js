@@ -133,8 +133,8 @@ class SignedOnHeader extends BaseComponent {
                              title={name}
                              className='btw-nav-dropdown'
                              id="nav-dropdown">
-                    <MenuItem eventKey={1.1}>Profile</MenuItem>
-                    <MenuItem eventKey={1.2}>Settings</MenuItem>
+                    {/*<MenuItem eventKey={1.1}>Profile</MenuItem>*/}
+                    {/*<MenuItem eventKey={1.2}>Settings</MenuItem>*/}
                     <MenuItem eventKey={1.3} onClick={() => actions.btwLogout()}>Sign out</MenuItem>
                 </NavDropdown>
             </Nav>
