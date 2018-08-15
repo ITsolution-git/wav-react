@@ -22,7 +22,6 @@ class VerifyCaptain extends BaseComponent {
 
 	getEmptyState = (initValue = '') => {
 		return {
-            username: initValue,
             firstname: initValue,
             lastname: initValue
         };
@@ -108,7 +107,6 @@ class VerifyCaptain extends BaseComponent {
 							{ this.renderInput('firstname', 'First Name (Legal)', 'text', nameWidth, '* First Name is not valid *') }
 							{ this.renderInput('lastname', 'Last Name (Legal)', 'text', nameWidth, '* Last Name is not valid *') }
 						</div>
-                        { this.renderInput('username', 'Username', 'text', 0, '* Username is not valid *') }
 						<br/><br/>
 					</form>
 					<Row>
