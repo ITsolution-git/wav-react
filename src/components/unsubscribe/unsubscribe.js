@@ -25,7 +25,7 @@ class Unsubscribe extends BaseComponent {
 			<div>
 				<div className='btw-change-password btw-verify container'>
 					<div className="intro">
-						<p className="intro-title">Please confirm to unsubscribe from our alerts.</p>
+						<p className="intro-title">Are you sure you want to unsubscribe from all alerts ?</p>
             {
               this.props.success && 
               <span style={{ fontSize: "18px", color: "green" }}>{this.props.data.message}</span>
