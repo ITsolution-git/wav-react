@@ -50,6 +50,9 @@ import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
 import roles from '../constants/Roles';
 
+// unsubscribe
+import Unsubscribe from './unsubscribe/unsubscribe';
+
 const { captain, admin, guest } = roles;
 
 const router =() => (
@@ -138,6 +141,9 @@ const router =() => (
         // transaction logs
         <Route exact path = {routes.loglist} component = { LogList } />
         <Route exact path = {routes.logdetail} component = { LogDetail } />
+
+        // unsubscribe
+        <Route exact path = {routes.unsubscribe} component = { Unsubscribe } />
     </Switch>
 );
 

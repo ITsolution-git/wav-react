@@ -1,11 +1,12 @@
 import config from '../config/ApiConfig';
-import { getAsync, postAsync, deleteAsync } from '../helpers/RequestHelper';
+import { getAsync, postAsync, deleteAsync, patchAsync } from '../helpers/RequestHelper';
 import authStorage from "../storage/AuthStorage";
 
 const UserService = {
     loadUser,
     checkForUniqueEmail,
-    deleteUser
+    deleteUser,
+    unsubscribeUser
 };
 
 function loadUser(userId) {
@@ -26,6 +27,14 @@ function checkForUniqueEmail(data) {
 function deleteUser(data) {
     return deleteAsync({
         url: `${config.apiHost}/api/v1/deleteUser`,
+        data,
+        headers: getHeaders()
+    })
+}
+
+function unsubscribeUser(data) {
+    return patchAsync({
+        url: `${config.apiHost}/user/unsubscribe`,
         data,
         headers: getHeaders()
     })

@@ -37,10 +37,11 @@ export default {
     loglist: '/transactionLogs/list',
     logdetail: '/transactionLogs/detail',
 
-    // static pages
     whyBetheWave: '/whyBetheWave',
     howContribute: '/howYouCanContribute',
     termsOfUse: '/termsOfUse',
     privacyPolicy: '/privacyPolicy',
-    faq: '/faq'
+    faq: '/faq',
+
+    unsubscribe: '/unsubscribe/:email'
 }
