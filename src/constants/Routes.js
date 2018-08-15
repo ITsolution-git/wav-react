@@ -42,5 +42,8 @@ export default {
     howContribute: '/howYouCanContribute',
     termsOfUse: '/termsOfUse',
     privacyPolicy: '/privacyPolicy',
-    faq: '/faq'
+    faq: '/faq',
+
+    // unsubscribe
+    unsubscribe: '/unsubscribe/:email'
 }

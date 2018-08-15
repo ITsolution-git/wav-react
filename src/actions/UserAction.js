@@ -49,3 +49,30 @@ export function deleteUser(data) {
         return { type: UserConstansts.DELETE_USER_FAILURE, error };
     }
 } 
+
+export function unsubscribeUser(email) {
+	return dispatch => {
+		const data = {
+			email
+		};
+		
+		dispatch(actionRequest)
+		return UserService.unsubscribeUser(data).then(
+			response => {
+				dispatch(actionSucceeded(response.data));
+			},
+			error => {
+				dispatch(actionFailed(error));
+			});
+	};
+
+	function actionSucceeded(data) {
+		return { type: UserConstansts.UNSUBSCRIBE_SUCCESS, data };
+    }
+    function actionRequest() {
+        return { type: UserConstansts.UNSUBSCRIBE_REQUEST };
+    }
+    function actionFailed(err) {
+        return { type: UserConstansts.UNSUBSCRIBE_FAILURE, err };
+    }
+}
