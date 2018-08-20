@@ -1,0 +1,11 @@
+{
+  "users":[
+    {
+      "email": "",
+      "password": "",
+      "tags":[
+        "end to end happy path"
+      ]
+    }
+  ]
+}

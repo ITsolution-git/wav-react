@@ -2,34 +2,57 @@
  *  Created by KennethObikwelu on 8/15/18.
  */
 
-var webdriver = require('selenium-webdriver');
-var test = require('selenium-webdriver/testing');
 
-var shelljs = require('shelljs');
-var fs =  require('fs');
-var path = require('path');
+let automate = require('selenium-webdriver');
 
-var where = process.env['ENVIRONMENT'];
-var browser = process.env['BROWSER'];
-var platform = process.env['PLATFORM'];
-var width = process.env['BROWSER_WIDTH'];
-var height = process.env['BROWSER_HEIGHT'];
-var seleniumtimeout = process.env['seleniumtimeout'];
+let shell = require('shelljs');
+let fileSystem = require('fs-extra');
+let path = require('npm-path');
 
-var capabilities = require('../data/capabilities.json');
-var users = require('./users');
-var screenshot = require('./screenshot');
+let env = process.env['ENVIRONMENT'];
+let browser = process.env['BROWSER'];
+let defaultTimeout = process.env['defaultTimeout'];
 
-var driver;
+let browserCapabilities = require('./support/capabilities.json');
 
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-var basedir = './target/screenshots/';
+let driver;
+
+let chai = require('chai');
+let chaiAsPromised = require('chai-as-promised');
+let basedir = './target/screenshots/';
 
 chai.use(chaiAsPromised);
 chai.config.truncateThreshold = 0;
+chai.config.includeStack = true;
 
-global.webdriver = webdriver;
-global.chaiAsPromised = chaiAsPromised;
-global.expect = chai.expect;
-global.test = test;
+
+module.exports = {
+	env           : env,
+	defaultTimeout: defaultTimeout,
+	driver        : function () {
+		return driver;
+	}
+};
+
+before(function () {
+	openBrowser();
+	shell.rm('-rf', basedir);
+});
+
+
+function openBrowser() {
+	if (browserCapabilities[browser] && browserCapabilities[browser]['host']) {
+		console.log("opening remote webdriver on " + browserCapabilities[browser]['host']);
+		driver = new automate.Builder()
+			.usingServer(browserCapabilities[browser]['host'])
+			.withCapabilities(browserCapabilities[browser]['browserCapabilities'])
+			.build();
+	} else {
+		driver = new automate.Builder()
+			.withCapabilities(browserCapabilities['chrome'])
+			.build();
+		console.log ('in here 1')
+	}
+	driver.manage().deleteAllCookies();
+}
+
