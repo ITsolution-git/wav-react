@@ -24,5 +24,5 @@ function searchCaptains(data) {
 }
 
 function getHeaders() {
-    return { 'x-key': authStorage.getLoggedUser().username };
+    return { 'x-key': authStorage.getLoggedUser().email };
 }

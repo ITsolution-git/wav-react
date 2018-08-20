@@ -15,7 +15,7 @@ class Login extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			username: '',
+			email: '',
 			password: '',
 			emptyField: null,
 			isReset: false
@@ -33,11 +33,11 @@ class Login extends BaseComponent {
 	};
 
 	btwSignOn() {
-		const { username, password } = this.state;
-		if (!username.length || !password.length) {
+		const { email, password } = this.state;
+		if (!email.length || !password.length) {
 			this.setState({emptyField: true});
 		} else {
-			this.props.actions.btwSignOn(username, password);
+			this.props.actions.btwSignOn(email, password);
 		}
 	}
 
@@ -55,7 +55,7 @@ class Login extends BaseComponent {
 
 	render() {
 		const { error, isFetching } = this.props;
-		const { password, username, emptyField } = this.state;
+		const { password, email, emptyField } = this.state;
 
 		return (
 			<div className="btw-login container">
@@ -67,11 +67,11 @@ class Login extends BaseComponent {
 					{ this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
 					<br/><br/>
                     <div className="form-group">
-                        <input type="text" className="input-field" id="username" ref="username"
+                        <input type="email" className="input-field" id="email" ref="email"
 							   required="" aria-required="true"
-							   placeholder="Username"
-                               onChange={event => this.updateLogonFields(event, 'username')} />
-												{!username && emptyField && <span style={{'color': 'red'}}> ** Enter username </span> }
+							   placeholder="Email"
+                               onChange={event => this.updateLogonFields(event, 'email')} />
+												{!email && emptyField && <span style={{'color': 'red'}}> ** Enter Email </span> }
                     </div>
                     <div className="form-group">
                         <input type="password" className="input-field" id="password" ref="password"

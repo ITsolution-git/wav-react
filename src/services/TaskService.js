@@ -45,12 +45,12 @@ function updateTaskWithFile(data) {
         url: `${config.apiHost}/api/v1/task/updateTask`,
         data,
         headers: {
-            'x-key': authStorage.getLoggedUser().username,
+            'x-key': authStorage.getLoggedUser().email,
             'Content-Type': 'multipart/form-data'
         }
     });
 }
 
 function getHeaders() {
-    return { 'x-key': authStorage.getLoggedUser().username };
+    return { 'x-key': authStorage.getLoggedUser().email };
 }

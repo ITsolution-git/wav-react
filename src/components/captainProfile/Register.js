@@ -112,8 +112,8 @@ class Register extends BaseComponent {
 								<Row>
 									<Col md={12}>
 										<UsernameInput onChange={this.handleChange}
-													   startValidation={startValidation}
-													   required />
+														 startValidation={startValidation}
+														 />
 									</Col>
 								</Row>
 								<Row>
