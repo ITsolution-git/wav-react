@@ -41,7 +41,7 @@ function unsubscribeUser(data) {
 }
 
 function getHeaders() {
-    return { 'x-key': authStorage.getLoggedUser().username };
+    return { 'x-key': authStorage.getLoggedUser().email };
 }
 
 export default UserService

@@ -68,12 +68,12 @@ class ChatBody extends BaseComponent {
     };
 
     getUsername = (isAdmin, isTo) => {
-        const { user_info: { user: { username } = {} } = {} } = this.props.chat || {},
-            resolvedUsername = isTo ? authStorage.getLoggedUser().username : username,
+        const { user_info: { user: { email } = {} } = {} } = this.props.chat || {},
+            resolvedUserEmail = isTo ? authStorage.getLoggedUser().email : email,
             isAdminText = isAdmin && ' (admin)' || '';
         return (
             <div>
-                <div>{ resolvedUsername }</div>
+                <div>{ resolvedUserEmail }</div>
                 <div>{ isAdminText }</div>
             </div>
         )

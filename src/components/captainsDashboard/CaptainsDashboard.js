@@ -23,8 +23,8 @@ class CaptainsDashboard extends BaseComponent {
     constructor(props) {
         super(props);
         const { actions } = this.props;
-        const { userid, username } = authStorage.getLoggedUser();
-        actions.loadVoterList(userid, username);
+        const { userid, email } = authStorage.getLoggedUser();
+        actions.loadVoterList(userid, email);
         actions.loadTaskList(userid);
         actions.getBtwUserProfile();
         this.state = {

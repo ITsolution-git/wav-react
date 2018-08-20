@@ -14,11 +14,11 @@ export default {
 
 
 
-function loadVoterList(userId, username) {
+function loadVoterList(userId, email) {
     return postAsync({
         data: {
           userid: userId,
-          username
+          email
         },
         url: `${config.apiHost}/api/v1/getVoters`,
         headers: getHeaders()
@@ -80,5 +80,5 @@ function deleteVoter(data) {
 
 
 function getHeaders() {
-    return { 'x-key': authStorage.getLoggedUser().username };
+    return { 'x-key': authStorage.getLoggedUser().email };
 }

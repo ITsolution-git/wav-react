@@ -14,7 +14,7 @@ function getLogList(searchFilter) {
 }
 
 function getHeaders() {
-    return { 'x-key': authStorage.getLoggedUser().username };
+    return { 'x-key': authStorage.getLoggedUser().email};
 }
 
 export default TransactionService
