@@ -4,16 +4,16 @@
 
 let core = require('../core');
 let urlFetcher = require('../support/dataParser');
-let webSelectorType = require('selenium-webdriver').By;
+let By = require('selenium-webdriver').By;
 let expect = require('chai').expect;
 
 module.exports = (driver) => {
 
 
 	let signOnPage = {
-		username: webSelectorType.id('username'),
-		password: webSelectorType.id('password'),
-		login   : webSelectorType.className('btw-button')
+		username: By.id('username'),
+		password: By.id('password'),
+		login   : By.className('btw-button')
 	}
 
 	let verifySignOnPage = async () => {
@@ -24,11 +24,14 @@ module.exports = (driver) => {
 		expect(passwordTextField).to.exist;
 		expect(loginTextField).to.exist;
 	}
-	let openSignOnPage = async (url)=>{
+	let openSignOnPage =  async (url)=>{
 		console.log('in here 3')
-		driver.get('staging-btw-ui-18.herokuapp.com').then(()=>{
-			console.log('in here 4')
-		})
+		 await driver.get('https://staging-btw-ui-18.herokuapp.com/');
+		if (driver.findElement(By.id('loginHeader')).isDisplayed()){
+			console.log('SignOn page is displayed')
+		}else {
+			expect(false).to.be.true
+		}
 	}
 	let validateSignOnProcess = (...args) => {
 		const { credentials } = args;

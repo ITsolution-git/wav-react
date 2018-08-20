@@ -4,7 +4,7 @@
 
 
 let automate = require('selenium-webdriver');
-
+let test = require("selenium-webdriver/testing");
 let shell = require('shelljs');
 let fileSystem = require('fs-extra');
 let path = require('npm-path');
@@ -34,25 +34,19 @@ module.exports = {
 	}
 };
 
-before(function () {
-	openBrowser();
-	shell.rm('-rf', basedir);
+test.before(async () => {
+	await openBrowser();
 });
 
 
-function openBrowser() {
-	if (browserCapabilities[browser] && browserCapabilities[browser]['host']) {
-		console.log("opening remote webdriver on " + browserCapabilities[browser]['host']);
-		driver = new automate.Builder()
-			.usingServer(browserCapabilities[browser]['host'])
-			.withCapabilities(browserCapabilities[browser]['browserCapabilities'])
-			.build();
-	} else {
-		driver = new automate.Builder()
-			.withCapabilities(browserCapabilities['chrome'])
-			.build();
-		console.log ('in here 1')
-	}
-	driver.manage().deleteAllCookies();
+async function openBrowser() {
+	driver = new automate.Builder()
+		.withCapabilities(browserCapabilities['chrome'])
+		.build();
+	await driver.manage().deleteAllCookies();
+	await driver.manage().timeouts().implicitlyWait(5000);
 }
 
+test.after(async () => {
+	await driver.quit();
+})

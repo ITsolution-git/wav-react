@@ -3,22 +3,27 @@
  */
 
 
+let test = require("selenium-webdriver/testing");
+
 let core = require ('../core');
 let createSignOnPage = require('../pages/signOnPage');
 
-describe('Validate login', ()=>{
+test.describe('Validate login', ()=>{
 	let signOnPage;
 
-	beforeEach(()=>{
+	test.beforeEach(()=>{
+		console.log('in here 2');
 		signOnPage = createSignOnPage(core.driver());
+		console.log(signOnPage)
 	});
 
 
 	//add credentials for successful login
-	it('Login successfully', ()=>{
+	test.it('Login successfully', async (done)=>{
 		console.log('in here 2');
-		signOnPage.openSignOnPage('staging');
+		await signOnPage.openSignOnPage('staging');
 		//signOnPage.validateSignOnProcess();
+		done();
 	})
 })
 
