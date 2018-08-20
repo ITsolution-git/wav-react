@@ -34,7 +34,7 @@ module.exports = {
 	}
 };
 
-test.before(async () => {
+before(async () => {
 	await openBrowser();
 });
 
@@ -47,6 +47,6 @@ async function openBrowser() {
 	await driver.manage().timeouts().implicitlyWait(5000);
 }
 
-test.after(async () => {
+after(async () => {
 	await driver.quit();
 })
