@@ -15,10 +15,10 @@ import {
 import { logout } from '../helpers/AuthHelper';
 
 
-export function btwSignOn(username, password, onSuccess = () => {}) {
+export function btwSignOn(email, password, onSuccess = () => {}) {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.signOn));
-		return IdentityService.login(username, password).then(
+		return IdentityService.login(email, password).then(
 			response => {
                 authStorage.saveTokenInfo(response.token);
                 appStorage.setSplashShown();
@@ -44,8 +44,8 @@ export function btwRegister(identity) {
 						dispatch(loadDataFailure(appDataTypes.register, data.message));
 						return;
 					}
-					const { username, password } = identity;
-					dispatch(btwSignOn(username, password, () => {
+					const { email, password } = identity;
+					dispatch(btwSignOn(email, password, () => {
                         dispatch(loadDataSuccess(appDataTypes.register, response.data));
 					}));
 				},
@@ -58,7 +58,7 @@ export function btwRegister(identity) {
 export function getBtwUserProfile() {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.profile));
-		return IdentityService.getUserProfile(authStorage.getLoggedUser().username).then(
+		return IdentityService.getUserProfile(authStorage.getLoggedUser().email).then(
 				response => {
 					dispatch(loadDataSuccess(appDataTypes.profile, response.data.userInformation))
 				},

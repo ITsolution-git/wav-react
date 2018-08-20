@@ -9,8 +9,8 @@ import history from '../utility/History';
 export function loadVoterList() {
     return dispatch => {
         dispatch(actionRequest());
-        const { userid, username } = authStorage.getLoggedUser();
-        return voterService.loadVoterList(userid, username).then(
+        const { userid, email } = authStorage.getLoggedUser();
+        return voterService.loadVoterList(userid, email).then(
             response => {
                 dispatch(actionSuccess(response.data.voters));
             },

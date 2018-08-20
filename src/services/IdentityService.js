@@ -7,11 +7,11 @@ const IdentityService = {
 	getUserProfile,
 };
 
-function login(username, password) {
+function login(email, password) {
 	return postAsync({
 		url: `${config.apiHost}/user/login`,
 		data: {
-			username,
+			email,
 			password
 		},
 		includeToken: false,
@@ -40,10 +40,10 @@ function register({ username, password, email, firstname, lastname}) {
 }
 
 
-function getUserProfile(username) {
+function getUserProfile(email) {
 	return getAsync({
 		url: `${config.apiHost}/api/v1/getUser`,
-		headers: {'x-key': username }
+		headers: {'x-key': email }
 	});
 }
 
