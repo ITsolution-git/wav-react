@@ -3,13 +3,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import qs from 'query-string';
 
 import BaseComponent from '../components/shared/BaseComponent';
 import appDataTypes from '../constants/AppDataTypes';
+import TaskRoutes from '../constants/TaskRoutes';
 import { btwSignOn } from '../actions/SignOnAction';
 import { getHomeRoute } from '../helpers/AuthHelper';
 import Spinner from '../components/shared/Spinner';
 import Button from '../components/shared/Button';
+import { loadTaskList } from '../actions/TaskListAction';
 
 class Login extends BaseComponent {
 	constructor(props, context) {
@@ -18,8 +21,10 @@ class Login extends BaseComponent {
 			email: '',
 			password: '',
 			emptyField: null,
-			isReset: false
-        };
+			isReset: false,
+			signinFromEmail: props.location.search ? true : false,
+			paramsFromEmail: props.location.search ? qs.parse(props.location.search) : {}
+		};
 	}
 
 	updateLogonFields = (event, field) => {
@@ -43,7 +48,14 @@ class Login extends BaseComponent {
 
     componentWillReceiveProps(props)  {
 		if (props.isSuccess) {
-			this.onLink(getHomeRoute());
+			const { paramsFromEmail } = this.state
+
+			if (this.state.signinFromEmail) {
+				this.props.actions.loadTaskList();
+				this.onLink(TaskRoutes['TS_GRP_' + paramsFromEmail['type']] + '?taskId=' + paramsFromEmail['id'])
+			} else {
+				this.onLink(getHomeRoute());
+			}
 		}
 	}
 
@@ -109,7 +121,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ btwSignOn }, dispatch)
+        actions: bindActionCreators({ btwSignOn, loadTaskList }, dispatch)
     };
 };
 

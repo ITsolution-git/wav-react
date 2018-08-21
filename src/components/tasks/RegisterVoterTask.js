@@ -135,13 +135,23 @@ class RegisterVoterTask extends TaskBase {
     };
 
     render() {
+
+        if (!this.props.taskData && this.props.tasks.length === 0) {
+            return ''
+        } 
+        
+        if (!this.props.taskData && this.props.tasks.length > 0) {
+            this.props.history.push('/errorPages/Page_50_X')
+            return ''
+        }
+
         return (
             <div className='btw-task container'>
                 <Row>
                     { this.renderBackToHome() }
                     <Col md={8}>
                         <Stepper steps={this.getSteps()}
-                                 taskData={this.props.taskData} />
+                                taskData={this.props.taskData} />
                     </Col>
                     <InformationSection taskData={this.props.taskData} />
                 </Row>
@@ -153,7 +163,8 @@ class RegisterVoterTask extends TaskBase {
 const mapStateToProps = (state, ownProps) => {
     return {
         taskData: getTaskData(state, ownProps),
-        stateInfo: state.taskList.stateInfo
+        stateInfo: state.taskList.stateInfo,
+        tasks: state.taskList.tasks
     }
 };
 

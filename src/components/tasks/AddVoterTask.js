@@ -69,6 +69,16 @@ class AddVoterTask extends TaskBase {
     };
 
     render() {
+
+        if (!this.props.taskData && this.props.tasks.length === 0) {
+            return ''
+        } 
+        
+        if (!this.props.taskData && this.props.tasks.length > 0) {
+            this.props.history.push('/errorPages/Page_50_X')
+            return ''
+        }
+
         return (
             <div className='btw-task container'>
                 { this.renderBackToHome() }
@@ -83,7 +93,8 @@ class AddVoterTask extends TaskBase {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        taskData: getTaskData(state, ownProps)
+        taskData: getTaskData(state, ownProps),
+        tasks: state.taskList.tasks
     }
 };
 

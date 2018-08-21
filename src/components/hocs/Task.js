@@ -12,7 +12,7 @@ const Task = (TaskComponent) => {
                 return dialogText;
             };
             if (!this.props.taskData) {
-                this.onLink(routes.tasksList);
+                // this.onLink(routes.tasksList);
             }
         }
 
@@ -21,7 +21,7 @@ const Task = (TaskComponent) => {
         }
 
         render() {
-            return this.props.taskData && <TaskComponent {...this.props} /> || null;
+            return <TaskComponent {...this.props} />;
         }
     };
 };
