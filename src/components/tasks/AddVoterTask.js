@@ -69,15 +69,19 @@ class AddVoterTask extends TaskBase {
     };
 
     render() {
-        return (
-            <div className='btw-task container'>
-                { this.renderBackToHome() }
-                <Col md={8}>
-                    <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
-                </Col>
-                <InformationSection taskData={this.props.taskData} />
-            </div>
-        );
+        if (!this.props.taskData) {
+            return ''
+        } else {
+            return (
+                <div className='btw-task container'>
+                    { this.renderBackToHome() }
+                    <Col md={8}>
+                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                    </Col>
+                    <InformationSection taskData={this.props.taskData} />
+                </div>
+            );
+        }
     }
 }
 
