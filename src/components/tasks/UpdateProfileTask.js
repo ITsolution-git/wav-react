@@ -155,27 +155,34 @@ class UpdateProfileTask extends TaskBase {
     };
 
     render() {
-        if (!this.props.taskData) {
+
+        if (!this.props.taskData && this.props.tasks.length === 0) {
             return ''
-        } else {
-            return (
-                <div className='btw-task container'>
-                    { this.renderBackToHome() }
-                    <Row>
-                        <Col md={8}>
-                            <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
-                        </Col>
-                        <InformationSection taskData={this.props.taskData} />
-                    </Row>
-                </div>
-            );
+        } 
+        
+        if (!this.props.taskData && this.props.tasks.length > 0) {
+            this.props.history.push('/errorPages/Page_50_X')
+            return ''
         }
+
+        return (
+            <div className='btw-task container'>
+                { this.renderBackToHome() }
+                <Row>
+                    <Col md={8}>
+                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                    </Col>
+                    <InformationSection taskData={this.props.taskData} />
+                </Row>
+            </div>
+        );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        taskData: getTaskData(state, ownProps)
+        taskData: getTaskData(state, ownProps),
+        tasks: state.taskList.tasks
     }
 };
 

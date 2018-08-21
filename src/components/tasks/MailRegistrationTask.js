@@ -134,26 +134,33 @@ class MailRegistrationTask extends TaskBase {
     };
 
     render() {
-        if (!this.props.taskData) {
+
+        if (!this.props.taskData && this.props.tasks.length === 0) {
             return ''
-        } else {
-            return (
-                <div className='btw-task container'>
-                    { this.renderBackToHome() }
-                    <Col md={8}>
-                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
-                    </Col>
-                    <InformationSection taskData={this.props.taskData} />
-                </div>
-            );
+        } 
+        
+        if (!this.props.taskData && this.props.tasks.length > 0) {
+            this.props.history.push('/errorPages/Page_50_X')
+            return ''
         }
+
+        return (
+            <div className='btw-task container'>
+                { this.renderBackToHome() }
+                <Col md={8}>
+                    <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                </Col>
+                <InformationSection taskData={this.props.taskData} />
+            </div>
+        );
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
         taskData: getTaskData(state, ownProps),
-        stateInfo: state.taskList.stateInfo
+        stateInfo: state.taskList.stateInfo,
+        tasks: state.taskList.tasks
     }
 };
 
