@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
+import NoTaskErrorPage from './errorPages/NoTaskErrorPage';
 import SendInvite from './invites/SendInvite';
 import Register from './captainProfile/Register';
 import MakeList from './voter/MakeList';
@@ -63,6 +64,8 @@ const router =() => (
                 component = { Authorization(Register, [guest, captain, admin]) } />
         <Route exact path = {routes.pageDown}
                 component = { GeneralErrorPage } />
+        <Route exact path = {routes.noTaskErr}
+                component = { NoTaskErrorPage } />
         <Route exact path = {routes.invites}
                 component = { Authorization(SendInvite, [captain]) } />
         <Route exact path = {routes.tasksList}

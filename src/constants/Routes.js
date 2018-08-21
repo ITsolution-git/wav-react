@@ -2,6 +2,7 @@ export default {
     register: '/captainProfile/Register',
     makelist: '/captainProfile/MakeList',
     pageDown: '/errorPages/Page_50_X',
+    noTaskErr: '/errorPages/No_Task',
     invites: '/invites/SendInvite',
     tasksList: '/tasksList',
     voterList: '/voterList',
