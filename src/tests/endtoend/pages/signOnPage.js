@@ -47,6 +47,6 @@ module.exports = (driver) => {
 	};
 	return {
 		validateSignOnProcess,
-		openSignOnPage
+		 openSignOnPage
 	}
 }

@@ -2,15 +2,15 @@
  *  Created by KennethObikwelu on 8/16/18.
  */
 
-
-
 let core = require ('../core');
 let createSignOnPage = require('../pages/signOnPage');
+let test = require("selenium-webdriver/testing");
 
-describe('Validate login', ()=>{
+
+test.describe('Validate login', ()=>{
 	let signOnPage;
 
-	beforeEach(()=>{
+	test.beforeEach(()=>{
 		console.log('in here 2');
 		signOnPage = createSignOnPage(core.driver());
 		console.log(signOnPage)
@@ -18,9 +18,9 @@ describe('Validate login', ()=>{
 
 
 	//add credentials for successful login
-	it('Login successfully', async (done)=>{
-		console.log('in here 2');
-		await signOnPage.openSignOnPage('staging');
+	test.it('Login successfully',  (done)=>{
+		console.log('in here 3');
+		 signOnPage.openSignOnPage('staging');
 		//signOnPage.validateSignOnProcess();
 		done();
 	})

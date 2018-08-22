@@ -8,13 +8,10 @@ let test = require("selenium-webdriver/testing");
 let shell = require('shelljs');
 let fileSystem = require('fs-extra');
 let path = require('npm-path');
-
 let env = process.env['ENVIRONMENT'];
 let browser = process.env['BROWSER'];
 let defaultTimeout = process.env['defaultTimeout'];
-
 let browserCapabilities = require('./support/capabilities.json');
-
 let driver;
 
 let chai = require('chai');
@@ -34,19 +31,23 @@ module.exports = {
 	}
 };
 
-before(async () => {
-	await openBrowser();
+test.before(() => {
+	 openBrowser().then(()=>{
+	 	console.log('Browser opened')
+	 })
 });
 
 
-async function openBrowser() {
-	driver = new automate.Builder()
+  function openBrowser() {
+	 driver =  new automate.Builder()
 		.withCapabilities(browserCapabilities['chrome'])
 		.build();
-	await driver.manage().deleteAllCookies();
-	await driver.manage().timeouts().implicitlyWait(5000);
+	 driver.manage().deleteAllCookies();
+	 driver.manage().timeouts().implicitlyWait(5000);
 }
 
-after(async () => {
-	await driver.quit();
+test.after(() => {
+	 driver.quit().then(()=>{
+		 console.log('Browser closed')
+	 });
 })
