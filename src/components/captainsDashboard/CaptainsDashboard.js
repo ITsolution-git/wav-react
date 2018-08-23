@@ -114,18 +114,18 @@ class CaptainsDashboard extends BaseComponent {
                     </Row>
                     }
                 </div>
-                <Dialog
+                <Dialog id='dashboardDialog'
                     title={`Welcome ${data.firstname} ${data.lastname}`}
                     show={showSplashModal}
                     actionButtons={
                         <Row>
-                            <Col md={4} xs={6}>
+                            <Col id='dashboardSplashSubmit' md={4} xs={6}>
                                 <Button size='medium' onClick={this.onSplashSubmitClick}>
                                     Go to Tasks
                                 </Button>
                             </Col>
-                            <Col md={3} xs={4}>
-                                <Button size='medium' onClick={() => this.onCloseSplashModal()}>
+                            <Col id='dashboardSplashDismiss' md={3} xs={4}>
+                                <Button  size='medium' onClick={() => this.onCloseSplashModal()}>
                                     Dismiss
                                 </Button>
                             </Col>
