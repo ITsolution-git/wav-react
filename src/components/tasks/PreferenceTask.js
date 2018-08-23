@@ -120,7 +120,7 @@ class PreferenceTask extends TaskBase {
         } 
         
         if (!this.props.taskData && this.props.tasks.length > 0) {
-            this.props.history.push('/errorPages/Page_50_X')
+            this.props.history.push('/errorPages/No_Task')
             return ''
         }
 
