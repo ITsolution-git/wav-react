@@ -34,6 +34,16 @@ export default function userReducer(state = InitialState.user, action) {
         case UserConstants.UNSUBSCRIBE_FAILURE: {
             return { ...state, ...{ isUnsubscribing: false, isUnsubscribed: false }};
         }
+        // update profile
+        case UserConstants.UPDATE_PROFILE_REQUEST: {
+            return { ...state, ...{ isUpdatingProfile: true, isUpdatedProfile: false }};
+        }
+        case UserConstants.UPDATE_PROFILE_SUCCESS: {
+            return { ...state, ...{ data: action.data, isUpdatingProfile: false, isUpdatedProfile: true }};
+        }
+        case UserConstants.UPDATE_PROFILE_FAILURE: {
+            return { ...state, ...{ isUpdatingProfile: false, isUpdatedProfile: false }};
+        }
         default:
             return state
     }
