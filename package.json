@@ -70,6 +70,7 @@
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
+    "e2etest": "sh execute.sh",
     "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom",
     "test:watch": "npm test -- --watch",
     "test-jest": "jest",

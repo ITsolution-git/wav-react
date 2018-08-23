@@ -23,4 +23,5 @@ yarn-error.log*
 
 *.css
 package-lock.json
-.idea/workspace.xml
+.idea/
+src/tests/endtoend/node_modules

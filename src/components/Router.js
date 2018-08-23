@@ -2,8 +2,10 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './Login';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
+import NoTaskErrorPage from './errorPages/NoTaskErrorPage';
 import SendInvite from './invites/SendInvite';
 import Register from './captainProfile/Register';
+import Profile from './captainProfile/Profile';
 import MakeList from './voter/MakeList';
 import TasksList from './tasksList/TasksList';
 import VotersList from './voterList/VotersList';
@@ -61,8 +63,12 @@ const router =() => (
                 component = { Authorization(Login, [guest]) } />
         <Route exact path = {routes.register}
                 component = { Authorization(Register, [guest, captain, admin]) } />
+        <Route exact path = {routes.profile}
+                component = { Profile } />
         <Route exact path = {routes.pageDown}
                 component = { GeneralErrorPage } />
+        <Route exact path = {routes.noTaskErr}
+                component = { NoTaskErrorPage } />
         <Route exact path = {routes.invites}
                 component = { Authorization(SendInvite, [captain]) } />
         <Route exact path = {routes.tasksList}
