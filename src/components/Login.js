@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import qs from 'query-string';
+import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../components/shared/BaseComponent';
 import appDataTypes from '../constants/AppDataTypes';
@@ -13,6 +14,7 @@ import { getHomeRoute } from '../helpers/AuthHelper';
 import Spinner from '../components/shared/Spinner';
 import Button from '../components/shared/Button';
 import { loadTaskList } from '../actions/TaskListAction';
+import AboutInfo from '../components/shared/AboutInfo';
 
 class Login extends BaseComponent {
 	constructor(props, context) {
@@ -70,42 +72,49 @@ class Login extends BaseComponent {
 		const { password, email, emptyField } = this.state;
 
 		return (
-			<div className="btw-login container">
-				<div className="btw-form" onKeyPress={this.onKeyPress}>
-                    <div className="card-content">
-						<p id="loginHeader" className="title">Log into your account </p>
-                        { error && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
+			<Row>
+				<Col md={6}>
+					<AboutInfo />
+				</Col>
+				<Col md={6} className="btw-login container">
+                    <div >
+                        <div className="btw-form" onKeyPress={this.onKeyPress}>
+                            <div className="card-content">
+                                <p id="loginHeader" className="title">Log into your account </p>
+                                { error && <div> <h5 style={{color: 'red'}}>Check your username or password </h5></div>}
+                            </div>
+                            { this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
+                            <br/><br/>
+                            <div className="form-group">
+                                <input type="email" className="input-field" id="email" ref="email"
+                                       required="" aria-required="true"
+                                       placeholder="Email"
+                                       onChange={event => this.updateLogonFields(event, 'email')} />
+                                {!email && emptyField && <span style={{'color': 'red'}}> ** Enter Email </span> }
+                            </div>
+                            <div className="form-group">
+                                <input type="password" className="input-field" id="password" ref="password"
+                                       required="" aria-required="true"
+                                       placeholder="Password"
+                                       onChange={event => this.updateLogonFields(event, 'password')} />
+                                {!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
+                            </div>
+                            <div className="link">
+                                <Link to='/captainProfile/register' className="pull-left">Register</Link>
+                                <div className="vertical-divider"></div>
+                                <Link to='/changePassword/request' className="pull-right">Forgot your password?</Link>
+                            </div>
+                            <div className="form-group">
+                                <Button disabled={isFetching}
+                                        onClick={this.btwSignOn.bind(this)}>
+                                    Login
+                                </Button>
+                            </div>
+                            <Spinner loading={isFetching} size={50} />
+                        </div>
                     </div>
-					{ this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
-					<br/><br/>
-                    <div className="form-group">
-                        <input type="email" className="input-field" id="email" ref="email"
-							   required="" aria-required="true"
-							   placeholder="Email"
-                               onChange={event => this.updateLogonFields(event, 'email')} />
-												{!email && emptyField && <span style={{'color': 'red'}}> ** Enter Email </span> }
-                    </div>
-                    <div className="form-group">
-                        <input type="password" className="input-field" id="password" ref="password"
-							   required="" aria-required="true"
-							   placeholder="Password"
-                               onChange={event => this.updateLogonFields(event, 'password')} />
-												{!password && emptyField && <span style={{'color': 'red'}}> ** Enter password </span> }
-                    </div>
-					<div className="link">
-						<Link to='/captainProfile/register' className="pull-left">Register</Link>
-						<div className="vertical-divider"></div>
-						<Link to='/changePassword/request' className="pull-right">Forgot your password?</Link>
-					</div>
-                    <div className="form-group">
-                        <Button disabled={isFetching}
-								 onClick={this.btwSignOn.bind(this)}>
-                            Login
-                        </Button>
-                    </div>
-					<Spinner loading={isFetching} size={50} />
-				</div>
-			</div>
+				</Col>
+			</Row>
 		);
 	}
 }

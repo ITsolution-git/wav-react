@@ -168,10 +168,7 @@ class SignedOnHeader extends BaseComponent {
                 <Navbar>
                     <Navbar.Header className='header-icon'>
                         <Navbar.Brand pullLeft>
-                            <a>
-                                <span style={{ fontSize: '29px'}}>Be the Wave</span>
-                                { renderLogo() }
-                            </a>
+                            { renderLogo() }
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>

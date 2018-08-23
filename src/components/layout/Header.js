@@ -2,7 +2,6 @@ import React from 'react';
 import PubSub from 'pubsub-js';
 
 import pubsubConstants from '../../constants/PubSubConstants';
-import SignedOffHeader from './SignedOffHeader';
 import SignedOnHeader from './SignedOnHeader';
 import authStorage from '../../storage/AuthStorage';
 import BaseComponent from '../shared/BaseComponent';
@@ -30,10 +29,7 @@ export default class Header extends BaseComponent {
 
 		return (
 			<div className="btw-header">
-				{ authenticated
-					? <SignedOnHeader />
-					: <SignedOffHeader />
-				}
+				{ authenticated && <SignedOnHeader /> }
 			</div>
 		);
 	}

@@ -3,23 +3,13 @@
 @import '~react-select/dist/react-select.css';
 
 @font-face {
-	font-family: Gotham;
-	src: url(../resources/fonts/Gotham_Rounded_Light.otf);
+	font-family: Avenir-Black;
+	src: url(../resources/fonts/Avenir-Black.ttf);
 }
 
 @font-face {
-	font-family: Gotham_Narrow_Black;
-	src: url(../resources/fonts/Gotham_Narrow_Black.otf);
-}
-
-@font-face {
-	font-family: Gotham_Narrow_Medium;
-	src: url(../resources/fonts/Gotham_Narrow_Medium.otf);
-}
-
-@font-face {
-	font-family: Gotham_Narrow_Light;
-	src: url(../resources/fonts/Gotham_Narrow_Light.otf);
+	font-family: Avenir-Light;
+	src: url(../resources/fonts/Avenir-Light.ttf);
 }
 
 html {
@@ -37,6 +27,7 @@ html {
 
 
 @import 'layout/header.scss';
+@import 'layout/about_info.scss';
 @import 'layout/layout.scss';
 
 @import 'captainProfile/base.scss';
