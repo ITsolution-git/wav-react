@@ -4,7 +4,7 @@
 
 const core = require('../core');
 let urlFetcher = require('../support/dataParser');
-
+let createSignOnPage = require('../pages/signOnPage');
 
 describe('Reset password end to end tests', ()=>{
 	let signOnPage;

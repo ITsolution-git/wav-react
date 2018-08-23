@@ -5,7 +5,7 @@
 
 const core = require('../core');
 let urlFetcher = require('../support/dataParser');
-
+let createSignOnPage = require('../pages/signOnPage');
 
 describe('Update profile end to end tests', ()=>{
 	let signOnPage;

@@ -6,6 +6,7 @@
 
 const core = require('../core');
 let urlFetcher = require('../support/dataParser');
+let createSignOnPage = require('../pages/signOnPage');
 
 
 describe('Task end to end tests', ()=>{
