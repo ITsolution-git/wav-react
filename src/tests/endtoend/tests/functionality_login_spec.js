@@ -10,7 +10,7 @@ let createTaskModal = require('../pages/latestTaskModal');
 let createDashboardPage = require('../pages/dashboardPage');
 let createSignedOnHeader = require('../pages/signedOnHeader');
 
-describe('Validate login', ()=>{
+describe('Login end to end tests', ()=>{
 	let signOnPage;
 	let latestTaskModal;
 	let dashboardPage;

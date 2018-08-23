@@ -11,9 +11,9 @@ module.exports = (driver) => {
 
 
 	let taskModal = {
-		modalCDialog: core.automate.By.css('body > div:nth-child(11) > div.fade.btw-modal.in.modal'),
-		goToTasksButtonOnModal   : core.automate.By.linkText('Go to Tasks'),
-		dismissButtonOnModal   : core.automate.By.xpath('/html/body/div[3]/div[2]/div/div/div[3]/div/div[2]/button')
+		modalCDialog: core.automate.By.id('dashboardDialog'),
+		goToTasksButtonOnModal   : core.automate.By.id('dashboardSplashSubmit'),
+		dismissButtonOnModal   : core.automate.By.id('dashboardSplashDismiss')
 	}
 
 	let validateWelcomeModalIsDisplayed =   async  () => {
@@ -34,7 +34,7 @@ module.exports = (driver) => {
 
 	let dismissModal =  async () => {
 		try {
-			 await driver.findElement(taskModal.modalCDialog).click();
+			 await driver.findElement(taskModal.dismissButtonOnModal).click();
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
