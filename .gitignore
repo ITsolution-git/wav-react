@@ -24,3 +24,4 @@ yarn-error.log*
 *.css
 package-lock.json
 .idea/
+src/tests/endtoend/node_modules

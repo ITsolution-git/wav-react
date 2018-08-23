@@ -1,5 +1,5 @@
 #!/bin/bash
 
-ls
 cd src/tests/endtoend/tests
-mocha login.js
+ls
+mocha *.js --full-trace --timeout 15000

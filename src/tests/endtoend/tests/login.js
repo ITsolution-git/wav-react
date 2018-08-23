@@ -2,27 +2,38 @@
  *  Created by KennethObikwelu on 8/16/18.
  */
 
-let core = require ('../core');
+const core = require('../core');
+let urlFetcher = require('../support/dataParser');
+
 let createSignOnPage = require('../pages/signOnPage');
-let test = require("selenium-webdriver/testing");
+let createTaskModal = require('../pages/latestTaskModal');
+let createDashboardPage = require('../pages/dashboardPage');
+let createSignedOnHeader = require('../pages/signedOnHeader');
 
-
-test.describe('Validate login', ()=>{
+describe('Validate login', ()=>{
 	let signOnPage;
+	let latestTaskModal;
+	let dashboardPage;
+	let signedOnHeader;
 
-	test.beforeEach(()=>{
-		console.log('in here 2');
+	const user = urlFetcher.findByTag('end to end happy path');
+
+	beforeEach(()=>{
 		signOnPage = createSignOnPage(core.driver());
-		console.log(signOnPage)
+		latestTaskModal = createTaskModal(core.driver());
+		dashboardPage = createDashboardPage(core.driver());
+		signedOnHeader = createSignedOnHeader(core.driver());
 	});
 
 
-	//add credentials for successful login
-	test.it('Login successfully',  (done)=>{
-		console.log('in here 3');
-		 signOnPage.openSignOnPage('staging');
-		//signOnPage.validateSignOnProcess();
-		done();
+	it('Login successfully',  async ()=>{
+		await signOnPage.openSignOnPage('staging');
+		await signOnPage.validateSignOnProcess(user.email, user.password);
+		await latestTaskModal.validateWelcomeModalIsDisplayed();
+		//await latestTaskModal.dismissModal();
+		//await dashboardPage.validateDashboard();
+		//await signedOnHeader.signOut();
+		//await signOnPage.verifySignOnPage();
 	})
 })
 
