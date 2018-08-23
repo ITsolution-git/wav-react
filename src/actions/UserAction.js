@@ -76,3 +76,27 @@ export function unsubscribeUser(email) {
         return { type: UserConstansts.UNSUBSCRIBE_FAILURE, err };
     }
 }
+
+export function updateProfile(data) {
+	return dispatch => {
+		
+		dispatch(actionRequest())
+		return UserService.updateProfile(data).then(
+			response => {
+				dispatch(actionSucceeded());
+			},
+			error => {
+				dispatch(actionFailed(error));
+			});
+	};
+
+	function actionSucceeded() {
+		return { type: UserConstansts.UPDATE_PROFILE_SUCCESS };
+    }
+    function actionRequest() {
+        return { type: UserConstansts.UPDATE_PROFILE_REQUEST };
+    }
+    function actionFailed(err) {
+        return { type: UserConstansts.UPDATE_PROFILE_FAILURE, err };
+    }
+}

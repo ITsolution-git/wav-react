@@ -130,7 +130,8 @@ export class TextInput extends InputBase {
                            if (value.length <= maxLength) {
                                this.onChange(e);
                            }
-                       }} />
+                       }}
+                       disabled={disabled} />
                 <FormHelperText classes={{root: 'btw-input-error'}}>{ error }</FormHelperText>
             </FormControl>
         );
