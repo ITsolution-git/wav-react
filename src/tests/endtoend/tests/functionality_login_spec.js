@@ -4,7 +4,6 @@
 
 const core = require('../core');
 let urlFetcher = require('../support/dataParser');
-
 let createSignOnPage = require('../pages/signOnPage');
 let createTaskModal = require('../pages/latestTaskModal');
 let createDashboardPage = require('../pages/dashboardPage');
@@ -24,6 +23,9 @@ describe('Login end to end tests', ()=>{
 		dashboardPage = createDashboardPage(core.driver());
 		signedOnHeader = createSignedOnHeader(core.driver());
 	});
+
+	function afterEach () {
+	}
 
 
 	it('Login successfully',  async ()=>{
