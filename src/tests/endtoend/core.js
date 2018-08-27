@@ -28,7 +28,6 @@ before(() => {
 	openBrowser();
 });
 
-
 function openBrowser() {
 	driver = new automate.Builder()
 		.withCapabilities(browserCapabilities['chrome'])
