@@ -123,6 +123,7 @@ export class TextInput extends InputBase {
                 <input value={value}
                        placeholder={this.resolveLabel()}
                        type={type}
+                       id={id}
                        onBlur={this.onFocusOut}
                        className="btw-input-new"
                        onChange={e => {
