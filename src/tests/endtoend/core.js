@@ -7,6 +7,7 @@ require('chromedriver');
 const automate = require('selenium-webdriver');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
+const fs = require('fs-extra');
 
 const browserCapabilities = require('./support/capabilities.json');
 
@@ -26,7 +27,6 @@ module.exports = {
 before(() => {
 	openBrowser();
 });
-
 
 function openBrowser() {
 	driver = new automate.Builder()

@@ -11,16 +11,14 @@ module.exports = (driver) => {
 
 
 	let taskModal = {
-		modalContent: core.automate.By.className('modal-content'),
-		modalFooter: core.automate.By.className('password'),
-		goToTasksButtonOnModal   : core.automate.By.linkText('Go to Tasks'),
-		dismissButtonOnModal   : core.automate.By.linkText('Dismiss')
+		modalCDialog: core.automate.By.id('dashboardDialog'),
+		goToTasksButtonOnModal   : core.automate.By.id('dashboardSplashSubmit'),
+		dismissButtonOnModal   : core.automate.By.id('dashboardSplashDismiss')
 	}
 
 	let validateWelcomeModalIsDisplayed =   async  () => {
 		try {
-			await driver.findElement(taskModal.modalContent).isDisplayed()
-			 driver.findElement(taskModal.modalFooter);
+			await await driver.findElement(taskModal.modalCDialog).isDisplayed();
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				console.log(error)
@@ -34,9 +32,9 @@ module.exports = (driver) => {
 	};
 
 
-	let dismissModal =  () => {
+	let dismissModal =  async () => {
 		try {
-			 driver.findElement(taskModal.dismissButtonOnModal).click();
+			 await driver.findElement(taskModal.dismissButtonOnModal).click();
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true

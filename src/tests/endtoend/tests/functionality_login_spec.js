@@ -4,13 +4,12 @@
 
 const core = require('../core');
 let urlFetcher = require('../support/dataParser');
-
 let createSignOnPage = require('../pages/signOnPage');
 let createTaskModal = require('../pages/latestTaskModal');
 let createDashboardPage = require('../pages/dashboardPage');
 let createSignedOnHeader = require('../pages/signedOnHeader');
 
-describe('Validate login', ()=>{
+describe('Login end to end tests', ()=>{
 	let signOnPage;
 	let latestTaskModal;
 	let dashboardPage;
@@ -25,11 +24,14 @@ describe('Validate login', ()=>{
 		signedOnHeader = createSignedOnHeader(core.driver());
 	});
 
+	function afterEach () {
+	}
 
-	it('Login successfully',  async ()=>{
+
+	it('******************************************Login successfully',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.validateSignOnProcess(user.email, user.password);
-		await latestTaskModal.validateWelcomeModalIsDisplayed();
+		//await latestTaskModal.validateWelcomeModalIsDisplayed();
 		//await latestTaskModal.dismissModal();
 		//await dashboardPage.validateDashboard();
 		//await signedOnHeader.signOut();
