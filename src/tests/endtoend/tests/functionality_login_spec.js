@@ -31,7 +31,7 @@ describe('Login end to end tests', ()=>{
 	it('******************************************Login successfully',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.validateSignOnProcess(user.email, user.password);
-		//await latestTaskModal.validateWelcomeModalIsDisplayed();
+		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		//await latestTaskModal.dismissModal();
 		//await dashboardPage.validateDashboard();
 		//await signedOnHeader.signOut();
