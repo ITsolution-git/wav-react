@@ -15,6 +15,10 @@
   font-family: Avenir-Black;
   font-size: 16px;
 }
+.title-14 {
+  font-family: Avenir-Black;
+  font-size: 14px;
+}
 .title-12 {
   font-family: Avenir-Black;
   font-size: 12px;
@@ -51,6 +55,22 @@
   @extend .title-32;
   color: $blue;
 }
+.title-24-blue {
+  @extend .title-24;
+  color: $blue;
+}
+
+// light-blue
+.title-32-light-blue {
+  @extend .title-32;
+  color: $light-blue;
+}
+
+// dark blue
+#title-12-dark-blue {
+  @extend .title-14;
+  color: $dark-blue;
+}
 
 
 #link-small {
@@ -77,4 +97,10 @@
   text-decoration: underline;
 }
 
+#link-small-red {
+  @extend #link-small;
+  @include respond-to($desktop) {
+    color: $red;
+  }
+}
 
