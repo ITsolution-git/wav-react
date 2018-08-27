@@ -8,10 +8,19 @@
   #title {
     margin-bottom: 5%;
   }
+  #mobile-title {
+    margin-bottom: 20%;
+  }
   #new-text {
     font-family: Avenir-Light;
     font-size: 18px;
     font-weight: 600;
-    color: $dark-blue;
+    @include respond-to($phone) {
+      color: $white;
+    }
+    @include respond-to($desktop) {
+      color: $dark-blue;
+    }
   }
 }
+

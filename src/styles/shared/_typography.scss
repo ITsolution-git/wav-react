@@ -41,6 +41,10 @@
   @extend .text-18;
   color: $white;
 }
+.title-32-white {
+  @extend .title-32;
+  color: $white;
+}
 
 // blue
 .title-32-blue {
@@ -53,13 +57,23 @@
   font-family: Avenir-Light;
   font-size: 15px;
   font-weight: 600;
-  color: $dark-blue;
+  @include respond-to($phone) {
+    color: $white;
+  }
+  @include respond-to($desktop) {
+    color: $dark-blue;
+  }
   text-decoration: underline;
 }
 
 #link-large {
   @extend .title-16;
-  color: $dark-blue;
+  @include respond-to($phone) {
+    color: $white;
+  }
+  @include respond-to($desktop) {
+    color: $dark-blue;
+  }
   text-decoration: underline;
 }
 
