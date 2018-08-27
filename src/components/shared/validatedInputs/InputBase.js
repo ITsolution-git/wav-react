@@ -79,8 +79,8 @@ export default class InputBase extends BaseComponent {
     };
 
     resolveLabel = () => {
-        const { label, required } = this.props;
-        return `${label} ${required && '*' || ''}`;
+        const { label } = this.props;
+        return label;
     };
 }
 
