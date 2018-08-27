@@ -31,11 +31,11 @@ describe('Login end to end tests', ()=>{
 	it('******************************************Login successfully',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.validateSignOnProcess(user.email, user.password);
-		//await latestTaskModal.validateWelcomeModalIsDisplayed();
-		//await latestTaskModal.dismissModal();
-		//await dashboardPage.validateDashboard();
-		//await signedOnHeader.signOut();
-		//await signOnPage.verifySignOnPage();
+		await latestTaskModal.validateWelcomeModalIsDisplayed();
+		await latestTaskModal.dismissModal();
+		await dashboardPage.validateDashboard();
+		await signedOnHeader.openMenu()
+		await signOnPage.verifySignOnPage()
 	})
 })
 
