@@ -106,6 +106,7 @@ export class TextInput extends InputBase {
             defaultValue,
             fullWidth = true,
             type,
+            id,
             maxLength = 50
         } = this.props;
 
