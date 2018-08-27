@@ -1,47 +1,17 @@
 .btw-login {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   .btw-form {
-    margin-top: 8%;
-    padding: 30px;
-    border: 1px solid #0097A7;
-
-    .form-group {
-      label {
-        @extend .btw-label;
-        margin-bottom: 15px;
-      }
-
-      input {
-        @extend .btw-input-new;
-        min-width: 280px;
-      }
-    }
-
-    .title {
-      font-family: Gotham_Narrow_Medium;
-      font-size: 20pt;
-      color: #006699;
-    }
-
-    button {
-      width: 100%;
-      margin-top: $input_field_space;
-    }
+    margin-top: 25%;
   }
-
-  .link {
-    display: flex;
-    justify-content: space-between;
+  #button-class {
+    margin: 20px 0 20px 0;
   }
-
-  .vertical-divider {
-    height: 18px;
-    border-left: 1.5px solid #337ab7;
-    margin-left: 5px;
-    margin-right: 5px;
+  #title {
+    margin-bottom: 5%;
   }
-
+  #new-text {
+    font-family: Avenir-Light;
+    font-size: 18px;
+    font-weight: 600;
+    color: $dark-blue;
+  }
 }

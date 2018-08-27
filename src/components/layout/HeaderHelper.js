@@ -59,6 +59,6 @@ export function isEmpty(obj) {
 
 export function renderLogo() {
     return (
-        <img src={logo} alt="" width={120} height={100} />
+        <img src={logo} alt="" width={100} height={80} />
     )
 }

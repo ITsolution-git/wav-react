@@ -1,0 +1,66 @@
+// general
+.title-32 {
+  font-family: Avenir-Black;
+  font-size: 32px;
+}
+.title-24 {
+  font-family: Avenir-Black;
+  font-size: 24px;
+}
+.title-20 {
+  font-family: Avenir-Black;
+  font-size: 20px;
+}
+.title-16 {
+  font-family: Avenir-Black;
+  font-size: 16px;
+}
+.title-12 {
+  font-family: Avenir-Black;
+  font-size: 12px;
+}
+.button-text {
+  font-family: Avenir-Black;
+  font-size: 16px;
+}
+.text-18 {
+  font-family: Avenir-Light;
+  font-size: 18px;
+}
+
+// white
+.title-20-white {
+  @extend .title-20;
+  color: $white;
+}
+.title-16-white {
+  @extend .title-16;
+  color: $white;
+}
+.text-18-white {
+  @extend .text-18;
+  color: $white;
+}
+
+// blue
+.title-32-blue {
+  @extend .title-32;
+  color: $blue;
+}
+
+
+#link-small {
+  font-family: Avenir-Light;
+  font-size: 15px;
+  font-weight: 600;
+  color: $dark-blue;
+  text-decoration: underline;
+}
+
+#link-large {
+  @extend .title-16;
+  color: $dark-blue;
+  text-decoration: underline;
+}
+
+

@@ -1,10 +1,11 @@
 .btw-input {
   display: block;
   width: 100%;
-  padding: 14px;
-  border: 1px solid #D3D6DC;
+  padding: 12px;
+  border: none;
+  border-radius: 3px;
   vertical-align: middle;
-  color: #0D1C3D;
+  color: $dark-blue;
   height: $input_field_height;
   font-size: $font_size_input;
 
@@ -17,24 +18,9 @@
   @extend .btw-input;
   color: #4C4C4C;
   font-size: 14pt;
-  font-family: Gotham_Narrow_Medium;
-  border-color: #0097A7;
-  box-shadow: 0px 4px 7px -2px rgba(0,0,0,0.2);
-
-  &::placeholder { /* Firefox */
-      color: #707070;
-      opacity: 0.6;
-  }
-  
-  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-     color: #707070;
-     opacity: 0.6;
-  }
-  
-  &::-ms-input-placeholder { /* Microsoft Edge */
-     color: #707070;
-     opacity: 0.6;
-  }
+  font-family: Avenir-Light;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  outline: none;
 }
 
 .btw-label {
@@ -92,7 +78,7 @@
 }
 
 .btw-input-error {
-  margin-bottom: 10px !important;
+  margin-bottom: 8px !important;
 
   @include respond-to($phone) {
     font-size: 13px !important;

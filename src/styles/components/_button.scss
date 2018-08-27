@@ -1,19 +1,21 @@
 .btw-button {
-  border-radius: 10px;
+  border-radius: 4px;
   outline: none;
-  border: 1px solid rgb(146, 100, 6);
+  border: none;
   color: white;
-  font-family: Gotham_Narrow_Medium;
-  background-color: #E1A427;
-  transition: background-color .2s ease,color .2s ease,border-color .2s ease;
-
-  &:hover {
-    background-color: rgb(146, 100, 6);
-  }
+  font-family: Avenir-Light;
+  font-weight: 600;
   &:disabled, [disabled]{
     border: 1px solid #999999;
     background-color: #cccccc;
     color: #666666;
+  }
+}
+
+.button-blue {
+  background-color: $blue;
+  &:hover {
+    background-color: darken($blue, 0.5);
   }
 }
 
@@ -24,8 +26,9 @@
   @include respond-to($desktop) {
     padding: 0 35px;
   }
-  font-size: 14pt;
-  height: 50px;
+  font-size: 12pt;
+  height: 43px;
+  min-width: 160px;
 }
 
 .button-medium {
