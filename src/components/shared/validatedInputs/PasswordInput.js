@@ -8,6 +8,7 @@ export default class PasswordInput extends InputBase {
     render () {
         return <TextInput label='Password'
                           type='password'
+                          id='password'
                           validator={value => validate(validationTypes.password, value)}
                           validatorError={
                               <span>

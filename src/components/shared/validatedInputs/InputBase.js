@@ -79,8 +79,8 @@ export default class InputBase extends BaseComponent {
     };
 
     resolveLabel = () => {
-        const { label, required } = this.props;
-        return `${label} ${required && '*' || ''}`;
+        const { label } = this.props;
+        return label;
     };
 }
 
@@ -106,6 +106,7 @@ export class TextInput extends InputBase {
             defaultValue,
             fullWidth = true,
             type,
+            id,
             maxLength = 50
         } = this.props;
 
@@ -123,6 +124,7 @@ export class TextInput extends InputBase {
                 <input value={value}
                        placeholder={this.resolveLabel()}
                        type={type}
+                       id={id}
                        onBlur={this.onFocusOut}
                        className="btw-input-new"
                        onChange={e => {

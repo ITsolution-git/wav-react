@@ -48,9 +48,11 @@ module.exports = (driver) => {
 
 	let verifySignOnPage = async () => {
 		try {
-			driver.findElement(signOnPage.username);
-			driver.findElement(signOnPage.password);
-			driver.findElement(signOnPage.login);
+			setTimeout(() => {
+				driver.findElement(signOnPage.username);
+				driver.findElement(signOnPage.password);
+				driver.findElement(signOnPage.login);
+			}, 1000)
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true

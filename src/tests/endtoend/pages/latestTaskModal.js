@@ -18,7 +18,7 @@ module.exports = (driver) => {
 
 	let validateWelcomeModalIsDisplayed =   async  () => {
 		try {
-			await await driver.findElement(taskModal.modalCDialog).isDisplayed();
+			await driver.wait(core.automate.until.elementLocated(taskModal.modalCDialog), 4000);
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				console.log(error)
@@ -34,7 +34,8 @@ module.exports = (driver) => {
 
 	let dismissModal =  async () => {
 		try {
-			 await driver.findElement(taskModal.dismissButtonOnModal).click();
+			let modal = await driver.wait(core.automate.until.elementLocated(taskModal.dismissButtonOnModal), 4000);
+			modal.click()
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
