@@ -61,7 +61,7 @@ class Register extends BaseComponent {
 		const { isValid, btwIdentity, termsAndPrivacy } = this.state;
 		this.setState({ startValidation: true });
 
-		if (!termsAndPrivacy) {
+		if (!termsAndPrivacy && this.isDesktop()) {
 			return;
         }
         if (Object.values(isValid).every(val => val)) {
