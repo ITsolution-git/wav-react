@@ -7,6 +7,7 @@ export default class LastNameInput extends InputBase {
     render () {
         return <TextInput label='Last Name'
                           type='text'
+                          id='lastname'
                           validator={value => validate('text', value)}
                           name={fields.lastName}
                           {...this.props } />
