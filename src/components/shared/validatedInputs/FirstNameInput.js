@@ -7,6 +7,7 @@ export default class FirstNameInput extends InputBase {
     render () {
         return <TextInput label='First Name'
                           type='text'
+                          id='firstname'
                           validator={value => validate('text', value)}
                           name={fields.firstName}
                           {...this.props } />

@@ -133,11 +133,13 @@ class MakeList extends BaseComponent {
 											<Col xs={12} md={6}>
 												<FirstNameInput startValidation={startValidation}
 																required
+																id={`firstname${i + 1}`}
 																onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
 											</Col>
 											<Col xs={12} md={6}>
 												<LastNameInput startValidation={startValidation}
 																required
+																id={`lastname${i + 1}`}
 																onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
 											</Col>
 										</Row>

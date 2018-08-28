@@ -17,7 +17,6 @@ import MobileLogo from '../layout/MobileLogo';
 import {
 	FirstNameInput,
 	LastNameInput,
-	UsernameInput,
 	EmailInput,
 	PasswordInput,
 	TextInput
@@ -32,7 +31,6 @@ class Register extends BaseComponent {
 			isValid: {
 				[fieldConstants.firstName]: false,
 				[fieldConstants.lastName]: false,
-				[fieldConstants.username]: false,
 				[fieldConstants.email]: false,
 				[fieldConstants.password]: false,
 				'confirmPassword': false
@@ -62,7 +60,7 @@ class Register extends BaseComponent {
 
 		if (!termsAndPrivacy) {
 			return;
-		}
+        }
         if (Object.values(isValid).every(val => val)) {
             this.props.btwRegister(btwIdentity)
         }
@@ -134,6 +132,7 @@ class Register extends BaseComponent {
                             <Col md={12}>
                                 <TextInput label='Confirm Password'
                                            type='password'
+                                           id="confirmPassword"
                                            validator={value => value === this.state.btwIdentity[fieldConstants.password]}
                                            validatorError='The passwords do not match'
                                            onChange={this.handleChange}
@@ -146,7 +145,7 @@ class Register extends BaseComponent {
 							<div className="col-xs-1 padding0">
 								<label className="checkbox-container">
 									<input type="checkbox" onClick={this.onTermsAndPrivacy}/>
-									<span className="checkmark"></span>
+									<span className="checkmark" id="terms_policy"></span>
 								</label>
 							</div>
 							<div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
