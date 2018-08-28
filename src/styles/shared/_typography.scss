@@ -33,6 +33,14 @@
 }
 
 // white
+.title-32-white {
+  @extend .title-32;
+  color: $white;
+}
+.title-24-white {
+  @extend .title-24;
+  color: $white;
+}
 .title-20-white {
   @extend .title-20;
   color: $white;
@@ -41,16 +49,16 @@
   @extend .title-16;
   color: $white;
 }
+.title-14-white {
+  @extend .title-14;
+  color: $white;
+}
+.title-12-white {
+  @extend .title-12;
+  color: $white;
+}
 .text-18-white {
   @extend .text-18;
-  color: $white;
-}
-.title-24-white {
-  @extend .title-24;
-  color: $white;
-}
-.title-32-white {
-  @extend .title-32;
   color: $white;
 }
 
@@ -63,20 +71,119 @@
   @extend .title-24;
   color: $blue;
 }
+.title-20-blue {
+  @extend .title-20;
+  color: $blue;
+}
+.title-16-blue {
+  @extend .title-16;
+  color: $blue;
+}
+.title-14-blue {
+  @extend .title-14;
+  color: $blue;
+}
+.title-12-blue {
+  @extend .title-12;
+  color: $blue;
+}
+.text-18-blue {
+  @extend .text-18;
+  color: $blue;
+}
 
 // light-blue
 .title-32-light-blue {
   @extend .title-32;
   color: $light-blue;
 }
-
-// dark blue
-#title-12-dark-blue {
+.title-24-light-blue {
+  @extend .title-24;
+  color: $light-blue;
+}
+.title-20-light-blue {
+  @extend .title-20;
+  color: $light-blue;
+}
+.title-16-light-blue {
+  @extend .title-16;
+  color: $light-blue;
+}
+.title-14-light-blue {
   @extend .title-14;
-  color: $dark-blue;
+  color: $light-blue;
+}
+.title-12-light-blue {
+  @extend .title-12;
+  color: $light-blue;
+}
+.text-18-light-blue {
+  @extend .text-18;
+  color: $light-blue;
 }
 
 
+// dark blue
+.title-32-dark-blue {
+  @extend .title-32;
+  color: $dark-blue;
+}
+.title-24-dark-blue {
+  @extend .title-24;
+  color: $dark-blue;
+}
+.title-20-dark-blue {
+  @extend .title-20;
+  color: $dark-blue;
+}
+.title-16-dark-blue {
+  @extend .title-16;
+  color: $dark-blue;
+}
+.title-14-dark-blue {
+  @extend .title-14;
+  color: $dark-blue;
+}
+.title-12-dark-blue {
+  @extend .title-12;
+  color: $dark-blue;
+}
+.text-18-dark-blue {
+  @extend .text-18;
+  color: $dark-blue;
+}
+
+//red
+.title-32-red {
+  @extend .title-32;
+  color: $red;
+}
+.title-24-red {
+  @extend .title-24;
+  color: $red;
+}
+.title-20-red {
+  @extend .title-20;
+  color: $red;
+}
+.title-16-red {
+  @extend .title-16;
+  color: $red;
+}
+.title-14-red {
+  @extend .title-14;
+  color: $red;
+}
+.title-12-red {
+  @extend .title-12;
+  color: $red;
+}
+.text-18-red {
+  @extend .text-18;
+  color: $red;
+}
+
+// links
 #link-small {
   font-family: Avenir-Light;
   font-size: 15px;
