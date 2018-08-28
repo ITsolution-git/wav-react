@@ -5,6 +5,7 @@ import { btwRegister } from '../../actions/SignOnAction';
 import YouTube from 'react-youtube';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
@@ -95,9 +96,12 @@ class Register extends BaseComponent {
                         { this.isDesktop() && <AboutInfo /> }
                     </Col>
 					<Col mdOffset={1} md={4} xs={12} className="no-padding">
-                        <div id="title" className="title-32-light-blue">WELCOME TO BETHEWAVE!</div>
-                        <div className="title-24-blue">Help your friends vote.</div>
-                        <div id="signup-text" className="title-24-blue">SIGN UP</div>
+						 { this.isDesktop() && <div id="title" className="title-32-light-blue">WELCOME TO BETHEWAVE!</div> }
+                        { this.isDesktop() && <div className="title-24-blue">Help your friends vote.</div> }
+						 { this.isDesktop()
+							 ? <div id="signup-text" className="title-24-blue">SIGN UP</div>
+							 : <div id="signup-text-mobile" className="title-24-white">Sign up</div>
+						 }
                         <Row>
                             <Col md={6}>
                                 <FirstNameInput onChange={this.handleChange}
@@ -142,24 +146,26 @@ class Register extends BaseComponent {
                                            required />
                             </Col>
                         </Row>
-						<div className="row">
-							<div className="col-xs-1 padding0">
-								<label className="checkbox-container">
-									<input type="checkbox" onClick={this.onTermsAndPrivacy}/>
-									<span className="checkmark"></span>
-								</label>
-							</div>
-							<div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
-								<label>
+						<div>
+                            <div className="row">
+                                <div className="col-xs-1 padding0">
+                                    <label className="checkbox-container">
+                                        <input type="checkbox" onClick={this.onTermsAndPrivacy}/>
+                                        <span className="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
+                                    <label>
 									<span id="title-12-dark-blue">
 										I have read and understood the term of use and by signing up, I agree to Bethewave's
 										<Link id="link-small-red" target="_blank" to='/termsOfUse'> Terms of Use </Link>
 										and <Link id="link-small-red" target="_blank" to='/privacyPolicy'> Privacy Policy</Link>
 									</span>
-								</label>
-							</div>
+                                    </label>
+                                </div>
+                            </div>
+                            { startValidation && !termsAndPrivacy && <span className="error-text">Terms and Privacy is required</span> }
 						</div>
-						{ startValidation && !termsAndPrivacy && <span>Terms and Privacy is required</span> }
                         <Row className="justify-content-center">
                             <Col md={12} xs={6} align="center">
                                 <div id="btn_signup">

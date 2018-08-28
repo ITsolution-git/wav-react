@@ -5,6 +5,10 @@
     #signup-text {
         margin: 5% 0 3% 0;
     }
+    #signup-text-mobile {
+        @extend #signup-text;
+        text-align: center;
+    }
     #btn_signup {
         margin: 4% 0 4% 0;
     }
