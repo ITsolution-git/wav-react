@@ -4,7 +4,6 @@
     border-radius: 0;
   }
   .modal-header {
-    font-family: Gotham_Narrow_Black;
     border-bottom: none;
     text-align: center;
     color: #0097A7;
@@ -17,5 +16,14 @@
   }
   .modal-footer {
     border-top: none;
+  }
+}
+
+.btw-modal-mobile {
+  margin-top: 30%;
+  width: 97%;
+  border-radius: 7px;
+  .modal-header, .modal-footer {
+    border: none;
   }
 }

@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { btwRegister } from '../../actions/SignOnAction';
-import YouTube from 'react-youtube';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
@@ -22,6 +23,7 @@ import {
 	TextInput
 } from '../shared/validatedInputs';
 import colors from "../../constants/ColorConstants";
+import Dialog from '../shared/Dialog';
 
 class Register extends BaseComponent {
 	constructor() {
@@ -35,7 +37,8 @@ class Register extends BaseComponent {
 				[fieldConstants.password]: false,
 				'confirmPassword': false
 			},
-			termsAndPrivacy: false
+			termsAndPrivacy: false,
+            showInfoModal: false
 		}
 	}
 
@@ -58,13 +61,17 @@ class Register extends BaseComponent {
 		const { isValid, btwIdentity, termsAndPrivacy } = this.state;
 		this.setState({ startValidation: true });
 
-		if (!termsAndPrivacy) {
+		if (!termsAndPrivacy && this.isDesktop()) {
 			return;
         }
         if (Object.values(isValid).every(val => val)) {
             this.props.btwRegister(btwIdentity)
         }
 	}
+
+    onCloseInfoModal = () => {
+    	this.setState({ showInfoModal: false })
+	};
 
 	componentWillReceiveProps(props) {
 		if (props.isSuccess) {
@@ -73,29 +80,37 @@ class Register extends BaseComponent {
 	}
 
 	render() {
-		const opts = {
-			playerVars: { // https://developers.google.com/youtube/player_parameters
-			  autoplay: 0
-			}
-		};
-
 		const {
 			startValidation,
-			termsAndPrivacy
+			termsAndPrivacy,
+            showInfoModal
 		} = this.state;
 
 		const { error } = this.props;
 		return (
                 <Row className="btw-register no-margin">
                     { this.isMobile() && this.renderBackground(colors.blue) }
-                    <MobileLogo />
+					{ this.isMobile() && <Row>
+						<Col xs={6}>
+                            <MobileLogo />
+						</Col>
+						<Col xs={6}>
+                            <FontAwesome className="pull-right"
+										 id="info-icon"
+										 onClick={() => this.setState({ showInfoModal: true })}
+										 name='info-circle' />
+						</Col>
+					</Row> }
                     <Col md={5} mdOffset={1} className="no-padding">
                         { this.isDesktop() && <AboutInfo /> }
                     </Col>
-					<Col mdOffset={1} md={4} xs={12} className="no-padding">
-                        <div id="title" className="title-32-light-blue">WELCOME TO BETHEWAVE!</div>
-                        <div className="title-24-blue">Help your friends vote.</div>
-                        <div id="signup-text" className="title-24-blue">SIGN UP</div>
+					<Col mdOffset={1} md={4} xsOffset={2} xs={8} className="no-padding">
+						 { this.isDesktop() && <div id="title" className="title-32-light-blue">WELCOME TO BETHEWAVE!</div> }
+                        { this.isDesktop() && <div className="title-24-blue">Help your friends vote.</div> }
+						 { this.isDesktop()
+							 ? <div id="signup-text" className="title-24-blue">SIGN UP</div>
+							 : <div id="signup-text-mobile" className="title-24-white">Sign up</div>
+						 }
                         <Row>
                             <Col md={6}>
                                 <FirstNameInput onChange={this.handleChange}
@@ -141,38 +156,68 @@ class Register extends BaseComponent {
                                            required />
                             </Col>
                         </Row>
-						<div className="row">
-							<div className="col-xs-1 padding0">
-								<label className="checkbox-container">
-									<input type="checkbox" onClick={this.onTermsAndPrivacy}/>
+						{ this.isDesktop() && <div>
+                            <div className="row">
+                                <div className="col-xs-1 padding0">
+                                    <label className="checkbox-container">
+                                        <input type="checkbox" onClick={this.onTermsAndPrivacy}/>
 									<span className="checkmark" id="terms_policy"></span>
-								</label>
-							</div>
-							<div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
-								<label>
-									<span id="title-12-dark-blue">
+                                    </label>
+                                </div>
+                                <div className={ this.isMobile() ? "col-xs-11 padding0" : "col-xs-11 padding0 terms-privacy"}>
+                                    <label>
+									<span className="title-14-dark-blue">
 										I have read and understood the term of use and by signing up, I agree to Bethewave's
 										<Link id="link-small-red" target="_blank" to='/termsOfUse'> Terms of Use </Link>
 										and <Link id="link-small-red" target="_blank" to='/privacyPolicy'> Privacy Policy</Link>
 									</span>
-								</label>
-							</div>
-						</div>
-						{ startValidation && !termsAndPrivacy && <span>Terms and Privacy is required</span> }
+                                    </label>
+                                </div>
+                            </div>
+                            { startValidation && !termsAndPrivacy && <span className="error-text">Terms and Privacy is required</span> }
+						</div> }
                         <Row className="justify-content-center">
-                            <Col md={12} xs={6} align="center">
+                            <Col md={12} xs={12} align="center">
                                 <div id="btn_signup">
                                     <Button onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up!</Button>
                                 </div>
                             </Col>
                         </Row>
 						<Row>
-							<Col>
+							<Col id="registered-text-div">
 								<span id='registered-text'>Already registered? </span>
                                 <Link id="link-small" target="_blank" to='/'> Sign in </Link>
 							</Col>
 						</Row>
 					</Col>
+                    <Dialog show={showInfoModal}
+                            closeButton
+                            onClose={this.onCloseInfoModal}>
+                        <div>
+							<div className="title-20-light-blue">
+								If you're here, it's because you've <br />
+								agreed to help us with something <br />
+								really important.
+							</div>
+							<div id="about-dialog-content" className="text-18-dark-blue">
+								We need to make 2018 a wave election for <br />
+								progressives, and one of the most <br />
+								important things you can do is make sure <br />
+								all your progressive friends vote.
+								<br /><br />
+								BeTheWave is an app that makes this easy, <br />
+								and you'are one of the first people to use <br />
+								it. As a captain on BeTheWave, you'll list <br />
+								out the names of the friends you want to <br />
+								help and then we'll take you step by step <br />
+								through the process of getting them <br />
+								registered and to the polls.
+							</div>
+							<div className="title-20-dark-blue">
+								Thanks for being part of this!
+							</div>
+						</div>
+                    </Dialog>
 				</Row>
 		);
 	}
