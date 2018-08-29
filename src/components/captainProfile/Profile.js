@@ -20,7 +20,6 @@ import Dialog from '../shared/Dialog';
 import {
 	FirstNameInput,
 	LastNameInput,
-	UsernameInput,
 	EmailInput,
 	PasswordInput,
 	TextInput,
@@ -40,7 +39,6 @@ class Profile extends BaseComponent {
 			isValid: {
 				[fieldConstants.firstName]: false,
 				[fieldConstants.lastName]: false,
-				[fieldConstants.username]: false,
 				[fieldConstants.email]: false,
 				[fieldConstants.address]: false,
 				[fieldConstants.phone]: false,
@@ -48,7 +46,7 @@ class Profile extends BaseComponent {
 				[fieldConstants.zipCode]: false,
 				[fieldConstants.password]: false,
 				'confirmPassword': false,
-				'confirmUsername': false
+				'confirmName': false
 			},
 			updateResult: null,
 			showConfirmModal: false
@@ -132,7 +130,7 @@ class Profile extends BaseComponent {
 	closeAccount = () => {
 		const { userProfile, isValid } = this.state;
 
-		if (!isValid['confirmUsername']) {
+		if (!isValid['confirmName']) {
 			return ;
 		}
 		this.props.actions.deleteUser({ userid: userProfile.id })
@@ -172,14 +170,6 @@ class Profile extends BaseComponent {
 											defaultValue={userProfile.lastname || ''}
 											onChange={this.handleChange}
 											required
-										/>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={12}>
-										<UsernameInput 
-											defaultValue={userProfile.username || ''}
-											onChange={this.handleChange}
 										/>
 									</Col>
 								</Row>
@@ -355,7 +345,7 @@ class Profile extends BaseComponent {
 													validator={value => value === (this.state.userProfile[fieldConstants.firstName] + ' ' + this.state.userProfile[fieldConstants.lastName])}
 													validatorError='The name is not correct!'
 													onChange={this.handleChange}
-													name='confirmUsername' />
+													name='confirmName' />
 										</Col>
 									</Row>
 							</Dialog>
