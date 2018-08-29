@@ -1,11 +1,11 @@
 import React from 'react';
-import { renderLogo } from './HeaderHelper';
+import Logo from './Logo';
 import BaseComponent from '../shared/BaseComponent';
 class MobileLogo extends BaseComponent {
     render() {
         return this.isMobile()
             ? <div id="mobile-logo">
-                {renderLogo()}
+                <Logo />
             </div>
             : null
     }

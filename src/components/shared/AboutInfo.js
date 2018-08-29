@@ -1,11 +1,13 @@
 import React from 'react';
-import { renderLogo } from '../layout/HeaderHelper';
+import Logo from '../layout/Logo';
 
 export default class AboutInfo extends React.Component {
     render() {
         return (
             <div className="btw-about-info">
-                <div className="logo">{ renderLogo() }</div>
+                <div className="logo">
+                    <Logo />
+                </div>
                 <div className="text-block">
                     <div className="title-20-white">
                         If you're here, it's because you've agreed to help us with something really important.

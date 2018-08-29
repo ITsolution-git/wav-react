@@ -26,7 +26,7 @@ import boardingTypes from "../../constants/VoterBoardingType";
 
 import Dialog from '../shared/Dialog';
 import Button from '../shared/Button';
-import { renderLogo } from './HeaderHelper';
+import Logo from './Logo';
 
 class SignedOnHeader extends BaseComponent {
 
@@ -172,7 +172,7 @@ class SignedOnHeader extends BaseComponent {
                 <Navbar>
                     <Navbar.Header className='header-icon'>
                         <Navbar.Brand pullLeft>
-                            { renderLogo() }
+                            <Logo />
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
