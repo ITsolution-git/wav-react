@@ -5,15 +5,38 @@
     #signup-text {
         margin: 5% 0 3% 0;
     }
+    #signup-text-mobile {
+        @extend #signup-text;
+        text-align: center;
+        margin-top: 20%;
+    }
     #btn_signup {
         margin: 4% 0 4% 0;
     }
-    #registered-text {
-        font-family: Avenir-Light;
-        font-weight: 600;
-        font-size: 14px;
-        color: $dark-blue;
+    #registered-text-div {
+        @include respond-to($phone) {
+            text-align: center;
+            margin-top: 20%;
+        }
+        #registered-text {
+            font-family: Avenir-Light;
+            font-weight: 600;
+            font-size: 14px;
+            @include respond-to($phone) {
+                color: $white;
+            }
+            @include respond-to($desktop) {
+                color: $dark-blue;
+            }
+        }
     }
+    #info-icon {
+        cursor: pointer;
+        color: $white;
+        font-size: 35px;
+        margin: 30px 20px 0 0;
+    }
+
     /* check box custom css ** no change ** */
     .checkbox-container {
         display: block;
@@ -76,4 +99,8 @@
         opacity: 1;
     }
     /* check box custom css end */
+}
+
+#about-dialog-content {
+    margin: 20px 0 20px 0;
 }
