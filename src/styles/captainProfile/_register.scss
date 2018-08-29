@@ -8,7 +8,7 @@
     #signup-text-mobile {
         @extend #signup-text;
         text-align: center;
-        margin-top: 20%;
+        margin-top: 10%;
     }
     #btn_signup {
         margin: 4% 0 4% 0;
@@ -16,7 +16,6 @@
     #registered-text-div {
         @include respond-to($phone) {
             text-align: center;
-            margin-top: 20%;
         }
         #registered-text {
             font-family: Avenir-Light;

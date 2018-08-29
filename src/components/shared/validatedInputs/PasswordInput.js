@@ -11,12 +11,13 @@ export default class PasswordInput extends InputBase {
                           id='password'
                           validator={value => validate(validationTypes.password, value)}
                           validatorError={
-                              <span>
-                                  <span>At least one special character</span><br />
-                                  <span>At least one number</span><br />
-                                  <span>At lease one upper case character</span><br />
-                                  <span>Minimum of 7 characters</span><br />
-                              </span>
+                              <div className="btw-password-error">
+                                  <div id="requirements" className="title-16-dark-blue">Password requirements</div>
+                                  <span>At least one special character</span>
+                                  <span>At least one number</span>
+                                  <span>At lease one upper case character</span>
+                                  <span>Minimum of 7 characters</span>
+                              </div>
                           }
                           name={fields.password}
                           {...this.props } />

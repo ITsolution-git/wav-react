@@ -85,6 +85,10 @@
   }
 }
 
+.btw-error-white {
+  color: $white !important;
+}
+
 .btw-spinner {
   display: flex;
   padding: 20px 0 20px 0;
@@ -94,3 +98,16 @@
   align-items: center;
 }
 
+.btw-password-error {
+  #requirements {
+    margin-bottom: 10px;
+  }
+  span {
+    display: block;
+    margin-top: 5px;
+  }
+  border-radius: 3px;
+  background-color: $white;
+  color: $dark-blue;
+  padding: 10px 5px 5px 10px;
+}
