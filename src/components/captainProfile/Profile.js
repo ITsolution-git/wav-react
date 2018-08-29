@@ -15,12 +15,11 @@ import ProfileConstants from '../../constants/ProfileConstants'
 import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
 import { updateProfile, deleteUser } from '../../actions/UserAction';
 
-import ConfirmationDialog from '../../components/shared/ConfirmationDialog'
+import Dialog from '../shared/Dialog';
 
 import {
 	FirstNameInput,
 	LastNameInput,
-	UsernameInput,
 	EmailInput,
 	PasswordInput,
 	TextInput,
@@ -40,14 +39,14 @@ class Profile extends BaseComponent {
 			isValid: {
 				[fieldConstants.firstName]: false,
 				[fieldConstants.lastName]: false,
-				[fieldConstants.username]: false,
 				[fieldConstants.email]: false,
 				[fieldConstants.address]: false,
 				[fieldConstants.phone]: false,
 				[fieldConstants.dateOfBirth]: false,
 				[fieldConstants.zipCode]: false,
 				[fieldConstants.password]: false,
-				'confirmPassword': false
+				'confirmPassword': false,
+				'confirmName': false
 			},
 			updateResult: null,
 			showConfirmModal: false
@@ -129,8 +128,15 @@ class Profile extends BaseComponent {
 	 * Api call for close account
 	 */
 	closeAccount = () => {
-		const { userProfile } = this.state;
+		const { userProfile, isValid } = this.state;
+
+		if (!isValid['confirmName']) {
+			return ;
+		}
 		this.props.actions.deleteUser({ userid: userProfile.id })
+		this.setState({
+			showConfirmModal: false
+		})
 	}
 
 	/**
@@ -142,7 +148,6 @@ class Profile extends BaseComponent {
 
 	render() {
 		const { userProfile } = this.state;
-		console.log(userProfile)
 
 		return (
 			<div>
@@ -165,14 +170,6 @@ class Profile extends BaseComponent {
 											defaultValue={userProfile.lastname || ''}
 											onChange={this.handleChange}
 											required
-										/>
-									</Col>
-								</Row>
-								<Row>
-									<Col md={12}>
-										<UsernameInput 
-											defaultValue={userProfile.username || ''}
-											onChange={this.handleChange}
 										/>
 									</Col>
 								</Row>
@@ -298,23 +295,60 @@ class Profile extends BaseComponent {
 								</Col>
 							</Row>
 							<Row className="margin-right">
-								<Col md={6} xs={6} style={{textAlign:'right'}}>
+								<Col md={12} xs={12} style={{textAlign:'center'}}>
 									<div id="btn_signup">
 										<Button onClick={this.updateProfile}>Update Profile</Button>
 									</div>
 								</Col>
-								<Col md={6} xs={6} style={{textAlign:'left'}}>
+							</Row>
+
+							<div className="title2" style={{marginTop:'10px'}}>Account Services</div>
+
+							<Row className="account-service">
+								<Col md={6} xs={6}>
+									<span>Delete account</span>
+								</Col>
+								<Col md={6} xs={6} style={{textAlign:'center'}}>
 									<div id="btn_remove">
-										<Button onClick={() => this.setState({showConfirmModal: true})}>Close Account</Button>
+										<Button onClick={() => this.setState({showConfirmModal: true})} style={{border:'2px solid red', color:'red', backgroundColor:'white'}}>Close Account</Button>
 									</div>
 								</Col>
 							</Row>
-							<ConfirmationDialog show={this.state.showConfirmModal}
+
+							<Dialog id='closeAccountDialog'
 								title='Warning!'
-								description='Deleting this user will result in you deleting all their voters and related tasks. Are you sure you want to continue with deleting this user?'
-								submitText='Yes'
-								onSubmit={() => this.closeAccount()}
-								onClose={this.onCloseConfirmModal} />
+								show={this.state.showConfirmModal}
+								actionButtons={
+									<Row>
+										<Col md={6} xs={6} className="text-right">
+											<Button size='medium' onClick={this.closeAccount}>
+												I understand
+											</Button>
+										</Col>
+										<Col md={6} xs={6} className="text-left">
+											<Button  size='medium' onClick={this.onCloseConfirmModal}>
+												Go back
+											</Button>
+										</Col>
+									</Row>
+								}
+								onClose={this.onCloseConfirmModal}>
+									<div style={{padding:'15px'}}>
+										<h4 style={{color:'grey', border:'1px solid red', padding:'10px'}}>Deleting your account will remove all progress and tasks associated with this account. Your Logon credentials would not work and in order to use this platform, you will need to re-register</h4>
+										<h4>Confirm by typing in your name in the text below to authorize us to delete your account</h4>
+									</div>
+
+									<Row>
+										<Col md={12} style={{padding:'0 30px'}}>
+											<TextInput label='Fistname Lastname'
+													type='text'
+													validator={value => value === (this.state.userProfile[fieldConstants.firstName] + ' ' + this.state.userProfile[fieldConstants.lastName])}
+													validatorError='The name is not correct!'
+													onChange={this.handleChange}
+													name='confirmName' />
+										</Col>
+									</Row>
+							</Dialog>
 						</div>
 					</div>
 				</div>
