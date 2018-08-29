@@ -34,7 +34,7 @@ module.exports = (driver) => {
 
 	let dismissModal =  async () => {
 		try {
-			let modal = await driver.wait(core.automate.until.elementLocated(taskModal.dismissButtonOnModal), 4000);
+			let modal = await driver.wait(core.automate.until.elementLocated(taskModal.dismissButtonOnModal), 10000);
 			modal.click()
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){

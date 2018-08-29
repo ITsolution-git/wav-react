@@ -6,6 +6,15 @@
       "tags":[
         "end to end happy path"
       ]
+    },
+    {
+      "firstname": "automate_first",
+      "lastname": "automate_last",
+      "email": "automate@test1234.com",
+      "password": "Aa5233713!",
+      "tags":[
+        "new user signup"
+      ]
     }
   ]
 }
