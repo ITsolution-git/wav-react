@@ -6,15 +6,16 @@
 let core = require('../core');
 let urlFetcher = require('../support/dataParser');
 let expect = require('chai').expect;
+let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
 
 	let dashboardPage = {
-		captainsDashboard: core.automate.By.className('btw-captains-dashboard'),
-		taskCard: core.automate.By.className('tasks'),
-		votersCard   : core.automate.By.className('voters'),
-		messageCard   : core.automate.By.className('messages')
+		captainsDashboard	: core.automate.By.className('btw-captains-dashboard'),
+		taskCard					: core.automate.By.className('tasks'),
+		votersCard   			: core.automate.By.className('voters'),
+		messageCard   		: core.automate.By.className('messages')
 	}
 
 	let validateDashboard = async (...args) => {
@@ -31,9 +32,24 @@ module.exports = (driver) => {
 				expect(false).to.be.true
 			}
 		}
-
 	};
+
+	let validateOnboardingResultProcess = async (value) => {
+		try {
+			let voters = await driver.findElement(helper.By.className('count'));
+			let num = await voters.getText();
+			expect(num).to.equal(value)
+		}catch(error){
+			if (error instanceof core.automate.error.NoSuchElementError){
+				expect(false).to.be.true
+			}else {
+				console.log(error)
+				expect(false).to.be.true
+			}
+		}
+	}
 	return {
-		validateDashboard
+		validateDashboard,
+		validateOnboardingResultProcess
 	}
 }

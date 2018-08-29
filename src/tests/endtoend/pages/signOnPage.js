@@ -2,25 +2,24 @@
  *  Created by KennethObikwelu on 8/16/18.
  */
 
-
-
 let core = require('../core');
 let urlFetcher = require('../support/dataParser');
 let expect = require('chai').expect;
+let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
 
 	let signOnPage = {
-		email: core.automate.By.id('email'),
-		password: core.automate.By.id('password'),
-		login   : core.automate.By.className('btw-button')
+		email			: core.automate.By.id('email'),
+		password	: core.automate.By.id('password'),
+		login   	: core.automate.By.className('btw-button'),
+		signup   	: core.automate.By.id('link-large')
 	}
 
 	let openSignOnPage =  async (url) => {
 		try {
 			 await driver.get(urlFetcher.retrieveUrl(url).url);
-			  driver.findElement(core.automate.By.id('loginHeader'));
 		} catch (error) {
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
@@ -48,11 +47,10 @@ module.exports = (driver) => {
 
 	let verifySignOnPage = async () => {
 		try {
-			setTimeout(() => {
-				driver.findElement(signOnPage.username);
-				driver.findElement(signOnPage.password);
-				driver.findElement(signOnPage.login);
-			}, 1000)
+			await helper.timeout(1000);
+			await driver.findElement(signOnPage.email);
+			await driver.findElement(signOnPage.password);
+			await driver.findElement(signOnPage.login);
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
@@ -63,9 +61,26 @@ module.exports = (driver) => {
 		}
 
 	};
+
+	let openRegisterPage = async () => {
+		try {
+			let signup = await driver.findElement(signOnPage.signup);
+			signup.click()
+		} catch(error) {
+			if (error instanceof core.automate.error.NoSuchElementError){
+				console.log(error)
+				expect(false).to.be.true
+			}else {
+				console.log(error)
+				expect(false).to.be.true
+			}
+		}
+	}
+
 	return {
 		openSignOnPage,
 		validateSignOnProcess,
-		verifySignOnPage
+		verifySignOnPage,
+		openRegisterPage
 	}
 }
