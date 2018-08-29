@@ -2,6 +2,7 @@ import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from 'react-select';
+import classnames from 'classnames';
 
 import BaseComponent from '../../shared/BaseComponent';
 
@@ -107,7 +108,8 @@ export class TextInput extends InputBase {
             fullWidth = true,
             type,
             id,
-            maxLength = 50
+            maxLength = 50,
+            errorWhite = false
         } = this.props;
 
         const {
@@ -134,7 +136,9 @@ export class TextInput extends InputBase {
                            }
                        }}
                        disabled={disabled} />
-                <FormHelperText classes={{root: 'btw-input-error'}}>{ error }</FormHelperText>
+                <FormHelperText classes={{root: classnames('btw-input-error', { 'btw-error-white': errorWhite })}}>
+                    { error }
+                </FormHelperText>
             </FormControl>
         );
     };
@@ -167,6 +171,7 @@ export class Dropdown extends InputBase {
             required,
             disabled,
             defaultValue,
+            errorWhite = false,
             fullWidth = true
         } = this.props;
         const {
@@ -189,7 +194,7 @@ export class Dropdown extends InputBase {
                     onBlur={this.onFocusOut}
                     options={values.map(this.mapItem)}
                 />
-                <FormHelperText classes={{root: 'btw-input-error'}}
+                <FormHelperText classes={{root: classnames('btw-input-error', { 'btw-error-white': errorWhite })}}
                                 error={!isValid}>{ error }</FormHelperText>
             </FormControl>
         );
