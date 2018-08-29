@@ -177,6 +177,21 @@
       }
   }
 
+  .account-service {
+    margin-top: 15px;
+		border: 1px solid red;
+		padding: 20px 20px 20px 10px;
+
+		& > div:first-child {
+			display: flex;
+    	align-items: center;
+		}
+		span {
+			color: grey;
+			font-size: 21px;
+		}
+  }
+
   /* check box custom css ** no change ** */
   .checkbox-container {
       display: block;
@@ -251,4 +266,22 @@
       opacity: 1;
   }
   /* check box custom css end */
+}
+
+#closeAccountDialog {
+	.modal-title {
+		color: red;
+	}	
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-left {
+	text-align: left;
+}
+
+.text-right {
+	text-align: right;
 }
