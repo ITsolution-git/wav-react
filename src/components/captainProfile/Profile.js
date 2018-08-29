@@ -12,8 +12,10 @@ import RadioButtons from '../shared/inputs/RadioButtons';
 import { Dropdown } from '../shared/validatedInputs/InputBase'
 
 import ProfileConstants from '../../constants/ProfileConstants'
-import { getBtwUserProfile } from '../../actions/SignOnAction';
-import { updateProfile } from '../../actions/UserAction';
+import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
+import { updateProfile, deleteUser } from '../../actions/UserAction';
+
+import ConfirmationDialog from '../../components/shared/ConfirmationDialog'
 
 import {
 	FirstNameInput,
@@ -47,7 +49,8 @@ class Profile extends BaseComponent {
 				[fieldConstants.password]: false,
 				'confirmPassword': false
 			},
-			updateResult: null
+			updateResult: null,
+			showConfirmModal: false
 		}
 
 		props.actions.getBtwUserProfile();
@@ -67,6 +70,10 @@ class Profile extends BaseComponent {
 			this.setState({
 				updateResult: nextProps.user.isUpdatedProfile
 			})
+		}
+		// Signout when successfully closed account
+		if (nextProps.user.isDeleteSuccess === true) {
+			this.props.actions.btwLogout()
 		}
 	}
 
@@ -102,7 +109,7 @@ class Profile extends BaseComponent {
 	}
 
 	/**
-	 * 
+	 * Api call for update profile
 	 */
 	updateProfile = () => {
 		const { userProfile } = this.state
@@ -117,6 +124,21 @@ class Profile extends BaseComponent {
 
 		this.props.actions.updateProfile({userid, information})
 	}
+
+	/**
+	 * Api call for close account
+	 */
+	closeAccount = () => {
+		const { userProfile } = this.state;
+		this.props.actions.deleteUser({ userid: userProfile.id })
+	}
+
+	/**
+	 * Close modal
+	 */
+	onCloseConfirmModal = () => {
+        this.setState({showConfirmModal: false})
+    }
 
 	render() {
 		const { userProfile } = this.state;
@@ -276,12 +298,23 @@ class Profile extends BaseComponent {
 								</Col>
 							</Row>
 							<Row className="margin-right">
-								<Col md={12} xs={12} style={{textAlign:'center'}}>
+								<Col md={6} xs={6} style={{textAlign:'right'}}>
 									<div id="btn_signup">
 										<Button onClick={this.updateProfile}>Update Profile</Button>
 									</div>
 								</Col>
+								<Col md={6} xs={6} style={{textAlign:'left'}}>
+									<div id="btn_remove">
+										<Button onClick={() => this.setState({showConfirmModal: true})}>Close Account</Button>
+									</div>
+								</Col>
 							</Row>
+							<ConfirmationDialog show={this.state.showConfirmModal}
+								title='Warning!'
+								description='Deleting this user will result in you deleting all their voters and related tasks. Are you sure you want to continue with deleting this user?'
+								submitText='Yes'
+								onSubmit={() => this.closeAccount()}
+								onClose={this.onCloseConfirmModal} />
 						</div>
 					</div>
 				</div>
@@ -301,7 +334,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ getBtwUserProfile, updateProfile }, dispatch)
+        actions: bindActionCreators({ getBtwUserProfile, updateProfile, deleteUser, btwLogout }, dispatch)
     };
 };
 
