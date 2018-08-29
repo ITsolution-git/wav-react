@@ -79,6 +79,15 @@ class Register extends BaseComponent {
 		}
 	}
 
+	renderAlreadyRegistered = () => {
+		return (
+            <div id="registered-text-div">
+                <span id='registered-text'>Already registered? </span>
+                <Link id="link-small" target="_blank" to='/'> Sign in </Link>
+            </div>
+        );
+	};
+
 	render() {
 		const {
 			startValidation,
@@ -105,10 +114,15 @@ class Register extends BaseComponent {
                         { this.isDesktop() && <AboutInfo /> }
                     </Col>
 					<Col mdOffset={1} md={4} xsOffset={2} xs={8} className="no-padding">
+
 						 { this.isDesktop() && <div id="title" className="title-32-light-blue">WELCOME TO BETHEWAVE!</div> }
-                        { this.isDesktop() && <div className="title-24-blue">Help your friends vote.</div> }
 						 { this.isDesktop()
-							 ? <div id="signup-text" className="title-24-blue">SIGN UP</div>
+							 ? <Row id="signup-text">
+								 <Col md={6}>
+                                     <div className="title-24-blue">SIGN UP</div>
+								 </Col>
+								 <Col md={6}>{ this.renderAlreadyRegistered() }</Col>
+							   </Row>
 							 : <div id="signup-text-mobile" className="title-24-white">Sign up</div>
 						 }
                         <Row>
@@ -183,12 +197,10 @@ class Register extends BaseComponent {
                                 </div>
                             </Col>
                         </Row>
-						<Row>
-							<Col id="registered-text-div">
-								<span id='registered-text'>Already registered? </span>
-                                <Link id="link-small" target="_blank" to='/'> Sign in </Link>
-							</Col>
-						</Row>
+                        { this.isMobile() &&
+							<Row>
+								<Col> { this.renderAlreadyRegistered() }</Col>
+							</Row> }
 					</Col>
                     <Dialog show={showInfoModal}
                             closeButton
