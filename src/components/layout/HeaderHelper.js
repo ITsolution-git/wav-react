@@ -56,9 +56,3 @@ export function isEmpty(obj) {
     }
     return true;
 }
-
-export function renderLogo() {
-    return (
-        <img src={logo} alt="" width={100} height={80} />
-    )
-}
