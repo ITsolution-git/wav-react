@@ -177,6 +177,7 @@ class Profile extends BaseComponent {
 									<Col md={12}>
 										<EmailInput 
 											defaultValue={userProfile.email || ''}
+											onChange={this.handleChange}
 											disabled={true}
 										/>
 									</Col>
