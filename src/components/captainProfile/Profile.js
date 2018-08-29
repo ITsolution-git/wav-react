@@ -341,7 +341,7 @@ class Profile extends BaseComponent {
 
 									<Row>
 										<Col md={12} style={{padding:'0 30px'}}>
-											<TextInput label='Fistname Lastname'
+											<TextInput label='Firstname Lastname'
 													type='text'
 													id="confirmName"
 													validator={value => value === (this.state.userProfile[fieldConstants.firstName] + ' ' + this.state.userProfile[fieldConstants.lastName])}
