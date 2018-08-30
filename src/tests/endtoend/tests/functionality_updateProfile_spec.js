@@ -17,7 +17,7 @@ describe('Update profile end to end tests', ()=>{
 	});
 
 
-	it('Happy Path update all profile information',  async ()=>{
+	/*it('Happy Path update all profile information',  async ()=>{
 
-	})
+	})*/
 })

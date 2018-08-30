@@ -8,56 +8,60 @@ let urlFetcher = require('../support/dataParser');
 
 let createSignOnPage 			= require('../pages/signOnPage');
 let createRegisterPage 		= require('../pages/registerPage');
-let createOnboardingPage 	= require('../pages/onboardingPage');
+let createOnBoardingPages 	= require('../pages/onboardingPage');
 let createTaskModal 			= require('../pages/latestTaskModal');
 let createDashboardPage 	= require('../pages/dashboardPage');
 let createSignedOnHeader 	= require('../pages/signedOnHeader');
 
 describe('Onboarding end to end tests', ()=>{
+	let signOnPage;
+	let registerPage;
+	let onBoardingPages;
+	let latestTaskModal;
+	let dashboardPage;
+	let signedOnHeader;
 
 	const newUser = urlFetcher.findByTag('new user signup');
 
 	beforeEach(()=>{
 		signOnPage 				= createSignOnPage(core.driver());
 		registerPage 			= createRegisterPage(core.driver());
-		onboardingPage 		= createOnboardingPage(core.driver());
+		onBoardingPages 		= createOnBoardingPages(core.driver());
 		latestTaskModal 	= createTaskModal(core.driver());
 		dashboardPage 		= createDashboardPage(core.driver());
 		signedOnHeader 		= createSignedOnHeader(core.driver());
 	});
 
 
-	it('Happy Path onboarding',  async () => {
+	it('****************************************** Happy Path onBoarding',  async () => {
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.openRegisterPage();
-		await registerPage.validateRegisterInputProcess(newUser);
-		await registerPage.validateMakelistInputProcess();
+		await registerPage.registerNewAccount(newUser);
+		await registerPage.shortListThreeVoters(newUser);
+		await onBoardingPages.enterMoreDetailsForVoter('1');
+		await onBoardingPages.enterMoreDetailsForVoter('2');
+		await onBoardingPages.enterMoreDetailsForVoter('3');
+		await onBoardingPages.validateGotoNextProcess();
+		
 	})
 
-	it('Happy Path onboarding - add more information for 1st user',  async ()=>{
-		await onboardingPage.validateOnboardingInputProcess('1');
-		await onboardingPage.validateGotoNextProcess();
+	/*it('Happy Path onboarding - add more information for 1st user',  async ()=>{
+
 	})
 
 	it('Happy Path onboarding - add more information for 2nd user',  async ()=>{
-		await onboardingPage.validateOnboardingInputProcess('2');
-		await onboardingPage.validateGotoNextProcess();
+
 	})
 
 	it('Happy Path onboarding - add more information for 3rd user',  async ()=>{
-		await onboardingPage.validateOnboardingInputProcess('3');
-		await onboardingPage.validateGotoNextProcess();
+		;
 	})
 
 	it('Happy Path onboarding - get all 3 matches ',  async ()=>{
-		await onboardingPage.validateFinishProcess();
-		await latestTaskModal.validateWelcomeModalIsDisplayed();
-		await latestTaskModal.dismissModal();
-		await dashboardPage.validateOnboardingResultProcess('3');
+
 	})
 
 	it('Happy Path onboarding - remove test user ',  async ()=>{
-		await signedOnHeader.closeAccount();
-		await signOnPage.verifySignOnPage();
-	})
+
+	})*/
 })

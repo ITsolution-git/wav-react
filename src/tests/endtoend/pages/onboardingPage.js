@@ -13,13 +13,17 @@ module.exports = (driver) => {
     next              : helper.By.xpath('//*[@id="root"]/div/div/div[2]/div/div[8]/div[2]/button')
   }
 
-  let validateOnboardingInputProcess =  async (index) => {
+  let enterMoreDetailsForVoter =  async (index) => {
     try {
 
       await helper.timeout(300)
       await driver.findElement(registerPage.email).sendKeys('automate@test' + index + '.com');
       await driver.findElement(registerPage.city).sendKeys('New York');
       await driver.findElement(registerPage.state).sendKeys('NY\n');
+
+	    await driver.findElement(registerPage.next).click();
+	    let nextBtn = await driver.wait(core.automate.until.elementLocated(helper.By.xpath('//*[@id="root"]/div/div/div[2]/div/div[2]/div/div[2]/button')), 30000);
+	    nextBtn.click();
 
     } catch(error) {
 
@@ -76,7 +80,7 @@ module.exports = (driver) => {
   }
 
 	return {
-    validateOnboardingInputProcess,
+    enterMoreDetailsForVoter,
     validateGotoNextProcess,
     validateFinishProcess
 	}

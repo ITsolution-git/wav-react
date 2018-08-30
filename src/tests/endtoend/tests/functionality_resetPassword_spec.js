@@ -16,7 +16,7 @@ describe('Reset password end to end tests', ()=>{
 	});
 
 
-	it('Happy Path update one task',  async ()=>{
+	/*it('Happy Path update one task',  async ()=>{
 
-	})
+	})*/
 })

@@ -16,7 +16,7 @@ describe('Voter end to end tests', ()=>{
 	});
 
 
-	it('Happy Path add voter',  async ()=>{
+	/*it('Happy Path add voter',  async ()=>{
 
 	})
 
@@ -26,5 +26,5 @@ describe('Voter end to end tests', ()=>{
 
 	it('Happy Path update voter',  async ()=>{
 
-	})
+	})*/
 })
