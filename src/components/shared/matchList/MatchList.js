@@ -68,7 +68,7 @@ class MatchList extends BaseComponent {
                     </p>
                 </div> }
                 <div className='match-list'>
-                    { currentVoters.map((person, i) => <MatchItem key={i}
+                    { currentVoters.map((person, i) => <MatchItem key={i} id={'currentVoter' + i}
                                                        onClick={() => this.onNameClick(person)}
                                                        person={person} />
                         )}

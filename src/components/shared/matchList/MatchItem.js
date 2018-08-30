@@ -17,7 +17,7 @@ export default class MatchItem extends BaseComponent {
     };
 
     render () {
-        const { onClick, person } = this.props;
+        const { onClick, person, id } = this.props;
         const {
             firstname,
             lastname,
@@ -37,7 +37,7 @@ export default class MatchItem extends BaseComponent {
 
         const { moreEnabled } = this.state;
         return (
-            <Row className='name-row' onClick={onClick}>
+            <Row className='name-row' onClick={onClick} id={id}>
                 <Col md={4}>
                     <div className='name-info'>
                         { firstname } { lastname }
