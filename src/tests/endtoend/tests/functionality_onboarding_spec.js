@@ -26,7 +26,7 @@ describe('Onboarding end to end tests', ()=>{
 	beforeEach(()=>{
 		signOnPage 				= createSignOnPage(core.driver());
 		registerPage 			= createRegisterPage(core.driver());
-		onBoardingPages 		= createOnBoardingPages(core.driver());
+		onBoardingPages 	= createOnBoardingPages(core.driver());
 		latestTaskModal 	= createTaskModal(core.driver());
 		dashboardPage 		= createDashboardPage(core.driver());
 		signedOnHeader 		= createSignedOnHeader(core.driver());
@@ -37,16 +37,19 @@ describe('Onboarding end to end tests', ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.openRegisterPage();
 		await registerPage.registerNewAccount(newUser);
-		await registerPage.shortListThreeVoters(newUser);
+		await registerPage.shortListThreeVoters();
+		await onBoardingPages.enterMoreDetailsForVoter('0');
+		// //select one voter from matches
 		await onBoardingPages.enterMoreDetailsForVoter('1');
-		//select one voter from matches
+		// //select one voter from matches
 		await onBoardingPages.enterMoreDetailsForVoter('2');
-		//select one voter from matches
-		await onBoardingPages.enterMoreDetailsForVoter('3');
-		//select one voter from matches
+		// //select one voter from matches
 		await onBoardingPages.validateGotoNextProcess();
-		//validate dashboard
-		//signout
+		// //validate dashboard
+		await latestTaskModal.validateWelcomeModalIsDisplayed();
+		await latestTaskModal.dismissModal();
+		await signedOnHeader.closeAccount();
+		// //signout
 	})
 
 	/*it('Happy Path onboarding - add more information for 1st user',  async ()=>{

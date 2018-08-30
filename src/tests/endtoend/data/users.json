@@ -15,6 +15,41 @@
       "tags":[
         "new user signup"
       ]
+    },
+    {
+      "voters": [
+        {
+          "firstname": "Terrance",
+          "lastname": "Jones",
+          "city": "Atlanta",
+          "state": "GA",
+          "email": "automate@test1.com"
+        },
+        {
+          "firstname": "Curtis",
+          "lastname": "Jackson",
+          "city": "Queens",
+          "state": "NY",
+          "email": "automate@test2.com"
+        },
+        {
+          "firstname": "Peter",
+          "lastname": "John",
+          "city": "Atlanta",
+          "state": "GA",
+          "email": "automate@test3.com"
+        },
+        {
+          "firstname": "Steve",
+          "lastname": "Wagner",
+          "city": "Atlanta",
+          "state": "GA",
+          "email": "automate@test4.com"
+        }
+      ],
+      "tags": [
+        "new voters"
+      ]
     }
   ]
 }

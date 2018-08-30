@@ -3,4 +3,4 @@
 cd src/tests/endtoend/tests
 git clean -fdx
 npm install
-mocha *.js --full-trace --timeout 20000
+mocha *.js --full-trace --timeout 200000
