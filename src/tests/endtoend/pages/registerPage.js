@@ -1,10 +1,11 @@
 let core = require('../core');
-let urlFetcher = require('../support/dataParser');
+let dataParser = require('../support/dataParser');
 let expect = require('chai').expect;
 let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
+	let voters = dataParser.findByTag('new voters').voters
 
 	let registerPage = {
 		firstName      : core.automate.By.id('firstname'),
@@ -16,7 +17,7 @@ module.exports = (driver) => {
 		signUpButton   : core.automate.By.className('btw-button')
 	}
 
-	let registerNewAccount = async (...args) => {
+	let registerNewAccount = async (args) => {
 		try {
 
 			await helper.timeout(1000);
@@ -42,15 +43,15 @@ module.exports = (driver) => {
 		}
 	};
 
-	let shortListThreeVoters = async (...args) => {
+	let shortListThreeVoters = async () => {
 		try {
 			let nextView = await driver.wait(core.automate.until.elementLocated(helper.By.className('view-next')), 15000);
 			nextView.click();
 
 			await helper.timeout(200);
-			for (let i = 1; i < 5; i++) {
-				await driver.findElement(helper.By.id('firstname' + i)).sendKeys( args.firstname + i);
-				await driver.findElement(helper.By.id('lastname' + i)).sendKeys(args.lastname + i);
+			for (let i = 0; i < 4; i++) {
+				await driver.findElement(helper.By.id('firstname' + (i+1))).sendKeys( voters[i].firstname );
+				await driver.findElement(helper.By.id('lastname' + (i+1))).sendKeys( voters[i].lastname );
 			}
 
 			let findBtn = await driver.findElement(helper.By.className('btw-button'));

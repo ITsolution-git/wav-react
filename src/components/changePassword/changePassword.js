@@ -72,11 +72,11 @@ class ChangePassword extends BaseComponent {
 		}
 	}
 
-	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
+	renderInput = (name, label, inputType, colWidth = 12, errorMsg, id) => {
 		return (
             <div className={`form-group col-xs-${colWidth}`}>
                 <label className="pull-left" htmlFor={name}>{label}</label>
-                <input type={inputType} className="input-field"
+                <input type={inputType} className="input-field" id={id}
                        onChange={this.updateFields.bind(this, name)}
                        onBlur={this.validateFields.bind(this, name)} />
                 { !this.state.isValid[name] && <span className="pull-left">{ errorMsg }</span> }
@@ -116,9 +116,9 @@ class ChangePassword extends BaseComponent {
 						{ !this.state.isChangedPassword && <span style={{ fontSize: "18px" }}>Password doesn't not reset</span> }
 						<br/><br/>
 						<div className={classNames({'password-div': !this.state.isValid['password'] })}>
-							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg) }
+							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg, 'password') }
 						</div>
-						{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *') }
+						{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *', 'confirmPassword') }
 						<br/><br/>
 					</form>
 					<Row>

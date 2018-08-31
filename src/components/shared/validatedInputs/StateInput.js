@@ -5,7 +5,7 @@ import fields from '../../../constants/FieldConstants';
 
 export default class StateInput extends InputBase {
     render () {
-        return <Dropdown label='State'
+        return <Dropdown label='State' classes="state"
                          values={ Object.keys(States)}
                          name={fields.state}
                          { ...this.props } />

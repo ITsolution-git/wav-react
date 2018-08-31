@@ -172,7 +172,8 @@ export class Dropdown extends InputBase {
             disabled,
             defaultValue,
             errorWhite = false,
-            fullWidth = true
+            fullWidth = true,
+            classes
         } = this.props;
         const {
             value = defaultValue || '',
@@ -184,7 +185,7 @@ export class Dropdown extends InputBase {
                          disabled={disabled}
                          fullWidth={fullWidth} >
                 <Select
-                    className='btw-validated-dropdown'
+                    className={`btw-validated-dropdown ${classes}`}
                     value={value}
                     onChange={option => {
                         const e = { target: { value: (option || {}).value || ''} };

@@ -66,11 +66,11 @@ class VerifyCaptain extends BaseComponent {
 		}
 	}
 
-	renderInput = (name, label, inputType, colWidth = 12, errorMsg) => {
+	renderInput = (name, label, inputType, colWidth = 12, errorMsg, id) => {
 		return (
             <div className={`form-group col-xs-${colWidth}`}>
                 <label className="pull-left" htmlFor={name}>{label}</label>
-                <input type={inputType} className="input-field"
+                <input type={inputType} className="input-field" id={id}
                        onChange={this.updateCaptainFields.bind(this, name)}
                        onBlur={this.validateCaptainFields.bind(this, name)} />
                 { !this.state.isValid[name] && <span className="pull-left">{ errorMsg }</span> }
@@ -104,8 +104,8 @@ class VerifyCaptain extends BaseComponent {
 						{ !this.state.isVerified && <span style={{ fontSize: "18px" }}>User doesn't exist</span> }
 						<br/><br/>
 						<div className="row">
-							{ this.renderInput('firstname', 'First Name (Legal)', 'text', nameWidth, '* First Name is not valid *') }
-							{ this.renderInput('lastname', 'Last Name (Legal)', 'text', nameWidth, '* Last Name is not valid *') }
+							{ this.renderInput('firstname', 'First Name (Legal)', 'text', nameWidth, '* First Name is not valid *', 'firstname') }
+							{ this.renderInput('lastname', 'Last Name (Legal)', 'text', nameWidth, '* Last Name is not valid *', 'lastname') }
 						</div>
 						<br/><br/>
 					</form>
