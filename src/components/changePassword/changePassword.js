@@ -116,9 +116,9 @@ class ChangePassword extends BaseComponent {
 						{ !this.state.isChangedPassword && <span style={{ fontSize: "18px" }}>Password doesn't not reset</span> }
 						<br/><br/>
 						<div className={classNames({'password-div': !this.state.isValid['password'] })}>
-							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg, 'firstname') }
+							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg, 'password') }
 						</div>
-						{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *', 'lastname') }
+						{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *', 'confirmPassword') }
 						<br/><br/>
 					</form>
 					<Row>
