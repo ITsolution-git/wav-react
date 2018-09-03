@@ -20,5 +20,7 @@ describe('Reset password end to end tests', ()=>{
 		await emailPage.resetPasswordStep();
 		await resetPasswordPage.verifyUser();
 		await resetPasswordPage.changePassword();
+		await signOnPage.verifySignOnPage();
+		await signOnPage.checkResetPasswordResult();
 	})
 })
