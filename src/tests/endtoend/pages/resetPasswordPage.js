@@ -36,15 +36,15 @@ module.exports = (driver) => {
 		}
 	};
 	
-	let changePassword = async () => {
+	let changePassword = async (password) => {
 		try {
 
       // Input firstname
 			let passwordField = await driver.wait(core.automate.until.elementLocated(helper.By.id('password')), 10000);
-      passwordField.sendKeys(data.newpassword);
+      passwordField.sendKeys(password);
 
       // Input lastname
-			await driver.findElement(helper.By.id('confirmPassword')).sendKeys(data.newpassword);
+			await driver.findElement(helper.By.id('confirmPassword')).sendKeys(password);
 			
 			// Click submit button
 			await helper.selectButton('Change')
