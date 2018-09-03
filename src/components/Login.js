@@ -99,7 +99,7 @@ class Login extends BaseComponent {
                                         Sign in
 									  </div>
 								}
-                                { this.state.isReset && <span style={{ fontSize: "18px", color: "green" }}>Password is reset, Login with your new password</span> }
+                                { this.state.isReset && <span style={{ fontSize: "18px", color: "green" }} id="resetPasswordSuccess">Password is reset, Login with your new password</span> }
                                 <Row>
                                     <Col md={7}>
                                         <EmailInput onChange={(value, valid, name) => {
