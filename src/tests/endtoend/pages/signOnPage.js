@@ -114,14 +114,9 @@ module.exports = (driver) => {
 		}
 	}
 
-	let checkResetPasswordResult = async (password) => {
+	let checkResetPasswordResult = async () => {
 		try {
 			await driver.findElement(helper.By.id('resetPasswordSuccess'))
-
-			await driver.findElement(signOnPage.email).sendKeys(user.email);
-			await driver.findElement(signOnPage.password).sendKeys(password);
-			await driver.findElement(signOnPage.login).click();
-
 		} catch (error) {
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true

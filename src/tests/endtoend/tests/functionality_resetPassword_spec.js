@@ -1,5 +1,6 @@
 
 const core = require('../core');
+let dataParser = require('../support/dataParser');
 let createSignOnPage = require('../pages/signOnPage');
 let createEmailPage = require('../pages/emailPage');
 let createResetPasswordPage = require('../pages/resetPasswordPage');
@@ -26,6 +27,7 @@ const generatePassword = () => {
 
 describe('Reset password end to end tests', ()=>{
 	let newpassword = generatePassword();
+	const user = dataParser.findByTag('new user signup');
 
 	beforeEach(()=>{
 		signOnPage = createSignOnPage(core.driver());
@@ -42,7 +44,8 @@ describe('Reset password end to end tests', ()=>{
 		await resetPasswordPage.verifyUser();
 		await resetPasswordPage.changePassword(newpassword);
 		await signOnPage.verifySignOnPage();
-		await signOnPage.checkResetPasswordResult(newpassword);
+		await signOnPage.checkResetPasswordResult();
+		await signOnPage.validateSignOnProcess(user.email, newpassword);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 	})
