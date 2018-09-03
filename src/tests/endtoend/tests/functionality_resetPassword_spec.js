@@ -1,22 +1,24 @@
-/**
- *  Created by KennethObikwelu on 8/23/18.
- */
 
 const core = require('../core');
-let urlFetcher = require('../support/dataParser');
 let createSignOnPage = require('../pages/signOnPage');
+let createEmailPage = require('../pages/emailPage');
+let createResetPasswordPage = require('../pages/resetPasswordPage');
 
 describe('Reset password end to end tests', ()=>{
 	let signOnPage;
 
-	const user = urlFetcher.findByTag('end to end happy path');
-
 	beforeEach(()=>{
 		signOnPage = createSignOnPage(core.driver());
+		emailPage = createEmailPage(core.driver());
+		resetPasswordPage = createResetPasswordPage(core.driver());
 	});
 
-
-	/*it('Happy Path update one task',  async ()=>{
-
-	})*/
+	it('Happy Path forgot/reset password task',  async ()=>{
+		await signOnPage.openSignOnPage('staging');
+		await signOnPage.validateForgotPasswordProcess();
+		await signOnPage.openEmailPage('staging');
+		await emailPage.resetPasswordStep();
+		await resetPasswordPage.verifyUser();
+		await resetPasswordPage.changePassword();
+	})
 })

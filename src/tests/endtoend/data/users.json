@@ -10,8 +10,9 @@
     {
       "firstname": "automate_first",
       "lastname": "automate_last",
-      "email": "automate@test1234.com",
+      "email": "automatetest4321@gmail.com",
       "password": "Aa5233713!",
+      "newpassword": "Aa5233713!",
       "tags":[
         "new user signup"
       ]
