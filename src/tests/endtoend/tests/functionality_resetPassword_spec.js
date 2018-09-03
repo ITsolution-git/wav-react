@@ -5,6 +5,7 @@ let createSignOnPage = require('../pages/signOnPage');
 let createEmailPage = require('../pages/emailPage');
 let createResetPasswordPage = require('../pages/resetPasswordPage');
 let createTaskModal = require('../pages/latestTaskModal');
+let createSignedOnHeader = require('../pages/signedOnHeader');
 
 const generatePassword = () => {
 	let UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -34,6 +35,7 @@ describe('Reset password end to end tests', ()=>{
 		emailPage = createEmailPage(core.driver());
 		latestTaskModal = createTaskModal(core.driver());
 		resetPasswordPage = createResetPasswordPage(core.driver());
+		signedOnHeader = createSignedOnHeader(core.driver());
 	});
 
 	it('Happy Path forgot/reset password task',  async ()=>{
@@ -48,5 +50,6 @@ describe('Reset password end to end tests', ()=>{
 		await signOnPage.validateSignOnProcess(user.email, newpassword);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
+		await signedOnHeader.signoutProcess();
 	})
 })
