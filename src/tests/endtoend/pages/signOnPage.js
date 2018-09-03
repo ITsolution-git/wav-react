@@ -9,6 +9,7 @@ let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
+	const user = urlFetcher.findByTag('new user signup');
 
 	let signOnPage = {
 		email			: core.automate.By.id('email'),
@@ -77,10 +78,48 @@ module.exports = (driver) => {
 		}
 	}
 
+	let validateForgotPasswordProcess = async () => {
+		try {
+			let link = await driver.findElement(helper.By.id('link-small'));
+			link.click();
+
+			await helper.timeout(300);
+			await driver.findElement(helper.By.css('input[type="email"')).sendKeys(user.email);
+
+			await helper.selectButton('Send Request')
+
+			await driver.wait(core.automate.until.elementLocated(helper.By.css('.btw-change-password > span')), 10000);
+
+		} catch(error) {
+			if (error instanceof core.automate.error.NoSuchElementError){
+				console.log(error)
+				expect(false).to.be.true
+			}else {
+				console.log(error)
+				expect(false).to.be.true
+			}
+		}
+	}
+
+	let openEmailPage = async (url) => {
+		try {
+			await driver.get(urlFetcher.retrieveUrl(url).url_gmail);
+		} catch (error) {
+			if (error instanceof core.automate.error.NoSuchElementError){
+				expect(false).to.be.true
+			}else {
+				console.log(error)
+				expect(false).to.be.true
+			}
+		}
+	}
+
 	return {
 		openSignOnPage,
+		openEmailPage,
 		validateSignOnProcess,
 		verifySignOnPage,
-		openRegisterPage
+		openRegisterPage,
+		validateForgotPasswordProcess
 	}
 }
