@@ -72,3 +72,18 @@
         }
     }
 }
+
+.btw-voter-layout {
+    .logo {
+        @include respond-to($phone) {
+            margin: 7% 0 0 9%;
+        }
+        @include respond-to($desktop) {
+            margin: 3% 0 0 6%;
+        }
+    }
+    .layout-center {
+        display: flex;
+        justify-content: center;
+    }
+}

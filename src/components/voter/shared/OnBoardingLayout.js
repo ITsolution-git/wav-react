@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../../shared/BaseComponent';
 import Logo from '../../layout/Logo';
@@ -13,12 +12,10 @@ export default class OnBoardingLayout extends  BaseComponent {
     render() {
         const { color = this.resolveDefaultColor() } = this.props;
         return (
-            <div>
-                <Row>
-                    <Col mdOffset={1} className='' >
-                        <Logo />
-                    </Col>
-                </Row>
+            <div className="btw-voter-layout">
+                <div className='logo' >
+                    <Logo />
+                </div>
                 { this.renderBackground(color) }
                 { this.props.children }
             </div>

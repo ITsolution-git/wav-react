@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import Radio from '@material-ui/core/Radio';
-import Modal from '@material-ui/core/Modal';
 
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';
@@ -23,8 +22,7 @@ class MakeList extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			startValidation: false,
-			view: 1
+			startValidation: false
 		};
 	}
 
@@ -62,58 +60,12 @@ class MakeList extends BaseComponent {
     	this.onLink(routes.voterDetail);
 	};
 
-	handleClose = () => {
-		this.setState({ view: 2 });
-	};
-
 	render() {
 		const { startValidation } = this.state;
 		return (
 			<div className="btw-makelist">
-				<Modal
-					open={this.state.view === 1}
-					onClose={this.handleClose}
-					disableBackdropClick={true}>
-					<div className="view1">
-						<div className="view1-title">Welcome to the Team</div>
-						<div className="view1-desc">
-							We think this is the Start of a beautiful friendship<br/><br/>
-							Speaking of Friends...
-						</div>
-						<div className="view1-nav">
-							<div className="radio1"></div>
-							<div className="radio2"></div>
-							<div className="view-next" onClick={this.handleClose}></div>
-						</div>
-					</div>
-				</Modal>
-
 				<div className='container'>
-
-					<div className="title">
-						<div className="app-title">BeTheWave</div>
-
-						{ 
-							this.state.view === 2 && 
-							<div>
-								<span className="title">Let's Start with Four Friends</span>
-								<div className="title-line"></div>
-							</div>
-						}
-					</div>
-
 					<div className="voters-form">
-						<div className="intro">
-							<p className="intro-title">
-								We'll check Local Voter Databases to<br />
-								Find out if They're Registered to Vote.
-							</p>
-
-							<p className="intro-desc">
-								We understand that their info is private and we won't be sharing it.
-							</p>
-							{ this.renderRequiredFieldMsg() }
-						</div>
 						<div className="rows mb-1">
 						{ Array(numberOfNames).fill(0).map((e,i)=> {
 							return (
