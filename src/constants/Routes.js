@@ -17,6 +17,7 @@ export default {
     voterSuccess: '/voterSuccess',
     voterNotRegisteredError: '/voterNotRegisteredError',
     voterNotFoundError: '/voterNotFoundError',
+    welcome: '/welcome',
     forum: '/forum',
     reports: '/reports',
     addVoterTask: '/task/addVoters',

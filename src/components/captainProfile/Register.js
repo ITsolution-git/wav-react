@@ -75,7 +75,7 @@ class Register extends BaseComponent {
 
 	componentWillReceiveProps(props) {
 		if (props.isSuccess) {
-			this.onLink(routes.makelist);
+			this.onLink(routes.welcome);
 		}
 	}
 

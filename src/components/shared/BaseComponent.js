@@ -7,6 +7,7 @@ import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import Button from './Button';
+import routes from "../../constants/Routes";
 
 class BaseComponent extends Component {
     constructor(props, context) {
@@ -43,6 +44,15 @@ class BaseComponent extends Component {
           <Helmet bodyAttributes={{style: `background-color : ${color}`}}>
           </Helmet>
       )
+    };
+
+    isOnBoarding = () => {
+        const { pathname = ''} = this.props.history.location,
+            { welcome, makelist, voterDetail, matchList, voterSuccess, voterNotRegisteredError, voterNotFoundError } = routes,
+            boardingRoutes = [ welcome,  makelist, voterDetail, matchList, voterSuccess, voterNotRegisteredError, voterNotFoundError ]
+            .map(route => route.toLowerCase());
+
+        return boardingRoutes.includes(pathname.toLowerCase());
     };
 
     renderBackToHome = (style) => {
