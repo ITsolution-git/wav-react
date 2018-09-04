@@ -1,6 +1,6 @@
 {
   "name": "btw-mvp-ui-18-v1",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.1.0",
@@ -79,5 +79,9 @@
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
+  },
+  "engines": {
+    "node": "8.9.x",
+    "npm": "6.1.x"
   }
 }
