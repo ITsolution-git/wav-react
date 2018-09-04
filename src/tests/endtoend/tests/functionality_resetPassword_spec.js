@@ -28,7 +28,7 @@ const generatePassword = () => {
 
 describe('Reset password end to end tests', ()=>{
 	let newpassword = generatePassword();
-	const user = dataParser.findByTag('new user signup');
+	const user = dataParser.findByTag('user reset password');
 
 	beforeEach(()=>{
 		signOnPage = createSignOnPage(core.driver());
@@ -40,10 +40,10 @@ describe('Reset password end to end tests', ()=>{
 
 	it('Happy Path forgot/reset password task',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
-		await signOnPage.validateForgotPasswordProcess();
+		await signOnPage.validateForgotPasswordProcess(user);
 		await signOnPage.openEmailPage('staging');
-		await emailPage.resetPasswordStep();
-		await resetPasswordPage.verifyUser();
+		await emailPage.resetPasswordStep(user);
+		await resetPasswordPage.verifyUser(user);
 		await resetPasswordPage.changePassword(newpassword);
 		await signOnPage.verifySignOnPage();
 		await signOnPage.checkResetPasswordResult();

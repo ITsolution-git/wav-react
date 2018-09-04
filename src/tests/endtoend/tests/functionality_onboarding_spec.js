@@ -4,7 +4,7 @@
 
 
 const core = require('../core');
-let urlFetcher = require('../support/dataParser');
+let dataParser = require('../support/dataParser');
 
 let createSignOnPage 			= require('../pages/signOnPage');
 let createRegisterPage 		= require('../pages/registerPage');
@@ -14,14 +14,9 @@ let createDashboardPage 	= require('../pages/dashboardPage');
 let createSignedOnHeader 	= require('../pages/signedOnHeader');
 
 describe('Onboarding end to end tests', ()=>{
-	let signOnPage;
-	let registerPage;
-	let onBoardingPages;
-	let latestTaskModal;
-	let dashboardPage;
-	let signedOnHeader;
 
-	const newUser = urlFetcher.findByTag('new user signup');
+	const newUser = dataParser.findByTag('new user signup');
+	let voters = dataParser.findByTag('new voters').voters
 
 	beforeEach(()=>{
 		signOnPage 				= createSignOnPage(core.driver());
@@ -37,18 +32,18 @@ describe('Onboarding end to end tests', ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.openRegisterPage();
 		await registerPage.registerNewAccount(newUser);
-		await registerPage.shortListThreeVoters();
-		await onBoardingPages.enterMoreDetailsForVoter('0');
+		await registerPage.shortListThreeVoters(voters);
+		await onBoardingPages.enterMoreDetailsForVoter('0', voters);
 		// select one voter from matches
-		await onBoardingPages.enterMoreDetailsForVoter('1');
+		await onBoardingPages.enterMoreDetailsForVoter('1', voters);
 		// select one voter from matches
-		await onBoardingPages.enterMoreDetailsForVoter('2');
+		await onBoardingPages.enterMoreDetailsForVoter('2', voters);
 		// select one voter from matches
 		await onBoardingPages.validateGotoNextProcess();
 		// validate dashboard
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
-		await signedOnHeader.closeAccount();
+		await signedOnHeader.closeAccount(newUser);
 		// signout
 	})
 

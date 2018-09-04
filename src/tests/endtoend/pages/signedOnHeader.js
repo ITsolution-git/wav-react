@@ -4,13 +4,10 @@
 
 
 let core = require('../core');
-let urlFetcher = require('../support/dataParser');
 let expect = require('chai').expect;
 let helper = require('../support/helper')
 
 module.exports = (driver) => {
-
-	const newUser = urlFetcher.findByTag('new user signup');
 
 	let signedOnHeader = {
 		signOutNavDropDown: core.automate.By.id('nav-dropdown'),
@@ -52,7 +49,7 @@ module.exports = (driver) => {
 		}
 	}
 
-	let closeAccount = async () => {
+	let closeAccount = async (newUser) => {
 		try {
 			// Open nav menu
 			let menu = await driver.wait(core.automate.until.elementLocated(signedOnHeader.signOutNavDropDown), 4000);

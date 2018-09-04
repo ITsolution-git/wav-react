@@ -34,7 +34,7 @@ describe('Login end to end tests', ()=>{
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await dashboardPage.validateDashboard();
-		await signedOnHeader.openMenu();
+		await signedOnHeader.signoutProcess();
 		await signOnPage.verifySignOnPage();
 	})
 })
