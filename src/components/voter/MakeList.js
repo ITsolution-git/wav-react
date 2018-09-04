@@ -8,12 +8,11 @@ import Radio from '@material-ui/core/Radio';
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';
 import routes from '../../constants/Routes';
-import colors from '../../constants/ColorConstants';
 import BaseComponent from '../shared/BaseComponent';
 import { FirstNameInput, LastNameInput } from '../shared/validatedInputs';
 import Button from '../shared/Button';
 import OnBoardingLayout from './shared/OnBoardingLayout';
-
+import ProgressBar from './shared/ProgressBar';
 
 const firstNamePrefix = voterConstants.FIRST_NAME_PREIX,
 	  lastNamePrefix = voterConstants.LAST_NAME_PREFIX,
@@ -92,15 +91,15 @@ class MakeList extends BaseComponent {
 	};
 
 	render() {
-		const { startValidation } = this.state;
-		const viewProps = this.viewProps();
+		const { startValidation } = this.state,
+		 viewProps = this.viewProps(),
+         errorWhite = this.isDesktop();
 
 		return (
 			<OnBoardingLayout>
 				<div className="btw-makelist">
 					<div className="voters-form">
 						<div className="rows">
-
                             <Col md={8} className="row" id="title-text">
                                 <Col mdOffset={2} md={10}>
                                     <div className={viewProps.titleClass}>Help your friends vote!</div>
@@ -126,12 +125,14 @@ class MakeList extends BaseComponent {
 												<Col xs={6} md={5}>
 													<FirstNameInput startValidation={startValidation}
 																	required
+																	errorWhite={errorWhite}
 																	id={`firstname${i + 1}`}
 																	onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
 												</Col>
 												<Col xs={6} md={5}>
 													<LastNameInput startValidation={startValidation}
 																   required
+																   errorWhite={errorWhite}
 																   id={`lastname${i + 1}`}
 																   onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
 												</Col>
@@ -154,6 +155,11 @@ class MakeList extends BaseComponent {
                                             onClick={this.onNext}>Go!</Button>
                                 </Col>
                             </Col>
+							<Col md={8} xsHidden>
+                                <Col id="progress-bar" mdOffset={2} md={10} xsHidden>
+                                    <ProgressBar width='25%' />
+                                </Col>
+							</Col>
 							<Col smHidden mdHidden lgHidden xs={10} xsOffset={1}>
                                 <div id="info-text-mobile" className="title-14-dark-blue">{ this.renderInfoText() }</div>
 							</Col>
