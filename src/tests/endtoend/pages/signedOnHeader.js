@@ -21,7 +21,7 @@ module.exports = (driver) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
-	let openMenu = async () => {
+	let signoutProcess = async () => {
 		try {
 			let menu = await driver.wait(core.automate.until.elementLocated(signedOnHeader.signOutNavDropDown), 4000);
 			await timeout(1000)
@@ -89,7 +89,7 @@ module.exports = (driver) => {
 	}
 
 	return {
-		openMenu,
+		signoutProcess,
 		closeAccount
 	}
 }

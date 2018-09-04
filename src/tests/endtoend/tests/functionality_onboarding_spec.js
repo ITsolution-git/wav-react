@@ -39,17 +39,17 @@ describe('Onboarding end to end tests', ()=>{
 		await registerPage.registerNewAccount(newUser);
 		await registerPage.shortListThreeVoters();
 		await onBoardingPages.enterMoreDetailsForVoter('0');
-		// //select one voter from matches
+		// select one voter from matches
 		await onBoardingPages.enterMoreDetailsForVoter('1');
-		// //select one voter from matches
+		// select one voter from matches
 		await onBoardingPages.enterMoreDetailsForVoter('2');
-		// //select one voter from matches
+		// select one voter from matches
 		await onBoardingPages.validateGotoNextProcess();
-		// //validate dashboard
+		// validate dashboard
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await signedOnHeader.closeAccount();
-		// //signout
+		// signout
 	})
 
 	/*it('Happy Path onboarding - add more information for 1st user',  async ()=>{
