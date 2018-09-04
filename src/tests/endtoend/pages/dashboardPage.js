@@ -10,9 +10,7 @@ let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
-	let voterData = dataParser.findByTag('new voters').voters
-
-	let dashboardPage = {
+	let dashboard = {
 		captainsDashboard	: core.automate.By.className('btw-captains-dashboard'),
 		taskCard					: core.automate.By.className('tasks'),
 		votersCard   			: core.automate.By.className('voters'),
@@ -22,10 +20,10 @@ module.exports = (driver) => {
 	let validateDashboard = async (...args) => {
 		try {
 			await helper.timeout(400)
-			await driver.findElement(dashboardPage.captainsDashboard);
-			await driver.findElement(dashboardPage.taskCard);
-			await driver.findElement(dashboardPage.votersCard);
-			await driver.findElement(dashboardPage.messageCard);
+			await driver.findElement(dashboard.captainsDashboard);
+			await driver.findElement(dashboard.taskCard);
+			await driver.findElement(dashboard.votersCard);
+			await driver.findElement(dashboard.messageCard);
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
@@ -80,7 +78,7 @@ module.exports = (driver) => {
 		}
 	}
 
-	let addVoterProcess = async () => {
+	let AddVoterFromVoterList = async (voterData) => {
 		try {
 			await helper.selectButton('Add Voter')
 
@@ -111,7 +109,7 @@ module.exports = (driver) => {
 		}
 	}
 
-	let validateAddVoterProcess = async () => {
+	let validateUserIsRemovedFromVoterList = async (voterData) => {
 		try {
 			// Check if it is on voters page
 			await driver.wait(core.automate.until.elementLocated(helper.By.className('voters-list')), 10000);
@@ -149,7 +147,7 @@ module.exports = (driver) => {
 		validateOnboardingResultProcess,
 		goToVoterPage,
 		validateVotersPage,
-		addVoterProcess,
-		validateAddVoterProcess
+		AddVoterFromVoterList,
+		validateUserIsRemovedFromVoterList
 	}
 }

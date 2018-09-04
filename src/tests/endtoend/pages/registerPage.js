@@ -1,11 +1,8 @@
 let core = require('../core');
-let dataParser = require('../support/dataParser');
 let expect = require('chai').expect;
 let helper = require('../support/helper')
 
 module.exports = (driver) => {
-
-	let voters = dataParser.findByTag('new voters').voters
 
 	let registerPage = {
 		firstName      : core.automate.By.id('firstname'),
@@ -43,7 +40,7 @@ module.exports = (driver) => {
 		}
 	};
 
-	let shortListThreeVoters = async () => {
+	let shortListThreeVoters = async (voters) => {
 		try {
 			let nextView = await driver.wait(core.automate.until.elementLocated(helper.By.className('view-next')), 15000);
 			nextView.click();
