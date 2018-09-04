@@ -45,6 +45,13 @@
           "city": "Atlanta",
           "state": "GA",
           "email": "automate@test4.com"
+        },
+        {
+          "firstname": "Susan",
+          "lastname": "Wilkins",
+          "city": "Alberta",
+          "state": "GA",
+          "email": "automate@test5.com"
         }
       ],
       "tags": [
