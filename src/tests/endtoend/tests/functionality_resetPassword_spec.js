@@ -8,12 +8,13 @@ let createTaskModal = require('../pages/latestTaskModal');
 let createSignedOnHeader = require('../pages/signedOnHeader');
 
 const generatePassword = () => {
-	let UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	let LOWERCASE = 'abcdefghijklmnopqrstuvwxyz'
-	let NUMBER = '0123456789'
-	let SPECIAL = '!@#$%^&*'
 
-	let generatedPassword = ''
+	let UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	let LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+	let NUMBER = '0123456789';
+	let SPECIAL = '!@#$%^&*';
+	let generatedPassword = '';
+
 	generatedPassword += UPPERCASE[ Math.floor(Math.random() * 26) ]
 	generatedPassword += LOWERCASE[ Math.floor(Math.random() * 26) ]
 	generatedPassword += UPPERCASE[ Math.floor(Math.random() * 26) ]
@@ -27,7 +28,14 @@ const generatePassword = () => {
 }
 
 describe('Reset password end to end tests', ()=>{
-	let newpassword = generatePassword();
+	let signOnPage;
+	let latestTaskModal;
+	let signedOnHeader;
+	let emailPage;
+	let resetPasswordPage;
+
+
+	let newPassword = generatePassword();
 	const user = dataParser.findByTag('user reset password');
 
 	beforeEach(()=>{
@@ -44,12 +52,12 @@ describe('Reset password end to end tests', ()=>{
 		await signOnPage.openEmailPage('staging');
 		await emailPage.resetPasswordStep(user);
 		await resetPasswordPage.verifyUser(user);
-		await resetPasswordPage.changePassword(newpassword);
+		await resetPasswordPage.changePassword(newPassword);
 		await signOnPage.verifySignOnPage();
 		await signOnPage.checkResetPasswordResult();
-		await signOnPage.validateSignOnProcess(user.email, newpassword);
+		await signOnPage.validateSignOnProcess(user.email, newPassword);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
-		await signedOnHeader.signoutProcess();
+		await signedOnHeader.signOutUser();
 	})
 })

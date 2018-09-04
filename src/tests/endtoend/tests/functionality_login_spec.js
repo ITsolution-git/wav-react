@@ -24,17 +24,13 @@ describe('Login end to end tests', ()=>{
 		signedOnHeader = createSignedOnHeader(core.driver());
 	});
 
-	function afterEach () {
-	}
-
-
 	it('****************************************** Login successfully',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.validateSignOnProcess(user.email, user.password);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await dashboardPage.validateDashboard();
-		await signedOnHeader.signoutProcess();
+		await signedOnHeader.signOutUser();
 		await signOnPage.verifySignOnPage();
 	})
 })

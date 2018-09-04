@@ -8,6 +8,10 @@ let dataParser = require('../support/dataParser');
 let createSignOnPage = require('../pages/signOnPage');
 
 describe('Update profile end to end tests', ()=>{
+	let signOnPage;
+	let latestTaskModal;
+	let dashboardPage;
+	let signedOnHeader;
 
 	const user = dataParser.findByTag('end to end happy path');
 
@@ -23,6 +27,6 @@ describe('Update profile end to end tests', ()=>{
 		await latestTaskModal.dismissModal();
 		await dashboardPage.validateDashboard();
 		await signedOnHeader.openUpdateProfilePage();
-		await signedOnHeader.signoutProcess();
+		await signedOnHeader.signOutUser();
 	})
 })
