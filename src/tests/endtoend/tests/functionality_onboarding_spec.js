@@ -5,7 +5,6 @@
 
 const core = require('../core');
 let dataParser = require('../support/dataParser');
-
 let createSignOnPage 			= require('../pages/signOnPage');
 let createRegisterPage 		= require('../pages/registerPage');
 let createOnBoardingPages 	= require('../pages/onboardingPage');
@@ -49,24 +48,4 @@ describe('Onboarding end to end tests', ()=>{
 		await signedOnHeader.closeAccount(newUser);
 		await signOnPage.verifySignOnPage();
 	})
-
-	/*it('Happy Path onboarding - add more information for 1st user',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - add more information for 2nd user',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - add more information for 3rd user',  async ()=>{
-		;
-	})
-
-	it('Happy Path onboarding - get all 3 matches ',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - remove test user ',  async ()=>{
-
-	})*/
 })

@@ -22,7 +22,7 @@ describe('Voter end to end tests', ()=>{
 		signedOnHeader = createSignedOnHeader(core.driver());
 	});
 
-	it('Happy Path add/remove voter',  async ()=>{
+	it('*******************************************Happy Path add/remove voter',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.validateSignOnProcess(user.email, user.password);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
