@@ -1,6 +1,3 @@
-/**
- *  Created by KennethObikwelu on 8/23/18.
- */
 
 const core = require('../core');
 let urlFetcher = require('../support/dataParser');
