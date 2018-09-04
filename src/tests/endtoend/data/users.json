@@ -13,6 +13,15 @@
       "email": "automatetest4321@gmail.com",
       "password": "Ajdeotyf4289*",
       "tags":[
+        "user reset password"
+      ]
+    },
+    {
+      "firstname": "automate_first",
+      "lastname": "automate_last",
+      "email": "automatetest1111@gmail.com",
+      "password": "Ajdeotyf4289*",
+      "tags":[
         "new user signup"
       ]
     },
@@ -45,6 +54,13 @@
           "city": "Atlanta",
           "state": "GA",
           "email": "automate@test4.com"
+        },
+        {
+          "firstname": "Susan",
+          "lastname": "Wilkins",
+          "city": "Alberta",
+          "state": "GA",
+          "email": "automate@test5.com"
         }
       ],
       "tags": [

@@ -4,8 +4,7 @@
 
 
 const core = require('../core');
-let urlFetcher = require('../support/dataParser');
-
+let dataParser = require('../support/dataParser');
 let createSignOnPage 			= require('../pages/signOnPage');
 let createRegisterPage 		= require('../pages/registerPage');
 let createOnBoardingPages 	= require('../pages/onboardingPage');
@@ -14,14 +13,16 @@ let createDashboardPage 	= require('../pages/dashboardPage');
 let createSignedOnHeader 	= require('../pages/signedOnHeader');
 
 describe('Onboarding end to end tests', ()=>{
+
+	const newUser = dataParser.findByTag('new user signup');
+	let voters = dataParser.findByTag('new voters').voters
+
 	let signOnPage;
-	let registerPage;
-	let onBoardingPages;
 	let latestTaskModal;
 	let dashboardPage;
 	let signedOnHeader;
-
-	const newUser = urlFetcher.findByTag('new user signup');
+	let registerPage;
+	let onBoardingPages;
 
 	beforeEach(()=>{
 		signOnPage 				= createSignOnPage(core.driver());
@@ -37,38 +38,14 @@ describe('Onboarding end to end tests', ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.openRegisterPage();
 		await registerPage.registerNewAccount(newUser);
-		await registerPage.shortListThreeVoters();
-		await onBoardingPages.enterMoreDetailsForVoter('0');
-		// select one voter from matches
-		await onBoardingPages.enterMoreDetailsForVoter('1');
-		// select one voter from matches
-		await onBoardingPages.enterMoreDetailsForVoter('2');
-		// select one voter from matches
+		await registerPage.shortListThreeVoters(voters);
+		await onBoardingPages.enterMoreDetailsForVoter('0', voters);
+		await onBoardingPages.enterMoreDetailsForVoter('1', voters);
+		await onBoardingPages.enterMoreDetailsForVoter('2', voters);
 		await onBoardingPages.validateGotoNextProcess();
-		// validate dashboard
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
-		await signedOnHeader.closeAccount();
-		// signout
+		await signedOnHeader.closeAccount(newUser);
+		await signOnPage.verifySignOnPage();
 	})
-
-	/*it('Happy Path onboarding - add more information for 1st user',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - add more information for 2nd user',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - add more information for 3rd user',  async ()=>{
-		;
-	})
-
-	it('Happy Path onboarding - get all 3 matches ',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - remove test user ',  async ()=>{
-
-	})*/
 })

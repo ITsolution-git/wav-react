@@ -1,14 +1,11 @@
 
 let core = require('../core');
-let dataParser = require('../support/dataParser');
 let expect = require('chai').expect;
 let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
-  const data = dataParser.findByTag('new user signup');
-
-	let resetPasswordStep = async () => {
+	let resetPasswordStep = async (data) => {
 		try {
       // Click login btn
 			let loginMenu = await driver.wait(core.automate.until.elementLocated(helper.By.className('gmail-nav__nav-link__sign-in')), 10000);

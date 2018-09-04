@@ -1,11 +1,8 @@
 let core = require('../core');
-let dataParser = require('../support/dataParser');
 let expect = require('chai').expect;
 let helper = require('../support/helper')
 
 module.exports = (driver) => {
-
-	let voters = dataParser.findByTag('new voters').voters
 
 	let registerPage = {
 		city              : helper.By.id('city'),
@@ -13,7 +10,7 @@ module.exports = (driver) => {
     state             : helper.By.css('.state input')
   }
 
-  let enterMoreDetailsForVoter =  async (index) => {
+  let enterMoreDetailsForVoter =  async (index, voters) => {
     try {
 
       await helper.timeout(300)

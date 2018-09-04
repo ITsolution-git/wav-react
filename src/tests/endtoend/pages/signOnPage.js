@@ -9,8 +9,6 @@ let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
-	const user = urlFetcher.findByTag('new user signup');
-
 	let signOnPage = {
 		email			: core.automate.By.id('email'),
 		password	: core.automate.By.id('password'),
@@ -78,7 +76,7 @@ module.exports = (driver) => {
 		}
 	}
 
-	let validateForgotPasswordProcess = async () => {
+	let validateForgotPasswordProcess = async (user) => {
 		try {
 			let link = await driver.findElement(helper.By.id('link-small'));
 			link.click();

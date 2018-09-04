@@ -1,14 +1,8 @@
-/**
- *  Created by KennethObikwelu on 8/22/18.
- */
-
 
 let core = require('../core');
-let urlFetcher = require('../support/dataParser');
 let expect = require('chai').expect;
 
 module.exports = (driver) => {
-
 
 	let taskModal = {
 		modalCDialog: core.automate.By.id('dashboardDialog'),

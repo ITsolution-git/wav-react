@@ -22,5 +22,24 @@ module.exports = {
 		if (foundItem) {
 			foundItem.click()
 		}
+	},
+	 generatePassword: () => {
+
+		let UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		let LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+		let NUMBER = '0123456789';
+		let SPECIAL = '!@#$%^&*';
+		let generatedPassword = '';
+
+		generatedPassword += UPPERCASE[ Math.floor(Math.random() * 26) ]
+		generatedPassword += LOWERCASE[ Math.floor(Math.random() * 26) ]
+		generatedPassword += UPPERCASE[ Math.floor(Math.random() * 26) ]
+		generatedPassword += LOWERCASE[ Math.floor(Math.random() * 26) ]
+		generatedPassword += NUMBER[ Math.floor(Math.random() * 10) ]
+		generatedPassword += SPECIAL[ Math.floor(Math.random() * 8) ]
+		generatedPassword += NUMBER[ Math.floor(Math.random() * 10) ]
+		generatedPassword += SPECIAL[ Math.floor(Math.random() * 8) ]
+
+		return generatedPassword
 	}
 }

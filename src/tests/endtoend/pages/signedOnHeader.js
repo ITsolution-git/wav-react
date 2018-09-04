@@ -4,13 +4,10 @@
 
 
 let core = require('../core');
-let urlFetcher = require('../support/dataParser');
 let expect = require('chai').expect;
 let helper = require('../support/helper')
 
 module.exports = (driver) => {
-
-	const newUser = urlFetcher.findByTag('new user signup');
 
 	let signedOnHeader = {
 		signOutNavDropDown: core.automate.By.id('nav-dropdown'),
@@ -21,7 +18,7 @@ module.exports = (driver) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
-	let signoutProcess = async () => {
+	let signOutUser = async () => {
 		try {
 			let menu = await driver.wait(core.automate.until.elementLocated(signedOnHeader.signOutNavDropDown), 4000);
 			await timeout(1000)
@@ -52,7 +49,32 @@ module.exports = (driver) => {
 		}
 	}
 
-	let closeAccount = async () => {
+	let openUpdateProfilePage = async () => {
+		try {
+			// Open nav menu
+			let menu = await driver.wait(core.automate.until.elementLocated(signedOnHeader.signOutNavDropDown), 4000);
+			await timeout(1000)
+			menu.click()
+
+			// Click manage account btn
+			let a_profile = await driver.findElement(core.automate.By.xpath('//*[@id="root"]/div/div/div[1]/div/nav/div/div[2]/ul[2]/li[3]/ul/li[1]/a'));
+			await timeout(100)
+			a_profile.click()
+
+			await timeout(300)
+			await driver.findElement(core.automate.By.className('profile'))
+
+		}catch(error){
+			if (error instanceof core.automate.error.NoSuchElementError){
+				expect(false).to.be.true
+			}else {
+				console.log(error)
+				expect(false).to.be.true
+			}
+		}
+	};
+
+	let closeAccount = async (newUser) => {
 		try {
 			// Open nav menu
 			let menu = await driver.wait(core.automate.until.elementLocated(signedOnHeader.signOutNavDropDown), 4000);
@@ -89,7 +111,8 @@ module.exports = (driver) => {
 	}
 
 	return {
-		signoutProcess,
-		closeAccount
+		signOutUser,
+		closeAccount,
+		openUpdateProfilePage
 	}
 }

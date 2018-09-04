@@ -1,14 +1,11 @@
 
 let core = require('../core');
-let dataParser = require('../support/dataParser');
 let expect = require('chai').expect;
 let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
-  const data = dataParser.findByTag('new user signup');
-
-	let verifyUser = async () => {
+	let verifyUser = async (data) => {
 		try {
 
 			await helper.timeout(4000)
