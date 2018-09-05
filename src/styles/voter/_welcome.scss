@@ -1,0 +1,42 @@
+.welcome-div {
+  background-color: $white;
+  @include respond-to($phone) {
+    width: 85%;
+    margin-top: 20%;
+  }
+  @include respond-to($desktop) {
+    width: 50%;
+    margin-top: 30px;
+  }
+
+  border-radius: 2px;
+  text-align: center;
+  padding: 70px 0 30px 0;
+
+  #how-it-works {
+    margin: 25px 0 25px 0;
+  }
+
+  #btn-next {
+    margin: 40px 0 20px 0;
+  }
+
+  #radio-view {
+    text-align: center;
+    margin-top: 20px;
+    div {
+      display: inline-block;
+    }
+  }
+  .radio {
+    margin: 0 4px 0 4px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background-color: grey;
+    opacity: 0.6;
+    &.active {
+      background-color: $dark-blue;
+    }
+  }
+}

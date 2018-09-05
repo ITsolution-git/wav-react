@@ -27,6 +27,7 @@ import RegisterVoterTask from './tasks/RegisterVoterTask';
 import UpdateProfileTask from './tasks/UpdateProfileTask';
 import PreferenceTask from './tasks/PreferenceTask';
 import RegularVoteTask from './tasks/RegularVoteTask';
+import WelcomePage from './voter/WelcomePage';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
@@ -101,6 +102,8 @@ const router =() => (
                 component = { Authorization(NotRegisteredError, [captain]) } />
         <Route exact path = {routes.voterNotFoundError}
                component = { Authorization(NotFoundError, [captain]) } />
+        <Route exact path = {routes.welcome}
+               component = { Authorization(WelcomePage, [captain]) } />
 
         // tasks
         <Route exact path = {routes.addVoterTask}

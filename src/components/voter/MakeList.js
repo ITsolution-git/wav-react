@@ -4,15 +4,15 @@ import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import Radio from '@material-ui/core/Radio';
-import Modal from '@material-ui/core/Modal';
 
 import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { makeListPersist } from '../../actions/VoterAction';
 import routes from '../../constants/Routes';
 import BaseComponent from '../shared/BaseComponent';
-
 import { FirstNameInput, LastNameInput } from '../shared/validatedInputs';
 import Button from '../shared/Button';
+import OnBoardingLayout from './shared/OnBoardingLayout';
+import ProgressBar from './shared/ProgressBar';
 
 const firstNamePrefix = voterConstants.FIRST_NAME_PREIX,
 	  lastNamePrefix = voterConstants.LAST_NAME_PREFIX,
@@ -23,8 +23,7 @@ class MakeList extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			startValidation: false,
-			view: 1
+			startValidation: false
 		};
 	}
 
@@ -62,102 +61,112 @@ class MakeList extends BaseComponent {
     	this.onLink(routes.voterDetail);
 	};
 
-	handleClose = () => {
-		this.setState({ view: 2 });
+    viewProps = () => {
+    	if (this.isMobile()) {
+    		return {
+    			buttonColor: 'blue',
+				titleClass: 'title-32-light-blue',
+				subtitleClass: 'title-24-blue'
+			}
+		}
+
+		return {
+    		buttonColor: 'light-blue',
+			titleClass: 'title-32-white',
+			subtitleClass: 'title-24-white'
+		}
+	};
+
+    renderInfoText = () => {
+    	return (
+    		<span>
+				We check local voter
+				databases to find out if
+				they're registered to vote.
+				We understand that their
+				info is private and won't
+				be sharing it!
+			</span>
+		)
 	};
 
 	render() {
-		const { startValidation } = this.state;
+		const { startValidation } = this.state,
+		 viewProps = this.viewProps(),
+         errorWhite = this.isDesktop();
+
 		return (
-			<div className="btw-makelist">
-				<Modal
-					open={this.state.view === 1}
-					onClose={this.handleClose}
-					disableBackdropClick={true}>
-					<div className="view1">
-						<div className="view1-title">Welcome to the Team</div>
-						<div className="view1-desc">
-							We think this is the Start of a beautiful friendship<br/><br/>
-							Speaking of Friends...
-						</div>
-						<div className="view1-nav">
-							<div className="radio1"></div>
-							<div className="radio2"></div>
-							<div className="view-next" onClick={this.handleClose}></div>
-						</div>
-					</div>
-				</Modal>
-
-				<div className='container'>
-
-					<div className="title">
-						<div className="app-title">BeTheWave</div>
-
-						{ 
-							this.state.view === 2 && 
-							<div>
-								<span className="title">Let's Start with Four Friends</span>
-								<div className="title-line"></div>
-							</div>
-						}
-					</div>
-
+			<OnBoardingLayout>
+				<div className="btw-makelist">
 					<div className="voters-form">
-						<div className="intro">
-							<p className="intro-title">
-								We'll check Local Voter Databases to<br />
-								Find out if They're Registered to Vote.
-							</p>
-
-							<p className="intro-desc">
-								We understand that their info is private and we won't be sharing it.
-							</p>
-							{ this.renderRequiredFieldMsg() }
-						</div>
-						<div className="rows mb-1">
-						{ Array(numberOfNames).fill(0).map((e,i)=> {
-							return (
-								<Row key={i} className="names">
-									<Col xs={2}>
-										<Radio 
-											checked={ !!this.state[`${firstNamePrefix}${i+1}${invalidPrefix}`] &&
-											!!this.state[`${lastNamePrefix}${i+1}${invalidPrefix}`] }
-											classes={{
-												checked: `checkbox`
-											}}
-											disabled
-										/>
-									</Col>
-									<Col xs={10}>
-										<Row>
-											<Col xs={12} md={6}>
-												<FirstNameInput startValidation={startValidation}
-																required
-																id={`firstname${i + 1}`}
-																onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
-											</Col>
-											<Col xs={12} md={6}>
-												<LastNameInput startValidation={startValidation}
-																required
-																id={`lastname${i + 1}`}
-																onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
-											</Col>
-										</Row>
-									</Col>
-								</Row>
-							)
-						})}
-						</div>
-						<Row>
-							<Col xs={6}>
+						<div className="rows">
+                            <Col md={8} className="row" id="title-text">
+                                <Col mdOffset={2} md={10}>
+                                    <div className={viewProps.titleClass}>Help your friends vote!</div>
+                                    <div id="subtitle" className={viewProps.subtitleClass}>Check if three of your friends registered:</div>
+                                </Col>
+                            </Col>
+							 <Row>
+								<Col md={8} xs={12}>
+									{ Array(numberOfNames).fill(0).map((e,i)=> {
+										return (
+											<Row key={i} className="row">
+												<Col md={2} xsHidden className="radio">
+													<Radio
+														checked={ !!this.state[`${firstNamePrefix}${i+1}${invalidPrefix}`] &&
+														!!this.state[`${lastNamePrefix}${i+1}${invalidPrefix}`] }
+														classes={{
+															root: 'default-checkbox',
+															checked: `checked-checkbox`
+														}}
+														disabled
+													/>
+												</Col>
+												<Col xs={6} md={5}>
+													<FirstNameInput startValidation={startValidation}
+																	required
+																	errorWhite={errorWhite}
+																	id={`firstname${i + 1}`}
+																	onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
+												</Col>
+												<Col xs={6} md={5}>
+													<LastNameInput startValidation={startValidation}
+																   required
+																   errorWhite={errorWhite}
+																   id={`lastname${i + 1}`}
+																   onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
+												</Col>
+											</Row>
+										)
+									})}
+								</Col>
+								<Col md={4} xsHidden className='row'>
+									<div id="info">
+										<div className="text-18-light-blue-bold">
+											{ this.renderInfoText() }
+										</div>
+									</div>
+								</Col>
+							</Row>
+                            <Col md={8} xs={12} className="row" id="go-button">
+                                <Col mdOffset={2} md={2} xs={12}>
+                                    <Button borderEnabled={false}
+                                            color={viewProps.buttonColor}
+                                            onClick={this.onNext}>Go!</Button>
+                                </Col>
+                            </Col>
+							<Col md={8} xsHidden>
+                                <Col id="progress-bar" mdOffset={2} md={10} xsHidden>
+                                    <ProgressBar width='25%' />
+                                </Col>
 							</Col>
-							<Col md={12} xs={6}>
-								<Button onClick={this.onNext}>Find My Friends</Button>
+							<Col smHidden mdHidden lgHidden xs={10} xsOffset={1}>
+                                <div id="info-text-mobile" className="title-14-dark-blue">{ this.renderInfoText() }</div>
 							</Col>
-						</Row>
+						</div>
 					</div>
 				</div>
-			</div>
+			</OnBoardingLayout>
 		);
 	}
 }

@@ -62,6 +62,7 @@
   color: $white;
 }
 
+
 // blue
 .title-32-blue {
   @extend .title-32;
@@ -121,7 +122,10 @@
   @extend .text-18;
   color: $light-blue;
 }
-
+.text-18-light-blue-bold {
+  @extend .text-18-light-blue;
+  font-weight: 600;
+}
 
 // dark blue
 .title-32-dark-blue {
