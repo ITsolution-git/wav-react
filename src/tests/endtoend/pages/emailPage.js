@@ -5,7 +5,7 @@ let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
-	let resetPasswordStep = async (data) => {
+	let resetPassword = async (data) => {
 		try {
       // Click login btn
 			let loginMenu = await driver.wait(core.automate.until.elementLocated(helper.By.className('gmail-nav__nav-link__sign-in')), 10000);
@@ -62,6 +62,6 @@ module.exports = (driver) => {
   };
   
 	return {
-		resetPasswordStep
+		resetPassword
 	}
 }

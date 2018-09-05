@@ -18,12 +18,13 @@ module.exports = (driver) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
-	let signOutUser = async () => {
+	let signOut = async () => {
 		try {
 			let menu = await driver.wait(core.automate.until.elementLocated(signedOnHeader.signOutNavDropDown), 4000);
 			await timeout(1000)
 			menu.click()
-			await signOut();
+
+			await clickSignout();
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
@@ -34,7 +35,7 @@ module.exports = (driver) => {
 		}
 	};
 
-	let signOut = async () => {
+	let clickSignout = async () => {
 		try {
 			let a_signout = await driver.findElement(core.automate.By.xpath('//*[@id="root"]/div/div/div[1]/div/nav/div/div[2]/ul[2]/li[3]/ul/li[2]/a'));
 			await timeout(100)
@@ -111,7 +112,7 @@ module.exports = (driver) => {
 	}
 
 	return {
-		signOutUser,
+		signOut,
 		closeAccount,
 		openUpdateProfilePage
 	}

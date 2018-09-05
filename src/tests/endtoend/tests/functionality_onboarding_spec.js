@@ -42,7 +42,7 @@ describe('Onboarding end to end tests', ()=>{
 		await onBoardingPages.enterMoreDetailsForVoter('0', voters);
 		await onBoardingPages.enterMoreDetailsForVoter('1', voters);
 		await onBoardingPages.enterMoreDetailsForVoter('2', voters);
-		await onBoardingPages.validateGotoNextProcess();
+		await onBoardingPages.goBack();
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await signedOnHeader.closeAccount(newUser);

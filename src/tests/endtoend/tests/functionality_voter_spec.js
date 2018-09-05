@@ -24,7 +24,7 @@ describe('Voter end to end tests', ()=>{
 
 	it('*******************************************Happy Path add/remove voter',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
-		await signOnPage.validateSignOnProcess(user.email, user.password);
+		await signOnPage.inputSignonInfo(user.email, user.password);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await dashboardPage.validateDashboard();
@@ -32,6 +32,6 @@ describe('Voter end to end tests', ()=>{
 		await dashboardPage.validateVotersPage();
 		await dashboardPage.AddVoterFromVoterList(voterData);
 		await dashboardPage.validateUserIsRemovedFromVoterList(voterData);
-		await signedOnHeader.signOutUser();
+		await signedOnHeader.signOut();
 	})
 })

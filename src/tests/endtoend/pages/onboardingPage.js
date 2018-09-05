@@ -19,7 +19,7 @@ module.exports = (driver) => {
       await driver.findElement(registerPage.state).sendKeys( voters[index].state + '\n' );
 
       await helper.timeout(300)
-      await helper.selectButton('Next')
+      await helper.selectButton('Go!')
       
 	    let firstVoter = await driver.wait(core.automate.until.elementLocated(helper.By.id('currentVoter0')), 30000);
       firstVoter.click();
@@ -43,7 +43,7 @@ module.exports = (driver) => {
     }
   };
 
-  let validateGotoNextProcess = async () => {
+  let goBack = async () => {
     
     try {
 
@@ -65,6 +65,6 @@ module.exports = (driver) => {
 
 	return {
     enterMoreDetailsForVoter,
-    validateGotoNextProcess
+    goBack
 	}
 }

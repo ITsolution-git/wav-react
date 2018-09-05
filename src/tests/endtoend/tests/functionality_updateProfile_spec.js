@@ -28,11 +28,11 @@ describe('Update profile end to end tests', ()=>{
 
 	it('*****************************************Happy Path update user profile',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
-		await signOnPage.validateSignOnProcess(user.email, user.password);
+		await signOnPage.inputSignonInfo(user.email, user.password);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await dashboardPage.validateDashboard();
 		await signedOnHeader.openUpdateProfilePage();
-		await signedOnHeader.signOutUser();
+		await signedOnHeader.signOut();
 	})
 })
