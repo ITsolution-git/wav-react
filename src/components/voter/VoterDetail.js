@@ -223,6 +223,13 @@ class VoterDetail extends BaseComponent {
                     <Col md={9} xsHidden className="no-padding" id="progress-bar">
                         <ProgressBar width='50%' />
                     </Col>
+                    <Col smHidden mdHidden lgHidden xs={11} xsOffset={1}>
+                        <div id="info-text-mobile" className="title-14-dark-blue">
+							Don't worry! <br />
+							We won't use any of these information to <br />
+							contact them!
+						</div>
+                    </Col>
                     <Col md={10} xs={12}>
                         <Spinner loading={matchListFetching} height={100} />
                     </Col>
