@@ -40,16 +40,16 @@ describe('Reset password end to end tests', ()=>{
 
 	it('Happy Path forgot/reset password task',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
-		await signOnPage.validateForgotPasswordProcess(user);
-		await signOnPage.openEmailPage('staging');
-		await emailPage.resetPasswordStep(user);
-		await resetPasswordPage.verifyUser(user);
+		await signOnPage.sendForgotPasswordRequest(user);
+		await signOnPage.checkResetEmail(user.mail_url);
+		await emailPage.resetPassword(user);
+		await resetPasswordPage.validateFirstAndLastName(user);
 		await resetPasswordPage.changePassword(newpassword);
-		await signOnPage.verifySignOnPage();
+		await signOnPage.validateSignOnPage();
 		await signOnPage.checkResetPasswordResult();
-		await signOnPage.validateSignOnProcess(user.email, newpassword);
+		await signOnPage.inputSignonInfo(user.email, newpassword);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
-		await signedOnHeader.signoutProcess();
+		await signedOnHeader.signOut();
 	})
 })

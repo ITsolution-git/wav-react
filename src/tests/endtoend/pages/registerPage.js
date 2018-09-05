@@ -42,11 +42,14 @@ module.exports = (driver) => {
 
 	let shortListThreeVoters = async (voters) => {
 		try {
-			let nextView = await driver.wait(core.automate.until.elementLocated(helper.By.className('view-next')), 15000);
+			let nextView = await driver.wait(core.automate.until.elementLocated(helper.By.css('#btn-next button')), 15000);
 			nextView.click();
 
 			await helper.timeout(200);
-			for (let i = 0; i < 4; i++) {
+			await driver.findElement(helper.By.css('#btn-next button')).click();
+
+			await helper.timeout(200);
+			for (let i = 0; i < 3; i++) {
 				await driver.findElement(helper.By.id('firstname' + (i+1))).sendKeys( voters[i].firstname );
 				await driver.findElement(helper.By.id('lastname' + (i+1))).sendKeys( voters[i].lastname );
 			}

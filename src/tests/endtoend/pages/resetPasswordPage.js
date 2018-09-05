@@ -5,7 +5,7 @@ let helper = require('../support/helper')
 
 module.exports = (driver) => {
 
-	let verifyUser = async (data) => {
+	let validateFirstAndLastName = async (data) => {
 		try {
 
 			await helper.timeout(4000)
@@ -56,7 +56,7 @@ module.exports = (driver) => {
   };
   
 	return {
-		verifyUser,
+		validateFirstAndLastName,
 		changePassword
 	}
 }

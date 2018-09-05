@@ -39,7 +39,7 @@ describe('Onboarding end to end tests', ()=>{
 		// select one voter from matches
 		await onBoardingPages.enterMoreDetailsForVoter('2', voters);
 		// select one voter from matches
-		await onBoardingPages.validateGotoNextProcess();
+		await onBoardingPages.goBack();
 		// validate dashboard
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();

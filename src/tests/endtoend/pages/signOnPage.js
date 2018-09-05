@@ -28,7 +28,7 @@ module.exports = (driver) => {
 			}
 		}
 	}
-	let validateSignOnProcess =   async (...args) => {
+	let inputSignonInfo =   async (...args) => {
 		try {
 			  await driver.findElement(signOnPage.email).sendKeys(args[0]);
 			  await driver.findElement(signOnPage.password).sendKeys(args[1]);
@@ -44,7 +44,7 @@ module.exports = (driver) => {
 
 	};
 
-	let verifySignOnPage = async () => {
+	let validateSignOnPage = async () => {
 		try {
 			await helper.timeout(1000);
 			await driver.findElement(signOnPage.email);
@@ -76,7 +76,7 @@ module.exports = (driver) => {
 		}
 	}
 
-	let validateForgotPasswordProcess = async (user) => {
+	let sendForgotPasswordRequest = async (user) => {
 		try {
 			let link = await driver.findElement(helper.By.id('link-small'));
 			link.click();
@@ -99,9 +99,9 @@ module.exports = (driver) => {
 		}
 	}
 
-	let openEmailPage = async (url) => {
+	let checkResetEmail = async (url) => {
 		try {
-			await driver.get(urlFetcher.retrieveUrl(url).url_gmail);
+			await driver.get(url);
 		} catch (error) {
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
@@ -127,11 +127,11 @@ module.exports = (driver) => {
 
 	return {
 		openSignOnPage,
-		openEmailPage,
-		validateSignOnProcess,
-		verifySignOnPage,
+		checkResetEmail,
+		inputSignonInfo,
+		validateSignOnPage,
 		openRegisterPage,
-		validateForgotPasswordProcess,
+		sendForgotPasswordRequest,
 		checkResetPasswordResult
 	}
 }

@@ -30,12 +30,12 @@ describe('Login end to end tests', ()=>{
 
 	it('****************************************** Login successfully',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
-		await signOnPage.validateSignOnProcess(user.email, user.password);
+		await signOnPage.inputSignonInfo(user.email, user.password);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await dashboardPage.validateDashboard();
-		await signedOnHeader.signoutProcess();
-		await signOnPage.verifySignOnPage();
+		await signedOnHeader.signOut();
+		await signOnPage.validateSignOnPage();
 	})
 })
 
