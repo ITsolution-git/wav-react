@@ -10,6 +10,7 @@ import routes from '../../constants/Routes';
 import boardingTypes from '../../constants/VoterBoardingType';
 import SharedMatchList from '../shared/matchList/MatchList';
 import NextButton from './shared/NextButton';
+import OnBoardingLayout from './shared/OnBoardingLayout';
 
 class MatchList extends BaseComponent {
     constructor(props, context) {
