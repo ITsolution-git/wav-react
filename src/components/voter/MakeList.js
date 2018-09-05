@@ -150,8 +150,7 @@ class MakeList extends BaseComponent {
 							</Row>
                             <Col md={8} xs={12} className="row" id="go-button">
                                 <Col mdOffset={2} md={2} xs={12}>
-                                    <Button borderEnabled={false}
-                                            color={viewProps.buttonColor}
+                                    <Button color={viewProps.buttonColor}
                                             onClick={this.onNext}>Go!</Button>
                                 </Col>
                             </Col>

@@ -59,22 +59,50 @@
 }
 
 .btw-validated-dropdown {
-  .Select-control {
-    border-radius: 0;
-    border: 1px solid #0097A7;
-    height: 50px;
+  &.is-open {
+    .Select-arrow-zone {
+      padding-top: 10px;
+      .Select-arrow {
+        transform: rotate(-135deg) !important;
+        -webkit-transform: rotate(-135deg) !important;
+      }
+    }
   }
+
+  .Select-control {
+    border-radius: 3px;
+    border: none;
+    height: 43px;
+    .Select-clear-zone {
+      width: 30px;
+    }
+    .Select-arrow-zone {
+      padding-right: 13px;
+      .Select-arrow {
+        border: solid $dark-blue;
+        border-width: 0px 2px 2px 0;
+        display: inline-block;
+        padding: 5px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+    }
+  }
+
   .Select-placeholder, .Select-value, .Select-input{
-    font-size: 13pt;
-    line-height: 50px !important;
+    color: #4C4C4C;
+    font-size: 14pt;
+    font-family: Avenir-Light;
+    line-height: 43px !important;
   }
   .Select-option.is-selected {
-    background-color: lighten(grey, 50%);
+    background-color: lighten($light-blue, 50%);
   }
 
   .Select-option.is-focused {
-    background-color: lighten(grey, 40%);
+    background-color: lighten($light-blue, 40%);
   }
+
 }
 
 .btw-input-error {

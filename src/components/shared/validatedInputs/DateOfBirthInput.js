@@ -25,10 +25,10 @@ export default class DateOfBirthInput extends InputBase {
 
         this.setState({value})
         onChange(value, isValid, name)
-    }
+    };
 
     render () {
-        return <TextInput label='Date of Birth'
+        return <TextInput label='Birthday'
                           placeholder='mm/dd/yyyy'
                           validator={value => validate(validationTypes.datetime, value)}
                           name={fields.dateOfBirth}
