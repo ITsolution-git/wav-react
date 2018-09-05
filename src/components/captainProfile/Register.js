@@ -199,7 +199,8 @@ class Register extends BaseComponent {
                         <Row className="justify-content-center">
                             <Col md={12} xs={12} align="center">
                                 <div id="btn_signup">
-                                    <Button onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up!</Button>
+                                    <Button borderEnabled
+											 onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up!</Button>
                                 </div>
                             </Col>
                         </Row>

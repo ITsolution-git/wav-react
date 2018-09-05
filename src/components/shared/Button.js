@@ -11,7 +11,7 @@ export default class Button extends React.Component {
             disabled,
             id,
             color = 'blue',
-            borderEnabled = true,
+            borderEnabled = false,
             onClick = () => {}
         } = this.props;
 

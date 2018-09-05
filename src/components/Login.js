@@ -122,6 +122,7 @@ class Login extends BaseComponent {
                                 <Link id="link-small" to='/changePassword/request'>Forgot password</Link>
                                 <div id="button-class">
                                     <Button disabled={isFetching}
+											 borderEnabled
                                             onClick={this.btwSignOn.bind(this)}>
 										{ this.isMobile() ? 'Go!' : 'Log In' }
                                     </Button>

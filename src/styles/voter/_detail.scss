@@ -1,8 +1,55 @@
 .btw-voter-detail {
-    #btn_next button {
-        margin-top: $input_field_space;
+    padding: 20px;
+    @include respond-to($desktop) {
+        width: 57%;
+        float: right;
+        margin-right: 10%;
     }
-    .email-field {
-        text-align: left;
+
+    #title {
+        @include respond-to($desktop) {
+            margin-bottom: 20px;
+        }
+        @include respond-to($phone) {
+            margin: 5px 0 20px 0;
+        }
+    }
+
+    #required-info {
+        margin-bottom: 20px;
+    }
+
+    #helpful-info {
+        margin-bottom: 20px;
+    }
+
+    #info-icon {
+        margin-left: 10px;
+    }
+
+    #progress-bar {
+        margin: 30px 0 20px 0;
+    }
+
+    #info {
+        margin-top: -30px;
+    }
+
+    #voter-address {
+        @include respond-to($phone) {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+
+    #go-button {
+        @include respond-to($phone) {
+            text-align: center;
+        }
+    }
+
+    #info-text-mobile {
+        margin-top: 15px;
+        text-align: center;
     }
 }
