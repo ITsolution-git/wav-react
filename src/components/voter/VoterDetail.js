@@ -126,7 +126,8 @@ class VoterDetail extends BaseComponent {
 		} = this.state;
 
 		const viewProps = this.viewProps(),
-        	errorWhite = this.isDesktop();
+        	errorWhite = this.isDesktop(),
+            showAsterisk = this.isMobile();
 
 		return (
 			<OnBoardingLayout>
@@ -149,6 +150,7 @@ class VoterDetail extends BaseComponent {
 													  onChange={this.handleChange}
 													  defaultValue={firstName}
 													  startValidation={startValidation}
+                                                      showAsterisk={showAsterisk}
 													  required />
 								 </Col>
 								 <Col md={6} xs={6}>
@@ -156,6 +158,7 @@ class VoterDetail extends BaseComponent {
 													 defaultValue={lastName}
                                                     onChange={this.handleChange}
 													 startValidation={startValidation}
+                                                    showAsterisk={showAsterisk}
 													 required />
 								 </Col>
 							 </Row>
@@ -165,6 +168,7 @@ class VoterDetail extends BaseComponent {
                                             startValidation={startValidation}
                                             disabled={emailDisabled}
                                             errorWhite={errorWhite}
+                                            showAsterisk={showAsterisk}
                                             required />
                             </Col>
                             <Row>
@@ -173,6 +177,7 @@ class VoterDetail extends BaseComponent {
                                                defaultValue={voterDetail[FieldConstants.city]}
                                                startValidation={startValidation}
                                                errorWhite={errorWhite}
+                                               showAsterisk={showAsterisk}
                                                required />
                                 </Col>
                                 <Col md={5} xs={5}>
@@ -180,14 +185,15 @@ class VoterDetail extends BaseComponent {
                                                 defaultValue={voterDetail[FieldConstants.state]}
                                                 startValidation={startValidation}
                                                 errorWhite={errorWhite}
+                                                showAsterisk={showAsterisk}
                                                 required />
                                 </Col>
                             </Row>
 							<Col id="helpful-info" className={`no-padding ${viewProps.subtitleClass}`} xsHidden>
 								Helpful Information:
 							</Col>
-                            <Row>
-                                <Col md={6}>
+                            <Row id='voter-address'>
+                                <Col md={6} xs={7}>
                                     <DateOfBirthInput defaultValue={voterDetail[FieldConstants.dateOfBirth]}
                                                       errorWhite={errorWhite}
                                                       onChange={this.handleChange} />
@@ -198,7 +204,7 @@ class VoterDetail extends BaseComponent {
                                                   onChange={this.handleChange} />
                                 </Col>
                             </Row>
-                            <Col md={6} xs={12} className="no-padding">
+                            <Col id="go-button" md={6} xs={12} className="no-padding">
                                 <Button disabled={matchListFetching}
                                         color={viewProps.buttonColor}
                                         onClick={this.onNext}>

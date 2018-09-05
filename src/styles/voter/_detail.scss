@@ -34,4 +34,17 @@
     #info {
         margin-top: -30px;
     }
+
+    #voter-address {
+        @include respond-to($phone) {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+
+    #go-button {
+        @include respond-to($phone) {
+            text-align: center;
+        }
+    }
 }
