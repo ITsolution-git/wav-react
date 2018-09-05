@@ -5,7 +5,6 @@
 
 const core = require('../core');
 let dataParser = require('../support/dataParser');
-
 let createSignOnPage 			= require('../pages/signOnPage');
 let createRegisterPage 		= require('../pages/registerPage');
 let createOnBoardingPages 	= require('../pages/onboardingPage');
@@ -17,6 +16,13 @@ describe('Onboarding end to end tests', ()=>{
 
 	const newUser = dataParser.findByTag('new user signup');
 	let voters = dataParser.findByTag('new voters').voters
+
+	let signOnPage;
+	let latestTaskModal;
+	let dashboardPage;
+	let signedOnHeader;
+	let registerPage;
+	let onBoardingPages;
 
 	beforeEach(()=>{
 		signOnPage 				= createSignOnPage(core.driver());
@@ -34,36 +40,12 @@ describe('Onboarding end to end tests', ()=>{
 		await registerPage.registerNewAccount(newUser);
 		await registerPage.shortListThreeVoters(voters);
 		await onBoardingPages.enterMoreDetailsForVoter('0', voters);
-		// select one voter from matches
 		await onBoardingPages.enterMoreDetailsForVoter('1', voters);
-		// select one voter from matches
 		await onBoardingPages.enterMoreDetailsForVoter('2', voters);
-		// select one voter from matches
 		await onBoardingPages.goBack();
-		// validate dashboard
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await signedOnHeader.closeAccount(newUser);
-		// signout
+		await signOnPage.verifySignOnPage();
 	})
-
-	/*it('Happy Path onboarding - add more information for 1st user',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - add more information for 2nd user',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - add more information for 3rd user',  async ()=>{
-		;
-	})
-
-	it('Happy Path onboarding - get all 3 matches ',  async ()=>{
-
-	})
-
-	it('Happy Path onboarding - remove test user ',  async ()=>{
-
-	})*/
 })

@@ -1,3 +1,5 @@
 export default {
-    blue: '#0D6291'
+    white: '#FFFFFF',
+    blue: '#0D6291',
+    lightBlue: '#32B5CC'
 }

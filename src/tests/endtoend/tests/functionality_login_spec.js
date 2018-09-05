@@ -24,10 +24,6 @@ describe('Login end to end tests', ()=>{
 		signedOnHeader = createSignedOnHeader(core.driver());
 	});
 
-	function afterEach () {
-	}
-
-
 	it('****************************************** Login successfully',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.inputSignonInfo(user.email, user.password);

@@ -72,3 +72,33 @@
         }
     }
 }
+
+.btw-voter-layout {
+    .logo {
+        @include respond-to($phone) {
+            margin: 7% 0 0 9%;
+        }
+        @include respond-to($desktop) {
+            margin: 3% 0 0 6%;
+        }
+    }
+    .layout-center {
+        display: flex;
+        justify-content: center;
+    }
+    #info {
+        background-color: $white;
+        border-radius: 3px;
+        padding: 30px 20px;
+    }
+}
+
+.btw-progress-bar {
+    height: 16px;
+    width: 100%;
+    background-color: $white;
+    .inner-bar {
+        height: 100%;
+        background-color: $light-blue;
+    }
+}

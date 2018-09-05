@@ -3,26 +3,26 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 
-import voterConstants from '../../constants/reducerConstants/VoterConstants';
 import { voterDetailsPersist, matchListPersist, resetMatchList  } from '../../actions/VoterAction';
 import BaseComponent from '../shared/BaseComponent';
-import NextButton from './shared/NextButton';
 import { getUrlParam } from '../../helpers/UrlHelper';
 import Spinner from '../shared/Spinner';
 import Button from '../shared/Button';
-
 import FieldConstants from '../../constants/FieldConstants';
 import {
+	FirstNameInput,
+	LastNameInput,
 	CityInput,
 	StateInput,
 	EmailInput,
 	DateOfBirthInput,
-	GenderInput,
 	AddressInput,
-	PhoneInput,
-	ZipCodeInput
 } from '../shared/validatedInputs';
+
+import OnBoardingLayout from './shared/OnBoardingLayout';
+import ProgressBar from './shared/ProgressBar';
 
 class VoterDetail extends BaseComponent {
 	constructor(props, context) {
@@ -64,6 +64,41 @@ class VoterDetail extends BaseComponent {
         }
 	};
 
+    viewProps = () => {
+        if (this.isMobile()) {
+            return {
+                buttonColor: 'blue',
+                titleClass: 'title-24-blue',
+            }
+        }
+
+        return {
+            buttonColor: 'light-blue',
+            titleClass: 'title-32-white',
+            subtitleClass: 'title-24-white'
+        }
+    };
+
+    renderInfoText = () => {
+        return (
+            <span>
+				We only use this information to verify their registration.
+				We will never contact them!
+			</span>
+        )
+    };
+
+    getNames = () => {
+        const { makeList, currentNumber } = this.props.voter,
+        	 { voterDetail} = this.state,
+		     getName = (field) => voterDetail[field] || makeList[`${field}${currentNumber}`];
+        return {
+        	firstName: getName(FieldConstants.firstName),
+			lastName: getName(FieldConstants.lastName)
+		}
+
+	};
+
     isLoadPrevious = () => {
     	return getUrlParam(this.props, 'loadPrevious');
     };
@@ -80,13 +115,8 @@ class VoterDetail extends BaseComponent {
 	}
 
 	render() {
-		const {
-			makeList,
-			currentNumber,
-			matchListFetching
-		} = this.props.voter,
-			firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
-			lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`],
+		const { matchListFetching } = this.props.voter,
+			{ firstName, lastName } = this.getNames(),
 			loadPrevious = this.isLoadPrevious(),
 			emailDisabled = !!loadPrevious;
 
@@ -95,83 +125,116 @@ class VoterDetail extends BaseComponent {
             voterDetail
 		} = this.state;
 
+		const viewProps = this.viewProps(),
+        	errorWhite = this.isDesktop(),
+            showAsterisk = this.isMobile();
+
 		return (
-			<div className='btw-voter btw-voter-detail container'>
-				{ this.isDesktop() && this.renderBackToHome() }
-				<div className="intro">
-					<p className="intro-title">
-					{ 'Tell us more about ' + firstName || '' + " " + lastName || '' }
-					</p>
-					<p className="intro-desc">
-						The more information you provide, the more accurately we can verify if they are registered to vote. (Don’t worry, we’ll NEVER share this information with anybody else.) 
-					</p>
-                    { this.renderRequiredFieldMsg() }
-				</div>
-				<Row>
-					<Col md={6}>
-						<CityInput onChange={this.handleChange}
-								   defaultValue={voterDetail[FieldConstants.city]}
-								   startValidation={startValidation}
-								   required />
+			<OnBoardingLayout>
+                <div className='btw-voter-detail'>
+					<Col md={8} className='no-padding'>
+                        <Col id="title" className={viewProps.titleClass}>
+                            { 'Tell us more about ' + firstName || '' + " " + lastName || '' }...
+                        </Col>
 					</Col>
-					<Col md={6}>
-						<StateInput onChange={this.handleChange}
-									defaultValue={voterDetail[FieldConstants.state]}
-									startValidation={startValidation}
-									required />
+					<Col md={8} xsHidden className='no-padding'>
+						<Col className={viewProps.subtitleClass} id="required-info">
+							Required Information: <FontAwesome id='info-icon' name='info-circle' />
+						</Col>
 					</Col>
-				</Row>
-				<Col className='email-field'>
-					<EmailInput onChange={this.handleChange}
-								defaultValue={voterDetail[FieldConstants.email]}
-								startValidation={startValidation}
-								disabled={emailDisabled}
-								required />
-					<span>We only use the email address to verify voter registration, we will not share this address or contact it</span>
-				</Col>
-				<Row>
-					<Col md={6}>
-						<DateOfBirthInput defaultValue={voterDetail[FieldConstants.dateOfBirth]}
-										   onChange={this.handleChange} />
-					</Col>
-					<Col md={6}>
-						<GenderInput defaultValue={voterDetail[FieldConstants.gender]}
-									 onChange={this.handleChange} />
-					</Col>
-				</Row>
-				<Col>
-					<AddressInput defaultValue={voterDetail[FieldConstants.address]}
-								  onChange={this.handleChange} />
-				</Col>
-				<Col>
-					<PhoneInput defaultValue={voterDetail[FieldConstants.phone]}
-								onChange={this.handleChange} />
-				</Col>
-				<Col>
-					<ZipCodeInput defaultValue={voterDetail[FieldConstants.zipCode]}
-								  onChange={this.handleChange} />
-				</Col>
-				<Row>
-                    <Col mdOffset={3} md={3} xs={6}>
-						{ loadPrevious ?
-                            <NextButton title='Next Name'
-										onNext={() => this.setState({
-											startValidation: false,
-											valid: this.getRequiredDefaults(),
-											voterDetail: {}
-										})} />
-							: this.isMobile && this.renderBackToHome()
-                        }
+					<Row>
+                        <Col md={8}>
+							 <Row>
+								 <Col md={6} xs={6}>
+									 <FirstNameInput errorWhite={errorWhite}
+													  onChange={this.handleChange}
+													  defaultValue={firstName}
+													  startValidation={startValidation}
+                                                      showAsterisk={showAsterisk}
+													  required />
+								 </Col>
+								 <Col md={6} xs={6}>
+									 <LastNameInput errorWhite={errorWhite}
+													 defaultValue={lastName}
+                                                    onChange={this.handleChange}
+													 startValidation={startValidation}
+                                                    showAsterisk={showAsterisk}
+													 required />
+								 </Col>
+							 </Row>
+                            <Col>
+                                <EmailInput onChange={this.handleChange}
+                                            defaultValue={voterDetail[FieldConstants.email]}
+                                            startValidation={startValidation}
+                                            disabled={emailDisabled}
+                                            errorWhite={errorWhite}
+                                            showAsterisk={showAsterisk}
+                                            required />
+                            </Col>
+                            <Row>
+                                <Col md={7} xs={7}>
+                                    <CityInput onChange={this.handleChange}
+                                               defaultValue={voterDetail[FieldConstants.city]}
+                                               startValidation={startValidation}
+                                               errorWhite={errorWhite}
+                                               showAsterisk={showAsterisk}
+                                               required />
+                                </Col>
+                                <Col md={5} xs={5}>
+                                    <StateInput onChange={this.handleChange}
+                                                defaultValue={voterDetail[FieldConstants.state]}
+                                                startValidation={startValidation}
+                                                errorWhite={errorWhite}
+                                                showAsterisk={showAsterisk}
+                                                required />
+                                </Col>
+                            </Row>
+							<Col id="helpful-info" className={`no-padding ${viewProps.subtitleClass}`} xsHidden>
+								Helpful Information:
+							</Col>
+                            <Row id='voter-address'>
+                                <Col md={6} xs={7}>
+                                    <DateOfBirthInput defaultValue={voterDetail[FieldConstants.dateOfBirth]}
+                                                      errorWhite={errorWhite}
+                                                      onChange={this.handleChange} />
+                                </Col>
+                                <Col md={6}>
+                                    <AddressInput defaultValue={voterDetail[FieldConstants.address]}
+                                                  errorWhite={errorWhite}
+                                                  onChange={this.handleChange} />
+                                </Col>
+                            </Row>
+                            <Col id="go-button" md={6} xs={12} className="no-padding">
+                                <Button disabled={matchListFetching}
+                                        color={viewProps.buttonColor}
+                                        onClick={this.onNext}>
+                                    Go!
+                                </Button>
+                            </Col>
+                        </Col>
+                        <Col md={4} xsHidden>
+                            <div id="info" >
+                                <div className="text-18-light-blue-bold">
+                                    { this.renderInfoText() }
+                                </div>
+                            </div>
+                        </Col>
+					</Row>
+                    <Col md={9} xsHidden className="no-padding" id="progress-bar">
+                        <ProgressBar width='50%' />
                     </Col>
-                    <Col md={3} xs={6}>
-                        <Button disabled={matchListFetching}
-								onClick={this.onNext}>
-                            {loadPrevious ? 'Resubmit' : 'Next'}
-                        </Button>
+                    <Col smHidden mdHidden lgHidden xs={11} xsOffset={1}>
+                        <div id="info-text-mobile" className="title-14-dark-blue">
+							Don't worry! <br />
+							We won't use any of these information to <br />
+							contact them!
+						</div>
                     </Col>
-				</Row>
-                <Spinner loading={matchListFetching} height={130} />
-			</div>
+                    <Col md={10} xs={12}>
+                        <Spinner loading={matchListFetching} height={100} />
+                    </Col>
+                </div>
+			</OnBoardingLayout>
 		);
 	}
 }

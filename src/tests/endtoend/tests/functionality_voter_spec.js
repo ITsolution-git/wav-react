@@ -7,8 +7,13 @@ let createDashboardPage = require('../pages/dashboardPage');
 let createSignedOnHeader = require('../pages/signedOnHeader');
 
 describe('Voter end to end tests', ()=>{
+	let signOnPage;
+	let latestTaskModal;
+	let dashboardPage;
+	let signedOnHeader;
+
 	const user = dataParser.findByTag('end to end happy path');
-	const voterData = dataParser.findByTag('new voters').voters
+	const voterData = dataParser.findByTag('new voters').voters;
 
 	beforeEach(()=>{
 		signOnPage = createSignOnPage(core.driver());
@@ -17,7 +22,7 @@ describe('Voter end to end tests', ()=>{
 		signedOnHeader = createSignedOnHeader(core.driver());
 	});
 
-	it('Happy Path add/remove voter',  async ()=>{
+	it('*******************************************Happy Path add/remove voter',  async ()=>{
 		await signOnPage.openSignOnPage('staging');
 		await signOnPage.inputSignonInfo(user.email, user.password);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();

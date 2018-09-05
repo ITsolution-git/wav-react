@@ -80,8 +80,8 @@ export default class InputBase extends BaseComponent {
     };
 
     resolveLabel = () => {
-        const { label } = this.props;
-        return label;
+        const { label, required, showAsterisk = false } = this.props;
+        return `${label} ${required && showAsterisk && '*' || ''}`;
     };
 }
 
