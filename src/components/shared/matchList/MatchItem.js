@@ -9,81 +9,83 @@ export default class MatchItem extends BaseComponent {
 
     replaceNumbersWithX = (str) => {
         str = str || '';
-        return str.replace(new RegExp("[0-9]", "g"), "X");
+        return str.replace(new RegExp("[0-9]", "g"), "*");
     };
 
     getViewProps = () => {
         if (this.isDesktop()) {
             return {
-                checkName: 'check-white'
+                checkName: 'check-white',
+                arrowName: 'light'
             };
         }
         return {
-            checkName: 'check-blue'
+            checkName: 'check-blue',
+            arrowName: 'black'
         };
+    };
+
+    formatAddress = (addr1, addr2) => {
+        addr1 = addr1 ? `${addr1}, ` : '';
+        return this.replaceNumbersWithX(`${addr1}${addr2}`);
+    };
+
+    resolveAddress = () => {
+        let {
+            mailaddrline1, mailaddrline2,
+            regaddrline1 = mailaddrline1,
+            regaddrline2 = mailaddrline2
+        } = this.props.person;
+
+        return this.formatAddress(regaddrline1, regaddrline2);
+    };
+
+    resolveCityState = () => {
+        let {
+            mailaddrcity, mailaddrstate,
+            regaddrcity = mailaddrcity,
+            regaddrstate = mailaddrstate
+        } = this.props.person;
+
+        return this.formatAddress(regaddrcity, regaddrstate);
     };
 
     render () {
         const { onClick, person, id } = this.props;
         const {
+            dwid,
             firstname,
             lastname,
-            regaddrline1,
-            regaddrline2,
-            regaddrcity,
-            regaddrstate,
-            gender,
-            birthdate,
-            mailaddrline1,
-            mailaddrline2,
-            mailaddrcity,
-            mailaddrstate,
-            mailaddrzip,
-            phone
+            birthdate
         } = person;
 
-        const { expanded } = this.props;
+        const { expanded, onChange } = this.props;
         const viewProps = this.getViewProps();
 
         return (
-            <Row className='match-item' onClick={onClick} id={id}>
-                <Col md={10}>
+            <Row className='match-item' id={id}>
+                <Col md={10} xs={10} onClick={() =>  onChange(expanded ? null : dwid)}>
                     <Row className='info-row'>
-                        <Col md={8}>
-                            <div>{ firstname }, { lastname } (born {new Date(birthdate).getFullYear()})</div>
-                            { true &&
-                                <div>
-                                    <div>{ this.replaceNumbersWithX(mailaddrline1) }, { this.replaceNumbersWithX(mailaddrline2) }</div>
-                                    <div>{ mailaddrcity }, { mailaddrstate }</div>
+                        <Col md={10} xs={10}>
+                            <div id="text-content" className="text-15-dark-blue-bold">
+                                <div>{ firstname }, { lastname } (born {new Date(birthdate).getFullYear()})</div>
+                                { expanded &&
+                                <div id="full-info">
+                                    <div>{ this.resolveAddress() }</div>
+                                    <div>{ this.resolveCityState() }</div>
                                     <div>{ birthdate } </div>
                                 </div>
-                            }
+                                }
+                            </div>
                         </Col>
-                        <Col md={2} className="pull-right">
-                            <Arrow expanded={expanded} />
+                        <Col id="arrow" md={2} xs={2} className="pull-right">
+                            <Arrow name={viewProps.arrowName} expanded={expanded} />
                         </Col>
                     </Row>
                 </Col>
-                <Col md={2}>
+                <Col id="check" md={2} xs={2} onClick={onClick}>
                     <Icon name={viewProps.checkName} width={40} height={40} />
                 </Col>
-
-                {/*<Col md={8}>*/}
-                    {/*<div>{ this.replaceNumbersWithX(regaddrline1) }, { this.replaceNumbersWithX(regaddrline2) }</div>*/}
-                    {/*<div>{ regaddrcity }, { regaddrstate }</div>*/}
-                    {/*{ moreEnabled &&*/}
-                        {/*<div className='more-info'>*/}
-                            {/*<div>Mail Address: { this.replaceNumbersWithX(mailaddrline1) }, { this.replaceNumbersWithX(mailaddrline2) }, { mailaddrcity }, { mailaddrstate }, { mailaddrzip } </div>*/}
-                            {/*<div>Phone: { phone }</div>*/}
-                            {/*<div>Birthday: { birthdate }</div>*/}
-                            {/*<div>Mail Address: { }</div>*/}
-                            {/*<div>Gender: { gender }</div>*/}
-                        {/*</div> }*/}
-                    {/*<span className='link' onClick={e => {*/}
-                        {/*e.stopPropagation();*/}
-                        {/*this.setState({ moreEnabled: !moreEnabled });*/}
-                    {/*}}>{ moreEnabled ? 'Show less' : 'Show more' }</span>*/}
-                {/*</Col>*/}
             </Row>
         )
     }

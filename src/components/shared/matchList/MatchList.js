@@ -15,7 +15,8 @@ class MatchList extends BaseComponent {
         super(props, context);
         this.state = {
             showConfirmModal: false,
-            currentVoters: []
+            currentVoters: [],
+            expandedId: null
         };
     }
 
@@ -46,7 +47,7 @@ class MatchList extends BaseComponent {
     getViewProps = () => {
       if (this.isDesktop()) {
         return {
-            titleClass: 'title-32-white'
+            titleClass: 'title-24-white'
         }
       }
       return {
@@ -58,7 +59,8 @@ class MatchList extends BaseComponent {
         const { matchList, matchListFetching } = this.props.voter;
         const {
             showConfirmModal,
-            currentVoters
+            currentVoters,
+            expandedId
         } = this.state;
         const items = matchList.sort((person1, person2) => person2.matchRate - person1.matchRate);
         const viewProps = this.getViewProps();
@@ -76,10 +78,13 @@ class MatchList extends BaseComponent {
                         }
                     </div> }
                 <div className='match-list'>
-                    { currentVoters.map((person, i) => <MatchItem key={i} id={'currentVoter' + i}
-                                                       onClick={() => this.onNameClick(person)}
-                                                       person={person} />
-                        )}
+                    { currentVoters.map((person, i) => {
+                        return <MatchItem key={i} id={'currentVoter' + i}
+                                          onClick={() => this.onNameClick(person)}
+                                          onChange={id => this.setState({ expandedId: id })}
+                                          expanded={person.dwid === expandedId}
+                                          person={person}/>
+                    })}
                 </div>
                 <Paginator items={items}
                            onItemsChange={items => this.setState({ currentVoters: items })}/>
