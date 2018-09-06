@@ -24,3 +24,30 @@
   }
 }
 
+.login-center-modal {
+  display: flex !important;
+
+  .forgot-password { 
+    padding: 60px 100px 30px 100px;
+    text-align: center;
+
+    .warning-red {
+      color: red;
+      padding: 10px 0;
+      border: 1px solid red;
+    }
+
+    .warning-green {
+      color: green;
+      padding: 10px 0;
+      border: 1px solid green;
+    }
+
+    & > div { margin: 25px 0; }
+    & > div:last-child { margin: 50px 0 0 0; a { color: black; } }
+  }
+  & .modal-dialog { align-self: center; width: fit-content !important; }
+  & .modal-header { display: none; }
+  & .modal-footer { display: none; }
+}
+

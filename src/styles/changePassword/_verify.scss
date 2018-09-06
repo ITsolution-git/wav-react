@@ -1,4 +1,37 @@
 .btw-verify {
+    height: 100vh;
+    margin-top: 0 !important;
+    width: 100%;
+    display: flex;
+    background-color: #036291;
+
+    & .container {
+        display: flex;
+    }
+
+    .verify-captain {
+        margin: auto;
+        border-radius: 10px;
+        background-color: white;
+        padding: 40px 50px 20px 50px;
+
+        .warning-red {
+            color: red;
+            padding: 10px 0;
+            border: 1px solid red;
+        }
+    
+        .warning-green {
+            color: green;
+            padding: 10px 0;
+            border: 1px solid green;
+        }
+
+        & > div {
+            margin: 20px 0;
+        }
+    }
+
     .password-div {
         height: 173px;
         text-align: left;
@@ -20,4 +53,9 @@
     .terms-privacy {
         margin-left: -20px;
     }
+}
+
+html, 
+body {
+    height: 100%;
 }

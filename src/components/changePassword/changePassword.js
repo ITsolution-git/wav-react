@@ -2,87 +2,63 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { changePasswordRequest } from '../../actions/PasswordRequestAction';
-import classNames from 'classnames';
-import { Row, Col } from 'react-bootstrap';
-
-import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
 import routes from '../../constants/Routes';
 import Button from '../shared/Button';
+import {
+	PasswordInput,
+	TextInput
+} from '../../components/shared/validatedInputs';
 
 class ChangePassword extends BaseComponent {
 	constructor() {
 		super();
 		this.state = {
-			info: this.getEmptyState(),
-			isValid: this.getEmptyState(true),
+			password: '',
+			confirmPassword: '',
+			valid: {
+				password: false,
+				confirmPassword: false
+			},
 			isChangedPassword: true
 		}
 	}
 
-	getEmptyState = (initValue = '') => {
-		return {
-            password: initValue !== '' ? false : '',
-            confirmPassword: initValue
-        };
+	handleChange = (value, isValid, name) => {
+		this.setState({
+			[name]: value,
+			valid: {...this.state.valid, [name]: isValid }
+		});
 	};
 
-	updateFields(field, event) {
-		let info = Object.assign({}, this.state.info);
-		info[field] = event.target.value;
-		this.setState({
-			info: info
-		})
-	}
+	changePassword = () => {
+		const { valid, password, confirmPassword } = this.state;
 
-	validateFields(field, event) {
-		const { info, isValid } = this.state,
-			{ value } = event.target;
-		let validation = { ...isValid };
-
-		validation[field] = field === 'confirmPassword'
-			? info.password === value
-			: validate(field, value);
-
-		this.setState({ isValid: validation });
-	}
-
-	onChangePassword(event) {
-		const { isValid, info } = this.state;
-		let validation = { ...isValid };
-        Object.keys(info).forEach(key => {
-        	validation[key] = key === 'confirmPassword'
-				? info.password === info[key]
-				: validate(key,  info[key]);
-        });
-
-		this.setState({ isValid: validation });
-
+		console.log(this.props)
 		if (!this.props.location.state.id) {
 			return true;
 		}
 
-		let param = this.props.location.state.id;
+		if (password !== confirmPassword) {
+			this.setState({
+				valid: {
+					...valid,
+					confirmPassword: false
+				}
+			})
+			return
+		}
 
-		if (Object.keys(info).some(key => !validation[key])) {
-			return true;
-		} else {
+		if (valid.password) {
+
+			let param = this.props.location.state.id, info = {};
+
+			info['password'] = password
+			info['confirmPassword'] = confirmPassword
 			info["userid"] = param;
 			return this.props.changePasswordRequest(info);
 		}
 	}
-
-	renderInput = (name, label, inputType, colWidth = 12, errorMsg, id) => {
-		return (
-            <div className={`form-group col-xs-${colWidth}`}>
-                <label className="pull-left" htmlFor={name}>{label}</label>
-                <input type={inputType} className="input-field" id={id}
-                       onChange={this.updateFields.bind(this, name)}
-                       onBlur={this.validateFields.bind(this, name)} />
-                { !this.state.isValid[name] && <span className="pull-left">{ errorMsg }</span> }
-            </div>
-		)
-	};
 
 	componentWillReceiveProps(props) {
 		if (props.isChangedPassword) {
@@ -105,32 +81,33 @@ class ChangePassword extends BaseComponent {
 		);
 
 		return (
-			<div>
-				<div className='btw-change-password btw-verify container'>
-					<div className="intro">
-						<p className="intro-title">
-                            Enter your new password
-						</p>
-					</div>
-					<form>
-						{ !this.state.isChangedPassword && <span style={{ fontSize: "18px" }}>Password doesn't not reset</span> }
-						<br/><br/>
-						<div className={classNames({'password-div': !this.state.isValid['password'] })}>
-							{ this.renderInput('password', 'Password', 'password', 0, passwordErrorMsg, 'password') }
+			<div className='btw-change-password btw-verify'>
+				<div className="container">
+					<div className="verify-captain col-lg-9 col-md-12">
+						{ !this.state.isChangedPassword && <div className="warning-red">Password doesn't not reset</div> }
+						<div className="title-32-light-blue">
+							Enter your new password
 						</div>
-						{ this.renderInput('confirmPassword', 'Confirm Password', 'password', 0, '* The passwords do not match *', 'confirmPassword') }
-						<br/><br/>
-					</form>
-					<Row>
-						<Col xs={6}>	
-							{ this.isMobile() && this.renderBackToHome()}
-						</Col>
-						<Col md={12} xs={6}>
-							<div id="btn_signup">
-								<Button onClick={this.onChangePassword.bind(this, 'onChangePassword')}>Change</Button>
-							</div>
-						</Col>
-					</Row>
+						<div className="text-18-dark-blue">
+							<PasswordInput 
+								onChange={this.handleChange}
+								isVoter={false}
+								name="password"
+								uniqueValidationEnabled={false}
+								required />
+							<TextInput label='Confirm Password'
+								type='password'
+								id="confirmPassword"
+								validator={value => value === this.state.password}
+								validatorError='The passwords do not match'
+								onChange={this.handleChange}
+								name='confirmPassword'
+								required />
+						</div>
+						<div id="btn-next">
+							<Button onClick={this.changePassword}>Submit</Button>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
