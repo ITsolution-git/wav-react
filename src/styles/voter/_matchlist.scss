@@ -1,7 +1,15 @@
 .btw-match-list {
-    @include respond-to($desktop) {
-      width: 42%;
+    padding: 20px;
+
+    #title {
+      @include respond-to($desktop) {
+
+      }
+      @include  respond-to($phone) {
+
+      }
     }
+
     .bottom-buttons {
       margin-top: $input_field_space;
       div {
@@ -9,12 +17,6 @@
       }
     }
     .match-list {
-      .name-row {
-        @extend .voter-row;
-        cursor: pointer;
-        &:hover {
-          background-color: darken(#3C98D9, 7%);
-        }
-      }
+
     }
 }

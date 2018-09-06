@@ -30,25 +30,29 @@ class MatchList extends BaseComponent {
     render() {
         const { boardingType } = this.props.voter;
         return (
-            <div className='btw-voter btw-match-list'>
-                <SharedMatchList onSubmitSuccess={(voter) => {
-                                    this.redirectToPage(voter, routes.voterSuccess);
-                                 }}
-                                 onSubmitError={(voter) => {
-                                     this.redirectToPage(voter, routes.voterNotRegisteredError);
-                                 }} />
-                <Row>
-                    { boardingType === boardingTypes.register &&
-                        <Row className='bottom-buttons'>
-                            <Col md={12}>
-                                <button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>
-                            </Col>
-                            <Col md={12}>
-                                <NextButton title='Skip'/>
-                            </Col>
-                        </Row> }
-                </Row>
-            </div>
+            <OnBoardingLayout>
+                <div className='btw-match-list layout-center'>
+                    <div>
+                        <SharedMatchList onSubmitSuccess={(voter) => {
+                            this.redirectToPage(voter, routes.voterSuccess);
+                        }}
+                                         onSubmitError={(voter) => {
+                                             this.redirectToPage(voter, routes.voterNotRegisteredError);
+                                         }} />
+                        <Row>
+                            { boardingType === boardingTypes.register &&
+                            <Row className='bottom-buttons'>
+                                <Col md={12}>
+                                    <button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>
+                                </Col>
+                                <Col md={12}>
+                                    <NextButton title='Skip'/>
+                                </Col>
+                            </Row> }
+                        </Row>
+                    </div>
+                </div>
+            </OnBoardingLayout>
         );
     }
 }

@@ -43,6 +43,17 @@ class MatchList extends BaseComponent {
         this.props.onSubmitError(this.currentPerson);
     };
 
+    getViewProps = () => {
+      if (this.isDesktop()) {
+        return {
+            titleClass: 'title-32-white'
+        }
+      }
+      return {
+          titleClass: 'title-24-dark-blue'
+      }
+    };
+
     render() {
         const { matchList, matchListFetching } = this.props.voter;
         const {
@@ -50,23 +61,20 @@ class MatchList extends BaseComponent {
             currentVoters
         } = this.state;
         const items = matchList.sort((person1, person2) => person2.matchRate - person1.matchRate);
+        const viewProps = this.getViewProps();
 
         return (
             <div>
                 <Spinner loading={matchListFetching} height={200} />
-                { !matchListFetching && <div className="intro">
-                    <p className="intro-title">
+                { !matchListFetching &&
+                    <div id="title" className={viewProps.titleClass}>
                         { matchList.length > 1 ?
-                            'Is one of these people your friend?' :
+                            'Which one is your friend?' :
                             matchList.length === 1 ?
                                 'Is this your friend?' :
                                 'Our search returned no results'
                         }
-                    </p>
-                    <p className="intro-title">
-                        { matchList.length ? "Click on the name of your voter to select it" : "" }
-                    </p>
-                </div> }
+                    </div> }
                 <div className='match-list'>
                     { currentVoters.map((person, i) => <MatchItem key={i} id={'currentVoter' + i}
                                                        onClick={() => this.onNameClick(person)}
