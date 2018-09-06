@@ -1,20 +1,33 @@
 .btw-match-list {
-    @include respond-to($desktop) {
-      width: 42%;
+    #title {
+      margin: 30px 0 50px 0;
     }
-    .bottom-buttons {
-      margin-top: $input_field_space;
-      div {
-        margin-bottom: 16px;
-      }
-    }
+
     .match-list {
-      .name-row {
-        @extend .voter-row;
-        cursor: pointer;
-        &:hover {
-          background-color: darken(#3C98D9, 7%);
+      .match-item {
+        @include respond-to($desktop) {
+          width: 450px;
         }
+        margin-bottom: 24px;
+      }
+      .info-row {
+        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        border-radius: 5px;
+        padding: 15px 0 15px 0;
+        background-color: $white;
+      }
+      #full-info {
+        margin: 10px 0 10px 0;
+      }
+      #arrow {
+        cursor: pointer;
+      }
+      #check {
+        cursor: pointer;
       }
     }
+
+  #button {
+    margin-top: 20px;
+  }
 }

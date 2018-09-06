@@ -27,6 +27,12 @@
     background-color: darken($light-blue, 0.5);
   }
 }
+.button-red {
+  background-color: $red;
+  &:hover {
+    background-color: darken($red, 0.5);
+  }
+}
 
 .button-large {
   @include respond-to($phone) {

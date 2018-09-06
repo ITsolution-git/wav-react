@@ -31,6 +31,10 @@
   font-family: Avenir-Light;
   font-size: 18px;
 }
+.text-15 {
+  font-family: Avenir-Light;
+  font-size: 15px;
+}
 
 // white
 .title-32-white {
@@ -57,11 +61,22 @@
   @extend .title-12;
   color: $white;
 }
+.text-15-white {
+  @extend .text-15;
+  color: $white;
+}
+.text-15-white-bold {
+  @extend .text-15-white;
+  font-weight: 600;
+}
 .text-18-white {
   @extend .text-18;
   color: $white;
 }
-
+.text-18-white-bold {
+  @extend .text-18-white;
+  font-weight: 600;
+}
 
 // blue
 .title-32-blue {
@@ -91,6 +106,10 @@
 .text-18-blue {
   @extend .text-18;
   color: $blue;
+}
+.text-18-blue-bold {
+  @extend .text-18-blue;
+  font-weight: 600;
 }
 
 // light-blue
@@ -152,9 +171,21 @@
   @extend .title-12;
   color: $dark-blue;
 }
+.text-15-dark-blue {
+  @extend .text-15;
+  color: $dark-blue;
+}
+.text-15-dark-blue-bold {
+  @extend .text-15-dark-blue;
+  font-weight: 600;
+}
 .text-18-dark-blue {
   @extend .text-18;
   color: $dark-blue;
+}
+.text-18-dark-blue-bold {
+  @extend .text-18-dark-blue;
+  font-weight: 600;
 }
 
 //red

@@ -115,7 +115,7 @@ export function registerVoter(voter) {
         );
         generateTaskForUser(boardingType);
     };
-    
+
      function updateVoter(data) {
         return { type: VoterContants.VOTER_UPDATE_SUCCESS, data };
     }
