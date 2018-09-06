@@ -31,3 +31,24 @@
     margin-top: 20px;
   }
 }
+
+#match-list-modal-content {
+  #text {
+    text-align: center;
+    #info {
+      line-height: 1.8;
+      padding: 20px;
+    }
+  }
+  #buttons {
+    @include respond-to($phone) {
+      text-align: center;
+      display: flex;
+      flex-direction: column-reverse;
+      div {
+        margin-bottom: 15px;
+      }
+    }
+    margin-top: 40px;
+  }
+}
