@@ -21,6 +21,8 @@ import {
     PasswordInput
 } from '../components/shared/validatedInputs';
 import colors from '../constants/ColorConstants';
+import Dialog from './shared/Dialog';
+import { forgotPasswordRequest } from '../actions/PasswordRequestAction';
 
 
 class Login extends BaseComponent {
@@ -33,7 +35,10 @@ class Login extends BaseComponent {
 			signinFromEmail: !!props.location.search,
 			paramsFromEmail: props.location.search ? qs.parse(props.location.search) : {},
 			startValidation: false,
-			valid: {}
+			valid: {},
+			showForgotPasswordModal: false,
+			forgotPasswordEmail: '',
+			showWarning: false
 		};
 	}
 
@@ -61,6 +66,24 @@ class Login extends BaseComponent {
 				this.onLink(getHomeRoute());
 			}
 		}
+
+		if (props.isUserFound) {
+			this.setState({
+				isUserFound: 1
+			})
+		}
+
+		if (props.isUserFound === false) {
+			this.setState({
+				isUserFound: 0
+			})
+		}
+
+		if (props.isRequestFetching === false) {
+			this.setState({
+				showWarning: true
+			})
+		}
 	}
 
 	componentDidMount() {
@@ -75,6 +98,36 @@ class Login extends BaseComponent {
 			valid: {...this.state.valid, [name]: isValid }
 		});
 	};
+
+	showForgotPasswordModal = (e) => {
+		e.preventDefault()
+
+		this.setState({
+			showForgotPasswordModal: !this.state.showForgotPasswordModal
+		})
+	}
+
+	closeForgotPasswordModal = (e) => {
+		if (e) e.preventDefault()
+
+		this.setState({
+			showWarning: false,
+			showForgotPasswordModal: false
+		})
+	}
+
+	changeForgotPasswordEmail = (value, valid, name) => {
+		this.setState({
+			[name]: value,
+			valid: {...this.state.valid, [name]: valid }
+		})
+	}
+
+	sendForgotPasswordRequest = () => {
+		if (this.state.valid['forgotPasswordEmail']) {
+			this.props.forgotPasswordRequest(this.state.forgotPasswordEmail);
+		}
+	}
 
 	render() {
 		const { error, isFetching } = this.props;
@@ -119,7 +172,7 @@ class Login extends BaseComponent {
                                                        required />
                                     </Col>
                                 </Row>
-                                <Link id="link-small" to='/changePassword/request'>Forgot password</Link>
+                                <a id="link-small" href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
                                 <div id="button-class">
                                     <Button disabled={isFetching}
 											 borderEnabled
@@ -143,6 +196,36 @@ class Login extends BaseComponent {
                             </Col>
                         </div>
                     </Col>
+
+					<Dialog show={this.state.showForgotPasswordModal}
+                            onClose={this.closeForgotPasswordModal}
+							className="login-center-modal">
+                        <div className="forgot-password">
+							{ this.state.isUserFound === 0 && this.state.showWarning && <div className="warning-red">User doesn't exist</div> }
+							{ this.state.isUserFound === 1 && this.state.showWarning && <div className="warning-green">Reset password request sent</div> }
+							<div className="title-32-light-blue">
+								Forgot your password?
+							</div>
+							<div className="title-20-blue">
+								We'll send you an email with a link to reset it!
+							</div>
+							<div className="text-18-dark-blue">
+								<EmailInput 
+									onChange={this.changeForgotPasswordEmail}
+									isVoter={false}
+									name="forgotPasswordEmail"
+									startValidation={startValidation}
+									uniqueValidationEnabled={false}
+									required />
+							</div>
+							<div id="btn-next">
+								<Button onClick={this.sendForgotPasswordRequest}>Go!</Button>
+							</div>
+							<div id="btn-next">
+								Back to <a href="" onClick={this.closeForgotPasswordModal}><b>Sign in</b></a>.
+							</div>
+						</div>
+                    </Dialog>
                 </Row>
 		);
 	}
@@ -152,14 +235,17 @@ const mapStateToProps = (state) => {
 	const { error, isSuccess, isFetching } = state.app[appDataTypes.signOn];
 	return {
 		error,
-        isFetching,
-        isSuccess
+		isFetching,
+		isSuccess,
+		isUserFound: state.request.isUserFound,
+		isRequestFetching: state.request.isFetching
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ btwSignOn, loadTaskList }, dispatch)
+		actions: bindActionCreators({ btwSignOn, loadTaskList }, dispatch),
+		forgotPasswordRequest: (email) => dispatch(forgotPasswordRequest(email))
     };
 };
 
