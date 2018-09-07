@@ -15,8 +15,7 @@ import AdminDashBoard from './adminDashboard/AdminDashboard';
 import VoterDetail from './voter/VoterDetail';
 import MatchList from './voter/MatchList';
 import VoterSuccess from './voter/shared/VoterSuccess';
-import NotRegisteredError from './voter/NotRegisteredError';
-import NotFoundError from './voter/NoFoundError';
+import NotFoundError from './voter/shared/VoterError';
 import Forum from './community/Forum';
 import Reports from './reports/Reports';
 import AddVoterTask from './tasks/AddVoterTask';
@@ -98,8 +97,6 @@ const router =() => (
                 component = { Authorization(MatchList, [captain]) } />
         <Route exact path = {routes.voterSuccess}
                 component = { Authorization(VoterSuccess, [captain]) } />
-        <Route exact path = {routes.voterNotRegisteredError}
-                component = { Authorization(NotRegisteredError, [captain]) } />
         <Route exact path = {routes.voterNotFoundError}
                component = { Authorization(NotFoundError, [captain]) } />
         <Route exact path = {routes.welcome}

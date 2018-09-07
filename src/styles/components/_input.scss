@@ -1,0 +1,54 @@
+.btw-input {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 3px;
+  vertical-align: middle;
+  height: $input_field_height;
+
+  &:focus {
+    border-color: #006BA6;
+  }
+}
+
+.btw-input-new {
+  @extend .btw-input;
+  color: $dark-blue;
+  font-size: 14pt;
+  font-family: Avenir-Light;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  outline: none;
+}
+
+.btw-label {
+  font-weight: $font_weight_normal;
+  font-size: $font_size_label;
+}
+
+.btw-input-error {
+  margin-bottom: 8px !important;
+
+  @include respond-to($phone) {
+    font-size: 13px !important;
+  }
+}
+
+.btw-error-white {
+  color: $white !important;
+}
+
+
+.btw-password-error {
+  #requirements {
+    margin-bottom: 10px;
+  }
+  span {
+    display: block;
+    margin-top: 5px;
+  }
+  border-radius: 3px;
+  background-color: $white;
+  color: $dark-blue;
+  padding: 10px 5px 5px 10px;
+}

@@ -11,7 +11,7 @@ export default function voterReducer(state = InitialState.voter, action) {
 		}
         case VoterContants.VOTER_NEXT_MUMBER_PERSIST: {
         	const nextNumber = state.currentNumber + 1;
-            return { ...state, currentNumber: nextNumber };
+            return { ...state, currentNumber: nextNumber, noResults: false };
         }
 		case VoterContants.VOTER_MATCHLIST_RESET: {
 			return { ...state,
@@ -29,9 +29,10 @@ export default function voterReducer(state = InitialState.voter, action) {
 		}
         case VoterContants.VOTER_MATCHLIST_PERSIST: {
             return { ...state,
-				matchList: action.matchList,
+				matchList: action.matchList || [],
 				matchListFetching: false,
-                voterRoute: routes.matchList
+                voterRoute: routes.matchList,
+                noResults: action.noResults || false
             };
         }
 		case VoterContants.VOTER_MATCHLIST_ERROR: {

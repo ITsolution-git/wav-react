@@ -4,6 +4,7 @@ import authStorage from '../storage/AuthStorage';
 import boardingTypes from '../constants/VoterBoardingType';
 import routes from '../constants/Routes';
 import history from '../utility/History';
+import { isDesktop } from '../helpers/DeviceHelper';
 
 let boardingInfo = {
     noResultsCount: 0,
@@ -67,14 +68,21 @@ export function matchListPersist(voterDetails, resubmit = false) {
            result => {
                 const { data } = result.data;
                 if (data) {
-                    boardingInfo.noResultsCount = data.count === 0 ? boardingInfo.noResultsCount + 1 : 0;
-                    if (boardingInfo.noResultsCount >= boardingInfo.maxEmptyCount) {
-                        boardingInfo.noResultsCount = 0;
-                        history.push(routes.voterNotFoundError);
+                    if (data.count === 0) {
+                        boardingInfo.noResultsCount += 1;
+                        let noResults = true;
+                        if (boardingInfo.noResultsCount >= boardingInfo.maxEmptyCount) {
+                            boardingInfo.noResultsCount = 0;
+                            noResults = false;
+                        }
+                        if (isDesktop()) {
+                            history.push(`${routes.voterNotFoundError}?noResults=${noResults}`);
+                        } else {
+                            dispatch(actionNoResults(noResults));
+                        }
                         return;
                     }
-
-                    dispatch(actionSuccess(data.ctRecords));
+                    dispatch(actionSuccess(data.ctRecords ));
                 }
            },
            error => {
@@ -88,6 +96,9 @@ export function matchListPersist(voterDetails, resubmit = false) {
     }
     function actionSuccess(matchList) {
         return { type: VoterContants.VOTER_MATCHLIST_PERSIST, matchList }
+    }
+    function actionNoResults(noResults) {
+        return { type: VoterContants.VOTER_MATCHLIST_PERSIST, noResults }
     }
     function actionError(error) {
         return { type: VoterContants.VOTER_MATCHLIST_ERROR, error }

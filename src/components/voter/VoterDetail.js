@@ -89,7 +89,7 @@ class VoterDetail extends BaseComponent {
     };
 
     getNames = () => {
-        const { makeList, currentNumber } = this.props.voter,
+        const { makeList = {}, currentNumber } = this.props.voter,
         	 { voterDetail} = this.state,
 		     getName = (field) => voterDetail[field] || makeList[`${field}${currentNumber}`];
         return {

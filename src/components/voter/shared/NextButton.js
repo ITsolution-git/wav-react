@@ -34,7 +34,7 @@ class NextButton extends BaseComponent {
     }
 
     render() {
-        const { title = 'Next', voter: { boardingType } } = this.props;
+        const { title = 'Next Voter!', voter: { boardingType } } = this.props;
         return boardingType === boardingTypes.register
             ? (
                 <Button onClick={this.onNext}>

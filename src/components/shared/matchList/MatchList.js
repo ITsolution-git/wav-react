@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../BaseComponent';
 import { registerVoter } from '../../../actions/VoterAction';
 import MatchItem from './MatchItem';
-import ConfirmationDialog from '../ConfirmationDialog';
+import Dialog from '../Dialog';
 import Spinner from '../Spinner';
 import Paginator from '../Paginator';
+import Button from '../../shared/Button';
 
 class MatchList extends BaseComponent {
     constructor(props, context) {
@@ -16,7 +18,8 @@ class MatchList extends BaseComponent {
         this.state = {
             showConfirmModal: false,
             currentVoters: [],
-            expandedId: null
+            expandedId: null,
+            fullInfo: ''
         };
     }
 
@@ -25,7 +28,7 @@ class MatchList extends BaseComponent {
         this.setState({ showConfirmModal: true });
     };
 
-    onCloseConfirmModal = () => {
+    onClose = () => {
         this.setState({ showConfirmModal: false });
     };
 
@@ -36,7 +39,7 @@ class MatchList extends BaseComponent {
         }
         const { onSubmitSuccess, actions } = this.props;
         actions.registerVoter(this.currentPerson);
-        this.onCloseConfirmModal();
+        this.onClose();
         onSubmitSuccess(this.currentPerson);
     };
 
@@ -47,11 +50,13 @@ class MatchList extends BaseComponent {
     getViewProps = () => {
       if (this.isDesktop()) {
         return {
-            titleClass: 'title-24-white'
+            titleClass: 'title-24-white',
+            dialogTitle: 'title-32-blue'
         }
       }
       return {
-          titleClass: 'title-24-dark-blue'
+          titleClass: 'title-24-dark-blue',
+          dialogTitle: 'title-20-blue'
       }
     };
 
@@ -60,8 +65,10 @@ class MatchList extends BaseComponent {
         const {
             showConfirmModal,
             currentVoters,
-            expandedId
+            expandedId,
+            fullInfo
         } = this.state;
+        const { firstname, lastname } = this.currentPerson || {};
         const items = matchList.sort((person1, person2) => person2.matchRate - person1.matchRate);
         const viewProps = this.getViewProps();
 
@@ -80,7 +87,10 @@ class MatchList extends BaseComponent {
                 <div className='match-list'>
                     { currentVoters.map((person, i) => {
                         return <MatchItem key={i} id={'currentVoter' + i}
-                                          onClick={() => this.onNameClick(person)}
+                                          onClick={info => {
+                                              this.onNameClick(person);
+                                              this.setState({ fullInfo: info });
+                                          }}
                                           onChange={id => this.setState({ expandedId: id })}
                                           expanded={person.dwid === expandedId}
                                           person={person}/>
@@ -88,12 +98,26 @@ class MatchList extends BaseComponent {
                 </div>
                 <Paginator items={items}
                            onItemsChange={items => this.setState({ currentVoters: items })}/>
-                <ConfirmationDialog show={showConfirmModal}
-                                    title='Register voter'
-                                    description='Are you sure this is the voter you intend to add to your list?'
-                                    submitText='Yes'
-                                    onSubmit={this.onSubmitSuccess}
-                                    onClose={this.onCloseConfirmModal} />
+                <Dialog show={showConfirmModal} onClose={this.onClose}>
+                    <div id="match-list-modal-content">
+                        <div id="text">
+                            <div className={viewProps.dialogTitle}>
+                                Are you sure this is your friend?</div>
+                            <div id="info" className="text-15-dark-blue-bold">
+                                { firstname } { lastname }
+                                <div>{ fullInfo }</div>
+                            </div>
+                        </div>
+                        <Row id="buttons">
+                            <Col md={6} xs={12} mdPush={3}>
+                                <Button size="medium" color="red" onClick={this.onClose}>No</Button>
+                            </Col>
+                            <Col md={6} xs={12}>
+                                <Button size="medium" onClick={this.onSubmitSuccess}>Yes</Button>
+                            </Col>
+                        </Row>
+                    </div>
+                </Dialog>
             </div>
         );
     }

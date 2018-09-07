@@ -50,6 +50,17 @@ export default class MatchItem extends BaseComponent {
         return this.formatAddress(regaddrcity, regaddrstate);
     };
 
+    getFullInfo = () => {
+        const { birthdate } = this.props.person;
+        return (
+            <div>
+                <div>{ this.resolveAddress() }</div>
+                <div>{ this.resolveCityState() }</div>
+                <div>{ birthdate } </div>
+            </div>
+        )
+    };
+
     render () {
         const { onClick, person, id } = this.props;
         const {
@@ -69,13 +80,7 @@ export default class MatchItem extends BaseComponent {
                         <Col md={10} xs={10}>
                             <div id="text-content" className="text-15-dark-blue-bold">
                                 <div>{ firstname }, { lastname } (born {new Date(birthdate).getFullYear()})</div>
-                                { expanded &&
-                                <div id="full-info">
-                                    <div>{ this.resolveAddress() }</div>
-                                    <div>{ this.resolveCityState() }</div>
-                                    <div>{ birthdate } </div>
-                                </div>
-                                }
+                                { expanded && <div id="full-info">{ this.getFullInfo() }</div> }
                             </div>
                         </Col>
                         <Col id="arrow" md={2} xs={2} className="pull-right">
@@ -83,7 +88,7 @@ export default class MatchItem extends BaseComponent {
                         </Col>
                     </Row>
                 </Col>
-                <Col id="check" md={2} xs={2} onClick={onClick}>
+                <Col id="check" md={2} xs={2} onClick={() => onClick(this.getFullInfo())}>
                     <Icon name={viewProps.checkName} width={40} height={40} />
                 </Col>
             </Row>

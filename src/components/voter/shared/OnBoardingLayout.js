@@ -10,12 +10,15 @@ export default class OnBoardingLayout extends  BaseComponent {
     };
 
     render() {
-        const { color = this.resolveDefaultColor() } = this.props;
+        const {
+            color = this.resolveDefaultColor(),
+            showLogo = true
+        } = this.props;
         return (
             <div className="btw-voter-layout">
-                <div className='logo' >
+                { showLogo && <div className='logo' >
                     <Logo />
-                </div>
+                </div> }
                 { this.renderBackground(color) }
                 { this.props.children }
             </div>

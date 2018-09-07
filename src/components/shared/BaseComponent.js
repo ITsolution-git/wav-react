@@ -8,6 +8,7 @@ import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import Button from './Button';
 import routes from "../../constants/Routes";
+import { isMobile } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
     constructor(props, context) {
@@ -32,11 +33,11 @@ class BaseComponent extends Component {
     };
 
     isMobile = () => {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        return isMobile();
     };
 
     isDesktop = () => {
-        return !this.isMobile();
+        return !isMobile();
     };
 
     renderBackground = (color) => {
@@ -48,8 +49,8 @@ class BaseComponent extends Component {
 
     isOnBoarding = () => {
         const { pathname = ''} = this.props.history.location,
-            { welcome, makelist, voterDetail, matchList, voterSuccess, voterNotRegisteredError, voterNotFoundError } = routes,
-            boardingRoutes = [ welcome,  makelist, voterDetail, matchList, voterSuccess, voterNotRegisteredError, voterNotFoundError ]
+            { welcome, makelist, voterDetail, matchList, voterSuccess, voterNotFoundError } = routes,
+            boardingRoutes = [ welcome,  makelist, voterDetail, matchList, voterSuccess, voterNotFoundError ]
             .map(route => route.toLowerCase());
 
         return boardingRoutes.includes(pathname.toLowerCase());

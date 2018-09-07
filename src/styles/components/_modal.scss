@@ -1,7 +1,15 @@
+.dialog-center {
+  display: flex !important;
+  height: 100%;
+  align-items: center;
+}
+
 .btw-modal {
   z-index: 100000;
+  @extend .dialog-center;
+
   .modal-content {
-    border-radius: 0;
+    border-radius: 5px;
   }
   .modal-header {
     border-bottom: none;
@@ -20,9 +28,16 @@
 }
 
 .btw-modal-mobile {
-  margin-top: 30%;
-  width: 97%;
-  border-radius: 7px;
+  @extend .dialog-center;
+
+  .modal-dialog {
+    width: 100%;
+    margin: 0 20px;
+  }
+  .modal-content {
+    min-height: 300px;
+    border-radius: 20px;
+  }
   .modal-header, .modal-footer {
     border: none;
   }

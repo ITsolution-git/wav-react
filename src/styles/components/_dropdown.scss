@@ -1,0 +1,77 @@
+.btw-select {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: 1px solid #D3D6DC;
+  vertical-align: middle;
+  color: #0D1C3D;
+  height: $input_field_height;
+  font-size: $font_size_input;
+  background-color: white;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+
+  background: url(https://upload.wikimedia.org/wikipedia/commons/f/f1/MediaWiki_Vector_skin_action_arrow.svg) 96% / 8% no-repeat;
+
+  &:focus {
+    border-color: #006BA6;
+  }
+}
+
+
+.btw-dropdown {
+  position: relative !important;
+}
+
+.btw-validated-dropdown {
+  &.is-open {
+    .Select-arrow-zone {
+      padding-top: 10px;
+      .Select-arrow {
+        transform: rotate(-135deg) !important;
+        -webkit-transform: rotate(-135deg) !important;
+      }
+    }
+  }
+
+  .Select-control {
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    height: 43px;
+    .Select-clear-zone {
+      width: 30px;
+    }
+    .Select-arrow-zone {
+      padding-right: 13px;
+      .Select-arrow {
+        border: solid $dark-blue;
+        border-width: 0px 2px 2px 0;
+        display: inline-block;
+        padding: 5px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+      }
+    }
+  }
+
+  .Select-placeholder, .Select-value, .Select-input{
+    color: #4C4C4C;
+    font-size: 14pt;
+    font-family: Avenir-Light;
+    line-height: 43px !important;
+  }
+  .Select-option.is-selected {
+    background-color: lighten($light-blue, 50%);
+  }
+
+  .Select-option.is-focused {
+    background-color: lighten($light-blue, 40%);
+  }
+
+}

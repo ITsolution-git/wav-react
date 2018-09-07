@@ -33,6 +33,16 @@
         display: flex;
         justify-content: center;
     }
+    .vertical-align {
+        align-items: center;
+        height: 100vh;
+    }
+    .white-box {
+        border-radius: 5px;
+        background-color: $white;
+        min-width: 45%;
+        min-height: 450px;
+    }
     #info {
         background-color: $white;
         border-radius: 3px;
