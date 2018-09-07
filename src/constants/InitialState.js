@@ -16,6 +16,7 @@ export default {
         currentNumber: 1,
         matchListError: null,
         matchListFetching: false,
+        noResults: false,
         matchList: []
     },
     voterList: {

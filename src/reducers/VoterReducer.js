@@ -32,7 +32,7 @@ export default function voterReducer(state = InitialState.voter, action) {
 				matchList: action.matchList || [],
 				matchListFetching: false,
                 voterRoute: routes.matchList,
-                noResults: action.noResults
+                noResults: action.noResults || false
             };
         }
 		case VoterContants.VOTER_MATCHLIST_ERROR: {
