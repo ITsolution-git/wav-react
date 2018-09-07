@@ -15,7 +15,6 @@ export default {
     voterDetail: '/voterDetail',
     matchList: '/matchList',
     voterSuccess: '/voterSuccess',
-    voterNotRegisteredError: '/voterNotRegisteredError',
     voterNotFoundError: '/voterNotFoundError',
     welcome: '/welcome',
     forum: '/forum',

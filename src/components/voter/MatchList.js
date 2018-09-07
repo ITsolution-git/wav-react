@@ -9,7 +9,6 @@ import { registerVoter } from "../../actions/VoterAction";
 import routes from '../../constants/Routes';
 import boardingTypes from '../../constants/VoterBoardingType';
 import SharedMatchList from '../shared/matchList/MatchList';
-import NextButton from './shared/NextButton';
 import OnBoardingLayout from './shared/OnBoardingLayout';
 import Button from '../shared/Button';
 
@@ -28,30 +27,38 @@ class MatchList extends BaseComponent {
         this.onLink(`${routes.voterDetail}?loadPrevious=true`);
     };
 
+    cantFindClick = () => {
+      if (this.isDesktop()) {
+          this.onLink(routes.voterNotFoundError);
+      }
+    };
+
     render() {
         const { boardingType } = this.props.voter;
         return (
             <OnBoardingLayout>
                 <div className='btw-match-list layout-center'>
                     <div>
-                        <SharedMatchList onSubmitSuccess={(voter) => {
-                            this.redirectToPage(voter, routes.voterSuccess);
-                        }}
-                                         onSubmitError={(voter) => {
-                                             this.redirectToPage(voter, routes.voterNotRegisteredError);
-                                         }} />
+                        <SharedMatchList
+                                onSubmitSuccess={(voter) => {
+                                    if (this.isDesktop()) {
+                                        this.redirectToPage(voter, routes.voterSuccess);
+                                    }
+                                }}
+                                 onSubmitError={(voter) => {
+                                     if (this.isDesktop()) {
+                                         this.redirectToPage(voter, routes.voterNotFoundError);
+                                     }
+                                 }} />
                         {/*<Row className='bottom-buttons'>*/}
                         {/*<Col md={12}>*/}
                         {/*<button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>*/}
                         {/*</Col>*/}
-                        {/*<Col md={12}>*/}
-                        {/*<NextButton title='Skip'/>*/}
-                        {/*</Col>*/}
-                        {/*</Row> */}
+
                         <Row>
                             <Col id="button" md={10} xs={10} className="no-padding">
                                 { boardingType === boardingTypes.register &&
-                                    <Button style={{width: '100%'}} color='red'>Can't find my friend!</Button> }
+                                    <Button onClick={this.cantFindClick} style={{width: '100%'}} color='red'>Can't find my friend!</Button> }
                             </Col>
                         </Row>
                     </div>

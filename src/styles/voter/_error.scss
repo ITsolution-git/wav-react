@@ -1,17 +1,12 @@
 .btw-voter-error {
+  text-align: center;
   .error-icon {
-    color: #FFD300;
-    font-size: 200px;
+    margin-top: 5%;
   }
   .cant-find {
-    font-size: 22px;
-    margin-bottom: 15px;
-    color: grey;
+    margin: 5% 0 5% 0;
   }
   .ok-text {
     margin-bottom: 6%;
-    font-weight: bold;
-    font-size: 17px;
-    color: grey;
   }
 }
