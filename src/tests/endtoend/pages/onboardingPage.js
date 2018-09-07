@@ -21,14 +21,14 @@ module.exports = (driver) => {
       await helper.timeout(300)
       await helper.selectButton('Go!')
       
-	    let firstVoter = await driver.wait(core.automate.until.elementLocated(helper.By.id('currentVoter0')), 30000);
+	    let firstVoter = await driver.wait(core.automate.until.elementLocated(helper.By.css('#currentVoter0 #check')), 30000);
       firstVoter.click();
       
       await helper.timeout(300)
       await helper.selectButton('Yes')
 
       await helper.timeout(300)
-      await helper.selectButton('Next')
+      await helper.selectButton('Next Voter')
 
     } catch(error) {
 
