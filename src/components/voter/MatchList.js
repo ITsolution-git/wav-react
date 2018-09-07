@@ -23,10 +23,6 @@ class MatchList extends BaseComponent {
         this.onLink(fullRoute);
     }
 
-    onNotSureClick = () => {
-        this.onLink(`${routes.voterDetail}?loadPrevious=true`);
-    };
-
     cantFindClick = () => {
       if (this.isDesktop()) {
           this.onLink(routes.voterNotFoundError);
@@ -50,11 +46,6 @@ class MatchList extends BaseComponent {
                                          this.redirectToPage(voter, routes.voterNotFoundError);
                                      }
                                  }} />
-                        {/*<Row className='bottom-buttons'>*/}
-                        {/*<Col md={12}>*/}
-                        {/*<button className="btn btn-primary" onClick={this.onNotSureClick}>Add more information about my voter</button>*/}
-                        {/*</Col>*/}
-
                         <Row>
                             <Col id="button" md={10} xs={10} className="no-padding">
                                 { boardingType === boardingTypes.register &&

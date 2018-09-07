@@ -2,9 +2,10 @@
   border-radius: 4px;
   outline: none;
   border: none;
-  font-family: Avenir-Light;
+  font-family: Avenir-Black;
   font-weight: 600;
   color: $white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
   &:disabled, [disabled]{
     border: 1px solid #999999;
     background-color: #cccccc;
@@ -31,6 +32,14 @@
   background-color: $red;
   &:hover {
     background-color: darken($red, 0.5);
+  }
+}
+
+.button-white {
+  background-color: $white;
+  color: $dark-blue;
+  &:hover {
+    background-color: darken($white, 0.5);
   }
 }
 

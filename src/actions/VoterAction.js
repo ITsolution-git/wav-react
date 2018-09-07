@@ -67,13 +67,16 @@ export function matchListPersist(voterDetails, resubmit = false) {
            result => {
                 const { data } = result.data;
                 if (data) {
-                    boardingInfo.noResultsCount = data.count === 0 ? boardingInfo.noResultsCount + 1 : 0;
-                    if (boardingInfo.noResultsCount >= boardingInfo.maxEmptyCount) {
-                        boardingInfo.noResultsCount = 0;
-                        history.push(routes.voterNotFoundError);
+                    if (data.count === 0) {
+                        boardingInfo.noResultsCount += 1;
+                        let noResults = true;
+                        if (boardingInfo.noResultsCount >= boardingInfo.maxEmptyCount) {
+                            boardingInfo.noResultsCount = 0;
+                            noResults = false;
+                        }
+                        history.push(`${routes.voterNotFoundError}?noResults=${noResults}`);
                         return;
                     }
-
                     dispatch(actionSuccess(data.ctRecords));
                 }
            },

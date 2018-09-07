@@ -10,18 +10,28 @@ import voterConstants from '../../../constants/reducerConstants/VoterConstants';
 import boardingTypes from '../../../constants/VoterBoardingType';
 import WhiteBox from './WhiteBox';
 import Icon from '../../shared/Icon';
+import Button from "../../shared/Button";
+import routes from "../../../constants/Routes";
 
 class VoterError extends ResultBase {
     componentWillMount() {
         this.checkRedirectVoterList();
     }
 
+    onEditInfoClick = () => {
+        this.onLink(`${routes.voterDetail}?loadPrevious=true`);
+    };
+
     render() {
         const { makeList, currentNumber, boardingType } = this.props.voter,
             firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
             lastName = makeList[`${voterConstants.LAST_NAME_PREFIX}${currentNumber}`];
 
-        const { firstname = firstName, lastname = lastName} = getUrlParams(this.props);
+        const {
+            firstname = firstName,
+            lastname = lastName,
+            noResults = false
+        } = getUrlParams(this.props);
 
         return (
             <WhiteBox>
@@ -39,9 +49,11 @@ class VoterError extends ResultBase {
                             you can help { firstname } { lastname } register in just a sec.
                         </div>
                     </div>
-                    { boardingType === boardingTypes.register && <div>
-                        <NextButton title='Next Voter' />
-                    </div> }
+                    { boardingType === boardingTypes.register &&
+                        <div id="buttons">
+                            { noResults === 'true' && <Button color="white" onClick={this.onEditInfoClick}>Edit Info</Button> }
+                            <NextButton title='Next Voter' />
+                        </div> }
                 </div>
             </WhiteBox>
         );
