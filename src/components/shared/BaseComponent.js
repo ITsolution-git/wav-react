@@ -8,6 +8,7 @@ import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import Button from './Button';
 import routes from "../../constants/Routes";
+import { isMobile } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
     constructor(props, context) {
@@ -32,11 +33,11 @@ class BaseComponent extends Component {
     };
 
     isMobile = () => {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        return isMobile();
     };
 
     isDesktop = () => {
-        return !this.isMobile();
+        return !isMobile();
     };
 
     renderBackground = (color) => {

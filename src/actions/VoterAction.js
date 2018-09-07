@@ -4,6 +4,7 @@ import authStorage from '../storage/AuthStorage';
 import boardingTypes from '../constants/VoterBoardingType';
 import routes from '../constants/Routes';
 import history from '../utility/History';
+import { isDesktop } from '../helpers/DeviceHelper';
 
 let boardingInfo = {
     noResultsCount: 0,
@@ -74,10 +75,14 @@ export function matchListPersist(voterDetails, resubmit = false) {
                             boardingInfo.noResultsCount = 0;
                             noResults = false;
                         }
-                        history.push(`${routes.voterNotFoundError}?noResults=${noResults}`);
+                        if (isDesktop()) {
+                            history.push(`${routes.voterNotFoundError}?noResults=${noResults}`);
+                        } else {
+                            dispatch(actionNoResults(noResults));
+                        }
                         return;
                     }
-                    dispatch(actionSuccess(data.ctRecords));
+                    dispatch(actionSuccess(data.ctRecords ));
                 }
            },
            error => {
@@ -91,6 +96,9 @@ export function matchListPersist(voterDetails, resubmit = false) {
     }
     function actionSuccess(matchList) {
         return { type: VoterContants.VOTER_MATCHLIST_PERSIST, matchList }
+    }
+    function actionNoResults(noResults) {
+        return { type: VoterContants.VOTER_MATCHLIST_PERSIST, noResults }
     }
     function actionError(error) {
         return { type: VoterContants.VOTER_MATCHLIST_ERROR, error }

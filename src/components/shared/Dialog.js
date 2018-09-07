@@ -11,6 +11,7 @@ export default class Dialog extends BaseComponent {
         const {
             show,
             onClose,
+            onHide = onClose,
             title='',
             children,
             actionButtons = null,
@@ -19,7 +20,7 @@ export default class Dialog extends BaseComponent {
         } = this.props;
         return (
             <Modal show={show}
-                   onHide={onClose}
+                   onHide={onHide}
                    className={classNames({'btw-modal': this.isDesktop(), 'btw-modal-mobile': this.isMobile()})}
                    {...restProps}>
                 <Modal.Header closeButton={closeButton}>

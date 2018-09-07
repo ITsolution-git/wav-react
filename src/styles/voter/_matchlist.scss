@@ -26,9 +26,12 @@
         cursor: pointer;
       }
     }
-
-  #button {
-    margin-top: 20px;
+  #button-row {
+    display: flex;
+    justify-content: center;
+    #button {
+      margin-top: 20px;
+    }
   }
 }
 
@@ -50,5 +53,20 @@
       }
     }
     margin-top: 40px;
+  }
+}
+
+#match-list-mobile-dialog {
+  text-align: center;
+  &.success-modal {
+
+  }
+  &.fail-modal {
+    #text {
+      margin: 10% 0 15% 0;
+    }
+  }
+  &.not-registered-modal {
+
   }
 }
