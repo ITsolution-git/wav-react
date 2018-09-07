@@ -59,7 +59,12 @@
 #match-list-mobile-dialog {
   text-align: center;
   &.success-modal {
-
+    #title {
+      margin-top: 8%;
+    }
+    #text {
+      margin: 10% 0 15% 0;
+    }
   }
   &.fail-modal {
     #text {
@@ -67,6 +72,11 @@
     }
   }
   &.not-registered-modal {
-
+    #text {
+      margin: 15% 0 20% 0;
+    }
+    button {
+      margin-bottom: 5%;
+    }
   }
 }

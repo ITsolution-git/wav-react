@@ -39,10 +39,10 @@ class MatchList extends BaseComponent {
       this.setState({ showFail: true });
     };
 
-    componentWillReceiveProps(props) {
-        const { noResults } = props.voter;
-        this.setState({ showNotRegistered: noResults });
-    }
+    onEditInfoClick = () => {
+        this.onCloseNotRegistered();
+        this.onLink(`${routes.voterDetail}?loadPrevious=true`);
+    };
 
     onCloseSuccess = () => {
       this.setState({ showSuccess: false });
@@ -52,16 +52,25 @@ class MatchList extends BaseComponent {
       this.setState({ showFail: false });
     };
 
-    onCloseRegistered = () => {
+    onCloseNotRegistered = () => {
         this.setState({ showNotRegistered: false });
     };
+
+    componentWillMount() {
+        const { noResults, matchList } = this.props.voter;
+        this.setState({
+            showNotRegistered: noResults,
+            showFail: !noResults && matchList.length === 0 && this.isMobile()
+        });
+    }
 
     render() {
         const {
             boardingType,
-            noResults,
-            firstname,
-            lastname
+            voterDetails: {
+                firstname,
+                lastname
+            } = {}
         } = this.props.voter;
         const {
             showSuccess,
@@ -99,7 +108,15 @@ class MatchList extends BaseComponent {
                 </div>
                 <Dialog show={showSuccess} onClose={this.onCloseSuccess} onHide={() => {}}>
                     <div id="match-list-mobile-dialog" className="success-modal">
-                        <Icon name="" />
+                        <div className="success-icon">
+                            <Icon name="check-light-blue" width={80} height={80} />
+                        </div>
+                        <div id="title" className="title-16-blue">Awesome!</div>
+                        <div id="text" className="text-15-dark-blue-bold">
+                            Your friend { firstname } { lastname } <br />
+                            is registered!
+                        </div>
+                        <NextButton onClick={this.onCloseSuccess} />
                     </div>
                 </Dialog>
                 <Dialog show={showFail} onClose={this.onCloseFail} onHide={() => {}}>
@@ -107,7 +124,7 @@ class MatchList extends BaseComponent {
                         <div className='error-icon'>
                             <Icon name='face-light' width={70} height={70} />
                         </div>
-                        <div id="text" className="text-18-dark-blue">
+                        <div id="text" className="text-15-dark-blue-bold">
                             It appears that your friend { firstname } <br />
                             { lastname } is not registered. Don't <br />
                             worry, we can fix that!
@@ -115,9 +132,19 @@ class MatchList extends BaseComponent {
                         <NextButton onClick={this.onCloseFail} />
                     </div>
                 </Dialog>
-                <Dialog show={showNotRegistered} onClose={this.onCloseRegistered} onHide={() => {}}>
+                <Dialog show={showNotRegistered} onClose={this.onCloseNotRegistered} onHide={() => {}}>
                     <div id="match-list-mobile-dialog" className="not-registered-modal">
-
+                        <div id="title" className="title-16-blue">
+                            We can't find your friend
+                        </div>
+                        <div id="text" className="text-15-dark-blue-bold">
+                            Is all the information you entered <br />
+                            correct? If yes, don't worry.
+                        </div>
+                        <div id="buttons">
+                            <Button onClick={this.onEditInfoClick} color="white">Edit Info</Button>
+                            <NextButton onClick={this.onCloseNotRegistered}/>
+                        </div>
                     </div>
                 </Dialog>
             </OnBoardingLayout>

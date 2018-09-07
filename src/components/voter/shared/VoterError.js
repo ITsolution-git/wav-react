@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import FontAwesome from 'react-fontawesome';
 
 import ResultBase from './ResultBase';
 import NextButton from './NextButton';
