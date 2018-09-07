@@ -26,7 +26,7 @@ class VoterSuccess extends ResultBase {
                         <Icon name="check-light-blue" width={70} height={70} />
                     </div>
                     <div id="text" className="title-32-light-blue">
-                        <div>Awesome</div>
+                        <div>Awesome!</div>
                         <div>{firstname } { lastname } { ' is registered.' }</div>
                     </div>
                     { boardingType === boardingTypes.register &&
