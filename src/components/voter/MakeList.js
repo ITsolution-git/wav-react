@@ -56,6 +56,13 @@ class MakeList extends BaseComponent {
     		return;
 		}
 
+		let username1 = namesObj.firstname1 + namesObj.lastname1
+		let username2 = namesObj.firstname2 + namesObj.lastname2
+		let username3 = namesObj.firstname3 + namesObj.lastname3
+
+		if (username1 === username2 || username2 === username3 || username3 === username1) {
+			return;
+		}
 
 		this.props.actions.makeListPersist(namesObj);
     	this.onLink(routes.voterDetail);
