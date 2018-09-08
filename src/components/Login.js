@@ -145,7 +145,7 @@ class Login extends BaseComponent {
                         <div className="btw-form" onKeyPress={this.onKeyPress}>
                             <Col mdOffset={2} xsOffset={2} xs={8}>
 								{ this.state.isReset && <div className={`${this.isMobile() ? 'warning-white' : 'warning-green'}`} id="resetPasswordSuccess">Password is reset, Login with your new password</div> }
-								{ error && <div className={`${this.isMobile() ? 'warning-white' : 'warning-red'}`}><h5>Check your username or password </h5></div>}
+								{ error && <div className={`${this.isMobile() ? 'warning-white' : 'warning-red'}`}>Check your username or password</div>}
 								<br/>
 								{ this.isDesktop()
 									?  <div id="title" className="title-32-blue">
