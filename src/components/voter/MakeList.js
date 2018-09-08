@@ -23,7 +23,8 @@ class MakeList extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
-			startValidation: false
+			startValidation: false,
+			duplicateNames: false
 		};
 	}
 
@@ -56,6 +57,20 @@ class MakeList extends BaseComponent {
     		return;
 		}
 
+		let username1 = namesObj.firstname1 + namesObj.lastname1
+		let username2 = namesObj.firstname2 + namesObj.lastname2
+		let username3 = namesObj.firstname3 + namesObj.lastname3
+
+		if (username1 === username2 || username2 === username3 || username3 === username1) {
+			this.setState({
+				duplicateNames: true
+			})
+			return;
+		} else {
+			this.setState({
+				duplicateNames: false
+			})
+		}
 
 		this.props.actions.makeListPersist(namesObj);
     	this.onLink(routes.voterDetail);
@@ -100,6 +115,7 @@ class MakeList extends BaseComponent {
 				<div className="btw-makelist">
 					<div className="voters-form">
 						<div className="rows">
+							{ this.state.duplicateNames && <div className={`${this.isMobile() ? 'warning-main' : 'warning-white'}`}>There are duplicate names in the list</div> }
                             <Col md={8} className="row" id="title-text">
                                 <Col mdOffset={2} md={10}>
                                     <div className={viewProps.titleClass}>Help your friends vote!</div>

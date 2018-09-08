@@ -39,16 +39,32 @@
   & .modal-footer { display: none; }
 }
 
-.warning-red {
-  color: red;
+.warning {
   padding: 10px 0;
   text-align: center;
-  border: 1px solid red;
+  font-family: Avenir-Black;
+  font-size: 18px;
+}
+.warning-red {
+  @extend .warning;
+  color: red;
+  border: 1.5px solid red;
 }
 
 .warning-green {
+  @extend .warning;
   color: green;
-  padding: 10px 0;
-  text-align: center;
-  border: 1px solid green;
+  border: 1.5px solid green;
+}
+
+.warning-white {
+  @extend .warning;
+  color: white;
+  border: 1.5px solid white;
+}
+
+.warning-main {
+  @extend .warning;
+  color: #0D6291;
+  border: 1.5px solid #0D6291;
 }
