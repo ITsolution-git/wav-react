@@ -115,9 +115,9 @@ class MakeList extends BaseComponent {
 				<div className="btw-makelist">
 					<div className="voters-form">
 						<div className="rows">
-							{ this.state.duplicateNames && <div className={`${this.isMobile() ? 'warning-main' : 'warning-white'}`}>There are duplicate names in the list</div> }
                             <Col md={8} className="row" id="title-text">
                                 <Col mdOffset={2} md={10}>
+									{ this.state.duplicateNames && <div className={`${this.isMobile() ? 'warning-main' : 'warning-white'}`}>There are duplicate names in the list</div> }
                                     <div className={viewProps.titleClass}>Help your friends vote!</div>
                                     <div id="subtitle" className={viewProps.subtitleClass}>Check if three of your friends registered:</div>
                                 </Col>

@@ -40,10 +40,10 @@
 }
 
 .warning {
-  padding: 10px 0;
+  padding: 10px 20px;
   text-align: center;
   font-family: Avenir-Black;
-  font-size: 18px;
+  font-size: 16px;
 }
 .warning-red {
   @extend .warning;
