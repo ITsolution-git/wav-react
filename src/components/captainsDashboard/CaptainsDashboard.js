@@ -17,6 +17,7 @@ import Spinner from '../shared/Spinner';
 import appStorage from '../../storage/AppStorage';
 import Button from '../shared/Button';
 import Dialog from '../shared/Dialog';
+import ContentLayout from '../layout/ContentLayout';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -76,7 +77,7 @@ class CaptainsDashboard extends BaseComponent {
         const { showSplashModal } = this.state;
 
         return (
-            <div>
+            <ContentLayout>
                 <div className='container btw-captains-dashboard'>
                     <Spinner loading={isFetching} height={300} />
                     { isSuccess &&
@@ -145,7 +146,7 @@ class CaptainsDashboard extends BaseComponent {
                             )
                         })}
                 </Dialog>
-            </div>
+            </ContentLayout>
         )
     }
 }
