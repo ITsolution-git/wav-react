@@ -5,7 +5,7 @@
   font-family: Avenir-Black;
   font-weight: 600;
   color: $white;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  @extend .shadow;
   &:disabled, [disabled]{
     border: 1px solid #999999;
     background-color: #cccccc;

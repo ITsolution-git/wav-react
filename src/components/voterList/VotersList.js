@@ -12,6 +12,7 @@ import AddEditDialog from './AddEditDialog';
 import Spinner from '../shared/Spinner';
 import Paginator from '../shared/Paginator';
 import Button from '../shared/Button';
+import ContentLayout from '../layout/ContentLayout';
 
 class VotersList extends BaseComponent {
     constructor(props, context) {
@@ -43,41 +44,42 @@ class VotersList extends BaseComponent {
             isFetching
         }} = this.props;
         return (
-            <div className='btw-voter btw-voter-list'>
-                { !this.isMobile() && this.renderBackToHome()}
-                <div className="intro">
-                    <p className="intro-title">
-                        My Voters
-                    </p>
-                    <div style={{clear: 'both'}}></div>
-                    <Spinner height={300} loading={isFetching} />
-                    <div className='voters-list'>
-                        { currentVoters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
+            <ContentLayout>
+                <div className='btw-voter btw-voter-list'>
+                    <div className="intro">
+                        <p className="intro-title">
+                            My Voters
+                        </p>
+                        <div style={{clear: 'both'}}></div>
+                        <Spinner height={300} loading={isFetching} />
+                        <div className='voters-list'>
+                            { currentVoters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
+                        </div>
+                        <Row>
+                            <Col md={6} xs={6}>
+                                { this.isMobile() && this.renderBackToHome()}
+                            </Col>
+                            <Col md={6} xs={6} className={classNames({'no-padding': this.isMobile()})}>
+                                <div className='pull-right'>
+                                    <Button onClick={() => this.setState({ showAddDialog: true })}>
+                                        Add Voter
+                                    </Button>
+                                </div>
+                            </Col>
+                        </Row>
                     </div>
-                    <Row>
-                        <Col md={6} xs={6}>
-                            { this.isMobile() && this.renderBackToHome()}
-                        </Col>
-                        <Col md={6} xs={6} className={classNames({'no-padding': this.isMobile()})}>
-                            <div className='pull-right'>
-                                <Button onClick={() => this.setState({ showAddDialog: true })}>
-                                    Add Voter
-                                </Button>
-                            </div>
-                        </Col>
-                    </Row>
+                    <Paginator items={voters}
+                               onItemsChange={items => this.setState({ currentVoters: items })}/>
+                    <AddEditDialog show={showAddDialog}
+                                   title='Add Voter'
+                                   submitText='Add'
+                                   onSubmit={data => {
+                                       this.props.actions.addVoter(data);
+                                       this.closeAddModal();
+                                   } }
+                                   onClose={this.closeAddModal} />
                 </div>
-                <Paginator items={voters}
-                           onItemsChange={items => this.setState({ currentVoters: items })}/>
-                <AddEditDialog show={showAddDialog}
-                               title='Add Voter'
-                               submitText='Add'
-                               onSubmit={data => {
-                                   this.props.actions.addVoter(data);
-                                   this.closeAddModal();
-                               } }
-                               onClose={this.closeAddModal} />
-            </div>
+            </ContentLayout>
         );
     }
 }

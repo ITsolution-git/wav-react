@@ -47,6 +47,7 @@ import HowContribute from './static/HowContribute';
 import TermsOfUse from './static/TermsOfUse';
 import PrivacyPolicy from './static/PrivacyPolicy';
 import Faq from './static/Faq';
+import ResourceCenter from './static/ResourceCenter';
 
 import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
@@ -138,6 +139,7 @@ const router =() => (
         <Route exact path = {routes.termsOfUse} component = { TermsOfUse } />
         <Route exact path = {routes.privacyPolicy} component = { PrivacyPolicy } />
         <Route exact path = {routes.faq} component = { Faq } />
+        <Route exact path = {routes.resourceCenter} component = { ResourceCenter } />
 
         // change changePassword
         <Route exact path = {routes.verifyCaptain} component = { VerifyCaptain } />

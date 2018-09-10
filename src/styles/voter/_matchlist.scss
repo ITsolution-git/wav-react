@@ -11,7 +11,7 @@
         margin-bottom: 24px;
       }
       .info-row {
-        box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        @extend .shadow;
         border-radius: 5px;
         padding: 15px 0 15px 0;
         background-color: $white;

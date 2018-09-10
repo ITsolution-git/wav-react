@@ -1,52 +1,7 @@
 .btw-header {
-  .btw-off-header {
-    .navbar-nav {
-      width: 85%;
-      text-align: center;
-      > li {
-        float: none;
-        display: inline-block;
-      }
-    }
-    .nav {
-      background: linear-gradient(to right, $primary_color, $secondary_color);
-      span {
-        color: white;
-        font-family: Gotham_Narrow_Medium;
-        font-size: 24pt;
-      }
-      img {
-        margin-top: -15px;
-        margin-left: 3px;
-      }
-    }
-    nav {
-      background: linear-gradient(to right, $primary_color, $secondary_color);
-      a {
-        color: #353C4C;
-      }
-      a:hover {
-        color: black;
-      }
-    }
-    .btw-logo {
-      width: 60px;
-      margin-left: 2%;
-    }
-
-    .mb-1 {
-      margin-bottom: 10px;
-    }
-
-    .row {
-      margin: 0;
-    }
-  }
-
   .btw-on-header {
     .navbar {
-      margin-bottom: 0;
-      padding: 9px;
+      padding: 10px;
     }
     .navbar-default {
       border: none;
@@ -54,49 +9,37 @@
         border: none;
       }
     }
-    .dropdown-div {
-      margin: 10px 0 10px 0;
+    @include respond-to($desktop) {
+      .navbar {
+        padding: 50px 0 15px 0;
+        position: relative;
+        #logo {
+          position: absolute;
+          top: 8px;
+          left: 5%;
+        }
+      }
     }
     nav {
       a {
-        font-family: Gotham_Narrow_Black;
-        color: white;
+        font-family: Avenir-Black;
+        color: $blue;
         font-size: 19px;
       }
       a:hover {
-        color: #DBE8F8;
+        color: lighten($blue, 15%);
         background-color: transparent;
       }
       a:focus {
-        color: white;
+        color: lighten($blue, 10%)
       }
-      background: linear-gradient(to right, $primary_color, $secondary_color);
-    }
-    .header-icon {
-      a {
-        padding-top: 7px;
-      }
-    }
-    .btw-avatar {
-      font-size: 40px;
-      float: left;
-      margin-right: 12px;
+      background: $white;
     }
     .btw-nav-dropdown {
       #nav-dropdown {
         color: white;
         background-color: transparent !important;
-      }
-      ul {
-        background-color: $primary_color !important;
-      }
-      li {
-        list-style-type: none;
-        .caret {
-          border-top: 6px dashed;
-          border-right: 8px solid transparent;
-          border-left: 8px solid transparent;
-        }
+        padding-top: 7px;
       }
       .dropdown-menu {
         min-width: 200px;
@@ -106,15 +49,8 @@
         }
       }
     }
-    .btw-nav-score {
-      color: green;
-      font-size: 18px;
-      float: right;
-      margin-top: 8px;
-    }
-
     .active-menu {
-      background-color: lighten($secondary_color, 15%) !important;
+      text-decoration: underline;
     }
   }
 

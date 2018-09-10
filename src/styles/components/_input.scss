@@ -17,7 +17,7 @@
   color: $dark-blue;
   font-size: 14pt;
   font-family: Avenir-Light;
-  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  @extend .shadow;
   outline: none;
 }
 

@@ -218,7 +218,20 @@
   color: $red;
 }
 
+
 // links
+
+.link-small-dark-blue {
+  @extend .title-16-dark-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-medium-dark-blue {
+  @extend .title-20-dark-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 #link-small {
   font-family: Avenir-Light;
   font-size: 15px;
@@ -250,3 +263,13 @@
   }
 }
 
+
+// arrows
+.arrow-right-dark-blue {
+  border: solid $dark-blue;
+  border-width: 0 4px 4px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}

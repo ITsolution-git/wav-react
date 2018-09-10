@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
@@ -12,11 +11,10 @@ import authStorage from '../../storage/AuthStorage';
 import { loadVoterList } from '../../actions/VoterListAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import { getBtwUserProfile } from '../../actions/SignOnAction';
-import { resolveTaskData } from '../../helpers/TaskHelper';
 import Spinner from '../shared/Spinner';
-import appStorage from '../../storage/AppStorage';
-import Button from '../shared/Button';
-import Dialog from '../shared/Dialog';
+import ContentLayout from '../layout/ContentLayout';
+import Icon from '../shared/Icon';
+import { resolveTaskData } from '../../helpers/TaskHelper';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -27,36 +25,21 @@ class CaptainsDashboard extends BaseComponent {
         actions.loadVoterList(userid, email);
         actions.loadTaskList(userid);
         actions.getBtwUserProfile();
-        this.state = {
-            showSplashModal: false
-        }
 	}
 
-	onCloseSplashModal = (onComplete = () => {}) => {
-        this.setState({ showSplashModal: false }, () => {
-            appStorage.unsetSplashShown();
-            onComplete();
-        });
-    };
-
     goToTask = (taskId, taskRoute) => {
-        this.onCloseSplashModal(() => {
-            this.onLink(`${taskRoute}?taskId=${taskId}`)
-        });
+        this.onLink(`${taskRoute}?taskId=${taskId}`);
     };
 
-    onSplashSubmitClick = () => {
-        this.onCloseSplashModal(() => {
-            this.onLink(routes.tasksList);
-        });
-    };
 
-    componentWillReceiveProps(props) {
-        const { taskList, profile } = props;
-        if (appStorage.isSplashShown() && !taskList.isFetching && !profile.isFetching) {
-            this.setState({ showSplashModal: true });
-        }
-    }
+	renderCircleItem = (number, text) => {
+      return (
+          <div id="circle-point" className="title-20-blue">
+              <span className="circle">{ number }</span>
+              { text }
+          </div>
+      )
+    };
 
     render() {
         const {
@@ -67,85 +50,84 @@ class CaptainsDashboard extends BaseComponent {
             },
             voters_count,
             taskList: {
-                tasks,
-                count
+                tasks
             }
         } = this.props;
 
-        const tasks_count = count;
-        const { showSplashModal } = this.state;
+        const task = tasks.length > 0 ? resolveTaskData(tasks[0]) : {};
 
         return (
-            <div>
+            <ContentLayout>
                 <div className='container btw-captains-dashboard'>
                     <Spinner loading={isFetching} height={300} />
                     { isSuccess &&
-                    <Row>
-                        <Col md={8}>
-                            <Row>
-                                <Col md={6} xs={6} className='block-padding'>
-                                    <div className='icon-div tasks' onClick={() => this.onLink(routes.tasksList)}>
-                                        <FontAwesome name='tasks' size='3x'/>
-                                        <span className='button-text'>Your Tasks</span>
-                                        { tasks_count ? <span className='count'>{tasks_count}</span> : '' }
-                                    </div>
-                                </Col>
-                                <Col md={6} xs={6} className='block-padding'>
-                                    <div className='icon-div voters' onClick={() => this.onLink(routes.voterList)}>
-                                        <FontAwesome name='users' size='3x'/>
-                                        <span className='button-text'>
-                                            Voters {/*<span>
-                                                (<b>{votersCount}</b>)
-                                            </span>*/}
-                                        </span>
-                                        { voters_count ? <span className='count'>{voters_count}</span> : '' }
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={6} xs={6} className='block-padding'>
-                                    <div className='icon-div messages' onClick={() => this.onLink(routes.messageList)}>
-                                        <FontAwesome name='envelope' size='3x'/>
-                                        <span className='button-text'>Messages</span>
-                                    </div>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                    }
-                </div>
-                <Dialog id='dashboardDialog'
-                    title={`Welcome ${data.firstname} ${data.lastname}`}
-                    show={showSplashModal}
-                    actionButtons={
+                    <Col>
+                        <div id="name" className="title-32-blue">
+                            Hi {data.firstname}!
+                        </div>
                         <Row>
-                            <Col id='dashboardSplashSubmit' md={4} xs={6}>
-                                <Button size='medium' onClick={this.onSplashSubmitClick}>
-                                    Go to Tasks
-                                </Button>
+                            <Col md={6}>
+                                <Col className="white-box">
+                                    <div className="title-24-light-blue">Top Action:</div>
+                                    <div id="recent-task">
+                                        { tasks.length > 0
+                                            ? <div>
+                                                <span className="text-18-dark-blue-bold">{ task.description }. </span>
+                                                <span id="get-started"
+                                                      onClick={() => this.goToTask(task._id, task.route)}
+                                                      className="link-medium-dark-blue">
+                                                    Get started
+                                                </span>
+                                                <i className="arrow-right-dark-blue" />
+                                            </div>
+                                            : <div>
+                                                <span>No recent actions</span>
+                                            </div> }
+                                    </div>
+                                </Col>
+                                <Row className="no-margin" id="voters">
+                                    <Col md={9} id="voter-count">
+                                        <div className="white-box">
+                                            <div className="title-24-light-blue">
+                                                { voters_count } Voters
+                                            </div>
+                                            <div className="link-small-dark-blue" onClick={() => this.onLink(routes.voterList)}>
+                                                View all voters
+                                            </div>
+                                        </div>
+                                        <div className="white-box" id="resource-center">
+                                            <div className="text-15-dark-blue-bold">
+                                                Not sure how to talk to your friends about <br />
+                                                voting? Uncertain about the latest voter ID laws?
+                                            </div>
+                                            <div className="link-small-dark-blue" onClick={() => this.onLink(routes.resourceCenter)}>
+                                                Check out our Resource Center  <i className="arrow-right-dark-blue" />
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col md={3} id="add-voter" className="white-box">
+                                        <div className="title-16-dark-blue">Add Voter</div>
+                                        <div>
+                                            <Icon name="plus" width="47px" height="47px" />
+                                        </div>
+                                    </Col>
+                                </Row>
                             </Col>
-                            <Col id='dashboardSplashDismiss' md={3} xs={4}>
-                                <Button  size='medium' onClick={() => this.onCloseSplashModal()}>
-                                    Dismiss
-                                </Button>
+                            <Col id="help-friends" md={4} className="white-box">
+                                <div className="title-24-light-blue">Help your friends:</div>
+                                { this.renderCircleItem('1', 'Register to vote') }
+                                { this.renderCircleItem('2', 'Decide method of voting') }
+                                { this.renderCircleItem('3', 'Understand the ballot') }
+                                { this.renderCircleItem('4', 'Cast their ballot') }
+                                <div className="link-small-dark-blue" onClick={() => this.onLink(routes.faq)}>
+                                    Learn More
+                                </div>
                             </Col>
                         </Row>
+                    </Col>
                     }
-                    onClose={() => this.onCloseSplashModal()}>
-                        { tasks.length === 0 && 'You have no new tasks, please check back soon'}
-                        { tasks.length !== 0 && 'Here is your the latest task'}
-                        { tasks.slice(0, 1).map((item, i) => {
-                            const task = resolveTaskData(item);
-                            return (
-                                <div key={i}
-                                     onClick={() => this.goToTask(task._id, task.route)}
-                                     className='latest-task'>
-                                    <div>{ task.description }</div>
-                                </div>
-                            )
-                        })}
-                </Dialog>
-            </div>
+                </div>
+            </ContentLayout>
         )
     }
 }

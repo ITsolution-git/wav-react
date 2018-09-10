@@ -9,8 +9,8 @@ import {
     MenuItem
 } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
-import Typography from '@material-ui/core/Typography';
 import classNames from 'classnames';
+import PubSub from "pubsub-js";
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
@@ -19,14 +19,9 @@ import authStorage from '../../storage/AuthStorage';
 import appDataTypes from "../../constants/AppDataTypes";
 import { bindActionCreators } from 'redux';
 import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
-import { getLevel, isEmpty } from './HeaderHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
-import PubSub from "pubsub-js";
-import boardingTypes from "../../constants/VoterBoardingType";
-
-import Dialog from '../shared/Dialog';
-import Button from '../shared/Button';
 import Logo from './Logo';
+import Icon from '../shared/Icon';
 
 class SignedOnHeader extends BaseComponent {
 
@@ -67,23 +62,21 @@ class SignedOnHeader extends BaseComponent {
 
     getCaptainLinks = () => {
         return [
-           // { route: routes.invites, title: 'Invites' },
-            { route: routes.tasksList, title: 'Tasks' },
-            { route: routes.voterList, title: 'Voters' },
-            { route: routes.messageList, title: 'Messages' },
-           // { route: routes.forum, title: 'Forum' },
-            { route: routes.captainsDashboard, title: 'Dashboard' },
-            { route: routes.faq, title: 'Voter Registration FAQs' }
+            { route: routes.captainsDashboard, title: 'Home' },
+            { route: routes.tasksList, title: 'My Actions' },
+            { route: routes.voterList, title: 'My Voters' },
+            { route: routes.resourceCenter, title: 'Resource Center' },
+            { route: routes.faq, title: 'Help' }
+            // { route: routes.messageList, title: 'Messages' },
         ]
     };
 
     getAdminLinks = () => {
         return [
-            { route: routes.adminDashboard, title: 'Messages' },
+            { route: routes.adminDashboard, title: 'Home' },
             { route: routes.voterFilter, title: 'Search Voters' },
             { route: routes.captainFilter, title: 'Search Captains' },
-            { route: routes.loglist, title: 'Transaction Logs' },
-            //{ route: routes.adminDashboard, title: 'Forum' }
+            { route: routes.loglist, title: 'Transaction Logs' }
         ]
     };
 
@@ -93,86 +86,44 @@ class SignedOnHeader extends BaseComponent {
             : this.getAdminLinks();
     };
 
-    handleHeaderClick = (e) => {
-        if (this.isOnBoarding() && !this.state.showInfoModal) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.setState({ showInfoModal: true });
-        }
-    };
-
-    onCloseInfoModal = () => {
-        this.setState({ showInfoModal: false })
-    };
-
     onProfile = () => {
         this.props.history.push(routes.profile)
-    }
-
-    renderLevel = () => {
-        const {
-            profile: {
-                data
-            }
-        } = this.props;
-        return getLevel(data);
     };
 
     renderProfileDropdown = () => {
-        const { profile: { isSuccess, data }, actions } = this.props;
-        const name = isSuccess && data.firstname || '';
+        const { actions } = this.props;
         return (
             <Nav pullRight>
-                <NavItem className='header-icon'>{ this.renderHeaderLevel() }</NavItem>
-                <NavItem className='header-icon'>
-                    <FontAwesome className='btw-avatar'
-                                 name='user-circle' />
-                </NavItem>
                 <NavDropdown eventKey={1}
-                             title={name}
+                             title={<Icon name="profile" width="40px" height="40px" />}
                              className='btw-nav-dropdown'
                              id="nav-dropdown">
                     <MenuItem eventKey={1.1} onClick={this.onProfile}>Manage account</MenuItem>
-                    {/*<MenuItem eventKey={1.2}>Settings</MenuItem>*/}
                     <MenuItem eventKey={1.3} onClick={() => actions.btwLogout()}>Sign out</MenuItem>
                 </NavDropdown>
             </Nav>
         )
     };
 
-    renderHeaderLevel = () => {
-        const { profile: { data } } = this.props;
-        return (
-            <div>{ !isEmpty(data) && data.role !== 'admin' && this.renderLevel()}</div>
-        )
-    };
-
-    resolveModalMessage = () => {
-        const { pathname } = this.props.history.location;
-        const { boardingType } = this.props.voter;
-        if (pathname === routes.matchList && boardingType === boardingTypes.voterList) {
-            return 'Please select a record from the list before proceeding';
-        }
-        return 'Please complete the onboarding process before you can access these secured features';
-    };
-
     render() {
         const {
-            showInfoModal,
             activeItem
         } = this.state;
 
         return (
-            <div className='btw-on-header' onClickCapture={this.handleHeaderClick} >
-                <Navbar>
+            <div className='btw-on-header' >
+                <Navbar fluid>
                     <Navbar.Header className='header-icon'>
                         <Navbar.Brand pullLeft>
-                            <Logo />
+                            <div id="logo">
+                                <Logo width={80} height={65} />
+                            </div>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
-                        <Nav>
+                        { this.renderProfileDropdown() }
+                        <Nav pullRight>
                             { this.resolveLinks().map((link, i) => {
                                     return (
                                         <NavItem key={i}
@@ -188,15 +139,8 @@ class SignedOnHeader extends BaseComponent {
                                 })
                             }
                         </Nav>
-                        { this.renderProfileDropdown() }
                     </Navbar.Collapse>
                 </Navbar>
-                <Dialog show={showInfoModal}
-                        actionButtons={ <Button size='medium'
-                                                onClick={this.onCloseInfoModal}>Ok</Button> }
-                        onClose={this.onCloseInfoModal}>
-                    <Typography gutterBottom>{ this.resolveModalMessage() }</Typography>
-                </Dialog>
             </div>
         )
     }
