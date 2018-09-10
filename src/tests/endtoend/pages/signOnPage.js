@@ -82,7 +82,7 @@ module.exports = (driver) => {
 			link.click();
 
 			await helper.timeout(300);
-			await driver.findElement(helper.By.css('input[type="email"')).sendKeys(user.email);
+			await driver.findElement(helper.By.css('.text-18-dark-blue > div > input')).sendKeys(user.email);
 
 			await helper.selectButton('Send Request')
 
