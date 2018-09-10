@@ -93,7 +93,7 @@ module.exports = (driver) => {
 			await helper.selectButton('Add')
 
 			// Select first from match list
-			let firstVoter = await driver.wait(core.automate.until.elementLocated(helper.By.id('currentVoter0')), 30000);
+			let firstVoter = await driver.wait(core.automate.until.elementLocated(helper.By.css('#currentVoter0 #check')), 30000);
       firstVoter.click();
       
       await helper.timeout(300)

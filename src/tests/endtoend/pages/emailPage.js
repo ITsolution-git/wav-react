@@ -8,9 +8,9 @@ module.exports = (driver) => {
 	let resetPassword = async (data) => {
 		try {
       // Click login btn
-			let loginMenu = await driver.wait(core.automate.until.elementLocated(helper.By.className('gmail-nav__nav-link__sign-in')), 10000);
-			await helper.timeout(1000)
-      loginMenu.click()
+			// let loginMenu = await driver.wait(core.automate.until.elementLocated(helper.By.className('gmail-nav__nav-link__sign-in')), 10000);
+			// await helper.timeout(1000)
+      // loginMenu.click()
       
       // Input email address
       let emailField = await driver.wait(core.automate.until.elementLocated(helper.By.id('identifierId')), 10000);
