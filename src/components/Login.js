@@ -23,6 +23,7 @@ import {
 import colors from '../constants/ColorConstants';
 import Dialog from './shared/Dialog';
 import { forgotPasswordRequest } from '../actions/PasswordRequestAction';
+import routes from '../constants/Routes';
 
 
 class Login extends BaseComponent {
@@ -189,7 +190,7 @@ class Login extends BaseComponent {
                                         : 'Not Registered'
                                     }
 								</span>
-                                    <Link id="link-large" to='/captainProfile/register'> Sign up</Link>
+                                    <Link id="link-large" to={routes.register}> Sign up</Link>
                                 </div>
                                 <Col md={6}>
                                     <Spinner loading={isFetching} size={50} />
