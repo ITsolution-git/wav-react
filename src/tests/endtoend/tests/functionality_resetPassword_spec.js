@@ -36,10 +36,10 @@ describe('Reset password end to end tests', ()=>{
 		await signOnPage.checkResetEmail(user.mail_url);
 		await emailPage.resetPassword(user);
 		await resetPasswordPage.validateFirstAndLastName(user);
-		await resetPasswordPage.changePassword(newpassword);
+		await resetPasswordPage.changePassword(newPassword);
 		await signOnPage.validateSignOnPage();
 		await signOnPage.checkResetPasswordResult();
-		await signOnPage.inputSignonInfo(user.email, newpassword);
+		await signOnPage.inputSignonInfo(user.email, newPassword);
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await signedOnHeader.signOut();

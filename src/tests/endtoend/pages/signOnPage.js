@@ -84,9 +84,9 @@ module.exports = (driver) => {
 			await helper.timeout(300);
 			await driver.findElement(helper.By.css('.text-18-dark-blue > div > input')).sendKeys(user.email);
 
-			await helper.selectButton('Send Request')
+			await helper.selectButton('Go!')
 
-			await driver.wait(core.automate.until.elementLocated(helper.By.css('.btw-change-password > span')), 10000);
+			await driver.wait(core.automate.until.elementLocated(helper.By.css('.forgot-password .warning-green')), 10000);
 
 		} catch(error) {
 			if (error instanceof core.automate.error.NoSuchElementError){

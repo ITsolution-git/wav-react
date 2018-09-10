@@ -44,7 +44,7 @@ module.exports = (driver) => {
 			await driver.findElement(helper.By.id('confirmPassword')).sendKeys(password);
 			
 			// Click submit button
-			await helper.selectButton('Change')
+			await helper.selectButton('Submit')
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				expect(false).to.be.true
