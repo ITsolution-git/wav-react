@@ -46,6 +46,6 @@ describe('Onboarding end to end tests', ()=>{
 		await latestTaskModal.validateWelcomeModalIsDisplayed();
 		await latestTaskModal.dismissModal();
 		await signedOnHeader.closeAccount(newUser);
-		await signOnPage.verifySignOnPage();
+		await signOnPage.validateSignOnPage();
 	})
 })
