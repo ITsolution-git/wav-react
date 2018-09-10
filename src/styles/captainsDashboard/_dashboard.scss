@@ -1,113 +1,49 @@
-$brand_color_blue: #58B9FE;
-$brand_color_green: #5FD837;
-$tasks-icon-size: 110px;
-$link-icon-size: 85px;
-
 .btw-captains-dashboard {
-  .block-padding {
-    padding-left: 1%;
-    padding-right: 1%;
+  #name {
+    margin: 2% 0;
   }
-  .button-base {
-    margin-top: 5%;
-    cursor: pointer;
+  .white-box {
+    @extend .shadow;
+    border-radius: 5px;
+    background-color: $white;
+    padding: 2.5% 3.5%;
   }
-  .icon-div {
-    @extend .button-base;
-    display: flex;
-    align-items: center;
-    height: 120px;
-    color: #F8FAFC;
-    padding-left: 20px;
-  }
-  .button-text {
-    padding-left: 22px;
-    font-size: 20px;
-  }
-  .tasks {
-    background-color: #8DA3CA;
-    &:hover {
-      background-color: darken(#8DA3CA, 20%);
+  #recent-task {
+    margin: 4% 0;
+    #get-started {
+      margin: 0 6px;
     }
   }
-  .messages {
-    background-color: #006BA6;
-    &:hover {
-      background-color: darken(#006BA6, 20%);
-    }
-  }
-  .voters {
-    background-color: #B6B7B2;
-    &:hover {
-      background-color: darken(#B6B7B2, 20%);
-    }
-  }
-  .invites {
-    background-color: #006BA6;
-    &:hover {
-      background-color: darken(#006BA6, 20%);
-    }
-  }
-  .forum {
-    background-color: #A2B3A4;
-    &:hover {
-      background-color: darken(#A2B3A4, 20%);
-    }
-  }
-  .count {
-    border: 2px solid red;
-    padding: 0px 6px 0px 4px;
-    color: red;
-    margin-left: 10px;
-  }
-  .right-column {
-    @extend .button-base;
-    height: 260px;
-    background-color: #37C1D1;
-    color: #F8FAFC;
-    .label {
-      text-decoration: underline;
-      text-decoration-color: #F8FAFC;
-    }
-    font-size: 19px;
-    div {
-      padding: 15px 0 15px 0;
-      span {
-        padding-left: 25px;
+  #voters {
+    margin: 4% 0;
+    #voter-count {
+      padding: 0 5% 0 0;
+      .link-small-dark-blue {
+        margin: 5% 0;
       }
     }
-    .notification {
-      &:hover {
-        background-color: darken(#37C1D1, 9%);
-      }
-      .count {
-        border: 2px solid white;
-        padding: 0px 6px 0px 4px;
-        color: white;
-        margin-left: 3px;
-      }
-    }
-    .community {
-      &:hover {
-        background-color: darken(#37C1D1, 9%);
+    #add-voter {
+      text-align: center;
+      img {
+        margin-top: 14%;
+        cursor: pointer;
       }
     }
   }
-}
-
-.latest-task {
-  padding: 2%;
-  border: 1px solid lightgray;
-  text-align: center;
-  margin: 3% 0 3% 0;
-  background-color: #3C98D9;
-  color: white;
-  cursor: pointer;
-}
-
-.splash-modal {
-  @include respond-to($desktop) {
-    min-width: 600px;
+  #resource-center {
+    margin-top: 6%;
   }
-  min-height: 150px;
+  #help-friends {
+    margin-left: 3.5%;
+    .circle {
+      border: 3px solid $blue;
+      padding: 0 9px;
+      margin-right: 10px;
+      border-radius: 50%;
+      @extend .title-24-blue;
+    }
+    #circle-point {
+      margin: 20px 0;
+    }
+  }
 }

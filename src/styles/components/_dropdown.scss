@@ -42,7 +42,7 @@
   .Select-control {
     border-radius: 3px;
     border: none;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    @extend .shadow;
     height: 43px;
     .Select-clear-zone {
       width: 30px;
