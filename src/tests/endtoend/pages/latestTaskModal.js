@@ -12,7 +12,7 @@ module.exports = (driver) => {
 
 	let validateWelcomeModalIsDisplayed =   async  () => {
 		try {
-			await driver.wait(core.automate.until.elementLocated(taskModal.modalCDialog), 4000);
+			await driver.wait(core.automate.until.elementLocated(taskModal.modalCDialog), 10000);
 		}catch(error){
 			if (error instanceof core.automate.error.NoSuchElementError){
 				console.log(error)
