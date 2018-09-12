@@ -99,7 +99,7 @@ class Login extends BaseComponent {
 			valid: {...this.state.valid, [name]: isValid }
 		});
 	};
-
+	
 	showForgotPasswordModal = (e) => {
 		e.preventDefault()
 
