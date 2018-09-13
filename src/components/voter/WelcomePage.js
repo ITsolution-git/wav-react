@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { withRouter } from 'react-router-dom';
 
 import BaseComponent from '../shared/BaseComponent';
 import OnBoardingLayout from './shared/OnBoardingLayout'
@@ -7,7 +8,7 @@ import Button from '../shared/Button';
 import colors from '../../constants/ColorConstants';
 import routes from '../../constants/Routes';
 
-export default class WelcomePage extends BaseComponent {
+class WelcomePage extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -62,5 +63,6 @@ export default class WelcomePage extends BaseComponent {
             </OnBoardingLayout>
         );
     }
-
 }
+
+export default withRouter(WelcomePage);

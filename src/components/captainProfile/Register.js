@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 import { btwRegister } from '../../actions/SignOnAction';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
 import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../shared/BaseComponent';
@@ -83,7 +82,7 @@ class Register extends BaseComponent {
 		return (
             <div id="registered-text-div">
                 <span id='registered-text'>Already registered? </span>
-                <Link id="link-small" target="_blank" to='/'> Sign in </Link>
+                <Link id="link-small" to='/'> Sign in </Link>
             </div>
         );
 	};
@@ -111,7 +110,7 @@ class Register extends BaseComponent {
 										 name='info-circle' />
 						</Col>
 					</Row> }
-                    <Col md={5} mdOffset={1} className="no-padding">
+                    <Col md={6} className="no-padding">
                         { this.isDesktop() && <AboutInfo /> }
                     </Col>
 					<Col mdOffset={1} md={4} xsOffset={2} xs={8} className="no-padding">
