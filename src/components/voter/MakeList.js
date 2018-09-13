@@ -40,6 +40,17 @@ class MakeList extends BaseComponent {
 	};
 
 
+	isUnique = () => {
+		const names = new Set();
+
+		for (let i = 1; i <= numberOfNames; i++) {
+			const firstName = this.state[`${firstNamePrefix}${i}`],
+				lastName = this.state[`${lastNamePrefix}${i}`];
+			names.add(firstName.toLowerCase() + lastName.toLowerCase());
+		}
+		return names.size === numberOfNames;
+	};
+
     onNext = () => {
     	this.setState({ startValidation: true });
 
@@ -57,19 +68,11 @@ class MakeList extends BaseComponent {
     		return;
 		}
 
-		let username1 = namesObj.firstname1 + namesObj.lastname1
-		let username2 = namesObj.firstname2 + namesObj.lastname2
-		let username3 = namesObj.firstname3 + namesObj.lastname3
+		const isUnique = this.isUnique();
+        this.setState({ duplicateNames: !isUnique });
 
-		if (username1 === username2 || username2 === username3 || username3 === username1) {
-			this.setState({
-				duplicateNames: true
-			})
-			return;
-		} else {
-			this.setState({
-				duplicateNames: false
-			})
+    	if (!isUnique) {
+    		return;
 		}
 
 		this.props.actions.makeListPersist(namesObj);
