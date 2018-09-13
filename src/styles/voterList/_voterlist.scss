@@ -1,53 +1,66 @@
 .btw-voter-list {
-  @include respond-to($phone) {
-    padding-left: 10px;
-    padding-right: 10px;
-    width: 90%;
-  }
-
-  @include respond-to($desktop) {
-    width: 50%;
-  }
+  //@include respond-to($phone) {
+  //  width: 90%;
+  //}
+  //
+  //@include respond-to($desktop) {
+  //  width: 80%;
+  //}
 
   .voters-list {
-    margin-bottom: 2%;
-    @include respond-to($phone) {
-      width: 100%;
-    }
-    @include respond-to($desktop) {
-      width: 98%;
-    }
+    margin-top: 30px;
 
-    .name-row {
-      @extend .voter-row;
+    .voter-item {
+      @extend .shadow;
+      background-color: $white;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 15px;
 
-      & > div {
-        padding-top: 5px;
-        padding-bottom: 5px;
-      }
-
-      padding-top: 10px;
-      padding-bottom: 10px;
-
-      .status-icon {
-        font-size: 23px;
-      }
-
-      .registered-icon {
-        @extend .status-icon;
-        color: #91E45B;
-      }
-
-      .not-registered-icon {
-        @extend .status-icon;
-        color: #F3BE0C;
-      }
-
-      .action-icon {
-        padding-left: 15px;
+      .arrow {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-radius: 5px;
         cursor: pointer;
-        font-size: 22px;
       }
+
+      .arrow-up {
+        @extend .arrow;
+        border-bottom: 10px solid $dark-blue;
+      }
+
+      .arrow-down {
+        @extend .arrow;
+        border-top: 10px solid $dark-blue;
+      }
+
+      .more-info {
+        margin-top: 20px;
+      }
+
+      .not-registered-box {
+        @extend .shadow;
+        width: fit-content;
+        padding: 10px 15px;
+      }
+
+      .edit-icon {
+        cursor: pointer;
+      }
+    }
+  }
+
+  #add-button {
+    @extend .shadow;
+    background-color: $white;
+    padding: 12px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    @extend .title-16-dark-blue;
+    img {
+      margin-left: 40px;
     }
   }
 }

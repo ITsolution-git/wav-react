@@ -4,13 +4,9 @@ import { Row, Col } from 'react-bootstrap';
 import BaseComponent from '../BaseComponent';
 import Icon from '../Icon';
 import Arrow from '../Arrow';
+import { replaceNumbersWithX } from '../../../helpers/InputHelper';
 
 export default class MatchItem extends BaseComponent {
-
-    replaceNumbersWithX = (str) => {
-        str = str || '';
-        return str.replace(new RegExp("[0-9]", "g"), "*");
-    };
 
     getViewProps = () => {
         if (this.isDesktop()) {
@@ -27,7 +23,7 @@ export default class MatchItem extends BaseComponent {
 
     formatAddress = (addr1, addr2) => {
         addr1 = addr1 ? `${addr1}, ` : '';
-        return this.replaceNumbersWithX(`${addr1}${addr2}`);
+        return replaceNumbersWithX(`${addr1}${addr2}`);
     };
 
     resolveAddress = () => {
