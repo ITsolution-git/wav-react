@@ -139,7 +139,7 @@ class Login extends BaseComponent {
                 <Row className="btw-login no-margin">
 					{ this.isMobile() && this.renderBackground(colors.blue) }
 					<MobileLogo />
-                    <Col md={5} mdOffset={1} className="no-padding">
+                    <Col md={6} className="no-padding">
                         { this.isDesktop() && <AboutInfo /> }
                     </Col>
                     <Col md={5} xs={12} className="no-padding">
