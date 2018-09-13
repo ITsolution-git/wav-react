@@ -13,6 +13,7 @@ import Spinner from '../shared/Spinner';
 import Paginator from '../shared/Paginator';
 import Button from '../shared/Button';
 import ContentLayout from '../layout/ContentLayout';
+import Icon from '../shared/Icon';
 
 class VotersList extends BaseComponent {
     constructor(props, context) {
@@ -45,29 +46,19 @@ class VotersList extends BaseComponent {
         }} = this.props;
         return (
             <ContentLayout>
-                <div className='btw-voter btw-voter-list'>
-                    <div className="intro">
-                        <p className="intro-title">
-                            My Voters
-                        </p>
-                        <div style={{clear: 'both'}}></div>
-                        <Spinner height={300} loading={isFetching} />
-                        <div className='voters-list'>
-                            { currentVoters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
+                <div className='btw-voter-list container'>
+                    <Spinner height={300} loading={isFetching} />
+                    <Col>
+                        <div className="title-24-blue">My Voters</div>
+                    </Col>
+                    <Col className="pull-right" onClick={() => this.setState({ showAddDialog: true })}>
+                        <div id="add-button">
+                            Add Voter <Icon name="plus" width={20} height={20} />
                         </div>
-                        <Row>
-                            <Col md={6} xs={6}>
-                                { this.isMobile() && this.renderBackToHome()}
-                            </Col>
-                            <Col md={6} xs={6} className={classNames({'no-padding': this.isMobile()})}>
-                                <div className='pull-right'>
-                                    <Button onClick={() => this.setState({ showAddDialog: true })}>
-                                        Add Voter
-                                    </Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </div>
+                    </Col>
+                    <Col md={12} className='voters-list'>
+                        { currentVoters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
+                    </Col>
                     <Paginator items={voters}
                                onItemsChange={items => this.setState({ currentVoters: items })}/>
                     <AddEditDialog show={showAddDialog}
