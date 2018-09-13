@@ -34,7 +34,7 @@ class WelcomePage extends BaseComponent {
         const { nextEnabled } = this.state;
         const contentMsg = nextEnabled
             ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-            : 'We think this is the Start of a beautiful friendship. Speaking of Friends...';
+            : 'We think this is the start of a beautiful friendship. Speaking of friends...';
         return (
             <OnBoardingLayout color={colors.blue}>
                 <div className="layout-center">
