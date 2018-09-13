@@ -46,7 +46,7 @@ class MakeList extends BaseComponent {
 		for (let i = 1; i <= numberOfNames; i++) {
 			const firstName = this.state[`${firstNamePrefix}${i}`],
 				lastName = this.state[`${lastNamePrefix}${i}`];
-			names.add(firstName.toLowerCase() + lastName.toLowerCase());
+			names.add(firstName.toLowerCase().trim() + lastName.toLowerCase().trim());
 		}
 		return names.size === numberOfNames;
 	};

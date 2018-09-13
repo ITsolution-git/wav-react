@@ -150,7 +150,8 @@ class VoterDetail extends BaseComponent {
 													  onChange={this.handleChange}
 													  defaultValue={firstName}
 													  startValidation={startValidation}
-                                                      showAsterisk={showAsterisk}
+													  showAsterisk={showAsterisk}
+													  disabled
 													  required />
 								 </Col>
 								 <Col md={6} xs={6}>
@@ -159,6 +160,7 @@ class VoterDetail extends BaseComponent {
                                                     onChange={this.handleChange}
 													 startValidation={startValidation}
                                                     showAsterisk={showAsterisk}
+                                                    disabled
 													 required />
 								 </Col>
 							 </Row>
