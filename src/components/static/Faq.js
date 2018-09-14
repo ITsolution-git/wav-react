@@ -1,4 +1,5 @@
 import React from 'react';
+import { Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import ContentLayout from '../layout/ContentLayout';
@@ -7,8 +8,10 @@ class Faq extends BaseComponent {
     render() {
         return (
             <ContentLayout>
-                <div className="btw-terms">
-
+                <div className="btw-terms container">
+                    <Col id="title">
+                        <div className="title-24-blue">Frequently Asked Questions</div>
+                    </Col>
                     <h4><b>What does my friend need to register to vote?</b></h4>
 
                     <p>
