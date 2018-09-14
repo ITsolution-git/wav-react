@@ -17,7 +17,7 @@ class NextButton extends BaseComponent {
     };
 
     onNext = () => {
-        const { voter, actions, onNext = () => {}}  = this.props;
+        const { actions, onNext = () => {}}  = this.props;
         onNext();
         if (this.isLastName()) {
             actions.resetVoterState();
