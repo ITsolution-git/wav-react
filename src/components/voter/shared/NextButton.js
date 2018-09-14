@@ -12,10 +12,14 @@ import boardingTypes from '../../../constants/VoterBoardingType';
 
 class NextButton extends BaseComponent {
 
+    isLastName = () => {
+      return this.props.voter.currentNumber === voterConstants.VOTERS_COUNT;
+    };
+
     onNext = () => {
         const { voter, actions, onNext = () => {}}  = this.props;
         onNext();
-        if (voter.currentNumber === voterConstants.VOTERS_COUNT) {
+        if (this.isLastName()) {
             actions.resetVoterState();
             this.redirectToHome();
             return;
@@ -38,7 +42,7 @@ class NextButton extends BaseComponent {
         return boardingType === boardingTypes.register
             ? (
                 <Button onClick={this.onNext}>
-                    { title }
+                    { this.isLastName() ? 'Complete' : title }
                 </Button>
             ) : null;
     }
