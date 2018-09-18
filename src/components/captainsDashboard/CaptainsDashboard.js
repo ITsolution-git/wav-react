@@ -31,6 +31,9 @@ class CaptainsDashboard extends BaseComponent {
         this.onLink(`${taskRoute}?taskId=${taskId}`);
     };
 
+    onAddClick = () => {
+        this.onLink(`${routes.voterList}?openAddModal=true`);
+    };
 
 	renderCircleItem = (number, text) => {
       return (
@@ -39,6 +42,20 @@ class CaptainsDashboard extends BaseComponent {
               { text }
           </div>
       )
+    };
+
+	renderResourceCenter = () => {
+	    return (
+	        <div>
+                <div className="text-15-dark-blue-bold">
+                    Not sure how to talk to your friends about <br />
+                    voting? Uncertain about the latest voter ID laws?
+                </div>
+                <div className="link-small-dark-blue" onClick={() => this.onLink(routes.resourceCenter)}>
+                    Check out our Resource Center  <i className="arrow-right-dark-blue" />
+                </div>
+            </div>
+        )
     };
 
     render() {
@@ -86,8 +103,8 @@ class CaptainsDashboard extends BaseComponent {
                                     </div>
                                 </Col>
                                 <Row className="no-margin" id="voters">
-                                    <Col md={9} id="voter-count">
-                                        <div className="white-box">
+                                    <Col md={9} xs={7} id="voter-count-div">
+                                        <div className="white-box" id="voter-count">
                                             <div className="title-24-light-blue">
                                                 { voters_count } Voters
                                             </div>
@@ -95,25 +112,21 @@ class CaptainsDashboard extends BaseComponent {
                                                 View all voters
                                             </div>
                                         </div>
-                                        <div className="white-box" id="resource-center">
-                                            <div className="text-15-dark-blue-bold">
-                                                Not sure how to talk to your friends about <br />
-                                                voting? Uncertain about the latest voter ID laws?
-                                            </div>
-                                            <div className="link-small-dark-blue" onClick={() => this.onLink(routes.resourceCenter)}>
-                                                Check out our Resource Center  <i className="arrow-right-dark-blue" />
-                                            </div>
-                                        </div>
+                                        { this.isDesktop() &&
+                                            <div className="white-box" id="resource-center">{ this.renderResourceCenter() }</div> }
                                     </Col>
-                                    <Col md={3} id="add-voter" className="white-box">
+                                    <Col md={3} xs={5} id="add-voter" className="white-box">
                                         <div className="title-16-dark-blue">Add Voter</div>
-                                        <div>
+                                        <div onClick={this.onAddClick}>
                                             <Icon name="plus" width="47px" height="47px" />
                                         </div>
                                     </Col>
                                 </Row>
+                                <Col mdHidden lgHidden id="resource-center-mobile">
+                                    { this.renderResourceCenter() }
+                                </Col>
                             </Col>
-                            <Col id="help-friends" md={4} className="white-box">
+                            <Col id="help-friends" md={4} xsHidden className="white-box">
                                 <div className="title-24-light-blue">Help your friends:</div>
                                 { this.renderCircleItem('1', 'Register to vote') }
                                 { this.renderCircleItem('2', 'Decide method of voting') }

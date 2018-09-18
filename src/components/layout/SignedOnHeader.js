@@ -8,9 +8,9 @@ import {
     NavDropdown,
     MenuItem
 } from 'react-bootstrap';
-import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
 import PubSub from "pubsub-js";
+import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
@@ -66,8 +66,7 @@ class SignedOnHeader extends BaseComponent {
             { route: routes.tasksList, title: 'My Actions' },
             { route: routes.voterList, title: 'My Voters' },
             { route: routes.resourceCenter, title: 'Resource Center' },
-            { route: routes.faq, title: 'Help' }
-            // { route: routes.messageList, title: 'Messages' },
+            { route: routes.faq, title: 'FAQ' }
         ]
     };
 
@@ -92,10 +91,11 @@ class SignedOnHeader extends BaseComponent {
 
     renderProfileDropdown = () => {
         const { actions } = this.props;
+        const size = this.isMobile() ? '50px' : '40px';
         return (
             <Nav pullRight>
                 <NavDropdown eventKey={1}
-                             title={<Icon name="profile" width="40px" height="40px" />}
+                             title={<Icon name="profile" width={size} height={size} />}
                              className='btw-nav-dropdown'
                              id="nav-dropdown">
                     <MenuItem eventKey={1.1} onClick={this.onProfile}>Manage account</MenuItem>
@@ -112,7 +112,7 @@ class SignedOnHeader extends BaseComponent {
 
         return (
             <div className='btw-on-header' >
-                <Navbar fluid>
+                <Navbar fluid collapseOnSelect staticTop>
                     <Navbar.Header className='header-icon'>
                         <Navbar.Brand pullLeft>
                             <div id="logo">
@@ -122,6 +122,12 @@ class SignedOnHeader extends BaseComponent {
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
+                        { this.isMobile() &&
+                        <Nav id="close-icon">
+                            <NavItem>
+                                <Icon name='close-white' width='30px' height='30px' />
+                            </NavItem>
+                        </Nav> }
                         { this.renderProfileDropdown() }
                         <Nav pullRight>
                             { this.resolveLinks().map((link, i) => {
