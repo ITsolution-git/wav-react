@@ -6,7 +6,12 @@
     @extend .shadow;
     border-radius: 5px;
     background-color: $white;
-    padding: 2.5% 3.5%;
+    @include respond-to($desktop) {
+      padding: 2.5% 3.5%;
+    }
+    @include respond-to($phone) {
+      padding: 20px 25px;
+    }
   }
   #recent-task {
     margin: 4% 0;
@@ -16,13 +21,17 @@
   }
   #voters {
     margin: 4% 0;
-    #voter-count {
+    #voter-count-div {
       padding: 0 5% 0 0;
       .link-small-dark-blue {
         margin: 5% 0;
       }
+      #voter-count {
+        height: 111px;
+      }
     }
     #add-voter {
+      height: 111px;
       text-align: center;
       img {
         margin-top: 14%;
@@ -32,6 +41,9 @@
   }
   #resource-center {
     margin-top: 6%;
+  }
+  #resource-center-mobile {
+    margin: 10% 2%;
   }
   #help-friends {
     margin-left: 3.5%;

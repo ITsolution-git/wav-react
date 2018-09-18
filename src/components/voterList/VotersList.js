@@ -14,6 +14,7 @@ import Paginator from '../shared/Paginator';
 import Button from '../shared/Button';
 import ContentLayout from '../layout/ContentLayout';
 import Icon from '../shared/Icon';
+import { getUrlParam } from '../../helpers/UrlHelper';
 
 class VotersList extends BaseComponent {
     constructor(props, context) {
@@ -29,7 +30,13 @@ class VotersList extends BaseComponent {
         if (!isSuccess && !error) {
             actions.loadVoterList();
         }
+        if (getUrlParam(this.props, 'openAddModal')) {
+            setTimeout(() => {
+                this.setState({showAddDialog: true});
+            }, 400);
+        }
     }
+    
 
     closeAddModal = () => {
         this.setState({ showAddDialog: false });
@@ -58,9 +65,9 @@ class VotersList extends BaseComponent {
                     </Col>
                     <Col md={12} className='voters-list'>
                         { currentVoters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
+                        <Paginator items={voters}
+                                   onItemsChange={items => this.setState({ currentVoters: items })}/>
                     </Col>
-                    <Paginator items={voters}
-                               onItemsChange={items => this.setState({ currentVoters: items })}/>
                     <AddEditDialog show={showAddDialog}
                                    title='Add Voter'
                                    submitText='Add'
