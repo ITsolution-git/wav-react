@@ -1,12 +1,4 @@
 .btw-voter-list {
-  //@include respond-to($phone) {
-  //  width: 90%;
-  //}
-  //
-  //@include respond-to($desktop) {
-  //  width: 80%;
-  //}
-
   .voters-list {
     margin-top: 30px;
 
@@ -14,7 +6,14 @@
       @extend .shadow;
       background-color: $white;
       border-radius: 5px;
-      padding: 20px;
+
+      @include respond-to($phone) {
+        padding: 20px 5px;
+      }
+      @include respond-to($desktop) {
+        padding: 20px;
+      }
+
       margin-bottom: 15px;
 
       .arrow {
@@ -48,6 +47,9 @@
 
       .edit-icon {
         cursor: pointer;
+        @include respond-to($phone) {
+          text-align: right;
+        }
       }
     }
   }
@@ -61,6 +63,55 @@
     @extend .title-16-dark-blue;
     img {
       margin-left: 40px;
+    }
+  }
+
+  #add-button-mobile {
+    @extend .title-16-white;
+    background-color: $blue;
+    border-radius: 5px;
+    padding: 20px 0;
+    margin-bottom: 25px;
+    text-align: center;
+    img {
+      margin-right: 20px;
+    }
+  }
+}
+
+#add-voter-modal {
+  padding: 0 10px;
+
+  #title-row {
+    margin-bottom: 20px;
+  }
+
+  #close-icon {
+    text-align: right;
+    img {
+      cursor: pointer;
+    }
+  }
+
+  #buttons {
+    text-align: center;
+    button {
+      margin: 10px 0;
+    }
+  }
+}
+
+#delete-voter-modal {
+  padding: 0 10px;
+
+  #description {
+    margin: 40px 0;
+  }
+
+  #buttons {
+    text-align: center;
+    button {
+      margin: 10px 0;
     }
   }
 }
