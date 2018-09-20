@@ -29,7 +29,8 @@ export default class Paginator extends BaseComponent {
     };
 
     componentWillReceiveProps(props) {
-        if (this.props.items.length !== props.items.length) {
+        if (this.props.items.length !== props.items.length
+            || JSON.stringify(this.resolvePageItems()) !== JSON.stringify(this.resolvePageItems(props))) {
             this.onParentItemsChange(props);
         }
     }

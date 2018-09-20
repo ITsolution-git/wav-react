@@ -4,11 +4,12 @@ import BaseComponent from './BaseComponent';
 
 export default class Icon extends BaseComponent {
     render() {
-        const { name, width, height } = this.props;
+        const { name, width, height, ...restProps } = this.props;
         return (
             <img src={require(`../../resources/icons/${name}.png`)}
                  width={width}
-                 height={height} />
+                 height={height}
+                 {...restProps} />
         )
     }
 }

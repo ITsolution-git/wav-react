@@ -2,8 +2,7 @@ import React  from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { Row, Col } from 'react-bootstrap';
-import classNames from 'classnames';
+import { Col } from 'react-bootstrap';
 
 import { loadVoterList, addVoter } from '../../actions/VoterListAction';
 import BaseComponent from '../shared/BaseComponent';
@@ -11,7 +10,6 @@ import VoterItem from './VoterItem';
 import AddEditDialog from './AddEditDialog';
 import Spinner from '../shared/Spinner';
 import Paginator from '../shared/Paginator';
-import Button from '../shared/Button';
 import ContentLayout from '../layout/ContentLayout';
 import Icon from '../shared/Icon';
 import { getUrlParam } from '../../helpers/UrlHelper';
@@ -51,6 +49,7 @@ class VotersList extends BaseComponent {
             voters = [],
             isFetching
         }} = this.props;
+
         return (
             <ContentLayout>
                 <div className='btw-voter-list container'>
@@ -64,14 +63,13 @@ class VotersList extends BaseComponent {
                         </div>
                     </Col>
                     <Col md={12} className='voters-list'>
-                        { currentVoters.map((voter, i) => <VoterItem key={i} voter={voter} />)}
+                        { currentVoters.map(voter => <VoterItem key={voter._id} voter={voter} />)}
                         <Paginator items={voters}
                                    onItemsChange={items => this.setState({ currentVoters: items })}/>
                     </Col>
                     <AddEditDialog show={showAddDialog}
-                                   title='Add Voter'
-                                   submitText='Add'
-                                   onSubmit={data => {
+                                   title='Add'
+                                   onAdd={data => {
                                        this.props.actions.addVoter(data);
                                        this.closeAddModal();
                                    } }

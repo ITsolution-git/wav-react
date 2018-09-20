@@ -1,12 +1,4 @@
 .btw-voter-list {
-  //@include respond-to($phone) {
-  //  width: 90%;
-  //}
-  //
-  //@include respond-to($desktop) {
-  //  width: 80%;
-  //}
-
   .voters-list {
     margin-top: 30px;
 
@@ -61,6 +53,43 @@
     @extend .title-16-dark-blue;
     img {
       margin-left: 40px;
+    }
+  }
+}
+
+#add-voter-modal {
+  padding: 0 10px;
+
+  #title-row {
+    margin-bottom: 20px;
+  }
+
+  #close-icon {
+    text-align: right;
+    img {
+      cursor: pointer;
+    }
+  }
+
+  #buttons {
+    text-align: center;
+    button {
+      margin: 10px 0;
+    }
+  }
+}
+
+#delete-voter-modal {
+  padding: 0 10px;
+
+  #description {
+    margin: 40px 0;
+  }
+
+  #buttons {
+    text-align: center;
+    button {
+      margin: 10px 0;
     }
   }
 }

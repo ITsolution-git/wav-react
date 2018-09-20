@@ -6,11 +6,12 @@ import { bindActionCreators } from "redux";
 import classNames from 'classnames';
 
 import AddEditDialog from './AddEditDialog';
-import ConfirmationDialog from '../shared/ConfirmationDialog';
 import { updateVoter, deleteVoter } from '../../actions/VoterListAction';
 import { replaceNumbersWithX } from '../../helpers/InputHelper';
 import BaseComponent from '../shared/BaseComponent';
 import Icon from "../shared/Icon";
+import Dialog from '../shared/Dialog';
+import Button from "../shared/Button";
 
 
 class VoterItem extends BaseComponent {
@@ -31,6 +32,18 @@ class VoterItem extends BaseComponent {
       this.setState({ showDeleteModal: false });
     };
 
+    getViewProps = () => {
+        if (this.isDesktop()) {
+            return {
+                titleClass: 'title-24-blue'
+            }
+        }
+        return {
+            titleClass: 'title-24-light-blue'
+        }
+    };
+
+
     render() {
         const { expanded, showEditModal, showDeleteModal } = this.state;
         let {
@@ -43,6 +56,7 @@ class VoterItem extends BaseComponent {
             zipcode
         } = this.props.voter;
 
+        const viewProps = this.getViewProps();
         const isRegistered = (registration_metadata || {}).isRegistered;
 
         return (
@@ -78,31 +92,40 @@ class VoterItem extends BaseComponent {
                         <Icon name='edit' width={30} height={30} />
                     </div>
                 </Col>
-                {/*<FontAwesome className='action-icon'*/}
-                             {/*onClick={() => this.setState({ showDeleteModal: true })}*/}
-                             {/*name='trash' />*/}
-
                 <AddEditDialog show={showEditModal}
-                               title='Edit Voter'
+                               title='Edit'
+                               isEdit={true}
                                voter={this.props.voter}
-                               submitText='Save'
                                disableEmail
-                               onSubmit={data => {
+                               onUpdate={data => {
                                    const { _id, registration_metadata, voter_characteristics,
                                        ...voterToUpdate} = data;
                                    this.props.actions.updateVoter(voterToUpdate);
                                    this.closeEditModal();
                                } }
+                               onDelete={() => this.setState({ showDeleteModal: true, showEditModal: false })}
                                onClose={this.closeEditModal} />
-                <ConfirmationDialog show={showDeleteModal}
-                                    title='Delete voter'
-                                    description='This will remove the voter’s information from your records. You will have to enter their information again if you want to re-add them. Confirm?'
-                                    submitText='Yes'
-                                    onSubmit={() => {
-                                        this.props.actions.deleteVoter(this.props.voter);
-                                        this.closeDeleteModal();
-                                    } }
-                                    onClose={this.closeDeleteModal} />
+                <Dialog show={showDeleteModal} onClose={this.closeDeleteModal}>
+                    <div id="delete-voter-modal">
+                        <div className={viewProps.titleClass}>
+                            Delete
+                        </div>
+                        <div id="description" className="text-18-dark-blue-bold">
+                            This will remove the voter’s information from your records. You will have to enter their information again if you want to re-add them. Confirm?
+                        </div>
+                        <Row id="buttons" className="no-margin">
+                            <Col>
+                                <Button color="red" onClick={() => {
+                                    this.props.actions.deleteVoter(this.props.voter);
+                                    this.closeDeleteModal();
+                                }}>Yes</Button>
+                            </Col>
+                            <Col>
+                                <Button onClick={this.closeDeleteModal}>No</Button>
+                            </Col>
+                        </Row>
+                    </div>
+                </Dialog>
             </Row>
         );
     }
