@@ -43,7 +43,6 @@ class VoterItem extends BaseComponent {
         }
     };
 
-
     render() {
         const { expanded, showEditModal, showDeleteModal } = this.state;
         let {
@@ -61,11 +60,11 @@ class VoterItem extends BaseComponent {
 
         return (
             <Row className='voter-item'>
-                <Col md={1}>
+                <Col md={1} xs={2}>
                     <div onClick={() => this.setState({ expanded: !expanded })}
                          className={classNames({'arrow-down': !expanded, 'arrow-up': expanded })} />
                 </Col>
-                <Col md={3}>
+                <Col md={3} xs={6}>
                     <div className="title-20-blue">{ firstname } { lastname }</div>
                     { expanded &&
                         <div className="more-info text-15-dark-blue-bold">
@@ -77,17 +76,17 @@ class VoterItem extends BaseComponent {
                             <div>{ zipcode }</div>
                         </div> }
                 </Col>
-                <Col md={1}>
+                <Col md={1} xs={1}>
                     { isRegistered
                         ? <Icon name='checkmark-green' width={14} height={14} />
                         : <Icon name='exclamation-mark' width={3} height={15} />
                     }
                 </Col>
-                <Col md={6}>
+                <Col md={6} xsHidden>
                     { !isRegistered
                         && <div className="not-registered-box text-15-dark-blue-bold">Not registered</div> }
                 </Col>
-                <Col md={1}>
+                <Col md={1} xs={3}>
                     <div className="edit-icon" onClick={() => this.setState({ showEditModal: true })}>
                         <Icon name='edit' width={30} height={30} />
                     </div>
