@@ -89,7 +89,7 @@ class ResourceCenter extends BaseComponent {
                           </div> }
                      <div id="email-div">
                          <span className="text-18-dark-blue-bold">
-                             Have a question? <span className="link-medium-dark-blue"> Email us</span>
+                             Have a question? <a href="mailto:hi@bethewave.vote" className="link-medium-dark-blue"> Email us</a>
                          </span>
                      </div>
                 </div>
