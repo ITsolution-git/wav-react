@@ -1,0 +1,46 @@
+.btw-resource-center {
+  .tile {
+    @extend .shadow;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 5px;
+
+    @include respond-to($desktop) {
+      margin: 25px 50px 25px 0;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      padding: 35px;
+      height: 27vh;
+    }
+
+    @include respond-to($phone) {
+      margin: 10px;
+      padding: 15px 25px;
+      #arrow-icon {
+        float: right;
+        padding: 4px;
+        border-radius: 50%;
+        background-color: $blue;
+      }
+    }
+  }
+
+  .tile-details {
+    @extend .shadow;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 30px;
+    padding: 40px;
+
+    #title {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+  }
+
+  #email-div {
+    text-align: center;
+    margin-top: 30px;
+  }
+}
