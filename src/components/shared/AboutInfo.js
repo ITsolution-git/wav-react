@@ -10,21 +10,18 @@ export default class AboutInfo extends React.Component {
                 </div>
                 <div className="text-block">
                     <div className="title-20-white">
-                        If you're here, it's because you've agreed to help us with something really important.
+                        Friends don’t let friends stay home on election day
                     </div>
                     <div className="text-content">
                         <div className="text-18-white">
-                            We need to make 2018 a wave election for progressives, and one of the most important things you can do is make sure all your progressive friends vote.
+                            The most impactful thing you can do in this election is make sure your friends vote. Most of them are interested, but they don’t. They’re busy and they forget. Or they don’t know where to go. Most often, they don’t know what’s on the ballot and why it’s important.
                         </div>
                         <div className="text-18-white">
-                            BeTheWave is an app that makes this easy, and you'are one of the first people to use it. As a captain on BeTheWave, you'll list out the names of the friends you want to help and then we'll take you step by step through the process of getting them registered and to the polls.
-                        </div>
-                        <div className="text-18-white">
-                            This is a prototype, and there might be some bugs and hiccups along the way. Your feedback is going to be crucial to making sure the final product is successful.
+                            That’s where you come in. Help your friends register and vote using the BeTheWave platform. We provide customized information and step-by-step guides for you to help your friends. Your friends are 7 times more likely to vote if they hear from you.
                         </div>
                     </div>
                     <div className="title-16-white">
-                        Thanks for being part of this!
+                        This election is too important to let your friends sit this one out!
                     </div>
                 </div>
             </div>
