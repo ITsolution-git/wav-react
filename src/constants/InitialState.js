@@ -63,6 +63,7 @@ export default {
         captainError: null
     },
     transaction: {},
+    votingInfo: {},
     error: {
         [errorTypes.emailExists]: false
     }

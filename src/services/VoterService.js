@@ -1,5 +1,5 @@
 import config from '../config/ApiConfig';
-import { patchAsync, postAsync, deleteAsync } from '../helpers/RequestHelper';
+import { patchAsync, postAsync, deleteAsync, getAsync } from '../helpers/RequestHelper';
 import authStorage from '../storage/AuthStorage';
 
 export default {
@@ -9,7 +9,10 @@ export default {
     generateTaskForUser,
     addVoter,
     retryAdd,
-    deleteVoter
+    deleteVoter,
+    getReferendumInfo,
+    getElectionInfo,
+    getPollingLocationInfo
 };
 
 
@@ -78,6 +81,26 @@ function deleteVoter(data) {
     })
 }
 
+function getReferendumInfo() {
+    return getAsync({
+        url: `${config.apiHost}/api/v1/getReferendumInfo`,
+        headers: getHeaders()
+    })
+}
+
+function getElectionInfo() {
+    return getAsync({
+        url: `${config.apiHost}/api/v1/getElectioncontestsInfo`,
+        headers: getHeaders()
+    })
+}
+
+function getPollingLocationInfo() {
+    return getAsync({
+        url: `${config.apiHost}/api/v1/getPollingLocationInfo`,
+        headers: getHeaders()
+    })
+}
 
 function getHeaders() {
     return { 'x-key': authStorage.getLoggedUser().email };

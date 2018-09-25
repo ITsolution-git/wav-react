@@ -5,6 +5,8 @@ import authStorage from '../storage/AuthStorage';
 import { setBoardingType, voterDetailsPersist } from './VoterAction';
 import routes from '../constants/Routes';
 import history from '../utility/History';
+import { initializeRequest, loadDataFailure, loadDataSuccess } from './AppAction';
+import appDataTypes from '../constants/AppDataTypes';
 
 export function loadVoterList() {
     return dispatch => {
@@ -99,4 +101,46 @@ export function deleteVoter(data) {
     function actionError(error) {
         return { type: VoterContants.VOTER_DELETE_ERROR, error };
     }
+}
+
+export function loadReferendumInfo() {
+    return dispatch => {
+        dispatch(initializeRequest(appDataTypes.referendumInfo));
+        return voterService.getReferendumInfo().then(
+            response => {
+                debugger;
+                dispatch(loadDataSuccess(appDataTypes.referendumInfo, response.data))
+            },
+            error => {
+                dispatch(loadDataFailure(appDataTypes.referendumInfo, error));
+            })
+    };
+}
+
+export function loadElectionContestInfo() {
+    return dispatch => {
+        dispatch(initializeRequest(appDataTypes.electionContestInfo));
+        return voterService.getElectionInfo().then(
+            response => {
+                debugger;
+                dispatch(loadDataSuccess(appDataTypes.electionContestInfo, response.data))
+            },
+            error => {
+                dispatch(loadDataFailure(appDataTypes.electionContestInfo, error));
+            })
+    };
+}
+
+export function loadPollingLocationInfo() {
+    return dispatch => {
+        dispatch(initializeRequest(appDataTypes.pollingLocationInfo));
+        return voterService.getPollingLocationInfo().then(
+            response => {
+                debugger;
+                dispatch(loadDataSuccess(appDataTypes.pollingLocationInfo, response.data))
+            },
+            error => {
+                dispatch(loadDataFailure(appDataTypes.pollingLocationInfo, error));
+            })
+    };
 }
