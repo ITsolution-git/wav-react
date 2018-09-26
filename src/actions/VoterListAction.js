@@ -105,7 +105,6 @@ export function deleteVoter(data) {
 
 export function loadVotingInfo(email, type) {
     return dispatch => {
-        debugger;
         dispatch({
                 type: votingInfoConstants.VOTING_INFO_REQUEST,
                 dataType: type,
