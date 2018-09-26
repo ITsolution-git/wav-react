@@ -32,9 +32,9 @@ export default {
 
     voterFilter: '/voter_filter',
     captainFilter: '/captain_filter',
-    verifyCaptain: '/change_password/verify',
-    changePassword: '/change_password/change',
-    forgotPassword: '/change_password/request',
+    verifyCaptain: '/changePassword/verify',
+    changePassword: '/changePassword/change',
+    forgotPassword: '/changePassword/request',
 
     loglist: '/transaction_logs/list',
     logdetail: '/transaction_logs/detail',
