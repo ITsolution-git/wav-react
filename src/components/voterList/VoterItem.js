@@ -12,7 +12,7 @@ import BaseComponent from '../shared/BaseComponent';
 import Icon from "../shared/Icon";
 import Dialog from '../shared/Dialog';
 import Button from "../shared/Button";
-
+import VotingInfo from './VotingInfo';
 
 class VoterItem extends BaseComponent {
     constructor(props, context) {
@@ -52,7 +52,8 @@ class VoterItem extends BaseComponent {
             address,
             city,
             state,
-            zipcode
+            zipcode,
+            email
         } = this.props.voter;
 
         const viewProps = this.getViewProps();
@@ -83,8 +84,8 @@ class VoterItem extends BaseComponent {
                     }
                 </Col>
                 <Col md={6} xsHidden>
-                    { !isRegistered
-                        && <div className="not-registered-box text-15-dark-blue-bold">Not registered</div> }
+                    { !isRegistered && <div className="not-registered-box text-15-dark-blue-bold">Not registered</div> }
+                    { expanded && <VotingInfo email={email} />}
                 </Col>
                 <Col md={1} xs={3}>
                     <div className="edit-icon" onClick={() => this.setState({ showEditModal: true })}>

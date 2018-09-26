@@ -6,7 +6,7 @@ import { setBoardingType, voterDetailsPersist } from './VoterAction';
 import routes from '../constants/Routes';
 import history from '../utility/History';
 import { initializeRequest, loadDataFailure, loadDataSuccess } from './AppAction';
-import appDataTypes from '../constants/AppDataTypes';
+import votingInfoConstants from '../constants/reducerConstants/VotingInfoConstants';
 
 export function loadVoterList() {
     return dispatch => {
@@ -103,44 +103,45 @@ export function deleteVoter(data) {
     }
 }
 
-export function loadReferendumInfo() {
+export function loadVotingInfo(email, type) {
     return dispatch => {
-        dispatch(initializeRequest(appDataTypes.referendumInfo));
-        return voterService.getReferendumInfo().then(
-            response => {
-                debugger;
-                dispatch(loadDataSuccess(appDataTypes.referendumInfo, response.data))
-            },
-            error => {
-                dispatch(loadDataFailure(appDataTypes.referendumInfo, error));
-            })
-    };
-}
+        debugger;
+        dispatch({
+                type: votingInfoConstants.VOTING_INFO_REQUEST,
+                dataType: type,
+                email
+            });
 
-export function loadElectionContestInfo() {
-    return dispatch => {
-        dispatch(initializeRequest(appDataTypes.electionContestInfo));
-        return voterService.getElectionInfo().then(
-            response => {
-                debugger;
-                dispatch(loadDataSuccess(appDataTypes.electionContestInfo, response.data))
-            },
-            error => {
-                dispatch(loadDataFailure(appDataTypes.electionContestInfo, error));
-            })
-    };
-}
+        let apiService = voterService.getReferendumInfo,
+            resultsProp = 'results';
 
-export function loadPollingLocationInfo() {
-    return dispatch => {
-        dispatch(initializeRequest(appDataTypes.pollingLocationInfo));
-        return voterService.getPollingLocationInfo().then(
+        switch (type) {
+            case 'electionContest':
+                apiService = voterService.getElectionInfo;
+                resultsProp = 'electionContestsInfo';
+                break;
+            case 'pollingLocation':
+                apiService = voterService.getPollingLocationInfo;
+                resultsProp = 'pollingLocations';
+                break;
+        }
+
+        return apiService(email).then(
             response => {
-                debugger;
-                dispatch(loadDataSuccess(appDataTypes.pollingLocationInfo, response.data))
+                dispatch({
+                        type: votingInfoConstants.VOTING_INFO_SUCCESS,
+                        data: response.data[resultsProp],
+                        dataType: type,
+                        email
+                    });
             },
             error => {
-                dispatch(loadDataFailure(appDataTypes.pollingLocationInfo, error));
+                dispatch({
+                        type: votingInfoConstants.VOTING_INFO_ERROR,
+                        dataType: type,
+                        error,
+                        email
+                    });
             })
     };
 }

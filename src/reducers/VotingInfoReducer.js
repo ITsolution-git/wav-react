@@ -2,18 +2,40 @@ import VotingInfoConstants from '../constants/reducerConstants/VotingInfoConstan
 import InitialState from '../constants/InitialState';
 
 export default function votingInfoReducer(state = InitialState.votingInfo, action) {
+
+    const updateState = (data) => {
+      const { email, dataType } = action;
+
+      return { ...state,
+                  ...{ [`${email}`]: {
+                      ...state[`${email}`],
+                          ...{ [`${dataType}`]: data
+                      }
+                  }
+            }};
+    };
+
     switch (action.type) {
         case VotingInfoConstants.VOTING_INFO_REQUEST: {
-            const { email } = action;
-            return { ...state, ... {[`${email}`]: { isFetching: true }}};
+            return updateState({
+                isFetching: true
+            });
         }
         case VotingInfoConstants.VOTING_INFO_SUCCESS: {
-            const { email, data } = action;
-            return { ...state, ... {[`${email}`]: { isFetching: false, data, isSuccess: true }}};
+            const { data } = action;
+            return updateState({
+                isSuccess: true,
+                isFetching: false,
+                data
+            });
         }
         case VotingInfoConstants.VOTING_INFO_ERROR: {
-            const { email, error } = action;
-            return { ...state, ... {[`${email}`]: { isFetching: false, error, isSuccess: false }}};
+            const { error } = action;
+            return updateState({
+                isSuccess: false,
+                isFetching: false,
+                error
+            });
         }
         default:
             return state

@@ -81,23 +81,23 @@ function deleteVoter(data) {
     })
 }
 
-function getReferendumInfo() {
+function getReferendumInfo(email) {
     return getAsync({
-        url: `${config.apiHost}/api/v1/getReferendumInfo`,
+        url: `${config.apiHost}/api/v1/civic/getReferendumInfo?email=${email}`,
         headers: getHeaders()
     })
 }
 
-function getElectionInfo() {
+function getElectionInfo(email) {
     return getAsync({
-        url: `${config.apiHost}/api/v1/getElectioncontestsInfo`,
+        url: `${config.apiHost}/api/v1/civic/getElectioncontestsInfo?email=${email}`,
         headers: getHeaders()
     })
 }
 
-function getPollingLocationInfo() {
+function getPollingLocationInfo(email) {
     return getAsync({
-        url: `${config.apiHost}/api/v1/getPollingLocationInfo`,
+        url: `${config.apiHost}/api/v1/civic/getPollingLocationInfo?email=${email}`,
         headers: getHeaders()
     })
 }
