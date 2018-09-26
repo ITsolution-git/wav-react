@@ -29,21 +29,21 @@ export default class MatchItem extends BaseComponent {
     resolveAddress = () => {
         let {
             mailaddrline1, mailaddrline2,
-            regaddrline1 = mailaddrline1,
-            regaddrline2 = mailaddrline2
+            regaddrline1,
+            regaddrline2
         } = this.props.person;
 
-        return this.formatAddress(regaddrline1, regaddrline2);
+        return this.formatAddress(regaddrline1 || mailaddrline1, regaddrline2 || mailaddrline2);
     };
 
     resolveCityState = () => {
         let {
             mailaddrcity, mailaddrstate,
-            regaddrcity = mailaddrcity,
-            regaddrstate = mailaddrstate
+            regaddrcity,
+            regaddrstate
         } = this.props.person;
 
-        return this.formatAddress(regaddrcity, regaddrstate);
+        return this.formatAddress(regaddrcity || mailaddrcity, regaddrstate || mailaddrstate);
     };
 
     getFullInfo = () => {

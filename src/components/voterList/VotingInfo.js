@@ -2,13 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { Table, Row, Col } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import {
     loadVotingInfo
 } from '../../actions/VoterListAction';
-import { replaceNumbersWithX } from '../../helpers/InputHelper';
 
 const dataTypes = {
     referendum: 'referendum',
@@ -54,7 +53,7 @@ class VotingInfo extends BaseComponent {
                                     <div className='section'>
                                         <div className='title-16-blue'>Address:</div>
                                         <div className='text-15-dark-blue-bold'>{ locationName }</div>
-                                        <div className='text-15-dark-blue-bold'>{ replaceNumbersWithX(line1) }, { city }, { state }, { zip } </div>
+                                        <div className='text-15-dark-blue-bold'>{ line1 }, { city }, { state }, { zip } </div>
                                     </div>
                                     <div className='section'>
                                         <div className='title-16-blue'>Notes:</div>
