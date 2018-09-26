@@ -12,7 +12,7 @@ import BaseComponent from '../shared/BaseComponent';
 import Icon from "../shared/Icon";
 import Dialog from '../shared/Dialog';
 import Button from "../shared/Button";
-
+import VotingInfo from './VotingInfo';
 
 class VoterItem extends BaseComponent {
     constructor(props, context) {
@@ -52,7 +52,8 @@ class VoterItem extends BaseComponent {
             address,
             city,
             state,
-            zipcode
+            zipcode,
+            email
         } = this.props.voter;
 
         const viewProps = this.getViewProps();
@@ -67,26 +68,29 @@ class VoterItem extends BaseComponent {
                 <Col md={3} xs={6}>
                     <div className="title-20-blue">{ firstname } { lastname }</div>
                     { expanded &&
-                        <div className="more-info text-15-dark-blue-bold">
-                            <div>{ replaceNumbersWithX(address) }</div>
-                            <div>
-                                { replaceNumbersWithX(city) }{ city ? ', ' : '' }
-                                { replaceNumbersWithX(state) }
+                        <div>
+                            <div className="more-info text-15-dark-blue-bold">
+                                <div>{ replaceNumbersWithX(address) }</div>
+                                <div>
+                                    { replaceNumbersWithX(city) }{ city ? ', ' : '' }
+                                    { replaceNumbersWithX(state) }
+                                </div>
+                                <div>{ zipcode }</div>
                             </div>
-                            <div>{ zipcode }</div>
+                            { this.isMobile() && <VotingInfo email={email} /> }
                         </div> }
                 </Col>
-                <Col md={1} xs={1}>
+                <Col md={1} xs={2}>
                     { isRegistered
                         ? <Icon name='checkmark-green' width={14} height={14} />
                         : <Icon name='exclamation-mark' width={3} height={15} />
                     }
                 </Col>
                 <Col md={6} xsHidden>
-                    { !isRegistered
-                        && <div className="not-registered-box text-15-dark-blue-bold">Not registered</div> }
+                    { !isRegistered && <div className="not-registered-box text-15-dark-blue-bold">Not registered</div> }
+                    { expanded && <VotingInfo email={email} />}
                 </Col>
-                <Col md={1} xs={3}>
+                <Col md={1} xs={2}>
                     <div className="edit-icon" onClick={() => this.setState({ showEditModal: true })}>
                         <Icon name='edit' width={30} height={30} />
                     </div>

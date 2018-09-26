@@ -9,6 +9,7 @@ import passwordRequestReducer from './PasswordRequestReducer';
 import userSearchReducer from './UserSearchReducer';
 import transactionReducer from './TransactionReducer';
 import errorReducer from './ErrorReducer';
+import votingInfoReducer from './VotingInfoReducer';
 
 //this is where you insert your reducers into the store
 export default  {
@@ -23,4 +24,5 @@ export default  {
     userSearch: userSearchReducer,
     transaction: transactionReducer,
     error: errorReducer,
+    votingInfo: votingInfoReducer
 }

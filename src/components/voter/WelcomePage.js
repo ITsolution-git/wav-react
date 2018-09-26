@@ -33,8 +33,17 @@ class WelcomePage extends BaseComponent {
     render() {
         const { nextEnabled } = this.state;
         const contentMsg = nextEnabled
-            ? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
-            : 'We think this is the start of a beautiful friendship. Speaking of friends...';
+            ? <div style={{textAlign: 'left'}}>
+                <ol>
+                    <li>Check to see if your friends are registered.</li>
+                    <li>Receive a customized set of steps for you to help your friends register and vote. Don’t worry we’ll provide you all the info and guidance you need!</li>
+                    <li>Track your impact as you help your friends vote</li>
+                </ol>
+              </div>
+            : <div>
+                Welcome to the team! <br />
+                You’re a part of a national movement to make sure no one sits this election out
+            </div>;
         return (
             <OnBoardingLayout color={colors.blue}>
                 <div className="layout-center">

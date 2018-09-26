@@ -5,6 +5,8 @@ import authStorage from '../storage/AuthStorage';
 import { setBoardingType, voterDetailsPersist } from './VoterAction';
 import routes from '../constants/Routes';
 import history from '../utility/History';
+import { initializeRequest, loadDataFailure, loadDataSuccess } from './AppAction';
+import votingInfoConstants from '../constants/reducerConstants/VotingInfoConstants';
 
 export function loadVoterList() {
     return dispatch => {
@@ -99,4 +101,46 @@ export function deleteVoter(data) {
     function actionError(error) {
         return { type: VoterContants.VOTER_DELETE_ERROR, error };
     }
+}
+
+export function loadVotingInfo(email, type) {
+    return dispatch => {
+        dispatch({
+                type: votingInfoConstants.VOTING_INFO_REQUEST,
+                dataType: type,
+                email
+            });
+
+        let apiService = voterService.getReferendumInfo,
+            resultsProp = 'results';
+
+        switch (type) {
+            case 'electionContest':
+                apiService = voterService.getElectionInfo;
+                resultsProp = 'electionContestsInfo';
+                break;
+            case 'pollingLocation':
+                apiService = voterService.getPollingLocationInfo;
+                resultsProp = 'pollingLocations';
+                break;
+        }
+
+        return apiService(email).then(
+            response => {
+                dispatch({
+                        type: votingInfoConstants.VOTING_INFO_SUCCESS,
+                        data: response.data[resultsProp],
+                        dataType: type,
+                        email
+                    });
+            },
+            error => {
+                dispatch({
+                        type: votingInfoConstants.VOTING_INFO_ERROR,
+                        dataType: type,
+                        error,
+                        email
+                    });
+            })
+    };
 }
