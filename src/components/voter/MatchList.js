@@ -21,7 +21,8 @@ class MatchList extends BaseComponent {
         this.state = {
             showSuccess: false,
             showFail: false,
-            showNotRegistered: false
+            showNotRegistered: false,
+            notActiveStatus: false
         };
     }
 
@@ -75,7 +76,8 @@ class MatchList extends BaseComponent {
         const {
             showSuccess,
             showFail,
-            showNotRegistered
+            showNotRegistered,
+            notActiveStatus
         } = this.state;
 
         return (
@@ -92,10 +94,10 @@ class MatchList extends BaseComponent {
                                 }}
                                  onSubmitError={(voter) => {
                                      if (this.isDesktop()) {
-                                         this.redirectToPage(voter, routes.voterNotFoundError);
+                                         this.onLink(`${routes.voterNotFoundError}?notActiveStatus=true`);
                                          return;
                                      }
-                                     this.setState({ showFail: true });
+                                     this.setState({ showFail: true, notActiveStatus: true });
                                  }} />
                         <Row id="button-row">
                             <Col id="button" md={10} xs={10} className="no-padding">
@@ -125,9 +127,16 @@ class MatchList extends BaseComponent {
                             <Icon name='face-light' width={70} height={70} />
                         </div>
                         <div id="text" className="text-15-dark-blue-bold">
-                            It appears that your friend { firstname } <br />
-                            { lastname } is not registered. Don't <br />
-                            worry, we can fix that!
+                            { notActiveStatus
+                                ? <div>
+                                    While we found { firstname } { lastname } on the voter registry, we noticed that they were not registered <br />
+                                    Don't worry, you can help { firstname } { lastname } register in no time
+                                 </div>
+                                : <div>
+                                    It appears that your friend { firstname } <br />
+                                    { lastname } is not registered. Don't <br />
+                                    worry, we can fix that!
+                                 </div> }
                         </div>
                         <NextButton onClick={this.onCloseFail} />
                     </div>
