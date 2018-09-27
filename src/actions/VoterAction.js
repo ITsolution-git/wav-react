@@ -47,8 +47,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
     return (dispatch, getState) => {
     	const {
     	    currentNumber,
-            makeList,
-            boardingType
+            makeList
     	} = getState().voter,
     		firstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${VoterContants.LAST_NAME_PREFIX}${currentNumber}`];
@@ -61,8 +60,6 @@ export function matchListPersist(voterDetails, resubmit = false) {
         const addVoterService = resubmit
             ? voterService.retryAdd
             : voterService.addVoter;
-
-        generateTaskForUser(boardingType, resubmit);
 
         return addVoterService(voterDetails).then(
            result => {
@@ -139,6 +136,9 @@ function generateTaskForUser(boardingType, resubmit) {
 }
 
 export function nextNumberPersist() {
+    if (boardingInfo.noResultsCount > 0) {
+        generateTaskForUser(boardingTypes.register);
+    }
     boardingInfo.noResultsCount = 0;
     return dispatch => {
         dispatch(persist());
