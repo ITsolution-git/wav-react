@@ -21,6 +21,19 @@ class VoterError extends ResultBase {
         this.onLink(`${routes.voterDetail}?loadPrevious=true`);
     };
 
+    resolveDescription = (firstname, lastname) => {
+        const { notActiveStatus } = getUrlParams(this.props);
+        return notActiveStatus === 'true'
+            ? <div>
+                While we found { firstname } { lastname } on the voter registry, we noticed that they were not registered <br />
+                Don't worry, you can help { firstname } { lastname } register in no time
+              </div>
+            : <div>
+                We couldn't find { firstname } { lastname } in the voter file. Don't worry - <br />
+                you can help { firstname } { lastname } register in just a sec.
+              </div>
+    };
+
     render() {
         const { makeList, currentNumber, boardingType } = this.props.voter,
             firstName = makeList[`${voterConstants.FIRST_NAME_PREIX}${currentNumber}`],
@@ -41,12 +54,9 @@ class VoterError extends ResultBase {
                     <div id="text">
                         <div className='cant-find title-32-light-blue'>
                             { firstname } { lastname } may not be <br />
-                            registered.
+                            registered.btw-voter-error
                         </div>
-                        <div className='ok-text text-18-dark-blue-bold'>
-                            We couldn't find { firstname } { lastname } in the voter file. Don't worry - <br />
-                            you can help { firstname } { lastname } register in just a sec.
-                        </div>
+                        <div className='ok-text text-18-dark-blue-bold'>{ this.resolveDescription(firstname, lastname) }</div>
                     </div>
                     { boardingType === boardingTypes.register &&
                         <div id="buttons">
