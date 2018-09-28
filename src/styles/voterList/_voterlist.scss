@@ -39,10 +39,10 @@
         margin-top: 20px;
       }
 
-      .not-registered-box {
-        @extend .shadow;
-        width: fit-content;
-        padding: 10px 15px;
+      .icons{
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
       }
 
       .edit-icon {
