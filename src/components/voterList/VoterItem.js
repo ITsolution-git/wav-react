@@ -1,5 +1,6 @@
 import React  from 'react';
 import { Row, Col } from 'react-bootstrap';
+import Tooltip from '@material-ui/core/Tooltip';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -81,13 +82,17 @@ class VoterItem extends BaseComponent {
                         </div> }
                 </Col>
                 <Col md={1} xs={2}>
-                    { isRegistered
-                        ? <Icon name='checkmark-green' width={14} height={14} />
-                        : <Icon name='exclamation-mark' width={3} height={15} />
-                    }
+                    <div className="icons">
+                        { isRegistered
+                            ? <Tooltip title="Registered">
+                                <Icon name='checkmark-green' width={14} height={14} />
+                            </Tooltip>
+                            : <Tooltip title="Not Registered">
+                                <Icon name='exclamation-mark' width={3} height={15} />
+                            </Tooltip> }
+                    </div>
                 </Col>
                 <Col md={6} xsHidden>
-                    { !isRegistered && <div className="not-registered-box text-15-dark-blue-bold">Not registered</div> }
                     { expanded && <VotingInfo email={email} />}
                 </Col>
                 <Col md={1} xs={2}>
