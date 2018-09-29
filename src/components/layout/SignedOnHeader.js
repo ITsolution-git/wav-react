@@ -65,8 +65,7 @@ class SignedOnHeader extends BaseComponent {
             { route: routes.captainsDashboard, title: 'Home' },
             { route: routes.tasksList, title: 'My Actions' },
             { route: routes.voterList, title: 'My Voters' },
-            { route: routes.resourceCenter, title: 'Resource Center' },
-            { route: routes.faq, title: 'FAQ' }
+            { route: routes.resourceCenter, title: 'Resource Center' }
         ]
     };
 
@@ -98,7 +97,7 @@ class SignedOnHeader extends BaseComponent {
                              title={<Icon name="profile" width={size} height={size} />}
                              className='btw-nav-dropdown'
                              id="nav-dropdown">
-                    <MenuItem eventKey={1.1} onClick={this.onProfile}>Manage account</MenuItem>
+                {/*    <MenuItem eventKey={1.1} onClick={this.onProfile}>Manage account</MenuItem>*/}
                     <MenuItem eventKey={1.3} onClick={() => actions.btwLogout()}>Sign out</MenuItem>
                 </NavDropdown>
             </Nav>
