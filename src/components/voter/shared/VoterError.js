@@ -54,7 +54,7 @@ class VoterError extends ResultBase {
                     <div id="text">
                         <div className='cant-find title-32-light-blue'>
                             { firstname } { lastname } may not be <br />
-                            registered.btw-voter-error
+                            registered
                         </div>
                         <div className='ok-text text-18-dark-blue-bold'>{ this.resolveDescription(firstname, lastname) }</div>
                     </div>
