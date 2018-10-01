@@ -81,6 +81,72 @@ const VotingFaqs = () => {
             <p>
                 Rules around residency vary by state.  In some, you are eligible immediately, others you need to wait a certain number of days.  No state can require you to live there for more than 30 days to be eligible to vote.
             </p><br/>
+
+	        <b>How do I know who will be on my ballot?</b>
+
+            <p>Check Rock the Vote: <a href="https://www.rockthevote.org/voting-information/" target="_blank">https://www.rockthevote.org/voting-information. </a>
+		        For the congressional races, the site provides short bios of the candidates and gives you links to their campaign pages and social media accounts. If you create a profile, you can even save which candidates you want to vote for and send them to yourself so you have a reference for Election Day.
+	        </p><br/>
+
+	        <b>Does my friend need ID to vote?</b>
+
+	        <p>It depends on the state.  <a target="_blank" href="https://www.vote.org/voter-id-laws/">Find out your state’s rules here. </a></p><br/>
+
+	        <b>What if my friend doesn’t have ID?</b>
+
+	        <p>First, check if your friend needs a valid ID to vote in their state. Most states don’t require ID.</p><br/>
+            <p>But if they do, don’t worry! Spread the Vote is an organization set up to make sure everyone who wants to vote
+                has proper ID.  <a target="_blank" href="https://www.spreadthevote.org/vote/">Fill out this short online form to request an ID.</a></p><br/>
+
+	        <b>What counts as valid ID?</b>
+
+	        <p>It depends on the state. It some states you can vote with your student ID card, whereas in other states you can’t.  <a target="_blank" href="https://www.vote.org/voter-id-laws/"> Learn more about specific state requirements. </a></p><br/>
+
+	        <b>Can I use my phone at the polling place?</b>
+
+	        <p>Depends on your polling place! If you want to use it to remember your voting choices,
+                double check with whoever is working the polling station before you take it out (or else you could get in trouble).
+                This is because it can be illegal to take photos in polling places!</p><br/>
+
+	        <b>What happens if I'm in line when the polls close?</b>
+
+	        <p> <a target="_blank" href="http://www.sos.ca.gov/elections/voter-bill-rights/">Most states have laws on the books </a>requiring that every person in line when the polls close must be able to vote.
+                If they tell you to leave, stay in line and call the nonpartisan voter-protection hotline at  <a href="tel:1-866-687-8683"> 1-866-OUR-VOTE (1-866-687-8683) </a> for more information.</p><br/>
+
+	        <b>What do I do if I have any problems trying to vote?</b>
+
+	        <p>If you encounter any problems trying to vote, contact the Justice Department's civil rights division by phone  <a href="tel:1-800-253-3931">(1-800-253-3931) </a>
+                or email  <a href="mailto:voting.section@usdoj.gov">(voting.section@usdoj.gov)</a>, or submit a complaint on its website.
+                You can also call the nonpartisan voter-protection hotline— from groups including the  <a target="_blank" href="https://www.aclu.org/know-your-rights/what-do-when-faced-voter-intimidation">ACLU </a> and  <a target="_blank" href="https://www.rockthevote.com/?referrer=http://rockthevote.com/">ROCK THE VOTE </a> — at  <a href="tel:1-866-687-8683">1-866-OUR-VOTE (1-866-687-8683) </a>
+                if you believe your rights were violated or you saw someone else's were.</p><br/>
+
+	        <b>Is Election Day a national holiday?</b>
+
+	        <p>No, but it should be! That way people could take time out of their day to vote without being penalized for missing work!</p><br/>
+
+	        <b>Can I get time off work to vote?</b>
+
+	        <p>Depends on your employer!</p><br/>
+
+	        <b>Can I get in trouble for sharing who I voted for at work?</b>
+
+	        <p>Your company may have rules prohibiting political paraphernalia or using social media to express your political affiliations,
+                so it's always a good idea to get acquainted with your employee handbook.
+                And unless you signed some sort of contract that says otherwise,
+                it's likely you're an at-will employee.
+                This means that your boss can fire you whenever they want without having to establish just cause.
+                Of course, labor laws exist in this country to protect people against adverse employment actions due to discrimination.
+                So if your boss fires you, for example, simply because you're a woman, that's wrongful termination,
+                and you could sue them for that. But very few laws exist that truly protect private-sector employees against getting fired for expressing their political affiliation.
+		        <a target="_blank" href="http://www.workplacefairness.org/retaliation-political-activity"> A handful of states</a>, such as  <a target="_blank" href="http://law.onecle.com/new-york/labor/LAB0201-D_201-D.html"> New York</a> and  <a target="_blank" href="http://www.dfeh.ca.gov/Publications_FEHADescr.htm">California</a>,
+                have laws that offer protections for political affiliation, but even some of those are fairly limited.
+                What's more, talking heatedly about politics at work could be construed as creating a hostile work environment, and people could file a harassment complaint against you for that.</p><br/>
+
+	        <b>If I’m turned away from the polls. What are my rights?</b>
+
+	        <p><a target="_blank" href="https://www.aclu.org/issues/voting-rights">Check your rights here. </a>
+                If you believe you were wrongfully turned away,
+                contact the Justice Department's civil rights division by phone <a href="tel:1-800-253-3931">(1-800-253-3931) </a> or email <a href="mailto:voting.section@usdoj.gov">(voting.section@usdoj.gov)</a>, or  <a target="_blank" href="https://www.justice.gov/crt/votercomplaint">submit a complaint on its website.</a></p><br/>
         </div>
     )
 };
