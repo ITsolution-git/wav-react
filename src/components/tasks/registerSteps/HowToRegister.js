@@ -5,16 +5,22 @@ import BaseComponent from '../../shared/BaseComponent';
 
 export default class HowToRegister extends BaseComponent {
     render() {
+        const {
+            voterData: {
+                firstname = '',
+                lastname = '',
+                state
+            },
+            stateInfo = {}
+        } = this.props;
+
         return (
             <div>
                 <Typography gutterBottom>
-                    First, a little bit of background about voter registration.
+                    It looks like { firstname } { lastname }  isn’t registered to vote in { stateInfo['state'] }. The upcoming voter registration deadline is { stateInfo["registrationDeadlineByMail"]}.
                     <br /><br />
-                    Each state sets its own rules and deadlines for voter registration. Most states allow online registration - some require that you mail in the form.
-                    <br /><br />
-                    California, for example, allows online registration. The deadline to register to vote in the upcoming primary is May 21.
-                    <br /><br />
-                    Here’s a complete list of <a target='_blank' onClick={this.props.onLinkClicked} href='https://www.vote.org/voter-registration-deadlines/'>state voter registration deadlines.</a>
+                    Sometimes this is inaccurate because your friend just registered and the database hasn’t updated yet, or they’re registered under a different name.<br />
+                    Occasionally states purge the voter registration list if someone hasn't voted in a while.
                 </Typography>
             </div>
         );
