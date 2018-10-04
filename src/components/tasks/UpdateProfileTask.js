@@ -175,7 +175,7 @@ class UpdateProfileTask extends TaskBase {
                             <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                         </Col>
                         <InformationSection taskData={this.props.taskData} />
-                        <BottomButtons />
+                        <BottomButtons taskData={this.props.taskData} />
                     </Row>
                 </div>
             </ContentLayout>

@@ -156,7 +156,7 @@ class RegisterVoterTask extends TaskBase {
                                      taskData={this.props.taskData} />
                         </Col>
                         <InformationSection taskData={this.props.taskData} />
-                        <BottomButtons />
+                        <BottomButtons taskData={this.props.taskData} />
                     </Row>
                 </div>
             </ContentLayout>
