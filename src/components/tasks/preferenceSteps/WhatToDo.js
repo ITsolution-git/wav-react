@@ -26,7 +26,7 @@ export default class WhatToDo extends BaseComponent {
         return (
             <div>
                 <Typography gutterBottom>
-                    <b>Help { firstname } { lastname } vote in the { stateInfo['2018PrimaryElectionVotingDate'] } election.</b>
+                    <b>Help { firstname } { lastname } vote in the { stateInfo['nextElection'] } election.</b>
                     <br /><br />
                     Voting options vary by state. In { stateInfo['state'] }, { firstname } { lastname } has the following options:
                     <br /><br />
