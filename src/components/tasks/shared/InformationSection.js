@@ -1,16 +1,23 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 import BaseComponent from '../../shared/BaseComponent';
-import imgPhone from '../../../resources/images/phone.png';
-import imgReward from '../../../resources/images/reward.png';
-import imgCheck from '../../../resources/images/checkmark.png'
-import imgLightBulb from '../../../resources/images/lightbulb.png'
-import States_Special from "../../../constants/States_Special";
-
+import States_Special from '../../../constants/States_Special';
+import Icon from '../../shared/Icon';
 
 class InformationSection extends BaseComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            expanded: false
+        }
+    }
+
+    onArrowClick = () => {
+        this.setState({ expanded: !this.state.expanded });
+    };
+
     getStateInfo = () => {
         const { taskData, stateInfo } = this.props;
 
@@ -51,66 +58,44 @@ class InformationSection extends BaseComponent {
 
     render () {
         const { taskData: {
-            group_info = {},
-            voter_metaData = {}
+            group_info = {}
         } = {} } = this.props;
+
+        const { expanded } = this.state;
 
         return (
             <Col
-                md={3}
-                xs={ this.isMobile() ? 12 : 8 }
-                xsOffset={ this.isMobile() ? 1 : 0 }
-                className="btw-task-info"
-                style={{marginLeft: (this.isMobile() ? "0" : "80px")}}>
-                <Row className="section">
-                    <Col xs={2} md={3}>
-                        <img src={imgReward} alt="" width={50} height={50} />
-                    </Col>
-                    <Col xs={10} md={9}>
-                        <span className="title"><b>Rewards Points</b></span><br />
-                        <span className="description">This task is worth {group_info.value} points</span>
-                    </Col>
-                </Row>
-
-                <hr />
-
-                <Row className="section">
-                    <Col xs={2} md={3}>
-                        <img src={imgPhone} alt="" width={50} height={50} />
-                    </Col>
-                    <Col xs={10} md={9}>
-                        <span className="title"><b>Need help?</b></span><br />
-                        <span className="description">hi@bethewave.vote</span><br/>
-                        <span className="description">(707) 408-8437</span>
-                    </Col>
-                </Row>
-
-                <hr />
-
-                <Row className="section">
-                    <Col xs={2} md={3}>
-                        <img src={imgLightBulb} alt="" width={50} height={50} />
-                    </Col>
-                    <Col xs={10} md={9}>
-                        <span className="title"><b>Relevant voting information that may apply to {voter_metaData.firstname + ' ' + voter_metaData.lastname}</b></span>
-                    </Col>
-                </Row>
-
-                <br/>
-                {
-                    Object.keys(this.getStateInfo()).map((e, index) => {
-                        return <Row key={index} className="section">
-                            <Col xs={2} md={3} style={{padding:"0"}}>
-                                <img src={imgCheck} className="pull-right" alt="" width={20} height={20} />
-                            </Col>
-                            <Col xs={10} md={9}>
-                                <span><b>{e}</b></span><br />
-                                <span>{ this.getStateInfo()[e] }</span>
-                            </Col>
-                        </Row>
-                    })
-                }
-                <br/>
+                md={4}
+                xsHidden
+                className="btw-task-info">
+                <div className="title-20-blue">
+                    Pssst. Need a cheat sheet on voting info? We got you covered
+                </div>
+                { expanded &&
+                 <div className="info">
+                    <Row className="section">
+                        <Col xs={12} md={12}>
+                            <span className="title-16-dark-blue">Rewards Points: </span>
+                            <span className="text-15-dark-blue-bold">This task is worth {group_info.value} points</span>
+                        </Col>
+                    </Row>
+                    {
+                        Object.keys(this.getStateInfo()).map((e, index) => {
+                            return <Row key={index} className="section">
+                                <Col xs={12} md={12}>
+                                    <span className="title-16-dark-blue">{ e }: </span>
+                                    <span className="text-15-dark-blue-bold">{ this.getStateInfo()[e] }</span>
+                                </Col>
+                            </Row>
+                        })
+                    }
+                </div> }
+                <div id="arrow-icon" onClick={this.onArrowClick}>
+                    { expanded
+                        ? <Icon name="arrow-up-dark" width="20px" height="12px" />
+                        : <Icon name="arrow-down-dark" width="20px" height="12px" />
+                    }
+                </div>
             </Col>
         );
     }

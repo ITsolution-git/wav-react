@@ -22,6 +22,7 @@ import {
 } from '../../constants/reducerConstants/TaskConstants';
 import { getTaskData } from "../../helpers/TaskHelper";
 import InformationSection from './shared/InformationSection';
+import ContentLayout from '../layout/ContentLayout';
 
 class RegisterVoterTask extends TaskBase {
     constructor(props, context) {
@@ -146,16 +147,17 @@ class RegisterVoterTask extends TaskBase {
         }
 
         return (
-            <div className='btw-task container'>
-                <Row>
-                    { this.renderBackToHome() }
-                    <Col md={8}>
-                        <Stepper steps={this.getSteps()}
-                                taskData={this.props.taskData} />
-                    </Col>
-                    <InformationSection taskData={this.props.taskData} />
-                </Row>
-            </div>
+            <ContentLayout>
+                <div className='btw-task container'>
+                    <Row>
+                        <Col md={8}>
+                            <Stepper steps={this.getSteps()}
+                                     taskData={this.props.taskData} />
+                        </Col>
+                        <InformationSection taskData={this.props.taskData} />
+                    </Row>
+                </div>
+            </ContentLayout>
         );
     }
 }

@@ -13,6 +13,7 @@ import PhotoUpload from './shared/PhotoUpload';
 import routes from '../../constants/Routes';
 import authStorage from '../../storage/AuthStorage';
 import InformationSection from './shared/InformationSection';
+import ContentLayout from '../layout/ContentLayout';
 
 const subSteps = {
     haveAsked: 'haveAsked',
@@ -145,13 +146,14 @@ class MailRegistrationTask extends TaskBase {
         }
 
         return (
-            <div className='btw-task container'>
-                { this.renderBackToHome() }
-                <Col md={8}>
-                    <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
-                </Col>
-                <InformationSection taskData={this.props.taskData} />
-            </div>
+            <ContentLayout>
+                <div className='btw-task container'>
+                    <Col md={8}>
+                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                    </Col>
+                    <InformationSection taskData={this.props.taskData} />
+                </div>
+            </ContentLayout>
         );
     }
 }

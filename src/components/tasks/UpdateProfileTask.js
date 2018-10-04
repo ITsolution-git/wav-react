@@ -9,6 +9,7 @@ import WithTask from '../hocs/Task';
 import Stepper from './shared/LetfStepper';
 import { getTaskData } from '../../helpers/TaskHelper';
 import TaskSuccess from './shared/TaskSuccess';
+import ContentLayout from '../layout/ContentLayout';
 
 import {
     FirstNameInput,
@@ -166,15 +167,16 @@ class UpdateProfileTask extends TaskBase {
         }
 
         return (
-            <div className='btw-task container'>
-                { this.renderBackToHome() }
-                <Row>
-                    <Col md={8}>
-                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
-                    </Col>
-                    <InformationSection taskData={this.props.taskData} />
-                </Row>
-            </div>
+            <ContentLayout>
+                <div className='btw-task container'>
+                    <Row>
+                        <Col md={8}>
+                            <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                        </Col>
+                        <InformationSection taskData={this.props.taskData} />
+                    </Row>
+                </div>
+            </ContentLayout>
         );
     }
 }

@@ -10,6 +10,7 @@ import { getTaskData } from "../../helpers/TaskHelper";
 import YesNoButtons from './shared/YesNoButtons';
 import InformationSection from './shared/InformationSection';
 import TaskSuccess from './shared/TaskSuccess';
+import ContentLayout from '../layout/ContentLayout';
 
 class RegularVoteTask extends TaskBase {
     state = {
@@ -102,13 +103,14 @@ class RegularVoteTask extends TaskBase {
         }
 
         return (
-            <div className='btw-task container'>
-                { this.renderBackToHome() }
-                <Col md={8}>
-                    <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
-                </Col>
-                <InformationSection taskData={this.props.taskData} />
-            </div>
+            <ContentLayout>
+                <div className='btw-task container'>
+                    <Col md={8}>
+                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                    </Col>
+                    <InformationSection taskData={this.props.taskData} />
+                </div>
+            </ContentLayout>
         );
     }
 }

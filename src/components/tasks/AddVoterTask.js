@@ -13,6 +13,7 @@ import Stepper from './shared/LetfStepper';
 import boardingTypes from '../../constants/VoterBoardingType';
 import { matchListPersist, voterDetailsPersist, setBoardingType } from "../../actions/VoterAction";
 import InformationSection from './shared/InformationSection';
+import ContentLayout from '../layout/ContentLayout';
 
 class AddVoterTask extends TaskBase {
     state = {
@@ -80,13 +81,14 @@ class AddVoterTask extends TaskBase {
         }
 
         return (
-            <div className='btw-task container'>
-                { this.renderBackToHome() }
-                <Col md={8}>
-                    <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
-                </Col>
-                <InformationSection taskData={this.props.taskData} />
-            </div>
+            <ContentLayout>
+                <div className='btw-task container'>
+                    <Col md={8}>
+                        <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
+                    </Col>
+                    <InformationSection taskData={this.props.taskData} />
+                </div>
+            </ContentLayout>
         );
     }
 }

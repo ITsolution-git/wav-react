@@ -14,19 +14,24 @@
     font-size: 150px;
   }
   .btw-task-info {
-    border: 1px solid lightgray;
+    padding: 15px 20px;
+    @extend .shadow;
+    background-color: $white;
+    border-radius: 5px;
 
-    .title {
-      font-size: 20px;
-    }
-
-    .description {
-      font-size: 16px;
+    .info {
+      margin: 15px 0;
     }
 
     .section {
       margin-left: 10px;
       margin-top: 10px;
+    }
+
+    #arrow-icon {
+      margin: 10px 0;
+      cursor: pointer;
+      text-align: center;
     }
   }
 }
