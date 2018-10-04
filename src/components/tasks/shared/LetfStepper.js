@@ -53,7 +53,7 @@ class LeftStepper extends BaseComponent {
         return steps.length > 0 ? (
             <div className='btw-stepper'>
                 <Row>
-                    <Col md={3}>
+                    <Col md={3} xsHidden>
                         <Stepper activeStep={activeStep} orientation="vertical">
                             { steps.map((step, index) => {
                                 return (
@@ -70,7 +70,7 @@ class LeftStepper extends BaseComponent {
                                 { currentCheckpoint.component }
                             </div>
                         </div>
-                        <Row>
+                        <Row className="no-margin">
                             <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
                                 { activeStep !== 0 && <Button> Back </Button> }
                             </Col>
