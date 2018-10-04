@@ -33,12 +33,14 @@ class ResourceCenter extends BaseComponent {
         if (this.isDesktop()) {
             return {
                 titleClass: 'title-24-blue',
-                tileClass: 'title-20-light-blue'
+                tileClass: 'title-20-light-blue',
+                linkClass: 'link-medium-blue'
             }
         }
         return {
             titleClass: 'title-24-light-blue',
-            tileClass: 'title-20-blue'
+            tileClass: 'title-20-blue',
+            linkClass: 'link-medium-light-blue'
         }
     };
 
@@ -62,6 +64,9 @@ class ResourceCenter extends BaseComponent {
         return <Tile type={type} title={titles[type]} />
     };
 
+    onBackClick = () => {
+      this.setState({ activeTile: null });
+    };
 
     render() {
         const viewProps = this.getViewProps();
@@ -71,7 +76,9 @@ class ResourceCenter extends BaseComponent {
             <ContentLayout>
                 <div className='btw-resource-center container'>
                     <div className={viewProps.titleClass}>
-                        Resource Center
+                        { activeTile
+                            ? <span onClick={this.onBackClick} className={viewProps.linkClass}>Back to Resource Center</span>
+                            : <span>Resource Center</span> }
                     </div>
                     { activeTile ?
                         <div>

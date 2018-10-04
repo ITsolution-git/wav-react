@@ -231,6 +231,16 @@
   text-decoration: underline;
   cursor: pointer;
 }
+.link-medium-blue {
+  @extend .title-20-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-medium-light-blue {
+  @extend .title-20-light-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 #link-small {
   font-family: Avenir-Light;
