@@ -13,6 +13,7 @@ import YesNoButtons from './shared/YesNoButtons';
 import RadioButtons from '../shared/inputs/RadioButtons';
 import InformationSection from './shared/InformationSection';
 import ContentLayout from '../layout/ContentLayout';
+import BottomButtons from './shared/BottomButtons';
 
 const votingTypes = {
     byMail: 'byMail',
@@ -132,6 +133,7 @@ class PreferenceTask extends TaskBase {
                         <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                     </Col>
                     <InformationSection taskData={this.props.taskData} />
+                    <BottomButtons />
                 </div>
             </ContentLayout>
         );

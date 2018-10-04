@@ -24,6 +24,7 @@ import {
 } from '../shared/validatedInputs';
 import fieldConstants from '../../constants/FieldConstants';
 import InformationSection from './shared/InformationSection';
+import BottomButtons from './shared/BottomButtons';
 
 const fieldTypes = {
     firstName: 'firstname',
@@ -174,6 +175,7 @@ class UpdateProfileTask extends TaskBase {
                             <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                         </Col>
                         <InformationSection taskData={this.props.taskData} />
+                        <BottomButtons />
                     </Row>
                 </div>
             </ContentLayout>

@@ -14,6 +14,7 @@ import boardingTypes from '../../constants/VoterBoardingType';
 import { matchListPersist, voterDetailsPersist, setBoardingType } from "../../actions/VoterAction";
 import InformationSection from './shared/InformationSection';
 import ContentLayout from '../layout/ContentLayout';
+import BottomButtons from './shared/BottomButtons';
 
 class AddVoterTask extends TaskBase {
     state = {
@@ -87,6 +88,7 @@ class AddVoterTask extends TaskBase {
                         <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                     </Col>
                     <InformationSection taskData={this.props.taskData} />
+                    <BottomButtons />
                 </div>
             </ContentLayout>
         );

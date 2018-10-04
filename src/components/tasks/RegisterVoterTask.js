@@ -23,6 +23,7 @@ import {
 import { getTaskData } from "../../helpers/TaskHelper";
 import InformationSection from './shared/InformationSection';
 import ContentLayout from '../layout/ContentLayout';
+import BottomButtons from './shared/BottomButtons';
 
 class RegisterVoterTask extends TaskBase {
     constructor(props, context) {
@@ -155,6 +156,7 @@ class RegisterVoterTask extends TaskBase {
                                      taskData={this.props.taskData} />
                         </Col>
                         <InformationSection taskData={this.props.taskData} />
+                        <BottomButtons />
                     </Row>
                 </div>
             </ContentLayout>

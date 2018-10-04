@@ -11,6 +11,7 @@ import YesNoButtons from './shared/YesNoButtons';
 import InformationSection from './shared/InformationSection';
 import TaskSuccess from './shared/TaskSuccess';
 import ContentLayout from '../layout/ContentLayout';
+import BottomButtons from './shared/BottomButtons';
 
 class RegularVoteTask extends TaskBase {
     state = {
@@ -109,6 +110,7 @@ class RegularVoteTask extends TaskBase {
                         <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                     </Col>
                     <InformationSection taskData={this.props.taskData} />
+                    <BottomButtons />
                 </div>
             </ContentLayout>
         );

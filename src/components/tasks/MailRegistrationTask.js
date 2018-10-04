@@ -14,6 +14,7 @@ import routes from '../../constants/Routes';
 import authStorage from '../../storage/AuthStorage';
 import InformationSection from './shared/InformationSection';
 import ContentLayout from '../layout/ContentLayout';
+import BottomButtons from './shared/BottomButtons';
 
 const subSteps = {
     haveAsked: 'haveAsked',
@@ -152,6 +153,7 @@ class MailRegistrationTask extends TaskBase {
                         <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                     </Col>
                     <InformationSection taskData={this.props.taskData} />
+                    <BottomButtons />
                 </div>
             </ContentLayout>
         );

@@ -12,6 +12,7 @@ import YesNoButtons from './shared/YesNoButtons';
 import routes from '../../constants/Routes';
 import InformationSection from './shared/InformationSection';
 import ContentLayout from '../layout/ContentLayout';
+import BottomButtons from './shared/BottomButtons';
 
 const subSteps = {
     haveRemind: 'haveRemind'
@@ -108,6 +109,7 @@ class ReminderVoteTask extends TaskBase {
                         <Stepper steps={this.getSteps()} taskData={this.props.taskData} />
                     </Col>
                     <InformationSection taskData={this.props.taskData} />
+                    <BottomButtons />
                 </div>
             </ContentLayout>
         );
