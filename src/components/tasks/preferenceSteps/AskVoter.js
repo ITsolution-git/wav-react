@@ -4,15 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import BaseComponent from '../../shared/BaseComponent';
 
 export default class AskVoter extends BaseComponent {
-    renderOption = (option) => {
-        return (
-            <li>
-                <Typography>
-                    <b>{ option }</b>
-                </Typography>
-            </li>
-        )
-    }
+    renderBool = (value) => {
+      return value ? "Yes" : "No"
+    };
 
     render() {
         const {
@@ -28,12 +22,10 @@ export default class AskVoter extends BaseComponent {
                 <Typography gutterBottom>
                     Ask { firstname } { lastname } how they prefer to cast their ballot, and be ready to give them more information about their options…
                     <br /><br />
+                    Vote by mail: <b>{ this.renderBool(stateInfo['allMailVoting'])}</b><br />
+                    deadline to request absentee ballot <b>{ stateInfo["absenteeBallotDeadline"]}</b><br />
+                    Early voting in person: <b>{ this.renderBool(stateInfo['earlyVotingAllowed'])}</b>
                 </Typography>
-                <ul>
-                    { stateInfo['earlyVotingAllowed'] && this.renderOption('Early voting.') }
-                    { stateInfo['absenteeWithCause'] && this.renderOption('Absentee with cause.') }
-                    { stateInfo['absenteeWithoutCause'] && this.renderOption('Absentee without cause.') }
-                </ul>
             </div>
         );
     }
