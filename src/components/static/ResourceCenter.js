@@ -1,11 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { withRouter } from 'react-router-dom';
 
 import BaseComponent from '../shared/BaseComponent';
 import ContentLayout from '../layout/ContentLayout';
 import Tile from './resourceCenter/Tile';
-import tileTypes from './resourceCenter/TileTypes';
+import tileTypes from '../../constants/ResourceCenterTypes';
 import Icon from '../shared/Icon';
+import { getUrlParams } from '../../helpers/UrlHelper';
 
 const titles = {
     [`${tileTypes.tipsForFriends}`]: 'Tips for talking with friends',
@@ -22,8 +24,9 @@ class ResourceCenter extends BaseComponent {
 
     constructor(props) {
         super(props);
+        const { tile = ''} = getUrlParams(this.props);
         this.state = {
-            activeTile: ''
+            activeTile: tile
         };
     }
     getViewProps = () => {
@@ -98,4 +101,4 @@ class ResourceCenter extends BaseComponent {
     }
 }
 
-export default ResourceCenter;
+export default withRouter(ResourceCenter);

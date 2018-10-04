@@ -1,6 +1,6 @@
 import React from 'react';
 
-import tileTypes from './TileTypes';
+import tileTypes from '../../../constants/ResourceCenterTypes';
 import TipsForFriends from './content/TipsForFriends';
 import TalkingPoints from './content/TalkingPoints';
 import RegistrationInfo from './content/RegistrationInfo';

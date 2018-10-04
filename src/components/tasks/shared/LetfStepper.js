@@ -6,10 +6,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import { Row, Col } from 'react-bootstrap';
 import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux';
-import Tooltip from '@material-ui/core/Tooltip';
 
 import BaseComponent from '../../shared/BaseComponent';
-import HelpButton from '../shared/HelpButton';
 import pubsubConstants from "../../../constants/PubSubConstants";
 import Button from '../../shared/Button';
 
@@ -49,7 +47,7 @@ class LeftStepper extends BaseComponent {
     };
 
     render() {
-        const { steps = [], taskData = {} } = this.props;
+        const { steps = [] } = this.props;
         const { activeStep } = this.state;
         const currentCheckpoint = this.currentCheckpoint();
         return steps.length > 0 ? (
@@ -68,17 +66,6 @@ class LeftStepper extends BaseComponent {
                     </Col>
                     <Col md={9}>
                         <div className='stepper-content'>
-                            <Row>
-                                <Col mdOffset={11} md={1} xsOffset={10}>
-                                    <Tooltip id="help-button"
-                                             disableFocusListener
-                                             title="Questions about this task? contact us">
-                                        <div>
-                                            <HelpButton task={taskData.task_description} checkpoint={currentCheckpoint.label} />
-                                        </div>
-                                    </Tooltip>
-                                </Col>
-                            </Row>
                             <div className='input-block'>
                                 { currentCheckpoint.component }
                             </div>

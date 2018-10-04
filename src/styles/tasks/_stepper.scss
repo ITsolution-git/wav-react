@@ -1,6 +1,10 @@
 .btw-stepper {
+  @extend .shadow;
+  border-radius: 5px;
+  background-color: $white;
+  padding-bottom: 20px;
+
   .stepper-content {
-    border: 1px solid lightgray;
     margin-bottom: 2%;
     padding: 2%;
     .input-block {
