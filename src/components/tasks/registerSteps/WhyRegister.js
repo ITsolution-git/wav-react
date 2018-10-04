@@ -8,21 +8,23 @@ export default class WhyRegister extends BaseComponent {
         const {
             voterData: {
                 firstname = '',
-                lastname = ''
-            }
+                lastname = '',
+                state = ''
+            },
+            stateInfo = {}
         } = this.props;
 
         return (
             <div>
                 <Typography gutterBottom>
-                    We couldn’t find { firstname } { lastname } on the voter registry last time we looked.
-                    But sometimes this is inaccurate.
+                    Get in touch with { firstname } about registering to vote. You can call, email, text, show up at their door.... Whatever works for you!
                     <br /><br />
-                    Why? The best way to verify that { firstname } { lastname } isn’t registered is to ask.
-                    <bt /><br />
-                    Contact them and check if they think they’re registered to vote.
+                    Let them know that it only takes 2 minutes to register on Vote.org (they can also check their registration status there too if they think they’re registered).<br />
+                    Remind them the deadline to register in { state } is { stateInfo["inPersonRegistration"]}.
                     <br /><br />
-                    You can call, email, text, show up at their door.... Whatever works for you! After you check with them, report back for next steps.
+                    It's also a good idea to send them a link to vote.org afterward.
+                    <br /><br />
+                    After you talk with them, report back for next steps.
                 </Typography>
             </div>
         );

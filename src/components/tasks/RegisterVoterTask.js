@@ -30,8 +30,7 @@ class RegisterVoterTask extends TaskBase {
         super(props, context);
         this.state = {
             nextEnabled: false,
-            subComponent: RegisterSubSteps.byDefault,
-            linkClicked: false
+            subComponent: RegisterSubSteps.byDefault
         };
     }
 
@@ -124,8 +123,8 @@ class RegisterVoterTask extends TaskBase {
          lastStep = this.getSubComponent();
         
         return [
-            { label: 'How to register', component: <HowToRegister onLinkClicked={() => this.setState({ linkClicked: true }) }/>, valid: true },
-            { label: 'Why register', component: <WhyRegister voterData={voter_metaData} />, valid: true },
+            { label: 'How to register', component: <HowToRegister voterData={voter_metaData} stateInfo={this.props.stateInfo} />, valid: true },
+            { label: 'Why register', component: <WhyRegister voterData={voter_metaData} stateInfo={this.props.stateInfo} />, valid: true },
             { label: 'Get contact', component: lastStep.component, valid: lastStep.valid, nextEnabled: this.state.nextEnabled },
             { label: 'Success', component: <TaskSuccess data={ this.getTaskData() } />, valid: true }
         ];
