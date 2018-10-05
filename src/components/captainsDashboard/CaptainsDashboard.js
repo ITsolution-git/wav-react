@@ -15,6 +15,7 @@ import Spinner from '../shared/Spinner';
 import ContentLayout from '../layout/ContentLayout';
 import Icon from '../shared/Icon';
 import { resolveTaskData } from '../../helpers/TaskHelper';
+import { getStateInfo } from '../../actions/TaskAction';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -27,8 +28,9 @@ class CaptainsDashboard extends BaseComponent {
         actions.getBtwUserProfile();
 	}
 
-    goToTask = (taskId, taskRoute) => {
-        this.onLink(`${taskRoute}?taskId=${taskId}`);
+    goToTask = (task, taskRoute) => {
+	    this.props.actions.getStateInfo(task.voter_metaData.state);
+        this.onLink(`${taskRoute}?taskId=${task._id}`);
     };
 
     onAddClick = () => {
@@ -91,7 +93,7 @@ class CaptainsDashboard extends BaseComponent {
                                             ? <div>
                                                 <span className="text-18-dark-blue-bold">{ task.description }. </span>
                                                 <span id="get-started"
-                                                      onClick={() => this.goToTask(task._id, task.route)}
+                                                      onClick={() => this.goToTask(task, task.route)}
                                                       className="link-medium-dark-blue">
                                                     Get started
                                                 </span>
@@ -159,7 +161,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ loadVoterList, loadTaskList, getBtwUserProfile }, dispatch)
+        actions: bindActionCreators({ loadVoterList, loadTaskList, getBtwUserProfile, getStateInfo }, dispatch)
     };
 };
 

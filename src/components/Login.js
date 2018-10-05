@@ -175,7 +175,9 @@ class Login extends BaseComponent {
                                                        required />
                                     </Col>
                                 </Row>
-                                <a id="link-small" href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
+
+	                            	<a id="link-small" href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
+
                                 <div id="button-class">
                                     <Button disabled={isFetching}
 											 borderEnabled
