@@ -57,6 +57,11 @@ export default class MatchItem extends BaseComponent {
         )
     };
 
+    getYear = (dob) => {
+        const year = new Date(dob).getFullYear();
+        return year || ((dob || '').substring(0, 4));
+    };
+
     render () {
         const { onClick, person, id } = this.props;
         const {
@@ -75,7 +80,7 @@ export default class MatchItem extends BaseComponent {
                     <Row className='info-row'>
                         <Col md={10} xs={10}>
                             <div id="text-content" className="text-15-dark-blue-bold">
-                                <div>{ firstname }, { lastname } (born {new Date(birthdate).getFullYear()})</div>
+                                <div>{ firstname }, { lastname } (born {this.getYear(birthdate)})</div>
                                 { expanded && <div id="full-info">{ this.getFullInfo() }</div> }
                             </div>
                         </Col>
