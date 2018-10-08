@@ -22,9 +22,9 @@ export default class AskVoter extends BaseComponent {
                 <Typography gutterBottom>
                     Ask { firstname } { lastname } how they prefer to cast their ballot, and be ready to give them more information about their options…
                     <br /><br />
-                    Vote by mail: <b>{ this.renderBool(stateInfo['allMailVoting'])}</b><br />
-                    deadline to request absentee ballot <b>{ stateInfo["absenteeBallotDeadline"]}</b><br />
-                    Early voting in person: <b>{ this.renderBool(stateInfo['earlyVotingAllowed'])}</b>
+                    Vote by mail: <b>{ this.renderBool(stateInfo['voteByMail'])}</b><br />
+                    deadline to request absentee ballot <b>{ stateInfo["absoluteAbsenteeBallotApplicationDeadline"]}</b><br />
+                    Early voting in person: <b>{ this.renderBool(stateInfo['earlyVoting'])}</b>
                 </Typography>
             </div>
         );

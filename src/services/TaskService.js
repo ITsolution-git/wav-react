@@ -12,7 +12,7 @@ export default {
 
 function getStateInfo(state) {
     return getAsync({
-        url: `${config.apiHost}/api/v1/task/getStateInfo?state=${state}`,
+        url: `${config.apiHost}/api/v2/task/getStateInfo?state=${state}`,
         headers: getHeaders()
     });
 }

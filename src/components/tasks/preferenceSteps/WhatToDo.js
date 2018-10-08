@@ -8,7 +8,7 @@ export default class WhatToDo extends BaseComponent {
         return (
             <li>
                 <Typography>
-                    <b>{ option }</b>
+                    <b>{ option === 'x' ? 'Yes' : option }</b>
                 </Typography>
             </li>
         )
@@ -32,9 +32,9 @@ export default class WhatToDo extends BaseComponent {
                     <br /><br />
                 </Typography>
                 <ul>
-                    { stateInfo['earlyVotingAllowed'] && this.renderOption('Early voting.') }
+                    { stateInfo['earlyVoting'] && this.renderOption('Early voting.') }
                     { stateInfo['absenteeWithCause'] && this.renderOption('Absentee with cause.') }
-                    { stateInfo['absenteeWithoutCause'] && this.renderOption('Absentee without cause.') }
+                    { stateInfo['voteByMail'] && this.renderOption('Absentee without cause.') }
                 </ul>
             </div>
         );
