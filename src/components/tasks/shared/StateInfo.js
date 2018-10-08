@@ -6,7 +6,7 @@ import BaseComponent from '../../shared/BaseComponent';
 
 class StateInfo extends BaseComponent {
     getStateInfo = () => {
-        const { taskData, stateInfo } = this.props;
+        const { stateInfo } = this.props;
 
         if (!stateInfo) return "";
 
@@ -24,6 +24,7 @@ class StateInfo extends BaseComponent {
     };
 
     render() {
+
         return (
             <div className="info">
                 <Row className="section">
@@ -48,7 +49,7 @@ class StateInfo extends BaseComponent {
 
 const mapStateToProps = (state) => {
     return {
-        stateInfo: state.taskList.stateInfo
+        stateInfo: state.taskList.stateInfo || {}
     }
 };
 

@@ -47,15 +47,16 @@ export function updateTask(data, withFile) {
 
 export function getStateInfo(state) {
     return dispatch => {
-        
-        dispatch(actionRequest())
-        return taskService.getStateInfo(state).then(
-            response => {
-                dispatch(actionSuccess(response.data.state_info));
-            },
-            error => {
-                dispatch(actionError(error));
-            })
+        if (state) {
+            dispatch(actionRequest());
+            return taskService.getStateInfo(state).then(
+                response => {
+                    dispatch(actionSuccess(response.data.state_info));
+                },
+                error => {
+                    dispatch(actionError(error));
+                })
+        }
     };
 
 

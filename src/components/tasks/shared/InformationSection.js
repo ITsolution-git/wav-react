@@ -20,8 +20,8 @@ class InformationSection extends BaseComponent {
 
     render () {
         const { expanded } = this.state;
-
-        return (
+        const { stateInfo } = this.props;
+        return stateInfo ? (
             <Col
                 md={4}
                 xsHidden
@@ -37,7 +37,7 @@ class InformationSection extends BaseComponent {
                     }
                 </div>
             </Col>
-        );
+        ) : null
     }
 }
 
