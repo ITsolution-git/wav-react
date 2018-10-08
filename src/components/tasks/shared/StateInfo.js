@@ -26,6 +26,11 @@ class StateInfo extends BaseComponent {
     render() {
         return (
             <div className="info">
+                <Row className="section">
+                    <Col xs={12} md={12}>
+                        <span className="title-20-dark-blue">{ this.props.stateInfo["state"] } voting info</span>
+                    </Col>
+                </Row>
                 {
                     Object.keys(this.getStateInfo()).map((e, index) => {
                         return <Row key={index} className="section">
