@@ -119,7 +119,7 @@ class ReminderVoteTask extends TaskBase {
 const mapStateToProps = (state, ownProps) => {
     return {
         taskData: getTaskData(state, ownProps),
-        stateInfo: state.taskList.stateInfo,
+        stateInfo: state.taskList.stateInfo || {},
         tasks: state.taskList.tasks
     }
 };

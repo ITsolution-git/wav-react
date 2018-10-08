@@ -29,7 +29,8 @@ class CaptainsDashboard extends BaseComponent {
 	}
 
     goToTask = (task, taskRoute) => {
-	    this.props.actions.getStateInfo(task.voter_metaData.state);
+        const { state } = task.voter_metaData || {};
+	    this.props.actions.getStateInfo(state);
         this.onLink(`${taskRoute}?taskId=${task._id}`);
     };
 
