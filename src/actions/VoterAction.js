@@ -8,7 +8,8 @@ import { isDesktop } from '../helpers/DeviceHelper';
 
 let boardingInfo = {
     noResultsCount: 0,
-    maxEmptyCount: 2
+    maxEmptyCount: 2,
+    generateTask: true
 };
 
 export function makeListPersist(makeList) {
@@ -104,7 +105,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
 
 export function registerVoter(voter) {
     return (dispatch, getState) => {
-        const { voterDetails, boardingType } = getState().voter;
+        const { voterDetails } = getState().voter;
 
         const patchData = {
             userid: authStorage.getLoggedUser().userid,
@@ -121,7 +122,7 @@ export function registerVoter(voter) {
             },
             error => {}
         );
-        generateTaskForUser(boardingType);
+        boardingInfo.generateTask = false;
     };
 
      function updateVoter(data) {
@@ -136,9 +137,10 @@ function generateTaskForUser(boardingType, resubmit) {
 }
 
 export function nextNumberPersist() {
-    if (boardingInfo.noResultsCount > 0) {
+    if (boardingInfo.generateTask) {
         generateTaskForUser(boardingTypes.register);
     }
+    boardingInfo.generateTask = true;
     boardingInfo.noResultsCount = 0;
     return dispatch => {
         dispatch(persist());

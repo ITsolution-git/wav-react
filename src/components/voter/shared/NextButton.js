@@ -19,12 +19,12 @@ class NextButton extends BaseComponent {
     onNext = () => {
         const { actions, onNext = () => {}}  = this.props;
         onNext();
+        actions.nextNumberPersist();
         if (this.isLastName()) {
             actions.resetVoterState();
             this.redirectToHome();
             return;
         }
-        actions.nextNumberPersist();
         this.onLink(routes.voterDetail);
     };
 
