@@ -21,7 +21,7 @@ export default class WhatToDo extends BaseComponent {
                     <br /><br />
                     Check in with { firstname } { lastname } to make sure they received it and remind them they can send in their ballot now.
                     <br /><br />
-                    Their ballot must be mailed in by { stateInfo['inPersonRegistration']}.
+                    Their ballot must be mailed in by { stateInfo['absoluteRegistrationDeadlineByMail']}.
                     <br /><br />
                     Ask { firstname } { lastname } to send you a photo of the stamped enveloped when they’re about to mail their ballot so you can confirm they voted.
                 </Typography>

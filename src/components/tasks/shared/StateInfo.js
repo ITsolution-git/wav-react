@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../../shared/BaseComponent';
-import States_Special from '../../../constants/States_Special';
 
 class StateInfo extends BaseComponent {
     getStateInfo = () => {
@@ -17,9 +16,9 @@ class StateInfo extends BaseComponent {
         return {
             "Next Election": stateInfo['nextElection'],
             "Online voter registration": stateInfo["onlineRegistration"] ? "Yes" : "No",
-            "Voter registration deadline": stateInfo['registrationDeadlineByMail'],
-            "Vote by mail option": stateInfo["allMailVoting"] ? "Yes" : "No",
-            "Vote by mail application deadline": stateInfo["absenteeBallotDeadline"],
+            "Voter registration deadline": stateInfo['absoluteRegistrationDeadlineByMail'],
+            "Vote by mail option": stateInfo["voteByMail"] ? "Yes" : "No",
+            "Vote by mail application deadline": stateInfo["absoluteAbsenteeBallotApplicationDeadline"],
             "ID needed at polls": stateInfo["idNeeded"] ? "Yes" : "No"
         }
     };
