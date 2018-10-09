@@ -26,9 +26,9 @@ class BaseComponent extends Component {
 
     renderRequiredFieldMsg = () => {
         return (
-            <Typography gutterBottom>
+            <div className="text-18-dark-blue-bold" style={{ marginBottom: 20 }}>
                 Fields marked with <span style={{ color: 'red'}}>*</span> are required
-            </Typography>
+            </div>
         )
     };
 

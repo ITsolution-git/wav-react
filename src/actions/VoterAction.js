@@ -48,8 +48,9 @@ export function matchListPersist(voterDetails, resubmit = false) {
     return (dispatch, getState) => {
     	const {
     	    currentNumber,
-            makeList
-    	} = getState().voter,
+            makeList,
+            boardingType
+            } = getState().voter,
     		firstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber}`],
 			lastName = makeList[`${VoterContants.LAST_NAME_PREFIX}${currentNumber}`];
 
@@ -73,7 +74,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
                             boardingInfo.noResultsCount = 0;
                             noResults = false;
                         }
-                        if (isDesktop()) {
+                        if (isDesktop() && boardingType !== boardingTypes.tasks) {
                             history.push(`${routes.voterNotFoundError}?noResults=${noResults}`);
                         } else {
                             dispatch(actionNoResults(noResults));
