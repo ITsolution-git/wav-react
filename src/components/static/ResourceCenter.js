@@ -26,7 +26,8 @@ class ResourceCenter extends BaseComponent {
         super(props);
         const { tile = ''} = getUrlParams(this.props);
         this.state = {
-            activeTile: tile
+            activeTile: tile,
+            backTo: !!tile
         };
     }
     getViewProps = () => {
@@ -65,19 +66,27 @@ class ResourceCenter extends BaseComponent {
     };
 
     onBackClick = () => {
+      if (this.state.backTo) {
+         this.props.history.goBack();
+         return;
+      }
       this.setState({ activeTile: null });
     };
 
     render() {
         const viewProps = this.getViewProps();
-        const { activeTile } = this.state;
+        const { activeTile, backTo } = this.state;
 
         return (
             <ContentLayout>
                 <div className='btw-resource-center container'>
                     <div className={viewProps.titleClass}>
                         { activeTile
-                            ? <span onClick={this.onBackClick} className={viewProps.linkClass}>Back to Resource Center</span>
+                            ? <span onClick={this.onBackClick} className={viewProps.linkClass}>
+                                { backTo
+                                    ? 'Back to Action'
+                                    : 'Back to Resource Center' }
+                             </span>
                             : <span>Resource Center</span> }
                     </div>
                     { activeTile ?
