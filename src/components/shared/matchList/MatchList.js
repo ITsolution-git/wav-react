@@ -48,7 +48,8 @@ class MatchList extends BaseComponent {
     };
 
     getViewProps = () => {
-      if (this.isDesktop()) {
+      const { fromTasks } = this.props;
+      if (this.isDesktop() && !fromTasks) {
         return {
             titleClass: 'title-24-white',
             dialogTitle: 'title-32-blue'

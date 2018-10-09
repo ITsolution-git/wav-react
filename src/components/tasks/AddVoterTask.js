@@ -9,6 +9,7 @@ import { getTaskData } from "../../helpers/TaskHelper";
 import VoterDetails from './addVoterSteps/VoterDetails';
 import MatchList from './addVoterSteps/MatchList';
 import TaskSuccess from './shared/TaskSuccess';
+import TaskFail from './shared/TaskFail';
 import Stepper from './shared/LetfStepper';
 import boardingTypes from '../../constants/VoterBoardingType';
 import { matchListPersist, voterDetailsPersist, setBoardingType } from "../../actions/VoterAction";
@@ -20,7 +21,8 @@ class AddVoterTask extends TaskBase {
     state = {
         voterDetails: {},
         voterDetailsValid: false,
-        matchListValid: false
+        matchListDone: false,
+        error: ''
     };
 
     onDetailsNext = () => {
@@ -36,10 +38,25 @@ class AddVoterTask extends TaskBase {
         this.loadPrevious = true;
     };
 
+    resolveComponent = () => {
+        const {
+            matchListDone,
+            error
+        } = this.state;
+
+        if (matchListDone) {
+           return error
+               ? <TaskFail data={error} />
+               : <TaskSuccess data={ this.getTaskData() } />;
+        }
+        return <MatchList onSuccess={() => this.setState({ matchListDone: true })}
+                          onError={error => this.setState({ matchListDone: true, error })} />
+    };
+
     getSteps = () => {
         const {
             voterDetailsValid,
-            matchListValid,
+            matchListDone,
             voterDetails
         } = this.state;
 
@@ -54,14 +71,15 @@ class AddVoterTask extends TaskBase {
                                                 }}
                                          voterDetails={voterDetails} />,
                 onNext: this.onDetailsNext,
+                backDisabled: true,
                 valid: voterDetailsValid
             },
             {
                 label: 'Match List',
-                component: <MatchList onChange={voter => this.setState({ matchListValid: true })}/>,
-                valid: matchListValid
-            },
-            { label: 'Success', component: <TaskSuccess data={ this.getTaskData() } />, valid: true }
+                component: this.resolveComponent(),
+                backDisabled: true,
+                valid: matchListDone
+            }
         ];
     };
 

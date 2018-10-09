@@ -8,10 +8,7 @@ import {
     AddressInput,
     StateInput,
     EmailInput,
-    DateOfBirthInput,
-    GenderInput,
-    PhoneInput,
-    ZipCodeInput
+    DateOfBirthInput
 } from '../../shared/validatedInputs/index';
 
 import fieldConstants from '../../../constants/FieldConstants';
@@ -51,55 +48,46 @@ export default class VoterDetails extends BaseComponent {
                     <Col md={6}>
                         <FirstNameInput onChange={this.handleChange}
                                         defaultValue={details[fieldConstants.firstName]}
+                                        showAsterisk={true}
                                         required />
                     </Col>
                     <Col md={6}>
                         <LastNameInput onChange={this.handleChange}
                                        defaultValue={details[fieldConstants.lastName]}
+                                       showAsterisk={true}
                                        required />
+                    </Col>
+                </Row>
+                <Row className='center-row'>
+                    <Col md={12}>
+                        <EmailInput onChange={this.handleChange}
+                                    defaultValue={details[fieldConstants.email]}
+                                    showAsterisk={true}
+                                    required />
                     </Col>
                 </Row>
                 <Row className='center-row'>
                     <Col md={6}>
                         <CityInput onChange={this.handleChange}
                                    defaultValue={details[fieldConstants.city]}
+                                   showAsterisk={true}
                                    required />
                     </Col>
                     <Col md={6}>
                         <StateInput onChange={this.handleChange}
                                     defaultValue={details[fieldConstants.state]}
+                                    showAsterisk={true}
                                     required />
                     </Col>
                 </Row>
                 <Row className='center-row'>
-                    <Col md={6}>
-                        <EmailInput onChange={this.handleChange}
-                                    defaultValue={details[fieldConstants.email]}
-                                    required />
-                    </Col>
                     <Col md={6}>
                         <DateOfBirthInput onChange={this.handleChange}
                                           defaultValue={details[fieldConstants.dateOfBirth]} />
                     </Col>
-                </Row>
-                <Row className='center-row'>
-                    <Col md={6}>
-                        <GenderInput onChange={this.handleChange}
-                                     defaultValue={details[fieldConstants.gender]} />
-                    </Col>
                     <Col md={6}>
                         <AddressInput onChange={this.handleChange}
                                       defaultValue={details[fieldConstants.address]} />
-                    </Col>
-                </Row>
-                <Row className='center-row'>
-                    <Col md={6}>
-                        <PhoneInput onChange={this.handleChange}
-                                    defaultValue={details[fieldConstants.phone]} />
-                    </Col>
-                    <Col md={6}>
-                        <ZipCodeInput onChange={this.handleChange}
-                                      defaultValue={details[fieldConstants.zipCode]} />
                     </Col>
                 </Row>
             </div>

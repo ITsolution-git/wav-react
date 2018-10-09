@@ -50,6 +50,7 @@ class LeftStepper extends BaseComponent {
         const { steps = [] } = this.props;
         const { activeStep } = this.state;
         const currentCheckpoint = this.currentCheckpoint();
+
         return steps.length > 0 ? (
             <div className='btw-stepper'>
                 <Row>
@@ -72,7 +73,7 @@ class LeftStepper extends BaseComponent {
                         </div>
                         <Row className="no-margin">
                             <Col mdOffset={3} md={4} xs={6} onClick={this.handleBack}>
-                                { activeStep !== 0 && <Button> Back </Button> }
+                                { (activeStep !== 0 && !currentCheckpoint.backDisabled) && <Button> Back </Button> }
                             </Col>
                             <Col md={4} xs={6} onClick={this.handleNext}>
                                 <Button disabled={!currentCheckpoint.valid}>

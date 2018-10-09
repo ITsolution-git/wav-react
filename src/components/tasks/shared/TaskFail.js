@@ -1,10 +1,10 @@
 import React from 'react';
-import FontAwesome from 'react-fontawesome';
 import PubSub from "pubsub-js";
 
 import BaseComponent from '../../shared/BaseComponent';
 import pubsubConstants from "../../../constants/PubSubConstants";
 import routes from '../../../constants/Routes';
+import Icon from '../../shared/Icon';
 
 export default class TaskFail extends BaseComponent {
     componentWillMount() {
@@ -18,10 +18,18 @@ export default class TaskFail extends BaseComponent {
     }
 
     render() {
+        const { title = 'We will have you try it again...', description } = this.props.data;
         return (
             <div className='error-icon'>
-                <FontAwesome name='exclamation-triangle' />
-                <div className='success-text'>We will have you try it again...</div>
+                <div className="icon">
+                    <Icon name='face-light' width={90} height={90} />
+                </div>
+                <div className='success-text title-32-light-blue'>
+                    { title }
+                </div>
+                <div className='text-18-dark-blue-bold'>
+                    { description }
+                </div>
             </div>
         );
     }
