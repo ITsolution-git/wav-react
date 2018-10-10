@@ -1,3 +1,5 @@
+import StepsToHelpFriendVote from "../components/static/StepsToHelpFriendVote";
+
 export default {
     register: '/register',
     profile: '/profile',
@@ -44,6 +46,7 @@ export default {
     termsOfUse: '/terms_of_use',
     privacyPolicy: '/privacy_policy',
     faq: '/faq',
+	stepsToHelpFriendVote: '/stepsToHelpFriendVote',
     resourceCenter: '/resource_center',
 
     unsubscribe: '/unsubscribe/:email'

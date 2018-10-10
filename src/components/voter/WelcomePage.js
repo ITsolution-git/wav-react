@@ -33,26 +33,31 @@ class WelcomePage extends BaseComponent {
     render() {
         const { nextEnabled } = this.state;
         const contentMsg = nextEnabled
-            ? <div style={{textAlign: 'left'}}>
-                <ol>
-                    <li>Check to see if your friends are registered.</li>
-                    <li>Receive a customized set of steps for you to help your friends register and vote. Don’t worry we’ll provide you all the info and guidance you need!</li>
-                    <li>Track your impact as you help your friends vote</li>
-                </ol>
+            ? <div>
+		        <div className="title-32-light-blue">
+			        HERE'S HOW IT WORKS ...
+		        </div>
+		        <br />
+                <div>Check to see if your friends are registered.</div>
+		        <br />
+                <div>Receive a customized set of steps for you to help your friends register and vote.
+                    Don’t worry we’ll provide you all the info and guidance you need!</div>
+		        <br />
+		        <div>Track your impact as you help your friends vote</div>
               </div>
             : <div>
-                Welcome to the team! <br />
+		        <div className="title-20-light-blue">
+			        WELCOME TO THE TEAM!
+		        </div>
+                <br />
                 You’re a part of a national movement to make sure no one sits this election out
             </div>;
         return (
             <OnBoardingLayout color={colors.blue}>
                 <div className="layout-center">
                     <div className='welcome-div'>
-                        <div className="title-32-light-blue">
-                            WELCOME TO THE TEAM!
-                        </div>
+
                         <div className="title-20-blue" id="how-it-works">
-                            How it works...
                         </div>
                         <div className="text-18-dark-blue">
                             { contentMsg }
