@@ -46,7 +46,7 @@ class WelcomePage extends BaseComponent {
 		        <div>Track your impact as you help your friends vote</div>
               </div>
             : <div>
-		        <div className="title-20-light-blue">
+		        <div className="title-32-light-blue">
 			        WELCOME TO THE TEAM!
 		        </div>
                 <br />
