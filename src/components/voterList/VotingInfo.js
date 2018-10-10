@@ -39,7 +39,7 @@ class VotingInfo extends BaseComponent {
             <div className="voting-info">
                 { pollingLocation.isSuccess && pollingLocation.data.length > 0 &&
                     <div className='block'>
-                        <div className='title text-18-dark-blue-bold'>Polling Info</div>
+                        <div className='title text-18-dark-blue-bold'>Polling Location</div>
                         { pollingLocation.data.map((info, i) => {
                             const {
                                 address: {
@@ -71,7 +71,7 @@ class VotingInfo extends BaseComponent {
                 }
                 { referendum.isSuccess && referendum.data.count > 0 &&
                     <div className='block'>
-                        <div className='title text-18-dark-blue-bold'>Referendum Info</div>
+                        <div className='title text-18-dark-blue-bold'>Referendum Issues on the Ballot</div>
                         <Table striped bordered >
                             <thead>
                             <tr>
@@ -94,10 +94,11 @@ class VotingInfo extends BaseComponent {
                 }
                 { electionContest.isSuccess && electionContest.data.length > 0 &&
                     <div className='block'>
-                        <div className='title text-18-dark-blue-bold'>Election Contest Info</div>
+                        <div className='title text-18-dark-blue-bold'>Election information</div>
                         <Table striped bordered >
                             <thead>
                             <tr>
+                                <th>Contested office</th>
                                 <th>Name</th>
                                 <th>Party</th>
                                 <th>Web Site</th>
@@ -107,8 +108,10 @@ class VotingInfo extends BaseComponent {
                             { electionContest.data.map(item => {
                                 return item.candidates.map((candidate, i) => {
                                     const { name, party, candidateUrl } = candidate;
+                                    console.log(item.office)
                                     return (
                                         <tr key={i}>
+                                            <td width="40%">{ item.office }</td>
                                             <td width="40%">{ name }</td>
                                             <td width="40%">{ party }</td>
                                             <td width="20%">

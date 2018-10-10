@@ -135,7 +135,7 @@ class CaptainsDashboard extends BaseComponent {
                                 { this.renderCircleItem('2', 'Decide method of voting') }
                                 { this.renderCircleItem('3', 'Understand the ballot') }
                                 { this.renderCircleItem('4', 'Cast their ballot') }
-                                <div className="link-small-dark-blue" onClick={() => this.onLink(routes.faq)}>
+                                <div className="link-small-dark-blue" onClick={() => this.onLink(routes.stepsToHelpFriendVote)}>
                                     Learn More
                                 </div>
                             </Col>
