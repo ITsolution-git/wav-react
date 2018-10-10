@@ -187,8 +187,8 @@ class Register extends BaseComponent {
                                     <label>
 									<span className="title-14-dark-blue">
 										I have read and understood the term of use and by signing up, I agree to Bethewave's
-										<Link id="link-small-red" target="_blank" to='/termsOfUse'> Terms of Use </Link>
-										and <Link id="link-small-red" target="_blank" to='/privacyPolicy'> Privacy Policy</Link>
+										<Link id="link-small-red" target="_blank" to={routes.termsOfUse}> Terms of Use </Link>
+										and <Link id="link-small-red" target="_blank" to={routes.privacyPolicy}> Privacy Policy</Link>
 									</span>
                                     </label>
                                 </div>

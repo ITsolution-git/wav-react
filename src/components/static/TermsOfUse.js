@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class TermsOfUse extends Component {
     render() {
         return (
-            <div className="btw-terms">
+            <div className="btw-privacy">
 
                 <h2><b>Terms and Conditions</b></h2><br/>
 
