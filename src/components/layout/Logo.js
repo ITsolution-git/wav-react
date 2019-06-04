@@ -14,7 +14,7 @@ class Logo extends BaseComponent {
     };
 
     render() {
-        const { width = 100, height = 80, useBlack = false } = this.props;
+        const { width = 65, height = 44, useBlack = false } = this.props;
         return (
             <img onClick={this.hanldeClick}
                  src={useBlack ? blackLogo : logo}
@@ -24,4 +24,4 @@ class Logo extends BaseComponent {
     }
 }
 
-export default withRouter(Logo);
+export default withRouter (Logo);

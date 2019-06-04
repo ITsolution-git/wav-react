@@ -15,7 +15,6 @@ import Spinner from '../components/shared/Spinner';
 import Button from '../components/shared/Button';
 import { loadTaskList } from '../actions/TaskListAction';
 import AboutInfo from '../components/shared/AboutInfo';
-import MobileLogo from '../components/layout/MobileLogo';
 import {
     EmailInput,
     PasswordInput
@@ -138,7 +137,6 @@ class Login extends BaseComponent {
 		return (
                 <Row className="btw-login no-margin">
 					{ this.isMobile() && this.renderBackground(colors.blue) }
-					<MobileLogo />
                     <Col md={6} className="no-padding">
                         { this.isDesktop() && <AboutInfo /> }
                     </Col>

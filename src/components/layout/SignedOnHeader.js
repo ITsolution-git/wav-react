@@ -10,7 +10,6 @@ import {
 } from 'react-bootstrap';
 import classNames from 'classnames';
 import PubSub from "pubsub-js";
-import FontAwesome from 'react-fontawesome';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import routes from '../../constants/Routes';
@@ -82,10 +81,6 @@ class SignedOnHeader extends BaseComponent {
         return authStorage.getCurrentRole() === roles.captain
             ? this.getCaptainLinks()
             : this.getAdminLinks();
-    };
-
-    onProfile = () => {
-        this.props.history.push(routes.profile)
     };
 
     renderProfileDropdown = () => {
