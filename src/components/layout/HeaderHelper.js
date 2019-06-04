@@ -3,7 +3,6 @@ import React from 'react';
 import gold from '../../resources/images/gold.png'
 import silver from '../../resources/images/silver.png'
 import bronze from '../../resources/images/bronze.png'
-import logo from '../../resources/images/logo.png';
 
 export function getLevel(data) {
 

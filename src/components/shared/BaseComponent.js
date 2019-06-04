@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PubSub from "pubsub-js";
-import Typography from '@material-ui/core/Typography';
 import { Helmet } from "react-helmet";
 
 import history from '../../utility/History';

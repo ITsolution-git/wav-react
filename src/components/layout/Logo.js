@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import BaseComponent from '../shared/BaseComponent';
-import logo from '../../resources/images/logo.png';
+import logo from '../../resources/images/logo.svg';
 import blackLogo from '../../resources/images/logo-black.png';
 
 class Logo extends BaseComponent {
