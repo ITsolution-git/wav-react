@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 
 import BaseComponent from '../shared/BaseComponent';
 import logo from '../../resources/images/logo.svg';
-import blackLogo from '../../resources/images/logo-black.png';
 
 class Logo extends BaseComponent {
 
@@ -14,10 +13,10 @@ class Logo extends BaseComponent {
     };
 
     render() {
-        const { width = 65, height = 44, useBlack = false } = this.props;
+        const { width = 65, height = 44 } = this.props;
         return (
             <img onClick={this.hanldeClick}
-                 src={useBlack ? blackLogo : logo}
+                 src={logo}
                  alt=""
                  width={width} height={height} />
         )
