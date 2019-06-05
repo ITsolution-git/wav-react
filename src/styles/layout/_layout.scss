@@ -1,3 +1,10 @@
-#mobile-logo {
-  margin: 30px 0 0 30px;
+.btw-app {
+  background-color: $grey7;
+  height: 100vh;
+
+  .btw-content {
+    display: flex;
+    justify-content: center;
+    padding-top: 138px;
+  }
 }

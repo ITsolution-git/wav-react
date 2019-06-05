@@ -1,3 +1,12 @@
 .btw-register {
+  .paper {
 
+    @include respond-to($phone) {
+      width: 272px;
+    }
+    @include respond-to($desktop) {
+      width: 512px;
+    }
+
+  }
 }

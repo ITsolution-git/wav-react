@@ -2,7 +2,6 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PubSub from "pubsub-js";
 import Header from './layout/Header';
-import Footer from './layout/Footer';
 import Router from './Router';
 import '../styles/App.css';
 import '../extensions';
@@ -24,7 +23,6 @@ class App extends BaseComponent {
 				<div className='btw-content'>
                     <Router />
 				</div>
-				{ !isHideHeader && <Footer /> }
 			</div>
 		);
 	}
