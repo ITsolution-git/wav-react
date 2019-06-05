@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import qs from 'query-string';
+import qs from 'qs';
 import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../components/shared/BaseComponent';

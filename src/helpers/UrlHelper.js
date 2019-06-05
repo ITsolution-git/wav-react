@@ -1,4 +1,4 @@
-import qs from 'query-string';
+import qs from 'qs';
 
 export function getUrlParam(props, name) {
     const params = parseParams(props)
