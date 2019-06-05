@@ -9,14 +9,10 @@ import {connect} from "react-redux";
 import { bindActionCreators } from "redux";
 
 class NoTaskErrorPage extends BaseComponent {
-    constructor( props, context ) {
-        super(props, context);
-    }
-
     render() {
         return (
             <div className='btw-error'>
-                <img src={ exclamation } width={150} height={150}></img>
+                <img alt='exclamation.png' src={ exclamation } width={150} height={150} />
                 <div>
                     <h3>Sorry ....there is not related task.... </h3>
                     <br/><br/><br/>

@@ -1,5 +1,3 @@
-import StepsToHelpFriendVote from "../components/static/StepsToHelpFriendVote";
-
 export default {
     register: '/register',
     profile: '/profile',

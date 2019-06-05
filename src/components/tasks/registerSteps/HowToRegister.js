@@ -8,8 +8,7 @@ export default class HowToRegister extends BaseComponent {
         const {
             voterData: {
                 firstname = '',
-                lastname = '',
-                state
+                lastname = ''
             },
             stateInfo = {}
         } = this.props;

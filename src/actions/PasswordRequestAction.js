@@ -10,7 +10,7 @@ export function forgotPasswordRequest(email) {
         dispatch(actionRequest());
         return PasswordRequestService.forgotPasswordRequest(data).then(
                 response => {
-                dispatch(actionSucceeded(response.data.request_id != undefined));
+                dispatch(actionSucceeded(response.data.request_id !== undefined));
             },
             error => {
                 dispatch(actionFailed(error));

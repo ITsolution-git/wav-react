@@ -10,9 +10,6 @@ import routes from "../../constants/Routes";
 import { isMobile } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
-    constructor(props, context) {
-        super(props, context);
-    }
 
     onLink = (route, params) => {
         PubSub.publish(pubsubConstants.onLocationChange, route);
