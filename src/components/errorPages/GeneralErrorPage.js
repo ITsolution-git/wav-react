@@ -10,9 +10,6 @@ import { btwLogout } from "../../actions/SignOnAction";
 import { bindActionCreators } from "redux";
 
 class GeneralErrorPage extends BaseComponent {
-    constructor( props, context ) {
-        super(props, context);
-    }
 
     componentWillMount() {
         setTimeout(() => {
@@ -23,7 +20,7 @@ class GeneralErrorPage extends BaseComponent {
     render() {
         return (
             <div className='btw-error'>
-                <img src={ exclamation } width={150} height={150}></img>
+                <img src={exclamation} alt='exclamation.png' width={150} height={150}></img>
                 <div>
                     <h3>Sorry ....Something went wrong .... Please try again later</h3>
                     <br/><br/><br/>

@@ -16,6 +16,8 @@ export function getHomeRoute() {
             return routes.adminDashboard;
         case roles.guest:
             return routes.login;
+        default:
+            return routes.login
     }
 }
 

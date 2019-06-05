@@ -10,9 +10,6 @@ import Spinner from '../../components/shared/Spinner';
 import Button from "../shared/Button";
 
 class Unsubscribe extends BaseComponent {
-	constructor() {
-		super();
-  }
 
   // call api for unsubscribe
   onConfirm = () => {

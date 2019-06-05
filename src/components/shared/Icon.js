@@ -9,6 +9,7 @@ export default class Icon extends BaseComponent {
             <img src={require(`../../resources/icons/${name}.png`)}
                  width={width}
                  height={height}
+                 alt={name}
                  {...restProps} />
         )
     }

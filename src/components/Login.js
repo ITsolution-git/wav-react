@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import qs from 'query-string';
+import qs from 'qs';
 import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../components/shared/BaseComponent';
@@ -15,7 +15,6 @@ import Spinner from '../components/shared/Spinner';
 import Button from '../components/shared/Button';
 import { loadTaskList } from '../actions/TaskListAction';
 import AboutInfo from '../components/shared/AboutInfo';
-import MobileLogo from '../components/layout/MobileLogo';
 import {
     EmailInput,
     PasswordInput
@@ -138,7 +137,6 @@ class Login extends BaseComponent {
 		return (
                 <Row className="btw-login no-margin">
 					{ this.isMobile() && this.renderBackground(colors.blue) }
-					<MobileLogo />
                     <Col md={6} className="no-padding">
                         { this.isDesktop() && <AboutInfo /> }
                     </Col>

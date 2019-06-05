@@ -134,7 +134,7 @@ class VoterDetail extends BaseComponent {
                 <div className='btw-voter-detail'>
 					<Col md={8} className='no-padding'>
                         <Col id="title" className={viewProps.titleClass}>
-                            { 'Tell us more about ' + firstName || '' + " " + lastName || '' }...
+                            Tell us more about { firstName || '' } { lastName || '' }...
                         </Col>
 					</Col>
 					<Col md={8} xsHidden className='no-padding'>

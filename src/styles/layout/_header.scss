@@ -1,4 +1,28 @@
 .btw-header {
+
+  header {
+    background-color: $blue4;
+    height: 72px;
+    display: flex;
+    justify-content: center;
+
+    img {
+      @include respond-to($phone) {
+        margin-left: 24px;
+      }
+      @include respond-to($tablet) {
+        margin-left: 72px;
+      }
+      @include respond-to($desktop) {
+        margin-left: 200px;
+      }
+    }
+  }
+
+  .btw-off-header {
+
+  }
+
   .btw-on-header {
     @include respond-to($phone) {
       .navbar-toggle {

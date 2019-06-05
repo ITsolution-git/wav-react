@@ -18,7 +18,7 @@ export function validate(type, value) {
         case validationTypes.date:
             return dateValidation(value);
         case validationTypes.phone:
-            return phoneValidation(parseInt(value));
+            return phoneValidation(parseInt(value, 10));
         case validationTypes.zip:
             return zipCodeValidation(value);
         case validationTypes.datetime:

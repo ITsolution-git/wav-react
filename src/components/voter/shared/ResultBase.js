@@ -1,5 +1,3 @@
-import React from 'react';
-
 import BaseComponent from '../../shared/BaseComponent';
 import boardingTypes from '../../../constants/VoterBoardingType';
 import routes from '../../../constants/Routes';

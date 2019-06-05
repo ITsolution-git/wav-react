@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PubSub from "pubsub-js";
-import Typography from '@material-ui/core/Typography';
 import { Helmet } from "react-helmet";
 
 import history from '../../utility/History';
@@ -11,9 +10,6 @@ import routes from "../../constants/Routes";
 import { isMobile } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
-    constructor(props, context) {
-        super(props, context);
-    }
 
     onLink = (route, params) => {
         PubSub.publish(pubsubConstants.onLocationChange, route);

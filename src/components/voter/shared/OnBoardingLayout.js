@@ -17,7 +17,7 @@ export default class OnBoardingLayout extends  BaseComponent {
         return (
             <div className="btw-voter-layout">
             { showLogo && <div className='logo' >
-                <Logo useBlack={this.isDesktop()} />
+                <Logo />
             </div> }
         { this.renderBackground(color) }
         { this.props.children }
