@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Paper } from '@material-ui/core';
 import { Row, Col } from 'react-bootstrap';
+import { Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import { btwRegister } from '../../actions/SignOnAction';
@@ -69,8 +69,8 @@ class Register extends BaseComponent {
 	renderAlreadyRegistered = () => {
 		return (
             <div id="registered-text-div">
-                <span id='registered-text'>Already registered? </span>
-                <Link id="link-small" to='/'> Sign in </Link>
+                <span id='registered-text'>Already have an account? </span>
+                <Link id="link-small" to='/'> Log in </Link>
             </div>
         );
 	};
@@ -82,74 +82,69 @@ class Register extends BaseComponent {
 		const { error } = this.props;
 		const errorInWhite = this.isMobile();
 
-
-
 		return (
 		    <div className="btw-register">
-                <Paper className="paper">
-                    <Row className="no-margin">
-                        <Col mdOffset={1} md={4} xsOffset={2} xs={8} className="no-padding">
-                            <Row>
-                                <Col md={6}>
-                                    <FirstNameInput onChange={this.handleChange}
-                                                    startValidation={startValidation}
-                                                    errorWhite={errorInWhite}
-                                                    required />
-                                </Col>
-                                <Col md={6}>
-                                    <LastNameInput onChange={this.handleChange}
-                                                   startValidation={startValidation}
-                                                   errorWhite={errorInWhite}
-                                                   required />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12}>
-                                    <EmailInput onChange={(value, valid, name) => {
-                                        const isValid = this.props.error ? true : valid;
-                                        this.handleChange(value, isValid, name);
-                                    }}
-                                                isVoter={false}
-                                                startValidation={startValidation}
-                                                uniqueValidationEnabled={false}
-                                                errorWhite={errorInWhite}
-                                                customError={error}
-                                                required />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12}>
-                                    <PasswordInput onChange={this.handleChange}
-                                                   startValidation={startValidation}
-                                                   errorWhite={errorInWhite}
-                                                   required />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12}>
-                                    <TextInput label='Confirm Password'
-                                               type='password'
-                                               id="confirmPassword"
-                                               validator={value => value === this.state.btwIdentity[fieldConstants.password]}
-                                               validatorError='The passwords do not match'
-                                               onChange={this.handleChange}
-                                               name='confirmPassword'
-                                               errorWhite={errorInWhite}
-                                               startValidation={startValidation}
-                                               required />
-                                </Col>
-                            </Row>
-                            <Row className="justify-content-center">
-                                <Col md={12} xs={12} align="center">
-                                    <div id="btn_signup">
-                                        <Button borderEnabled
-                                                onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Me Up!</Button>
-                                    </div>
-                                </Col>
-                            </Row>
-                            { this.renderAlreadyRegistered() }
+                <Paper className='paper'>
+                    <div>Sign Up with Email</div>
+                    <Row>
+                        <Col md={6}>
+                            <FirstNameInput onChange={this.handleChange}
+                                            startValidation={startValidation}
+                                            errorWhite={errorInWhite}
+                                            required />
+                        </Col>
+                        <Col md={6}>
+                            <LastNameInput onChange={this.handleChange}
+                                           startValidation={startValidation}
+                                           errorWhite={errorInWhite}
+                                           required />
                         </Col>
                     </Row>
+                    <Row>
+                        <Col md={12}>
+                            <EmailInput onChange={(value, valid, name) => {
+                                const isValid = this.props.error ? true : valid;
+                                this.handleChange(value, isValid, name);
+                            }}
+                                        isVoter={false}
+                                        startValidation={startValidation}
+                                        uniqueValidationEnabled={false}
+                                        errorWhite={errorInWhite}
+                                        customError={error}
+                                        required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <PasswordInput onChange={this.handleChange}
+                                           startValidation={startValidation}
+                                           errorWhite={errorInWhite}
+                                           required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <TextInput label='Confirm Password'
+                                       type='password'
+                                       id="confirmPassword"
+                                       validator={value => value === this.state.btwIdentity[fieldConstants.password]}
+                                       validatorError='The passwords do not match'
+                                       onChange={this.handleChange}
+                                       name='confirmPassword'
+                                       errorWhite={errorInWhite}
+                                       startValidation={startValidation}
+                                       required />
+                        </Col>
+                    </Row>
+                    <Row className="justify-content-center">
+                        <Col md={12} xs={12} align="center">
+                            <div id="btn_signup">
+                                <Button borderEnabled
+                                        onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Up</Button>
+                            </div>
+                        </Col>
+                    </Row>
+                    { this.renderAlreadyRegistered() }
                 </Paper>
             </div>
 		);

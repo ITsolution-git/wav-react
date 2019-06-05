@@ -3,9 +3,11 @@
 
     @include respond-to($phone) {
       width: 272px;
+      padding: 59px 20px 45px 20px;
     }
     @include respond-to($desktop) {
       width: 512px;
+      padding: 59px 88px 45px 88px;
     }
 
   }
