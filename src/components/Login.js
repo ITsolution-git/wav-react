@@ -136,26 +136,18 @@ class Login extends BaseComponent {
 
 		return (
                 <Row className="btw-login no-margin">
-					{ this.isMobile() && this.renderBackground(colors.blue) }
-                    <Col md={6} className="no-padding">
-                        { this.isDesktop() && <AboutInfo /> }
-                    </Col>
-                    <Col md={5} xs={12} className="no-padding">
+					
+                    <Col md={12} xs={12} className="no-padding">
                         <div className="btw-form" onKeyPress={this.onKeyPress}>
-                            <Col mdOffset={2} xsOffset={2} xs={8}>
+                            <Col md={12} className="no-padding">
 								{ this.state.isReset && <div className={`${this.isMobile() ? 'warning-white' : 'warning-green'}`} id="resetPasswordSuccess" style={{fontSize:'15px'}}>Password is reset, Login with your new password</div> }
 								{ error && <div className={`${this.isMobile() ? 'warning-white' : 'warning-red'}`}>Check your username or password</div>}
-								<br/>
-								{ this.isDesktop()
-									?  <div id="title" className="title-32-blue">
-                                        Login to your <div>account</div>
-                                    	</div>
-									: <div id="mobile-title" className="title-32-white">
-                                        Sign in
-									  </div>
-								}
+								
+								<div className="login-title">Log In by Email</div>
+								
                                 <Row>
-                                    <Col md={7}>
+                                    <Col md={12}>
+                                    	<p className='input-field-label'>Email</p>
                                         <EmailInput onChange={(value, valid, name) => {
                                             const isValid = error ? true : valid;
                                             this.handleChange(value, isValid, name);
@@ -163,36 +155,40 @@ class Login extends BaseComponent {
                                                     isVoter={false}
                                                     startValidation={startValidation}
                                                     uniqueValidationEnabled={false}
-                                                    required />
+                                                    required 
+                                                    label='Your email address'/>
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col md={7}>
+                                    <Col md={12}>
+                                    	<p className='input-field-label'>Password</p>
                                         <PasswordInput onChange={this.handleChange}
                                                        startValidation={startValidation}
-                                                       required />
+                                                       required 
+                                                       label='Your password'/>
                                     </Col>
                                 </Row>
 
-	                            	<a id="link-small" href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
-
                                 <div id="button-class">
-                                    <Button disabled={isFetching}
-											 borderEnabled
-                                            onClick={this.btwSignOn.bind(this)}>
-										{ this.isMobile() ? 'Go!' : 'Log In' }
+                                    <Button 
+                                    	disabled={isFetching}
+										borderEnabled
+                                        onClick={this.btwSignOn.bind(this)}
+                                        color='blue4'
+                                        style={{width: '100%'}}>
+										Log In
                                     </Button>
                                 </div>
-                                <div>
-								<span id="new-text">
-									{ this.isDesktop()
-                                        ? 'New to BeTheWave?'
-                                        : 'Not Registered'
-                                    }
-								</span>
-                                    <Link id="link-large" to={routes.register}> Sign up</Link>
+
+                                <a className='forgot-password-link' href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
+
+                                <div className='go-to-signup'>
+									<span>
+										New to BeTheWave
+									</span>
+                                    <Link  to={routes.register}> Sign up</Link>
                                 </div>
-                                <Col md={6}>
+                                <Col md={12}>
                                     <Spinner loading={isFetching} size={50} />
                                 </Col>
                             </Col>

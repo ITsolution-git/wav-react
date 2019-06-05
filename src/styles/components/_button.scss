@@ -29,6 +29,14 @@
     background-color: darken($light-blue, 0.5);
   }
 }
+
+.button-blue4 {
+  background-color: $blue4;
+  &:hover {
+    background-color: darken($blue4, 0.5);
+  }
+}
+
 .button-red {
   background-color: $red;
   &:hover {
