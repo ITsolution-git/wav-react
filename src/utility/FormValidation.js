@@ -2,7 +2,7 @@ export const emailValidation = (...args) => {
   const maxLength = 60;
   const checkIfValid = (element) => {
     if (typeof element === 'string') {
-      if (!(element.length <= maxLength && element.length >= 5 && !!(element.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) ) ) {
+      if (!(element.length <= maxLength && element.length >= 5 && !!(element.match(/^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))) {
         return false
       }
       return true;
@@ -16,9 +16,9 @@ export const emailValidation = (...args) => {
     if (typeof element === 'object') {
       let { email } = element;
       if (typeof email === "string") {
-          if (!(email.length <= maxLength && email.length >= 5 && !!(email.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) ) ) {
-            return false
-          }
+        if (!(email.length <= maxLength && email.length >= 5 && !!(email.match(/^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)))) {
+          return false
+        }
         return true;
       }
       return false;
@@ -39,7 +39,7 @@ export const passwordValidation = (...args) => {
 
   const checkIfValid = (element) => {
     if (typeof element === 'string') {
-      if (!(element.length >= 6 && !!(element.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)) ) ) {
+      if (!(element.length >= 6 && !!(element.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/)))) {
         return false
       }
       return true;
@@ -53,9 +53,9 @@ export const passwordValidation = (...args) => {
     if (typeof element === 'object') {
       let { password } = element;
       if (typeof password === "string") {
-          if (!(password.length >= 6 && !!(password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)) ) ) {
-            return false
-          }
+        if (!(password.length >= 6 && !!(password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/)))) {
+          return false
+        }
         return true;
       }
       return false;
@@ -78,7 +78,7 @@ export const datetimeValidation = (...args) => {
 
   const checkIfValid = (element) => {
     if (typeof element === 'string') {
-      if (!date_regex.test(element) ) {
+      if (!date_regex.test(element)) {
         return false
       }
       return true;
@@ -92,9 +92,9 @@ export const datetimeValidation = (...args) => {
     if (typeof element === 'object') {
       let { password } = element;
       if (typeof password === "string") {
-          if (!date_regex.test(element) ) {
-            return false
-          }
+        if (!date_regex.test(element)) {
+          return false
+        }
         return true;
       }
       return false;
@@ -161,7 +161,7 @@ export const phoneValidation = (...args) => {
 
   const checkIfValid = (element) => {
     if (typeof element === 'number') {
-      if (!(element.toString().length >= 10 && element.toString().length <=11)) {
+      if (!(element.toString().length >= 10 && element.toString().length <= 11)) {
         return false
       }
       return true;
@@ -173,15 +173,15 @@ export const phoneValidation = (...args) => {
       return result //will be a boolean
     }
     if (typeof element === 'object') {
-      let { phoneNumber, number} = element;
+      let { phoneNumber, number } = element;
       if (typeof phoneNumber === 'number' || typeof number === 'number') {
         if (phoneNumber) {
-          if (!(phoneNumber.toString().length >= 10 && phoneNumber.toString().length <=11)) {
+          if (!(phoneNumber.toString().length >= 10 && phoneNumber.toString().length <= 11)) {
             return false
           }
         }
         if (number) {
-          if (!(number.toString().length >= 10 && number.toString().length <=11)) {
+          if (!(number.toString().length >= 10 && number.toString().length <= 11)) {
             return false
           }
         }

@@ -1,5 +1,5 @@
 import config from '../config/ApiConfig';
-import { getAsync, postAsync } from '../helpers/RequestHelper';
+import { postAsync } from '../helpers/RequestHelper';
 
 export default {
     forgotPasswordRequest,

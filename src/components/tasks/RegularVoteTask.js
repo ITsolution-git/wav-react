@@ -43,7 +43,7 @@ class RegularVoteTask extends TaskBase {
             <span>
                 Make sure { firstname } { lastname } votes on June 5. A few things for when you contact { firstname } { lastname }:
                 Ask if they know where their polling location is.
-                If they’re not sure, they can check here: <a target='_blank' href='https://www.vote.org/polling-place-locator'>vote.org/polling-place-locator</a>
+                If they’re not sure, they can check here: <a target='_blank' rel="noopener noreferrer" href='https://www.vote.org/polling-place-locator'>vote.org/polling-place-locator</a>
             </span>
         ),
         secondOption = (

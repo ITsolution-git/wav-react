@@ -42,10 +42,10 @@ const fieldTypes = {
 
 class UpdateProfileTask extends TaskBase {
     constructor(props, context) {
-      super(props, context);
-      this.state = {
-          valid: {}
-      };
+        super(props, context);
+        this.state = {
+            valid: {}
+        };
     }
 
     resolveStepData = (field) => {
@@ -70,7 +70,7 @@ class UpdateProfileTask extends TaskBase {
             case gender:
                 return this.renderInput(gender, 'Gender', <GenderInput onChange={this.onChange} required />);
             case city:
-                return this.renderInput(city, 'City', <CityInput onChange={this.onChange} required  />);
+                return this.renderInput(city, 'City', <CityInput onChange={this.onChange} required />);
             case address:
                 return this.renderInput(address, 'Address', <AddressInput onChange={this.onChange} required />);
             case phoneNumber:
@@ -79,6 +79,8 @@ class UpdateProfileTask extends TaskBase {
                 return this.renderInput(dateOfBirth, 'Date of Birth', <DateOfBirthInput onChange={this.onChange} required />);
             case zipCode:
                 return this.renderInput(zipCode, 'Zip Code', <ZipCodeInput onChange={this.onChange} required />);
+            default:
+                break;
         }
     };
 
@@ -107,14 +109,14 @@ class UpdateProfileTask extends TaskBase {
 
         return (
             <div key={name} className='update-profile'>
-                { this.renderRequiredFieldMsg() }
-                    { this.isVoterTask()
+                {this.renderRequiredFieldMsg()}
+                {this.isVoterTask()
                     && <Typography gutterBottom>
-                        { firstname } { lastname } from { city }, { state } needs to have the following information about them updated
+                        {firstname} {lastname} from {city}, {state} needs to have the following information about them updated
                     </Typography>
-                    }
+                }
                 <div className='input-field-div'>
-                    <div className='input-field'>{ input }</div>
+                    <div className='input-field'>{input}</div>
                 </div>
             </div>
         )
@@ -138,21 +140,22 @@ class UpdateProfileTask extends TaskBase {
             ? captain_metaData
             : voter_metaData.fields || [];
 
-        return [ ...fields.map(this.resolveStepData), {
+        return [...fields.map(this.resolveStepData), {
             label: 'Success',
             component: <TaskSuccess data={this.getTaskData()} />,
-            valid: true }
+            valid: true
+        }
         ];
     };
 
     getTaskData = () => {
-        const { taskData = {}} = this.props,
+        const { taskData = {} } = this.props,
             type = taskData.captain_metaData ? 'captain_metaData' : 'voter_metaData';
         return { [type]: this.state, taskid: taskData._id, points: taskData.group_info.value };
     };
 
     isVoterTask = () => {
-        const { taskData = {}} = this.props;
+        const { taskData = {} } = this.props;
         return !!taskData.voter_metaData;
     };
 
@@ -160,8 +163,8 @@ class UpdateProfileTask extends TaskBase {
 
         if (!this.props.taskData && this.props.tasks.length === 0) {
             return ''
-        } 
-        
+        }
+
         if (!this.props.taskData && this.props.tasks.length > 0) {
             this.props.history.push('/errorPages/No_Task')
             return ''
@@ -191,7 +194,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ }, dispatch)
+    actions: bindActionCreators({}, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WithTask(UpdateProfileTask));

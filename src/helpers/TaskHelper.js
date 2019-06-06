@@ -66,11 +66,13 @@ export function resolveTaskData(task) {
             break;
         }
         case taskIds.regularVoteTaskId: {
-            const { stateInfo = {}} = task;
+            const { stateInfo = {} } = task;
             task.description = `Remind ${firstname} ${lastname} to vote on ${stateInfo['nextElection'] || ''}`;
             task.route = routes.regularVoteTask;
             break;
         }
+        default:
+            break;
     }
     return task;
 }

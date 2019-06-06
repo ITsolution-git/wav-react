@@ -28,7 +28,7 @@ class ReminderVoteTask extends TaskBase {
         };
     }
 
-    getSubComponent  = () => {
+    getSubComponent = () => {
         const {
             taskData: {
                 voter_metaData: {
@@ -46,8 +46,8 @@ class ReminderVoteTask extends TaskBase {
             case subSteps.haveRemind: {
                 return {
                     component: <YesNoButtons title={`Did you remind ${firstname} ${lastname}  to mail in their ballot?`}
-                                             value={haveRemind}
-                                             onChange={val => this.setState({ haveRemind: val, nextEnabled: true })} />,
+                        value={haveRemind}
+                        onChange={val => this.setState({ haveRemind: val, nextEnabled: true })} />,
                     onNext: () => {
                         if (haveRemind === 'no') {
                             this.onLink(routes.tasksList);
@@ -56,6 +56,8 @@ class ReminderVoteTask extends TaskBase {
                     valid: !!haveRemind
                 }
             }
+            default:
+                break;
         }
     };
 
@@ -71,7 +73,7 @@ class ReminderVoteTask extends TaskBase {
         const subComponent = this.getSubComponent();
 
         return [
-            { label: 'What to do', component: <WhatToDo voterData={ voter_metaData } stateInfo={stateInfo} />, valid: true },
+            { label: 'What to do', component: <WhatToDo voterData={voter_metaData} stateInfo={stateInfo} />, valid: true },
             {
                 label: 'Have contact',
                 component: subComponent.component,
@@ -79,24 +81,25 @@ class ReminderVoteTask extends TaskBase {
                 onNext: subComponent.onNext,
                 nextEnabled
             },
-            { label: 'Success',
-                component: <TaskSuccess data={this.getTaskData()}/>,
+            {
+                label: 'Success',
+                component: <TaskSuccess data={this.getTaskData()} />,
                 valid: true
             }
         ];
     };
 
     getTaskData = () => {
-        const { taskData = {}} = this.props;
+        const { taskData = {} } = this.props;
         return { taskid: taskData._id, points: taskData.group_info.value };
     };
 
     render() {
-        
+
         if (!this.props.taskData && this.props.tasks.length === 0) {
             return ''
-        } 
-        
+        }
+
         if (!this.props.taskData && this.props.tasks.length > 0) {
             this.props.history.push('/errorPages/No_Task')
             return ''

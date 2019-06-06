@@ -29,7 +29,7 @@ class VerifyCaptain extends BaseComponent {
 	handleChange = (value, isValid, name) => {
 		this.setState({
 			[name]: value,
-			valid: {...this.state.valid, [name]: isValid }
+			valid: { ...this.state.valid, [name]: isValid }
 		});
 	};
 
@@ -52,52 +52,50 @@ class VerifyCaptain extends BaseComponent {
 			this.onLink(routes.changePassword, { "id": props.user._id.toString() });
 			return;
 		} else {
-			this.setState({ "isVerified": false});
+			this.setState({ "isVerified": false });
 		}
 	}
 
 	render() {
-		
-        const nameWidth = this.isMobile() ? 12 : 6;
-        
+
 		return (
-				<div className='btw-change-password btw-verify'>
-					<div className="container">
-						<div className="verify-captain col-lg-9 col-md-12">
-							{ !this.state.isVerified && <div className="warning-red">User doesn't exist</div> }
-							<div className="title-32-light-blue">
-								Fill in these details for us to verify your account
+			<div className='btw-change-password btw-verify'>
+				<div className="container">
+					<div className="verify-captain col-lg-9 col-md-12">
+						{!this.state.isVerified && <div className="warning-red">User doesn't exist</div>}
+						<div className="title-32-light-blue">
+							Fill in these details for us to verify your account
 							</div>
-							<div className="text-18-dark-blue">
-								<FirstNameInput 
-									onChange={this.handleChange}
-									isVoter={false}
-									name="firstname"
-									uniqueValidationEnabled={false}
-									required />
-								<LastNameInput 
-									onChange={this.handleChange}
-									isVoter={false}
-									name="lastname"
-									uniqueValidationEnabled={false}
-									required />
-							</div>
-							<div id="btn-next">
-								<Button onClick={this.btwVerify}>Submit</Button>
-							</div>
+						<div className="text-18-dark-blue">
+							<FirstNameInput
+								onChange={this.handleChange}
+								isVoter={false}
+								name="firstname"
+								uniqueValidationEnabled={false}
+								required />
+							<LastNameInput
+								onChange={this.handleChange}
+								isVoter={false}
+								name="lastname"
+								uniqueValidationEnabled={false}
+								required />
+						</div>
+						<div id="btn-next">
+							<Button onClick={this.btwVerify}>Submit</Button>
 						</div>
 					</div>
 				</div>
+			</div>
 		);
 	}
 }
 
 const mapStateToProps = (state) => {
-    const { isSuccess, user } = state.request;
-    return {
+	const { isSuccess, user } = state.request;
+	return {
 		isSuccess,
 		user
-    };
+	};
 };
 
 
