@@ -213,7 +213,7 @@ export const zipCodeValidation = (...args) => {
         if (current === '0') {
           return previous && true;
         }
-        return previous && !!(parseInt(current));
+        return previous && !!(parseInt(current, 10));
       }, true);
 
       return boolean;
@@ -236,7 +236,7 @@ export const zipCodeValidation = (...args) => {
           if (current === '0') {
             return previous && true;
           }
-          return previous && !!(parseInt(current));
+          return previous && !!(parseInt(current, 10));
         }, true);
         return boolean;
       }
@@ -266,7 +266,7 @@ export const dateValidation = (...args) => {
         if (current === '0') {
           return previous && true;
         }
-        return previous && !!(parseInt(current));
+        return previous && !!(parseInt(current, 10));
       }, true);
 
       return boolean;
@@ -289,7 +289,7 @@ export const dateValidation = (...args) => {
           if (current === '0') {
             return previous && true;
           }
-          return previous && !!(parseInt(current));
+          return previous && !!(parseInt(current, 10));
         }, true);
         return boolean;
       }
