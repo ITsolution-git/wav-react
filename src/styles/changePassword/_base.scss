@@ -1,58 +1,37 @@
 .btw-change-password {
-    @include respond-to($desktop) {
-        width: $max_width;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 512px;
+  
+    .content{
+        padding: 51px 88px;
     }
-	margin: auto;
-    margin-top: $margin_top;
-    text-align: center;
-
-    .intro {
-        margin-top: $margin_top;
-        text-align: center;
+  
+    .title{
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+        text-align: left;
+        margin-bottom: 13px;
     }
-
-    .intro-title {
-        font-size: $font_size_title;
-    }
-
-    .intro-desc {
-        margin-top: 30px;
-        font-size: $font_size_desc;
-    }
-
-    form {
-        @include respond-to($desktop) {
-            width: $max_width - 300px;
+    
+	.remember{
+        margin-top: 50px;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 130%;
+        a {
+            color: #0A1333;
+            font-weight: bold;
         }
-
-        margin: auto;
-        margin-top: 70px;
-
-        label {
-            margin-bottom: 15px;
-            @extend .btw-label;
+	}
+  
+    @media screen and (max-width: 568px) {
+        .content{
+            padding: 37px 16px;
         }
-
-        input {
-            @extend .btw-input;
-        }
-        
-        select {
-            @extend .btw-select;
-
-            background: url(https://upload.wikimedia.org/wikipedia/commons/f/f1/MediaWiki_Vector_skin_action_arrow.svg) 98% / 5% no-repeat;
-        }
-		
-        span {
-          color: red;
-        }
-
-        .form-group {
-            margin-bottom: $input_field_space;
-        }
-    }
-
-    .mr-1 {
-        margin-right: 10px;
+        width: 100%;
+        margin: 0 24px;
     }
 }
