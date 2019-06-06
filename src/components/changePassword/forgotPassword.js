@@ -99,7 +99,7 @@ class ForgotPassword extends BaseComponent {
 							<Typography className='description'>
 								Enter the email address associated with your account and
 								we’ll send you a link to create a new Password
-															</Typography>
+							</Typography>
 						</Grid>
 						<TextField
 							className='input'
@@ -119,7 +119,7 @@ class ForgotPassword extends BaseComponent {
 							onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}
 							fullWidth>
 							Send Verification Link
-													</Button>
+						</Button>
 						<div className='remember'>
 							Remembered? <Link to={routes.login}><b>Log in</b></Link>.
 						</div>
@@ -161,7 +161,6 @@ class ForgotPassword extends BaseComponent {
                             </Button>
                     </Row>
                 </div> */}
-
 			</div >
 		);
 	}
