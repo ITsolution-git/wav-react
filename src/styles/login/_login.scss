@@ -1,13 +1,64 @@
 .btw-login {
+
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+
+  @include respond-to($phone) {
+    width: 272px;
+    padding: 37px 16px 36px;
+  }
+
+  @include respond-to($tablet) {
+    width: 512px;
+    padding: 59px 88px 44px;
+    margin-top: 138px;
+  }
+
+  @include respond-to($desktop) {
+    width: 512px;
+    padding: 59px 88px 44px;
+  }
+
   .btw-form {
-    margin-top: 25%;
+    
+    .login-title{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 27px;
+      margin-bottom: 45px;
+    }
+
+    .input-field-label{
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      margin-bottom: 5px;
+    }
+
+    .forgot-password-link{
+      margin-top: 50px;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 13px;
+      line-height: 18px;
+      color: black;
+    }
+
+    .go-to-signup{
+      margin-top: 20px;
+    }
   }
+
+
   #button-class {
-    margin: 20px 0 20px 0;
+    margin-bottom: 50px;
   }
-  #title {
-    margin-bottom: 5%;
-  }
+  
+
+
   #mobile-title {
     margin-bottom: 20%;
   }
