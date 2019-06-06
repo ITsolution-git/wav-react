@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Button, Grid, Typography, Paper } from '@material-ui/core';
+import { Grid, Typography, Paper } from '@material-ui/core';
 
 import { changePasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
@@ -10,6 +10,7 @@ import {
     PasswordInput,
     TextInput
 } from '../../components/shared/validatedInputs';
+import Button from '../shared/Button';
 
 class ChangePassword extends BaseComponent {
     constructor() {
@@ -106,14 +107,9 @@ class ChangePassword extends BaseComponent {
                             onChange={this.handleChange}
                             name='confirmPassword'
                             required />
-                        <Button
-                            className='button'
-                            variant='contained'
-                            color='primary'
-                            fullWidth
-                            onClick={this.changePassword}>
+                        <Button onClick={this.changePassword}>
                             Save New Password
-						</Button>
+                        </Button>
                         <div className='remember'>
                             Remembered? <Link to={routes.login}>Log in</Link>.
 						</div>

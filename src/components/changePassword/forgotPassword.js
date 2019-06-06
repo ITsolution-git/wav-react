@@ -1,83 +1,51 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Button, TextField, Grid, Typography, Paper } from '@material-ui/core';
+import { Grid, Typography, Paper } from '@material-ui/core';
 
 import { forgotPasswordRequest } from '../../actions/PasswordRequestAction';
-import { validate } from '../../utility/InputValidator';
 import BaseComponent from '../shared/BaseComponent';
 import routes from '../../constants/Routes';
-// TODO: commented by sergey
-// import Spinner from '../../components/shared/Spinner';
-
-const errorMsg = '* Email is not valid *';
-const fieldName = 'email';
+import Button from '../shared/Button';
+import { EmailInput } from '../../components/shared/validatedInputs';
 
 class ForgotPassword extends BaseComponent {
     constructor() {
         super();
         this.state = {
-            info: this.getEmptyState(),
-            isValid: this.getEmptyState(true),
+            email: '',
+            isValid: false,
             isUserFound: -1
         }
     }
 
-    getEmptyState = (initValue = '') => {
-        return {
-            email: initValue
-        };
+    componentWillReceiveProps(props) {
+        const { isUserFound } = props;
+        this.setState({ isUserFound: isUserFound ? 1 : 0 });
+    }
+
+    handleChange = (value, valid, name) => {
+        this.setState({ email: value, isValid: valid });
     };
 
-    updateFields(field, event) {
-        let info = Object.assign({}, this.state.info);
-        info[field] = event.target.value;
-        this.setState({
-            info: info
-        })
+    onForgotPassword = () => {
+        const { isValid, email } = this.state;
+        const { forgotPasswordRequest } = this.props;
+        isValid && forgotPasswordRequest(email);
     }
 
-    validateFields(field, event) {
-        const { isValid } = this.state;
-        const { value } = event.target;
-        let validation = { ...isValid };
-
-        validation[field] = validate(field, value);
-        this.setState({ isValid: validation });
-    }
-
-    onForgotPassword(event) {
-        const { isValid, info } = this.state;
-        let validation = { ...isValid };
-
-        Object.keys(info).forEach(key => {
-            validation[key] = validate(key, info[key]);
-        });
-        this.setState({ isValid: validation });
-        return Object.keys(info).some(key => !validation[key])
-            ? true
-            : this.props.forgotPasswordRequest(info.email);
-    }
-
-    componentWillReceiveProps(props) {
-        if (props.isUserFound) {
-            this.setState({
-                isUserFound: 1
-            })
-        }
-
-        if (props.isUserFound === false) {
-            this.setState({
-                isUserFound: 0
-            })
-        }
+    renderMessage = () => {
+        const { isUserFound } = this.state;
+        return (
+            <React.Fragment>
+                {isUserFound === 0 && <span className='errorMessage'>User doesn't exist</span>}
+                {isUserFound === 1 && <span className='successMessage'>Reset password request sent</span>}
+            </React.Fragment>
+        )
     }
 
     render() {
-
-        // TODO: It is connected with Spinner. by sergey
-        // const { isFetching } = this.props;
-        const { isValid, isUserFound } = this.state;
+        const { email } = this.state;
 
         return (
             <div className="btw-forgot-password">
@@ -92,31 +60,17 @@ class ForgotPassword extends BaseComponent {
 								we’ll send you a link to create a new Password
 							</Typography>
                         </Grid>
-                        {isUserFound === 0 && <span style={{ fontSize: "12px", color: "red" }}>User doesn't exist</span>}
-                        {isUserFound === 1 && <span style={{ fontSize: "12px", color: "green" }}>Reset password request sent</span>}
-                        <TextField
-                            className='input'
-                            required
-                            autoFocus
-                            margin="normal"
-                            label="Email"
-                            type="email"
-                            onChange={this.updateFields.bind(this, fieldName)}
-                            onBlur={this.validateFields.bind(this, fieldName)}
-                            fullWidth />
-                        {!isValid[fieldName] && <span style={{ fontSize: "12px", color: "red" }}>{errorMsg}</span>}
-                        {/* TODO: Please update Spinner It is not overlay. by Sergey*/}
-                        {/* <Spinner loading={isFetching} size={50} /> */}
-                        <Button
-                            className='button'
-                            variant='contained'
-                            color='primary'
-                            onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}
-                            fullWidth>
-                            Send Verification Link
-						</Button>
+                        {this.renderMessage()}
+                        <EmailInput
+                            defaultValue={email}
+                            onChange={this.handleChange}
+                            uniqueValidationEnabled={false}
+                            required />
+                        <Button onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
+                            Send Request
+                        </Button>
                         <div className='remember'>
-                            Remembered? <Link to={routes.login}>Log in</Link>.
+                            Remembered? <Link to={routes.login}>Log in.</Link>
 						</div>
                     </Paper>
                 </Grid>
@@ -126,10 +80,9 @@ class ForgotPassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { isUserFound, isFetching } = state.request;
+    const { isUserFound } = state.request;
     return {
-        isUserFound,
-        isFetching
+        isUserFound
     };
 };
 
