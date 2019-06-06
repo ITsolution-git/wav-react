@@ -115,7 +115,7 @@ class ChangePassword extends BaseComponent {
                             Save New Password
 						</Button>
                         <div className='remember'>
-                            Remembered? <Link to={routes.login}><b>Log in</b></Link>.
+                            Remembered? <Link to={routes.login}>Log in</Link>.
 						</div>
                     </Paper>
                 </Grid>
