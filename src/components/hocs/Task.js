@@ -1,13 +1,11 @@
 import React from 'react';
 
 import BaseComponent from '../shared/BaseComponent';
-import routes from '../../constants/Routes';
-
 
 const Task = (TaskComponent) => {
     return class WithTask extends BaseComponent {
         componentWillMount() {
-            window.onbeforeunload = function(e) {
+            window.onbeforeunload = function (e) {
                 const dialogText = `Are sure you want to reload? After refreshing the page you will be redirected back to the 'Task List' page and all progress will be lost`;
                 return dialogText;
             };
@@ -16,7 +14,7 @@ const Task = (TaskComponent) => {
             }
         }
 
-        componentWillUnmount()  {
+        componentWillUnmount() {
             window.onbeforeunload = null;
         }
 

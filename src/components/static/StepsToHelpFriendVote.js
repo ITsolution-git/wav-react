@@ -77,7 +77,7 @@ class StepsToHelpFriendVote extends BaseComponent {
 
 					<p>
 						If you’re feeling particularly enterprising, you can host a ballot party. Invite some friends over to discuss what’s on the ballot and share research.
-						But it should be a party, so make it fun! Have snacks and some music.  <a target="_blank" href="https://ballotparty.ballotready.org"> Learn more here.</a>
+						But it should be a party, so make it fun! Have snacks and some music.  <a target="_blank" rel="noopener noreferrer" href="https://ballotparty.ballotready.org"> Learn more here.</a>
 					</p><br/>
 
 

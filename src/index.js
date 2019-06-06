@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import History from './utility/History';
 import HttpsRedirect from 'react-https-redirect';
 
@@ -15,9 +15,9 @@ import registerServiceWorker from './registerServiceWorker';
 const app = (
 	<Provider store={store.configure()}>
 		<HttpsRedirect>
-            <Router history={History}>
+			<Router history={History}>
 				<App />
-            </Router>
+			</Router>
 		</HttpsRedirect>
 	</Provider>
 );
