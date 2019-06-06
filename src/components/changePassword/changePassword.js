@@ -1,11 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Button, TextField, Grid, Typography, Paper } from '@material-ui/core';
+import { Button, Grid, Typography, Paper } from '@material-ui/core';
 
 import { changePasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
 import routes from '../../constants/Routes';
+import {
+    PasswordInput,
+    TextInput
+} from '../../components/shared/validatedInputs';
 
 class ChangePassword extends BaseComponent {
     constructor() {
@@ -88,26 +92,20 @@ class ChangePassword extends BaseComponent {
                         <Grid container alignItems='center' justify='flex-start'>
                             <Typography className='title'>Reset Password</Typography>
                         </Grid>
-                        <TextField
-                            className='input'
-                            required
-                            autoFocus
-                            margin="normal"
-                            label="New password"
-                            type="password"
+                        <PasswordInput
+                            onChange={this.handleChange}
+                            isVoter={false}
                             name="password"
-                            fullWidth
-                            onChange={this.handleChange} />
-                        <TextField
-                            className='input'
-                            required
-                            autoFocus
-                            margin="normal"
-                            label="Confirm new password"
-                            type="password"
+                            uniqueValidationEnabled={false}
+                            required />
+                        <TextInput label='Confirm Password'
+                            type='password'
+                            id="confirmPassword"
+                            validator={value => value === this.state.password}
+                            validatorError='The passwords do not match'
+                            onChange={this.handleChange}
                             name='confirmPassword'
-                            fullWidth
-                            onChange={this.handleChange} />
+                            required />
                         <Button
                             className='button'
                             variant='contained'
