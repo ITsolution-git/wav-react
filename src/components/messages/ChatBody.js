@@ -42,18 +42,18 @@ class ChatBody extends BaseComponent {
     }
 
     renderText = (msg) => {
-      return (
-          <div className='msg-text'>
-              <Typography>{ msg }</Typography>
-          </div>
-      );
+        return (
+            <div className='msg-text'>
+                <Typography>{msg}</Typography>
+            </div>
+        );
     };
 
     renderFrom = (message, isAdmin) => {
         return (
             <div className='msg-from'>
-                <Typography variant='caption'>{ this.getUsername(isAdmin) }</Typography>
-                <div className='msg-box'>{ this.formatMessage(message) }</div>
+                <Typography variant='caption'>{this.getUsername(isAdmin)}</Typography>
+                <div className='msg-box'>{this.formatMessage(message)}</div>
             </div>
         )
     };
@@ -61,8 +61,8 @@ class ChatBody extends BaseComponent {
     renderTo = (message, isAdmin) => {
         return (
             <div className='msg-to'>
-                <div className='msg-box'>{ this.formatMessage(message) }</div>
-                <Typography variant='caption'>{ this.getUsername(isAdmin, true) }</Typography>
+                <div className='msg-box'>{this.formatMessage(message)}</div>
+                <Typography variant='caption'>{this.getUsername(isAdmin, true)}</Typography>
             </div>
         )
     };
@@ -70,11 +70,11 @@ class ChatBody extends BaseComponent {
     getUsername = (isAdmin, isTo) => {
         const { user_info: { user: { email } = {} } = {} } = this.props.chat || {},
             resolvedUserEmail = isTo ? authStorage.getLoggedUser().email : email,
-            isAdminText = isAdmin && ' (admin)' || '';
+            isAdminText = isAdmin && ' (admin)';
         return (
             <div>
-                <div>{ resolvedUserEmail }</div>
-                <div>{ isAdminText }</div>
+                <div>{resolvedUserEmail}</div>
+                <div>{isAdminText}</div>
             </div>
         )
     };
@@ -84,9 +84,9 @@ class ChatBody extends BaseComponent {
         if (jsonMsg) {
             return (
                 <div>
-                    <div>Task: { jsonMsg.task }</div>
-                    <div>Checkpoint: { jsonMsg.checkpoint } </div>
-                    <div>Question: { jsonMsg.question }</div>
+                    <div>Task: {jsonMsg.task}</div>
+                    <div>Checkpoint: {jsonMsg.checkpoint} </div>
+                    <div>Question: {jsonMsg.question}</div>
                 </div>
             )
         }
@@ -100,15 +100,15 @@ class ChatBody extends BaseComponent {
         } = this.props;
 
         sendMessage(chatId, this.state.value);
-        this.setState({ value: ''});
+        this.setState({ value: '' });
     };
 
     closeChat = () => {
-      const {
-          actions: { closeChat },
-          chatId
-      } = this.props;
-      closeChat(chatId);
+        const {
+            actions: { closeChat },
+            chatId
+        } = this.props;
+        closeChat(chatId);
     };
 
     scrollToBottom = () => {
@@ -133,14 +133,14 @@ class ChatBody extends BaseComponent {
         const { value } = this.state;
         return (
             <div className='chat-body'>
-                { chatId
+                {chatId
                     ? messages
                         ? (
                             <div className='messages'>
-                                { messages.map((msg, i) => {
+                                {messages.map((msg, i) => {
                                     return (
                                         <div key={i}>
-                                            { authStorage.getCurrentRole() === roles.admin
+                                            {authStorage.getCurrentRole() === roles.admin
                                                 ? msg.isAdmin
                                                     ? this.renderTo(msg.message, true)
                                                     : this.renderFrom(msg.message)
@@ -154,20 +154,20 @@ class ChatBody extends BaseComponent {
                                 <div ref={(el) => { this.messagesEnd = el; }} ></div>
                                 <div className='controls'>
                                     <Input placeholder='Compose...'
-                                               autoFocus
-                                               multiline
-                                               rows='3'
-                                               value={value}
-                                               fullWidth
-                                               disableUnderline={true}
-                                               onChange={e => this.setState({ value: e.target.value })}
+                                        autoFocus
+                                        multiline
+                                        rows='3'
+                                        value={value}
+                                        fullWidth
+                                        disableUnderline={true}
+                                        onChange={e => this.setState({ value: e.target.value })}
 
                                     />
                                     <Row>
                                         <Col md={3} xs={4}>
                                             <Button disabled={!value} onClick={this.sendMessage}>Send</Button>
                                         </Col>
-                                        <Col md={3} xs={4} onClick={() => this.setState({ value: ''})}>
+                                        <Col md={3} xs={4} onClick={() => this.setState({ value: '' })}>
                                             <Button>Cancel</Button>
                                         </Col>
                                         <Col md={3} xs={4} onClick={this.closeChat}>

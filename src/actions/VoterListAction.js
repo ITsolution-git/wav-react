@@ -5,7 +5,8 @@ import authStorage from '../storage/AuthStorage';
 import { setBoardingType, voterDetailsPersist } from './VoterAction';
 import routes from '../constants/Routes';
 import history from '../utility/History';
-import { initializeRequest, loadDataFailure, loadDataSuccess } from './AppAction';
+// TODO: fix linting issue by sergey
+// import { initializeRequest, loadDataFailure, loadDataSuccess } from './AppAction';
 import votingInfoConstants from '../constants/reducerConstants/VotingInfoConstants';
 
 export function loadVoterList() {
@@ -106,10 +107,10 @@ export function deleteVoter(data) {
 export function loadVotingInfo(email, type) {
     return dispatch => {
         dispatch({
-                type: votingInfoConstants.VOTING_INFO_REQUEST,
-                dataType: type,
-                email
-            });
+            type: votingInfoConstants.VOTING_INFO_REQUEST,
+            dataType: type,
+            email
+        });
 
         let apiService = voterService.getReferendumInfo,
             resultsProp = 'results';
@@ -123,24 +124,26 @@ export function loadVotingInfo(email, type) {
                 apiService = voterService.getPollingLocationInfo;
                 resultsProp = 'pollingLocations';
                 break;
+            default:
+                break;
         }
 
         return apiService(email).then(
             response => {
                 dispatch({
-                        type: votingInfoConstants.VOTING_INFO_SUCCESS,
-                        data: response.data[resultsProp],
-                        dataType: type,
-                        email
-                    });
+                    type: votingInfoConstants.VOTING_INFO_SUCCESS,
+                    data: response.data[resultsProp],
+                    dataType: type,
+                    email
+                });
             },
             error => {
                 dispatch({
-                        type: votingInfoConstants.VOTING_INFO_ERROR,
-                        dataType: type,
-                        error,
-                        email
-                    });
+                    type: votingInfoConstants.VOTING_INFO_ERROR,
+                    dataType: type,
+                    error,
+                    email
+                });
             })
     };
 }

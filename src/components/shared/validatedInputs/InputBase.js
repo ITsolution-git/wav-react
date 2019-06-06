@@ -14,7 +14,7 @@ export default class InputBase extends BaseComponent {
 
     onChange = (e) => {
         let { value } = e.target;
-        const { onInputChange = () => {}} = this.props;
+        const { onInputChange = () => { } } = this.props;
         onInputChange(e);
 
         this.setState(({ value }), () => {
@@ -27,9 +27,9 @@ export default class InputBase extends BaseComponent {
     };
 
     onFocusOut = (e) => {
-      const { onBlur = () => {}} = this.props;
-      onBlur(e);
-      this.validate();
+        const { onBlur = () => { } } = this.props;
+        onBlur(e);
+        this.validate();
     };
 
     onParentChange = () => {
@@ -81,7 +81,7 @@ export default class InputBase extends BaseComponent {
 
     resolveLabel = () => {
         const { label, required, showAsterisk = false } = this.props;
-        return `${label} ${required && showAsterisk && '*' || ''}`;
+        return `${label} ${required && showAsterisk && '*'}`;
     };
 }
 
@@ -118,26 +118,26 @@ export class TextInput extends InputBase {
             error
         } = this.state;
 
-          return (
+        return (
             <FormControl error={!isValid}
-                         required={required}
-                         disabled={disabled}
-                         fullWidth={fullWidth}>
+                required={required}
+                disabled={disabled}
+                fullWidth={fullWidth}>
                 <input value={value}
-                       placeholder={this.resolveLabel()}
-                       type={type}
-                       id={id}
-                       onBlur={this.onFocusOut}
-                       className="btw-input-new"
-                       onChange={e => {
-                           const { value } = e.target;
-                           if (value.length <= maxLength) {
-                               this.onChange(e);
-                           }
-                       }}
-                       disabled={disabled} />
-                <FormHelperText classes={{root: classnames('btw-input-error', { 'btw-error-white': errorWhite })}}>
-                    { error }
+                    placeholder={this.resolveLabel()}
+                    type={type}
+                    id={id}
+                    onBlur={this.onFocusOut}
+                    className="btw-input-new"
+                    onChange={e => {
+                        const { value } = e.target;
+                        if (value.length <= maxLength) {
+                            this.onChange(e);
+                        }
+                    }}
+                    disabled={disabled} />
+                <FormHelperText classes={{ root: classnames('btw-input-error', { 'btw-error-white': errorWhite }) }}>
+                    {error}
                 </FormHelperText>
             </FormControl>
         );
@@ -182,21 +182,21 @@ export class Dropdown extends InputBase {
         } = this.state;
         return (
             <FormControl required={required}
-                         disabled={disabled}
-                         fullWidth={fullWidth} >
+                disabled={disabled}
+                fullWidth={fullWidth} >
                 <Select
                     className={`btw-validated-dropdown ${classes}`}
                     value={value}
                     onChange={option => {
-                        const e = { target: { value: (option || {}).value || ''} };
+                        const e = { target: { value: (option || {}).value || '' } };
                         this.onChange(e);
                     }}
                     placeholder={this.resolveLabel()}
                     onBlur={this.onFocusOut}
                     options={values.map(this.mapItem)}
                 />
-                <FormHelperText classes={{root: classnames('btw-input-error', { 'btw-error-white': errorWhite })}}
-                                error={!isValid}>{ error }</FormHelperText>
+                <FormHelperText classes={{ root: classnames('btw-input-error', { 'btw-error-white': errorWhite }) }}
+                    error={!isValid}>{error}</FormHelperText>
             </FormControl>
         );
     };

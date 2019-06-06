@@ -35,7 +35,7 @@ class MailRegistrationTask extends TaskBase {
         };
     }
 
-    getSubComponent  = () => {
+    getSubComponent = () => {
         const {
             taskData: {
                 voter_metaData: {
@@ -55,30 +55,30 @@ class MailRegistrationTask extends TaskBase {
             case subSteps.haveAsked: {
                 return {
                     component: <YesNoButtons title={`Did you talk to ${firstname} ${lastname} about signing up to vote by mail?`}
-                                             value={haveAsked}
-                                             onChange={val => this.setState({ haveAsked: val })} />,
+                        value={haveAsked}
+                        onChange={val => this.setState({ haveAsked: val })} />,
                     onNext: () => {
-                         if (haveAsked === 'no') {
-                             this.onLink(routes.tasksList);
-                             return;
-                         }
-                         this.setState({ subComponent: subSteps.haveConfirmed });
-                     },
+                        if (haveAsked === 'no') {
+                            this.onLink(routes.tasksList);
+                            return;
+                        }
+                        this.setState({ subComponent: subSteps.haveConfirmed });
+                    },
                     valid: !!haveAsked
                 }
             }
             case subSteps.haveConfirmed: {
                 return {
                     component: <YesNoButtons title={`Did ${firstname} ${lastname} confirm that they’ve signed up?`}
-                                             value={haveConfirmed}
-                                             onChange={val => this.setState({ haveConfirmed: val })} />,
+                        value={haveConfirmed}
+                        onChange={val => this.setState({ haveConfirmed: val })} />,
                     onNext: () => {
                         if (haveConfirmed === 'no') {
                             this.onLink(routes.tasksList);
                             return;
                         }
                         this.setState({ subComponent: subSteps.photoUpload });
-                     },
+                    },
                     valid: !!haveConfirmed
                 }
             }
@@ -86,16 +86,18 @@ class MailRegistrationTask extends TaskBase {
                 return {
                     component: (
                         <PhotoUpload title='Upload an email or photo confirming that they’ve signed up.'
-                                     onFileChange={image => this.setState({
-                                         image,
-                                         photoStepValid: true,
-                                         nextEnabled: true
-                                     })}
+                            onFileChange={image => this.setState({
+                                image,
+                                photoStepValid: true,
+                                nextEnabled: true
+                            })}
                         />
                     ),
                     valid: photoStepValid
                 }
             }
+            default:
+                break;
         }
     };
 
@@ -111,7 +113,7 @@ class MailRegistrationTask extends TaskBase {
         const subComponent = this.getSubComponent();
 
         return [
-            { label: 'What to do', component: <WhatToDo voterData={ voter_metaData } stateInfo={stateInfo} />, valid: true },
+            { label: 'What to do', component: <WhatToDo voterData={voter_metaData} stateInfo={stateInfo} />, valid: true },
             {
                 label: 'Have contact',
                 component: subComponent.component,
@@ -119,15 +121,16 @@ class MailRegistrationTask extends TaskBase {
                 onNext: subComponent.onNext,
                 nextEnabled
             },
-            { label: 'Success',
-              component: <TaskSuccess data={this.getTaskData()}/>,
-              valid: true
+            {
+                label: 'Success',
+                component: <TaskSuccess data={this.getTaskData()} />,
+                valid: true
             }
         ];
     };
 
     getTaskData = () => {
-        const { taskData = {}} = this.props;
+        const { taskData = {} } = this.props;
         let formData = new FormData();
         formData.append('image', this.state.image);
         formData.append('taskid', taskData._id);
@@ -139,8 +142,8 @@ class MailRegistrationTask extends TaskBase {
 
         if (!this.props.taskData && this.props.tasks.length === 0) {
             return ''
-        } 
-        
+        }
+
         if (!this.props.taskData && this.props.tasks.length > 0) {
             this.props.history.push('/errorPages/No_Task')
             return ''

@@ -6,8 +6,8 @@ import BaseComponent from '../../shared/BaseComponent';
 
 export default class UserItem extends BaseComponent {
     state = {
-      moreEnabled: false,
-      openImageModal: false
+        moreEnabled: false,
+        openImageModal: false
     };
 
     renderDetailedVoterInfo = () => {
@@ -25,14 +25,14 @@ export default class UserItem extends BaseComponent {
         } = this.props.user;
         return (
             <div>
-                <div>State: { state }</div>
-                <div>Gender: { gender }</div>
-                <div>City: { city}</div>
-                <div>Address: { address }</div>
-                <div>Phone: { phonenumber }</div>
-                <div>Is Registered: { isRegistered ? 'True' : 'False' }</div>
-                <div>Is Completed: { isCompleted ? 'True' : 'False' } </div>
-                <div>Status: { voterStatus ? voterStatus : '' }</div>
+                <div>State: {state}</div>
+                <div>Gender: {gender}</div>
+                <div>City: {city}</div>
+                <div>Address: {address}</div>
+                <div>Phone: {phonenumber}</div>
+                <div>Is Registered: {isRegistered ? 'True' : 'False'}</div>
+                <div>Is Completed: {isCompleted ? 'True' : 'False'} </div>
+                <div>Status: {voterStatus ? voterStatus : ''}</div>
             </div>
         )
     };
@@ -49,12 +49,12 @@ export default class UserItem extends BaseComponent {
 
         return (
             <div>
-                <div>Username: { username }</div>
-                <div>Role: { role }</div>
-                <div>Phone: { phonenumber }</div>
-                <div>Address: { address }</div>
-                <div>Date of birth: { dateofbirth.date }</div>
-                <div>ZipCode: { zipcode } </div>
+                <div>Username: {username}</div>
+                <div>Role: {role}</div>
+                <div>Phone: {phonenumber}</div>
+                <div>Address: {address}</div>
+                <div>Date of birth: {dateofbirth.date}</div>
+                <div>ZipCode: {zipcode} </div>
             </div>
         )
     };
@@ -62,7 +62,7 @@ export default class UserItem extends BaseComponent {
     handleImageOpen = () => {
         this.setState({ openImageModal: true });
     };
-    
+
     handleImageClose = () => {
         this.setState({ openImageModal: false });
     };
@@ -75,33 +75,32 @@ export default class UserItem extends BaseComponent {
                 lastname,
                 email,
                 image
-            },
-            isVoter = true
+            }
         } = this.props;
         console.log(this.props)
         return (
             <Row className='name-row'>
                 <Col md={6} xs={12}>
                     <div className='name-info'>
-                        { firstname } { lastname }, { email }
+                        {firstname} {lastname}, {email}
                     </div>
                 </Col>
                 <Col md={3} xs={6}>
-                    <br/>
-                    { moreEnabled && 
+                    <br />
+                    {moreEnabled &&
                         <div onClick={this.handleImageOpen}>
-                            { image && <img src={image} width={140} height={140}/> }
-                        </div> }
+                            {image && <img src={image} width={140} height={140} alt='' />}
+                        </div>}
                 </Col>
                 <Col md={3} xs={6} className='no-padding'>
-                    { moreEnabled &&
-                    <div className='more-info'>
-                        { this.renderDetailedVoterInfo() }
-                    </div> }
+                    {moreEnabled &&
+                        <div className='more-info'>
+                            {this.renderDetailedVoterInfo()}
+                        </div>}
                     <div className='link' onClick={e => {
                         e.stopPropagation();
                         this.setState({ moreEnabled: !moreEnabled });
-                    }}>{ moreEnabled ? 'Show less' : 'Show more' }</div>
+                    }}>{moreEnabled ? 'Show less' : 'Show more'}</div>
                 </Col>
 
                 <Modal
@@ -111,7 +110,7 @@ export default class UserItem extends BaseComponent {
                     onClose={this.handleImageClose}
                 >
                     <div className="image-modal">
-                        <img src={image} />
+                        <img src={image} alt='' />
                     </div>
                 </Modal>
             </Row>
