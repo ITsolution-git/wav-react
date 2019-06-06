@@ -1,9 +1,9 @@
-// eslint-disable-next-line no-use-before-define
+// eslint-disable-next-line
 String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
 };
 
-// eslint-disable-next-line no-use-before-define
+// eslint-disable-next-line
 String.prototype.parseJson = function () {
     let isJson = true,
         result = null;
