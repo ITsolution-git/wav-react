@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+import { Button, TextField, Grid, Typography, Paper } from '@material-ui/core';
+
 import { changePasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
 import routes from '../../constants/Routes';
-import Button from '../shared/Button';
+// import Button from '../shared/Button';
 import {
 	PasswordInput,
 	TextInput
@@ -27,7 +29,7 @@ class ChangePassword extends BaseComponent {
 	handleChange = (value, isValid, name) => {
 		this.setState({
 			[name]: value,
-			valid: {...this.state.valid, [name]: isValid }
+			valid: { ...this.state.valid, [name]: isValid }
 		});
 	};
 
@@ -65,7 +67,7 @@ class ChangePassword extends BaseComponent {
 			this.onLink(routes.login, { isReset: true });
 			return;
 		} else {
-			this.setState({ "isChangedPassword": false});
+			this.setState({ "isChangedPassword": false });
 		}
 	}
 
@@ -81,44 +83,81 @@ class ChangePassword extends BaseComponent {
 		);
 
 		return (
-			<div className='btw-change-password btw-verify'>
-				<div className="container">
-					<div className="verify-captain col-lg-9 col-md-12">
-						{ !this.state.isChangedPassword && <div className="warning-red">Password doesn't not reset</div> }
-						<div className="title-32-light-blue">
-							Enter your new password
+			<div className="btw-change-password">
+				<Grid container alignItems='center' justify='center'>
+					<Paper className='content'>
+						<Grid container alignItems='center' justify='flex-start'>
+							<Typography className='title'>Reset Password</Typography>
+						</Grid>
+						<TextField
+							className='input'
+							required
+							autoFocus
+							margin="normal"
+							id="email"
+							label="New password"
+							type="password"
+							fullWidth />
+						<TextField
+							className='input'
+							required
+							autoFocus
+							margin="normal"
+							id="email"
+							label="Confirm new password"
+							type="password"
+							fullWidth />
+						<Button
+							className='button'
+							variant='contained'
+							color='primary'
+							fullWidth>
+							Save New Password
+						</Button>
+						<div className='remember'>
+							Remembered? <Link to={routes.login}><b>Log in</b></Link>.
 						</div>
-						<div className="text-18-dark-blue">
-							<PasswordInput 
-								onChange={this.handleChange}
-								isVoter={false}
-								name="password"
-								uniqueValidationEnabled={false}
-								required />
-							<TextInput label='Confirm Password'
-								type='password'
-								id="confirmPassword"
-								validator={value => value === this.state.password}
-								validatorError='The passwords do not match'
-								onChange={this.handleChange}
-								name='confirmPassword'
-								required />
-						</div>
-						<div id="btn-next">
-							<Button onClick={this.changePassword}>Submit</Button>
-						</div>
-					</div>
-				</div>
+					</Paper>
+				</Grid>
 			</div>
+			// <div className='btw-change-password btw-verify'>
+			// 	<div className="container">
+			// 		<div className="verify-captain col-lg-9 col-md-12">
+			// 			{ !this.state.isChangedPassword && <div className="warning-red">Password doesn't not reset</div> }
+			// 			<div className="title-32-light-blue">
+			// 				Enter your new password
+			// 			</div>
+			// 			<div className="text-18-dark-blue">
+			// 				<PasswordInput 
+			// 					onChange={this.handleChange}
+			// 					isVoter={false}
+			// 					name="password"
+			// 					uniqueValidationEnabled={false}
+			// 					required />
+			// 				<TextInput label='Confirm Password'
+			// 					type='password'
+			// 					id="confirmPassword"
+			// 					validator={value => value === this.state.password}
+			// 					validatorError='The passwords do not match'
+			// 					onChange={this.handleChange}
+			// 					name='confirmPassword'
+			// 					required />
+			// 			</div>
+			// 			<div id="btn-next">
+			// 				<Button onClick={this.changePassword}>Submit</Button>
+			// 			</div>
+			// 		</div>
+			// 	</div>
+			// </div>
 		);
 	}
 }
 
 const mapStateToProps = (state) => {
-    const { isChangedPassword } = state.request;
-    return {
+	const { isChangedPassword } = state.request;
+	return {
 		isChangedPassword
-    };
+	};
 };
 
 
