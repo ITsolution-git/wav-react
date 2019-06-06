@@ -5,51 +5,48 @@
     width: 512px;
   
     .content{
-      padding: 51px 88px;
+        padding: 51px 88px;
     }
   
     .title{
-      font-style: normal;
-      font-weight: 600;
-      font-size: 20px;
-      line-height: 27px;
-      text-align: left;
-      margin-bottom: 13px;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+        text-align: left;
+        margin-bottom: 13px;
     }
   
     .input {
-      margin-bottom: 27px;
+        margin-bottom: 27px;
     }
   
     .button{
-      background-color: #4B70F3;
-      margin-top: 13px;
-      margin-bottom: 50px;
-      height: 40px;
-      font-style: normal;
-      font-weight: 600;
-      font-size: 13px;
-      line-height: 18px;
-      padding: 11px 0;
-      text-transform: unset;
+        background-color: #4B70F3;
+        margin-top: 13px;
+        margin-bottom: 50px;
+        height: 40px;
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 18px;
+        padding: 11px 0;
+        text-transform: unset;
     }
   
     .remember{
-      font-style: normal;
-      font-weight: normal;
-      font-size: 13px;
-      line-height: 130%;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 130%;
     }
   
     .remember a {
-      color: #0A1333;
+        color: #0A1333;
     }
   
     @media screen and (max-width: 568px) {
-      .content{
-        padding: 37px 16px;
-      }
-      width: 100%;
-      margin: 0 24px;
+        .content{
+            padding: 37px 16px;
+        }
+        width: 100%;
+        margin: 0 24px;
     }
-  }
+}
