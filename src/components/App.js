@@ -1,12 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import PubSub from "pubsub-js";
+import PubSub from 'pubsub-js';
 import Header from './layout/Header';
 import Router from './Router';
+import { ThemeProvider } from '@material-ui/styles';
+
 import '../styles/App.css';
 import '../extensions';
 import pubsubConstants from "../constants/PubSubConstants";
 import BaseComponent from './shared/BaseComponent';
+import theme from '../theme';
 
 class App extends BaseComponent {
 
@@ -18,12 +21,14 @@ class App extends BaseComponent {
 
 		let isHideHeader = this.isOnBoarding();
 		return (
-			<div className='btw-app'>
-				{ !isHideHeader && <Header /> }
-				<div className='btw-content'>
-                    <Router />
+			<ThemeProvider theme={theme}>
+				<div className='btw-app'>
+					{ !isHideHeader && <Header /> }
+					<div className='btw-content'>
+						<Router />
+					</div>
 				</div>
-			</div>
+			</ThemeProvider>
 		);
 	}
 }
