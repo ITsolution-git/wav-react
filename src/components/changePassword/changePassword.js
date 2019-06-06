@@ -77,6 +77,7 @@ class ChangePassword extends BaseComponent {
         //         <div>Minimum of 7 characters</div>
         //     </div>
         // );
+
         const { isChangedPassword } = this.state;
 
         return (
@@ -92,7 +93,6 @@ class ChangePassword extends BaseComponent {
                             required
                             autoFocus
                             margin="normal"
-                            id="email"
                             label="New password"
                             type="password"
                             name="password"
@@ -103,7 +103,6 @@ class ChangePassword extends BaseComponent {
                             required
                             autoFocus
                             margin="normal"
-                            id="email"
                             label="Confirm new password"
                             type="password"
                             name='confirmPassword'
@@ -133,7 +132,6 @@ const mapStateToProps = (state) => {
         isChangedPassword
     };
 };
-
 
 const mapDispatchToProps = (dispatch) => ({
     changePasswordRequest: (info) => dispatch(changePasswordRequest(info))

@@ -99,7 +99,6 @@ class ForgotPassword extends BaseComponent {
                             required
                             autoFocus
                             margin="normal"
-                            id="email"
                             label="Email"
                             type="email"
                             onChange={this.updateFields.bind(this, fieldName)}
@@ -133,7 +132,6 @@ const mapStateToProps = (state) => {
         isFetching
     };
 };
-
 
 const mapDispatchToProps = (dispatch) => ({
     forgotPasswordRequest: (email) => dispatch(forgotPasswordRequest(email))
