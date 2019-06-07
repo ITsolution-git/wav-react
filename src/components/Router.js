@@ -27,7 +27,7 @@ import UpdateProfileTask from './tasks/UpdateProfileTask';
 import PreferenceTask from './tasks/PreferenceTask';
 import RegularVoteTask from './tasks/RegularVoteTask';
 import WelcomePage from './voter/WelcomePage';
-import SocialConnect from './socialConnect/SocialConnect';
+import SocialConnect from './socialNetworks/SocialConnect';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
