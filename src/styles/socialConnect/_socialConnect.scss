@@ -1,0 +1,40 @@
+.btw-social-connect {
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	width: 512px;
+  
+	.content{
+        padding: 51px 88px;
+        border-radius: 5px;
+	}
+  
+	.title{
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+        text-align: left;
+        margin-bottom: 12px;
+	}
+  
+	.description{
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 130%;
+        margin-bottom: 28px;
+    }
+    
+    .socialGroup{
+        padding: 24px;
+        border-radius: 3px;
+        margin-bottom: 32px;
+	}
+  
+	@media screen and (max-width: 568px) {
+        .content{
+            padding: 37px 16px;
+        }
+        width: 100%;
+        margin: 0 24px;
+	}
+}
