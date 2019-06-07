@@ -41,7 +41,8 @@ class SocialConnect extends BaseComponent {
                 <SocialItem
                     name='linkedIn'
                     status={linkedIn}
-                    socialConnectHandler={() => this.socialConnectHandler('linkedIn')} />
+                    socialConnectHandler={() => this.socialConnectHandler('linkedIn')}
+                    isLast />
             </div>
         );
     }
