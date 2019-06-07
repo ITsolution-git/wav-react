@@ -35,20 +35,6 @@ class SocialItem extends BaseComponent {
         );
     }
 
-    borderContainerRender = () => {
-        const { isLast } = this.props;
-
-        if (isLast) {
-            return null;
-        } else {
-            return (
-                <div className='border-container'>
-                    <div className='item-border' />
-                </div>
-            );
-        }
-    }
-
     render() {
         const { name, status } = this.props;
         const iconClassname = status ? name : 'default';
@@ -66,7 +52,9 @@ class SocialItem extends BaseComponent {
                         {status ? this.connectedTextRender() : this.connectButtonRender()}
                     </div>
                 </div>
-                {this.borderContainerRender()}
+                <div className='border-container'>
+                    <div className='item-border' />
+                </div>
             </div>
         );
     }
