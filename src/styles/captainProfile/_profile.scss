@@ -22,16 +22,16 @@
       color: #006699;
   }
 
-  @include respond-to($lg) {
+  @include respond-to($desktop) {
       margin-left: 120px;
       margin-right: 120px;
 
       .row {
-          display: flex;
+        display: flex;
       }
   }
 
-  @include respond-to($xs) {
+  @include respond-to($tablet) {
       margin-left: 40px;
       margin-right: 40px;
   }
@@ -48,16 +48,8 @@
           margin-right: 0;
       }
 
-      @include respond-to($lg) {
+      @include respond-to($desktop) {
           margin-right: 0;
-      }
-
-      @include respond-to($xs) {
-          margin-right: 0;
-      }
-
-      @include respond-to($xl) {
-          margin-right: 150px;
       }
   }
 
@@ -66,7 +58,7 @@
       margin-top: 70px;
       @extend .margin-right;
 
-      @include respond-to($xl) {
+      @include respond-to($desktop) {
           margin-right: 150px;
       }
   

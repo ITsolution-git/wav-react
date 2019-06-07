@@ -191,31 +191,31 @@
 //red
 .title-32-red {
   @extend .title-32;
-  color: $red;
+  color: $error;
 }
 .title-24-red {
   @extend .title-24;
-  color: $red;
+  color: $error;
 }
 .title-20-red {
   @extend .title-20;
-  color: $red;
+  color: $error;
 }
 .title-16-red {
   @extend .title-16;
-  color: $red;
+  color: $error;
 }
 .title-14-red {
   @extend .title-14;
-  color: $red;
+  color: $error;
 }
 .title-12-red {
   @extend .title-12;
-  color: $red;
+  color: $error;
 }
 .text-18-red {
   @extend .text-18;
-  color: $red;
+  color: $error;
 }
 
 
@@ -269,7 +269,7 @@
 #link-small-red {
   @extend #link-small;
   @include respond-to($desktop) {
-    color: $red;
+    color: $error;
   }
 }
 

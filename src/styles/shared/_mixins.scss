@@ -1,15 +1,12 @@
 $phone: '(max-width: 480px)';
 $tablet: '(min-width: 481px) and (max-width: 1199px)';
 $desktop: '(min-width: 1200px)';
-
-$xs: '(max-width: 768px)';
-$sm: '(min-width: 768px)';
-$md: '(min-width: 992px)';
-$lg: '(min-width: 1200px)';
-$xl: '(min-width: 1600px)';
+$computer: '(min-width: 481px)'; /* for tablets and desktop */
 
 @mixin respond-to($media) {
   @media only screen and #{$media} {
     @content;
   }
 }
+
+

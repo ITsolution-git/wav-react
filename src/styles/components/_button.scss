@@ -31,16 +31,16 @@
 }
 
 .button-blue4 {
-  background-color: $blue4;
+  background-color: $primary;
   &:hover {
-    background-color: darken($blue4, 0.5);
+    background-color: darken($primary, 0.5);
   }
 }
 
 .button-red {
-  background-color: $red;
+  background-color: $error;
   &:hover {
-    background-color: darken($red, 0.5);
+    background-color: darken($error, 0.5);
   }
 }
 
@@ -78,3 +78,4 @@
 .button-small {
   // TODO
 }
+
