@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Button as MuiButton } from '@material-ui/core';
 
 export default class Button extends React.Component {
 
@@ -16,13 +17,13 @@ export default class Button extends React.Component {
         } = this.props;
 
         return (
-            <button className={classNames(`btw-button button-${size} button-${color}`, { border: borderEnabled })}
+            <MuiButton>
                     id={id}
                     style={style}
                     disabled={disabled}
                     onClick={onClick}>
                 { children }
-            </button>
+            </MuiButton>
         )
     }
 }

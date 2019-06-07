@@ -1,8 +1,9 @@
-const theme = {
+import { createMuiTheme } from '@material-ui/core/styles';
+import palette from './palette';
+
+const theme = createMuiTheme({
     background: 'red',
-    palette: {
-        type: 'light',
-    },
+    palette,
     overrides: {
         MuiAppBar: {
             root: {
@@ -10,6 +11,6 @@ const theme = {
             }
         }
     }
-};
+});
 
 export default theme;

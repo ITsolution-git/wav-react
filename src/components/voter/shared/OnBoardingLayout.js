@@ -2,7 +2,7 @@ import React from 'react';
 
 import BaseComponent from '../../shared/BaseComponent';
 import Logo from '../../layout/Logo';
-import colors from '../../../constants/ColorConstants';
+import colors from '../../../constants/Colors';
 
 export default class OnBoardingLayout extends  BaseComponent {
     resolveDefaultColor = () => {

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import BaseComponent from '../shared/BaseComponent';
 import OnBoardingLayout from './shared/OnBoardingLayout'
 import Button from '../shared/Button';
-import colors from '../../constants/ColorConstants';
+import colors from '../../constants/Colors';
 import routes from '../../constants/Routes';
 
 class WelcomePage extends BaseComponent {

@@ -19,7 +19,7 @@ import {
     EmailInput,
     PasswordInput
 } from '../components/shared/validatedInputs';
-import colors from '../constants/ColorConstants';
+import colors from '../constants/Colors';
 import Dialog from './shared/Dialog';
 import { forgotPasswordRequest } from '../actions/PasswordRequestAction';
 import routes from '../constants/Routes';
