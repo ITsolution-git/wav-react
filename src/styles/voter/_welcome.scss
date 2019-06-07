@@ -1,42 +1,204 @@
 .welcome-div {
   background-color: $white;
-  @include respond-to($phone) {
-    width: 85%;
-    margin-top: 20%;
-  }
-  @include respond-to($desktop) {
-    width: 50%;
-    margin-top: 30px;
-  }
-
   border-radius: 2px;
-  text-align: center;
-  padding: 70px 40px 30px 40px;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+  
 
-  #how-it-works {
-    margin: 25px 0 25px 0;
-  }
+  @include respond-to($phone) {
+    width: 272px;
+    padding: 37px 16px;
 
-  #btn-next {
-    margin: 40px 0 20px 0;
-  }
+    .welcome-message {
+      margin-bottom: 28px!important;
+    }
 
-  #radio-view {
-    text-align: center;
-    margin-top: 20px;
-    div {
-      display: inline-block;
+    .welcome-video-container {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      .mobile-welcome-content {
+        position: absolute;
+        color: white;
+        padding: 45px 40px;
+
+        .welcome-title {
+          font-style: normal;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 25px;
+        }
+
+        .welcome-message {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 13px;
+          line-height: 130%;
+        }
+      }
+
+      video {
+        object-fit: cover;
+      }
+
+    }
+
+    .play-button {
+      top: calc(50% - 40px);
+      left: calc(50% - 40px);
+      width: 80px;
+      height: 80px;
+
+      .white-circle {
+        width: 52px;
+        height: 52px;
+      }
+    }
+
+    .watch-later-div {
+      position: absolute;
+      bottom: 23px;
+      width: 100%;
+      left: 0;
     }
   }
-  .radio {
-    margin: 0 4px 0 4px;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background-color: grey;
-    opacity: 0.6;
-    &.active {
-      background-color: $dark-blue;
+  
+  @include respond-to($desktop) {
+    width: 512px;
+    padding: 51px 24px;
+
+    .welcome-video-container {
+      height: 272px;
+      position: relative;
+
+      .mobile-welcome-content {
+        display: none;
+      }
+    }
+
+    .play-button {
+      top: 96px;
+      left: 192px;
+      width: 80px;
+      height: 80px;
+
+      .white-circle {
+        width: 52px;
+        height: 52px;
+      }
     }
   }
+
+  @include respond-to($tablet) {
+    padding: 51px 24px;
+    width: 512px;
+
+    .welcome-video-container {
+      height: 272px;
+      position: relative;
+
+      .mobile-welcome-content {
+        display: none;
+      }
+    }
+
+    .play-button {
+      top: 96px;
+      left: 192px;
+      width: 80px;
+      height: 80px;
+
+      .white-circle {
+        width: 52px;
+        height: 52px;
+      }
+    }
+  }
+
+  .welcome-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0;
+  }
+
+  .welcome-message {
+    margin: 12px 0 43px;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 130%;
+  }
+
+  .welcome-video-container {
+    
+    &:hover {
+      .play-button {
+        display: flex;
+      }
+    }
+
+    &:not(:hover) {
+      .play-button {
+        display: none;
+      }
+
+      .full-screen {
+        display: none;
+      }
+    }
+
+    .full-screen {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .play-button {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.25);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      cursor: pointer;
+
+      .white-circle {
+        display: flex;
+        background: $white;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+
+        .play-icon {
+          border: 0;
+          background: transparent;
+          box-sizing: border-box;
+          width: 0;
+          height: 17.33px;
+          border-color: transparent transparent transparent #202020;
+          transition: 100ms all ease;
+          border-style: solid;
+          border-width: 10px 0 10px 16px;
+          margin-left: 6px;
+
+          &.pause {
+            border-style: double;
+            border-width: 0px 0 0px 16px;
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .watch-later-div {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
 }

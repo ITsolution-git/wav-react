@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import qs from 'qs';
 import { Row, Col } from 'react-bootstrap';
-
 import BaseComponent from '../components/shared/BaseComponent';
 import appDataTypes from '../constants/AppDataTypes';
 import TaskRoutes from '../constants/TaskRoutes';
@@ -14,12 +13,10 @@ import { getHomeRoute } from '../helpers/AuthHelper';
 import Spinner from '../components/shared/Spinner';
 import Button from '../components/shared/Button';
 import { loadTaskList } from '../actions/TaskListAction';
-import AboutInfo from '../components/shared/AboutInfo';
 import {
     EmailInput,
     PasswordInput
 } from '../components/shared/validatedInputs';
-import colors from '../constants/ColorConstants';
 import Dialog from './shared/Dialog';
 import { forgotPasswordRequest } from '../actions/PasswordRequestAction';
 import routes from '../constants/Routes';
