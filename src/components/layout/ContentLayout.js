@@ -1,7 +1,7 @@
 import React from 'react';
 
 import BaseComponent from '../shared/BaseComponent';
-import colors from '../../constants/Colors';
+import colors from '../../constants/ColorConstants';
 
 export default class ContentLayout extends BaseComponent {
     render() {
