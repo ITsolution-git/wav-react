@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Grid, Typography, Paper } from '@material-ui/core';
 
 import { forgotPasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
@@ -49,31 +48,28 @@ class ForgotPassword extends BaseComponent {
 
         return (
             <div className="btw-forgot-password">
-                <Grid container alignItems='center' justify='center'>
-                    <Paper className='content'>
-                        <Grid container alignItems='center' justify='flex-start'>
-                            <Typography className='title'>Reset Password</Typography>
-                        </Grid>
-                        <Grid container alignItems='center' justify='flex-start'>
-                            <Typography className='description'>
-                                Enter the email address associated with your account and
-								we’ll send you a link to create a new Password
-							</Typography>
-                        </Grid>
-                        {this.renderMessage()}
-                        <EmailInput
-                            defaultValue={email}
-                            onChange={this.handleChange}
-                            uniqueValidationEnabled={false}
-                            required />
-                        <Button onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
-                            Send Request
-                        </Button>
-                        <div className='remember'>
-                            Remembered? <Link to={routes.login}>Log in.</Link>
-						</div>
-                    </Paper>
-                </Grid>
+                <div className='content'>
+                    <div className='title'>Reset Password</div>
+                    <div className='description'>
+                        Enter the email address associated with your account and
+                        we’ll send you a link to create a new Password
+					</div>
+                    {this.renderMessage()}
+                    <EmailInput
+                        defaultValue={email}
+                        onChange={this.handleChange}
+                        uniqueValidationEnabled={false}
+                        required />
+                    <Button
+                        color='blue4'
+                        style={{ width: '100%' }}
+                        onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
+                        Send Request
+                    </Button>
+                    <div className='remember'>
+                        Remembered? <Link to={routes.login}>Log in.</Link>
+                    </div>
+                </div>
             </div >
         );
     }
