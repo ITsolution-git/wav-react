@@ -16,13 +16,13 @@ class SocialConnect extends BaseComponent {
         }
     }
 
+    // TODO: implement socialConnectHandler
     socialConnectHandler = (name) => {
         this.setState({ [name]: true })
-        console.log(name);
     }
 
+    // TODO: implement showResultHandler
     showResultHandler = () => {
-        console.log('Show Results');
     }
 
     socialItemRender = () => {
