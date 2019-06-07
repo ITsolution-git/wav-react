@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
 import classNames from 'classnames';
 
 import BaseComponent from '../shared/BaseComponent';
@@ -10,9 +9,9 @@ class SocialItem extends BaseComponent {
 
     connectedTextRender = () => {
         return (
-            <Typography className={classNames('status', !this.isMobile() && 'status-center')}>
+            <div className={classNames('status', !this.isMobile() && 'status-center')}>
                 Connected
-            </Typography>
+            </div>
         );
     }
 
@@ -56,9 +55,9 @@ class SocialItem extends BaseComponent {
                         <Icon name={`${name}-${status ? 'light' : 'grey'}`} />
                     </div>
                     <div className='controls'>
-                        <Typography className='name'>
+                        <div className='name'>
                             {name}
-                        </Typography>
+                        </div>
                         {status ? this.connectedTextRender() : this.connectButtonRender()}
                     </div>
                 </div>
