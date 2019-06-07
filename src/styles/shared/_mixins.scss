@@ -1,6 +1,8 @@
 $phone: '(max-width: 480px)';
 $tablet: '(min-width: 481px) and (max-width: 1199px)';
 $desktop: '(min-width: 1200px)';
+$computer: '(min-width: 481px)'; /* for tablets and desktop */
+
 
 $xs: '(max-width: 768px)';
 $sm: '(min-width: 768px)';
@@ -13,3 +15,5 @@ $xl: '(min-width: 1600px)';
     @content;
   }
 }
+
+
