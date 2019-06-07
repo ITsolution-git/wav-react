@@ -27,6 +27,7 @@ import UpdateProfileTask from './tasks/UpdateProfileTask';
 import PreferenceTask from './tasks/PreferenceTask';
 import RegularVoteTask from './tasks/RegularVoteTask';
 import WelcomePage from './voter/WelcomePage';
+import SocialConnect from './socialNetworks/SocialConnect';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
@@ -73,6 +74,8 @@ const router = () => (
             component={NoTaskErrorPage} />
         <Route exact path={routes.invites}
             component={Authorization(SendInvite, [captain])} />
+        <Route exact path={routes.socialConnect}
+            component={Authorization(SocialConnect, [captain])} />
         <Route exact path={routes.tasksList}
             component={Authorization(TasksList, [captain])} />
         <Route exact path={routes.voterList}

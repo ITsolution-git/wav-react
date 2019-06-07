@@ -30,6 +30,7 @@ export default {
     reminderVoteTask: '/task/reminder_vote',
     regularVoteTask: '/task/regular_vote',
 
+    socialConnect: '/social_connect',
     voterFilter: '/voter_filter',
     captainFilter: '/captain_filter',
     verifyCaptain: '/changePassword/verify',
@@ -44,7 +45,7 @@ export default {
     termsOfUse: '/terms_of_use',
     privacyPolicy: '/privacy_policy',
     faq: '/faq',
-	stepsToHelpFriendVote: '/stepsToHelpFriendVote',
+    stepsToHelpFriendVote: '/stepsToHelpFriendVote',
     resourceCenter: '/resource_center',
 
     unsubscribe: '/unsubscribe/:email'
