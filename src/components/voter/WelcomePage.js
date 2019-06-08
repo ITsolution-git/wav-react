@@ -1,11 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { findDOMNode } from 'react-dom'
+import ReactPlayer from 'react-player';
+import screenfull from 'screenfull';
+import classnames from 'classnames';
+
 import BaseComponent from '../shared/BaseComponent';
 import Button from '../shared/Button';
 import routes from '../../constants/Routes';
-import ReactPlayer from 'react-player';
-import screenfull from 'screenfull';
 
 class WelcomePage extends BaseComponent {
     constructor(props) {
@@ -32,7 +34,7 @@ class WelcomePage extends BaseComponent {
     }
 
     render() {
-        const {playing} = this.state;
+        const { playing } = this.state;
 
         return (
             <div className="layout-center">
@@ -55,7 +57,7 @@ class WelcomePage extends BaseComponent {
 
                         <div className="play-button" onClick={this.playPause}>
                             <span className="white-circle">
-                                <span className={"play-icon " + (playing ? "pause" : "")}></span>
+                                <span className={classnames('play-icon', { "pause" : playing})}></span>
                             </span>
                         </div>
 
