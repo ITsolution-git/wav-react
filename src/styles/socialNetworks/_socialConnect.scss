@@ -1,4 +1,4 @@
-.btw-forgot-password {
+.btw-social-connect {
 	align-items: center;
 	justify-content: center;
 	display: flex;
@@ -15,37 +15,30 @@
         font-size: 20px;
         line-height: 27px;
         text-align: left;
-        margin-bottom: 13px;
+        margin-bottom: 12px;
 	}
   
 	.description{
         font-weight: normal;
         font-size: 13px;
         line-height: 130%;
-        margin-bottom: 14px;
+        margin-bottom: 28px;
+    }
+    
+    .socialGroup{
+        padding: 24px;
+        border-radius: 3px;
+        margin-bottom: 32px;
+        border: 1px solid #E9EBF3;
+		box-sizing: border-box;
 	}
   
-    .successMessage{
-        font-size: 13px;
-        color: green;
-    }
-
-    .errorMessage{
-        font-size: 13px;
-        color: red;
-    }
-
-	.remember{
-        margin-top: 50px;
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 130%;
-        a {
-            color: #0A1333;
-            font-weight: bold;
-        }
+	.btw-social-item:last-child {
+		.border-container {
+			display: none;
+		}
 	}
-  
+	
 	@media screen and (max-width: 568px) {
         .content{
             padding: 37px 16px;

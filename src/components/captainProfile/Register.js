@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-import { Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import { btwRegister } from '../../actions/SignOnAction';
@@ -11,6 +10,7 @@ import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 import fieldConstants from '../../constants/FieldConstants';
 import Button from '../shared/Button';
+import Paper from '../shared/Paper';
 
 import {
 	FirstNameInput,
@@ -21,8 +21,8 @@ import {
 } from '../shared/validatedInputs';
 
 class Register extends BaseComponent {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			btwIdentity: {},
 			isValid: {

@@ -38,25 +38,18 @@
     height: 240px;
   }
 
-  @include respond-to($md) {
+  @include respond-to($tablet) {
     left: calc(50% - 300px);
     top: calc(50% - 240px);
     width: 600px;
     height: 480px;
   }
 
-  @include respond-to($lg) {
+  @include respond-to($desktop) {
     left: calc(50% - 480px);
     top: calc(50% - 300px);
     width: 960px;
     height: 600px;
-  }
-
-  @include respond-to($xl) {
-    left: calc(50% - 600px);
-    top: calc(50% - 384px);
-    width: 1200px;
-    height: 768px;
   }
 
   left: 0;

@@ -15,8 +15,8 @@ import Spinner from '../components/shared/Spinner';
 import Button from '../components/shared/Button';
 import { loadTaskList } from '../actions/TaskListAction';
 import {
-    EmailInput,
-    PasswordInput
+	EmailInput,
+	PasswordInput
 } from '../components/shared/validatedInputs';
 import Dialog from './shared/Dialog';
 import { forgotPasswordRequest } from '../actions/PasswordRequestAction';
@@ -41,7 +41,7 @@ class Login extends BaseComponent {
 	}
 
 	onKeyPress = (e) => {
-		if(e.key === 'Enter' || e.which === 13) {
+		if (e.key === 'Enter' || e.which === 13) {
 			this.btwSignOn();
 		}
 	};
@@ -50,11 +50,11 @@ class Login extends BaseComponent {
 		this.setState({ startValidation: true });
 		const { email, password, valid } = this.state;
 		if (valid.email && valid.password) {
-            this.props.actions.btwSignOn(email, password);
+			this.props.actions.btwSignOn(email, password);
 		}
 	}
 
-    componentWillReceiveProps(props)  {
+	componentWillReceiveProps(props) {
 		if (props.isSuccess) {
 			const { paramsFromEmail } = this.state;
 			if (this.state.signinFromEmail) {
@@ -86,17 +86,17 @@ class Login extends BaseComponent {
 
 	componentDidMount() {
 		if (this.props.location.state) {
-			this.setState({isReset: this.props.location.state.isReset})
+			this.setState({ isReset: this.props.location.state.isReset })
 		}
 	}
 
-    handleChange = (value, isValid, name) => {
+	handleChange = (value, isValid, name) => {
 		this.setState({
 			[name]: value,
-			valid: {...this.state.valid, [name]: isValid }
+			valid: { ...this.state.valid, [name]: isValid }
 		});
 	};
-	
+
 	showForgotPasswordModal = (e) => {
 		e.preventDefault()
 
@@ -117,7 +117,7 @@ class Login extends BaseComponent {
 	changeForgotPasswordEmail = (value, valid, name) => {
 		this.setState({
 			[name]: value,
-			valid: {...this.state.valid, [name]: valid }
+			valid: { ...this.state.valid, [name]: valid }
 		})
 	}
 
@@ -133,96 +133,96 @@ class Login extends BaseComponent {
 
 
 		return (
-                <Row className="btw-login no-margin">
-					
-                    <Col md={12} xs={12} className="no-padding">
-                        <div className="btw-form" onKeyPress={this.onKeyPress}>
-                            <Col md={12} className="no-padding">
-								{ this.state.isReset && <div className={`${this.isMobile() ? 'warning-white' : 'warning-green'}`} id="resetPasswordSuccess" style={{fontSize:'15px'}}>Password is reset, Login with your new password</div> }
-								{ error && <div className={`${this.isMobile() ? 'warning-white' : 'warning-red'}`}>Check your username or password</div>}
-								
-								<div className="login-title">Log In by Email</div>
-								
-                                <Row>
-                                    <Col md={12}>
-                                    	<p className='input-field-label'>Email</p>
-                                        <EmailInput onChange={(value, valid, name) => {
-                                            const isValid = error ? true : valid;
-                                            this.handleChange(value, isValid, name);
-                                        }}
-                                                    isVoter={false}
-                                                    startValidation={startValidation}
-                                                    uniqueValidationEnabled={false}
-                                                    required 
-                                                    label='Your email address'/>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col md={12}>
-                                    	<p className='input-field-label'>Password</p>
-                                        <PasswordInput onChange={this.handleChange}
-                                                       startValidation={startValidation}
-                                                       required 
-                                                       label='Your password'/>
-                                    </Col>
-                                </Row>
+			<Row className="btw-login no-margin">
 
-                                <div id="button-class">
-                                    <Button 
-                                    	disabled={isFetching}
-										borderEnabled
-                                        onClick={this.btwSignOn.bind(this)}
-                                        color='blue4'
-                                        style={{width: '100%'}}>
-										Log In
+				<Col md={12} xs={12} className="no-padding">
+					<div className="btw-form" onKeyPress={this.onKeyPress}>
+						<Col md={12} className="no-padding">
+							{this.state.isReset && <div className={`${this.isMobile() ? 'warning-white' : 'warning-green'}`} id="resetPasswordSuccess" style={{ fontSize: '15px' }}>Password is reset, Login with your new password</div>}
+							{error && <div className={`${this.isMobile() ? 'warning-white' : 'warning-red'}`}>Check your username or password</div>}
+
+							<div className="login-title">Log In by Email</div>
+
+							<Row>
+								<Col md={12}>
+									<p className='input-field-label'>Email</p>
+									<EmailInput onChange={(value, valid, name) => {
+										const isValid = error ? true : valid;
+										this.handleChange(value, isValid, name);
+									}}
+										isVoter={false}
+										startValidation={startValidation}
+										uniqueValidationEnabled={false}
+										required
+										label='Your email address' />
+								</Col>
+							</Row>
+							<Row>
+								<Col md={12}>
+									<p className='input-field-label'>Password</p>
+									<PasswordInput onChange={this.handleChange}
+										startValidation={startValidation}
+										required
+										label='Your password' />
+								</Col>
+							</Row>
+
+							<div id="button-class">
+								<Button
+									disabled={isFetching}
+									borderEnabled
+									onClick={this.btwSignOn.bind(this)}
+									color='blue4'
+									style={{ width: '100%' }}>
+									Log In
                                     </Button>
-                                </div>
+							</div>
 
-                                <a className='forgot-password-link' href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
+							<a className='forgot-password-link' href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
 
-                                <div className='go-to-signup'>
-									<span>
-										New to BeTheWave
+							<div className='go-to-signup'>
+								<span>
+									New to BeTheWave
 									</span>
-                                    <Link  to={routes.register}> Sign up</Link>
-                                </div>
-                                <Col md={12}>
-                                    <Spinner loading={isFetching} size={50} />
-                                </Col>
-                            </Col>
-                        </div>
-                    </Col>
+								<Link to={routes.register}> Sign up</Link>
+							</div>
+							<Col md={12}>
+								<Spinner loading={isFetching} size={50} />
+							</Col>
+						</Col>
+					</div>
+				</Col>
 
-					<Dialog show={this.state.showForgotPasswordModal}
-                            onClose={this.closeForgotPasswordModal}
-							className="login-center-modal">
-                        <div className="forgot-password">
-							{ this.state.isUserFound === 0 && this.state.showWarning && <div className="warning-red">User doesn't exist</div> }
-							{ this.state.isUserFound === 1 && this.state.showWarning && <div className="warning-green">Reset password request sent</div> }
-							<div className="title-32-light-blue">
-								Forgot your password?
+				<Dialog show={this.state.showForgotPasswordModal}
+					onClose={this.closeForgotPasswordModal}
+					className="login-center-modal">
+					<div className="forgot-password">
+						{this.state.isUserFound === 0 && this.state.showWarning && <div className="warning-red">User doesn't exist</div>}
+						{this.state.isUserFound === 1 && this.state.showWarning && <div className="warning-green">Reset password request sent</div>}
+						<div className="title-32-light-blue">
+							Forgot your password?
 							</div>
-							<div className="title-20-blue">
-								We'll send you an email with a link to reset it!
+						<div className="title-20-blue">
+							We'll send you an email with a link to reset it!
 							</div>
-							<div className="text-18-dark-blue">
-								<EmailInput 
-									onChange={this.changeForgotPasswordEmail}
-									isVoter={false}
-									name="forgotPasswordEmail"
-									startValidation={startValidation}
-									uniqueValidationEnabled={false}
-									required />
-							</div>
-							<div id="btn-next">
-								<Button onClick={this.sendForgotPasswordRequest}>Go!</Button>
-							</div>
-							<div id="btn-next">
-								Back to <a href="" onClick={this.closeForgotPasswordModal}><b>Sign in</b></a>.
-							</div>
+						<div className="text-18-dark-blue">
+							<EmailInput
+								onChange={this.changeForgotPasswordEmail}
+								isVoter={false}
+								name="forgotPasswordEmail"
+								startValidation={startValidation}
+								uniqueValidationEnabled={false}
+								required />
 						</div>
-                    </Dialog>
-                </Row>
+						<div id="btn-next">
+							<Button onClick={this.sendForgotPasswordRequest}>Go!</Button>
+						</div>
+						<div id="btn-next">
+							Back to <a href="" onClick={this.closeForgotPasswordModal}><b>Sign in</b></a>.
+							</div>
+					</div>
+				</Dialog>
+			</Row>
 		);
 	}
 }
@@ -239,10 +239,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
+	return {
 		actions: bindActionCreators({ btwSignOn, loadTaskList }, dispatch),
 		forgotPasswordRequest: (email) => dispatch(forgotPasswordRequest(email))
-    };
+	};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

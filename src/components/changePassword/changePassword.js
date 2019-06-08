@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
-import { Grid, Typography, Paper } from '@material-ui/core';
 
 import { changePasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
@@ -87,35 +86,34 @@ class ChangePassword extends BaseComponent {
 
         return (
             <div className="btw-change-password">
-                <Grid container alignItems='center' justify='center'>
-                    <Paper className='content'>
-                        {!isChangedPassword && <span style={{ fontSize: "12px", color: "red" }}>Password doesn't not reset</span>}
-                        <Grid container alignItems='center' justify='flex-start'>
-                            <Typography className='title'>Reset Password</Typography>
-                        </Grid>
-                        <PasswordInput
-                            onChange={this.handleChange}
-                            isVoter={false}
-                            name="password"
-                            uniqueValidationEnabled={false}
-                            required />
-                        <TextInput label='Confirm Password'
-                            type='password'
-                            id="confirmPassword"
-                            validator={value => value === this.state.password}
-                            validatorError='The passwords do not match'
-                            onChange={this.handleChange}
-                            name='confirmPassword'
-                            required />
-                        <Button onClick={this.changePassword}>
-                            Save New Password
-                        </Button>
-                        <div className='remember'>
-                            Remembered? <Link to={routes.login}>Log in</Link>.
-						</div>
-                    </Paper>
-                </Grid>
-            </div>
+                <div className='content'>
+                    {!isChangedPassword && <span className='errorMessage'>Password doesn't not reset</span>}
+                    <div className='title'>Reset Password</div>
+                    <PasswordInput
+                        onChange={this.handleChange}
+                        isVoter={false}
+                        name="password"
+                        uniqueValidationEnabled={false}
+                        required />
+                    <TextInput label='Confirm Password'
+                        type='password'
+                        id="confirmPassword"
+                        validator={value => value === this.state.password}
+                        validatorError='The passwords do not match'
+                        onChange={this.handleChange}
+                        name='confirmPassword'
+                        required />
+                    <Button
+                        color='blue4'
+                        style={{ width: '100%' }}
+                        onClick={this.changePassword}>
+                        Save New Password
+                    </Button>
+                    <div className='remember'>
+                        Remembered? <Link to={routes.login}>Log in</Link>.
+					</div>
+                </div>
+            </div >
         );
     }
 }
