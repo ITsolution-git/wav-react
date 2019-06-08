@@ -7,6 +7,7 @@ import classnames from 'classnames';
 
 import BaseComponent from '../shared/BaseComponent';
 import Button from '../shared/Button';
+import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
 
 class WelcomePage extends BaseComponent {
@@ -38,15 +39,13 @@ class WelcomePage extends BaseComponent {
 
         return (
             <div className="layout-center">
-                <div className="welcome-div">
-                    <h2 className="welcome-title">Hello there!</h2>
-                    <p className="welcome-message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae porttitor leo. Pellentesque sed pharetra erat. Nam non odio turpis. Quisque lectus augue, convallis vel tristique eget, consectetur.</p>
+                <Paper className={'welcome-div'}>
+                    <div className={'welcome-content'}>
+                        <h2 className="welcome-title">Hello there!</h2>
+                        <p className="welcome-message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae porttitor leo. Pellentesque sed pharetra erat. Nam non odio turpis. Quisque lectus augue, convallis vel tristique eget, consectetur.</p>
+                    </div>
 
                     <div className="welcome-video-container">
-                        <div className="mobile-welcome-content">
-                            <h2 className="welcome-title">Hello there!</h2>
-                            <p className="welcome-message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae porttitor leo. Pellentesque sed pharetra erat. Nam non odio turpis. Quisque lectus augue, convallis vel tristique eget, consectetur.</p>
-                        </div>
                         <ReactPlayer 
                             url='https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8'
                             width="100%"
@@ -67,7 +66,7 @@ class WelcomePage extends BaseComponent {
                     <div className="watch-later-div">
                         <Button onClick={this.onGetStarted}>Watch Later</Button>
                     </div>
-                </div>
+                </Paper>
             </div>
             
         );
