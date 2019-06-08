@@ -1,10 +1,10 @@
 import React from 'react';
 import cn from 'classnames';
 
-const Checkbox = ({ className, name, onChange }) => {
+const Checkbox = ({ className, label, onChange }) => {
     return (
         <label className={cn('btw-checkbox', className)}>
-            {name}
+            {label}
             <input
                 type='checkbox'
                 onChange={onChange} />

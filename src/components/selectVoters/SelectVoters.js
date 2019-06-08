@@ -16,7 +16,7 @@ class SelectVoters extends BaseComponent {
     }
 
     checkHandler = (event) => {
-        console.log(event.target.checked);
+        const { checked } = event.target;
     }
 
     render() {
@@ -32,7 +32,7 @@ class SelectVoters extends BaseComponent {
                                 Try to choose a few among regular voters, a few among infrequent voters,
                                 and a few unregistered voters.
 					        </div>
-                            <Checkbox onChange={(event) => this.checkHandler(event)} />
+                            <Checkbox onChange={(event) => this.checkHandler(event)} label='test check' />
                         </Col>
                     </Row>
                 </div >
