@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    Modal
-} from 'react-bootstrap';
-import classNames from 'classnames';
+import { Modal } from 'react-bootstrap';
 
 import BaseComponent from './BaseComponent';
 
