@@ -12,7 +12,7 @@ export default class Dialog extends BaseComponent {
             show,
             onClose,
             onHide = onClose,
-            title='',
+            title = '',
             children,
             actionButtons = null,
             closeButton,
@@ -20,17 +20,17 @@ export default class Dialog extends BaseComponent {
         } = this.props;
         return (
             <Modal show={show}
-                   onHide={onHide}
-                   className={classNames({'btw-modal': this.isDesktop(), 'btw-modal-mobile': this.isMobile()})}
-                   {...restProps}>
+                onHide={onHide}
+                className='btw-modal'
+                {...restProps}>
                 <Modal.Header closeButton={closeButton}>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    { children }
+                    {children}
                 </Modal.Body>
                 <Modal.Footer>
-                    { actionButtons }
+                    {actionButtons}
                 </Modal.Footer>
             </Modal>
         );

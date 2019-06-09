@@ -7,6 +7,8 @@ import BaseComponent from '../shared/BaseComponent';
 import Checkbox from '../shared/Checkbox';
 import SearchInput from '../shared/SearchInput';
 import VotersProgressBar from '../shared/VotersProgressBar';
+import Dialog from '../shared/Dialog';
+import Button from '../shared/Button';
 import ContentLayout from '../layout/ContentLayout';
 
 class SelectVoters extends BaseComponent {
@@ -75,13 +77,14 @@ class SelectVoters extends BaseComponent {
                     sex: 'Male'
                 }
             ],
-            selectVoters: []
+            selectVoters: [],
+            showAlertModal: false
         }
     }
 
     checkHandler = event => {
         const { checked } = event.target;
-        checked && this.setState({selectVoters: this.state.votersList});
+        checked && this.setState({selectVoters: this.state.votersList, showAlertModal: true});
     }
 
     searchInputHandler = value => {
@@ -111,8 +114,12 @@ class SelectVoters extends BaseComponent {
         console.log('nextHandler');
     }
 
+    closeModalHandler = () => {
+        this.setState({showAlertModal: false});
+    }
+
     render() {
-        const {selectVoters} = this.state;
+        const { selectVoters, showAlertModal } = this.state;
         return (
             <ContentLayout>
                 <div className='btw-select-voters container'>
@@ -150,6 +157,36 @@ class SelectVoters extends BaseComponent {
                     selectVoters={selectVoters}
                     onClear={this.clearSelectedVotersHandler}
                     onNext={this.nextHandler} />
+
+                <Dialog 
+                    id='selectedVotersAlertDialog'
+                    title='Hurray! We matched you with 40 of your friends.'
+                    show={showAlertModal}
+                    actionButtons={
+                        <Row>
+                            <Col xs={12}>
+                                <Button 
+                                    id="selectedVotersAlertDialog"
+                                    onClick={() => this.closeModalHandler()}
+                                    color='blue4'
+                                    style={{ width: '100%', fontSize: 13 }}>
+                                    Ok, got it!
+                                </Button>
+                            </Col>
+                        </Row>
+                    }
+                    onClose={this.closeModalHandler}>
+                        <div>
+                            <h4 style={{fontSize: 13}}>
+                                Select 10 people among your social media friends or search 
+                                for other people you know among all the voters of your district.
+                            </h4>
+                            <h4 style={{fontSize: 13}}>
+                                Try to choose a few among regular voters, a few among 
+                                infrequent voters, and a few unregistered voters.
+                            </h4>
+                        </div>
+                </Dialog>
             </ContentLayout >
         );
     }
