@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import Checkbox from '../shared/Checkbox';
+import SearchInput from '../shared/SearchInput';
 import ContentLayout from '../layout/ContentLayout';
 
 class SelectVoters extends BaseComponent {
@@ -15,8 +16,13 @@ class SelectVoters extends BaseComponent {
         }
     }
 
-    checkHandler = (event) => {
+    checkHandler = event => {
         const { checked } = event.target;
+        console.log(checked);
+    }
+
+    searchInputHandler = value => {
+        console.log(value);
     }
 
     render() {
@@ -33,6 +39,12 @@ class SelectVoters extends BaseComponent {
                                 and a few unregistered voters.
 					        </div>
                             <Checkbox onChange={(event) => this.checkHandler(event)} label='test check' />
+                            <SearchInput
+                                placeholder='Search by name or address'
+                                onChange={(value) => this.searchInputHandler(value)} />
+                            <SearchInput
+                                placeholder='Search by name or address'
+                                onChange={(value) => this.searchInputHandler(value)} />
                         </Col>
                     </Row>
                 </div >
