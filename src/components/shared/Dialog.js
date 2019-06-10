@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 
 import BaseComponent from './BaseComponent';
+import Typography from './Typography';
 
 export default class Dialog extends BaseComponent {
     render() {
@@ -21,7 +22,7 @@ export default class Dialog extends BaseComponent {
                 className='btw-modal'
                 {...restProps}>
                 <Modal.Header closeButton={closeButton}>
-                    <Modal.Title>{title}</Modal.Title>
+                    <Typography>{title}</Typography>
                 </Modal.Header>
                 <Modal.Body>
                     {children}
