@@ -21,10 +21,10 @@ export default class ConfirmationDialog extends BaseComponent {
                     actionButtons={
                         <Row>
                             <Col md={3} xs={3}>
-                                <Button className='btn-primary' onClick={onSubmit}>{submitText}</Button>
+                                <Button onClick={onSubmit}>{submitText}</Button>
                             </Col>
                             <Col md={3} xs={3}>
-                                <Button className='btn-primary' onClick={onClose}>No</Button>
+                                <Button onClick={onClose}>No</Button>
                             </Col>
                         </Row>
                     }

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import PubSub from "pubsub-js";
-import { Helmet } from "react-helmet";
+import PubSub from 'pubsub-js';
+import { Helmet } from 'react-helmet';
 
 import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
-import Button from './Button';
-import routes from "../../constants/Routes";
+import routes from '../../constants/Routes';
 import { isMobile } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
@@ -50,16 +49,6 @@ class BaseComponent extends Component {
             .map(route => route.toLowerCase());
 
         return boardingRoutes.includes(pathname.toLowerCase());
-    };
-
-    renderBackToHome = (style) => {
-        style = this.isDesktop() ? style || {'left': '1%', 'position': 'absolute'} : null;
-        return (
-            <Button style={style}
-                    onClick={this.redirectToHome}>
-                Go back
-            </Button>
-        );
     };
 }
 

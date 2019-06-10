@@ -56,10 +56,7 @@ class SocialConnect extends BaseComponent {
                         to find your friends among all the voters.
 					</div>
                     {this.socialItemRender()}
-                    <Button
-                        color='blue4'
-                        style={{ width: '100%', fontSize: 13 }}
-                        onClick={this.showResultHandler}>
+                    <Button onClick={this.showResultHandler}>
                         Show Results
                     </Button>
                 </div>

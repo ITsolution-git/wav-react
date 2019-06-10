@@ -1,13 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import routes from '../../constants/Routes';
 import exclamation from '../../resources/images/exclamation.png';
-
 import BaseComponent from '../shared/BaseComponent';
-import {connect} from "react-redux";
-import { btwLogout } from "../../actions/SignOnAction";
-import { bindActionCreators } from "redux";
+import { btwLogout } from '../../actions/SignOnAction';
+import Button from '../shared/Button';
 
 class GeneralErrorPage extends BaseComponent {
 
@@ -24,10 +24,9 @@ class GeneralErrorPage extends BaseComponent {
                 <div>
                     <h3>Sorry ....Something went wrong .... Please try again later</h3>
                     <br/><br/><br/>
-                    <button className='btn btn-primary btn-general-go-back' 
-                            onClick={() => this.onLink(routes.login)}>
+                    <Button onClick={() => this.onLink(routes.login)}>
                         Back to login page
-                    </button>
+                    </Button>
                 </div>
 			</div>
         );

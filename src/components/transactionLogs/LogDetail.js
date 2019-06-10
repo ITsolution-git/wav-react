@@ -16,7 +16,6 @@ class LogDetail extends BaseComponent {
 
         return (
             <div className="container btw-log-details">
-                { this.renderBackToHome() }
                 <h2>Transaction Details</h2>
                 <br />
 
