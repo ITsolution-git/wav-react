@@ -63,10 +63,10 @@ class VerifyCaptain extends BaseComponent {
 				<div className="container">
 					<div className="verify-captain col-lg-9 col-md-12">
 						{!this.state.isVerified && <div className="warning-red">User doesn't exist</div>}
-						<div className="title-32-light-blue">
+						<div>
 							Fill in these details for us to verify your account
 							</div>
-						<div className="text-18-dark-blue">
+						<div>
 							<FirstNameInput
 								onChange={this.handleChange}
 								isVoter={false}

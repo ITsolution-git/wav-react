@@ -29,15 +29,15 @@ class StateInfo extends BaseComponent {
             <div className="info">
                 <Row className="section">
                     <Col xs={12} md={12}>
-                        <span className="title-20-dark-blue">{ this.props.stateInfo["state"] } voting info</span>
+                        <span>{ this.props.stateInfo["state"] } voting info</span>
                     </Col>
                 </Row>
                 {
                     Object.keys(this.getStateInfo()).map((e, index) => {
                         return <Row key={index} className="section">
                             <Col xs={12} md={12}>
-                                <span className="title-16-dark-blue">{ e }: </span>
-                                <span className="text-15-dark-blue-bold">{ this.getStateInfo()[e] }</span>
+                                <span>{ e }: </span>
+                                <span>{ this.getStateInfo()[e] }</span>
                             </Col>
                         </Row>
                     })

@@ -35,15 +35,15 @@ class TaskList extends BaseComponent {
     getViewProps = () => {
         if (this.isDesktop()) {
             return {
-                titleClass: 'title-32-blue',
-                taskName: 'text-18-dark-blue-bold',
-                tileClass: 'title-20-light-blue'
+                titleClass: '',
+                taskName: '',
+                tileClass: ''
             }
         }
         return {
-            titleClass: 'title-32-light-blue',
-            taskName: 'title-16-blue',
-            tileClass: 'title-16-white'
+            titleClass: '',
+            taskName: '',
+            tileClass: ''
         }
     };
 
@@ -74,7 +74,7 @@ class TaskList extends BaseComponent {
                                             <Col md={3} xs={2} className='link' onClick={() => this.goToTask(taskData, taskData.route)}>
                                                 { this.isDesktop()
                                                     ? <div>
-                                                        <span className="link-medium-dark-blue">Get Started</span>
+                                                        <span>Get Started</span>
                                                         <Icon name="arrow-right-black" width="25px" height="25px" />
                                                       </div>
                                                     : <div className="arrow-mobile">
@@ -110,7 +110,7 @@ class TaskList extends BaseComponent {
                 </div>
                 <Dialog show={showTipsDialog} closeButton onClose={() => this.setState({ showTipsDialog: false })}>
                     <div id="btw-tips-dialog">
-                        <div id="title" className="title-24-light-blue">
+                        <div id="title">
                             Tips on Talking to Friends Voting
                         </div>
                         <div className="text-15-dark-blue-bold">

@@ -43,8 +43,8 @@ const Tile = ({ type, title }) => {
 
   return (
     <div className="tile-details">
-        <div id="title" className="title-24-light-blue">{ title }</div>
-        <div id="content" className="text-18-dark-blue">{ htmlContent }</div>
+        <div id="title">{ title }</div>
+        <div id="content">{ htmlContent }</div>
     </div>
   );
 };

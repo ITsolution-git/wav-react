@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators } from "redux";
-import Typography from '@material-ui/core/Typography';
+import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 
 import TaskBase from './shared/TaskBase';
@@ -111,9 +110,9 @@ class UpdateProfileTask extends TaskBase {
             <div key={name} className='update-profile'>
                 {this.renderRequiredFieldMsg()}
                 {this.isVoterTask()
-                    && <Typography gutterBottom>
+                    && <div>
                         {firstname} {lastname} from {city}, {state} needs to have the following information about them updated
-                    </Typography>
+                    </div>
                 }
                 <div className='input-field-div'>
                     <div className='input-field'>{input}</div>

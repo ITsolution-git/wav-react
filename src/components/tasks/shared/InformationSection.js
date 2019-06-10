@@ -26,7 +26,7 @@ class InformationSection extends BaseComponent {
                 md={4}
                 xsHidden
                 className="btw-task-info">
-                <div className="title-20-blue">
+                <div>
                     Pssst. Need a cheat sheet on voting info? We got you covered
                 </div>
                 { expanded && <StateInfo taskData={this.props.taskData} /> }

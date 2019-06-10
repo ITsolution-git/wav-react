@@ -11,6 +11,7 @@ import routes from '../../constants/Routes';
 import fieldConstants from '../../constants/FieldConstants';
 import Button from '../shared/Button';
 import Paper from '../shared/Paper';
+import Typography from '../shared/Typography';
 
 import {
 	FirstNameInput,
@@ -69,8 +70,10 @@ class Register extends BaseComponent {
 	renderAlreadyRegistered = () => {
 		return (
             <div id="registered-text-div">
-                <span id='registered-text'>Already have an account? </span>
-                <Link id="link-small" to='/'> Log in </Link>
+                <Typography id='registered-text' variant='body' displayInline lightColor>
+                    Already have an account?
+                </Typography>
+                <Link to='/'> Log in </Link>
             </div>
         );
 	};
@@ -85,7 +88,7 @@ class Register extends BaseComponent {
 		return (
 		    <div className="btw-register">
                 <Paper className='paper'>
-                    <div>Sign Up with Email</div>
+                    <Typography>Sign Up with Email</Typography>
                     <Row>
                         <Col md={6}>
                             <FirstNameInput onChange={this.handleChange}

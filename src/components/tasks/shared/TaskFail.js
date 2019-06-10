@@ -24,10 +24,10 @@ export default class TaskFail extends BaseComponent {
                 <div className="icon">
                     <Icon name='face-light' width={90} height={90} />
                 </div>
-                <div className='success-text title-32-light-blue'>
+                <div className='success-text'>
                     { title }
                 </div>
-                <div className='text-18-dark-blue-bold'>
+                <div>
                     { description }
                 </div>
             </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
-import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
 import Button from '../../shared/Button';
@@ -19,7 +18,7 @@ export default class PhotoUpload extends BaseComponent {
         const { image } = this.state;
         return (
             <div className='registration-by-mail'>
-                <Typography>{title}</Typography>
+                <div>{title}</div>
                 <Dropzone className='drop-zone' ref={(node) => { this.dropzoneRef = node; }} onDrop={this.handleFiles} >
                     <div>
                         <div> {image ? 'You have uploaded an image.' : 'Drop photo here.'}</div>
