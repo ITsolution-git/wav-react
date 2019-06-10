@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
 import RadioButtons from '../../shared/inputs/RadioButtons';
@@ -26,9 +25,9 @@ export default class YesNoButtons extends BaseComponent {
 
         return (
             <div>
-                <Typography gutterBottom>
+                <div>
                     { title }
-                </Typography>
+                </div>
                 <RadioButtons title=''
                               onChange={onChange}
                               value={value}

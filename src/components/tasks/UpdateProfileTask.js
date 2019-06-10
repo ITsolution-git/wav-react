@@ -111,9 +111,9 @@ class UpdateProfileTask extends TaskBase {
             <div key={name} className='update-profile'>
                 {this.renderRequiredFieldMsg()}
                 {this.isVoterTask()
-                    && <Typography gutterBottom>
+                    && <div>
                         {firstname} {lastname} from {city}, {state} needs to have the following information about them updated
-                    </Typography>
+                    </div>
                 }
                 <div className='input-field-div'>
                     <div className='input-field'>{input}</div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Typography from '@material-ui/core/Typography';
 import Input from '@material-ui/core/Input';
 import { Row, Col } from 'react-bootstrap';
 
@@ -44,7 +43,7 @@ class ChatBody extends BaseComponent {
     renderText = (msg) => {
         return (
             <div className='msg-text'>
-                <Typography>{msg}</Typography>
+                {msg}
             </div>
         );
     };
@@ -52,7 +51,7 @@ class ChatBody extends BaseComponent {
     renderFrom = (message, isAdmin) => {
         return (
             <div className='msg-from'>
-                <Typography variant='caption'>{this.getUsername(isAdmin)}</Typography>
+                <div>{this.getUsername(isAdmin)}</div>
                 <div className='msg-box'>{this.formatMessage(message)}</div>
             </div>
         )
@@ -62,7 +61,7 @@ class ChatBody extends BaseComponent {
         return (
             <div className='msg-to'>
                 <div className='msg-box'>{this.formatMessage(message)}</div>
-                <Typography variant='caption'>{this.getUsername(isAdmin, true)}</Typography>
+                <div>{this.getUsername(isAdmin, true)}</div>
             </div>
         )
     };

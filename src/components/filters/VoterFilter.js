@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col, Button } from 'react-bootstrap';
-import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../shared/BaseComponent';
 import { searchVoters} from '../../actions/UserSearchAction';
@@ -97,9 +96,7 @@ class VoterFilter extends BaseComponent {
             <div className='btw-user-search container'>
                 <Row>
                     <Col md={3} className='input-filters' >
-                        <Typography variant='subheading' gutterBottom>
-                            Voter
-                        </Typography>
+                        <div>Voter</div>
                         <FirstNameInput onChange={(checked, value) => this.handleChange(voterFields.firstName, checked, value )} />
                         <LastNameInput onChange={(checked, value) => this.handleChange(voterFields.lastName, checked, value )}/>
                         <EmailInput onChange={(checked, value) => this.handleChange(voterFields.email, checked, value )} />
@@ -109,10 +106,7 @@ class VoterFilter extends BaseComponent {
                         <AddressInput onChange={(checked, value) => this.handleChange(voterFields.address, checked, value )} />
                         <PhoneInput onChange={(checked, value) => this.handleChange(voterFields.phone, checked, value )} />
                         <IsRegisteredInput onChange={(checked, value) => this.handleChange(voterFields.isRegistered, checked, value )} />
-                        <VoterStatusInput onChange={(checked, value) => this.handleChange(voterFields.voterStatus, checked, value )} />
-                        <Typography variant='subheading' gutterBottom>
-                            Captain
-                        </Typography>
+                        <div>Captain</div>
                         <UsernameInput onChange={(checked, value) => this.handleChange(captainFields.username, checked, value, false )} />
                         <EmailInput onChange={(checked, value) => this.handleChange(captainFields.email, checked, value, false )} />
                         <FirstNameInput onChange={(checked, value) => this.handleChange(captainFields.firstName, checked, value, false )} />
