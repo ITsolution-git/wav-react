@@ -2,7 +2,6 @@ import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import Typography from '@material-ui/core/Typography';
 import classnames from 'classnames';
 import Moment from 'react-moment';
 
@@ -43,7 +42,7 @@ class MessageList extends BaseComponent {
             { currentChats } = this.state;
         return (
             <div className='container btw-message-list'>
-                <Typography>Message list</Typography>
+                <div>Message list</div>
                 <Row className='chat-content'>
                     <Col md={4}>
                         <div className='chats'>
@@ -67,7 +66,7 @@ class MessageList extends BaseComponent {
                             })}
                             { chats.length === 0 &&
                                 <div className='msg-text'>
-                                    <Typography>No conversations</Typography>
+                                    <div>No conversations</div>
                                 </div> }
                             <Paginator items={chats}
                                        pageSize={5}

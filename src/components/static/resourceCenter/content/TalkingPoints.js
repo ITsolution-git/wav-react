@@ -77,7 +77,7 @@ export default class TalkingPoints extends  BaseComponent {
                 Friend: I only really care about...<br/>
                 <br/><br/>
                 <b>For more information about different scenarios and questions, check out our</b>
-                <span className="link-small-dark-blue" onClick={() => this.onLink(routes.faq)}> Voting FAQs.</span>
+                <span onClick={() => this.onLink(routes.faq)}> Voting FAQs.</span>
             </div>
         )
     }

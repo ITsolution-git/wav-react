@@ -83,15 +83,15 @@ class MakeList extends BaseComponent {
     	if (this.isMobile()) {
     		return {
     			buttonColor: 'blue',
-				titleClass: 'title-32-light-blue',
-				subtitleClass: 'title-24-blue'
+				titleClass: '',
+				subtitleClass: ''
 			}
 		}
 
 		return {
     		buttonColor: 'light-blue',
-			titleClass: 'title-32-white',
-			subtitleClass: 'title-24-white'
+			titleClass: '',
+			subtitleClass: ''
 		}
 	};
 
@@ -179,7 +179,7 @@ class MakeList extends BaseComponent {
                                 </Col>
 							</Col>
 							<Col smHidden mdHidden lgHidden xs={10} xsOffset={1}>
-                                <div id="info-text-mobile" className="title-14-dark-blue">{ this.renderInfoText() }</div>
+                                <div id="info-text-mobile">{ this.renderInfoText() }</div>
 							</Col>
 						</div>
 					</div>

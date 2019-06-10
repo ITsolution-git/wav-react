@@ -51,17 +51,17 @@ class VotingInfo extends BaseComponent {
                             return (
                                 <div key={i}>
                                     <div className='section'>
-                                        <div className='title-16-blue'>Address:</div>
-                                        <div className='text-15-dark-blue-bold'>{ locationName }</div>
-                                        <div className='text-15-dark-blue-bold'>{ line1 }, { city }, { state }, { zip } </div>
+                                        <div>Address:</div>
+                                        <div>{ locationName }</div>
+                                        <div>{ line1 }, { city }, { state }, { zip } </div>
                                     </div>
                                     <div className='section'>
-                                        <div className='title-16-blue'>Notes:</div>
-                                        <div className='text-15-dark-blue-bold'>{ notes }</div>
+                                        <div>Notes:</div>
+                                        <div>{ notes }</div>
                                     </div>
                                     <div className='section'>
-                                        <div className='title-16-blue'>Polling hours:</div>
-                                        <div className='text-15-dark-blue-bold'>{ pollingHours }</div>
+                                        <div>Polling hours:</div>
+                                        <div>{ pollingHours }</div>
                                     </div>
                                 </div>
                                 )

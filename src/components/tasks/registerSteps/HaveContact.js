@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
 import { RegisterTaskConstants, RegisterSubSteps } from '../../../constants/reducerConstants/TaskConstants';
@@ -97,9 +96,9 @@ export class SecondYes extends SharedComponent {
         } = this.props;
         return (
             <div>
-                <Typography gutterBottom>
+                <div>
                     Ask { firstname } { lastname } to check directly on Vote.org and let you know the results. If they can, have them take a screenshot and send it to you.
-                </Typography>
+                </div>
             </div>
         )
     }
@@ -142,9 +141,7 @@ export class FirstNo extends SharedComponent {
         } = this.props;
         return (
             <div>
-                <Typography gutterBottom>
-                    Tell { firstname } { lastname } to register on Vote.org and let you know afterward. If you can, have  { firstname } { lastname } forward you the confirmation email or screenshot.
-                </Typography>
+                Tell { firstname } { lastname } to register on Vote.org and let you know afterward. If you can, have  { firstname } { lastname } forward you the confirmation email or screenshot.
             </div>
         )
     }

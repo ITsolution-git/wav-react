@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
 
 import BaseComponent from '../../shared/BaseComponent';
 
@@ -7,9 +6,9 @@ export default class WhatToDo extends BaseComponent {
     renderOption = (option) => {
         return (
             <li>
-                <Typography>
+                <div>
                     <b>{ option === 'x' ? 'Yes' : option }</b>
-                </Typography>
+                </div>
             </li>
         )
     }
@@ -25,12 +24,12 @@ export default class WhatToDo extends BaseComponent {
 
         return (
             <div>
-                <Typography gutterBottom>
+                <div>
                     <b>Help { firstname } { lastname } vote in the { stateInfo['nextElection'] } election.</b>
                     <br /><br />
                     Voting options vary by state. In { stateInfo['state'] }, { firstname } { lastname } has the following options:
                     <br /><br />
-                </Typography>
+                </div>
                 <ul>
                     { stateInfo['earlyVoting'] && this.renderOption('Early voting.') }
                     { stateInfo['absenteeWithCause'] && this.renderOption('Absentee with cause.') }

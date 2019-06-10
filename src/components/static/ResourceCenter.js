@@ -33,15 +33,15 @@ class ResourceCenter extends BaseComponent {
     getViewProps = () => {
         if (this.isDesktop()) {
             return {
-                titleClass: 'title-24-blue',
-                tileClass: 'title-20-light-blue',
-                linkClass: 'link-medium-blue'
+                titleClass: '',
+                tileClass: '',
+                linkClass: ''
             }
         }
         return {
-            titleClass: 'title-24-light-blue',
-            tileClass: 'title-20-blue',
-            linkClass: 'link-medium-light-blue'
+            titleClass: '',
+            tileClass: '',
+            linkClass: ''
         }
     };
 
@@ -108,7 +108,7 @@ class ResourceCenter extends BaseComponent {
                           </div> }
                      <div id="email-div">
                          <span className="text-18-dark-blue-bold">
-                             Have a question? <a href="mailto:hi@bethewave.vote" className="link-medium-dark-blue"> Email us</a>
+                             Have a question? <a href="mailto:hi@bethewave.vote"> Email us</a>
                          </span>
                      </div>
                 </div>

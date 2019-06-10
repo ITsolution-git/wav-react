@@ -10,7 +10,7 @@ class Faq extends BaseComponent {
             <ContentLayout>
                 <div className="btw-terms container">
                     <Col id="title">
-                        <div className="title-24-blue">Frequently Asked Questions</div>
+                        <div>Frequently Asked Questions</div>
                     </Col>
                     <h4><b>What does my friend need to register to vote?</b></h4>
 

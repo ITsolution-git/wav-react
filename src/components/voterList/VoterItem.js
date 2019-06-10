@@ -36,11 +36,11 @@ class VoterItem extends BaseComponent {
     getViewProps = () => {
         if (this.isDesktop()) {
             return {
-                titleClass: 'title-24-blue'
+                titleClass: ''
             }
         }
         return {
-            titleClass: 'title-24-light-blue'
+            titleClass: ''
         }
     };
 
@@ -67,7 +67,7 @@ class VoterItem extends BaseComponent {
                          className={classNames({'arrow-down': !expanded, 'arrow-up': expanded })} />
                 </Col>
                 <Col md={3} xs={6}>
-                    <div className="title-20-blue">{ firstname } { lastname }</div>
+                    <div>{ firstname } { lastname }</div>
                     { expanded &&
                         <div>
                             <div className="more-info text-15-dark-blue-bold">

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import Typography from '@material-ui/core/Typography';
 
 import TaskBase from './shared/TaskBase';
 import WithTask from '../hocs/Task';
@@ -21,9 +20,9 @@ class RegularVoteTask extends TaskBase {
     renderOption = (option) => {
         return (
             <li>
-                <Typography>
+                <div>
                     { option }
-                </Typography>
+                </div>
             </li>
         )
     };
