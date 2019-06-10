@@ -171,14 +171,14 @@ export default class AddEditDialog extends BaseComponent {
                                 { isEdit
                                     ? <Row>
                                         <Row>
-                                            <Button onClick={() => this.onSubmitInner(onUpdate)} color="blue">Update</Button>
+                                            <Button onClick={() => this.onSubmitInner(onUpdate)}>Update</Button>
                                         </Row>
                                         <Row>
-                                            <Button onClick={onDelete} color="red">Delete</Button>
+                                            <Button onClick={onDelete}>Delete</Button>
                                         </Row>
                                     </Row>
                                     : <Row>
-                                        <Button onClick={() => this.onSubmitInner(onAdd)} color="blue">Add</Button>
+                                        <Button onClick={() => this.onSubmitInner(onAdd)}>Add</Button>
                                     </Row> }
                             </div>
 					</div>

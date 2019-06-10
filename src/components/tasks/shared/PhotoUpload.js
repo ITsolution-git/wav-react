@@ -27,8 +27,7 @@ export default class PhotoUpload extends BaseComponent {
                 </Dropzone>
                 <Row>
                     <Col md={3} xs={6}>
-                        <Button size='medium'
-                            onClick={() => { this.dropzoneRef.open() }}>Upload</Button>
+                        <Button onClick={() => { this.dropzoneRef.open() }}>Upload</Button>
                     </Col>
                 </Row>
             </div>

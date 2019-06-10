@@ -111,10 +111,10 @@ class MatchList extends BaseComponent {
                         </div>
                         <Row id="buttons">
                             <Col md={6} xs={12} mdPush={3}>
-                                <Button size="medium" color="red" onClick={this.onClose}>No</Button>
+                                <Button onClick={this.onClose}>No</Button>
                             </Col>
                             <Col md={6} xs={12}>
-                                <Button size="medium" onClick={this.onSubmitSuccess}>Yes</Button>
+                                <Button onClick={this.onSubmitSuccess}>Yes</Button>
                             </Col>
                         </Row>
                     </div>

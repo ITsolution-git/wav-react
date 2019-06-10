@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import routes from '../../constants/Routes';
 import exclamation from '../../resources/images/exclamation.png';
-
 import BaseComponent from '../shared/BaseComponent';
-import {connect} from "react-redux";
-import { bindActionCreators } from "redux";
+import Button from '../shared/Button';
 
 class NoTaskErrorPage extends BaseComponent {
     render() {

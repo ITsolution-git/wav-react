@@ -60,7 +60,7 @@ class VoterError extends ResultBase {
                     </div>
                     { boardingType === boardingTypes.register &&
                         <div id="buttons">
-                            { noResults === 'true' && <Button color="white" onClick={this.onEditInfoClick}>Edit Info</Button> }
+                            { noResults === 'true' && <Button onClick={this.onEditInfoClick}>Edit Info</Button> }
                             <NextButton title='Next Voter' />
                         </div> }
                 </div>

@@ -123,7 +123,7 @@ class VoterItem extends BaseComponent {
                         </div>
                         <Row id="buttons" className="no-margin">
                             <Col>
-                                <Button color="red" onClick={() => {
+                                <Button onClick={() => {
                                     this.props.actions.deleteVoter(this.props.voter);
                                     this.closeDeleteModal();
                                 }}>Yes</Button>

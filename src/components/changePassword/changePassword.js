@@ -103,10 +103,7 @@ class ChangePassword extends BaseComponent {
                         onChange={this.handleChange}
                         name='confirmPassword'
                         required />
-                    <Button
-                        color='blue4'
-                        style={{ width: '100%' }}
-                        onClick={this.changePassword}>
+                    <Button onClick={this.changePassword}>
                         Save New Password
                     </Button>
                     <div className='remember'>
