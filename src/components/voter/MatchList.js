@@ -102,7 +102,7 @@ class MatchList extends BaseComponent {
                         <Row id="button-row">
                             <Col id="button" md={10} xs={10} className="no-padding">
                                 { boardingType === boardingTypes.register &&
-                                    <Button onClick={this.cantFindClick} style={{width: '100%'}} color='red'>Can't find my friend!</Button>
+                                    <Button onClick={this.cantFindClick}>Can't find my friend!</Button>
                                 }
                             </Col>
                         </Row>
@@ -151,7 +151,7 @@ class MatchList extends BaseComponent {
                             correct? If yes, don't worry.
                         </div>
                         <div id="buttons">
-                            <Button onClick={this.onEditInfoClick} color="white">Edit Info</Button>
+                            <Button onClick={this.onEditInfoClick}>Edit Info</Button>
                             <NextButton onClick={this.onCloseNotRegistered}/>
                         </div>
                     </div>

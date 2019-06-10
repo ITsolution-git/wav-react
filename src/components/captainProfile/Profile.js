@@ -311,7 +311,7 @@ class Profile extends BaseComponent {
 								</Col>
 								<Col md={6} xs={6} style={{textAlign:'center'}}>
 									<div id="btn_remove">
-										<Button id="closeAccountBtn" onClick={() => this.setState({showConfirmModal: true})} style={{border:'2px solid red', color:'red', backgroundColor:'white'}}>Close Account</Button>
+										<Button id="closeAccountBtn" onClick={() => this.setState({showConfirmModal: true})}>Close Account</Button>
 									</div>
 								</Col>
 							</Row>
@@ -327,7 +327,7 @@ class Profile extends BaseComponent {
 											</Button>
 										</Col>
 										<Col md={6} xs={6} className="text-left">
-											<Button  size='medium' onClick={this.onCloseConfirmModal}>
+											<Button onClick={this.onCloseConfirmModal}>
 												Go back
 											</Button>
 										</Col>
