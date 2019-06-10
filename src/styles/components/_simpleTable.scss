@@ -4,6 +4,7 @@
         border: 0;
         height: 400px;
         width: 100%;
+        overflow-y: scroll;
     }
 
     .table-responsive::-webkit-scrollbar {
@@ -43,6 +44,9 @@
                     color: #515973;
                 }
 
+                .check{
+                    padding: 20px 0;
+                }
                 .name {
                     color: #0A1333;
                 }

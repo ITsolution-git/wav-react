@@ -124,12 +124,12 @@ class SimpleTable extends BaseComponent {
             <div className='btw-simple-table'>
                 <Table responsive>
                     <thead>
-                        {this.desktopHeaderRender()}
-                        {/* {this.mobileHeaderRender()} */}
+                        {this.isDesktop() && this.desktopHeaderRender()}
+                        {this.isMobile() && this.mobileHeaderRender()}
                     </thead>
                     <tbody>
-                        {this.desktopBodyRender()}
-                        {/* {this.mobileBodyRender()} */}
+                        {this.isDesktop() && this.desktopBodyRender()}
+                        {this.isMobile() && this.mobileBodyRender()}
                     </tbody>
                 </Table >
             </div >

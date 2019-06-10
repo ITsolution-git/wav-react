@@ -13,29 +13,49 @@ class SearchInput extends BaseComponent {
     }
 
     inputHandler = (event) => {
-        const { onChange } = this.props;
         const { value } = event.target;
 
         this.setState({ value: value });
-        onChange(value);
+        this.isMobile() && this.props.onChange(value);
     }
 
     clickHandler = () => {
-        const { onChange } = this.props;
-        onChange(this.state.value);
+        this.props.onChange(this.state.value);
+    }
+
+    clearHandler = () => {
+        this.setState({ value: '' });
+        this.isMobile() && this.props.onChange('');
+    }
+
+    iconRender = () => {
+        const isValue = this.state.value !== '';
+
+        if (this.isMobile()) {
+            return (
+                <i className={classNames('fa', isValue ? 'fa-close' : 'fa-search')} onClick={this.clearHandler} />
+            );
+        } else {
+            return (
+                <i className={classNames('fa fa-search', isValue && 'i-active')} />
+            );
+        }
     }
 
     render() {
         const { placeholder } = this.props;
-        const isValue = this.state.value !== '';
+        const { value } = this.state;
+        const isValue = value !== '';
 
         return (
-            <div className='btw-search-input'>
+            <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon')}>
+                {this.iconRender()}
                 <input
                     type='text'
                     className='btw-paper'
                     placeholder={placeholder}
                     name='search'
+                    value={value}
                     onChange={this.inputHandler} />
                 <button
                     type='button'
@@ -43,7 +63,7 @@ class SearchInput extends BaseComponent {
                     onClick={this.clickHandler}>
                     Search
                 </button>
-            </div>
+            </div >
         );
     }
 }
