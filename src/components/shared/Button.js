@@ -2,28 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-export default class Button extends React.Component {
+import BaseComponent from '../shared/BaseComponent';
+
+class Button extends BaseComponent {
 
     render() {
         const {
-            children,
             size='large',
-            style = {},
-            disabled,
-            id,
             color = 'blue',
-            borderEnabled = false,
-            onClick = () => {}
+            className,
+            children,
+            onClick = () => {},
+            ...restProps
         } = this.props;
 
         return (
-            <button className={classNames(`btw-button button-${size} button-${color}`, { border: borderEnabled })}
-                    id={id}
-                    style={style}
-                    disabled={disabled}
-                    onClick={onClick}>
+            <button className={classNames('btw-button', `button-${size}`, `button-${color}`, className)}
+                    onClick={onClick}
+                    {...restProps}>
                 { children }
             </button>
         )
     }
 }
+
+Button.propTypes = {
+    size: PropTypes.oneOf(['large', 'medium', 'small']),
+    color: PropTypes.oneOf(['blue', 'white' ])
+};
+
+export default Button;

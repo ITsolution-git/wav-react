@@ -1,80 +1,60 @@
 .btw-button {
-  border-radius: 4px;
+  border-radius: 3px;
   outline: none;
   border: none;
-  font-weight: 600;
   color: $white;
-  @extend .shadow;
-  &:disabled, [disabled]{
-    border: 1px solid #999999;
-    background-color: #cccccc !important;
-    color: #666666;
-  }
-
-  &.border {
-    border: 1px solid $white;
-  }
+  font-weight: 600;
+  font-size: 13px;
+  font-family: Open-Sans;
+  height: 40px;
 }
 
 .button-blue {
-  background-color: $blue;
-  &:hover {
-    background-color: darken($blue, 0.5);
-  }
-}
-.button-light-blue {
-  background-color: $light-blue;
-  &:hover {
-    background-color: darken($light-blue, 0.5);
-  }
-}
-
-.button-blue4 {
   background-color: $primary;
   &:hover {
-    background-color: darken($primary, 0.5);
+    background-color: $primary-hover;
   }
-}
-
-.button-red {
-  background-color: $error;
-  &:hover {
-    background-color: darken($error, 0.5);
+  &:disabled, [disabled] {
+    background-color: $divider;
+    color: $secondary;
+    opacity: 0.6;
   }
 }
 
 .button-white {
   background-color: $white;
-  color: $dark-blue;
+  color: $main;
+  border: 1px solid $divider;
   &:hover {
-    background-color: darken($white, 0.5);
+    background-color: $background;
+  }
+  &:disabled, [disabled] {
+    background-color: $white;
+    opacity: 0.4;
   }
 }
 
 .button-large {
   @include respond-to($phone) {
-    padding: 0 15px;
+    width: 240px;
   }
-  @include respond-to($desktop) {
-    padding: 0 35px;
+  @include respond-to($computer) {
+    width: 336px;
   }
-  font-size: 12pt;
-  height: 43px;
-  min-width: 160px;
 }
 
 .button-medium {
   @include respond-to($phone) {
-    padding: 0 10px;
+    width: 240px;
   }
-  @include respond-to($desktop) {
-    padding: 0 32px;
+  @include respond-to($computer) {
+    width: 200px;
   }
-  font-size: 11pt;
-  height: 41px;
-  min-width: 130px;
 }
+
 .button-small {
-  // TODO
+  font-size: 11px;
+  width: 60px;
+  height: 24px;
 }
 

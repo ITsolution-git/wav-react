@@ -16,10 +16,9 @@ class NoTaskErrorPage extends BaseComponent {
                 <div>
                     <h3>Sorry ....there is not related task.... </h3>
                     <br/><br/><br/>
-                    <button className='btn btn-primary btn-general-go-back' 
-                            onClick={() => this.onLink(routes.login)}>
+                    <Button onClick={() => this.onLink(routes.login)}>
                         Back to Home page
-                    </button>
+                    </Button>
                 </div>
 			</div>
         );
