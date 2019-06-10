@@ -1,0 +1,62 @@
+.btw-simple-table{
+
+    .table-responsive {
+        border: 0;
+        height: 400px;
+        width: 100%;
+    }
+
+    .table-responsive::-webkit-scrollbar {
+        width: 2px;
+    }
+
+    .table {
+        thead {
+            tr {
+                margin-top: 10px;
+
+                th {
+                    position: sticky;
+                    top: 0;
+                    vertical-align: bottom;
+                    border-bottom: 0.5px solid #E9EBF3;
+                    color: #505872;
+                    font-size: 13px;
+                    background-color: white;
+                    z-index: 1;
+                }
+
+                .check {
+                    width: 15px;
+                }
+            }
+        }
+
+        tbody {
+
+            tr {
+                td {
+                    height: 47.5px;
+                    padding: 14px 8px;
+                    font-size: 13px;
+                    font-weight: normal;
+                    color: #515973;
+                }
+
+                .name {
+                    color: #0A1333;
+                }
+
+                .description {
+                    margin-bottom: 0;
+                    font-size: 12px;
+                    color: #515973;
+                }
+                .status {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}

@@ -5,10 +5,11 @@ import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import Checkbox from '../shared/Checkbox';
-import SearchInput from '../shared/SearchInput';
+// import SearchInput from '../shared/SearchInput';
 import VotersProgressBar from '../shared/VotersProgressBar';
 import Dialog from '../shared/Dialog';
 import Button from '../shared/Button';
+import SimpleTable from '../shared/SimpleTable';
 import ContentLayout from '../layout/ContentLayout';
 
 class SelectVoters extends BaseComponent {
@@ -16,65 +17,245 @@ class SelectVoters extends BaseComponent {
         super();
         this.state = {
             votersList: [
-                { 
+                {
                     id: 1,
                     name: 'Denis Damin 1',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: false,
+                        linkedIn: false,
+                        facebook: true
+                    },
+                    status: 'infrequent'
                 },
-                { 
+                {
                     id: 2,
                     name: 'Denis Damin 2',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Female',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Not registered'
                 },
-                { 
+                {
                     id: 3,
                     name: 'Denis Damin 3',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Female',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Not registered'
                 },
-                { 
+                {
                     id: 4,
                     name: 'Denis Damin 4',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: false,
+                        facebook: true
+                    },
+                    status: 'Not registered'
                 },
-                { 
+                {
                     id: 5,
                     name: 'Denis Damin 5',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
                 },
-                { 
+                {
                     id: 6,
                     name: 'Denis Damin 6',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
                 },
-                { 
+                {
                     id: 7,
                     name: 'Denis Damin 7',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
                 },
-                { 
+                {
                     id: 8,
                     name: 'Denis Damin 8',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
                 },
-                { 
+                {
                     id: 9,
                     name: 'Denis Damin 9',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
                 },
-                { 
+                {
                     id: 10,
                     name: 'Denis Damin 10',
                     street: 'New work Sr. 1289',
-                    sex: 'Male'
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
+                },
+                {
+                    id: 11,
+                    name: 'Denis Damin 1',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: false,
+                        linkedIn: false,
+                        facebook: true
+                    },
+                    status: 'infrequent'
+                },
+                {
+                    id: 12,
+                    name: 'Denis Damin 2',
+                    street: 'New work Sr. 1289',
+                    sex: 'Female',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Not registered'
+                },
+                {
+                    id: 13,
+                    name: 'Denis Damin 3',
+                    street: 'New work Sr. 1289',
+                    sex: 'Female',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Not registered'
+                },
+                {
+                    id: 14,
+                    name: 'Denis Damin 4',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: false,
+                        facebook: true
+                    },
+                    status: 'Not registered'
+                },
+                {
+                    id: 15,
+                    name: 'Denis Damin 5',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
+                },
+                {
+                    id: 16,
+                    name: 'Denis Damin 6',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
+                },
+                {
+                    id: 17,
+                    name: 'Denis Damin 7',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
+                },
+                {
+                    id: 18,
+                    name: 'Denis Damin 8',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
+                },
+                {
+                    id: 19,
+                    name: 'Denis Damin 9',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
+                },
+                {
+                    id: 20,
+                    name: 'Denis Damin 10',
+                    street: 'New work Sr. 1289',
+                    sex: 'Male',
+                    social: {
+                        twitter: true,
+                        linkedIn: true,
+                        facebook: true
+                    },
+                    status: 'Regular'
                 }
             ],
             selectVoters: [],
@@ -84,7 +265,7 @@ class SelectVoters extends BaseComponent {
 
     checkHandler = event => {
         const { checked } = event.target;
-        checked && this.setState({selectVoters: this.state.votersList, showAlertModal: true});
+        checked && this.setState({ selectVoters: this.state.votersList, showAlertModal: true });
     }
 
     searchInputHandler = value => {
@@ -102,12 +283,12 @@ class SelectVoters extends BaseComponent {
             ));
 
             selectVoters = [
-                ...selectVoters.slice(0, targetIndex), 
+                ...selectVoters.slice(0, targetIndex),
                 ...selectVoters.slice(targetIndex + 1)
             ];
         }
 
-        this.setState({selectVoters});
+        this.setState({ selectVoters });
     }
 
     nextHandler = () => {
@@ -115,11 +296,15 @@ class SelectVoters extends BaseComponent {
     }
 
     closeModalHandler = () => {
-        this.setState({showAlertModal: false});
+        this.setState({ showAlertModal: false });
+    }
+
+    selectTableHandler = (selectVoters) => {
+        this.setState({ selectVoters });
     }
 
     render() {
-        const { selectVoters, showAlertModal } = this.state;
+        const { selectVoters, showAlertModal, votersList } = this.state;
         return (
             <ContentLayout>
                 <div className='btw-select-voters container'>
@@ -139,33 +324,39 @@ class SelectVoters extends BaseComponent {
                             </Row>
                             <Row>
                                 <Col xs={12} sm={12} md={12} lg={9}>
-                                     <SearchInput
+                                    {/* <SearchInput
                                         placeholder='Search by name or address'
-                                        onChange={(value) => this.searchInputHandler(value)} />
+                                        onChange={(value) => this.searchInputHandler(value)} /> */}
+                                    <div className='btw-paper table-container'>
+                                        <SimpleTable
+                                            data={votersList}
+                                            selectData={selectVoters}
+                                            onSelect={(selectVoters) => this.selectTableHandler(selectVoters)} />
+                                    </div>
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={3}>
-                                    {/* <VotersProgressBar 
+                                    <VotersProgressBar
                                         selectVoters={selectVoters}
                                         onClear={this.clearSelectedVotersHandler}
-                                        onNext={this.nextHandler} /> */}
+                                        onNext={this.nextHandler} />
                                 </Col>
                             </Row>
                         </Col>
                     </Row>
                 </div >
-                <VotersProgressBar 
+                {/* <VotersProgressBar
                     selectVoters={selectVoters}
                     onClear={this.clearSelectedVotersHandler}
-                    onNext={this.nextHandler} />
+                    onNext={this.nextHandler} /> */}
 
-                <Dialog 
+                <Dialog
                     id='selectedVotersAlertDialog'
                     title='Hurray! We matched you with 40 of your friends.'
                     show={showAlertModal}
                     actionButtons={
                         <Row>
                             <Col xs={12}>
-                                <Button 
+                                <Button
                                     id="selectedVotersAlertDialog"
                                     onClick={() => this.closeModalHandler()}
                                     color='blue4'
@@ -176,16 +367,16 @@ class SelectVoters extends BaseComponent {
                         </Row>
                     }
                     onClose={this.closeModalHandler}>
-                        <div>
-                            <h4 style={{fontSize: 13}}>
-                                Select 10 people among your social media friends or search 
-                                for other people you know among all the voters of your district.
+                    <div>
+                        <h4 style={{ fontSize: 13 }}>
+                            Select 10 people among your social media friends or search
+                            for other people you know among all the voters of your district.
                             </h4>
-                            <h4 style={{fontSize: 13}}>
-                                Try to choose a few among regular voters, a few among 
-                                infrequent voters, and a few unregistered voters.
-                            </h4>
-                        </div>
+                        <h4 style={{ fontSize: 13 }}>
+                            Try to choose a few among regular voters, a few among
+                            infrequent voters, and a few unregistered voters.
+                        </h4>
+                    </div>
                 </Dialog>
             </ContentLayout >
         );
