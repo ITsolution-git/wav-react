@@ -1,15 +1,9 @@
 .welcome-div {
   
-  @include respond-to($desktop) {
+  @include respond-to($computer) {
     width: 512px;
     padding: 51px 24px;
   }
-
-  @include respond-to($tablet) {
-    padding: 51px 24px;
-    width: 512px;
-  }
-
   .welcome-content {
 
     @include respond-to($phone) {
@@ -42,12 +36,7 @@
 
   .welcome-video-container {
 
-    @include respond-to($desktop) {
-      height: 272px;
-      position: relative;
-    }
-
-    @include respond-to($tablet) {
+    @include respond-to($computer) {
       height: 272px;
       position: relative;
     }
@@ -67,11 +56,7 @@
     }
 
     &:not(:hover) {
-      .play-button {
-        display: none;
-      }
-
-      .full-screen {
+      .play-button, .full-screen {
         display: none;
       }
     }
@@ -93,14 +78,7 @@
       border-radius: 50%;
       cursor: pointer;
 
-      @include respond-to($desktop) {
-        top: 96px;
-        left: 192px;
-        width: 80px;
-        height: 80px;
-      }
-
-      @include respond-to($tablet) {
+      @include respond-to($computer) {
         top: 96px;
         left: 192px;
         width: 80px;
@@ -120,21 +98,8 @@
         border-radius: 50%;
         justify-content: center;
         align-items: center;
-
-        @include respond-to($desktop) {
-          width: 52px;
-          height: 52px;
-        }
-
-        @include respond-to($tablet) {
-          width: 52px;
-          height: 52px;
-        }
-        
-        @include respond-to($phone) {
-          width: 52px;
-          height: 52px;
-        }
+        width: 52px;
+        height: 52px;
 
         .play-icon {
           border: 0;
