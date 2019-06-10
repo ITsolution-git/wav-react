@@ -33,7 +33,7 @@ class Typography extends BaseComponent {
         const styles = {...style, ...this.resolveStyleObj(color, lightColor, fontWeight)};
 
         return React.createElement(displayInline ? 'span' : 'div', {
-            ... {
+            ...{
                 className: cn('btw-typography', variant, className ),
                 style: styles,
                 children

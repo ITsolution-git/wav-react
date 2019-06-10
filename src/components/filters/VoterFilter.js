@@ -106,6 +106,7 @@ class VoterFilter extends BaseComponent {
                         <AddressInput onChange={(checked, value) => this.handleChange(voterFields.address, checked, value )} />
                         <PhoneInput onChange={(checked, value) => this.handleChange(voterFields.phone, checked, value )} />
                         <IsRegisteredInput onChange={(checked, value) => this.handleChange(voterFields.isRegistered, checked, value )} />
+                        <VoterStatusInput onChange={(checked, value) => this.handleChange(voterFields.voterStatus, checked, value )} />
                         <div>Captain</div>
                         <UsernameInput onChange={(checked, value) => this.handleChange(captainFields.username, checked, value, false )} />
                         <EmailInput onChange={(checked, value) => this.handleChange(captainFields.email, checked, value, false )} />

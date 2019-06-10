@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators } from "redux";
-import Typography from '@material-ui/core/Typography';
+import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 
 import TaskBase from './shared/TaskBase';
