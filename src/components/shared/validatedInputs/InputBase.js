@@ -2,7 +2,7 @@ import React from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Select from 'react-select';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 import BaseComponent from '../../shared/BaseComponent';
 
@@ -80,8 +80,8 @@ export default class InputBase extends BaseComponent {
     };
 
     resolveLabel = () => {
-        const { label, required, showAsterisk = false } = this.props;
-        return `${label} ${required && showAsterisk && '*'}`;
+        const { label } = this.props;
+        return `${label}`;
     };
 }
 
@@ -107,9 +107,10 @@ export class TextInput extends InputBase {
             defaultValue,
             fullWidth = true,
             type,
-            id,
             maxLength = 50,
-            errorWhite = false
+            errorWhite = false,
+            label,
+            ...restProps
         } = this.props;
 
         const {
@@ -119,27 +120,23 @@ export class TextInput extends InputBase {
         } = this.state;
 
         return (
-            <FormControl error={!isValid}
-                required={required}
-                disabled={disabled}
-                fullWidth={fullWidth}>
+            <>
+                <label>{ label }</label>
                 <input value={value}
-                    placeholder={this.resolveLabel()}
                     type={type}
-                    id={id}
                     onBlur={this.onFocusOut}
-                    className="btw-input-new"
+                    className='btw-input-new'
                     onChange={e => {
                         const { value } = e.target;
                         if (value.length <= maxLength) {
                             this.onChange(e);
                         }
                     }}
-                    disabled={disabled} />
-                <FormHelperText classes={{ root: classnames('btw-input-error', { 'btw-error-white': errorWhite }) }}>
-                    {error}
-                </FormHelperText>
-            </FormControl>
+                       {...restProps} />
+                <span classes={{ root: cn('btw-input-error', { 'btw-error-white': errorWhite }) }}>
+                    { error }
+                </span>
+            </>
         );
     };
 }
@@ -195,7 +192,7 @@ export class Dropdown extends InputBase {
                     onBlur={this.onFocusOut}
                     options={values.map(this.mapItem)}
                 />
-                <FormHelperText classes={{ root: classnames('btw-input-error', { 'btw-error-white': errorWhite }) }}
+                <FormHelperText classes={{ root: cn('btw-input-error', { 'btw-error-white': errorWhite }) }}
                     error={!isValid}>{error}</FormHelperText>
             </FormControl>
         );

@@ -28,10 +28,11 @@ class EmailInput extends InputBase {
     };
 
     render () {
-        const { error } = this.props;
+        const { error, placeholder = 'Your email address' } = this.props;
         return <TextInput label='Email'
                           type='email'
                           id='email'
+                          placeholder={placeholder}
                           customError={error}
                           onInputChange={this.checkForUniqueEmail}
                           onBlur={e => this.handleUnique(e.target.value)}

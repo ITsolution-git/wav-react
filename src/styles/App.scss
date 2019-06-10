@@ -30,12 +30,15 @@
 
 html {
 	font-size: 21px;
+
+	body {
+		font-family: Open-Sans;
+	}
 }
 
 @import 'shared/_colors.scss';
 @import 'shared/style.scss';
 @import 'shared/mixins';
-@import 'shared/sizes.scss';
 @import 'shared/components.scss';
 @import 'shared/sharedclasses.scss';
 @import 'shared/titles.scss';

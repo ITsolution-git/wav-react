@@ -126,8 +126,7 @@ class VoterDetail extends BaseComponent {
 		} = this.state;
 
 		const viewProps = this.viewProps(),
-        	errorWhite = this.isDesktop(),
-            showAsterisk = this.isMobile();
+        	errorWhite = this.isDesktop();
 
 		return (
 			<OnBoardingLayout>
@@ -150,7 +149,6 @@ class VoterDetail extends BaseComponent {
 													  onChange={this.handleChange}
 													  defaultValue={firstName}
 													  startValidation={startValidation}
-													  showAsterisk={showAsterisk}
 													  disabled
 													  required />
 								 </Col>
@@ -159,7 +157,6 @@ class VoterDetail extends BaseComponent {
 													 defaultValue={lastName}
                                                     onChange={this.handleChange}
 													 startValidation={startValidation}
-                                                    showAsterisk={showAsterisk}
                                                     disabled
 													 required />
 								 </Col>
@@ -170,7 +167,6 @@ class VoterDetail extends BaseComponent {
                                             startValidation={startValidation}
                                             disabled={emailDisabled}
                                             errorWhite={errorWhite}
-                                            showAsterisk={showAsterisk}
                                             required />
                             </Col>
                             <Row>
@@ -179,7 +175,6 @@ class VoterDetail extends BaseComponent {
                                                defaultValue={voterDetail[FieldConstants.city]}
                                                startValidation={startValidation}
                                                errorWhite={errorWhite}
-                                               showAsterisk={showAsterisk}
                                                required />
                                 </Col>
                                 <Col md={5} xs={5}>
@@ -187,7 +182,6 @@ class VoterDetail extends BaseComponent {
                                                 defaultValue={voterDetail[FieldConstants.state]}
                                                 startValidation={startValidation}
                                                 errorWhite={errorWhite}
-                                                showAsterisk={showAsterisk}
                                                 required />
                                 </Col>
                             </Row>

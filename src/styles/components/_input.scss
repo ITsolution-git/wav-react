@@ -1,28 +1,12 @@
 .btw-input {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 3px;
-  vertical-align: middle;
-  height: $input_field_height;
-
-  &:focus {
-    border-color: #006BA6;
-  }
-}
-
-.btw-input-new {
-  @extend .btw-input;
   color: $dark-blue;
   font-size: 14pt;
-  @extend .shadow;
   outline: none;
 }
 
 .btw-label {
-  font-weight: $font_weight_normal;
-  font-size: $font_size_label;
+  font-weight: 400;
+  font-size: 18px;
 }
 
 .btw-input-error {

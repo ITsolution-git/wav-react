@@ -173,10 +173,7 @@ class Login extends BaseComponent {
 							<div id="button-class">
 								<Button
 									disabled={isFetching}
-									borderEnabled
-									onClick={this.btwSignOn.bind(this)}
-									color='blue4'
-									style={{ width: '100%' }}>
+									onClick={this.btwSignOn.bind(this)}>
 									Log In
                                     </Button>
 							</div>
