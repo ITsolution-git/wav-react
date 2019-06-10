@@ -4,15 +4,10 @@
     padding: 37px 16px 36px;
   }
 
-  @include respond-to($tablet) {
+  @include respond-to($computer) {
     width: 512px;
     padding: 59px 88px 44px;
     margin-top: 138px;
-  }
-
-  @include respond-to($desktop) {
-    width: 512px;
-    padding: 59px 88px 44px;
   }
 
   .btw-form {

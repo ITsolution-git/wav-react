@@ -1,0 +1,25 @@
+.select-disctrict {
+    width: 512px;
+    padding: 51px 88px;
+
+    @include respond-to($phone) {
+        width: 272px;
+        padding: 37px 16px;
+    }
+
+    .district-title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 27px;
+        margin: 0;
+    }
+
+    .district-description {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 130%;
+        margin-top: 12px;
+    }
+}
