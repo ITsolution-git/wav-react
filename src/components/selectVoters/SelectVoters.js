@@ -5,11 +5,11 @@ import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import Checkbox from '../shared/Checkbox';
-// import SearchInput from '../shared/SearchInput';
+import SearchInput from '../shared/SearchInput';
 import VotersProgressBar from '../shared/VotersProgressBar';
 import Dialog from '../shared/Dialog';
 import Button from '../shared/Button';
-import SimpleTable from '../shared/SimpleTable';
+import VotersTable from '../shared/VotersTable';
 import ContentLayout from '../layout/ContentLayout';
 
 class SelectVoters extends BaseComponent {
@@ -328,17 +328,17 @@ class SelectVoters extends BaseComponent {
                                         placeholder='Search by name or address'
                                         onChange={(value) => this.searchInputHandler(value)} /> */}
                                     <div className='btw-paper table-container'>
-                                        <SimpleTable
+                                        <VotersTable
                                             data={votersList}
                                             selectData={selectVoters}
                                             onSelect={(selectVoters) => this.selectTableHandler(selectVoters)} />
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={3}>
-                                    <VotersProgressBar
+                                    {/* <VotersProgressBar
                                         selectVoters={selectVoters}
                                         onClear={this.clearSelectedVotersHandler}
-                                        onNext={this.nextHandler} />
+                                        onNext={this.nextHandler} /> */}
                                 </Col>
                             </Row>
                         </Col>

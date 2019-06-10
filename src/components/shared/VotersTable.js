@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 import BaseComponent from './BaseComponent';
 import Checkbox from './Checkbox';
 
-class SimpleTable extends BaseComponent {
+class VotersTable extends BaseComponent {
 
     clearHandler = (id) => {
         let { selectData, onSelect } = this.props;
@@ -121,7 +121,7 @@ class SimpleTable extends BaseComponent {
     render() {
 
         return (
-            <div className='btw-simple-table'>
+            <div className='btw-voters-table'>
                 <Table responsive>
                     <thead>
                         {this.isDesktop() && this.desktopHeaderRender()}
@@ -137,4 +137,4 @@ class SimpleTable extends BaseComponent {
     }
 }
 
-export default SimpleTable;
+export default VotersTable;
