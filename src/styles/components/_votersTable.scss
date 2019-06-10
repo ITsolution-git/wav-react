@@ -5,10 +5,25 @@
         height: 400px;
         width: 100%;
         overflow-y: scroll;
+        padding: 0 10px;
     }
 
-    .table-responsive::-webkit-scrollbar {
-        width: 2px;
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+      
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px #FAFBFF; 
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #e9ebf3; 
+        border-radius: 3px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #8e93a6; 
     }
 
     .table {
