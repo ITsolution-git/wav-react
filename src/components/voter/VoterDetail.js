@@ -68,14 +68,14 @@ class VoterDetail extends BaseComponent {
         if (this.isMobile()) {
             return {
                 buttonColor: 'blue',
-                titleClass: 'title-24-blue',
+                titleClass: '',
             }
         }
 
         return {
             buttonColor: 'light-blue',
-            titleClass: 'title-32-white',
-            subtitleClass: 'title-24-white'
+            titleClass: '',
+            subtitleClass: ''
         }
     };
 
@@ -226,7 +226,7 @@ class VoterDetail extends BaseComponent {
                         <ProgressBar width='50%' />
                     </Col>
                     <Col smHidden mdHidden lgHidden xs={11} xsOffset={1}>
-                        <div id="info-text-mobile" className="title-14-dark-blue">
+                        <div id="info-text-mobile">
 							Don't worry! <br />
 							We won't use any of these information to <br />
 							contact them!

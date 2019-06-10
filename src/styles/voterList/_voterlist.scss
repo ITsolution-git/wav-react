@@ -72,14 +72,12 @@
     padding: 12px 15px;
     border-radius: 5px;
     cursor: pointer;
-    @extend .title-16-dark-blue;
     img {
       margin-left: 40px;
     }
   }
 
   #add-button-mobile {
-    @extend .title-16-white;
     background-color: $blue;
     border-radius: 5px;
     padding: 20px 0;

@@ -113,8 +113,8 @@ class MatchList extends BaseComponent {
                         <div className="success-icon">
                             <Icon name="check-light-blue" width={80} height={80} />
                         </div>
-                        <div id="title" className="title-16-blue">Awesome!</div>
-                        <div id="text" className="text-15-dark-blue-bold">
+                        <div id="title">Awesome!</div>
+                        <div id="text">
                             Your friend { firstname } { lastname } <br />
                             is registered!
                         </div>
@@ -143,7 +143,7 @@ class MatchList extends BaseComponent {
                 </Dialog>
                 <Dialog show={showNotRegistered} onClose={this.onCloseNotRegistered} onHide={() => {}}>
                     <div id="match-list-mobile-dialog" className="not-registered-modal">
-                        <div id="title" className="title-16-blue">
+                        <div id="title">
                             We can't find your friend
                         </div>
                         <div id="text" className="text-15-dark-blue-bold">

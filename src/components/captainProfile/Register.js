@@ -70,7 +70,7 @@ class Register extends BaseComponent {
 		return (
             <div id="registered-text-div">
                 <span id='registered-text'>Already have an account? </span>
-                <Link id="link-small" to='/'> Log in </Link>
+                <Link to='/'> Log in </Link>
             </div>
         );
 	};

@@ -2,16 +2,6 @@
 @import '~rc-pagination/assets/index.css';
 @import '~react-select/dist/react-select.css';
 
-@font-face {
-	font-family: Avenir-Black;
-	src: url(../resources/fonts/Avenir-Black.ttf);
-}
-
-@font-face {
-	font-family: Avenir-Light;
-	src: url(../resources/fonts/Avenir-Light.ttf);
-}
-
 html {
 	font-size: 21px;
 }
@@ -24,7 +14,6 @@ html {
 @import 'shared/sharedclasses.scss';
 @import 'shared/titles.scss';
 @import 'shared/components_lib.scss';
-@import 'shared/_typography.scss';
 
 
 @import 'layout/header.scss';

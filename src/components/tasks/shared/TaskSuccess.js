@@ -34,7 +34,7 @@ class TaskSuccess extends BaseComponent {
                 <div className="icon">
                     <Icon name="check-light-blue" width={70} height={70} />
                 </div>
-                <div className='success-text title-32-light-blue'>
+                <div className='success-text'>
                     { title }
                 </div>
                 <Spinner height={100} loading={isFetching} />

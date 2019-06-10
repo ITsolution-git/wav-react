@@ -19,14 +19,14 @@ class StepsToHelpFriendVote extends BaseComponent {
 			<ContentLayout>
 				<div className="btw-terms container">
 					<Col id="title">
-						<div className="title-24-blue">Steps to Helping Your Friends Vote</div>
+						<div>Steps to Helping Your Friends Vote</div>
 					</Col>
 					<h4><b>What does my friend need to register to vote?</b></h4>
 
 					<p>
 						Don’t worry, you don’t have to remember all of the details below.
 						You’ll receive notifications about “Actions” for you to take to make sure all of your friends are ready to vote.
-						<span className="link-small-dark-blue" onClick={() => this.onLink(routes.tasksList)}> Go to My Actions to get started. </span>
+						<span onClick={() => this.onLink(routes.tasksList)}> Go to My Actions to get started. </span>
 					</p><br/>
 
 					<h4><b>1.    Register to Vote</b></h4>
@@ -53,7 +53,7 @@ class StepsToHelpFriendVote extends BaseComponent {
 					<p>
 						Now that your friend is registered, you’ll let them know what their options are for how they cast their ballot -- in person on Election Day or early,
 						either by mail or in person. The options available to your friend depend on their county and state.
-						You can find out which options are available by going to <span className="link-small-dark-blue" onClick={() => this.onLink(routes.voterList)}> My Voters  </span>  and clicking on your friend’s name.
+						You can find out which options are available by going to <span onClick={() => this.onLink(routes.voterList)}> My Voters  </span>  and clicking on your friend’s name.
 					</p><br/>
 
 					<p>
@@ -99,7 +99,7 @@ class StepsToHelpFriendVote extends BaseComponent {
 					</p><br/>
 
 					<p>
-						Ready to help your friends vote? <span className="link-small-dark-blue" onClick={() => this.onLink(routes.tasksList)}> Get started now</span>
+						Ready to help your friends vote? <span onClick={() => this.onLink(routes.tasksList)}> Get started now</span>
 					</p><br/>
 
 				</div>

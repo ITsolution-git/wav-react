@@ -52,7 +52,7 @@ class VoterError extends ResultBase {
                         <Icon name='face-light' width={90} height={90} />
                     </div>
                     <div id="text">
-                        <div className='cant-find title-32-light-blue'>
+                        <div className='cant-find'>
                             { firstname } { lastname } may not be <br />
                             registered
                         </div>

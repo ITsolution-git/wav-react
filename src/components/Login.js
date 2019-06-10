@@ -199,13 +199,13 @@ class Login extends BaseComponent {
 					<div className="forgot-password">
 						{this.state.isUserFound === 0 && this.state.showWarning && <div className="warning-red">User doesn't exist</div>}
 						{this.state.isUserFound === 1 && this.state.showWarning && <div className="warning-green">Reset password request sent</div>}
-						<div className="title-32-light-blue">
+						<div>
 							Forgot your password?
 							</div>
-						<div className="title-20-blue">
+						<div>
 							We'll send you an email with a link to reset it!
 							</div>
-						<div className="text-18-dark-blue">
+						<div>
 							<EmailInput
 								onChange={this.changeForgotPasswordEmail}
 								isVoter={false}

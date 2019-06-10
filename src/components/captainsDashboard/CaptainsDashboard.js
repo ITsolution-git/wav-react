@@ -40,7 +40,7 @@ class CaptainsDashboard extends BaseComponent {
 
 	renderCircleItem = (number, text) => {
       return (
-          <div id="circle-point" className="title-20-blue">
+          <div id="circle-point">
               <span className="circle">{ number }</span>
               { text }
           </div>
@@ -54,7 +54,7 @@ class CaptainsDashboard extends BaseComponent {
                     Not sure how to talk to your friends about <br />
                     voting? Uncertain about the latest voter ID laws?
                 </div>
-                <div className="link-small-dark-blue" onClick={() => this.onLink(routes.resourceCenter)}>
+                <div onClick={() => this.onLink(routes.resourceCenter)}>
                     Check out our Resource Center  <i className="arrow-right-dark-blue" />
                 </div>
             </div>
@@ -82,20 +82,19 @@ class CaptainsDashboard extends BaseComponent {
                     <Spinner loading={isFetching} height={300} />
                     { isSuccess &&
                     <Col>
-                        <div id="name" className="title-32-blue">
+                        <div id="name">
                             Hi {data.firstname}!
                         </div>
                         <Row>
                             <Col md={6}>
                                 <Col className="white-box">
-                                    <div className="title-24-light-blue">Top Action:</div>
+                                    <div>Top Action:</div>
                                     <div id="recent-task">
                                         { tasks.length > 0
                                             ? <div>
                                                 <span className="text-18-dark-blue-bold">{ task.description }. </span>
                                                 <span id="get-started"
-                                                      onClick={() => this.goToTask(task, task.route)}
-                                                      className="link-medium-dark-blue">
+                                                      onClick={() => this.goToTask(task, task.route)}>
                                                     Get started
                                                 </span>
                                                 <i className="arrow-right-dark-blue" />
@@ -108,10 +107,10 @@ class CaptainsDashboard extends BaseComponent {
                                 <Row className="no-margin" id="voters">
                                     <Col md={9} xs={7} id="voter-count-div">
                                         <div className="white-box" id="voter-count">
-                                            <div className="title-24-light-blue">
+                                            <div>
                                                 { voters_count } Voters
                                             </div>
-                                            <div className="link-small-dark-blue" onClick={() => this.onLink(routes.voterList)}>
+                                            <div onClick={() => this.onLink(routes.voterList)}>
                                                 View all voters
                                             </div>
                                         </div>
@@ -119,7 +118,7 @@ class CaptainsDashboard extends BaseComponent {
                                             <div className="white-box" id="resource-center">{ this.renderResourceCenter() }</div> }
                                     </Col>
                                     <Col md={3} xs={5} id="add-voter" className="white-box">
-                                        <div className="title-16-dark-blue">Add Voter</div>
+                                        <div>Add Voter</div>
                                         <div onClick={this.onAddClick}>
                                             <Icon name="plus" width="47px" height="47px" />
                                         </div>
@@ -130,12 +129,12 @@ class CaptainsDashboard extends BaseComponent {
                                 </Col>
                             </Col>
                             <Col id="help-friends" md={4} xsHidden className="white-box">
-                                <div className="title-24-light-blue">Help your friends:</div>
+                                <div>Help your friends:</div>
                                 { this.renderCircleItem('1', 'Register to vote') }
                                 { this.renderCircleItem('2', 'Decide method of voting') }
                                 { this.renderCircleItem('3', 'Understand the ballot') }
                                 { this.renderCircleItem('4', 'Cast their ballot') }
-                                <div className="link-small-dark-blue" onClick={() => this.onLink(routes.stepsToHelpFriendVote)}>
+                                <div onClick={() => this.onLink(routes.stepsToHelpFriendVote)}>
                                     Learn More
                                 </div>
                             </Col>

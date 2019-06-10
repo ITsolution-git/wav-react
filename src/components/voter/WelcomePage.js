@@ -34,7 +34,7 @@ class WelcomePage extends BaseComponent {
         const { nextEnabled } = this.state;
         const contentMsg = nextEnabled
             ? <div>
-		        <div className="title-32-light-blue">
+		        <div>
 			        HERE'S HOW IT WORKS ...
 		        </div>
 		        <br />
@@ -46,7 +46,7 @@ class WelcomePage extends BaseComponent {
 		        <div>Track your impact as you help your friends vote</div>
               </div>
             : <div>
-		        <div className="title-32-light-blue">
+		        <div>
 			        WELCOME TO THE TEAM!
 		        </div>
                 <br />
@@ -57,7 +57,7 @@ class WelcomePage extends BaseComponent {
                 <div className="layout-center">
                     <div className='welcome-div'>
 
-                        <div className="title-20-blue" id="how-it-works">
+                        <div id="how-it-works">
                         </div>
                         <div className="text-18-dark-blue">
                             { contentMsg }

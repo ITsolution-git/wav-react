@@ -51,13 +51,13 @@ class MatchList extends BaseComponent {
       const { fromTasks } = this.props;
       if (this.isDesktop() && !fromTasks) {
         return {
-            titleClass: 'title-24-white',
-            dialogTitle: 'title-32-blue'
+            titleClass: '',
+            dialogTitle: ''
         }
       }
       return {
-          titleClass: 'title-24-dark-blue',
-          dialogTitle: 'title-20-blue'
+          titleClass: '',
+          dialogTitle: ''
       }
     };
 

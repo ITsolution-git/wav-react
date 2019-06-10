@@ -70,11 +70,11 @@ export default class AddEditDialog extends BaseComponent {
 	getViewProps = () => {
 		if (this.isDesktop()) {
 			return {
-				titleClass: 'title-24-blue'
+				titleClass: ''
 			}
 		}
 		return {
-            titleClass: 'title-24-light-blue'
+            titleClass: ''
 		}
 	};
 
