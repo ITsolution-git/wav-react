@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import qs from 'qs';
 import { Row, Col } from 'react-bootstrap';
+import cn from 'classnames';
 
 import BaseComponent from '../components/shared/BaseComponent';
 import appDataTypes from '../constants/AppDataTypes';
@@ -18,6 +19,7 @@ import {
 	EmailInput,
 	PasswordInput
 } from '../components/shared/validatedInputs';
+import Paper from '../components/shared/Paper';
 import Dialog from './shared/Dialog';
 import { forgotPasswordRequest } from '../actions/PasswordRequestAction';
 import routes from '../constants/Routes';
@@ -133,7 +135,8 @@ class Login extends BaseComponent {
 
 
 		return (
-			<Row className="btw-login no-margin">
+			<Paper className={cn('btw-login')}>
+			<Row className="no-margin">
 
 				<Col md={12} xs={12} className="no-padding">
 					<div className="btw-form" onKeyPress={this.onKeyPress}>
@@ -223,6 +226,7 @@ class Login extends BaseComponent {
 					</div>
 				</Dialog>
 			</Row>
+			</Paper>
 		);
 	}
 }
