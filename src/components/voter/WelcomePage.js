@@ -1,80 +1,74 @@
 import React from 'react';
-import classnames from 'classnames';
 import { withRouter } from 'react-router-dom';
+import { findDOMNode } from 'react-dom'
+import ReactPlayer from 'react-player';
+import screenfull from 'screenfull';
+import classnames from 'classnames';
 
 import BaseComponent from '../shared/BaseComponent';
-import OnBoardingLayout from './shared/OnBoardingLayout'
 import Button from '../shared/Button';
-import colors from '../../constants/ColorConstants';
+import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
 
 class WelcomePage extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            nextEnabled: false
+            playing: false
         }
     }
-
-    onNext = () => {
-        this.setState({ nextEnabled: true });
-    };
 
     onGetStarted = () => {
         this.onLink(routes.makelist);
     };
 
-    renderRadio = (active) => {
-      return (
-          <div className={classnames('radio', { active })} />
-      )
-    };
+    playPause = () => {
+        this.setState({playing: !this.state.playing});
+    }
+
+    ref = player => {
+        this.player = player;
+    }
+
+    onClickFullscreen = () => {
+        screenfull.request(findDOMNode(this.player))
+    }
 
     render() {
-        const { nextEnabled } = this.state;
-        const contentMsg = nextEnabled
-            ? <div>
-		        <div>
-			        HERE'S HOW IT WORKS ...
-		        </div>
-		        <br />
-                <div>Check to see if your friends are registered.</div>
-		        <br />
-                <div>Receive a customized set of steps for you to help your friends register and vote.
-                    Don’t worry we’ll provide you all the info and guidance you need!</div>
-		        <br />
-		        <div>Track your impact as you help your friends vote</div>
-              </div>
-            : <div>
-		        <div>
-			        WELCOME TO THE TEAM!
-		        </div>
-                <br />
-                You’re a part of a national movement to make sure no one sits this election out
-            </div>;
-        return (
-            <OnBoardingLayout color={colors.blue}>
-                <div className="layout-center">
-                    <div className='welcome-div'>
+        const { playing } = this.state;
 
-                        <div id="how-it-works">
-                        </div>
-                        <div className="text-18-dark-blue">
-                            { contentMsg }
-                        </div>
-                        <div id="btn-next">
-                            { nextEnabled
-                                ? <Button onClick={this.onGetStarted}>Get Started!</Button>
-                                : <Button onClick={this.onNext}>Next</Button>
-                            }
-                            <div id="radio-view">
-                                { this.renderRadio(!nextEnabled) }
-                                { this.renderRadio(nextEnabled) }
-                            </div>
-                        </div>
+        return (
+            <div className="layout-center">
+                <Paper className={'welcome-div'}>
+                    <div className={'welcome-content'}>
+                        <h2 className="welcome-title">Hello there!</h2>
+                        <p className="welcome-message">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vitae porttitor leo. Pellentesque sed pharetra erat. Nam non odio turpis. Quisque lectus augue, convallis vel tristique eget, consectetur.</p>
                     </div>
-                </div>
-            </OnBoardingLayout>
+
+                    <div className="welcome-video-container">
+                        <ReactPlayer 
+                            url='https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8'
+                            width="100%"
+                            height="100%"
+                            playing={playing}
+                            ref={this.ref}
+                        />
+
+                        <div className="play-button" onClick={this.playPause}>
+                            <span className="white-circle">
+                                <span className={classnames('play-icon', { "pause" : playing})}></span>
+                            </span>
+                        </div>
+
+                        <div className="full-screen" onClick={this.onClickFullscreen}>View Full Screen</div>
+                    </div>
+
+                    <div className="watch-later-div">
+                        <Button onClick={this.onGetStarted}>Watch Later</Button>
+                    </div>
+                </Paper>
+            </div>
+            
         );
     }
 }
