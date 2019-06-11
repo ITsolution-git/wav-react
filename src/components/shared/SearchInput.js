@@ -61,7 +61,7 @@ class SearchInput extends BaseComponent {
                     onChange={this.inputHandler} />
                 <Button
                     type='button'
-                    className='btw-paper'
+                    className='btw-paper search-button'
                     onClick={this.clickHandler}
                     disabled={isEmpty}>
                     Search
