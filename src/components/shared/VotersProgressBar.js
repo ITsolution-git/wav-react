@@ -90,11 +90,11 @@ class VotersProgressBar extends BaseComponent {
                 </div>
                 <div className='status-container'>
                     <div className='status'>Added {selectedVoters.length}/{maxVoters}:</div>
-                    <a
+                    <span
                         className={classNames('clear', { 'active': selectedVoters.length !== 0 })}
                         onClick={this.clearAllHandler}>
                         Clear All
-                    </a>
+                    </span>
                 </div>
                 {this.renderProgressBar()}
                 {this.renderVotersList()}

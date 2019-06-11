@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     @include respond-to($desktop) {
-      padding-top: 138px;
+      padding-top: 10vh;
     }
     @include respond-to($phone) {
       height: 90%;

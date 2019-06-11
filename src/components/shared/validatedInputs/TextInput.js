@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextInput as Input } from "./InputBase";
-import InputBase from "./InputBase";
+import { TextInput as Input } from './InputBase';
+import InputBase from './InputBase';
 
 export default class TextInput extends InputBase {
     render () {
