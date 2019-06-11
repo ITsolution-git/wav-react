@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
 
 import BaseComponent from './BaseComponent';
 import Typography from './Typography';
 
-export default class Dialog extends BaseComponent {
+class Dialog extends BaseComponent {
     render() {
         const {
             show,
@@ -34,3 +35,11 @@ export default class Dialog extends BaseComponent {
         );
     }
 }
+
+Dialog.propTypes = {
+    show: PropTypes.bool,
+    title: PropTypes.string,
+    onClose: PropTypes.func
+};
+
+export default Dialog; 
