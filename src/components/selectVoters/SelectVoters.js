@@ -322,7 +322,7 @@ class SelectVoters extends BaseComponent {
                                 <Col xs={12} sm={12} md={12} lg={9}>
                                     <SearchInput
                                         placeholder='Search by name or address'
-                                        onChange={(value) => this.searchInputHandler(value)} />
+                                        onChange={this.searchInputHandler} />
                                     <div className='btw-paper table-container'>
                                         <VotersTable
                                             data={votersList}
@@ -349,9 +349,9 @@ class SelectVoters extends BaseComponent {
                         <Row>
                             <Col xs={12}>
                                 <Button
+                                    fullWidth
                                     id="selectedVotersAlertDialog"
-                                    onClick={this.closeModalHandler}
-                                    style={{ width: '100%' }}>
+                                    onClick={this.closeModalHandler}>
                                     Ok, got it!
                                 </Button>
                             </Col>

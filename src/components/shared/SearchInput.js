@@ -39,7 +39,7 @@ class SearchInput extends BaseComponent {
 
         return this.isMobile() ?
             <i className={classNames('fa', isValue ? 'fa-close' : 'fa-search')} onClick={this.clearHandler} /> :
-            <i className={classNames('fa fa-search', isValue && 'i-active')} />
+            <i className={classNames('fa fa-search', { 'i-active': isValue })} />
     }
 
     render() {
