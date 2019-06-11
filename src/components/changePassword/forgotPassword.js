@@ -6,6 +6,7 @@ import { forgotPasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
 import routes from '../../constants/Routes';
 import Button from '../shared/Button';
+import Typography from '../shared/Typography';
 import { EmailInput } from '../../components/shared/validatedInputs';
 
 class ForgotPassword extends BaseComponent {
@@ -37,8 +38,8 @@ class ForgotPassword extends BaseComponent {
         const { isUserFound } = this.state;
         return (
             <React.Fragment>
-                {isUserFound === 0 && <span className='errorMessage'>User doesn't exist</span>}
-                {isUserFound === 1 && <span className='successMessage'>Reset password request sent</span>}
+                {isUserFound === 0 && <Typography variant='functional' className='errorMessage' displayInline>User doesn't exist</Typography>}
+                {isUserFound === 1 && <Typography variant='functional' className='successMessage' displayInline>Reset password request sent</Typography>}
             </React.Fragment>
         )
     }
@@ -48,24 +49,24 @@ class ForgotPassword extends BaseComponent {
 
         return (
             <div className="btw-forgot-password">
-                <div className='content'>
-                    <div className='title'>Reset Password</div>
-                    <div className='description'>
+                <div className='content btw-paper'>
+                    <Typography className='title'>Reset Password</Typography>
+                    <Typography variant='body' className='description'>
                         Enter the email address associated with your account and
                         we’ll send you a link to create a new Password
-					</div>
+					</Typography>
                     {this.renderMessage()}
                     <EmailInput
                         defaultValue={email}
                         onChange={this.handleChange}
                         uniqueValidationEnabled={false}
                         required />
-                    <Button onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
+                    <Button style={{ width: '100%' }} onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
                         Send Request
                     </Button>
-                    <div className='remember'>
+                    <Typography variant='body' className='remember'>
                         Remembered? <Link to={routes.login}>Log in.</Link>
-                    </div>
+                    </Typography>
                 </div>
             </div >
         );
