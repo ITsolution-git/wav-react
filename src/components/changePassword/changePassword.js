@@ -104,7 +104,7 @@ class ChangePassword extends BaseComponent {
                         onChange={this.handleChange}
                         name='confirmPassword'
                         required />
-                    <Button style={{ width: '100%' }} onClick={this.changePassword}>
+                    <Button fullWidth onClick={this.changePassword}>
                         Save New Password
                     </Button>
                     <Typography variant='body' className='remember'>

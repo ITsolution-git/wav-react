@@ -61,7 +61,7 @@ class ForgotPassword extends BaseComponent {
                         onChange={this.handleChange}
                         uniqueValidationEnabled={false}
                         required />
-                    <Button style={{ width: '100%' }} onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
+                    <Button fullWidth onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
                         Send Request
                     </Button>
                     <Typography variant='body' className='remember'>

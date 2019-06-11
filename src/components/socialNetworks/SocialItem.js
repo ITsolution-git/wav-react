@@ -10,7 +10,7 @@ class SocialItem extends BaseComponent {
 
     connectedTextRender = () => {
         return (
-            <Typography variant='functional' className={classNames('status', this.isDesktop() && 'status-center')}>
+            <Typography variant='functional' className={classNames('status', { 'status-center': this.isDesktop() })}>
                 Connected
             </Typography>
         );
