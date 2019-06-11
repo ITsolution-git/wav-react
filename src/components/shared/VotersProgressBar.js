@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 
@@ -90,8 +91,6 @@ class VotersProgressBar extends BaseComponent {
                 {this.votersListRender()}
                 <div className='button-container'>
                     <Button
-                        color='blue4'
-                        style={{ fontSize: 13 }}
                         onClick={this.clickHandler}
                         disabled={selectVoters.length < 10} >
                         Next Step
@@ -101,5 +100,11 @@ class VotersProgressBar extends BaseComponent {
         );
     }
 }
+
+VotersProgressBar.propTypes = {
+    selectVoters: PropTypes.array,
+    onClear: PropTypes.func,
+    onNext: PropTypes.func
+};
 
 export default VotersProgressBar;
