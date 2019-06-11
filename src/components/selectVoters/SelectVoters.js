@@ -270,7 +270,6 @@ class SelectVoters extends BaseComponent {
     }
 
     searchInputHandler = value => {
-        console.log(value);
     }
 
     clearSelectedVotersHandler = (id) => {
@@ -293,7 +292,6 @@ class SelectVoters extends BaseComponent {
     }
 
     nextHandler = () => {
-        console.log('nextHandler');
     }
 
     closeModalHandler = () => {
