@@ -83,6 +83,8 @@ html {
 @import 'socialNetworks/socialConnect.scss';
 @import 'socialNetworks/socialItem.scss';
 
+@import 'selectVoters/selectVoters.scss';
+
 @import 'userSearch/usersearch';
 
 @import 'transactionLogs/list';
@@ -93,3 +95,7 @@ html {
 @import 'components/modal';
 @import 'components/input';
 @import 'components/dropdown';
+@import 'components/checkbox';
+@import 'components/searchInput';
+@import 'components/votersProgressBar';
+@import 'components/votersTable';

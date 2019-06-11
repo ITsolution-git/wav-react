@@ -8,19 +8,20 @@ class Button extends BaseComponent {
 
     render() {
         const {
-            size='large',
+            size = 'large',
             color = 'blue',
             className,
             children,
-            onClick = () => {},
+            fullWidth,
+            onClick = () => { },
             ...restProps
         } = this.props;
 
         return (
-            <button className={classNames('btw-button', `button-${size}`, `button-${color}`, className)}
-                    onClick={onClick}
-                    {...restProps}>
-                { children }
+            <button className={classNames('btw-button', `button-${size}`, `button-${color}`, className, { 'button-full-width': fullWidth })}
+                onClick={onClick}
+                {...restProps}>
+                {children}
             </button>
         )
     }
@@ -28,7 +29,7 @@ class Button extends BaseComponent {
 
 Button.propTypes = {
     size: PropTypes.oneOf(['large', 'medium', 'small']),
-    color: PropTypes.oneOf(['blue', 'white' ])
+    color: PropTypes.oneOf(['blue', 'white'])
 };
 
 export default Button;

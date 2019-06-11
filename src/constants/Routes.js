@@ -31,6 +31,7 @@ export default {
     regularVoteTask: '/task/regular_vote',
 
     socialConnect: '/social_connect',
+    selectVoters: '/select_voters',
     voterFilter: '/voter_filter',
     captainFilter: '/captain_filter',
     verifyCaptain: '/changePassword/verify',
