@@ -2,13 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-const Checkbox = ({ className, label, onChange, checked }) => {
+const Checkbox = ({ className, label, onChange, checked, ...restProps }) => {
+
+    const handleChange = (event) => {
+        onChange(event.target.checked, event)
+    }
+
     return (
-        <label className={classNames('btw-checkbox', className)}>
+        <label className={classNames('btw-checkbox', className)} {...restProps}>
             {label}
             <input
                 type='checkbox'
-                onChange={onChange}
+                onChange={handleChange}
                 checked={checked} />
             <span className='checkmark' />
         </label>

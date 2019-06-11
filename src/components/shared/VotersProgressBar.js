@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from './BaseComponent';
 import Button from './Button';
+import Typography from './Typography';
 
 class VotersProgressBar extends BaseComponent {
 
@@ -16,8 +17,11 @@ class VotersProgressBar extends BaseComponent {
     }
 
     clickHandler = () => {
-        const { selectVoters, onNext } = this.props;
-        selectVoters.length === 10 && onNext();
+        const { selectedVoters, maxVoters, onNext } = this.props;
+
+        if (selectedVoters.length === maxVoters) {
+            onNext();
+        }
     }
 
     clearItemHandler = (id) => {
@@ -25,31 +29,36 @@ class VotersProgressBar extends BaseComponent {
     }
 
     clearAllHandler = () => {
-        const { selectVoters, onClear } = this.props;
-        selectVoters.length !== 0 && onClear('all');
+        const { selectedVoters, onClear } = this.props;
+
+        if (selectedVoters.length !== 0) {
+            onClear('all');
+        }
     }
 
     zoomHandler = () => {
         const { zoom } = this.state;
-        const { selectVoters } = this.props;
+        const { selectedVoters } = this.props;
 
-        selectVoters.length !== 0 && this.setState({ zoom: !zoom });
+        if (selectedVoters.length !== 0) {
+            this.setState({ zoom: !zoom });
+        }
     }
 
-    votersListRender = () => {
-        const { selectVoters } = this.props;
+    renderVotersList = () => {
+        const { selectedVoters } = this.props;
         const { zoom } = this.state;
 
         return (
-            <Row className={classNames('voters-list-container', zoom && 'open')}>
+            <Row className={classNames('voters-list-container', { 'open': zoom })}>
                 {
-                    selectVoters.map((voter, i) => {
+                    selectedVoters.map((voter, i) => {
                         return (
                             <Col key={i} xs={12} sm={4} md={4} lg={12}>
                                 <div className='item'>
-                                    <div className='name'>
+                                    <Typography variant='body'>
                                         {voter.name}
-                                    </div>
+                                    </Typography>
                                     <span className='fa fa-close' onClick={() => this.clearItemHandler(voter.id)} />
                                 </div>
                             </Col>
@@ -60,39 +69,39 @@ class VotersProgressBar extends BaseComponent {
         );
     }
 
-    progressBarRender = () => {
-        const { selectVoters } = this.props;
+    renderProgressBar = () => {
+        const { selectedVoters, maxVoters } = this.props;
 
         return (
             <div className='progress-container'>
-                {[...Array(10)].map((e, i) => {
-                    return <div key={i} className={classNames('item', selectVoters.length > i && 'active')} />
+                {[...Array(maxVoters)].map((e, i) => {
+                    return <div key={i} className={classNames('item', { 'active': selectedVoters.length > i })} />
                 })}
             </div>
         );
     }
 
     render() {
-        const { selectVoters } = this.props;
+        const { selectedVoters, maxVoters } = this.props;
         return (
             <div className='btw-voters-progress-bar btw-paper'>
                 <div className='zoom-container'>
                     <div className='zoom' onClick={this.zoomHandler} />
                 </div>
                 <div className='status-container'>
-                    <div className='status'>Added {selectVoters.length}/10:</div>
+                    <div className='status'>Added {selectedVoters.length}/{maxVoters}:</div>
                     <a
-                        className={classNames('clear', selectVoters.length !== 0 && 'active')}
+                        className={classNames('clear', { 'active': selectedVoters.length !== 0 })}
                         onClick={this.clearAllHandler}>
                         Clear All
                     </a>
                 </div>
-                {this.progressBarRender()}
-                {this.votersListRender()}
+                {this.renderProgressBar()}
+                {this.renderVotersList()}
                 <div className='button-container'>
                     <Button
                         onClick={this.clickHandler}
-                        disabled={selectVoters.length < 10} >
+                        disabled={selectedVoters.length < maxVoters} >
                         Next Step
                     </Button>
                 </div>
@@ -102,9 +111,14 @@ class VotersProgressBar extends BaseComponent {
 }
 
 VotersProgressBar.propTypes = {
-    selectVoters: PropTypes.array,
+    selectedVoters: PropTypes.array,
+    maxVoters: PropTypes.number,
     onClear: PropTypes.func,
     onNext: PropTypes.func
 };
+
+VotersProgressBar.defaultProps = {
+    maxVoters: 10
+}
 
 export default VotersProgressBar;

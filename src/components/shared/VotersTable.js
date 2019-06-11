@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
+import _ from 'lodash';
 
 import BaseComponent from './BaseComponent';
 import Checkbox from './Checkbox';
@@ -8,47 +9,40 @@ import Checkbox from './Checkbox';
 class VotersTable extends BaseComponent {
 
     clearHandler = (id) => {
-        let { selectData, onSelect } = this.props;
+        let { selectedData, onSelect } = this.props;
 
-        const targetIndex = selectData.findIndex(item => (
-            item.id === id
-        ));
-
-        selectData = [
-            ...selectData.slice(0, targetIndex),
-            ...selectData.slice(targetIndex + 1)
-        ];
-        onSelect(selectData);
+        _.remove(selectedData, { id: id });
+        onSelect(selectedData);
     }
 
     addHandler = (item) => {
-        let { selectData, onSelect } = this.props;
-        if (selectData.length >= 10) {
+        let { selectedData, onSelect, maxSelectedVoters } = this.props;
+        if (selectedData.length >= maxSelectedVoters) {
             return null;
         }
-        selectData = [
-            ...selectData,
+        selectedData = [
+            ...selectedData,
             item
         ]
-        onSelect(selectData);
+        onSelect(selectedData);
     }
 
-    checkHandler = (event, item) => {
-        const { checked } = event.target;
-        checked ?
+    checkboxHandler = (value, item) => {
+        value ?
             this.addHandler(item) :
             this.clearHandler(item.id);
     }
 
     isSelected = (id) => {
-        const { selectData } = this.props;
-        const targetIndex = selectData.findIndex(item => (
+        const { selectedData } = this.props;
+        const targetIndex = selectedData.findIndex(item => (
             item.id === id
         ));
+
         return targetIndex >= 0;
     }
 
-    desktopHeaderRender = () => {
+    renderDesktopHeader = () => {
         return (
             <tr>
                 <th className='check'></th>
@@ -59,7 +53,7 @@ class VotersTable extends BaseComponent {
         );
     }
 
-    mobileHeaderRender = () => {
+    renderMobileHeader = () => {
         return (
             <tr>
                 <th className='check'></th>
@@ -68,7 +62,7 @@ class VotersTable extends BaseComponent {
         );
     }
 
-    voterInfoRender = (item) => {
+    renderVoterInfo = (item) => {
         return (
             <React.Fragment>
                 <div className='name'>
@@ -81,17 +75,18 @@ class VotersTable extends BaseComponent {
         );
     }
 
-    desktopBodyRender = () => {
+    renderDesktopBody = () => {
         const { data } = this.props;
+
         return data.map((item, i) => {
             return (
                 <tr key={i}>
                     <td>
                         <div className='check'>
-                            <Checkbox onChange={(event) => this.checkHandler(event, item)} checked={this.isSelected(item.id)} />
+                            <Checkbox onChange={(value) => this.checkboxHandler(value, item)} checked={this.isSelected(item.id)} />
                         </div>
                     </td>
-                    <td>{this.voterInfoRender(item)}</td>
+                    <td>{this.renderVoterInfo(item)}</td>
                     <td>Table cell</td>
                     <td>{item.status}</td>
                 </tr>
@@ -99,18 +94,19 @@ class VotersTable extends BaseComponent {
         })
     }
 
-    mobileBodyRender = () => {
+    renderMobileBody = () => {
         const { data } = this.props;
+
         return data.map((item, i) => {
             return (
                 <tr key={i}>
                     <td>
                         <div className='check'>
-                            <Checkbox onChange={(event) => this.checkHandler(event, item)} checked={this.isSelected(item.id)} />
+                            <Checkbox onChange={(value) => this.checkboxHandler(value, item)} checked={this.isSelected(item.id)} />
                         </div>
                     </td>
                     <td>
-                        {this.voterInfoRender(item)}
+                        {this.renderVoterInfo(item)}
                         <div className='status'>
                             <div>
                                 {item.status}
@@ -131,12 +127,12 @@ class VotersTable extends BaseComponent {
             <div className='btw-voters-table'>
                 <Table responsive>
                     <thead>
-                        {this.isDesktop() && this.desktopHeaderRender()}
-                        {this.isMobile() && this.mobileHeaderRender()}
+                        {this.isDesktop() && this.renderDesktopHeader()}
+                        {this.isMobile() && this.renderMobileHeader()}
                     </thead>
                     <tbody>
-                        {this.isDesktop() && this.desktopBodyRender()}
-                        {this.isMobile() && this.mobileBodyRender()}
+                        {this.isDesktop() && this.renderDesktopBody()}
+                        {this.isMobile() && this.renderMobileBody()}
                     </tbody>
                 </Table >
             </div >
@@ -146,8 +142,13 @@ class VotersTable extends BaseComponent {
 
 VotersTable.propTypes = {
     data: PropTypes.array,
-    selectData: PropTypes.array,
+    selectedData: PropTypes.array,
+    maxSelectedVoters: PropTypes.number,
     onSelect: PropTypes.func
 };
+
+VotersTable.defaultProps = {
+    maxSelectedVoters: 10
+}
 
 export default VotersTable;

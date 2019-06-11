@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
+import _ from 'lodash';
 
 import BaseComponent from '../shared/BaseComponent';
 import Checkbox from '../shared/Checkbox';
@@ -259,36 +260,30 @@ class SelectVoters extends BaseComponent {
                     status: 'Regular'
                 }
             ],
-            selectVoters: [],
+            selectedVoters: [],
             showAlertModal: false
         }
     }
 
-    checkHandler = event => {
-        const { checked } = event.target;
-        checked && this.setState({ selectVoters: this.state.votersList, showAlertModal: true });
+    checkboxHandler = (value, event) => {
+        if (value) {
+            this.setState({ selectedVoters: this.state.votersList, showAlertModal: true });
+        }
     }
 
     searchInputHandler = value => {
     }
 
     clearSelectedVotersHandler = (id) => {
-        let { selectVoters } = this.state;
+        let { selectedVoters } = this.state;
 
         if (id === 'all') {
-            selectVoters = [];
+            selectedVoters = [];
         } else {
-            const targetIndex = selectVoters.findIndex(voter => (
-                voter.id === id
-            ));
-
-            selectVoters = [
-                ...selectVoters.slice(0, targetIndex),
-                ...selectVoters.slice(targetIndex + 1)
-            ];
+            _.remove(selectedVoters, { id: id });
         }
 
-        this.setState({ selectVoters });
+        this.setState({ selectedVoters });
     }
 
     nextHandler = () => {
@@ -298,12 +293,12 @@ class SelectVoters extends BaseComponent {
         this.setState({ showAlertModal: false });
     }
 
-    selectTableHandler = (selectVoters) => {
-        this.setState({ selectVoters });
+    selectTableHandler = (selectedVoters) => {
+        this.setState({ selectedVoters });
     }
 
     render() {
-        const { selectVoters, showAlertModal, votersList } = this.state;
+        const { selectedVoters, showAlertModal, votersList } = this.state;
         return (
             <ContentLayout>
                 <div className='btw-select-voters container'>
@@ -320,7 +315,7 @@ class SelectVoters extends BaseComponent {
                                         Try to choose a few among regular voters, a few among infrequent voters,
                                         and a few unregistered voters.
                                     </Typography>
-                                    <Checkbox onChange={(event) => this.checkHandler(event)} label='test check' />
+                                    <Checkbox onChange={this.checkboxHandler} label='test check' />
                                 </Col>
                             </Row>
                             <Row>
@@ -331,14 +326,14 @@ class SelectVoters extends BaseComponent {
                                     <div className='btw-paper table-container'>
                                         <VotersTable
                                             data={votersList}
-                                            selectData={selectVoters}
-                                            onSelect={(selectVoters) => this.selectTableHandler(selectVoters)} />
+                                            selectedData={selectedVoters}
+                                            onSelect={this.selectTableHandler} />
                                     </div>
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={3}>
                                     <VotersProgressBar
                                         color='blue'
-                                        selectVoters={selectVoters}
+                                        selectedVoters={selectedVoters}
                                         onClear={this.clearSelectedVotersHandler}
                                         onNext={this.nextHandler} />
                                 </Col>
@@ -355,7 +350,7 @@ class SelectVoters extends BaseComponent {
                             <Col xs={12}>
                                 <Button
                                     id="selectedVotersAlertDialog"
-                                    onClick={() => this.closeModalHandler()}
+                                    onClick={this.closeModalHandler}
                                     style={{ width: '100%' }}>
                                     Ok, got it!
                                 </Button>

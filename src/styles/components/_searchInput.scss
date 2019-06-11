@@ -21,31 +21,18 @@
         @include respond-to($computer) {
             padding-left:  45px;
         }
-    }
 
-    input[type=text]::placeholder { /* Most modern browsers support this now. */
-        color: $divider;
-        font-weight: 300;
-    }
-
-    input[type=text]::-webkit-input-placeholder{ /* WebKit, Blink, Edge */
-        color: $divider;
-        font-weight: 300;
-    }
-
-    input[type=text]::-moz-placeholder { /* Firefox 19+ */
-        color: $divider;
-        font-weight: 300;
-    }
-
-    input[type=text]:-ms-input-placeholder { /* IE 10+ */
-        color: $divider;
-        font-weight: 300;
-    }
-
-    input[type=text]:-moz-placeholder { /* Firefox 18- */
-        color: $divider;
-        font-weight: 300;
+        @mixin placeholder {
+            &::-webkit-input-placeholder {@content};
+            &:-moz-placeholder           {@content};
+            &::-moz-placeholder          {@content};
+            &:-ms-input-placeholder      {@content} ; 
+        }
+        
+        @include placeholder {
+            color: $divider;
+            font-weight: 300;
+        }
     }
 
     .search-button {

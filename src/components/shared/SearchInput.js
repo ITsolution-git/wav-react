@@ -18,7 +18,9 @@ class SearchInput extends BaseComponent {
         const { value } = event.target;
 
         this.setState({ value: value });
-        this.isMobile() && this.props.onChange(value);
+        if (this.isMobile()) {
+            this.props.onChange(value);
+        }
     }
 
     clickHandler = () => {
@@ -27,21 +29,17 @@ class SearchInput extends BaseComponent {
 
     clearHandler = () => {
         this.setState({ value: '' });
-        this.isMobile() && this.props.onChange('');
+        if (this.isMobile()) {
+            this.props.onChange('');
+        }
     }
 
-    iconRender = () => {
-        const isValue = this.state.value !== '';
+    renderIcon = () => {
+        const isValue = !!this.state.value;
 
-        if (this.isMobile()) {
-            return (
-                <i className={classNames('fa', isValue ? 'fa-close' : 'fa-search')} onClick={this.clearHandler} />
-            );
-        } else {
-            return (
-                <i className={classNames('fa fa-search', isValue && 'i-active')} />
-            );
-        }
+        return this.isMobile() ?
+            <i className={classNames('fa', isValue ? 'fa-close' : 'fa-search')} onClick={this.clearHandler} /> :
+            <i className={classNames('fa fa-search', isValue && 'i-active')} />
     }
 
     render() {
@@ -51,7 +49,7 @@ class SearchInput extends BaseComponent {
 
         return (
             <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon')}>
-                {this.iconRender()}
+                {this.renderIcon()}
                 <input
                     type='text'
                     className='btw-paper'
@@ -59,7 +57,7 @@ class SearchInput extends BaseComponent {
                     name='search'
                     value={value}
                     onChange={this.inputHandler} />
-                <Button
+                < Button
                     type='button'
                     className='btw-paper search-button'
                     onClick={this.clickHandler}
