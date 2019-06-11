@@ -83,7 +83,6 @@ class Register extends BaseComponent {
 			startValidation,
 		} = this.state;
 		const { error } = this.props;
-		const errorInWhite = this.isMobile();
 
 		return (
 		    <div className="btw-register">
@@ -93,13 +92,11 @@ class Register extends BaseComponent {
                         <Col md={6}>
                             <FirstNameInput onChange={this.handleChange}
                                             startValidation={startValidation}
-                                            errorWhite={errorInWhite}
                                             required />
                         </Col>
                         <Col md={6}>
                             <LastNameInput onChange={this.handleChange}
                                            startValidation={startValidation}
-                                           errorWhite={errorInWhite}
                                            required />
                         </Col>
                     </Row>
@@ -112,7 +109,6 @@ class Register extends BaseComponent {
                                         isVoter={false}
                                         startValidation={startValidation}
                                         uniqueValidationEnabled={false}
-                                        errorWhite={errorInWhite}
                                         customError={error}
                                         required />
                         </Col>
@@ -121,7 +117,6 @@ class Register extends BaseComponent {
                         <Col md={12}>
                             <PasswordInput onChange={this.handleChange}
                                            startValidation={startValidation}
-                                           errorWhite={errorInWhite}
                                            required />
                         </Col>
                     </Row>
@@ -134,7 +129,6 @@ class Register extends BaseComponent {
                                        validatorError='The passwords do not match'
                                        onChange={this.handleChange}
                                        name='confirmPassword'
-                                       errorWhite={errorInWhite}
                                        startValidation={startValidation}
                                        required />
                         </Col>

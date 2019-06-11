@@ -5,6 +5,7 @@ import Select from 'react-select';
 import cn from 'classnames';
 
 import BaseComponent from '../../shared/BaseComponent';
+import Icon from '../../shared/Icon';
 
 export default class InputBase extends BaseComponent {
     baseState = {
@@ -100,17 +101,32 @@ export class TextInput extends InputBase {
         this.onMount();
     }
 
+    renderRightIcon = () => {
+        const { isValid, value } = this.state;
+        const { rightIcon = null, useGreenMark = true } = this.props;
+
+        if (rightIcon) {
+            return rightIcon
+        }
+
+        return value && isValid && useGreenMark
+            ? <Icon width={14} height={10.5} name='green-mark' ext='svg' />
+            : null;
+
+    };
+
     render = () => {
         const {
-            required,
-            disabled,
             defaultValue,
             fullWidth = true,
             type,
             maxLength = 50,
-            errorWhite = false,
             label,
-            ...restProps
+            id,
+            style,
+            className,
+            disabled,
+            placeholder
         } = this.props;
 
         const {
@@ -120,23 +136,31 @@ export class TextInput extends InputBase {
         } = this.state;
 
         return (
-            <>
-                <label>{ label }</label>
-                <input value={value}
-                    type={type}
-                    onBlur={this.onFocusOut}
-                    className='btw-input-new'
-                    onChange={e => {
-                        const { value } = e.target;
-                        if (value.length <= maxLength) {
-                            this.onChange(e);
-                        }
-                    }}
-                       {...restProps} />
-                <span classes={{ root: cn('btw-input-error', { 'btw-error-white': errorWhite }) }}>
-                    { error }
+            <div className={cn('btw-input', { disabled, error: !isValid })}>
+                <label htmlFor={id}>{ label }</label>
+                <div className={cn('text-box')}>
+                    <input value={value}
+                           id={id}
+                           className={cn('btw-input', className)}
+                           style={style}
+                           type={type}
+                           onBlur={this.onFocusOut}
+                           onChange={e => {
+                               const { value } = e.target;
+                               if (value.length <= maxLength) {
+                                   this.onChange(e);
+                               }
+                           }}
+                           placeholder={placeholder}
+                           disabled={disabled} />
+                <span className='right-icon'>
+                  { this.renderRightIcon() }
                 </span>
-            </>
+                </div>
+                <div className='error-msg'>
+                    { error }
+                </div>
+            </div>
         );
     };
 }

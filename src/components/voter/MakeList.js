@@ -110,8 +110,7 @@ class MakeList extends BaseComponent {
 
 	render() {
 		const { startValidation } = this.state,
-		 viewProps = this.viewProps(),
-         errorWhite = this.isDesktop();
+		 viewProps = this.viewProps();
 
 		return (
 			<OnBoardingLayout>
@@ -144,14 +143,12 @@ class MakeList extends BaseComponent {
 												<Col xs={6} md={5}>
 													<FirstNameInput startValidation={startValidation}
 																	required
-																	errorWhite={errorWhite}
 																	id={`firstname${i + 1}`}
 																	onChange={(val, isValid) => this.handleChange(val, isValid, `${firstNamePrefix}${i + 1}`)} />
 												</Col>
 												<Col xs={6} md={5}>
 													<LastNameInput startValidation={startValidation}
 																   required
-																   errorWhite={errorWhite}
 																   id={`lastname${i + 1}`}
 																   onChange={(val, isValid) => this.handleChange(val, isValid, `${lastNamePrefix}${i + 1}`)}/>
 												</Col>

@@ -1,37 +1,60 @@
 .btw-input {
-  color: $dark-blue;
-  font-size: 14pt;
-  outline: none;
-}
+  .text-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid $divider;
+    border-radius: 3px;
 
-.btw-label {
-  font-weight: 400;
-  font-size: 18px;
-}
+    &:focus-within {
+      border: 1px solid $primary;
+    }
 
-.btw-input-error {
-  margin-bottom: 8px !important;
+    input {
+      text-indent: 5px;
+      padding-right: 20px;
+      height: 40px;
+      outline: none;
+      border: none;
+      width: 100%;
+    }
 
-  @include respond-to($phone) {
-    font-size: 13px !important;
+    input::placeholder {
+      font-weight: normal;
+      font-size: 14px;
+      color: $main;
+      opacity: 0.4;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: $main;
+    }
+  }
+
+  &.disabled {
+    label {
+      color: $divider;
+    }
+  }
+
+  &.error {
+    .text-box {
+      border: 1px solid $error;
+    }
+  }
+
+  .error-msg {
+    font-weight: 600;
+    font-size: 11px;
+    color: $error;
+  }
+
+  .right-icon {
+    position: absolute;
+    right: 20px
   }
 }
 
-.btw-error-white {
-  color: $white !important;
-}
 
-
-.btw-password-error {
-  #requirements {
-    margin-bottom: 10px;
-  }
-  span {
-    display: block;
-    margin-top: 5px;
-  }
-  border-radius: 3px;
-  background-color: $white;
-  color: $dark-blue;
-  padding: 10px 5px 5px 10px;
-}
