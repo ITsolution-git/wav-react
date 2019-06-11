@@ -328,12 +328,12 @@ class SelectVoters extends BaseComponent {
                                     <SearchInput
                                         placeholder='Search by name or address'
                                         onChange={(value) => this.searchInputHandler(value)} />
-                                    {/* <div className='btw-paper table-container'>
+                                    <div className='btw-paper table-container'>
                                         <VotersTable
                                             data={votersList}
                                             selectData={selectVoters}
                                             onSelect={(selectVoters) => this.selectTableHandler(selectVoters)} />
-                                    </div> */}
+                                    </div>
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={3}>
                                     <VotersProgressBar
