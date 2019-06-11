@@ -45,7 +45,7 @@ class SearchInput extends BaseComponent {
     render() {
         const { placeholder } = this.props;
         const { value } = this.state;
-        const isEmpty = value === '';
+        const isValue = !!value;
 
         return (
             <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon')}>
@@ -61,7 +61,7 @@ class SearchInput extends BaseComponent {
                     type='button'
                     className='btw-paper search-button'
                     onClick={this.clickHandler}
-                    disabled={isEmpty}>
+                    disabled={!isValue}>
                     Search
                 </Button>
             </div >
