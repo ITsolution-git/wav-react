@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import BaseComponent from '../shared/BaseComponent';
 import Button from '../shared/Button';
 import SocialItem from './SocialItem';
+import Typography from '../shared/Typography';
 
 class SocialConnect extends BaseComponent {
     constructor() {
@@ -49,14 +50,14 @@ class SocialConnect extends BaseComponent {
     render() {
         return (
             <div className='btw-social-connect'>
-                <div className='content'>
-                    <div className='title'>Connect social accounts</div>
-                    <div className='description'>
+                <div className='content btw-paper'>
+                    <Typography className='title'>Connect social accounts</Typography>
+                    <Typography variant='body' className='description'>
                         Connect your favourite social media services
                         to find your friends among all the voters.
-					</div>
+					</Typography>
                     {this.socialItemRender()}
-                    <Button onClick={this.showResultHandler}>
+                    <Button style={{ width: '100%' }} onClick={this.showResultHandler}>
                         Show Results
                     </Button>
                 </div>

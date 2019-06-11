@@ -4,14 +4,15 @@ import classNames from 'classnames';
 import BaseComponent from '../shared/BaseComponent';
 import Button from '../shared/Button';
 import Icon from '../shared/Icon';
+import Typography from '../shared/Typography';
 
 class SocialItem extends BaseComponent {
 
     connectedTextRender = () => {
         return (
-            <div className={classNames('status', !this.isMobile() && 'status-center')}>
+            <Typography variant='functional' className={classNames('status', this.isDesktop() && 'status-center')}>
                 Connected
-            </div>
+            </Typography>
         );
     }
 
@@ -22,13 +23,8 @@ class SocialItem extends BaseComponent {
         // TODO: Delete styling after modifying button by sergey
         return (
             <Button
-                size='medium'
-                color='blue4'
-                style={
-                    this.isMobile() ?
-                        { width: 24, fontSize: 18, height: 24, minWidth: 'unset', padding: 0 } :
-                        { width: 94, fontSize: 13, height: 24, minWidth: 'unset', padding: 0 }
-                }
+                size='small'
+                className={this.isMobile() ? 'plus-button' : 'connect-button'}
                 onClick={socialConnectHandler}>
                 {buttonName}
             </Button>
@@ -46,9 +42,9 @@ class SocialItem extends BaseComponent {
                         <Icon name={`${name}-${status ? 'light' : 'grey'}`} />
                     </div>
                     <div className='controls'>
-                        <div className='name'>
+                        <Typography variant='body' fontWeight='600' className='name'>
                             {name}
-                        </div>
+                        </Typography>
                         {status ? this.connectedTextRender() : this.connectButtonRender()}
                     </div>
                 </div>
