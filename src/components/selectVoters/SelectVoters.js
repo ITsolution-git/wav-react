@@ -8,9 +8,9 @@ import Checkbox from '../shared/Checkbox';
 import Dialog from '../shared/Dialog';
 import Button from '../shared/Button';
 import VotersTable from '../shared/VotersTable';
-// import SearchInput from '../shared/SearchInput';
-// import VotersProgressBar from '../shared/VotersProgressBar';
-// import Typography from '../shared/Typography';
+import SearchInput from '../shared/SearchInput';
+import VotersProgressBar from '../shared/VotersProgressBar';
+import Typography from '../shared/Typography';
 import ContentLayout from '../layout/ContentLayout';
 
 class SelectVoters extends BaseComponent {
@@ -311,34 +311,36 @@ class SelectVoters extends BaseComponent {
                         <Col xs={12}>
                             <Row>
                                 <Col xs={12}>
-                                    <div className='title'>Add 10 voters to your list</div>
-                                    <div className='description'>
+                                    <Typography>
+                                        Add 10 voters to your list
+                                    </Typography>
+                                    <Typography variant='body' displayInline lightColor>
                                         Select 10 people among your social media friends or search
                                         for other people you know among all the voters of your district.
                                         Try to choose a few among regular voters, a few among infrequent voters,
                                         and a few unregistered voters.
-					                </div>
+                                    </Typography>
                                     <Checkbox onChange={(event) => this.checkHandler(event)} label='test check' />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12} sm={12} md={12} lg={9}>
-                                    {/* <SearchInput
+                                    <SearchInput
                                         placeholder='Search by name or address'
-                                        onChange={(value) => this.searchInputHandler(value)} /> */}
-                                    <div className='btw-paper table-container'>
+                                        onChange={(value) => this.searchInputHandler(value)} />
+                                    {/* <div className='btw-paper table-container'>
                                         <VotersTable
                                             data={votersList}
                                             selectData={selectVoters}
                                             onSelect={(selectVoters) => this.selectTableHandler(selectVoters)} />
-                                    </div>
+                                    </div> */}
                                 </Col>
                                 <Col xs={12} sm={12} md={12} lg={3}>
-                                    {/* <VotersProgressBar
+                                    <VotersProgressBar
                                         color='blue'
                                         selectVoters={selectVoters}
                                         onClear={this.clearSelectedVotersHandler}
-                                        onNext={this.nextHandler} /> */}
+                                        onNext={this.nextHandler} />
                                 </Col>
                             </Row>
                         </Col>
@@ -362,14 +364,14 @@ class SelectVoters extends BaseComponent {
                     }
                     onClose={this.closeModalHandler}>
                     <div>
-                        <h4 style={{ fontSize: 13 }}>
+                        <Typography style={{ marginBottom: 30 }} variant='body' displayInline='div' lightColor>
                             Select 10 people among your social media friends or search
                             for other people you know among all the voters of your district.
-                        </h4>
-                        <h4 style={{ fontSize: 13 }}>
+                        </Typography>
+                        <Typography variant='body' displayInline lightColor>
                             Try to choose a few among regular voters, a few among
                             infrequent voters, and a few unregistered voters.
-                        </h4>
+                        </Typography>
                     </div>
                 </Dialog>
             </ContentLayout >
