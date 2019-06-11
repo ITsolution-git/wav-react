@@ -28,6 +28,7 @@ import PreferenceTask from './tasks/PreferenceTask';
 import RegularVoteTask from './tasks/RegularVoteTask';
 import WelcomePage from './voter/WelcomePage';
 import SocialConnect from './socialNetworks/SocialConnect';
+import SelectVoters from './selectVoters/SelectVoters';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
@@ -92,6 +93,10 @@ const router = () => (
             component={Authorization(AdminDashBoard, [admin])} />
         <Route exact path={routes.reports}
             component={Authorization(Reports, [admin])} />
+
+        {/* select voters onboarding */}
+        <Route exact path={routes.selectVoters}
+            component={Authorization(SelectVoters, [captain])} />
 
         {/* voter onboarding */}
         <Route exact path={routes.makelist}

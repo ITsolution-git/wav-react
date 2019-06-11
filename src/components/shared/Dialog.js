@@ -1,18 +1,17 @@
 import React from 'react';
-import {
-    Modal
-} from 'react-bootstrap';
-import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import { Modal } from 'react-bootstrap';
 
 import BaseComponent from './BaseComponent';
+import Typography from './Typography';
 
-export default class Dialog extends BaseComponent {
+class Dialog extends BaseComponent {
     render() {
         const {
             show,
             onClose,
             onHide = onClose,
-            title='',
+            title = '',
             children,
             actionButtons = null,
             closeButton,
@@ -20,19 +19,27 @@ export default class Dialog extends BaseComponent {
         } = this.props;
         return (
             <Modal show={show}
-                   onHide={onHide}
-                   className={classNames({'btw-modal': this.isDesktop(), 'btw-modal-mobile': this.isMobile()})}
-                   {...restProps}>
+                onHide={onHide}
+                className='btw-modal'
+                {...restProps}>
                 <Modal.Header closeButton={closeButton}>
-                    <Modal.Title>{title}</Modal.Title>
+                    <Typography>{title}</Typography>
                 </Modal.Header>
                 <Modal.Body>
-                    { children }
+                    {children}
                 </Modal.Body>
                 <Modal.Footer>
-                    { actionButtons }
+                    {actionButtons}
                 </Modal.Footer>
             </Modal>
         );
     }
 }
+
+Dialog.propTypes = {
+    show: PropTypes.bool,
+    title: PropTypes.string,
+    onClose: PropTypes.func
+};
+
+export default Dialog; 

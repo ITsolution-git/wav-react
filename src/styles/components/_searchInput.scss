@@ -1,0 +1,78 @@
+.btw-search-input{
+
+    position: relative; 
+
+    input[type=text] {
+        height: 48px;
+        padding: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        border: 0;
+        float: left;
+        width: calc(100% - 112px);
+        background: $white;
+        border-radius: 3px 0 0 3px;
+       
+        @include respond-to($phone) {
+            width: 100%;
+            height: 40px;
+        }
+
+        @include respond-to($computer) {
+            padding-left:  45px;
+        }
+
+        @mixin placeholder {
+            &::-webkit-input-placeholder {@content};
+            &:-moz-placeholder           {@content};
+            &::-moz-placeholder          {@content};
+            &:-ms-input-placeholder      {@content} ; 
+        }
+        
+        @include placeholder {
+            color: $divider;
+            font-weight: 300;
+        }
+    }
+
+    .search-button {
+        float: left;
+        width: 112px;
+        height: 48px;
+        font-weight: 600;
+        border: 0;
+        cursor: pointer;
+        border-radius: 0 3px 3px 0;
+
+        @include respond-to($phone) {
+            display: none;
+        }
+    }
+
+    .fa {
+        color: $divider;
+        position: absolute;
+        padding: 17px 19px;
+
+        @include respond-to($phone) {
+            padding: 14px 19px;
+        }
+    }
+
+    .fa-search {
+        left: 0;
+
+        @include respond-to($phone) {
+            left: unset;
+            right: 0;
+        }
+    }
+
+    .fa-close{
+        right: 0px;
+    }
+
+    .i-active {
+        color: $primary;
+    }
+}
