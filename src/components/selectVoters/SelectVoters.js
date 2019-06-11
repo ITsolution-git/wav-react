@@ -364,7 +364,7 @@ class SelectVoters extends BaseComponent {
                     }
                     onClose={this.closeModalHandler}>
                     <div>
-                        <Typography style={{ marginBottom: 30 }} variant='body' displayInline='div' lightColor>
+                        <Typography variant='body' displayInline lightColor>
                             Select 10 people among your social media friends or search
                             for other people you know among all the voters of your district.
                         </Typography>

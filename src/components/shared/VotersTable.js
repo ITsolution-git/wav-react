@@ -53,8 +53,6 @@ class VotersTable extends BaseComponent {
             <tr>
                 <th className='check'></th>
                 <th className='name'>Name</th>
-                <th>Street</th>
-                <th>Sex</th>
                 <th>Connected On</th>
                 <th>Status</th>
             </tr>
@@ -70,17 +68,30 @@ class VotersTable extends BaseComponent {
         );
     }
 
+    voterInfoRender = (item) => {
+        return (
+            <React.Fragment>
+                <div className='name'>
+                    {item.name}
+                </div>
+                <div className='description'>
+                    {`${item.sex} | ${item.street}`}
+                </div>
+            </React.Fragment>
+        );
+    }
+
     desktopBodyRender = () => {
         const { data } = this.props;
         return data.map((item, i) => {
             return (
                 <tr key={i}>
                     <td>
-                        <Checkbox onChange={(event) => this.checkHandler(event, item)} checked={this.isSelected(item.id)} />
+                        <div className='check'>
+                            <Checkbox onChange={(event) => this.checkHandler(event, item)} checked={this.isSelected(item.id)} />
+                        </div>
                     </td>
-                    <td className='name'>{item.name}</td>
-                    <td>{item.street}</td>
-                    <td>{item.sex}</td>
+                    <td>{this.voterInfoRender(item)}</td>
                     <td>Table cell</td>
                     <td>{item.status}</td>
                 </tr>
@@ -95,16 +106,11 @@ class VotersTable extends BaseComponent {
                 <tr key={i}>
                     <td>
                         <div className='check'>
-                            <Checkbox onChange={(event) => this.checkHandler(event, item.id)} />
+                            <Checkbox onChange={(event) => this.checkHandler(event, item)} checked={this.isSelected(item.id)} />
                         </div>
                     </td>
                     <td>
-                        <div className='name'>
-                            {item.name}
-                        </div>
-                        <div className='description'>
-                            {`${item.street} | ${item.sex}`}
-                        </div>
+                        {this.voterInfoRender(item)}
                         <div className='status'>
                             <div>
                                 {item.status}
