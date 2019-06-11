@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 
 import BaseComponent from './BaseComponent';
@@ -136,5 +137,11 @@ class VotersTable extends BaseComponent {
         );
     }
 }
+
+VotersTable.propTypes = {
+    data: PropTypes.array,
+    selectData: PropTypes.array,
+    onSelect: PropTypes.func
+};
 
 export default VotersTable;
