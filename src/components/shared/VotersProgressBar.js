@@ -75,7 +75,7 @@ class VotersProgressBar extends BaseComponent {
     render() {
         const { selectVoters } = this.props;
         return (
-            <div className='btw-voters-progress-bar'>
+            <div className='btw-voters-progress-bar btw-paper'>
                 <div className='zoom-container'>
                     <div className='zoom' onClick={this.zoomHandler} />
                 </div>
