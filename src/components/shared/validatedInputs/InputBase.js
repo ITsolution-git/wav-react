@@ -118,7 +118,6 @@ export class TextInput extends InputBase {
     render = () => {
         const {
             defaultValue,
-            fullWidth = true,
             type,
             maxLength = 50,
             label,

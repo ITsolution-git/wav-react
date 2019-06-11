@@ -177,8 +177,8 @@ class Login extends BaseComponent {
 									Log In
                                     </Button>
 							</div>
-
-							<a className='forgot-password-link' href="" onClick={this.showForgotPasswordModal}>Forgot password</a>
+							
+							<span className='forgot-password-link' onClick={this.showForgotPasswordModal}>Forgot password</span>
 
 							<div className='go-to-signup'>
 								<span>
@@ -218,8 +218,8 @@ class Login extends BaseComponent {
 							<Button onClick={this.sendForgotPasswordRequest}>Go!</Button>
 						</div>
 						<div id="btn-next">
-							Back to <a href="" onClick={this.closeForgotPasswordModal}><b>Sign in</b></a>.
-							</div>
+							Back to <span href="" onClick={this.closeForgotPasswordModal}><b>Sign in</b></span>.
+						</div>
 					</div>
 				</Dialog>
 			</Row>
