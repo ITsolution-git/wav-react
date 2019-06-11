@@ -10,6 +10,7 @@ import {
     TextInput
 } from '../../components/shared/validatedInputs';
 import Button from '../shared/Button';
+import Typography from '../shared/Typography';
 
 class ChangePassword extends BaseComponent {
     constructor() {
@@ -86,9 +87,9 @@ class ChangePassword extends BaseComponent {
 
         return (
             <div className="btw-change-password">
-                <div className='content'>
-                    {!isChangedPassword && <span className='errorMessage'>Password doesn't not reset</span>}
-                    <div className='title'>Reset Password</div>
+                <div className='content btw-paper'>
+                    {!isChangedPassword && <Typography variant='functional' className='errorMessage' displayInline>Password doesn't not reset</Typography>}
+                    <Typography className='title'>Reset Password</Typography>
                     <PasswordInput
                         onChange={this.handleChange}
                         isVoter={false}
@@ -103,12 +104,12 @@ class ChangePassword extends BaseComponent {
                         onChange={this.handleChange}
                         name='confirmPassword'
                         required />
-                    <Button onClick={this.changePassword}>
+                    <Button fullWidth onClick={this.changePassword}>
                         Save New Password
                     </Button>
-                    <div className='remember'>
-                        Remembered? <Link to={routes.login}>Log in</Link>.
-					</div>
+                    <Typography variant='body' className='remember'>
+                        Remembered? <Link to={routes.login}>Log in.</Link>
+                    </Typography>
                 </div>
             </div >
         );

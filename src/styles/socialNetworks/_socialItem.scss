@@ -23,25 +23,22 @@
 	}
     
     .facebook {
-        background-color: #3B5998;
+        background-color: $facebook-color;
     }
 
     .twitter {
-        background-color: #38A1F3;
+        background-color: $twitter-color;
     }
 
     .linkedIn {
-        background-color: #0077B5;
+        background-color: $linkedin-color;
     }
 
     .default {
-        background-color: #E9EBF3;
+        background-color: $divider;
     }
 
 	.name{
-        font-weight: 600;
-        font-size: 13px;
-        line-height: 18px;
         text-transform: capitalize;
 	}
   
@@ -54,11 +51,7 @@
     }
     
     .status{
-        color: #4b70f3;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 11px;
-        line-height: 15px;
+        color: $primary;
     }
 
     .status-center{
@@ -73,6 +66,16 @@
 
     .item-border{
         width: 100%;
-        border-bottom: 1px solid #E9EBF3;
+        border-bottom: 1px solid $divider;
+    }
+
+    .connect-button {
+        width: 94px;
+    }
+
+    .plus-button {
+        width: 24px;
+        font-size: 18px;
+        padding: 0;
     }
 }
