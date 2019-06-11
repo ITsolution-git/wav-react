@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import BaseComponent from './BaseComponent';
+import Button from './Button';
 
 class SearchInput extends BaseComponent {
 
@@ -45,7 +47,7 @@ class SearchInput extends BaseComponent {
     render() {
         const { placeholder } = this.props;
         const { value } = this.state;
-        const isValue = value !== '';
+        const isEmpty = value === '';
 
         return (
             <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon')}>
@@ -57,15 +59,21 @@ class SearchInput extends BaseComponent {
                     name='search'
                     value={value}
                     onChange={this.inputHandler} />
-                <button
+                <Button
                     type='button'
-                    className={classNames('btw-paper', isValue && 'active-button')}
-                    onClick={this.clickHandler}>
+                    className='btw-paper'
+                    onClick={this.clickHandler}
+                    disabled={isEmpty}>
                     Search
-                </button>
+                </Button>
             </div >
         );
     }
 }
+
+SearchInput.propTypes = {
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func
+};
 
 export default SearchInput;
