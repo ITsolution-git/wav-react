@@ -3,12 +3,19 @@
 
     @include respond-to($phone) {
       width: 272px;
-      padding: 59px 20px 45px 20px;
+      padding: 20px 20px 20px 20px;
     }
     @include respond-to($computer) {
       width: 512px;
-      padding: 59px 88px 45px 88px;
+      padding: 43px 88px 30px 88px;
     }
 
+    .title {
+      margin-bottom: 25px;
+    }
+
+    .inputs-row {
+      margin-bottom: 15px;
+    }
   }
 }
