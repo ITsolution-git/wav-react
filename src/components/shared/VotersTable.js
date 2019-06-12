@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 import BaseComponent from './BaseComponent';
 import Checkbox from './Checkbox';
+import SocialIcons from './SocialIcons';
 
 class VotersTable extends BaseComponent {
 
@@ -87,7 +88,9 @@ class VotersTable extends BaseComponent {
                         </div>
                     </td>
                     <td>{this.renderVoterInfo(item)}</td>
-                    <td>Table cell</td>
+                    <td>
+                        <SocialIcons social={item.social} />
+                    </td>
                     <td>{item.status}</td>
                 </tr>
             );
