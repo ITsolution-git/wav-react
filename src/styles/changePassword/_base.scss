@@ -6,6 +6,7 @@
   
     .content{
         padding: 51px 88px;
+        width: 100%;
     }
   
     .title{
@@ -17,6 +18,10 @@
         color: $error;
     }
     
+    .inputs-row {
+        margin-bottom: 15px;
+    }
+
 	.remember{
         margin-top: 50px;
         
