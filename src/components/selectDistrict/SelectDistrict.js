@@ -36,6 +36,7 @@ class SelectDistrict extends BaseComponent {
             <Paper className={'select-disctrict'}>
                 <h2 className={'district-title'}>Select voting district</h2>
                 <Typography variant='body'>Enter your ZIP code to find a voting district you are attached to. You can change the district anytime.</Typography>
+
                 <Typography variant='body'>The information you provided overlaps {votingDistrics.length} voting districts. Please, select one:</Typography>
 
                 <div className={'districts-list'}>

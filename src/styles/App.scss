@@ -98,13 +98,11 @@ html {
 @import 'components/modal';
 @import 'components/input';
 @import 'components/dropdown';
-<<<<<<< HEAD
-
-@import 'selectDistrict/selectDistrict';
-@import 'selectDistrict/selectDistrictItem';
-=======
 @import 'components/checkbox';
 @import 'components/searchInput';
 @import 'components/votersProgressBar';
 @import 'components/votersTable';
->>>>>>> remotes/origin/release/2019-stage2.0
+
+
+@import 'selectDistrict/selectDistrict';
+@import 'selectDistrict/selectDistrictItem';
