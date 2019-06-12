@@ -33,7 +33,6 @@ class Register extends BaseComponent {
 				[fieldConstants.password]: false,
 				'confirmPassword': false
 			},
-			termsAndPrivacy: false,
             showInfoModal: false
 		}
 	}
@@ -50,12 +49,9 @@ class Register extends BaseComponent {
 
 
     btwRegister() {
-		const { isValid, btwIdentity, termsAndPrivacy } = this.state;
+		const { isValid, btwIdentity } = this.state;
 		this.setState({ startValidation: true });
 
-		if (!termsAndPrivacy && this.isDesktop()) {
-			return;
-        }
         if (Object.values(isValid).every(val => val)) {
             this.props.btwRegister(btwIdentity)
         }
