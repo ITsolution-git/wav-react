@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 
 import { changePasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
@@ -90,20 +91,28 @@ class ChangePassword extends BaseComponent {
                 <div className='content btw-paper'>
                     {!isChangedPassword && <Typography variant='functional' className='errorMessage' displayInline>Password doesn't not reset</Typography>}
                     <Typography className='title'>Reset Password</Typography>
-                    <PasswordInput
-                        onChange={this.handleChange}
-                        isVoter={false}
-                        name="password"
-                        uniqueValidationEnabled={false}
-                        required />
-                    <TextInput label='Confirm Password'
-                        type='password'
-                        id="confirmPassword"
-                        validator={value => value === this.state.password}
-                        validatorError='The passwords do not match'
-                        onChange={this.handleChange}
-                        name='confirmPassword'
-                        required />
+                    <Row className='inputs-row'>
+                        <Col md={12}>
+                            <PasswordInput
+                                onChange={this.handleChange}
+                                isVoter={false}
+                                name="password"
+                                uniqueValidationEnabled={false}
+                                required />
+                        </Col>
+                    </Row>
+                    <Row className='inputs-row'>
+                        <Col md={12}>
+                            <TextInput label='Confirm Password'
+                                type='password'
+                                id="confirmPassword"
+                                validator={value => value === this.state.password}
+                                validatorError='The passwords do not match'
+                                onChange={this.handleChange}
+                                name='confirmPassword'
+                                required />
+                        </Col>
+                    </Row>
                     <Button fullWidth onClick={this.changePassword}>
                         Save New Password
                     </Button>
