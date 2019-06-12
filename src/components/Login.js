@@ -184,7 +184,7 @@ class Login extends BaseComponent {
 								<span>
 									New to BeTheWave
 									</span>
-								<Link to={routes.register}> Sign up</Link>
+								<Link to={routes.registerBySocial}> Sign up</Link>
 							</div>
 							<Col md={12}>
 								<Spinner loading={isFetching} size={50} />

@@ -21,7 +21,7 @@ import {
 	TextInput
 } from '../shared/validatedInputs';
 
-class Register extends BaseComponent {
+class RegisterByMail extends BaseComponent {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -158,4 +158,4 @@ const mapDispatchToProps = (dispatch) => ({
 	btwRegister: (btwIdentity) => dispatch(btwRegister(btwIdentity))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Register));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterByMail));

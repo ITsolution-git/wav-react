@@ -4,7 +4,8 @@ import Login from './Login';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import NoTaskErrorPage from './errorPages/NoTaskErrorPage';
 import SendInvite from './invites/SendInvite';
-import Register from './captainProfile/Register';
+import RegisterByMail from './auth/RegisterByMail';
+import RegisterBySocial from './auth/RegisterBySocial';
 import Profile from './captainProfile/Profile';
 import MakeList from './voter/MakeList';
 import TasksList from './tasksList/TasksList';
@@ -65,8 +66,10 @@ const router = () => (
     <Switch>
         <Route exact path={routes.login}
             component={Authorization(Login, [guest])} />
-        <Route exact path={routes.register}
-            component={Authorization(Register, [guest, captain, admin])} />
+        <Route exact path={routes.registerByMail}
+            component={Authorization(RegisterByMail, [guest, captain, admin])} />
+        <Route exact path={routes.registerBySocial}
+            component={Authorization(RegisterBySocial, [guest, captain, admin])} />
         <Route exact path={routes.profile}
             component={Profile} />
         <Route exact path={routes.pageDown}
