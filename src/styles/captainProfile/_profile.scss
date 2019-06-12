@@ -2,8 +2,8 @@
 
   margin-left: 100px;
   margin-right: 100px;
-  margin-top: $margin_top;
-  margin-bottom: $margin_top;
+  margin-top: 50px;
+  margin-bottom: 50px;
   box-shadow: -3px -3px 15px rgba(0,0,0,0.2);
 
   .row {
@@ -69,7 +69,7 @@
       }
 
       .form-group {
-          margin-bottom: $input_field_space;
+          margin-bottom: 4%;
           padding: 0;
           padding-right: 20px;
       }

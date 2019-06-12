@@ -83,27 +83,24 @@ class Register extends BaseComponent {
 			startValidation,
 		} = this.state;
 		const { error } = this.props;
-		const errorInWhite = this.isMobile();
 
 		return (
 		    <div className="btw-register">
                 <Paper className='paper'>
-                    <Typography>Sign Up with Email</Typography>
-                    <Row>
+                    <Typography className='title'>Sign Up with Email</Typography>
+                    <Row className='inputs-row'>
                         <Col md={6}>
                             <FirstNameInput onChange={this.handleChange}
                                             startValidation={startValidation}
-                                            errorWhite={errorInWhite}
                                             required />
                         </Col>
                         <Col md={6}>
                             <LastNameInput onChange={this.handleChange}
                                            startValidation={startValidation}
-                                           errorWhite={errorInWhite}
                                            required />
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='inputs-row'>
                         <Col md={12}>
                             <EmailInput onChange={(value, valid, name) => {
                                 const isValid = this.props.error ? true : valid;
@@ -112,34 +109,33 @@ class Register extends BaseComponent {
                                         isVoter={false}
                                         startValidation={startValidation}
                                         uniqueValidationEnabled={false}
-                                        errorWhite={errorInWhite}
                                         customError={error}
                                         required />
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='inputs-row'>
                         <Col md={12}>
                             <PasswordInput onChange={this.handleChange}
+                                           placeholder='Your password (at least 6 charachters)'
                                            startValidation={startValidation}
-                                           errorWhite={errorInWhite}
                                            required />
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='inputs-row'>
                         <Col md={12}>
                             <TextInput label='Confirm Password'
                                        type='password'
                                        id="confirmPassword"
+                                       placeholder='Confirm your password'
                                        validator={value => value === this.state.btwIdentity[fieldConstants.password]}
                                        validatorError='The passwords do not match'
                                        onChange={this.handleChange}
                                        name='confirmPassword'
-                                       errorWhite={errorInWhite}
                                        startValidation={startValidation}
                                        required />
                         </Col>
                     </Row>
-                    <Row className="justify-content-center">
+                    <Row className='inputs-row'>
                         <Col md={12} xs={12} align="center">
                             <div id="btn_signup">
                                 <Button onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Up</Button>

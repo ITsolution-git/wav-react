@@ -115,7 +115,7 @@ class VotingInfo extends BaseComponent {
                                             <td width="40%">{ name }</td>
                                             <td width="40%">{ party }</td>
                                             <td width="20%">
-                                                { candidateUrl && <a target="_blank" href={candidateUrl}>Site</a> }
+                                                { candidateUrl && <a rel="noopener noreferrer" target="_blank" href={candidateUrl}>Site</a> }
                                             </td>
                                         </tr>
                                     )

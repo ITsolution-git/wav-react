@@ -48,13 +48,11 @@ export default class VoterDetails extends BaseComponent {
                     <Col md={6}>
                         <FirstNameInput onChange={this.handleChange}
                                         defaultValue={details[fieldConstants.firstName]}
-                                        showAsterisk={true}
                                         required />
                     </Col>
                     <Col md={6}>
                         <LastNameInput onChange={this.handleChange}
                                        defaultValue={details[fieldConstants.lastName]}
-                                       showAsterisk={true}
                                        required />
                     </Col>
                 </Row>
@@ -62,7 +60,6 @@ export default class VoterDetails extends BaseComponent {
                     <Col md={12}>
                         <EmailInput onChange={this.handleChange}
                                     defaultValue={details[fieldConstants.email]}
-                                    showAsterisk={true}
                                     required />
                     </Col>
                 </Row>
@@ -70,13 +67,11 @@ export default class VoterDetails extends BaseComponent {
                     <Col md={6}>
                         <CityInput onChange={this.handleChange}
                                    defaultValue={details[fieldConstants.city]}
-                                   showAsterisk={true}
                                    required />
                     </Col>
                     <Col md={6}>
                         <StateInput onChange={this.handleChange}
                                     defaultValue={details[fieldConstants.state]}
-                                    showAsterisk={true}
                                     required />
                     </Col>
                 </Row>

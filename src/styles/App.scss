@@ -30,12 +30,15 @@
 
 html {
 	font-size: 21px;
+
+	body {
+		font-family: Open-Sans;
+	}
 }
 
 @import 'shared/_colors.scss';
 @import 'shared/style.scss';
 @import 'shared/mixins';
-@import 'shared/sizes.scss';
 @import 'shared/components.scss';
 @import 'shared/sharedclasses.scss';
 @import 'shared/titles.scss';
@@ -83,6 +86,8 @@ html {
 @import 'socialNetworks/socialConnect.scss';
 @import 'socialNetworks/socialItem.scss';
 
+@import 'selectVoters/selectVoters.scss';
+
 @import 'userSearch/usersearch';
 
 @import 'transactionLogs/list';
@@ -93,6 +98,13 @@ html {
 @import 'components/modal';
 @import 'components/input';
 @import 'components/dropdown';
+<<<<<<< HEAD
 
 @import 'selectDistrict/selectDistrict';
 @import 'selectDistrict/selectDistrictItem';
+=======
+@import 'components/checkbox';
+@import 'components/searchInput';
+@import 'components/votersProgressBar';
+@import 'components/votersTable';
+>>>>>>> remotes/origin/release/2019-stage2.0

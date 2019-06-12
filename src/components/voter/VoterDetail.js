@@ -125,9 +125,7 @@ class VoterDetail extends BaseComponent {
             voterDetail
 		} = this.state;
 
-		const viewProps = this.viewProps(),
-        	errorWhite = this.isDesktop(),
-            showAsterisk = this.isMobile();
+		const viewProps = this.viewProps();
 
 		return (
 			<OnBoardingLayout>
@@ -146,20 +144,16 @@ class VoterDetail extends BaseComponent {
                         <Col md={8}>
 							 <Row>
 								 <Col md={6} xs={6}>
-									 <FirstNameInput errorWhite={errorWhite}
-													  onChange={this.handleChange}
+									 <FirstNameInput onChange={this.handleChange}
 													  defaultValue={firstName}
 													  startValidation={startValidation}
-													  showAsterisk={showAsterisk}
 													  disabled
 													  required />
 								 </Col>
 								 <Col md={6} xs={6}>
-									 <LastNameInput errorWhite={errorWhite}
-													 defaultValue={lastName}
+									 <LastNameInput defaultValue={lastName}
                                                     onChange={this.handleChange}
 													 startValidation={startValidation}
-                                                    showAsterisk={showAsterisk}
                                                     disabled
 													 required />
 								 </Col>
@@ -169,8 +163,6 @@ class VoterDetail extends BaseComponent {
                                             defaultValue={voterDetail[FieldConstants.email]}
                                             startValidation={startValidation}
                                             disabled={emailDisabled}
-                                            errorWhite={errorWhite}
-                                            showAsterisk={showAsterisk}
                                             required />
                             </Col>
                             <Row>
@@ -178,16 +170,12 @@ class VoterDetail extends BaseComponent {
                                     <CityInput onChange={this.handleChange}
                                                defaultValue={voterDetail[FieldConstants.city]}
                                                startValidation={startValidation}
-                                               errorWhite={errorWhite}
-                                               showAsterisk={showAsterisk}
                                                required />
                                 </Col>
                                 <Col md={5} xs={5}>
                                     <StateInput onChange={this.handleChange}
                                                 defaultValue={voterDetail[FieldConstants.state]}
                                                 startValidation={startValidation}
-                                                errorWhite={errorWhite}
-                                                showAsterisk={showAsterisk}
                                                 required />
                                 </Col>
                             </Row>
@@ -197,12 +185,10 @@ class VoterDetail extends BaseComponent {
                             <Row id='voter-address'>
                                 <Col md={6} xs={7}>
                                     <DateOfBirthInput defaultValue={voterDetail[FieldConstants.dateOfBirth]}
-                                                      errorWhite={errorWhite}
                                                       onChange={this.handleChange} />
                                 </Col>
                                 <Col md={6}>
                                     <AddressInput defaultValue={voterDetail[FieldConstants.address]}
-                                                  errorWhite={errorWhite}
                                                   onChange={this.handleChange} />
                                 </Col>
                             </Row>

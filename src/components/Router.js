@@ -28,7 +28,11 @@ import PreferenceTask from './tasks/PreferenceTask';
 import RegularVoteTask from './tasks/RegularVoteTask';
 import WelcomePage from './voter/WelcomePage';
 import SocialConnect from './socialNetworks/SocialConnect';
+<<<<<<< HEAD
 import SelectDistrict from './selectDistrict/SelectDistrict';
+=======
+import SelectVoters from './selectVoters/SelectVoters';
+>>>>>>> remotes/origin/release/2019-stage2.0
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
@@ -93,6 +97,10 @@ const router = () => (
             component={Authorization(AdminDashBoard, [admin])} />
         <Route exact path={routes.reports}
             component={Authorization(Reports, [admin])} />
+
+        {/* select voters onboarding */}
+        <Route exact path={routes.selectVoters}
+            component={Authorization(SelectVoters, [captain])} />
 
         {/* voter onboarding */}
         <Route exact path={routes.makelist}
