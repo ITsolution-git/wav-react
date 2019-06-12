@@ -22,4 +22,20 @@
         line-height: 130%;
         margin-top: 12px;
     }
+
+    .districts-list {
+        max-height: 352px;
+        padding: 8px 0;
+        overflow: scroll;
+        margin: 13px 0 40px;
+
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            width: 3px;
+            background: #E9EBF3;
+        }
+    }
 }
