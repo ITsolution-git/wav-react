@@ -10,7 +10,7 @@ class SocialIcons extends BaseComponent {
     renderSmallIcon = (name, value, height) => {
 
         return (
-            <div className={classNames('icon icon-small', value && name)} >
+            <div className={classNames('icon icon-small', { [name]: value })} >
                 {value && <Icon name={`${name}-light`} height={height} />}
             </div >
         );
