@@ -29,7 +29,7 @@ class SelectVoters extends BaseComponent {
                         linkedIn: false,
                         facebook: true
                     },
-                    status: 'infrequent'
+                    status: 'Infrequent'
                 },
                 {
                     id: 2,
@@ -41,7 +41,7 @@ class SelectVoters extends BaseComponent {
                         linkedIn: true,
                         facebook: true
                     },
-                    status: 'Not registered'
+                    status: 'Regular'
                 },
                 {
                     id: 3,
@@ -149,7 +149,7 @@ class SelectVoters extends BaseComponent {
                         linkedIn: false,
                         facebook: true
                     },
-                    status: 'infrequent'
+                    status: 'Infrequent'
                 },
                 {
                     id: 12,
