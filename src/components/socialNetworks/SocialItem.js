@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import BaseComponent from '../shared/BaseComponent';
 import Button from '../shared/Button';
-import Icon from '../shared/Icon';
+import SocialIcon from '../shared/SocialIcon';
 import Typography from '../shared/Typography';
 
 class SocialItem extends BaseComponent {
@@ -33,14 +33,11 @@ class SocialItem extends BaseComponent {
 
     render() {
         const { name, status } = this.props;
-        const iconClassname = status ? name : 'default';
 
         return (
             <div className='btw-social-item'>
                 <div className='main-container'>
-                    <div className={classNames('icon', iconClassname)}>
-                        <Icon name={`${name}-${status ? 'light' : 'grey'}`} />
-                    </div>
+                    <SocialIcon name={name} value={status} size='large' />
                     <div className='controls'>
                         <Typography variant='body' fontWeight='600' className='name'>
                             {name}
