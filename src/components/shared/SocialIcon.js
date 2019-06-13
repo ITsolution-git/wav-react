@@ -7,40 +7,38 @@ import BaseComponent from './BaseComponent';
 
 class SocialIcon extends BaseComponent {
 
-    renderSmallIcon = (name, visible, height) => {
+    getIconHeight = (size) => {
 
-        return (
-            <div className={classNames('btw-social-icon social-icon-small', { [name]: visible })} >
-                {visible && <Icon name={`${name}-light`} height={height} />}
-            </div >
-        );
+        switch (size) {
+            case 'small':
+                return 8;
+            case 'medium':
+                return 12;
+            case 'large':
+                return 20;
+            default:
+                return null;
+        }
     }
 
-    renderBigIcon = (name, visible, height, iconSizeClass) => {
+    renderIcon = (name, iconSizeClass, visible, height, enable) => {
 
         return (
-            <div className={classNames('btw-social-icon', iconSizeClass, visible ? name : 'social-icon-default')} >
-                <Icon name={`${name}-${visible ? 'light' : 'grey'}`} height={height} />
+            <div className={classNames('btw-social-icon', iconSizeClass, visible ? name : { 'social-icon-default': enable })} >
+                {enable && <Icon name={`${name}-${visible ? 'light' : 'grey'}`} height={height} />}
             </div >
         );
     }
 
     render() {
         const { name, visible, size } = this.props;
+        const height = this.getIconHeight(size);
+        const enable = visible || size !== 'small';
 
-        switch (size) {
-            case 'small':
-                return this.renderSmallIcon(name, visible, 8);
-            case 'medium':
-                return this.renderBigIcon(name, visible, 12, 'social-icon-medium');
-            case 'large':
-                return this.renderBigIcon(name, visible, 20, 'social-icon-large');
-            default:
-                return null;
-        }
+        return this.renderIcon(name, `social-icon-${size}`, visible, height, enable);
     }
-}
 
+}
 SocialIcon.propTypes = {
     name: PropTypes.string,
     visible: PropTypes.bool,
