@@ -43,12 +43,12 @@ class SearchInput extends BaseComponent {
     }
 
     render() {
-        const { placeholder } = this.props;
+        const { placeholder, className } = this.props;
         const { value } = this.state;
         const isValue = !!value;
 
         return (
-            <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon')}>
+            <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon', className)}>
                 {this.renderIcon()}
                 <input
                     type='text'

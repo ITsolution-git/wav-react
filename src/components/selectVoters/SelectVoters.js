@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 
+import routes from '../../constants/Routes';
 import BaseComponent from '../shared/BaseComponent';
-import Checkbox from '../shared/Checkbox';
 import Dialog from '../shared/Dialog';
 import Button from '../shared/Button';
 import VotersTable from '../shared/VotersTable';
@@ -13,11 +13,21 @@ import SearchInput from '../shared/SearchInput';
 import VotersProgressBar from '../shared/VotersProgressBar';
 import Typography from '../shared/Typography';
 import ContentLayout from '../layout/ContentLayout';
+import SocialInfo from './SocialInfo';
 
 class SelectVoters extends BaseComponent {
     constructor() {
         super();
         this.state = {
+            user: {
+                firstname: 'Denis',
+                lastname: 'Damin',
+                social: {
+                    twitter: false,
+                    linkedIn: false,
+                    facebook: true
+                }
+            },
             votersList: [
                 {
                     id: 1,
@@ -265,12 +275,6 @@ class SelectVoters extends BaseComponent {
         }
     }
 
-    checkboxHandler = (value, event) => {
-        if (value) {
-            this.setState({ selectedVoters: this.state.votersList, showAlertModal: true });
-        }
-    }
-
     searchInputHandler = value => {
     }
 
@@ -297,50 +301,102 @@ class SelectVoters extends BaseComponent {
         this.setState({ selectedVoters });
     }
 
+    socialConnectHandler = () => {
+        this.onLink(routes.socialConnect);
+    }
+
+    renderDescription = () => {
+
+        return (
+            <>
+                <Typography className='title'>
+                    Add 10 voters to your list
+                </Typography>
+                <Typography variant='body' className='page-description'>
+                    Select <b>10 people</b> among your social media friends or search
+                    for other people you know among all the voters of your district.
+                    Try to choose a few among <b>regular voters</b>, a few among
+                    <b> infrequent voters</b>, and a few <b>unregistered voters</b>.
+                </Typography>
+            </>
+        );
+    }
+
+    renderSocialInfo = (device) => {
+        const { user } = this.state;
+
+        return (
+            <SocialInfo
+                social={user.social}
+                onSocialConnect={this.socialConnectHandler}
+                className={`social-info-${device}`} />
+        );
+    }
+
+    renderVotersProgressBar = (device) => {
+        const { selectedVoters } = this.state;
+
+        return (
+            <VotersProgressBar
+                color='blue'
+                selectedVoters={selectedVoters}
+                onClear={this.clearSelectedVotersHandler}
+                onNext={this.nextHandler}
+                className={`voter-progress-bar-${device}`} />
+        );
+    }
+
+    renderTable = () => {
+        const { selectedVoters, votersList } = this.state;
+
+        return (
+            <div className='btw-paper table-container'>
+                <Typography variant='body' className='table-description'>
+                    Hurray! We matched you with {votersList.length} of your friends.
+                </Typography>
+                <VotersTable
+                    data={votersList}
+                    selectedData={selectedVoters}
+                    onSelect={this.selectTableHandler} />
+            </div>
+        );
+    }
+
     render() {
-        const { selectedVoters, showAlertModal, votersList } = this.state;
+        const { showAlertModal } = this.state;
+
         return (
             <ContentLayout>
-                <div className='btw-select-voters container'>
-                    <Row>
-                        <Col xs={12}>
-                            <Row>
-                                <Col xs={12}>
-                                    <Typography>
-                                        Add 10 voters to your list
-                                    </Typography>
-                                    <Typography variant='body' displayInline lightColor>
-                                        Select 10 people among your social media friends or search
-                                        for other people you know among all the voters of your district.
-                                        Try to choose a few among regular voters, a few among infrequent voters,
-                                        and a few unregistered voters.
-                                    </Typography>
-                                    <Checkbox onChange={this.checkboxHandler} label='test check' />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={12} sm={12} md={12} lg={9}>
-                                    <SearchInput
-                                        placeholder='Search by name or address'
-                                        onChange={this.searchInputHandler} />
-                                    <div className='btw-paper table-container'>
-                                        <VotersTable
-                                            data={votersList}
-                                            selectedData={selectedVoters}
-                                            onSelect={this.selectTableHandler} />
-                                    </div>
-                                </Col>
-                                <Col xs={12} sm={12} md={12} lg={3}>
-                                    <VotersProgressBar
-                                        color='blue'
-                                        selectedVoters={selectedVoters}
-                                        onClear={this.clearSelectedVotersHandler}
-                                        onNext={this.nextHandler} />
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </div >
+                <Row className='btw-select-voters container'>
+                    <Col xs={12}>
+                        <Row>
+                            <Col xs={12} lg={9}>
+                                {this.renderSocialInfo('tablet')}
+                                {this.renderDescription()}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12} lg={9}>
+                                <Row>
+                                    <Col xs={12}>
+                                        <SearchInput
+                                            placeholder='Search by name or address'
+                                            onChange={this.searchInputHandler}
+                                            className='search-input' />
+                                    </Col>
+                                    <Col xs={12}>
+                                        {this.renderTable()}
+                                    </Col>
+                                </Row>
+                            </Col>
+                            <Col xs={12} sm={12} md={12} lg={3}>
+                                {this.renderVotersProgressBar('desktop')}
+                                {this.renderSocialInfo('desktop')}
+                            </Col>
+                        </Row>
+                    </Col>
+                    {/* {this.renderVotersProgressBar('tablet')} */}
+                </Row>
                 <Dialog
                     id='selectedVotersAlertDialog'
                     title='Hurray! We matched you with 40 of your friends.'

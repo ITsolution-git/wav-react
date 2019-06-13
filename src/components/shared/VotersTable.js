@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
+import classNames from 'classnames';
 import _ from 'lodash';
 
 import BaseComponent from './BaseComponent';
@@ -66,14 +67,14 @@ class VotersTable extends BaseComponent {
 
     renderVoterInfo = (item) => {
         return (
-            <React.Fragment>
+            <>
                 <div className='name'>
                     {item.name}
                 </div>
                 <div className='description'>
                     {`${item.sex} | ${item.street}`}
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -128,9 +129,10 @@ class VotersTable extends BaseComponent {
     }
 
     render() {
+        const { className } = this.props;
 
         return (
-            <div className='btw-voters-table'>
+            <div className={classNames('btw-voters-table', className)}>
                 <Table responsive>
                     <thead>
                         {this.isDesktop() && this.renderDesktopHeader()}

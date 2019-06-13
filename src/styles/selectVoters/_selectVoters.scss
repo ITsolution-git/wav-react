@@ -4,21 +4,74 @@
 	display: flex;
   
 	.title{
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 27px;
-        text-align: left;
         margin-bottom: 20px;
 	}
   
-	.description{
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 130%;
+	.page-description{
         margin-bottom: 26px;
+
+        @include respond-to($phone) {
+           display: none;
+        }
     }
     
+    .search-input{
+        margin-bottom: 8px;
+    }
+
     .table-container{
+        margin: 24px 0;
         padding: 26px 32px;
+
+        .table-description {
+            padding: 0 10px;
+
+            @include respond-to($phone) {
+                display: none;
+            }
+        }
+
+        @include respond-to($phone) {
+            padding: 0;
+            box-shadow: unset;
+            border-radius: 0;
+            background-color: unset;
+        }
+    }
+
+    .voter-progress-bar-desktop {
+        margin-bottom: 16px;
+
+        @include respond-to($tablet) {
+            display: none;
+        }
+
+        @include respond-to($phone) {
+            display: none;
+        }
+    }
+
+    .voter-progress-bar-tablet {
+        margin-bottom: 0px;
+
+        @include respond-to($desktop) {
+            display: none;
+        }
+    }
+
+    .social-info-desktop{
+        margin-bottom: 24px;
+
+        @include respond-to($tablet) {
+            display: none;
+        }
+    }
+
+    .social-info-tablet{
+        margin-bottom: 35px;
+
+        @include respond-to($desktop) {
+            display: none;
+        }
     }
 }

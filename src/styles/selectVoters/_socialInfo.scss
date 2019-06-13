@@ -1,0 +1,38 @@
+.btw-social-info {
+	align-items: left;
+	justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+  
+	
+	.info-content{
+        margin: 15px 0;
+        
+        .title{
+            margin-bottom: 7px;
+            font-size: 16px;
+        }
+
+        @include respond-to($tablet) {
+            margin: 0 15px;
+        }
+    }
+
+    .connect-button{
+        width: 100%;
+
+        @include respond-to($tablet) {
+            width: 112px;
+        }
+    }
+
+    @include respond-to($tablet) {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    @include respond-to($phone) {
+        display: none;
+    }
+}
