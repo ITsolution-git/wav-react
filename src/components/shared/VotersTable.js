@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
+import classNames from 'classnames';
 import _ from 'lodash';
 
 import BaseComponent from './BaseComponent';
 import Checkbox from './Checkbox';
-import SocialIcons from './SocialIcons';
+import SocialList from './SocialList';
 import StatusIcon from './StatusIcon';
 
 class VotersTable extends BaseComponent {
@@ -66,14 +67,14 @@ class VotersTable extends BaseComponent {
 
     renderVoterInfo = (item) => {
         return (
-            <React.Fragment>
+            <>
                 <div className='name'>
                     {item.name}
                 </div>
                 <div className='description'>
                     {`${item.sex} | ${item.street}`}
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 
@@ -90,7 +91,7 @@ class VotersTable extends BaseComponent {
                     </td>
                     <td>{this.renderVoterInfo(item)}</td>
                     <td>
-                        <SocialIcons social={item.social} />
+                        <SocialList social={item.social} />
                     </td>
                     <td>
                         <StatusIcon type={item.status} />
@@ -118,7 +119,7 @@ class VotersTable extends BaseComponent {
                                 <StatusIcon type={item.status} />
                             </div>
                             <div>
-                                <SocialIcons social={item.social} />
+                                <SocialList social={item.social} />
                             </div>
                         </div>
                     </td>
@@ -128,9 +129,10 @@ class VotersTable extends BaseComponent {
     }
 
     render() {
+        const { className } = this.props;
 
         return (
-            <div className='btw-voters-table'>
+            <div className={classNames('btw-voters-table', className)}>
                 <Table responsive>
                     <thead>
                         {this.isDesktop() && this.renderDesktopHeader()}

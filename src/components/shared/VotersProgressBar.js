@@ -82,9 +82,10 @@ class VotersProgressBar extends BaseComponent {
     }
 
     render() {
-        const { selectedVoters, maxVoters } = this.props;
+        const { selectedVoters, maxVoters, className } = this.props;
+            
         return (
-            <div className='btw-voters-progress-bar btw-paper'>
+            <div className={classNames('btw-voters-progress-bar btw-paper', className)}>
                 <div className='zoom-container'>
                     <div className='zoom' onClick={this.zoomHandler} />
                 </div>

@@ -12,32 +12,6 @@
         width: 100%;
     }
   
-	.icon{
-        border-radius: 8px;
-        min-width: 48px;
-        height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 24px;
-	}
-    
-    .facebook {
-        background-color: $facebook-color;
-    }
-
-    .twitter {
-        background-color: $twitter-color;
-    }
-
-    .linkedIn {
-        background-color: $linkedin-color;
-    }
-
-    .default {
-        background-color: $divider;
-    }
-
 	.name{
         text-transform: capitalize;
 	}
@@ -45,6 +19,7 @@
 	.controls{
         width: 100%;
         height: 48px;
+        margin-left: 24px;
         align-items: center;
         justify-content: space-between;
         display: flex;
