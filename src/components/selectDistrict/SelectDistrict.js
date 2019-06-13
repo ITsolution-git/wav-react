@@ -5,6 +5,7 @@ import BaseComponent from '../shared/BaseComponent';
 import Paper from '../shared/Paper';
 import Typography from '../shared/Typography';
 import Button from '../shared/Button';
+import Autocomplete from '../shared/Autocomplete';
 import SelectDistrictItem from './SelectDistrictItem';
 
 class SelectDistrict extends BaseComponent {
@@ -21,7 +22,16 @@ class SelectDistrict extends BaseComponent {
                {title: "illinois's Congresssional District #5"},
                {title: "illinois's Congresssional District #5"}
             ],
-            selectedVoting: -1
+            selectedVoting: -1,
+            searchAutoItems: [
+                {id: 0, label: "Area 0"},
+                {id: 1, label: "Area 1"},
+                {id: 2, label: "Area 2"},
+                {id: 3, label: "Area 3"},
+                {id: 4, label: "Area 4"},
+                {id: 5, label: "Area 5"},
+            ],
+            searchString: ""
         }
     }
 
@@ -29,15 +39,37 @@ class SelectDistrict extends BaseComponent {
         this.setState({selectedVoting: index});
     }
 
+    getDistricts = (value, item) => {
+        this.setState({
+            votingDistrics: [
+                {title: "illinois's Congresssional District #1"},
+                {title: "illinois's Congresssional District #2"},
+                {title: "illinois's Congresssional District #3"}
+            ],
+            searchString: value.label
+        });
+    }
+
     render() {
-        const { votingDistrics, selectedVoting } = this.state;
+        const { votingDistrics, selectedVoting, searchAutoItems, searchString } = this.state;
+        console.log(searchString)
         
         return (
             <Paper className={'select-disctrict'}>
                 <h2 className={'district-title'}>Select voting district</h2>
-                <Typography variant='body'>Enter your ZIP code to find a voting district you are attached to. You can change the district anytime.</Typography>
+                {
+                    searchString === "" ? <Typography variant='body'>Enter your ZIP code to find a voting district you are attached to. You can change the district anytime.</Typography>
+                    : ''
+                }
 
-                <Typography variant='body'>The information you provided overlaps {votingDistrics.length} voting districts. Please, select one:</Typography>
+                <Autocomplete items={searchAutoItems}
+                    onSelect={(value, item)=> this.getDistricts(value, item)}
+                    value={searchString}
+                    className={'search-box'} />
+
+                {
+                    searchString === "" ? '' : <Typography variant='body'>The information you provided overlaps {votingDistrics.length} voting districts. Please, select one:</Typography>
+                }
 
                 <div className={'districts-list'}>
                     {votingDistrics.map((item, index) => {

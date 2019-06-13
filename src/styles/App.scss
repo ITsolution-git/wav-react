@@ -93,6 +93,9 @@ html {
 @import 'transactionLogs/list';
 @import 'transactionLogs/detail';
 
+@import 'selectDistrict/selectDistrict';
+@import 'selectDistrict/selectDistrictItem';
+
 // new components
 @import 'components/button';
 @import 'components/modal';
@@ -102,7 +105,7 @@ html {
 @import 'components/searchInput';
 @import 'components/votersProgressBar';
 @import 'components/votersTable';
-
-
-@import 'selectDistrict/selectDistrict';
-@import 'selectDistrict/selectDistrictItem';
+@import 'components/autocomplete';
+@import 'components/typography';
+@import 'components/socialIcons';
+@import 'components/statusIcon';

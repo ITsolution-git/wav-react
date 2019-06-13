@@ -5,7 +5,7 @@ import Select from 'react-select';
 import cn from 'classnames';
 
 import BaseComponent from '../../shared/BaseComponent';
-import Icon from '../../shared/Icon';
+import SvgIcon from '../../shared/SvgIcon';
 
 export default class InputBase extends BaseComponent {
     baseState = {
@@ -110,7 +110,7 @@ export class TextInput extends InputBase {
         }
 
         return value && isValid && useGreenMark
-            ? <Icon width={14} height={10.5} name='green-mark' ext='svg' />
+            ? <SvgIcon width={14} height={10.5} name='green-mark' />
             : null;
 
     };

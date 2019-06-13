@@ -6,6 +6,7 @@
   
 	.content{
         padding: 51px 88px;
+        width: 100%;
 	}
   
 	.title{
@@ -14,8 +15,12 @@
   
 	.description{
         margin-bottom: 14px;
-	}
-  
+    }
+    
+    .inputs-row {
+        margin-bottom: 15px;
+      }
+      
     .successMessage{
         font-size: 13px;
         color: $success;

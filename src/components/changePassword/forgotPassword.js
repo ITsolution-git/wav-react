@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 
 import { forgotPasswordRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
@@ -56,11 +57,15 @@ class ForgotPassword extends BaseComponent {
                         we’ll send you a link to create a new Password
 					</Typography>
                     {this.renderMessage()}
-                    <EmailInput
-                        defaultValue={email}
-                        onChange={this.handleChange}
-                        uniqueValidationEnabled={false}
-                        required />
+                    <Row className='inputs-row'>
+                        <Col md={12}>
+                            <EmailInput
+                                defaultValue={email}
+                                onChange={this.handleChange}
+                                uniqueValidationEnabled={false}
+                                required />
+                        </Col>
+                    </Row>
                     <Button fullWidth onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
                         Send Request
                     </Button>
