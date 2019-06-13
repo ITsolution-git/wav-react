@@ -89,7 +89,9 @@ html {
 @import 'socialNetworks/socialConnect';
 @import 'socialNetworks/socialItem';
 
+
 @import 'selectVoters/selectVoters';
+@import 'selectVoters/socialInfo';
 
 @import 'userSearch/usersearch';
 
@@ -107,5 +109,6 @@ html {
 @import 'components/votersTable';
 @import 'components/autocomplete';
 @import 'components/typography';
-@import 'components/socialIcons';
+@import 'components/socialList';
+@import 'components/socialIcon';
 @import 'components/statusIcon';

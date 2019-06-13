@@ -22,13 +22,13 @@ class StatusIcon extends BaseComponent {
     }
 
     render() {
-        const { type, noBorder } = this.props;
+        const { type, noBorder, className } = this.props;
 
         return (
             <Typography
                 displayInline
                 variant='functional'
-                className={classNames('btw-status-icon', this.getClassName(type), { 'status-icon-no-border': noBorder })}>
+                className={classNames('btw-status-icon', this.getClassName(type), { 'status-icon-no-border': noBorder }, className)}>
                 {type}
             </Typography>
         );
