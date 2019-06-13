@@ -35,7 +35,7 @@ class SelectDistrict extends BaseComponent {
         }
     }
 
-    handleSelectDistrict = (index) => {
+    handleSelectDistrict = index => () => {
         this.setState({selectedVoting: index});
     }
 
@@ -77,7 +77,7 @@ class SelectDistrict extends BaseComponent {
                                 key={index} 
                                 districtName={item.title} 
                                 isSelected={selectedVoting === index}
-                                handleSelect={()=>this.handleSelectDistrict(index)}/>
+                                handleSelect={this.handleSelectDistrict(index)}/>
                         );
                     })}
                 </div>
