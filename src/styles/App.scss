@@ -36,57 +36,60 @@ html {
 	}
 }
 
-@import 'shared/_colors.scss';
-@import 'shared/style.scss';
+@import 'shared/colors';
+@import 'shared/style';
 @import 'shared/mixins';
-@import 'shared/components.scss';
-@import 'shared/sharedclasses.scss';
-@import 'shared/titles.scss';
-@import 'shared/components_lib.scss';
+@import 'shared/components';
+@import 'shared/sharedclasses';
+@import 'shared/titles';
+@import 'shared/components_lib';
 
 
-@import 'layout/header.scss';
-@import 'layout/about_info.scss';
-@import 'layout/layout.scss';
+@import 'layout/header';
+@import 'layout/about_info';
+@import 'layout/layout';
 
-@import 'captainProfile/register.scss';
+@import 'auth/base';
+@import 'auth/register_by_mail';
+@import 'auth/register_by_social';
+
 @import 'voter/makelist';
-@import 'captainProfile/profile.scss';
+@import 'captainProfile/profile';
 
-@import 'voter/base.scss';
-@import 'voter/detail.scss';
-@import 'voter/matchlist.scss';
-@import 'voter/success.scss';
-@import 'voter/error.scss';
-@import 'voter/welcome.scss';
+@import 'voter/base';
+@import 'voter/detail';
+@import 'voter/matchlist';
+@import 'voter/success';
+@import 'voter/error';
+@import 'voter/welcome';
 
-@import 'voterList/voterlist.scss';
+@import 'voterList/voterlist';
 
-@import 'errorPages/general.scss';
+@import 'errorPages/general';
 
-@import 'login/login.scss';
+@import 'login/login';
 
-@import 'captainsDashboard/dashboard.scss';
-@import 'adminDashboard/dashboard.scss';
+@import 'captainsDashboard/dashboard';
+@import 'adminDashboard/dashboard';
 
-@import 'tasks/tasklist.scss';
-@import 'tasks/taskworkflow.scss';
-@import 'tasks/stepper.scss';
+@import 'tasks/tasklist';
+@import 'tasks/taskworkflow';
+@import 'tasks/stepper';
 
-@import 'messages/messagelist.scss';
+@import 'messages/messagelist';
 
-@import 'static/terms.scss';
-@import 'static/privacy.scss';
-@import 'static/resource_center.scss';
+@import 'static/terms';
+@import 'static/privacy';
+@import 'static/resource_center';
 
-@import 'changePassword/base.scss';
-@import 'changePassword/verify.scss';
-@import 'changePassword/forgot.scss';
+@import 'changePassword/base';
+@import 'changePassword/verify';
+@import 'changePassword/forgot';
 
-@import 'socialNetworks/socialConnect.scss';
-@import 'socialNetworks/socialItem.scss';
+@import 'socialNetworks/socialConnect';
+@import 'socialNetworks/socialItem';
 
-@import 'selectVoters/selectVoters.scss';
+@import 'selectVoters/selectVoters';
 
 @import 'userSearch/usersearch';
 

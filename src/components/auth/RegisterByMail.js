@@ -81,7 +81,7 @@ class RegisterByMail extends BaseComponent {
 		const { error } = this.props;
 
 		return (
-		    <div className="btw-register">
+		    <div className='btw-register-mail'>
                 <Paper className='paper'>
                     <Typography className='title'>Sign Up with Email</Typography>
                     <Row className='inputs-row'>
