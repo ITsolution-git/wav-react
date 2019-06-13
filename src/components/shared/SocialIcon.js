@@ -7,43 +7,34 @@ import BaseComponent from './BaseComponent';
 
 class SocialIcon extends BaseComponent {
 
-    renderSmallIcon = (name, value, height) => {
+    renderSmallIcon = (name, visible, height) => {
 
         return (
-            <div className={classNames('btw-social-icon social-icon-small', { [name]: value })} >
-                {value && <Icon name={`${name}-light`} height={height} />}
+            <div className={classNames('btw-social-icon social-icon-small', { [name]: visible })} >
+                {visible && <Icon name={`${name}-light`} height={height} />}
             </div >
         );
     }
 
-    renderMediumIcon = (name, value, height) => {
+    renderBigIcon = (name, visible, height, iconSizeClass) => {
 
         return (
-            <div className={classNames('btw-social-icon social-icon-medium', value ? name : 'social-icon-default')} >
-                <Icon name={`${name}-${value ? 'light' : 'grey'}`} height={height} />
-            </div >
-        );
-    }
-
-    renderLargeIcon = (name, value, height) => {
-
-        return (
-            <div className={classNames('btw-social-icon social-icon-large', value ? name : 'social-icon-default')} >
-                <Icon name={`${name}-${value ? 'light' : 'grey'}`} height={height} />
+            <div className={classNames('btw-social-icon', iconSizeClass, visible ? name : 'social-icon-default')} >
+                <Icon name={`${name}-${visible ? 'light' : 'grey'}`} height={height} />
             </div >
         );
     }
 
     render() {
-        const { name, value, size } = this.props;
+        const { name, visible, size } = this.props;
 
         switch (size) {
             case 'small':
-                return this.renderSmallIcon(name, value, 8);
+                return this.renderSmallIcon(name, visible, 8);
             case 'medium':
-                return this.renderMediumIcon(name, value, 12);
+                return this.renderBigIcon(name, visible, 12, 'social-icon-medium');
             case 'large':
-                return this.renderLargeIcon(name, value, 20);
+                return this.renderBigIcon(name, visible, 20, 'social-icon-large');
             default:
                 return null;
         }
@@ -52,7 +43,7 @@ class SocialIcon extends BaseComponent {
 
 SocialIcon.propTypes = {
     name: PropTypes.string,
-    value: PropTypes.bool,
+    visible: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large'])
 };
 

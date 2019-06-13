@@ -12,9 +12,9 @@ class SocialList extends BaseComponent {
 
         return (
             <div className={classNames('btw-social-list', className)}>
-                <SocialIcon name='twitter' value={social.twitter} size={size} />
-                <SocialIcon name='linkedIn' value={social.linkedIn} size={size} />
-                <SocialIcon name='facebook' value={social.facebook} size={size} />
+                <SocialIcon name='twitter' visible={social.twitter} size={size} />
+                <SocialIcon name='linkedIn' visible={social.linkedIn} size={size} />
+                <SocialIcon name='facebook' visible={social.facebook} size={size} />
             </div>
         );
     }

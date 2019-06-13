@@ -37,7 +37,7 @@ class SocialItem extends BaseComponent {
         return (
             <div className='btw-social-item'>
                 <div className='main-container'>
-                    <SocialIcon name={name} value={status} size='large' />
+                    <SocialIcon name={name} visible={status} size='large' />
                     <div className='controls'>
                         <Typography variant='body' fontWeight='600' className='name'>
                             {name}
