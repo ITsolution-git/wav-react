@@ -4,21 +4,73 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Row, Col } from 'react-bootstrap';
 
-import { loadTaskList } from '../../actions/TaskListAction';
 import Spinner from '../shared/Spinner';
-import { resolveTaskData } from '../../helpers/TaskHelper';
 import BaseComponent from '../shared/BaseComponent';
-import { getStateInfo } from '../../actions/TaskAction';
-import ContentLayout from '../layout/ContentLayout';
 import Icon from '../shared/Icon';
-import routes from '../../constants/Routes';
 import Dialog from '../shared/Dialog';
+import Paper from '../shared/Paper';
+import Typography from '../shared/Typography';
+import routes from '../../constants/Routes';
+import { getStateInfo } from '../../actions/TaskAction';
+import { loadTaskList } from '../../actions/TaskListAction';
+import ContentLayout from '../layout/ContentLayout';
+import { resolveTaskData } from '../../helpers/TaskHelper';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            showTipsModal: false
+            showTipsModal: false,
+            tasks: [
+                {   
+                    task_id: 0,
+                    title:'Help 5 people register for voting',
+                    status: 0, // 0: in progress, 1: completed
+                    points: {
+                        score: 4,
+                        total: 20
+                    },
+                    start_date: '30 May 2019',
+                    end_date: '30 May 2019',
+                    sub_tasks: [
+                        {
+                            status: 0, //0 : in progress, 1: done
+                        }
+                    ]
+                },
+                {   
+                    task_id: 1,
+                    title:'Help 5 people register for voting',
+                    status: 0, // 0: in progress, 1: completed
+                    points: {
+                        score: 4,
+                        total: 20
+                    },
+                    start_date: '30 May 2019',
+                    end_date: '30 May 2019',
+                    sub_tasks: [
+                        {
+                            status: 0, //0 : in progress, 1: done
+                        }
+                    ]
+                },
+                {   
+                    task_id: 2,
+                    title:'Help 5 people register for voting',
+                    status: 0, // 0: in progress, 1: completed
+                    points: {
+                        score: 4,
+                        total: 20
+                    },
+                    start_date: '30 May 2019',
+                    end_date: '30 May 2019',
+                    sub_tasks: [
+                        {
+                            status: 0, //0 : in progress, 1: done
+                        }
+                    ]
+                }
+            ]
         };
     }
 
@@ -56,87 +108,48 @@ class TaskList extends BaseComponent {
         const viewProps = this.getViewProps();
 
         return (
-            <ContentLayout>
-                <div className='bwt-task-list container'>
-                    <Spinner height={300} loading={isFetching} />
-                    <div id="title" className={viewProps.titleClass}>My Actions</div>
-                    <Row>
-                        <Col md={7}>
-                            <div className='task-list'>
-                                { !tasks.length && <h2 style={{color:"black"}}>You have no new tasks.</h2>}
-                                { tasks.map((task, i) => {
-                                    const taskData = resolveTaskData(task);
-                                    return (
-                                        <Row key={i} className='task no-margin'>
-                                            <Col md={9} xs={10}>
-                                                <div className={viewProps.taskName}>{ taskData.description }</div>
-                                            </Col>
-                                            <Col md={3} xs={2} className='link' onClick={() => this.goToTask(taskData, taskData.route)}>
-                                                { this.isDesktop()
-                                                    ? <div>
-                                                        <span>Get Started</span>
-                                                        <Icon name="arrow-right-black" width="25px" height="25px" />
-                                                      </div>
-                                                    : <div className="arrow-mobile">
-                                                        <Icon name="arrow-right" width="20px" height="20px" />
-                                                      </div>
-                                                }
-                                            </Col>
-                                        </Row>
-                                    )
-                                })}
-                            </div>
-                        </Col>
-                        <Col md={5} xs={12}>
-                            <Row>
-                                <Col md={12} xs={6} id="tile-div">
-                                    <div className="tile" onClick={() => this.setState({ showTipsDialog: true })}>
-                                        <div className={viewProps.tileClass}>
-                                            Tips for talking <br />
-                                            to your friends
-                                        </div>
+            
+                <div className='bwt-task-list'>
+                    <ul className={'tabs'}>
+                        <li className={'active'}>All actions</li>
+                        <li>In progress</li>
+                        <li>Completed</li>
+                    </ul>
+
+                    <div className={'actions-content'}>
+                        <div className={'actions'}>
+                            <Paper className={'action'}>
+                                <div className={'action-header'}>
+                                    <div className={'action-status'}>
+                                        <Icon name='action-status-inprogress'
+                                            ext='svg'
+                                            width='11'
+                                            heigh='11'/>
+                                        <Typography className={'status-text'} variant="functional" lightColor>In prgress</Typography>
                                     </div>
-                                </Col>
-                                <Col md={12} xs={6} id="tile-div" onClick={() => this.onLink(routes.faq)}>
-                                    <div className="tile">
-                                        <div className={viewProps.tileClass}>
-                                            Voting FAQs
-                                        </div>
+
+                                    <div className={'action-points'}>
+                                        <Icon name='medal'
+                                            ext='svg'
+                                            width='16'
+                                            heigh='16'/>
+                                        <Typography className={'points-text'} variant="functional">4 / 20</Typography>    
                                     </div>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </div>
-                <Dialog show={showTipsDialog} closeButton onClose={() => this.setState({ showTipsDialog: false })}>
-                    <div id="btw-tips-dialog">
-                        <div id="title">
-                            Tips on Talking to Friends Voting
+                                </div>
+
+                                <Typography className={'action-title'}>Help 5 people register for voting</Typography>
+                                <Typography className={'action-duration'} lightColor>30 May 2019 – 30 June 2019</Typography>
+
+                                <Typography className={'task-done'} lightColor>Tasks done: 1 / 5</Typography>
+                            </Paper>
                         </div>
-                        <div className="text-15-dark-blue-bold">
-                            So you want to help friends vote! Congratulations! You are now a shepherd
-                            of democracy! <br />
-                            <br />
-                            Luckily, lots of folks done studies about what works best when trying to
-                            register a new voter. We've boiled this stuff down to a few handy tips! <br />
-                            <br />
-                            So! Here are the 4 things you want to keep in mind when talking to your friends
-                            about voting: <br />
-                            <br />
-                            Be clear with your friends about how long stuff will take.
-                            A big psychological hurdle to first time voters is the mistaken assumption that registering or voting takes hours and involves lots of red tape.
-                            Making it clear to your friends that they can hop on vote.org and register in 2 minutes (literally) helps to overcome this barrier. <br />
-                            { this.isDesktop() &&
-                             <span>
-                                Know which issues your friends care about and talk about those in the context of voting. Most young voters don’t associate voting with their everyday lives.
-                                But linking voting with things that affect your friends all the time makes it more likely that they’ll view voting as salient to their lives.
-                                If you know your friend works for minimum wage, talk about ballot measures that would increase the minimum wage!
-                                If you know your friend is frustrated about her health care, make it clear that voting for officials with good healthcare policies would make a positive impact on her life.
-                             </span> }
+
+                        <div className={'active-action'}>
+                            hi
                         </div>
                     </div>
-                </Dialog>
-            </ContentLayout>
+                </div>
+           
         );
     }
 }
