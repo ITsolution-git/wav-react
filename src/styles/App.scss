@@ -98,6 +98,9 @@ html {
 @import 'transactionLogs/list';
 @import 'transactionLogs/detail';
 
+@import 'selectDistrict/selectDistrict';
+@import 'selectDistrict/selectDistrictItem';
+
 // new components
 @import 'components/button';
 @import 'components/modal';

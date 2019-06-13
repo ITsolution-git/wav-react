@@ -29,6 +29,7 @@ import PreferenceTask from './tasks/PreferenceTask';
 import RegularVoteTask from './tasks/RegularVoteTask';
 import WelcomePage from './voter/WelcomePage';
 import SocialConnect from './socialNetworks/SocialConnect';
+import SelectDistrict from './selectDistrict/SelectDistrict';
 import SelectVoters from './selectVoters/SelectVoters';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
@@ -114,6 +115,10 @@ const router = () => (
             component={Authorization(NotFoundError, [captain])} />
         <Route exact path={routes.welcome}
             component={Authorization(WelcomePage, [captain])} />
+
+        {/* select voting district */}
+        <Route exact path={routes.selectDistrict}
+            component={Authorization(SelectDistrict, [captain])} />
 
         {/* tasks */}
         <Route exact path={routes.addVoterTask}
