@@ -271,11 +271,23 @@ class SelectVoters extends BaseComponent {
                 }
             ],
             selectedVoters: [],
-            showAlertModal: false
+            showAlertModal: false,
+            searchString: ''
+        }
+    }
+
+    getSearchData = () => {
+        const { searchString, votersList } = this.state;
+
+        if (!!searchString) {
+            return votersList.filter(item => item.name.toLowerCase().includes(searchString.toLowerCase()));
+        } else {
+            return votersList;
         }
     }
 
     searchInputHandler = value => {
+        this.setState({ searchString: value });
     }
 
     clearSelectedVotersHandler = (id) => {
@@ -347,23 +359,61 @@ class SelectVoters extends BaseComponent {
     }
 
     renderTable = () => {
-        const { selectedVoters, votersList } = this.state;
+        const { selectedVoters, searchString } = this.state;
+        const data = this.getSearchData();
 
         return (
             <div className='btw-paper table-container'>
                 <Typography variant='body' className='table-description'>
-                    Hurray! We matched you with {votersList.length} of your friends.
+                    {!!searchString ?
+                        `We found ${data.length} results for “${searchString}”` :
+                        `Hurray! We matched you with ${data.length} of your friends.`
+                    }
                 </Typography>
                 <VotersTable
-                    data={votersList}
+                    data={data}
                     selectedData={selectedVoters}
                     onSelect={this.selectTableHandler} />
             </div>
         );
     }
 
-    render() {
+    renderDialog = () => {
         const { showAlertModal } = this.state;
+
+        return (
+            <Dialog
+                id='selectedVotersAlertDialog'
+                title='Hurray! We matched you with 40 of your friends.'
+                show={showAlertModal}
+                actionButtons={
+                    <Row>
+                        <Col xs={12}>
+                            <Button
+                                fullWidth
+                                id="selectedVotersAlertDialog"
+                                onClick={this.closeModalHandler}>
+                                Ok, got it!
+                                </Button>
+                        </Col>
+                    </Row>
+                }
+                onClose={this.closeModalHandler}>
+                <div>
+                    <Typography variant='body' displayInline lightColor>
+                        Select 10 people among your social media friends or search
+                        for other people you know among all the voters of your district.
+                    </Typography>
+                    <Typography variant='body' displayInline lightColor>
+                        Try to choose a few among regular voters, a few among
+                        infrequent voters, and a few unregistered voters.
+                    </Typography>
+                </div>
+            </Dialog>
+        );
+    }
+
+    render() {
 
         return (
             <ContentLayout>
@@ -395,35 +445,9 @@ class SelectVoters extends BaseComponent {
                             </Col>
                         </Row>
                     </Col>
+                    {this.renderVotersProgressBar('tablet')}
                 </Row>
-                <Dialog
-                    id='selectedVotersAlertDialog'
-                    title='Hurray! We matched you with 40 of your friends.'
-                    show={showAlertModal}
-                    actionButtons={
-                        <Row>
-                            <Col xs={12}>
-                                <Button
-                                    fullWidth
-                                    id="selectedVotersAlertDialog"
-                                    onClick={this.closeModalHandler}>
-                                    Ok, got it!
-                                </Button>
-                            </Col>
-                        </Row>
-                    }
-                    onClose={this.closeModalHandler}>
-                    <div>
-                        <Typography variant='body' displayInline lightColor>
-                            Select 10 people among your social media friends or search
-                            for other people you know among all the voters of your district.
-                        </Typography>
-                        <Typography variant='body' displayInline lightColor>
-                            Try to choose a few among regular voters, a few among
-                            infrequent voters, and a few unregistered voters.
-                        </Typography>
-                    </div>
-                </Dialog>
+                {this.renderDialog()}
             </ContentLayout >
         );
     }
