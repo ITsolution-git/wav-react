@@ -395,7 +395,6 @@ class SelectVoters extends BaseComponent {
                             </Col>
                         </Row>
                     </Col>
-                    {/* {this.renderVotersProgressBar('tablet')} */}
                 </Row>
                 <Dialog
                     id='selectedVotersAlertDialog'
