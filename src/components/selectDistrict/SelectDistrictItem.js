@@ -2,8 +2,8 @@ import React from 'react';
 
 import BaseComponent from '../shared/BaseComponent';
 import Typography from '../shared/Typography';
-import readioIcon from '../../resources/icons/radio-button.svg';
-import readioSelectedIcon from '../../resources/icons/radio-button-selected.svg';
+import SvgIcon from '../shared/SvgIcon';
+
 
 class SelectDistrictItem extends BaseComponent {
 
@@ -12,10 +12,8 @@ class SelectDistrictItem extends BaseComponent {
 
         return(
             <div className={'district-item'} onClick={handleSelect}>
-                <img src={isSelected ? readioSelectedIcon : readioIcon}
-                    alt=""/>
-                <Typography 
-                    variant={'functional'} 
+                <SvgIcon name={isSelected ? 'radio-button-selected' : 'radio-button'}/>
+                <Typography variant={'functional'} 
                     className={'district-name'}>{districtName}</Typography>
             </div>
         );

@@ -7,22 +7,6 @@
         padding: 37px 16px;
     }
 
-    .district-title {
-        font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 27px;
-        margin: 0;
-    }
-
-    .district-description {
-        font-style: normal;
-        font-weight: normal;
-        font-size: 13px;
-        line-height: 130%;
-        margin-top: 12px;
-    }
-
     .search-box {
         margin: 28px 0 32px;
     }
@@ -39,7 +23,7 @@
 
         &::-webkit-scrollbar-thumb {
             width: 3px;
-            background: #E9EBF3;
+            background: $divider;
         }
     }
 }

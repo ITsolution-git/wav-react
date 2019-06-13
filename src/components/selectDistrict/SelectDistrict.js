@@ -52,23 +52,21 @@ class SelectDistrict extends BaseComponent {
 
     render() {
         const { votingDistrics, selectedVoting, searchAutoItems, searchString } = this.state;
-        console.log(searchString)
         
         return (
             <Paper className={'select-disctrict'}>
-                <h2 className={'district-title'}>Select voting district</h2>
+                <Typography>Select voting district</Typography>
                 {
-                    searchString === "" ? <Typography variant='body'>Enter your ZIP code to find a voting district you are attached to. You can change the district anytime.</Typography>
-                    : ''
+                    !searchString && <Typography variant='body'>Enter your ZIP code to find a voting district you are attached to. You can change the district anytime.</Typography>
                 }
 
                 <Autocomplete items={searchAutoItems}
-                    onSelect={(value, item)=> this.getDistricts(value, item)}
+                    onSelect={this.getDistricts}
                     value={searchString}
                     className={'search-box'} />
 
                 {
-                    searchString === "" ? '' : <Typography variant='body'>The information you provided overlaps {votingDistrics.length} voting districts. Please, select one:</Typography>
+                    searchString && <Typography variant='body'>The information you provided overlaps {votingDistrics.length} voting districts. Please, select one:</Typography>
                 }
 
                 <div className={'districts-list'}>
