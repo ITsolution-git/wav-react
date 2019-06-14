@@ -10,18 +10,21 @@ import SocialList from '../shared/SocialList';
 class SocialInfo extends BaseComponent {
 
     render() {
-        const { social, onSocialConnect, className } = this.props;
+        const { social, onSocialConnect, noConnect, className } = this.props;
+        const size = noConnect ? 'large' : 'medium';
 
         return (
-            <div className={classNames('btw-social-info btw-paper', className)}>
-                <SocialList social={social} size='medium' />
+            <div className={classNames('btw-social-info', noConnect ? 'btw-social-info-no-connect' : 'btw-paper', className)}>
+                <SocialList social={social} size={size} />
                 <div className='info-content'>
                     <Typography className='title'>
                         Connect social media accounts
                     </Typography>
-                    <Typography variant='body'>
-                        With connected social media accounts, it is much easier
-                        to find voters that you already know in real life.
+                    <Typography variant='body' className='description'>
+                        {noConnect ?
+                            'We will use your accounts information only to connect you with voters you already know in real life. This can make your serching process much easier.' :
+                            'With connected social media accounts, it is much easier to find voters that you already know in real life.'
+                        }
                     </Typography>
                 </div>
                 <Button
@@ -37,7 +40,12 @@ class SocialInfo extends BaseComponent {
 
 SocialInfo.propTypes = {
     social: PropTypes.object,
+    noConnect: PropTypes.bool,
     onSocialConnect: PropTypes.func
 };
+
+SocialInfo.defaultProps = {
+    noConnect: false
+}
 
 export default SocialInfo;

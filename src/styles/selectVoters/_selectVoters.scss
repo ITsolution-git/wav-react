@@ -5,6 +5,10 @@
   
 	.title{
         margin-bottom: 20px;
+
+        @include respond-to($phone) {
+            margin-bottom: 3px;
+        }
 	}
   
 	.page-description{
@@ -15,8 +19,33 @@
         }
     }
     
+    .page-no-connect-description{
+        margin-bottom: 30px;
+
+        span {
+            cursor: pointer;
+            color: $primary;
+        }
+
+        @include respond-to($phone) {
+            margin-bottom: 20px;
+         }
+    }
+
     .search-input{
         margin-bottom: 8px;
+    }
+
+    .social-info-no-table {
+        width: 100%;
+        align-items: center;
+        display: flex;
+        padding: 80px 0;
+        flex-direction: column;
+
+        @include respond-to($phone) {
+            display: none;
+        }
     }
 
     .table-container{
