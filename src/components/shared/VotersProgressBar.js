@@ -86,7 +86,7 @@ class VotersProgressBar extends BaseComponent {
         const { zoom } = this.state;
 
         return (
-            <div className={classNames('btw-voters-progress-bar btw-paper', { 'voters-progress-bar-full-height': zoom }, className)}>
+            <div className={classNames('btw-voters-progress-bar btw-paper', { 'vpb-full-height': zoom }, className)}>
                 <div>
                     <div className='zoom-container'>
                         <div className='zoom' onClick={this.zoomHandler} />

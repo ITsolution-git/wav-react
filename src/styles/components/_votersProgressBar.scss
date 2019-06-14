@@ -141,7 +141,7 @@
     }
 }
 
-.voters-progress-bar-full-height{
+.vpb-full-height{
     @include respond-to($phone) {
         display: flex;
         flex-direction: column;

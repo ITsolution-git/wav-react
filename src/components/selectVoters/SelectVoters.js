@@ -370,7 +370,7 @@ class SelectVoters extends BaseComponent {
         );
     }
 
-    renderNoTable = (isNotConnected, isNoData) => {
+    renderNoDataText = (isNotConnected, isNoData) => {
         const { user } = this.state;
 
         return isNoData ?
@@ -392,7 +392,7 @@ class SelectVoters extends BaseComponent {
         const isNoData = data.length === 0;
 
         return isNotConnected || isNoData ?
-            this.renderNoTable(isNotConnected, isNoData) :
+            this.renderNoDataText(isNotConnected, isNoData) :
             (
                 <div className='btw-paper table-container'>
                     <Typography variant='body' className='table-description'>
