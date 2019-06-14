@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Row, Col } from 'react-bootstrap';
 import ReadMoreAndLess from 'react-read-more-less';
+import cn from 'classnames';
 
 import Spinner from '../shared/Spinner';
 import BaseComponent from '../shared/BaseComponent';
@@ -46,6 +47,9 @@ class TaskList extends BaseComponent {
                     sub_tasks: [
                         {
                             status: 0, //0 : in progress, 1: done
+                            voter: {
+                                name: 'Dennis Holman'
+                            }
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
@@ -208,6 +212,17 @@ class TaskList extends BaseComponent {
 
                             <Typography className={'active-task-title'}>Active tasks({selectedTask.sub_tasks.length - getCompletedTasksCount(selectedTask)})</Typography>
                             
+                            {
+                                selectedTask.sub_tasks.map(sub_task =>
+                                    <div className={'sub_task-item'}>
+                                        <div className={'voter-detail'}>
+                                            <div className={'voter-general'}>
+                                                <Typography className={'voter-name'}>{sub_task.voter.name}</Typography>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            }
                         </div>
                     </Paper>
                 </div>

@@ -70,7 +70,27 @@
         padding: 27px 40px;
 
         .active-task-title {
-          margin-top: 21px;
+          margin: 21px 0 12px;
+        }
+      }
+
+      .sub_task-item {
+        border: 1px solid $divider;
+        box-sizing: border-box;
+        border-radius: 3px;
+        padding: 15px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .voter-detail {
+
+          .voter-general{
+
+            .voter-name {
+              font-size: 13px;
+            }
+          }
         }
       }
     }
