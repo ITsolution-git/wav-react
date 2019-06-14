@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Row, Col } from 'react-bootstrap';
+import ReadMoreAndLess from 'react-read-more-less';
 
 import Spinner from '../shared/Spinner';
 import BaseComponent from '../shared/BaseComponent';
-import Icon from '../shared/Icon';
+import SvgIcon from '../shared/SvgIcon';
 import Dialog from '../shared/Dialog';
 import Paper from '../shared/Paper';
 import Typography from '../shared/Typography';
@@ -16,11 +17,21 @@ import { loadTaskList } from '../../actions/TaskListAction';
 import ContentLayout from '../layout/ContentLayout';
 import { resolveTaskData } from '../../helpers/TaskHelper';
 
+
+function getCompletedTasksCount(task) {
+    var count = 0
+    task.sub_tasks.map(sub_task => {
+        if(sub_task.status) count ++
+    })
+    return count;
+}
+
 class TaskList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
         this.state = {
             showTipsModal: false,
+            selectedTaskNo: 0,
             tasks: [
                 {   
                     task_id: 0,
@@ -36,15 +47,22 @@ class TaskList extends BaseComponent {
                         {
                             status: 0, //0 : in progress, 1: done
                         }
-                    ]
+                    ],
+                    description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
+
+                    I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
+                    
+                    I have examples on how I want everything to look and behave that you can take a look at when we talk. 
+                    
+                    I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 },
                 {   
                     task_id: 1,
-                    title:'Help 5 people register for voting',
+                    title:'Request a ballot for 1 person',
                     status: 0, // 0: in progress, 1: completed
                     points: {
                         score: 4,
-                        total: 20
+                        total: 10
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
@@ -52,23 +70,45 @@ class TaskList extends BaseComponent {
                         {
                             status: 0, //0 : in progress, 1: done
                         }
-                    ]
+                    ],
+                    description: "How to talk to your voters about what you are involved in. Different for different people. Regular voters say they will vote anyway. These are a good group to get to become captains..."
                 },
                 {   
                     task_id: 2,
-                    title:'Help 5 people register for voting',
-                    status: 0, // 0: in progress, 1: completed
+                    title:'Confirm registration information for 3 people',
+                    status: 1, // 0: in progress, 1: completed
                     points: {
-                        score: 4,
+                        score: 10,
+                        total: 10
+                    },
+                    start_date: '30 May 2019',
+                    end_date: '30 May 2019',
+                    sub_tasks: [
+                        {
+                            status: 1, //0 : in progress, 1: done
+                        }
+                    ],
+                    description: "How to talk to your voters about what you are involved in. Different for different people. Regular voters say they will vote anyway. These are a good group to get to become captains..."
+                },
+                {   
+                    task_id: 3,
+                    title:'Inform 3 people on their polling place location',
+                    status: 1, // 0: in progress, 1: completed
+                    points: {
+                        score: 20,
                         total: 20
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
                     sub_tasks: [
                         {
-                            status: 0, //0 : in progress, 1: done
+                            status: 1, //0 : in progress, 1: done
+                        },
+                        {
+                            status: 1, //0 : in progress, 1: done
                         }
-                    ]
+                    ],
+                    description: "How to talk to your voters about what you are involved in. Different for different people. Regular voters say they will vote anyway. These are a good group to get to become captains..."
                 }
             ]
         };
@@ -101,54 +141,77 @@ class TaskList extends BaseComponent {
 
     render() {
         const { taskList: {
-            tasks = [],
+            // tasks = [],
             isFetching
         }} = this.props;
-        const { showTipsDialog } = this.state;
+        const { showTipsDialog, tasks, selectedTaskNo } = this.state;
         const viewProps = this.getViewProps();
-
+        const selectedTask = tasks[selectedTaskNo]
         return (
             
-                <div className='bwt-task-list'>
-                    <ul className={'tabs'}>
-                        <li className={'active'}>All actions</li>
-                        <li>In progress</li>
-                        <li>Completed</li>
-                    </ul>
 
-                    <div className={'actions-content'}>
-                        <div className={'actions'}>
-                            <Paper className={'action'}>
-                                <div className={'action-header'}>
-                                    <div className={'action-status'}>
-                                        <Icon name='action-status-inprogress'
-                                            ext='svg'
-                                            width='11'
-                                            heigh='11'/>
-                                        <Typography className={'status-text'} variant="functional" lightColor>In prgress</Typography>
+            <div className='bwt-task-list'>
+                <ul className={'tabs'}>
+                    <li className={'active'}>All actions</li>
+                    <li>In progress</li>
+                    <li>Completed</li>
+                </ul>
+
+                <div className={'actions-content'}>
+                    <div className={'actions'}>
+                        {
+                            tasks.map(task => 
+                                <Paper className={'action'} key={task.task_id}>
+                                    <div className={'action-header'}>
+                                        <div className={'action-status'}>
+                                            <SvgIcon name={task.status ? 'action-status-completed' : 'action-status-inprogress'}/>
+                                            <Typography className={'status-text'} variant="functional" lightColor>{task.status ? 'Completed' : 'In progress'}</Typography>
+                                        </div>
+
+                                        <div className={'action-points'}>
+                                            <SvgIcon name='medal' />
+                                            <Typography className={'points-text'} variant="functional">{task.points.score} / {task.points.total}</Typography>    
+                                        </div>
                                     </div>
 
-                                    <div className={'action-points'}>
-                                        <Icon name='medal'
-                                            ext='svg'
-                                            width='16'
-                                            heigh='16'/>
-                                        <Typography className={'points-text'} variant="functional">4 / 20</Typography>    
-                                    </div>
-                                </div>
-
-                                <Typography className={'action-title'}>Help 5 people register for voting</Typography>
-                                <Typography className={'action-duration'} lightColor>30 May 2019 – 30 June 2019</Typography>
-
-                                <Typography className={'task-done'} lightColor>Tasks done: 1 / 5</Typography>
-                            </Paper>
-                        </div>
-
-                        <div className={'active-action'}>
-                            hi
-                        </div>
+                                    <Typography className={'action-title'}>{task.title}</Typography>
+                                    <Typography className={'action-duration'} lightColor>{task.start_date} – {task.end_date}</Typography>
+                                    <Typography className={'task-done'} lightColor>Tasks done: {getCompletedTasksCount(task)} / {task.sub_tasks.length}</Typography>
+                                </Paper>
+                            )
+                        }
+                        
                     </div>
+
+                    <Paper className={'selected-action'}>
+                        <div className={'header'}>
+                            <div className={'action-status'}>
+                                <SvgIcon name={selectedTask.status ? 'action-status-completed' : 'action-status-inprogress'}/>
+                                <Typography className={'status-text'} variant="functional" lightColor>{selectedTask.status ? 'Completed' : 'In progress'}</Typography>
+                            </div>
+
+                            <div className={'action-points'}>
+                                <Typography variant='functional' lightColor>Points earned: </Typography>
+                                <SvgIcon name='medal' />
+                                <Typography className={'points-text'} variant="functional">{selectedTask.points.score} / {selectedTask.points.total}</Typography>    
+                            </div>
+                        </div>
+                        <div className={'action-body'}>
+                            <Typography>{selectedTask.title}</Typography>
+                            <Typography  variant='body' lightColor className={'action-duration'}>{selectedTask.start_date} – {selectedTask.end_date}</Typography>
+                            <ReadMoreAndLess charLimit={250}
+                                readMoreText='Read more'
+                                readLessText='Read less'
+                            >
+                                {selectedTask.description}
+                            </ReadMoreAndLess>
+
+                            <Typography className={'active-task-title'}>Active tasks({selectedTask.sub_tasks.length - getCompletedTasksCount(selectedTask)})</Typography>
+                            
+                        </div>
+                    </Paper>
                 </div>
+            </div>
            
         );
     }

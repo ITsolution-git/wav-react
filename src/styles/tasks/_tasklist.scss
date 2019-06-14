@@ -25,7 +25,7 @@
   }
 
   .actions-content {
-    padding: 0 200px;
+    padding: 0;
     display: flex;
     justify-content: center;
 
@@ -36,29 +36,12 @@
       .action {
         padding: 18px 40px;
         width: 424px;
+        margin-bottom: 16px;
 
         .action-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-
-          .action-status {
-            display: flex;
-            align-items: center;
-
-            .status-text {
-              margin-left: 5px;
-            }
-          }
-
-          .action-points {
-            display: flex;
-            align-items: center;
-
-            .points-text {
-              margin-left: 4px;
-            }
-          }
         }
 
         .action-title {
@@ -67,19 +50,52 @@
           line-height: 130%;
         }
 
-        .action-duration {
-          font-size: 12px;
-          margin-bottom: 27px;
-        }
-
         .task-done {
           font-size: 12px;
         }
       }
     }
 
-    .active-action {
+    .selected-action {
       width: 600px;
+
+      .header {
+        padding: 19px 40px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $divider;
+      }
+
+      .action-body {
+        padding: 27px 40px;
+
+        .active-task-title {
+          margin-top: 21px;
+        }
+      }
+    }
+
+    .action-status {
+      display: flex;
+      align-items: center;
+
+      .status-text {
+        margin-left: 5px;
+      }
+    }
+
+    .action-points {
+      display: flex;
+      align-items: center;
+
+      .points-text {
+        margin-left: 4px;
+      }
+    }
+    
+    .action-duration {
+      font-size: 12px;
+      margin-bottom: 27px;
     }
   }
 }
