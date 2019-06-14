@@ -18,7 +18,7 @@ class SearchInput extends BaseComponent {
         const { value } = event.target;
 
         this.setState({ value: value });
-        if (this.isMobile()) {
+        if (this.isMobile() || !value) {
             this.props.onChange(value);
         }
     }

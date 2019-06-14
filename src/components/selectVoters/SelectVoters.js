@@ -24,7 +24,7 @@ class SelectVoters extends BaseComponent {
                 firstname: 'Denis',
                 lastname: 'Damin',
                 social: {
-                    twitter: false,
+                    twitter: true,
                     linkedIn: false,
                     facebook: false
                 }
