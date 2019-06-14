@@ -1,11 +1,13 @@
 import React from 'react';
 
 import Typography from '../shared/Typography';
+import SvgIcon from '../shared/SvgIcon';
 
 const SelectNoData = () => {
 
     return (
         <div className='btw-select-no-data'>
+            <SvgIcon name='no-data' height='48' />
             <div className='info-content'>
                 <Typography className='title'>
                     What a pity!

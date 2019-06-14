@@ -375,17 +375,16 @@ class SelectVoters extends BaseComponent {
     renderNoTable = (isNoConnect, isNoData) => {
         const { user } = this.state;
 
-        return (
-            <div className='social-info-no-table'>
-                {isNoData ?
-                    <SelectNoData /> :
-                    <SocialInfo
-                        social={user.social}
-                        onSocialConnect={this.socialConnectHandler}
-                        noConnect={isNoConnect} />
-                }
-            </div>
-        );
+        return isNoData ?
+            (<div className='social-no-data'>
+                <SelectNoData />
+            </div>) :
+            (<div className='social-no-connect'>
+                <SocialInfo
+                    social={user.social}
+                    onSocialConnect={this.socialConnectHandler}
+                    noConnect={isNoConnect} />
+            </div>);
     }
 
     renderTable = () => {

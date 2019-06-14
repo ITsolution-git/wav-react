@@ -36,12 +36,20 @@
         margin-bottom: 8px;
     }
 
-    .social-info-no-table {
+    .social-no-table {
         width: 100%;
         align-items: center;
         display: flex;
         padding: 80px 0;
         flex-direction: column;
+    }
+
+    .social-no-data {
+        @extend .social-no-table;
+    }
+
+    .social-no-connect {
+        @extend .social-no-table;
 
         @include respond-to($phone) {
             display: none;
@@ -98,7 +106,7 @@
 
     .social-info-tablet{
         margin-bottom: 35px;
-
+        padding: 13px;
         @include respond-to($desktop) {
             display: none;
         }
