@@ -9,9 +9,10 @@ class SocialList extends BaseComponent {
 
     render() {
         const { social, size, className } = this.props;
+        const isLarge = size === 'large';
 
         return (
-            <div className={classNames('btw-social-list', className)}>
+            <div className={classNames('btw-social-list', { 'social-list-large': isLarge }, className)}>
                 <SocialIcon name='twitter' visible={social.twitter} size={size} />
                 <SocialIcon name='linkedIn' visible={social.linkedIn} size={size} />
                 <SocialIcon name='facebook' visible={social.facebook} size={size} />
@@ -22,7 +23,7 @@ class SocialList extends BaseComponent {
 
 SocialList.propTypes = {
     social: PropTypes.object,
-    size: PropTypes.oneOf(['medium', 'small'])
+    size: PropTypes.oneOf(['small', 'medium', 'large'])
 };
 
 SocialList.defaultProps = {

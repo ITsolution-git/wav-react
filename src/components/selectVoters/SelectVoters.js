@@ -14,6 +14,7 @@ import VotersProgressBar from '../shared/VotersProgressBar';
 import Typography from '../shared/Typography';
 import ContentLayout from '../layout/ContentLayout';
 import SocialInfo from './SocialInfo';
+import VoterNotFound from './VoterNotFound';
 
 class SelectVoters extends BaseComponent {
     constructor() {
@@ -23,9 +24,9 @@ class SelectVoters extends BaseComponent {
                 firstname: 'Denis',
                 lastname: 'Damin',
                 social: {
-                    twitter: false,
+                    twitter: true,
                     linkedIn: false,
-                    facebook: true
+                    facebook: false
                 }
             },
             votersList: [
@@ -271,11 +272,26 @@ class SelectVoters extends BaseComponent {
                 }
             ],
             selectedVoters: [],
-            showAlertModal: false
+            showAlertModal: false,
+            searchString: ''
         }
     }
 
+    isNotConnected = () => {
+        const { user: { social: { twitter, linkedIn, facebook } } } = this.state;
+        return !(twitter || linkedIn || facebook);
+    }
+
+    getSearchData = () => {
+        const { searchString, votersList } = this.state;
+
+        return !!searchString ?
+            votersList.filter(item => item.name.toLowerCase().includes(searchString.toLowerCase())) :
+            votersList;
+    }
+
     searchInputHandler = value => {
+        this.setState({ searchString: value });
     }
 
     clearSelectedVotersHandler = (id) => {
@@ -318,6 +334,12 @@ class SelectVoters extends BaseComponent {
                     Try to choose a few among <b>regular voters</b>, a few among
                     <b> infrequent voters</b>, and a few <b>unregistered voters</b>.
                 </Typography>
+                {this.isNotConnected() &&
+                    <Typography variant='body' className='page-no-connect-description'>
+                        To ease your searching process
+                        <span onClick={this.socialConnectHandler}> connect your social media accounts.</span>
+                    </Typography>
+                }
             </>
         );
     }
@@ -325,12 +347,14 @@ class SelectVoters extends BaseComponent {
     renderSocialInfo = (device) => {
         const { user } = this.state;
 
-        return (
-            <SocialInfo
-                social={user.social}
-                onSocialConnect={this.socialConnectHandler}
-                className={`social-info-${device}`} />
-        );
+        if (!this.isNotConnected()) {
+            return (
+                <SocialInfo
+                    social={user.social}
+                    onSocialConnect={this.socialConnectHandler}
+                    className={`social-info-${device}`} />
+            );
+        }
     }
 
     renderVotersProgressBar = (device) => {
@@ -346,24 +370,81 @@ class SelectVoters extends BaseComponent {
         );
     }
 
+    renderNoDataText = (isNotConnected, isNoData) => {
+        const { user } = this.state;
+
+        return isNoData ?
+            (<div className='social-no-data'>
+                <VoterNotFound />
+            </div>) :
+            (<div className='social-no-connect'>
+                <SocialInfo
+                    social={user.social}
+                    onSocialConnect={this.socialConnectHandler}
+                    noConnect={isNotConnected} />
+            </div>);
+    }
+
     renderTable = () => {
-        const { selectedVoters, votersList } = this.state;
+        const { selectedVoters, searchString } = this.state;
+        const data = this.getSearchData();
+        const isNotConnected = this.isNotConnected();
+        const isNoData = data.length === 0;
+
+        return isNotConnected || isNoData ?
+            this.renderNoDataText(isNotConnected, isNoData) :
+            (
+                <div className='btw-paper table-container'>
+                    <Typography variant='body' className='table-description'>
+                        {!!searchString ?
+                            `We found ${data.length} results for “${searchString}”` :
+                            `Hurray! We matched you with ${data.length} of your friends.`
+                        }
+                    </Typography>
+                    <VotersTable
+                        data={data}
+                        selectedData={selectedVoters}
+                        onSelect={this.selectTableHandler} />
+                </div>
+            );
+    }
+
+    renderDialog = () => {
+        const { showAlertModal } = this.state;
 
         return (
-            <div className='btw-paper table-container'>
-                <Typography variant='body' className='table-description'>
-                    Hurray! We matched you with {votersList.length} of your friends.
-                </Typography>
-                <VotersTable
-                    data={votersList}
-                    selectedData={selectedVoters}
-                    onSelect={this.selectTableHandler} />
-            </div>
+            <Dialog
+                id='selectedVotersAlertDialog'
+                title='Hurray! We matched you with 40 of your friends.'
+                show={showAlertModal}
+                actionButtons={
+                    <Row>
+                        <Col xs={12}>
+                            <Button
+                                fullWidth
+                                id='selectedVotersAlertDialog'
+                                onClick={this.closeModalHandler}>
+                                Ok, got it!
+                            </Button>
+                        </Col>
+                    </Row>
+                }
+                onClose={this.closeModalHandler}>
+                <div>
+                    <Typography variant='body' displayInline lightColor>
+                        Select 10 people among your social media friends or search
+                        for other people you know among all the voters of your district.
+                    </Typography>
+                    <Typography variant='body' displayInline lightColor>
+                        Try to choose a few among regular voters, a few among
+                        infrequent voters, and a few unregistered voters.
+                    </Typography>
+                </div>
+            </Dialog>
         );
     }
 
     render() {
-        const { showAlertModal } = this.state;
 
         return (
             <ContentLayout>
@@ -395,35 +476,9 @@ class SelectVoters extends BaseComponent {
                             </Col>
                         </Row>
                     </Col>
-                </Row>
-                <Dialog
-                    id='selectedVotersAlertDialog'
-                    title='Hurray! We matched you with 40 of your friends.'
-                    show={showAlertModal}
-                    actionButtons={
-                        <Row>
-                            <Col xs={12}>
-                                <Button
-                                    fullWidth
-                                    id="selectedVotersAlertDialog"
-                                    onClick={this.closeModalHandler}>
-                                    Ok, got it!
-                                </Button>
-                            </Col>
-                        </Row>
-                    }
-                    onClose={this.closeModalHandler}>
-                    <div>
-                        <Typography variant='body' displayInline lightColor>
-                            Select 10 people among your social media friends or search
-                            for other people you know among all the voters of your district.
-                        </Typography>
-                        <Typography variant='body' displayInline lightColor>
-                            Try to choose a few among regular voters, a few among
-                            infrequent voters, and a few unregistered voters.
-                        </Typography>
-                    </div>
-                </Dialog>
+                    {this.renderVotersProgressBar('tablet')}
+                </Row >
+                {this.renderDialog()}
             </ContentLayout >
         );
     }

@@ -125,18 +125,27 @@
     }
 
     @include respond-to($tablet) {
-        position: absolute;
-        bottom: 0px;
+        position: fixed;
+        bottom: 0;
         z-index: 2;
         right: 0px;
         width: 100%
     }
 
     @include respond-to($phone) {
-        position: absolute;
-        bottom: 0px;
-        z-index: 2;
+        position: fixed;
+        bottom: 0;
+        z-index: 10000;
         right: 0px;
         width: 100%
+    }
+}
+
+.vpb-full-height{
+    @include respond-to($phone) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh;
     }
 }
