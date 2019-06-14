@@ -135,8 +135,17 @@
     @include respond-to($phone) {
         position: fixed;
         bottom: 0;
-        z-index: 2;
+        z-index: 10000;
         right: 0px;
         width: 100%
+    }
+}
+
+.voters-progress-bar-full-height{
+    @include respond-to($phone) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100vh;
     }
 }

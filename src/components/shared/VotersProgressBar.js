@@ -83,22 +83,25 @@ class VotersProgressBar extends BaseComponent {
 
     render() {
         const { selectedVoters, maxVoters, className } = this.props;
-            
+        const { zoom } = this.state;
+
         return (
-            <div className={classNames('btw-voters-progress-bar btw-paper', className)}>
-                <div className='zoom-container'>
-                    <div className='zoom' onClick={this.zoomHandler} />
-                </div>
-                <div className='status-container'>
-                    <div className='status'>Added {selectedVoters.length}/{maxVoters}:</div>
-                    <span
-                        className={classNames('clear', { 'active': selectedVoters.length !== 0 })}
-                        onClick={this.clearAllHandler}>
-                        Clear All
+            <div className={classNames('btw-voters-progress-bar btw-paper', { 'voters-progress-bar-full-height': zoom }, className)}>
+                <div>
+                    <div className='zoom-container'>
+                        <div className='zoom' onClick={this.zoomHandler} />
+                    </div>
+                    <div className='status-container'>
+                        <div className='status'>Added {selectedVoters.length}/{maxVoters}:</div>
+                        <span
+                            className={classNames('clear', { 'active': selectedVoters.length !== 0 })}
+                            onClick={this.clearAllHandler}>
+                            Clear All
                     </span>
+                    </div>
+                    {this.renderProgressBar()}
+                    {this.renderVotersList()}
                 </div>
-                {this.renderProgressBar()}
-                {this.renderVotersList()}
                 <div className='button-container'>
                     <Button
                         onClick={this.clickHandler}

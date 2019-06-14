@@ -51,13 +51,6 @@
                 }
             }
 
-            .mobile-header {
-                margin-top: 0; 
-                @include respond-to($computer) {
-                    display: none;
-                }
-            }
-
             .desktop-header {
 
                 @include respond-to($phone) {

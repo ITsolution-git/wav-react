@@ -56,15 +56,6 @@ class VotersTable extends BaseComponent {
         );
     }
 
-    renderMobileHeader = () => {
-        return (
-            <tr className='mobile-header'>
-                <th className='check'></th>
-                <th></th>
-            </tr>
-        );
-    }
-
     renderVoterInfo = (item) => {
         return (
             <>
@@ -136,7 +127,6 @@ class VotersTable extends BaseComponent {
                 <Table responsive>
                     <thead>
                         {this.renderDesktopHeader()}
-                        {this.renderMobileHeader()}
                     </thead>
                     <tbody>
                         {this.renderDesktopBody()}
