@@ -4,12 +4,12 @@ import PasswordRequestService from '../services/PasswordRequestService';
 export function forgotPasswordRequest(email) {
     return dispatch => {
         const data = {
-            captainEmail: email
+            email: email
         };
-    
+
         dispatch(actionRequest());
         return PasswordRequestService.forgotPasswordRequest(data).then(
-                response => {
+            response => {
                 dispatch(actionSucceeded(response.data.request_id !== undefined));
             },
             error => {
@@ -17,7 +17,7 @@ export function forgotPasswordRequest(email) {
             }
         )
     };
-    
+
     function actionSucceeded(isUserFound) {
         return { type: PasswordRequestContants.PASSWORD_RESET_SUCCEEDED, isUserFound };
     }

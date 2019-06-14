@@ -7,9 +7,14 @@ export default {
     changePasswordRequest
 };
 
+// TODO: we change staging-host url
+// https://btw-api-staging-2019.herokuapp.com'
+
 function forgotPasswordRequest(data) {
+
+    console.log('forgotPasswordRequest')
     return postAsync({
-        url: `${config.apiHost}/request/forgotPassword`,
+        url: `${config.apiHost}/user/resetPassword/sendEmail`,
         data,
         headers: {},
         includeToken: false
