@@ -1,0 +1,29 @@
+.select-disctrict {
+    width: 512px;
+    padding: 51px 88px;
+
+    @include respond-to($phone) {
+        width: 272px;
+        padding: 37px 16px;
+    }
+
+    .search-box {
+        margin: 28px 0 32px;
+    }
+
+    .districts-list {
+        max-height: 352px;
+        padding: 8px 0;
+        overflow: scroll;
+        margin: 13px 0 40px;
+
+        &::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            width: 3px;
+            background: $divider;
+        }
+    }
+}

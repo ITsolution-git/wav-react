@@ -40,6 +40,10 @@
                     font-size: 13px;
                     background-color: $white;
                     z-index: 1;
+
+                    @include respond-to($phone) {
+                        background-color: unset;
+                    }
                 }
 
                 .check {
