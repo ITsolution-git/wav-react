@@ -50,6 +50,20 @@
                     width: 15px;
                 }
             }
+
+            .mobile-header {
+                margin-top: 0; 
+                @include respond-to($computer) {
+                    display: none;
+                }
+            }
+
+            .desktop-header {
+
+                @include respond-to($phone) {
+                    display: none;
+                }
+            }
         }
 
         tbody {
@@ -80,6 +94,24 @@
                     margin-top: 6px;
                     display: flex;
                     justify-content: space-between;
+                }
+            }
+
+            .selected-row{
+                background-color: rgba($primary, 0.05);
+            }
+            
+            .mobile-body {
+
+                @include respond-to($computer) {
+                    display: none;
+                }
+            }
+
+            .desktop-body {
+
+                @include respond-to($phone) {
+                    display: none;
                 }
             }
         }

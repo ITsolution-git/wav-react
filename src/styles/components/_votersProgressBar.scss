@@ -125,16 +125,16 @@
     }
 
     @include respond-to($tablet) {
-        position: absolute;
-        bottom: 0px;
+        position: fixed;
+        bottom: 0;
         z-index: 2;
         right: 0px;
         width: 100%
     }
 
     @include respond-to($phone) {
-        position: absolute;
-        bottom: 0px;
+        position: fixed;
+        bottom: 0;
         z-index: 2;
         right: 0px;
         width: 100%

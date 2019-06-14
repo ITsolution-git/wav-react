@@ -73,6 +73,11 @@
             box-shadow: unset;
             border-radius: 0;
             background-color: unset;
+            margin-bottom: 160px;
+        }
+
+        @include respond-to($tablet) {
+            margin-bottom: 160px;
         }
     }
 
