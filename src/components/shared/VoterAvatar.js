@@ -15,9 +15,9 @@ class VoterAvatar extends BaseComponent {
         const { src, size, color, initials } =  this.props
 
         return(
-            <div className={cn('btw-voter-avatar')} style={{width: size + 'px', height: size + 'px', borderColor: colors[color] }}>
+            <div className={cn('btw-voter-avatar')} style={{width: size, height: size, borderColor: colors[color] }}>
                 {
-                    src ? <img className={cn('btw-voter-img')} src={src}/>
+                    src ? <img className={cn('btw-voter-img')} src={src} alt=""/>
                     : <span className={cn('btw-voter-avatar-initials')}>{initials}</span>
                 }
             </div>
