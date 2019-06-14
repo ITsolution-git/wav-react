@@ -14,7 +14,7 @@ import VotersProgressBar from '../shared/VotersProgressBar';
 import Typography from '../shared/Typography';
 import ContentLayout from '../layout/ContentLayout';
 import SocialInfo from './SocialInfo';
-import SelectNoData from './SelectNoData';
+import VoterNotFound from './VoterNotFound';
 
 class SelectVoters extends BaseComponent {
     constructor() {
@@ -277,7 +277,7 @@ class SelectVoters extends BaseComponent {
         }
     }
 
-    isNoConnect = () => {
+    isNotConnected = () => {
         const { user: { social: { twitter, linkedIn, facebook } } } = this.state;
         return !(twitter || linkedIn || facebook);
     }
@@ -285,11 +285,9 @@ class SelectVoters extends BaseComponent {
     getSearchData = () => {
         const { searchString, votersList } = this.state;
 
-        if (!!searchString) {
-            return votersList.filter(item => item.name.toLowerCase().includes(searchString.toLowerCase()));
-        } else {
-            return votersList;
-        }
+        return !!searchString ?
+            votersList.filter(item => item.name.toLowerCase().includes(searchString.toLowerCase())) :
+            votersList;
     }
 
     searchInputHandler = value => {
@@ -336,7 +334,7 @@ class SelectVoters extends BaseComponent {
                     Try to choose a few among <b>regular voters</b>, a few among
                     <b> infrequent voters</b>, and a few <b>unregistered voters</b>.
                 </Typography>
-                {this.isNoConnect() &&
+                {this.isNotConnected() &&
                     <Typography variant='body' className='page-no-connect-description'>
                         To ease your searching process
                         <span onClick={this.socialConnectHandler}> connect your social media accounts.</span>
@@ -349,7 +347,7 @@ class SelectVoters extends BaseComponent {
     renderSocialInfo = (device) => {
         const { user } = this.state;
 
-        if (!this.isNoConnect()) {
+        if (!this.isNotConnected()) {
             return (
                 <SocialInfo
                     social={user.social}
@@ -372,29 +370,29 @@ class SelectVoters extends BaseComponent {
         );
     }
 
-    renderNoTable = (isNoConnect, isNoData) => {
+    renderNoTable = (isNotConnected, isNoData) => {
         const { user } = this.state;
 
         return isNoData ?
             (<div className='social-no-data'>
-                <SelectNoData />
+                <VoterNotFound />
             </div>) :
             (<div className='social-no-connect'>
                 <SocialInfo
                     social={user.social}
                     onSocialConnect={this.socialConnectHandler}
-                    noConnect={isNoConnect} />
+                    noConnect={isNotConnected} />
             </div>);
     }
 
     renderTable = () => {
         const { selectedVoters, searchString } = this.state;
         const data = this.getSearchData();
-        const isNoConnect = this.isNoConnect();
+        const isNotConnected = this.isNotConnected();
         const isNoData = data.length === 0;
 
-        return isNoConnect || isNoData ?
-            this.renderNoTable(isNoConnect, isNoData) :
+        return isNotConnected || isNoData ?
+            this.renderNoTable(isNotConnected, isNoData) :
             (
                 <div className='btw-paper table-container'>
                     <Typography variant='body' className='table-description'>
@@ -424,7 +422,7 @@ class SelectVoters extends BaseComponent {
                         <Col xs={12}>
                             <Button
                                 fullWidth
-                                id="selectedVotersAlertDialog"
+                                id='selectedVotersAlertDialog'
                                 onClick={this.closeModalHandler}>
                                 Ok, got it!
                             </Button>

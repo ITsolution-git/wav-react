@@ -3,10 +3,10 @@ import React from 'react';
 import Typography from '../shared/Typography';
 import SvgIcon from '../shared/SvgIcon';
 
-const SelectNoData = () => {
+const VoterNotFound = () => {
 
     return (
-        <div className='btw-select-no-data'>
+        <div className='btw-voter-not-found'>
             <SvgIcon name='no-data' height='48' />
             <div className='info-content'>
                 <Typography className='title'>
@@ -21,4 +21,4 @@ const SelectNoData = () => {
     )
 };
 
-export default SelectNoData;
+export default VoterNotFound;
