@@ -224,7 +224,9 @@ class TaskList extends BaseComponent {
                                             <VoterAvatar initials={sub_task.voter.initials} src={sub_task.voter.avatar} color={sub_task.voter.status == 'not-registered' ? 'error' : sub_task.voter.status == 'in-frequent' ? 'alert' : 'success'} />
                                             <div className={'voter-general'}>
                                                 <Typography className={'voter-name'}>{sub_task.voter.name}</Typography>
-
+                                                <div className={'voter-auth-social'}>
+                                                    <Typography>{sub_task.voter.status == 'not-registered' ? 'Not registerd' : sub_task.voter.status == 'in-frequent' ? 'Infrequent' : 'Regular'}</Typography>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
