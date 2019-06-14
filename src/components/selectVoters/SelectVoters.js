@@ -14,6 +14,7 @@ import VotersProgressBar from '../shared/VotersProgressBar';
 import Typography from '../shared/Typography';
 import ContentLayout from '../layout/ContentLayout';
 import SocialInfo from './SocialInfo';
+import SelectNoData from './SelectNoData';
 
 class SelectVoters extends BaseComponent {
     constructor() {
@@ -377,10 +378,7 @@ class SelectVoters extends BaseComponent {
         return (
             <div className='social-info-no-table'>
                 {isNoData ?
-                    <SocialInfo
-                        social={user.social}
-                        onSocialConnect={this.socialConnectHandler}
-                        noConnect={isNoData} /> :
+                    <SelectNoData /> :
                     <SocialInfo
                         social={user.social}
                         onSocialConnect={this.socialConnectHandler}
