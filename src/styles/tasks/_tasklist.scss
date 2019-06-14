@@ -84,9 +84,12 @@
         align-items: center;
 
         .voter-detail {
+          display: flex;
+          align-items: center;
 
           .voter-general{
-
+            margin: 0 0 0 17px;
+            
             .voter-name {
               font-size: 13px;
             }

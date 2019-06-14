@@ -12,6 +12,7 @@ import SvgIcon from '../shared/SvgIcon';
 import Dialog from '../shared/Dialog';
 import Paper from '../shared/Paper';
 import Typography from '../shared/Typography';
+import VoterAvatar from '../shared/VoterAvatar'
 import routes from '../../constants/Routes';
 import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';
@@ -46,9 +47,13 @@ class TaskList extends BaseComponent {
                     end_date: '30 May 2019',
                     sub_tasks: [
                         {
+                            sub_task_id: 0,
                             status: 0, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman'
+                                name: 'Dennis Holman',
+                                status: 'regular', //not-registered, in-frequent, regular,
+                                initials: 'DH',
+                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png'
                             }
                         }
                     ],
@@ -214,10 +219,12 @@ class TaskList extends BaseComponent {
                             
                             {
                                 selectedTask.sub_tasks.map(sub_task =>
-                                    <div className={'sub_task-item'}>
+                                    <div className={'sub_task-item'} key={sub_task.sub_task_id}>
                                         <div className={'voter-detail'}>
+                                            <VoterAvatar initials={sub_task.voter.initials} src={sub_task.voter.avatar} color={sub_task.voter.status == 'not-registered' ? 'error' : sub_task.voter.status == 'in-frequent' ? 'alert' : 'success'} />
                                             <div className={'voter-general'}>
                                                 <Typography className={'voter-name'}>{sub_task.voter.name}</Typography>
+
                                             </div>
                                         </div>
                                     </div>
