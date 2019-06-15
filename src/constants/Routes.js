@@ -37,8 +37,7 @@ export default {
     selectVoters: '/select_voters',
     voterFilter: '/voter_filter',
     captainFilter: '/captain_filter',
-    verifyCaptain: '/changePassword/verify',
-    changePassword: '/changePassword/change',
+    changePassword: '/changePassword/change/:token',
     forgotPassword: '/changePassword/request',
 
     loglist: '/transaction_logs/list',

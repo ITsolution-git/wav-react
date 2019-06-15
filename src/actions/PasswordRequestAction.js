@@ -1,16 +1,13 @@
 import PasswordRequestContants from '../constants/reducerConstants/PasswordRequestConstants';
 import PasswordRequestService from '../services/PasswordRequestService';
 
-export function forgotPasswordRequest(email) {
+export function forgotPasswordRequest(data) {
     return dispatch => {
-        const data = {
-            email: email
-        };
 
         dispatch(actionRequest());
         return PasswordRequestService.forgotPasswordRequest(data).then(
             response => {
-                dispatch(actionSucceeded(response.data.request_id !== undefined));
+                dispatch(actionSucceeded(true));
             },
             error => {
                 dispatch(actionFailed(error));
@@ -24,21 +21,18 @@ export function forgotPasswordRequest(email) {
     function actionRequest() {
         return { type: PasswordRequestContants.PASSWORD_RESET_REQUEST };
     }
-    function actionFailed(err) {
-        return { type: PasswordRequestContants.PASSWORD_RESET_FAILED, err };
+    function actionFailed(error) {
+        return { type: PasswordRequestContants.PASSWORD_RESET_FAILED, error };
     }
 }
 
-export function verifyUserRequest(data) {
+export function verifyTokenRequest(token) {
     return dispatch => {
 
-        return PasswordRequestService.verifyUserRequest(data).then(
+        return PasswordRequestService.verifyTokenRequest(token).then(
             response => {
-                if (response.data.user) {
-                    dispatch(actionSucceeded(response.data.user));
-                } else {
-                    dispatch(actionFailed());
-                }
+                console.log(response.data);
+                dispatch(actionSucceeded(response.data.isValid));
             },
             error => {
                 dispatch(actionFailed());
@@ -46,11 +40,11 @@ export function verifyUserRequest(data) {
         )
     };
 
-    function actionSucceeded(user) {
-        return { type: PasswordRequestContants.VERIFY_USER_SUCCEEDED, user };
+    function actionSucceeded(isValid) {
+        return { type: PasswordRequestContants.VERIFY_TOKEN_SUCCEEDED, isValid };
     }
     function actionFailed() {
-        return { type: PasswordRequestContants.VERIFY_USER_FAILED };
+        return { type: PasswordRequestContants.VERIFY_TOKEN_FAILED };
     }
 }
 

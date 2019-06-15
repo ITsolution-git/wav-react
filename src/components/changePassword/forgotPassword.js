@@ -32,7 +32,13 @@ class ForgotPassword extends BaseComponent {
     onForgotPassword = () => {
         const { isValid, email } = this.state;
         const { forgotPasswordRequest } = this.props;
-        isValid && forgotPasswordRequest(email);
+        const data = {
+            email: email
+        };
+
+        if (isValid) {
+            forgotPasswordRequest(data);
+        }
     }
 
     renderMessage = () => {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { changePasswordRequest } from '../../actions/PasswordRequestAction';
+import { changePasswordRequest, verifyTokenRequest } from '../../actions/PasswordRequestAction';
 import BaseComponent from '../shared/BaseComponent';
 import routes from '../../constants/Routes';
 import {
@@ -23,8 +23,17 @@ class ChangePassword extends BaseComponent {
                 password: false,
                 confirmPassword: false
             },
+            isValidToken: true,
             isChangedPassword: true
         }
+    }
+
+    async componentDidMount() {
+        const { token } = this.props.match.params;
+        await this.props.verifyTokenRequest(token);
+
+        const { isValidToken } = this.props;
+        this.setState({ isValidToken });
     }
 
     handleChange = (value, isValid, name) => {
@@ -34,13 +43,8 @@ class ChangePassword extends BaseComponent {
         });
     };
 
-    changePassword = () => {
+    changePassword = async () => {
         const { valid, password, confirmPassword } = this.state;
-
-        console.log(this.props)
-        if (!this.props.location.state.id) {
-            return true;
-        }
 
         if (password !== confirmPassword) {
             this.setState({
@@ -53,50 +57,46 @@ class ChangePassword extends BaseComponent {
         }
 
         if (valid.password) {
+            const { token } = this.props.match.params;
+            const data = {
+                newPassword: password,
+                resetPasswordToken: token
+            }
+            await this.props.changePasswordRequest(data);
 
-            let param = this.props.location.state.id, info = {};
-
-            info['password'] = password
-            info['confirmPassword'] = confirmPassword
-            info["userid"] = param;
-            return this.props.changePasswordRequest(info);
+            const { isChangedPassword } = this.props;
+            if (isChangedPassword) {
+                this.onLink(routes.loginBySocial, { isReset: true });
+            } else {
+                this.setState({ isChangedPassword });
+            }
         }
     }
 
-    componentWillReceiveProps(props) {
-        if (props.isChangedPassword) {
-            this.onLink(routes.loginBySocial, { isReset: true });
-            return;
-        } else {
-            this.setState({ "isChangedPassword": false });
-        }
+    renderMessage = () => {
+        const { isChangedPassword, isValidToken } = this.state;
+
+        return (
+            <React.Fragment>
+                {!isChangedPassword && <Typography variant='functional' className='errorMessage' >Password doesn't not reset</Typography>}
+                {!isValidToken && <Typography variant='functional' className='errorMessage' >Token is not valid</Typography>}
+            </React.Fragment>
+        )
     }
 
     render() {
 
-        // Todo: It is not used by sergey
-        // const passwordErrorMsg = (
-        //     <div>
-        //         <div>At least one special character</div>
-        //         <div>At least one number</div>
-        //         <div>At lease one upper case character</div>
-        //         <div>Minimum of 7 characters</div>
-        //     </div>
-        // );
-
-        const { isChangedPassword } = this.state;
-
         return (
-            <div className="btw-change-password">
+            <div className='btw-change-password'>
                 <div className='content btw-paper'>
-                    {!isChangedPassword && <Typography variant='functional' className='errorMessage' displayInline>Password doesn't not reset</Typography>}
+                    {this.renderMessage()}
                     <Typography className='title'>Reset Password</Typography>
                     <Row className='inputs-row'>
                         <Col md={12}>
                             <PasswordInput
                                 onChange={this.handleChange}
                                 isVoter={false}
-                                name="password"
+                                name='password'
                                 uniqueValidationEnabled={false}
                                 required />
                         </Col>
@@ -105,7 +105,7 @@ class ChangePassword extends BaseComponent {
                         <Col md={12}>
                             <TextInput label='Confirm Password'
                                 type='password'
-                                id="confirmPassword"
+                                id='confirmPassword'
                                 validator={value => value === this.state.password}
                                 validatorError='The passwords do not match'
                                 onChange={this.handleChange}
@@ -126,14 +126,16 @@ class ChangePassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { isChangedPassword } = state.request;
+    const { isValidToken, isChangedPassword } = state.request;
     return {
+        isValidToken,
         isChangedPassword
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    changePasswordRequest: (info) => dispatch(changePasswordRequest(info))
+    changePasswordRequest: (data) => dispatch(changePasswordRequest(data)),
+    verifyTokenRequest: (token) => dispatch(verifyTokenRequest(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ChangePassword));
