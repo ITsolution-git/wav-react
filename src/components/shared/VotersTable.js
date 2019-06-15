@@ -47,20 +47,11 @@ class VotersTable extends BaseComponent {
 
     renderDesktopHeader = () => {
         return (
-            <tr>
+            <tr className='desktop-header'>
                 <th className='check'></th>
                 <th className='name'>Name</th>
                 <th>Connected On</th>
                 <th>Status</th>
-            </tr>
-        );
-    }
-
-    renderMobileHeader = () => {
-        return (
-            <tr>
-                <th className='check'></th>
-                <th></th>
             </tr>
         );
     }
@@ -83,7 +74,7 @@ class VotersTable extends BaseComponent {
 
         return data.map((item, i) => {
             return (
-                <tr key={i}>
+                <tr key={i} className={classNames('desktop-body', { 'selected-row': this.isSelected(item.id) })}>
                     <td>
                         <div className='check'>
                             <Checkbox onChange={(value) => this.checkboxHandler(value, item)} checked={this.isSelected(item.id)} />
@@ -106,7 +97,7 @@ class VotersTable extends BaseComponent {
 
         return data.map((item, i) => {
             return (
-                <tr key={i}>
+                <tr key={i} className={classNames('mobile-body', { 'selected-row': this.isSelected(item.id) })}>
                     <td>
                         <div className='check'>
                             <Checkbox onChange={(value) => this.checkboxHandler(value, item)} checked={this.isSelected(item.id)} />
@@ -135,12 +126,11 @@ class VotersTable extends BaseComponent {
             <div className={classNames('btw-voters-table', className)}>
                 <Table responsive>
                     <thead>
-                        {this.isDesktop() && this.renderDesktopHeader()}
-                        {this.isMobile() && this.renderMobileHeader()}
+                        {this.renderDesktopHeader()}
                     </thead>
                     <tbody>
-                        {this.isDesktop() && this.renderDesktopBody()}
-                        {this.isMobile() && this.renderMobileBody()}
+                        {this.renderDesktopBody()}
+                        {this.renderMobileBody()}
                     </tbody>
                 </Table >
             </div >

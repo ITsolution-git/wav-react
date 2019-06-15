@@ -1,0 +1,21 @@
+.btw-voter-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px;
+    cursor: pointer;
+
+    .btw-voter-img {
+        width: calc(100% - 10px);
+        border-radius: 50%;
+    }
+
+    .btw-voter-avatar-initials {
+        color: $primary;
+        font-weight: bold;
+        font-size: 11px;
+        line-height: 130%;
+        text-transform: uppercase;
+    }
+}

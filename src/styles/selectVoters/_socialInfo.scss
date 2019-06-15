@@ -5,7 +5,6 @@
     flex-direction: column;
     padding: 24px;
   
-	
 	.info-content{
         margin: 15px 0;
         
@@ -34,5 +33,33 @@
 
     @include respond-to($phone) {
         display: none;
+    }
+}
+
+.btw-social-info-no-connect {
+	align-items: center;
+    opacity: 0.5;
+    width: 250px;
+
+    .info-content{
+        margin: 15px 0;
+       
+        .title{
+            text-align: center;
+        }
+
+        .description{
+            text-align: center;
+        }
+    }
+
+    .connect-button{
+        border: 0;
+        color: $primary;
+        background-color: unset;
+    }
+
+    @include respond-to($tablet) {
+        flex-direction: column;
     }
 }
