@@ -1,11 +1,42 @@
 .btw-register-paper {
+
   @include respond-to($phone) {
     width: 272px;
     padding: 20px 20px 20px 20px;
   }
+
   @include respond-to($computer) {
     width: 512px;
     padding: 43px 88px 30px 88px;
   }
+
 }
 
+.btw-social-width {
+  @include respond-to($phone) {
+    width: 272px;
+  }
+
+  @include respond-to($computer) {
+    width: 336px;
+  }
+}
+
+.btw-social-button {
+  height: 40px;
+  border-radius: 3px;
+  border: 1px solid $divider;
+  display: flex;
+  align-items: center;
+
+  @extend .btw-social-width;
+
+  .icon {
+    border-right: 1px solid $divider;
+    padding-right: 17px;
+  }
+}
+
+.btw-social-divider {
+  border: 1px solid $divider;
+}
