@@ -1,5 +1,16 @@
 .bwt-task-list {
   width: 100%;
+  height: 100%;
+  overflow-y: scroll; 
+
+  &::-webkit-scrollbar {
+      width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      width: 3px;
+      background: $divider;
+  }
 
   .tabs {
     display: flex;
@@ -28,15 +39,28 @@
     padding: 0;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 
     .actions {
-      padding: 8px;
+      padding: 0 8px 8px;
       cursor: pointer;
+      
+      @include respond-to($phone) {
+        width: 100%;
+      }
 
       .action {
         padding: 18px 40px;
         width: 424px;
         margin-bottom: 16px;
+
+        @include respond-to($tablet) {
+          width: 248px;
+        }
+
+        @include respond-to($phone) {
+          width: 100%;
+        }
 
         .action-header {
           display: flex;
@@ -52,18 +76,73 @@
 
         .task-done {
           font-size: 12px;
+          margin-top: 3px;
         }
+      }
+
+      .task-selected {
+        border:1px solid $primary;
       }
     }
 
     .selected-action {
       width: 600px;
+      
+      @include respond-to($tablet) {
+        width: 424px;
+      }
+
+      @include respond-to($phone) {
+        width: 100%;
+        display: none;
+      }
+
+      &.mobile-selected-action {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10000;
+        width: 100%;
+        overflow-y: scroll;
+        height: 100%;
+        display: block;
+        padding-top: 64px;
+      }
+
+      .mobile-selected-header {
+        background: $primary;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        padding: 23px;
+        justify-content: space-between;
+
+        .goto-all-actions {
+          display: flex;
+          align-items: center;
+          
+          .nav-title {
+            margin-left: 11px;
+          }
+        }
+      }
 
       .header {
         padding: 19px 40px;
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid $divider;
+        box-sizing: border-box;
+        border-radius: 3px;
+
+        &.completed-selected-header {
+          color: $white;
+          background: linear-gradient(270deg, #5ED5CC 0%, #2BADC6 100%);
+        }
       }
 
       .action-body {
@@ -71,6 +150,7 @@
 
         .active-task-title {
           margin: 21px 0 12px;
+          font-size: 13px;
         }
       }
 
@@ -82,6 +162,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin: 0 0 8px;
+        position: relative;
 
         .voter-detail {
           display: flex;
@@ -92,6 +174,40 @@
             
             .voter-name {
               font-size: 13px;
+            }
+
+            .voter-auth-social {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+
+        .sub-task-info {
+          display: flex;
+          align-items: center;
+
+          @include respond-to($phone) {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+          }
+
+          .mark-as-done {
+            width: 90px;
+            margin-left: 8px;
+
+            @include respond-to($phone) {
+              display: none;
+            }
+          }
+
+          .mark-icon {
+            display: none;
+            margin-left: 16px;
+
+            @include respond-to($phone) {
+              display: block;
             }
           }
         }
@@ -120,5 +236,12 @@
       font-size: 12px;
       margin-bottom: 27px;
     }
+  }
+
+  .empty-task {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
