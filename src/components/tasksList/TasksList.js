@@ -23,55 +23,6 @@ import { loadTaskList } from '../../actions/TaskListAction';
 import ContentLayout from '../layout/ContentLayout';
 import { resolveTaskData } from '../../helpers/TaskHelper';
 
-
-function getCompletedTasksCount(task) {
-    var count = 0
-    task.sub_tasks.map(sub_task => {
-        if(sub_task.status) count ++
-    })
-    return count;
-}
-
-function renderSubTasks(sub_tasks, status) {
-    return  sub_tasks.map(sub_task => {
-        return (
-        sub_task.status === status && <div className={'sub_task-item'} key={sub_task.sub_task_id}>
-            <div className={'voter-detail'}>
-                <VoterAvatar initials={sub_task.voter.initials} src={sub_task.voter.avatar} color={sub_task.voter.status === 'not-registered' ? 'error' : sub_task.voter.status === 'in-frequent' ? 'alert' : 'success'} />
-                <div className={'voter-general'}>
-                    <Typography className={'voter-name'}>{sub_task.voter.name}</Typography>
-                    <div className={'voter-auth-social'}>
-                        <Typography variant='functional' color={sub_task.voter.status === 'not-registered' ? colors['error'] : sub_task.voter.status === 'in-frequent' ? colors['alert'] : colors['success']}>{sub_task.voter.status === 'not-registered' ? 'Not registerd' : sub_task.voter.status === 'in-frequent' ? 'Infrequent' : 'Regular'} </Typography> | 
-                        <SocialList social={sub_task.voter.social}/>
-                    </div>
-                </div>
-            </div>
-
-            <div className={'sub-task-info'}>
-                <SvgIcon name='medal' />
-                <Typography variant="functional">{sub_task.points}</Typography>
-                { !status && <Button size='small' color='white' className={'mark-as-done'}>Mark as Done</Button>}
-                {<SvgIcon name={status? 'mark-done' : 'mark-inprogress'} className={cn('mark-icon')}/>}
-            </div>
-        </div>
-        )
-    })
-}
-
-function countTaskofCurrentTab(tasks, tab) {
-    var count = 0;
-    if(tab === 2) {
-        return tasks.length
-    } else {
-        tasks.map(task => {
-            if(task.status === tab) {
-                count ++
-            }
-        })
-        return count
-    }
-}
-
 class TaskList extends BaseComponent {
     constructor(props, context) {
         super(props, context);
@@ -80,6 +31,7 @@ class TaskList extends BaseComponent {
             selectedTaskNo: 0,
             selectedTab: 2,
             isShowMobileSelectedDetail: false,
+            showMarkAsDoneDlg: false,
             tasks: [
                 {   
                     task_id: 0,
@@ -400,15 +352,78 @@ class TaskList extends BaseComponent {
         })
     }
 
+    renderSubTasks(sub_tasks, status) {
+        return  sub_tasks.map(sub_task => {
+            return (
+            sub_task.status === status && <div className={'sub_task-item'} key={sub_task.sub_task_id}>
+                <div className={'voter-detail'}>
+                    <VoterAvatar initials={sub_task.voter.initials} src={sub_task.voter.avatar} color={sub_task.voter.status === 'not-registered' ? 'error' : sub_task.voter.status === 'in-frequent' ? 'alert' : 'success'} />
+                    <div className={'voter-general'}>
+                        <Typography className={'voter-name'}>{sub_task.voter.name}</Typography>
+                        <div className={'voter-auth-social'}>
+                            <Typography variant='functional' color={sub_task.voter.status === 'not-registered' ? colors['error'] : sub_task.voter.status === 'in-frequent' ? colors['alert'] : colors['success']}>{sub_task.voter.status === 'not-registered' ? 'Not registerd' : sub_task.voter.status === 'in-frequent' ? 'Infrequent' : 'Regular'} </Typography> | 
+                            <SocialList social={sub_task.voter.social}/>
+                        </div>
+                    </div>
+                </div>
+    
+                <div className={'sub-task-info'}>
+                    <SvgIcon name='medal' />
+                    <Typography variant="functional">{sub_task.points}</Typography>
+                    { !status && <Button size='small' color='white' className={'mark-as-done'} onClick={this.clickMarkAsDone(sub_task)}>Mark as Done</Button>}
+                    {<SvgIcon name={status? 'mark-done' : 'mark-inprogress'} className={cn('mark-icon')}/>}
+                </div>
+            </div>
+            )
+        })
+    }
+
+    getCompletedTasksCount(task) {
+        var count = 0
+        task.sub_tasks.map(sub_task => {
+            if(sub_task.status) count ++
+        })
+        return count;
+    }
+
+    countTaskofCurrentTab() {
+        var count = 0;
+        if(this.state.selectedTab === 2) {
+            return this.state.tasks.length
+        } else {
+            this.state.tasks.map(task => {
+                if(task.status === this.state.selectedTab) {
+                    count ++
+                }
+            })
+            return count
+        }
+    }
+
+    clickMarkAsDone = sub_task => () => {
+        this.setState({
+            subTaskForMark: sub_task,
+            showMarkAsDoneDlg: true,
+        })
+    }
+
     render() {
         const { taskList: {
             // tasks = [],
             isFetching
         }} = this.props;
-        const { showTipsDialog, tasks, selectedTaskNo, selectedTab, isShowMobileSelectedDetail } = this.state;
+        const { 
+            showTipsDialog, 
+            tasks, 
+            selectedTaskNo, 
+            selectedTab, 
+            isShowMobileSelectedDetail, 
+            showMarkAsDoneDlg,
+            subTaskForMark
+        } = this.state;
         const viewProps = this.getViewProps();
-        const selectedTask = tasks[selectedTaskNo]
-        console.log(isShowMobileSelectedDetail)
+        const selectedTask = tasks[selectedTaskNo];
+        
         return (
 
             <div className='bwt-task-list'>
@@ -419,7 +434,7 @@ class TaskList extends BaseComponent {
                 </ul>
                 
                 {
-                    countTaskofCurrentTab(tasks, selectedTab) ?
+                    this.countTaskofCurrentTab(tasks, selectedTab) ?
                     <div className={'actions-content'}>
                         <div className={'actions'}>
                             {
@@ -442,9 +457,9 @@ class TaskList extends BaseComponent {
                                             <Typography className={'action-title'}>{task.title}</Typography>
                                             <Typography className={'action-duration'} lightColor>{task.start_date} – {task.end_date}</Typography>
                                             <TaskProgressBar total={task.sub_tasks.length}
-                                                completedNumber={getCompletedTasksCount(task)}
+                                                completedNumber={this.getCompletedTasksCount(task)}
                                             />
-                                            <Typography className={'task-done'} lightColor>Tasks done: {getCompletedTasksCount(task)} / {task.sub_tasks.length}</Typography>
+                                            <Typography className={'task-done'} lightColor>Tasks done: {this.getCompletedTasksCount(task)} / {task.sub_tasks.length}</Typography>
                                         </Paper>
                                     )}
                                 )
@@ -485,13 +500,13 @@ class TaskList extends BaseComponent {
                                     {selectedTask.description}
                                 </ReadMoreAndLess>
 
-                                {!selectedTask.status && <Typography className={'active-task-title'}>Active tasks({selectedTask.sub_tasks.length - getCompletedTasksCount(selectedTask)})</Typography>}
+                                {!selectedTask.status && <Typography className={'active-task-title'}>Active tasks({selectedTask.sub_tasks.length - this.getCompletedTasksCount(selectedTask)})</Typography>}
                                 
-                                {renderSubTasks(selectedTask.sub_tasks, 0)}
+                                {this.renderSubTasks(selectedTask.sub_tasks, 0)}
 
-                                <Typography className={'active-task-title'}>Done tasks({getCompletedTasksCount(selectedTask)})</Typography>
+                                <Typography className={'active-task-title'}>Done tasks({this.getCompletedTasksCount(selectedTask)})</Typography>
 
-                                {renderSubTasks(selectedTask.sub_tasks, 1)}
+                                {this.renderSubTasks(selectedTask.sub_tasks, 1)}
                             </div>
                         </Paper>
                     </div> :
@@ -504,7 +519,36 @@ class TaskList extends BaseComponent {
                     </div>
                 }
 
-                
+                {showMarkAsDoneDlg && <Dialog className={cn('mark-as-done-dlg')} 
+                    show={showMarkAsDoneDlg} 
+                    closeButton 
+                    actionButtons={<Button fullWidth>Mark as Done</Button>}
+                    onClose={()=> this.setState({showMarkAsDoneDlg: false})}> 
+                    
+                    <Typography>{selectedTask.title}</Typography>
+                    <ReadMoreAndLess charLimit={250}
+                        readMoreText='Read more'
+                        readLessText='Read less'
+                    >
+                        {selectedTask.description}
+                    </ReadMoreAndLess>
+                    
+                    <div className={'sub_task-item'}>
+                        <div className={'voter-detail'}>
+                            <VoterAvatar initials={subTaskForMark.voter.initials} src={subTaskForMark.voter.avatar} color={subTaskForMark.voter.status === 'not-registered' ? 'error' : subTaskForMark.voter.status === 'in-frequent' ? 'alert' : 'success'} />
+                            <div className={'voter-general'}>
+                                <Typography className={'voter-name'}>{subTaskForMark.voter.name}</Typography>
+                                <div className={'voter-auth-social'}>
+                                    <Typography variant='functional' color={subTaskForMark.voter.status === 'not-registered' ? colors['error'] : subTaskForMark.voter.status === 'in-frequent' ? colors['alert'] : colors['success']}>{subTaskForMark.voter.status === 'not-registered' ? 'Not registerd' : subTaskForMark.voter.status === 'in-frequent' ? 'Infrequent' : 'Regular'} </Typography> | 
+                                    <SocialList social={subTaskForMark.voter.social}/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <Typography variant="body" className={cn('add-a-photo')}>Add a photo</Typography>
+                    <Typography variant="functional" lightColor>e.g. a screenshot of the person’s status changed to “registered” or their photo with the ballot. Feel free to show off with the result of your work.</Typography>
+                </Dialog>}
             </div>
            
         );
