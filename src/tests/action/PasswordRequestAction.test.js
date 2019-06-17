@@ -107,8 +107,7 @@ describe('verifyTokenRequest tests', () => {
 
             const expectedActions = [
                 {
-                    type: PasswordRequestContants.VERIFY_TOKEN_SUCCEEDED,
-                    isValid: true
+                    type: PasswordRequestContants.VERIFY_TOKEN_SUCCEEDED
                 }
             ];
 

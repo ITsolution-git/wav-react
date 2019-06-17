@@ -31,7 +31,7 @@ export function verifyTokenRequest(token) {
 
         return PasswordRequestService.verifyTokenRequest(token).then(
             response => {
-                dispatch(actionSucceeded(response.data.isValid));
+                dispatch(actionSucceeded());
             },
             error => {
                 dispatch(actionFailed());
@@ -39,8 +39,8 @@ export function verifyTokenRequest(token) {
         )
     };
 
-    function actionSucceeded(isValid) {
-        return { type: PasswordRequestContants.VERIFY_TOKEN_SUCCEEDED, isValid };
+    function actionSucceeded() {
+        return { type: PasswordRequestContants.VERIFY_TOKEN_SUCCEEDED };
     }
     function actionFailed() {
         return { type: PasswordRequestContants.VERIFY_TOKEN_FAILED };
