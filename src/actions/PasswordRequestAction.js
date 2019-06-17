@@ -22,7 +22,7 @@ export function forgotPasswordRequest(data) {
         return { type: PasswordRequestContants.PASSWORD_RESET_REQUEST };
     }
     function actionFailed(error) {
-        return { type: PasswordRequestContants.PASSWORD_RESET_FAILED, error };
+        return { type: PasswordRequestContants.PASSWORD_RESET_FAILED };
     }
 }
 
@@ -31,7 +31,6 @@ export function verifyTokenRequest(token) {
 
         return PasswordRequestService.verifyTokenRequest(token).then(
             response => {
-                console.log(response.data);
                 dispatch(actionSucceeded(response.data.isValid));
             },
             error => {

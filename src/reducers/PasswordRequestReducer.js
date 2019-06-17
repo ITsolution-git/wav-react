@@ -10,7 +10,7 @@ export default function passwordRequestReducer(state = InitialState.request, act
             return { ...state, isUserFound: action.isUserFound, isFetching: false };
         }
         case PasswordRequestConstants.PASSWORD_RESET_FAILED: {
-            return { ...state, isUserFound: false, isFetching: false, err: action.err };
+            return { ...state, isUserFound: false, isFetching: false };
         }
         case PasswordRequestConstants.VERIFY_TOKEN_SUCCEEDED: {
             return { ...state, isValidToken: true };
