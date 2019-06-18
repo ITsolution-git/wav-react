@@ -3,7 +3,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import BaseComponent from './BaseComponent';
 
-
 class Spinner extends BaseComponent {
 	render() {
 		const { loading, height = 100, size = 70 } = this.props;

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+
 import Login from './Login';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import NoTaskErrorPage from './errorPages/NoTaskErrorPage';
@@ -9,7 +10,7 @@ import RegisterBySocial from './auth/RegisterBySocial';
 import Profile from './captainProfile/Profile';
 import MakeList from './voter/MakeList';
 import TasksList from './tasksList/TasksList';
-import VotersList from './voterList/VotersList';
+import VotersManagement from './voterList';
 import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
@@ -84,7 +85,7 @@ const router = () => (
         <Route exact path={routes.tasksList}
             component={Authorization(TasksList, [captain])} />
         <Route exact path={routes.voterList}
-            component={Authorization(VotersList, [captain])} />
+            component={Authorization(VotersManagement, [captain])} />
         <Route exact path={routes.community}
             component={Authorization(Community, [captain])} />
         <Route exact path={routes.forum}

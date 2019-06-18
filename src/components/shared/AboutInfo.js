@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Logo from '../layout/Logo';
 
 export default class AboutInfo extends React.Component {

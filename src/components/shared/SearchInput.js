@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import BaseComponent from './BaseComponent';
-import Button from './Button';
+import { BaseComponent, Button } from '../shared';
 
 class SearchInput extends BaseComponent {
 

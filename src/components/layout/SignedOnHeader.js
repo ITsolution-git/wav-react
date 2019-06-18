@@ -1,31 +1,31 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
     Navbar,
     Nav,
-    NavItem,
-    NavDropdown,
-    MenuItem
+    Container
 } from 'react-bootstrap';
 import classNames from 'classnames';
-import PubSub from "pubsub-js";
+import PubSub from 'pubsub-js';
 
-import BaseComponent from '../../components/shared/BaseComponent';
+import {
+    BaseComponent,
+    ProfileDropdown,
+    Logo, 
+    Icon
+} from '../../components/shared';
 import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
 import authStorage from '../../storage/AuthStorage';
-import appDataTypes from "../../constants/AppDataTypes";
-import { bindActionCreators } from 'redux';
+import appDataTypes from '../../constants/AppDataTypes';
 import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
-import pubsubConstants from "../../constants/PubSubConstants";
-import Logo from './Logo';
-import Icon from '../shared/Icon';
+import pubsubConstants from '../../constants/PubSubConstants';
 
 class SignedOnHeader extends BaseComponent {
 
     state = {
-        showInfoModal: false,
         activeItem: this.props.location.pathname
     };
 
@@ -60,11 +60,9 @@ class SignedOnHeader extends BaseComponent {
     };
 
     getCaptainLinks = () => {
-        return [
-            { route: routes.captainsDashboard, title: 'Home' },
-            { route: routes.tasksList, title: 'My Actions' },
-            { route: routes.voterList, title: 'My Voters' },
-            { route: routes.resourceCenter, title: 'Resource Center' }
+        return [            
+            { route: routes.tasksList, title: 'Actions' },
+            { route: routes.voterList, title: 'Voters' },
         ]
     };
 
@@ -84,19 +82,9 @@ class SignedOnHeader extends BaseComponent {
     };
 
     renderProfileDropdown = () => {
-        const { actions } = this.props;
-        const size = this.isMobile() ? '50px' : '40px';
-        return (
-            <Nav pullRight>
-                <NavDropdown eventKey={1}
-                             title={<Icon name="profile" width={size} height={size} />}
-                             className='btw-nav-dropdown'
-                             id="nav-dropdown">
-                {/*    <MenuItem eventKey={1.1} onClick={this.onProfile}>Manage account</MenuItem>*/}
-                    <MenuItem eventKey={1.3} onClick={() => actions.btwLogout()}>Sign out</MenuItem>
-                </NavDropdown>
-            </Nav>
-        )
+        const { actions, profile: {data} } = this.props
+        const props={...actions, ...this, ...data}
+        return <ProfileDropdown {...props} />
     };
 
     render() {
@@ -105,43 +93,37 @@ class SignedOnHeader extends BaseComponent {
         } = this.state;
 
         return (
-            <div className='btw-on-header' >
-                <Navbar fluid collapseOnSelect staticTop>
-                    <Navbar.Header className='header-icon'>
-                        <Navbar.Brand pullLeft>
-                            <div id="logo">
-                                <Logo width={80} height={65} />
-                            </div>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
-                    <Navbar.Collapse>
+            <Container className='btw-on-header' >
+                <Navbar expand='lg' collapseOnSelect sticky='top'>                    
+                    <Navbar.Brand href='/home'><Logo /></Navbar.Brand>
+                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
+                    <Navbar.Collapse className='justify-content-between'>
                         { this.isMobile() &&
-                        <Nav id="close-icon">
-                            <NavItem>
+                        <Nav id='close-icon'>
+                            <Nav.Item>
                                 <Icon name='close-white' width='30px' height='30px' />
-                            </NavItem>
-                        </Nav> }
-                        { this.renderProfileDropdown() }
-                        <Nav pullRight>
+                            </Nav.Item>
+                        </Nav> }                        
+                        <Nav>
                             { this.resolveLinks().map((link, i) => {
                                     return (
-                                        <NavItem key={i}
-                                                 className={classNames({ 'active-menu': link.route === activeItem })}
-                                                 eventKey={i}
-                                                 onClick={() => {
-                                                     this.setState({ activeItem: link.route });
-                                                     this.onLink(link.route)
-                                                 }} >
+                                        <Nav.Item key={i}
+                                                className={classNames({ 'active-menu': link.route === activeItem })}
+                                                eventkey={i}
+                                                onClick={() => {
+                                                    this.setState({ activeItem: link.route });
+                                                    this.onLink(link.route)
+                                                }} >
                                             { link.title }
-                                        </NavItem>
+                                        </Nav.Item>
                                     );
                                 })
                             }
                         </Nav>
+                        { this.renderProfileDropdown() }
                     </Navbar.Collapse>
                 </Navbar>
-            </div>
+            </Container>
         )
     }
 }

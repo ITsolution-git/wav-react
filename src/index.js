@@ -8,9 +8,7 @@ import HttpsRedirect from 'react-https-redirect';
 import store from './store/index'
 import App from './components/App';
 
-
 import registerServiceWorker from './registerServiceWorker';
-
 
 const app = (
 	<Provider store={store.configure()}>
