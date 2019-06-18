@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Nav, NavDropdown } from 'react-bootstrap';
+
 import { Icon } from '../shared';
 
 /**
@@ -27,8 +28,8 @@ ProfileTitle.propTypes = {
 }
 
 ProfileTitle.defaultProps = {
-	name: 'John Doe',
-	level: 'Junior'
+	name: '',
+	level: ''
 }
 
 
@@ -63,9 +64,9 @@ ProfileDropdown.propTypes = {
 }
 
 ProfileDropdown.defaultProps = {
-	firstname: 'John',
-	lastname: 'Doe',
-	role: 'Junior'
+	firstname: '',
+	lastname: '',
+	role: ''
 }
 
 export default ProfileDropdown

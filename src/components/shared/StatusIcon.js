@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {BaseComponent, Typography} from '../shared';
+
+import { BaseComponent, Typography } from '../shared';
 
 class StatusIcon extends BaseComponent {
 
