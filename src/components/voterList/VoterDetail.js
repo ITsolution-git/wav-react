@@ -8,18 +8,19 @@ import VoterProfile from './VoterProfile';
 class VoterDetail extends BaseComponent {
 
     render() {
-        const { selectedVoter } = this.props;
+        const { selectedVoter, changeStatusHandler } = this.props;
 
         return (
             <div className={classNames('btw-voter-detail-info btw-paper')}>
-                <VoterProfile selectedVoter={selectedVoter} />
+                <VoterProfile selectedVoter={selectedVoter} changeStatusHandler={changeStatusHandler} />
             </div>
         );
     }
 }
 
 VoterDetail.propTypes = {
-    selectedVoter: PropTypes.object
+    selectedVoter: PropTypes.object,
+    changeStatusHandler: PropTypes.func
 };
 
 export default VoterDetail;
