@@ -61,6 +61,8 @@ html {
 @import 'voter/welcome.scss';
 
 @import 'voterList/voterlist.scss';
+@import 'voterList/voterDetail.scss';
+@import 'voterList/voterProfile.scss';
 
 @import 'errorPages/general.scss';
 
@@ -114,3 +116,4 @@ html {
 @import 'components/statusIcon';
 @import 'components/voterAvatar';
 @import 'components/taskProgressBar';
+@import 'components/voterStatusDropdown';
