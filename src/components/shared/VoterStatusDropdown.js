@@ -31,34 +31,3 @@ VoterStatusDropdown.propTypes = {
 };
 
 export default VoterStatusDropdown;
-
-
-
-
-
-// class StatusSelect extends BaseComponent {
-
-
-//     render() {
-
-//         return (
-//             // <select className='btw-status-select'>
-//             //     <option value='Not registered' className='bss-not-registered'>Not registered</option>
-//             //     <option value='Infrequent' className='bss-infrequent'>Infrequent</option>
-//             //     <option value='Regular' className='bss-regular'>Regular</option>
-//             // </select>
-
-//             <Select className='btw-status-select'
-//                 // defaultValue={options[0]}
-//                 formatOptionLabel={formatOptionLabel}
-//                 options={options}
-//             />
-//         );
-//     }
-// }
-
-// StatusSelect.propTypes = {
-//     onSelect: PropTypes.func
-// };
-
-// export default StatusSelect;
