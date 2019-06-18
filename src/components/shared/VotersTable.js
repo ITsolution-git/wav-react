@@ -4,10 +4,7 @@ import { Table } from 'react-bootstrap';
 import classNames from 'classnames';
 import _ from 'lodash';
 
-import BaseComponent from './BaseComponent';
-import Checkbox from './Checkbox';
-import SocialList from './SocialList';
-import StatusIcon from './StatusIcon';
+import { BaseComponent, Checkbox, SocialList, StatusIcon } from '../shared';
 
 class VotersTable extends BaseComponent {
 

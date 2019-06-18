@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import Icon from './Icon';
-import BaseComponent from './BaseComponent';
+import { Icon, BaseComponent } from '../shared';
 
 class SocialIcon extends BaseComponent {
 

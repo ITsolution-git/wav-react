@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 
-import BaseComponent from '../shared/BaseComponent';
+import { BaseComponent } from '../shared';
 import {
     loadVotingInfo
 } from '../../actions/VoterListAction';
