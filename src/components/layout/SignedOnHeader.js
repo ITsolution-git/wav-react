@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
@@ -8,6 +9,7 @@ import {
 } from 'react-bootstrap';
 import classNames from 'classnames';
 import PubSub from 'pubsub-js';
+
 import {
     BaseComponent,
     ProfileDropdown,
@@ -18,7 +20,6 @@ import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
 import authStorage from '../../storage/AuthStorage';
 import appDataTypes from '../../constants/AppDataTypes';
-import { bindActionCreators } from 'redux';
 import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
 import pubsubConstants from '../../constants/PubSubConstants';
 

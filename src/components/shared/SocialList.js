@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import {SocialIcon, BaseComponent} from '../shared';
+import { SocialIcon, BaseComponent } from '../shared';
 
 class SocialList extends BaseComponent {
 

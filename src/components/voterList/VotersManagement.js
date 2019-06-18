@@ -1,5 +1,6 @@
 import React from 'react';
 import { Row, Col, Container } from 'react-bootstrap'
+
 import { BaseComponent } from '../shared'
 import { VotersList, VoterDetail, FilterBar } from './index'
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap'
+
 import { BaseComponent } from '../shared';
 import colors from '../../constants/ColorConstants';
 
