@@ -8,7 +8,6 @@ import Register from './captainProfile/Register';
 import Profile from './captainProfile/Profile';
 import MakeList from './voter/MakeList';
 import TasksList from './tasksList/TasksList';
-import VotersList from './voterList/VotersList';
 import VotersManagement from './voterList';
 import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
