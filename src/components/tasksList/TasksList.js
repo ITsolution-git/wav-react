@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { Row, Col } from 'react-bootstrap';
 import ReadMoreAndLess from 'react-read-more-less';
 import cn from 'classnames';
+import Dropzone from 'react-dropzone';
 
 import Spinner from '../shared/Spinner';
 import Button from '../shared/Button';
@@ -425,7 +426,7 @@ class TaskList extends BaseComponent {
         const selectedTask = tasks[selectedTaskNo];
         
         return (
-
+        <ContentLayout> 
             <div className='bwt-task-list'>
                 <ul className={'tabs'}>
                     <li className={cn({'active': selectedTab === 2})} onClick={this.switchTab(2)}>All actions</li>
@@ -533,7 +534,7 @@ class TaskList extends BaseComponent {
                         {selectedTask.description}
                     </ReadMoreAndLess>
                     
-                    <div className={'sub_task-item'}>
+                    <div className={cn('sub_task-item', 'mark-modal-sub-task-item')}>
                         <div className={'voter-detail'}>
                             <VoterAvatar initials={subTaskForMark.voter.initials} src={subTaskForMark.voter.avatar} color={subTaskForMark.voter.status === 'not-registered' ? 'error' : subTaskForMark.voter.status === 'in-frequent' ? 'alert' : 'success'} />
                             <div className={'voter-general'}>
@@ -548,9 +549,40 @@ class TaskList extends BaseComponent {
 
                     <Typography variant="body" className={cn('add-a-photo')}>Add a photo</Typography>
                     <Typography variant="functional" lightColor>e.g. a screenshot of the person’s status changed to “registered” or their photo with the ballot. Feel free to show off with the result of your work.</Typography>
+
+                    <Dropzone className={cn('drop-zone')}  ref={(node) => { this.dropzoneRef = node; }}>
+                        <div className={cn('upload-photo')}>
+                            <SvgIcon name="add-photo-to-upload" />
+                            <Typography lightColor variant="body">Drag an image here or browse for an image to upload</Typography>
+                        </div>
+                    </Dropzone>
+
+                    <div className={cn('uploading')}>
+                        <Typography lightColor variant="body">Uploading...</Typography>
+                    </div>
+
+                    <div className={cn('uploaded-image')}>
+                        <div className={cn('photo-info')}>
+                            <SvgIcon name="uploaded-photo" />
+                            <Typography variant='body' color={colors['secondary']}>dennis_photo.png</Typography>
+                        </div>
+
+                        <SvgIcon name="upload-photo-remove" className={cn('remove-btn')}/>
+                    </div>
+
+                    <div>
+                        <Typography lightColor variant="body" className={cn('or-you-can')}>or you can</Typography>
+                        <Typography className={cn('add-a-comment-btn')}>Add a Text Comment</Typography>
+                    </div>
+
+                    <div className={cn('add-a-comment')}>
+                        <Typography className={cn('add-text-title')}>Add a text comment</Typography>
+                        <textarea placeholder='Write about your success...'></textarea>
+                    </div>
+
                 </Dialog>}
             </div>
-           
+        </ContentLayout>   
         );
     }
 }
