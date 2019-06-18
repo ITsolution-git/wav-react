@@ -151,7 +151,7 @@ const router = () => (
         <Route exact path={routes.captainFilter}
             component={Authorization(CaptainFilter, [admin])} />
 
-        {/* tatic route pages */}
+        {/* static route pages */}
         <Route exact path={routes.whyBetheWave} component={WhyBethewave} />
         <Route exact path={routes.howContribute} component={HowContribute} />
         <Route exact path={routes.termsOfUse} component={TermsOfUse} />

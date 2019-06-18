@@ -1,9 +1,7 @@
 import React from 'react';
 
-import BaseComponent from '../shared/BaseComponent';
-import Paper from '../shared/Paper';
-import Typography from '../shared/Typography';
-import SocialButton from '../shared/SocialButton';
+import { BaseComponent, Paper, Typography, SocialButton } from '../shared';
+import AlreadyRegistered from './AlreadyRegistered';
 
 class RegisterBySocial extends BaseComponent {
 
@@ -52,6 +50,7 @@ class RegisterBySocial extends BaseComponent {
                             { this.renderText('Email') }
                         </SocialButton>
                     </div>
+                    <AlreadyRegistered />
                 </Paper>
             </div>
         )

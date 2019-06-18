@@ -25,6 +25,7 @@ import Typography from './Typography'
 import VoterAvatar from './VoterAvatar'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
+import SocialButton from './SocialButton'
 
 export {
 	BaseComponent,
@@ -51,4 +52,5 @@ export {
 	VoterAvatar,
 	VotersProgressBar,
 	VotersTable,
+	SocialButton
 }

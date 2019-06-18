@@ -2,17 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 import { btwRegister } from '../../actions/SignOnAction';
-import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 import fieldConstants from '../../constants/FieldConstants';
-import Button from '../shared/Button';
-import Paper from '../shared/Paper';
-import Typography from '../shared/Typography';
-
 import {
 	FirstNameInput,
 	LastNameInput,
@@ -20,6 +14,8 @@ import {
 	PasswordInput,
 	TextInput
 } from '../shared/validatedInputs';
+import { Button, Paper, Typography, BaseComponent } from '../shared';
+import AlreadyRegistered from './AlreadyRegistered';
 
 class RegisterByMail extends BaseComponent {
 	constructor(props) {
@@ -62,17 +58,6 @@ class RegisterByMail extends BaseComponent {
 			this.onLink(routes.welcome);
 		}
 	}
-
-	renderAlreadyRegistered = () => {
-		return (
-            <div id="registered-text-div">
-                <Typography id='registered-text' variant='body' displayInline lightColor>
-                    Already have an account?
-                </Typography>
-                <Link to='/'> Log in </Link>
-            </div>
-        );
-	};
 
 	render() {
 		const {
@@ -138,7 +123,7 @@ class RegisterByMail extends BaseComponent {
                             </div>
                         </Col>
                     </Row>
-                    { this.renderAlreadyRegistered() }
+                    <AlreadyRegistered />
                 </Paper>
             </div>
 		);
