@@ -7,18 +7,25 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import BaseComponent from './BaseComponent';
+import Typography from './Typography';
 import colors from '../../constants/Colors';
 
 class VoterAvatar extends BaseComponent {
 
     render() {
-        const { src, size, color, initials } =  this.props
+        const { src, size, color, initials, className } = this.props
 
-        return(
-            <div className={cn('btw-voter-avatar')} style={{width: size, height: size, borderColor: colors[color] }}>
+        return (
+            <div className={cn('btw-voter-avatar', className)} style={{ width: size, height: size, borderColor: colors[color] }}>
                 {
-                    src ? <img className={cn('btw-voter-img')} src={src} alt=""/>
-                    : <span className={cn('btw-voter-avatar-initials')}>{initials}</span>
+                    src ?
+                        <img className='btw-voter-img' src={src} alt="" /> :
+                        <Typography
+                            displayInline
+                            variant='functional'
+                            className='btw-voter-avatar-initials'>
+                            {initials}
+                        </Typography>
                 }
             </div>
         )
