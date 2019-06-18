@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../shared/BaseComponent';
+import { BaseComponent } from '../shared';
 import VoterProfile from './VoterProfile';
 
 class VoterDetail extends BaseComponent {

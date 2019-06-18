@@ -2,10 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../shared/BaseComponent';
-import VoterAvatar from '../shared/VoterAvatar';
-import Typography from '../shared/Typography';
-import VoterStatusDropdown from '../shared/VoterStatusDropdown';
+import { BaseComponent, VoterAvatar, Typography, VoterStatusDropdown } from '../shared';
 
 class VoterProfile extends BaseComponent {
 
