@@ -33,6 +33,7 @@ class TaskList extends BaseComponent {
             selectedTab: 2,
             isShowMobileSelectedDetail: false,
             showMarkAsDoneDlg: false,
+            markAsDoneModalStatus: 0, //0 : start
             tasks: [
                 {   
                     task_id: 0,
@@ -372,7 +373,7 @@ class TaskList extends BaseComponent {
                     <SvgIcon name='medal' />
                     <Typography variant="functional">{sub_task.points}</Typography>
                     { !status && <Button size='small' color='white' className={'mark-as-done'} onClick={this.clickMarkAsDone(sub_task)}>Mark as Done</Button>}
-                    {<SvgIcon name={status? 'mark-done' : 'mark-inprogress'} className={cn('mark-icon')}/>}
+                    {<SvgIcon name={status? 'mark-done' : 'mark-inprogress'} className={cn('mark-icon')} onClick={this.clickMarkAsDone(sub_task)}/>}
                 </div>
             </div>
             )
@@ -402,10 +403,32 @@ class TaskList extends BaseComponent {
     }
 
     clickMarkAsDone = sub_task => () => {
+        if(sub_task.status) {
+            return;
+        }
+        
         this.setState({
             subTaskForMark: sub_task,
             showMarkAsDoneDlg: true,
         })
+    }
+
+    handleFiles = files => {
+        this.setState({markAsDoneModalStatus: 1},
+            () => {
+                var me = this;
+                setTimeout(function(){
+                    me.setState({markAsDoneModalStatus: 2})
+                }, 1000)
+            });
+    }
+
+    removePhoto = () => {
+        this.setState({markAsDoneModalStatus: 0})
+    }
+
+    addATextComment = () => {
+        this.setState({markAsDoneModalStatus: 3})
     }
 
     render() {
@@ -420,7 +443,8 @@ class TaskList extends BaseComponent {
             selectedTab, 
             isShowMobileSelectedDetail, 
             showMarkAsDoneDlg,
-            subTaskForMark
+            subTaskForMark,
+            markAsDoneModalStatus
         } = this.state;
         const viewProps = this.getViewProps();
         const selectedTask = tasks[selectedTaskNo];
@@ -547,38 +571,42 @@ class TaskList extends BaseComponent {
                         </div>
                     </div>
 
-                    <Typography variant="body" className={cn('add-a-photo')}>Add a photo</Typography>
-                    <Typography variant="functional" lightColor>e.g. a screenshot of the person’s status changed to “registered” or their photo with the ballot. Feel free to show off with the result of your work.</Typography>
+                    {(markAsDoneModalStatus === 0 || markAsDoneModalStatus === 1 || markAsDoneModalStatus === 2) &&
+                        <div>
+                            <Typography variant="body" className={cn('add-a-photo')}>Add a photo</Typography>
+                            <Typography variant="functional" lightColor>e.g. a screenshot of the person’s status changed to “registered” or their photo with the ballot. Feel free to show off with the result of your work.</Typography>
+                        </div>
+                    }
 
-                    <Dropzone className={cn('drop-zone')}  ref={(node) => { this.dropzoneRef = node; }}>
+                    {markAsDoneModalStatus === 0 && <Dropzone className={cn('drop-zone')}  ref={(node) => { this.dropzoneRef = node; }} onDrop={this.handleFiles}>
                         <div className={cn('upload-photo')}>
                             <SvgIcon name="add-photo-to-upload" />
                             <Typography lightColor variant="body">Drag an image here or browse for an image to upload</Typography>
                         </div>
-                    </Dropzone>
+                    </Dropzone>}
 
-                    <div className={cn('uploading')}>
+                    {markAsDoneModalStatus === 1 && <div className={cn('uploading')}>
                         <Typography lightColor variant="body">Uploading...</Typography>
-                    </div>
+                    </div>}
 
-                    <div className={cn('uploaded-image')}>
+                    {markAsDoneModalStatus === 2 && <div className={cn('uploaded-image')}>
                         <div className={cn('photo-info')}>
                             <SvgIcon name="uploaded-photo" />
                             <Typography variant='body' color={colors['secondary']}>dennis_photo.png</Typography>
                         </div>
 
-                        <SvgIcon name="upload-photo-remove" className={cn('remove-btn')}/>
-                    </div>
+                        <SvgIcon name="upload-photo-remove" className={cn('remove-btn')} onClick={this.removePhoto}/>
+                    </div>}
 
-                    <div>
+                    {markAsDoneModalStatus === 0 && <div>
                         <Typography lightColor variant="body" className={cn('or-you-can')}>or you can</Typography>
-                        <Typography className={cn('add-a-comment-btn')}>Add a Text Comment</Typography>
-                    </div>
+                        <Typography className={cn('add-a-comment-btn')} onClick={this.addATextComment}>Add a Text Comment</Typography>
+                    </div>}
 
-                    <div className={cn('add-a-comment')}>
+                    {markAsDoneModalStatus === 3 &&<div className={cn('add-a-comment')}>
                         <Typography className={cn('add-text-title')}>Add a text comment</Typography>
-                        <textarea placeholder='Write about your success...'></textarea>
-                    </div>
+                        <textarea placeholder='Write about your success...' className={cn('ta-write-about-your-success')}></textarea>
+                    </div>}
 
                 </Dialog>}
             </div>
