@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
-
-import BaseComponent from './BaseComponent';
-import Button from './Button';
-import Typography from './Typography';
+import { BaseComponent, Button, Typography } from '../shared';
 
 class VotersProgressBar extends BaseComponent {
 

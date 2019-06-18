@@ -1,5 +1,4 @@
 import React from 'react';
-
 import BaseComponent from './BaseComponent';
 
 export default class Icon extends BaseComponent {
