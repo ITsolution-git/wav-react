@@ -1,7 +1,10 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
 
 import { BaseComponent, Paper, Typography, SocialButton } from '../shared';
 import AlreadyRegistered from './AlreadyRegistered';
+import routes from '../../constants/Routes';
 
 class RegisterBySocial extends BaseComponent {
 
@@ -18,7 +21,7 @@ class RegisterBySocial extends BaseComponent {
     };
 
     handleMailClick = () => {
-
+        this.onLink(routes.registerByMail);
     };
 
     renderText = (network) => {
@@ -34,8 +37,10 @@ class RegisterBySocial extends BaseComponent {
         return (
             <div className='btw-register-social'>
                 <Paper className='paper'>
-                    <Typography className='title'>Sign Up with Email</Typography>
-                    <Typography variant='body' lightColor>Use any Sign Up method you like.</Typography>
+                    <Row className='no-margin'>
+                        <Typography className='title'>Sign Up with Email</Typography>
+                        <Typography variant='body' lightColor>Use any Sign Up method you like.</Typography>
+                    </Row>
                     <div className='buttons'>
                         <SocialButton iconName='google-normal' onClick={this.handleGoogleClick}>
                             { this.renderText('Google') }
@@ -46,6 +51,11 @@ class RegisterBySocial extends BaseComponent {
                         <SocialButton iconName='twitter-normal' onClick={this.handleTwitterClick}>
                             { this.renderText('Twitter') }
                         </SocialButton>
+                        <Row className='no-margin'>
+                            <div className='btw-social-divider'>
+                                <div>OR</div>
+                            </div>
+                        </Row>
                         <SocialButton iconName='envelope' onClick={this.handleMailClick}>
                             { this.renderText('Email') }
                         </SocialButton>
@@ -57,4 +67,4 @@ class RegisterBySocial extends BaseComponent {
     }
 }
 
-export default RegisterBySocial;
+export default withRouter(RegisterBySocial);

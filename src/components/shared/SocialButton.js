@@ -6,7 +6,7 @@ import SvgIcon from '../shared/SvgIcon';
 
 const SocialButton = ({ iconName, onClick, children  }) => {
     return (
-        <Row onClick={onClick} className='btw-social-button'>
+        <Row onClick={onClick} className='btw-social-button no-margin'>
             <Col xs={4} md={4} lg={4}>
                 <SvgIcon name={iconName} className='icon' />
             </Col>

@@ -1,7 +1,7 @@
 .btw-register-paper {
 
   @include respond-to($phone) {
-    width: 272px;
+    width: 310px;
     padding: 20px 20px 20px 20px;
   }
 
@@ -28,6 +28,7 @@
   border: 1px solid $divider;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   @extend .btw-social-width;
 
@@ -38,5 +39,23 @@
 }
 
 .btw-social-divider {
-  border: 1px solid $divider;
+  @extend .btw-social-width;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid $divider;
+  text-align: center;
+  margin: 12px 0 3px 0;
+
+  div {
+    color: $divider;
+    width: 40px;
+    margin-top: -7px;
+    background: white;
+    font-weight: bold;
+    font-size: 10px;
+  }
+}
+
+.btw-registered-text {
+  margin-right: 6px;
 }
