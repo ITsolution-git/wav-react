@@ -136,9 +136,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
