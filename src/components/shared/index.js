@@ -54,7 +54,7 @@ export {
 	VotersProgressBar,
 	VotersTable,
 	VoterInfo,
-	VoterCardView
+	VoterCardView,
 	SocialButton,
 	VoterStatusDropdown
 }

@@ -14,7 +14,7 @@ import Paper from '../shared/Paper';
 import SocialList from '../shared/SocialList'
 import TaskProgressBar from '../shared/TaskProgressBar';
 import Typography from '../shared/Typography';
-import VoterAvatar from '../shared/VoterAvatar'
+import { VoterAvatar } from '../shared'
 import colors from '../../constants/Colors';
 import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';

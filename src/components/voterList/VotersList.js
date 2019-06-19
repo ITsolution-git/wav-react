@@ -81,7 +81,7 @@ const VotersList = (props) => {
 	return (
 		<div className='btw-voter-list mt-5'>
 			<StatusBar isShow={true} count={3} keyword={keyword} />
-			{list.map(item => <VoterCardView data={item} keyword={keyword} />)}
+			{list.map((item, key) => <VoterCardView key={key} data={item} keyword={keyword} />)}
 		</div>
 	)
 }
