@@ -65,7 +65,11 @@ html {
 @import 'voter/error';
 @import 'voter/welcome';
 
+
 @import 'voterList/voterlist';
+@import 'voterList/voterDetail';
+@import 'voterList/voterProfile';
+
 
 @import 'errorPages/general';
 
@@ -102,6 +106,8 @@ html {
 @import 'selectDistrict/selectDistrict';
 @import 'selectDistrict/selectDistrictItem';
 
+@import 'verifyEmail/verifyEmail';
+
 // new components
 @import 'components/button';
 @import 'components/modal';
@@ -118,3 +124,4 @@ html {
 @import 'components/statusIcon';
 @import 'components/voterAvatar';
 @import 'components/taskProgressBar';
+@import 'components/voterStatusDropdown';

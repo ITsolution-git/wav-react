@@ -26,6 +26,7 @@ import VoterAvatar from './VoterAvatar'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
 import SocialButton from './SocialButton'
+import VoterStatusDropdown from './VoterStatusDropdown'
 
 export {
 	BaseComponent,
@@ -52,5 +53,6 @@ export {
 	VoterAvatar,
 	VotersProgressBar,
 	VotersTable,
-	SocialButton
+	SocialButton,
+	VoterStatusDropdown
 }

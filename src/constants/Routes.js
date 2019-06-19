@@ -52,5 +52,7 @@ export default {
     stepsToHelpFriendVote: '/stepsToHelpFriendVote',
     resourceCenter: '/resource_center',
 
-    unsubscribe: '/unsubscribe/:email'
+    unsubscribe: '/unsubscribe/:email',
+
+    verifyEmail: '/verify_email'
 }

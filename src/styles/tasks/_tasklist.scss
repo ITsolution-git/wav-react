@@ -1,64 +1,413 @@
 .bwt-task-list {
-  @include respond-to($desktop) {
-    width: 92%;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll; 
+
+  &::-webkit-scrollbar {
+      width: 3px;
   }
 
-  #title {
-    margin-bottom: 30px;
+  &::-webkit-scrollbar-thumb {
+      width: 3px;
+      background: $divider;
   }
 
-  .task-list {
-    .task {
-      @extend .shadow;
-      border-radius: 5px;
-      @include respond-to($desktop) {
-        padding: 3% 2%;
-      }
-      @include respond-to($phone) {
-        padding: 5% 2%;
-      }
-      margin-bottom: 3%;
-      background-color: $white;
-      .link {
-        cursor: pointer;
-        img {
-          margin-left: 5px;
-        }
-        .arrow-mobile {
-          background-color: $blue;
-          padding: 4px 0;
-          border-radius: 50%;
-        }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 26px;
+
+    li {
+      margin: 0 10px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: $secondary;
+      line-height: 18px;
+      padding: 0;
+
+      &.active {
+        color: black;
       }
     }
   }
-  #tile-div {
-    .tile {
-      @extend .shadow;
-      border-radius: 5px;
+
+  .actions-content {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .actions {
+      padding: 0 8px 8px;
       cursor: pointer;
-      min-height: 100px;
+      
+      @include respond-to($phone) {
+        width: 100%;
+      }
+
+      .action {
+        padding: 18px 40px;
+        width: 424px;
+        margin-bottom: 16px;
+
+        @include respond-to($tablet) {
+          width: 248px;
+        }
+
+        @include respond-to($phone) {
+          width: 100%;
+        }
+
+        .action-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .action-title {
+          margin-top: 32px;
+          font-size: 12px;
+          line-height: 130%;
+        }
+
+        .task-done {
+          font-size: 12px;
+          margin-top: 3px;
+        }
+      }
+
+      .task-selected {
+        border:1px solid $primary;
+      }
+    }
+
+    .selected-action {
+      width: 600px;
+      
+      @include respond-to($tablet) {
+        width: 424px;
+      }
+
+      @include respond-to($phone) {
+        width: 100%;
+        display: none;
+      }
+
+      &.mobile-selected-action {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1040;
+        width: 100%;
+        overflow-y: scroll;
+        height: 100%;
+        display: block;
+        padding-top: 64px;
+      }
+
+      .mobile-selected-header {
+        background: $primary;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        padding: 23px;
+        justify-content: space-between;
+
+        .goto-all-actions {
+          display: flex;
+          align-items: center;
+          
+          .nav-title {
+            margin-left: 11px;
+          }
+        }
+      }
+
+      .header {
+        padding: 19px 40px;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $divider;
+        box-sizing: border-box;
+        border-radius: 3px;
+
+        &.completed-selected-header {
+          color: $white;
+          background: linear-gradient(270deg, #5ED5CC 0%, #2BADC6 100%);
+        }
+      }
+
+      .action-body {
+        padding: 27px 40px;
+
+        .active-task-title {
+          margin: 21px 0 12px;
+          font-size: 13px;
+        }
+      }
+
+     
+    }
+
+    .action-status {
       display: flex;
       align-items: center;
-      justify-content: center;
 
-      @include respond-to($desktop) {
-        background-color: $white;
-        margin: 0% 0 4% 20%;
-        width: 60%;
+      .status-text {
+        margin-left: 5px;
       }
-      @include respond-to($phone) {
-        margin: 20px 0;
-        background-color: $blue;
+    }
+
+    .action-points {
+      display: flex;
+      align-items: center;
+
+      .points-text {
+        margin-left: 4px;
+      }
+    }
+    
+    .action-duration {
+      font-size: 12px;
+      margin-bottom: 27px;
+    }
+  }
+
+  .empty-task {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.mark-as-done-dlg {
+  padding-left: 0!important;
+
+  .modal-header {
+    border: none;
+  }
+
+  .modal-footer {
+    border: none;
+    padding: 0;
+  }
+
+  .modal-body {
+    padding: 0 40px 32px;
+
+    .add-a-photo {
+      font-weight: 600;
+      margin-top: 50px;
+    }
+
+    .drop-zone {
+      width: 100%;
+
+      .upload-photo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 25px 0;
+        border: 1px dashed $divider;
+        margin: 30px 0;
+      }
+    }
+
+    .uploading {
+      padding: 50px;
+      text-align: center;
+    }
+
+    .uploaded-image {
+      border: 1px solid $divider;
+      box-sizing: border-box;
+      border-radius: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 16px;
+      margin: 30px 0;
+
+      .photo-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .remove-btn {
+        cursor: pointer;
+      }
+    }
+
+    .or-you-can {
+      text-align: center;
+    }
+
+    .add-a-comment-btn {
+      text-align: center;
+      font-size: 13px;
+      text-decoration: underline;
+      margin-top: 7px;
+      cursor: pointer;
+    }
+
+    .add-a-comment {
+
+      .add-text-title {
+        font-size: 13px;
+      }
+
+      .ta-write-about-your-success {
+        width: 100%;
+        border: solid 1px $divider;
+        border-radius: 2px;
+        padding: 10px;
+        margin-top: 12px;
       }
     }
   }
 }
 
-#btw-tips-dialog {
-  padding: 0 15px 15px 15px;
-  #title {
-    text-align: center;
-    margin-bottom: 15px;
+.congrate-dlg {
+  .modal-dialog {
+    overflow: hidden;
+    
+    @include respond-to($computer) {
+      width: 287px;
+    }
+
+    .modal-header, .modal-footer {
+      display: none;
+    }
+
+    .modal-body {
+      background: linear-gradient(180.25deg, #5ED5CC 0.14%, #2BADC6 99.87%);
+      border-radius: 6px;
+      padding: 54px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+
+      .cong-title {
+        margin: 0 0 15px;
+      }
+
+      .points-icon {
+        position: relative;
+        margin: 20px 0 30px;
+
+        .points {
+          position: absolute;
+          background: $white;
+          border: 3px solid #43cfda;
+          border-radius: 16px;
+          width: 64px;
+          height: 27px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          bottom: 0;
+          right: 10px;
+        }
+      }
+
+      .share-icons {
+        margin: 15px 0 0;
+        
+        .tw-icon {
+          margin: 0 16px 0 0;
+        }
+      }
+
+      .ellipse-solid {
+        position: absolute;
+        top: -48px;
+        left: 0;
+      }
+
+      .plus-solid {
+        position: absolute;
+        bottom: 60px;
+        right: 0px;
+      }
+    }
   }
+}
+
+.sub_task-item {
+  border: 1px solid $divider;
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding: 15px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 8px;
+  position: relative;
+
+  &.mark-modal-sub-task-item {
+    margin: 35px 0 50px;
+  }
+
+  .voter-detail {
+    display: flex;
+    align-items: center;
+
+    .voter-general{
+      margin: 0 0 0 17px;
+      
+      .voter-name {
+        font-size: 13px;
+      }
+
+      .voter-auth-social {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .sub-task-info {
+    display: flex;
+    align-items: center;
+
+    @include respond-to($phone) {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+    }
+
+    .mark-as-done {
+      width: 90px;
+      margin-left: 8px;
+
+      @include respond-to($phone) {
+        display: none;
+      }
+    }
+
+    .mark-icon {
+      display: none;
+      margin-left: 16px;
+
+      @include respond-to($phone) {
+        display: block;
+      }
+    }
+  }
+}
+
+.btw-content-layout {
+  width: 100%;
+  height: 100%;
 }
