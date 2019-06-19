@@ -1,5 +1,6 @@
 export default {
-    register: '/register',
+    registerByMail: '/register_by_mail',
+    registerBySocial: '/register_by_social',
     profile: '/profile',
     makelist: '/make_list',
     pageDown: '/page_down',
@@ -11,7 +12,8 @@ export default {
     captainsDashboard: '/home',
     adminDashboard: '/home_admin',
     messageList: '/message_list',
-    login: '/',
+    loginBySocial: '/',
+    loginByMail: '/login_by_mail',
     voterDetail: '/voter_detail',
     matchList: '/match_list',
     voterSuccess: '/voter_success',
@@ -50,5 +52,7 @@ export default {
     stepsToHelpFriendVote: '/stepsToHelpFriendVote',
     resourceCenter: '/resource_center',
 
-    unsubscribe: '/unsubscribe/:email'
+    unsubscribe: '/unsubscribe/:email',
+
+    verifyEmail: '/verify_email'
 }

@@ -1,0 +1,13 @@
+.btw-register-mail {
+  .paper {
+    @extend .btw-register-paper;
+
+    .title {
+      margin-bottom: 25px;
+    }
+
+    .inputs-row {
+      margin-bottom: 15px;
+    }
+  }
+}

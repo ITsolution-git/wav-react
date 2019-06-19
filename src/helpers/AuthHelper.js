@@ -15,9 +15,9 @@ export function getHomeRoute() {
         case roles.admin:
             return routes.adminDashboard;
         case roles.guest:
-            return routes.login;
+            return routes.loginBySocial;
         default:
-            return routes.login
+            return routes.loginBySocial
     }
 }
 
@@ -27,6 +27,6 @@ export function redirectToHome() {
 
 export function logout() {
     localStorage.clear();
-    History.push(routes.login);
+    History.push(routes.loginBySocial);
     PubSub.publish(pubsubConstants.onAuthChange, false);
 }

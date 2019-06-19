@@ -1,9 +1,29 @@
-import React from 'react'
+import React from 'react';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
-const VoterDetail = (props) => {
-	return (
-		<div>Voter Detail</div>
-	)
+import { BaseComponent } from '../shared';
+import { VoterProfile, VoterCommunication } from './index'
+import { VoterAction } from './voterAction';
+
+class VoterDetail extends BaseComponent {
+
+    render() {
+        const { selectedVoter, changeStatusHandler } = this.props;
+
+        return (
+            <div className={classNames('btw-voter-detail-info btw-paper')}>
+                <VoterProfile selectedVoter={selectedVoter} changeStatusHandler={changeStatusHandler} />
+                <VoterCommunication selectedVoter={selectedVoter} />
+                <VoterAction tasks={selectedVoter.tasks} />
+            </div>
+        );
+    }
 }
+
+VoterDetail.propTypes = {
+    selectedVoter: PropTypes.object,
+    changeStatusHandler: PropTypes.func
+};
 
 export default VoterDetail;
