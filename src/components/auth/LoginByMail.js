@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import qs from 'qs';
 import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
-import TaskRoutes from '../../constants/TaskRoutes';
 import { btwSignOn } from '../../actions/SignOnAction';
-import { getHomeRoute } from '../../helpers/AuthHelper';
 import Spinner from '../shared/Spinner';
 import Button from '../shared/Button';
 import {
@@ -19,7 +16,8 @@ import {
 } from '../shared/validatedInputs';
 import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
-import { Typography } from "../shared";
+import { Typography } from '../shared';
+import BottomLink from './BottomLink';
 
 
 class LoginByMail extends BaseComponent {
@@ -104,12 +102,13 @@ class LoginByMail extends BaseComponent {
 						</Row>
 
 						<Link className='forgot-password-link' to={routes.forgotPassword}>Forgot password?</Link>
+
 						<div className='go-to-signup'>
-										<span>
-											New to BeTheWave
-											</span>
-							<Link to={routes.registerBySocial}> Sign up</Link>
+							<BottomLink title={`Don't have an account?`}
+										link={routes.registerBySocial}
+										linkText='Sign up'/>
 						</div>
+
 						<Col md={12}>
 							<Spinner loading={isFetching} size={50} />
 						</Col>

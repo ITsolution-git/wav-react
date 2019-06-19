@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
 
 import { BaseComponent, Paper, Typography, SocialButton } from '../shared';
-import AlreadyRegistered from './AlreadyRegistered';
+import BottomLink from './BottomLink';
 import routes from '../../constants/Routes';
 
 class LoginBySocial extends BaseComponent {
@@ -59,6 +59,9 @@ class LoginBySocial extends BaseComponent {
                             { this.renderText('Email') }
                         </SocialButton>
                     </div>
+                    <BottomLink title={`Don't have an account?`}
+                                link={routes.registerBySocial}
+                                linkText='Sign up'/>
                 </Paper>
             </div>
         )

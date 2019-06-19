@@ -15,7 +15,7 @@ import {
 	TextInput
 } from '../shared/validatedInputs';
 import { Button, Paper, Typography, BaseComponent } from '../shared';
-import AlreadyRegistered from './AlreadyRegistered';
+import BottomLink from './BottomLink';
 
 class RegisterByMail extends BaseComponent {
 	constructor(props) {
@@ -123,7 +123,7 @@ class RegisterByMail extends BaseComponent {
                             </div>
                         </Col>
                     </Row>
-                    <AlreadyRegistered />
+                    <BottomLink />
                 </Paper>
             </div>
 		);
