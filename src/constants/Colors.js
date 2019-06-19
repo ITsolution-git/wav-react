@@ -1,4 +1,4 @@
-export default {
+const colors = {
     primary: '#4B70F3',
     primaryHover: '#3B5DD9',
     secondary: '#515973',
@@ -10,3 +10,18 @@ export default {
     alert: '#FEC754',
     white: '#FFFFFF'
 }
+
+export const getColorByStatus = status => {
+    switch(status) {
+        case 'Not registered':
+            return colors.error
+        case 'Infrequent':
+            return colors.alert
+        case 'Regular':
+            return colors.success
+        default:
+            return colors.primary
+    }
+}
+
+export default colors
