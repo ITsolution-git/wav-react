@@ -13,7 +13,7 @@ class VoterAction extends BaseComponent {
                 <Typography className='title'>
                     Actions with this voter
                 </Typography>
-                {tasks.map(task => (<VoterActionItem task={task} />))}
+                {tasks.map((task, index) => (<VoterActionItem task={task} key={index} />))}
             </div>
         );
     }

@@ -32,6 +32,7 @@ class VoterActionItem extends BaseComponent {
                         {!task.status && <Button size='small' color='white' className='mark-action-button' onClick={this.clickMarkButtonHandler}>Mark as Done</Button>}
                     </div>
                 </div>
+                {!task.status && <Button size='small' color='white' fullWidth className='mobile-mark-action-button' onClick={this.clickMarkButtonHandler}>Mark as Done</Button>}
             </div>
         );
     }

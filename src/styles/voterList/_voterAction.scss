@@ -16,7 +16,7 @@
         justify-content: left;
         flex-direction: column; 
         margin-bottom: 24px;
-        
+
         .action-header {
             display: flex;
             flex-direction: row;
@@ -47,6 +47,17 @@
             .mark-action-button{
                 width: unset;
                 margin-left: 5px;
+
+                @include respond-to($phone) {
+                    display: none;
+                }
+            }
+        }
+        .mobile-mark-action-button{
+            background-color: unset;
+            
+            @include respond-to($computer) {
+                display: none;
             }
         }
     }

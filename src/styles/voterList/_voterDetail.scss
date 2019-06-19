@@ -6,4 +6,9 @@
     width: 100%;
     padding: 32px 24px;
     
+    @include respond-to($phone) {
+        box-shadow: unset;
+        background-color: unset;
+        padding: 32px 0;
+    }
 }
