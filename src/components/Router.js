@@ -61,6 +61,9 @@ import roles from '../constants/Roles';
 // unsubscribe
 import Unsubscribe from './unsubscribe/unsubscribe';
 
+//verify email
+import VerifyEmail from './verifyEmail/VerifyEmail';
+
 const { captain, admin, guest } = roles;
 
 const router = () => (
@@ -168,6 +171,10 @@ const router = () => (
 
         {/* unsubscribe */}
         <Route exact path={routes.unsubscribe} component={Unsubscribe} />
+
+        {/* verify email*/}
+        <Route exact path={routes.verifyEmail} 
+            component={Authorization(VerifyEmail, [captain])} />
     </Switch>
 );
 
