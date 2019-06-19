@@ -68,57 +68,52 @@ class LoginByMail extends BaseComponent {
 		return (
 			<div className='btw-login-mail'>
 				<Paper className='paper'>
-					<Row className="no-margin">
-						<Col md={12} xs={12} className="no-padding">
-							<div className="btw-form" onKeyPress={this.onKeyPress}>
-								<Col md={12} className="no-padding">
-									<Typography className='title'>Log In by Email</Typography>
-									{ error && <div>Check your username or password</div> }
-									<Row>
-										<Col md={12}>
-											<EmailInput onChange={(value, valid, name) => {
-												const isValid = error ? true : valid;
-												this.handleChange(value, isValid, name);
-											}}
-														isVoter={false}
-														startValidation={startValidation}
-														uniqueValidationEnabled={false}
-														required
-														label='Your email address' />
-										</Col>
-									</Row>
-									<Row>
-										<Col md={12}>
-											<PasswordInput onChange={this.handleChange}
-														   startValidation={startValidation}
-														   required
-														   label='Your password' />
-										</Col>
-									</Row>
+					<div className="btw-form" onKeyPress={this.onKeyPress}>
+						<Typography className='title'>Log In by Email</Typography>
+						{ error && <div>Check your username or password</div> }
 
-									<div id="button-class">
-										<Button
-											disabled={isFetching}
-											onClick={this.btwSignOn.bind(this)}>
-											Log In
-										</Button>
-									</div>
+						<Row className='inputs-row'>
+							<Col md={12}>
+								<EmailInput onChange={(value, valid, name) => {
+									const isValid = error ? true : valid;
+									this.handleChange(value, isValid, name);
+								}}
+											isVoter={false}
+											startValidation={startValidation}
+											uniqueValidationEnabled={false}
+											required
+											label='Your email address' />
+							</Col>
+						</Row>
+						<Row className='inputs-row'>
+							<Col md={12}>
+								<PasswordInput onChange={this.handleChange}
+											   startValidation={startValidation}
+											   required
+											   label='Your password' />
+							</Col>
+						</Row>
+						<Row className='inputs-row'>
+							<Col md={12}>
+								<Button
+									disabled={isFetching}
+									onClick={this.btwSignOn.bind(this)}>
+									Log In
+								</Button>
+							</Col>
+						</Row>
 
-									<Link className='forgot-password-link' to={routes.forgotPassword}>Forgot password</Link>
-
-									<div className='go-to-signup'>
+						<Link className='forgot-password-link' to={routes.forgotPassword}>Forgot password?</Link>
+						<div className='go-to-signup'>
 										<span>
 											New to BeTheWave
 											</span>
-											<Link to={routes.registerBySocial}> Sign up</Link>
-									</div>
-									<Col md={12}>
-										<Spinner loading={isFetching} size={50} />
-									</Col>
-								</Col>
-							</div>
+							<Link to={routes.registerBySocial}> Sign up</Link>
+						</div>
+						<Col md={12}>
+							<Spinner loading={isFetching} size={50} />
 						</Col>
-					</Row>
+					</div>
 				</Paper>
 			</div>
 		);
