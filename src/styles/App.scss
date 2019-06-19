@@ -52,6 +52,8 @@ html {
 @import 'auth/base';
 @import 'auth/register_by_mail';
 @import 'auth/register_by_social';
+@import 'auth/_login_by_mail';
+@import 'auth/login_by_social';
 
 @import 'voter/makelist';
 @import 'captainProfile/profile';
@@ -66,8 +68,6 @@ html {
 @import 'voterList/voterlist';
 
 @import 'errorPages/general';
-
-@import 'login/login';
 
 @import 'captainsDashboard/dashboard';
 @import 'adminDashboard/dashboard';

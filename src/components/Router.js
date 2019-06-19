@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Login from './Login';
+import LoginBySocial from './auth/LoginBySocial';
+import LoginByMail from './auth/LoginByMail';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import NoTaskErrorPage from './errorPages/NoTaskErrorPage';
 import SendInvite from './invites/SendInvite';
@@ -66,8 +67,10 @@ const { captain, admin, guest } = roles;
 
 const router = () => (
     <Switch>
-        <Route exact path={routes.login}
-            component={Authorization(Login, [guest])} />
+        <Route exact path={routes.loginBySocial}
+           component={Authorization(LoginBySocial, [guest])} />
+        <Route exact path={routes.loginByMail}
+            component={Authorization(LoginByMail, [guest])} />
         <Route exact path={routes.registerByMail}
             component={Authorization(RegisterByMail, [guest, captain, admin])} />
         <Route exact path={routes.registerBySocial}

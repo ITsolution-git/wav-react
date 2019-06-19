@@ -65,7 +65,7 @@ class ChangePassword extends BaseComponent {
 
     componentWillReceiveProps(props) {
         if (props.isChangedPassword) {
-            this.onLink(routes.login, { isReset: true });
+            this.onLink(routes.loginBySocial, { isReset: true });
             return;
         } else {
             this.setState({ "isChangedPassword": false });
@@ -117,7 +117,7 @@ class ChangePassword extends BaseComponent {
                         Save New Password
                     </Button>
                     <Typography variant='body' className='remember'>
-                        Remembered? <Link to={routes.login}>Log in.</Link>
+                        Remembered? <Link to={routes.loginBySocial}>Log in.</Link>
                     </Typography>
                 </div>
             </div >
