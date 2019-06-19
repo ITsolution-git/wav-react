@@ -7,7 +7,7 @@ class VoterCommunication extends BaseComponent {
     constructor() {
         super();
         this.state = {
-            readMore: true
+            readMore: false
         }
     }
 

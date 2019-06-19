@@ -162,7 +162,29 @@ class VotersManagement extends BaseComponent {
                     linkedIn: true,
                     facebook: true
                 },
-                status: 'Infrequent'
+                status: 'Infrequent',
+                tasks: [
+                    {
+                        id: 1,
+                        title: 'Help Dennis Holman register for voting',
+                        status: 0, // 0: in progress, 1: completed
+                        points: 4,
+                        start_date: '30 May 2019',
+                        end_date: '30 May 2019',
+                        description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
+                        I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
+                    },
+                    {
+                        id: 5,
+                        title: 'Help Dennis Holman register for voting',
+                        status: 1, // 0: in progress, 1: completed
+                        points: 20,
+                        start_date: '30 May 2019',
+                        end_date: '30 May 2019',
+                        description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
+                        I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
+                    }
+                ]
             },
             searchString: ''
         }
