@@ -6,6 +6,19 @@ import { BaseComponent, VoterAvatar, Typography, VoterStatusDropdown } from '../
 
 class VoterProfile extends BaseComponent {
 
+    getAvatarColor = status => {
+        switch (status) {
+            case 'Infrequent':
+                return 'alert';
+            case 'Regular':
+                return 'success';
+            case 'Not registered':
+                return 'error';
+            default:
+                return null;
+        }
+    }
+
     render() {
         const { selectedVoter, changeStatusHandler } = this.props;
 
@@ -15,7 +28,7 @@ class VoterProfile extends BaseComponent {
                     size={56}
                     initials='SG'
                     src={selectedVoter.avatar}
-                    color='error' />
+                    color={this.getAvatarColor(selectedVoter.status)} />
                 <Typography className='voter-name'>
                     {selectedVoter.name}
                 </Typography>
