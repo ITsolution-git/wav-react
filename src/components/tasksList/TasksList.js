@@ -2,12 +2,10 @@ import React  from 'react';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from "redux";
-import { Row, Col } from 'react-bootstrap';
 import ReadMoreAndLess from 'react-read-more-less';
 import cn from 'classnames';
 import Dropzone from 'react-dropzone';
 
-import Spinner from '../shared/Spinner';
 import Button from '../shared/Button';
 import BaseComponent from '../shared/BaseComponent';
 import SvgIcon from '../shared/SvgIcon';
@@ -17,12 +15,10 @@ import SocialList from '../shared/SocialList'
 import TaskProgressBar from '../shared/TaskProgressBar';
 import Typography from '../shared/Typography';
 import VoterAvatar from '../shared/VoterAvatar'
-import routes from '../../constants/Routes';
 import colors from '../../constants/Colors';
 import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import ContentLayout from '../layout/ContentLayout';
-import { resolveTaskData } from '../../helpers/TaskHelper';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
@@ -33,7 +29,8 @@ class TaskList extends BaseComponent {
             selectedTab: 2,
             isShowMobileSelectedDetail: false,
             showMarkAsDoneDlg: false,
-            markAsDoneModalStatus: 0, //0 : start
+            markAsDoneModalStatus: 0, //0 : start,
+            showCongratDlg: false,
             tasks: [
                 {   
                     task_id: 0,
@@ -55,9 +52,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -71,9 +68,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -87,9 +84,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -123,9 +120,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -155,9 +152,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -191,9 +188,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -207,9 +204,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -223,9 +220,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -259,9 +256,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -275,9 +272,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -291,9 +288,9 @@ class TaskList extends BaseComponent {
                                 initials: 'DH',
                                 avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
                                 social: {
-                                    twitter: 'http://twitter.com',
-                                    linkedIn: 'http://linkedin.com',
-                                    facebook: 'http://facebook.com'
+                                    twitter: true,
+                                    linkedIn: true,
+                                    facebook: true
                                 }
                             },
                             points: 4
@@ -383,7 +380,8 @@ class TaskList extends BaseComponent {
     getCompletedTasksCount(task) {
         var count = 0
         task.sub_tasks.map(sub_task => {
-            if(sub_task.status) count ++
+            if(sub_task.status) count ++;
+            return count;
         })
         return count;
     }
@@ -397,6 +395,7 @@ class TaskList extends BaseComponent {
                 if(task.status === this.state.selectedTab) {
                     count ++
                 }
+                return count;
             })
             return count
         }
@@ -406,7 +405,7 @@ class TaskList extends BaseComponent {
         if(sub_task.status) {
             return;
         }
-        
+
         this.setState({
             subTaskForMark: sub_task,
             showMarkAsDoneDlg: true,
@@ -431,26 +430,31 @@ class TaskList extends BaseComponent {
         this.setState({markAsDoneModalStatus: 3})
     }
 
+    showCongrate = () => {
+        this.setState({
+            showMarkAsDoneDlg: false, 
+            showCongratDlg: true,
+            markAsDoneModalStatus: 0
+        })
+    }
+
     render() {
-        const { taskList: {
-            // tasks = [],
-            isFetching
-        }} = this.props;
+       
         const { 
-            showTipsDialog, 
             tasks, 
             selectedTaskNo, 
             selectedTab, 
             isShowMobileSelectedDetail, 
             showMarkAsDoneDlg,
             subTaskForMark,
-            markAsDoneModalStatus
+            markAsDoneModalStatus,
+            showCongratDlg
         } = this.state;
-        const viewProps = this.getViewProps();
+        
         const selectedTask = tasks[selectedTaskNo];
         
         return (
-        <ContentLayout> 
+        <ContentLayout>
             <div className='bwt-task-list'>
                 <ul className={'tabs'}>
                     <li className={cn({'active': selectedTab === 2})} onClick={this.switchTab(2)}>All actions</li>
@@ -547,7 +551,7 @@ class TaskList extends BaseComponent {
                 {showMarkAsDoneDlg && <Dialog className={cn('mark-as-done-dlg')} 
                     show={showMarkAsDoneDlg} 
                     closeButton 
-                    actionButtons={<Button fullWidth>Mark as Done</Button>}
+                    actionButtons={<Button fullWidth onClick={this.showCongrate}>Mark as Done</Button>}
                     onClose={()=> this.setState({showMarkAsDoneDlg: false})}> 
                     
                     <Typography>{selectedTask.title}</Typography>
@@ -609,6 +613,35 @@ class TaskList extends BaseComponent {
                     </div>}
 
                 </Dialog>}
+
+                {
+                    showCongratDlg && <Dialog className={cn('congrate-dlg')} 
+                        show={showCongratDlg} 
+                        onClose={()=> this.setState({showCongratDlg: false})}>
+                        
+                        <Typography color={colors['white']} className={cn('cong-title')}>Congratulations!</Typography>
+                        <Typography color={colors['white']} variant='body'>Here are your 4 points. Well deserved, my friend. Well deserved!</Typography>
+
+                        <div className={cn('points-icon')}>
+                            <SvgIcon name="points-icon" />
+
+                            <div className={cn('points')}>
+                                <SvgIcon name="medal" />
+                                <Typography variant="body"> +4</Typography>
+                            </div>
+                        </div>
+
+                        <Typography color={colors['white']} variant='body'>Share your result:</Typography>
+
+                        <div className={cn('share-icons')}>
+                            <SvgIcon name="social-twitter" className={cn('tw-icon')}/>
+                            <SvgIcon name="social-fb" />
+                        </div>
+
+                        <SvgIcon name="ellipse-solid" className={cn('ellipse-solid')}/>
+                        <SvgIcon name="plus-solid" className={cn('plus-solid')}/>
+                    </Dialog>
+                }
             </div>
         </ContentLayout>   
         );

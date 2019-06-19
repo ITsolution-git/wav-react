@@ -190,6 +190,8 @@
 }
 
 .mark-as-done-dlg {
+  padding-left: 0!important;
+
   .modal-header {
     border: none;
   }
@@ -274,6 +276,74 @@
   }
 }
 
+.congrate-dlg {
+  .modal-dialog {
+    overflow: hidden;
+    
+    @include respond-to($computer) {
+      width: 287px;
+    }
+
+    .modal-header, .modal-footer {
+      display: none;
+    }
+
+    .modal-body {
+      background: linear-gradient(180.25deg, #5ED5CC 0.14%, #2BADC6 99.87%);
+      border-radius: 6px;
+      padding: 54px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+
+      .cong-title {
+        margin: 0 0 15px;
+      }
+
+      .points-icon {
+        position: relative;
+        margin: 20px 0 30px;
+
+        .points {
+          position: absolute;
+          background: $white;
+          border: 3px solid #43cfda;
+          border-radius: 16px;
+          width: 64px;
+          height: 27px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          bottom: 0;
+          right: 10px;
+        }
+      }
+
+      .share-icons {
+        margin: 15px 0 0;
+        
+        .tw-icon {
+          margin: 0 16px 0 0;
+        }
+      }
+
+      .ellipse-solid {
+        position: absolute;
+        top: -48px;
+        left: 0;
+      }
+
+      .plus-solid {
+        position: absolute;
+        bottom: 60px;
+        right: 0px;
+      }
+    }
+  }
+}
+
 .sub_task-item {
   border: 1px solid $divider;
   box-sizing: border-box;
@@ -335,4 +405,9 @@
       }
     }
   }
+}
+
+.btw-content-layout {
+  width: 100%;
+  height: 100%;
 }
