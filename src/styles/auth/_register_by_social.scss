@@ -1,0 +1,18 @@
+.btw-register-social {
+  .paper {
+    @extend .btw-register-paper;
+
+    .title {
+      margin-bottom: 25px;
+    }
+
+
+    .buttons {
+      margin: 30px 0 50px 0;
+
+      & > div {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

@@ -25,6 +25,7 @@ import Typography from './Typography'
 import VoterAvatar from './VoterAvatar'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
+import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
 
 export {
@@ -52,5 +53,6 @@ export {
 	VoterAvatar,
 	VotersProgressBar,
 	VotersTable,
+	SocialButton,
 	VoterStatusDropdown
 }

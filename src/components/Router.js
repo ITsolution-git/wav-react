@@ -1,11 +1,13 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Login from './Login';
+import LoginBySocial from './auth/LoginBySocial';
+import LoginByMail from './auth/LoginByMail';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import NoTaskErrorPage from './errorPages/NoTaskErrorPage';
 import SendInvite from './invites/SendInvite';
-import Register from './captainProfile/Register';
+import RegisterByMail from './auth/RegisterByMail';
+import RegisterBySocial from './auth/RegisterBySocial';
 import Profile from './captainProfile/Profile';
 import MakeList from './voter/MakeList';
 import TasksList from './tasksList/TasksList';
@@ -68,10 +70,14 @@ const { captain, admin, guest } = roles;
 
 const router = () => (
     <Switch>
-        <Route exact path={routes.login}
-            component={Authorization(Login, [guest])} />
-        <Route exact path={routes.register}
-            component={Authorization(Register, [guest, captain, admin])} />
+        <Route exact path={routes.loginBySocial}
+           component={Authorization(LoginBySocial, [guest])} />
+        <Route exact path={routes.loginByMail}
+            component={Authorization(LoginByMail, [guest])} />
+        <Route exact path={routes.registerByMail}
+            component={Authorization(RegisterByMail, [guest, captain, admin])} />
+        <Route exact path={routes.registerBySocial}
+            component={Authorization(RegisterBySocial, [guest, captain, admin])} />
         <Route exact path={routes.profile}
             component={Profile} />
         <Route exact path={routes.pageDown}
@@ -151,7 +157,7 @@ const router = () => (
         <Route exact path={routes.captainFilter}
             component={Authorization(CaptainFilter, [admin])} />
 
-        {/* tatic route pages */}
+        {/* static route pages */}
         <Route exact path={routes.whyBetheWave} component={WhyBethewave} />
         <Route exact path={routes.howContribute} component={HowContribute} />
         <Route exact path={routes.termsOfUse} component={TermsOfUse} />

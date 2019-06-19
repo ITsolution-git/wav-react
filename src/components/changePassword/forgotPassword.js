@@ -70,7 +70,7 @@ class ForgotPassword extends BaseComponent {
                         Send Request
                     </Button>
                     <Typography variant='body' className='remember'>
-                        Remembered? <Link to={routes.login}>Log in.</Link>
+                        Remembered? <Link to={routes.loginBySocial}>Log in.</Link>
                     </Typography>
                 </div>
             </div >
