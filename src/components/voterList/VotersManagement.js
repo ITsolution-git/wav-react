@@ -166,7 +166,7 @@ class VotersManagement extends BaseComponent {
                 tasks: [
                     {
                         id: 1,
-                        title: 'Help Dennis Holman register for voting',
+                        title: 'Help Dennis Holman',
                         status: 0, // 0: in progress, 1: completed
                         points: 4,
                         start_date: '30 May 2019',
@@ -176,7 +176,7 @@ class VotersManagement extends BaseComponent {
                     },
                     {
                         id: 5,
-                        title: 'Help Dennis Holman register for voting',
+                        title: 'Help Dennis Holman',
                         status: 1, // 0: in progress, 1: completed
                         points: 20,
                         start_date: '30 May 2019',
