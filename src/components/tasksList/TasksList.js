@@ -471,7 +471,8 @@ class TaskList extends BaseComponent {
 
                                     return ( (task.status === selectedTab || selectedTab === 2) &&
                                         <Paper className={cn('action', {'task-selected': index === selectedTaskNo})} key={task.task_id}>
-                                            <div className={'action-header'}  onClick={this.changeSelectedTask(index)}>
+                                            <div onClick={this.changeSelectedTask(index)}>
+                                            <div className={'action-header'}>
                                                 <div className={'action-status'}>
                                                     <SvgIcon name={task.status ? 'action-status-completed' : 'action-status-inprogress'}/>
                                                     <Typography className={'status-text'} variant="functional" lightColor>{task.status ? 'Completed' : 'In progress'}</Typography>
@@ -489,6 +490,7 @@ class TaskList extends BaseComponent {
                                                 completedNumber={this.getCompletedTasksCount(task)}
                                             />
                                             <Typography className={'task-done'} lightColor>Tasks done: {this.getCompletedTasksCount(task)} / {task.sub_tasks.length}</Typography>
+                                            </div>
                                         </Paper>
                                     )}
                                 )
