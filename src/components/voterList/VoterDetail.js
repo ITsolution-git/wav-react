@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import { BaseComponent } from '../shared';
-import VoterProfile from './VoterProfile';
+import { VoterProfile, VoterCommunication } from './index'
 
 class VoterDetail extends BaseComponent {
 
@@ -13,6 +13,7 @@ class VoterDetail extends BaseComponent {
         return (
             <div className={classNames('btw-voter-detail-info btw-paper')}>
                 <VoterProfile selectedVoter={selectedVoter} changeStatusHandler={changeStatusHandler} />
+                <VoterCommunication selectedVoter={selectedVoter} />
             </div>
         );
     }
