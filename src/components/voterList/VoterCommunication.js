@@ -22,9 +22,8 @@ class VoterCommunication extends BaseComponent {
 
         if (type === 'showLess') {
             return readMore && (<Typography variant='body' onClick={this.readMoreButtonHandler} className='show-more'>Show Less</Typography>)
-        } else {
-            return !readMore && (<>.. <span onClick={this.readMoreButtonHandler} className='show-more'>Read more</span></>)
         }
+        return !readMore && (<>.. <span onClick={this.readMoreButtonHandler} className='show-more'>Read more</span></>)
     }
 
     renderMessage = () => {

@@ -8,6 +8,23 @@ class VoterActionItem extends BaseComponent {
     clickMarkButtonHandler = () => {
     }
 
+    renderMarkButton = (device) => {
+        const { task } = this.props;
+
+        if (!task.status) {
+            return (
+                <Button
+                    size='small'
+                    color='white'
+                    fullWidth={device === 'mobile'}
+                    className={`${device}-mark-action-button`}
+                    onClick={this.clickMarkButtonHandler}>
+                    Mark as Done
+                </Button>
+            )
+        }
+    }
+
     render() {
         const { task } = this.props;
 
@@ -29,10 +46,10 @@ class VoterActionItem extends BaseComponent {
                     <div className='action-control'>
                         <SvgIcon name='medal' />
                         <Typography variant="functional">{task.points}</Typography>
-                        {!task.status && <Button size='small' color='white' className='mark-action-button' onClick={this.clickMarkButtonHandler}>Mark as Done</Button>}
+                        {this.renderMarkButton('computer')}
                     </div>
                 </div>
-                {!task.status && <Button size='small' color='white' fullWidth className='mobile-mark-action-button' onClick={this.clickMarkButtonHandler}>Mark as Done</Button>}
+                {this.renderMarkButton('mobile')}
             </div>
         );
     }
