@@ -52,5 +52,5 @@ export default {
 
     unsubscribe: '/unsubscribe/:email',
 
-    verifyEmail: '/verifyemail'
+    verifyEmail: '/verify_email'
 }

@@ -22,7 +22,7 @@ class VerifyEmail extends BaseComponent {
                 <Typography className={cn('confirm-text')}>Confirm your email, please check your inbox.</Typography>
                 <Typography color={colors['primary']} displayInline variant='body' className={cn('email-address')}>user.email@gmail.com</Typography>
                 <div className={cn('receive-email')}>
-                    <Typography lightColor displayInline variant='body'>Didnt receive an email?</Typography>
+                    <Typography lightColor displayInline variant='functional'>Didnt receive an email?</Typography>
                     <Typography displayInline variant='body' className={cn('resend-btn')}>Resend</Typography>
 
                 </div>
