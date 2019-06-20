@@ -1,57 +1,92 @@
 .btw-captains-dashboard {
-  #name {
-    margin: 2% 0;
+
+ .today-extra-points {
+   margin-top: 90px;
+   margin-bottom: 30px;
+ }
+
+ .today-extra-point {
+   padding: 24px;
+   border-radius: 3px;
+   color: $white;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   &.left-point {
+    background: linear-gradient(267.51deg, #5ED5CC 0.26%, #2BADC6 98.82%);
+   }
+
+   &.right-point {
+    background: linear-gradient(267.62deg, #56B2D7 0.68%, #648ECA 99.71%)
+   }
+
+   .points-marks {
+     display: flex;
+     align-items: center;
+
+     .mark-as-done-btn {
+        width: auto;
+        background: transparent;
+        border: solid 1px;
+        margin-left: 5px;
+     }
+   }
+ }
+
+ .actions-in-progress-title {
+   margin-top: 50px;
+   margin-bottom: 30px;
+ }
+
+ .action-in-progress {
+  padding: 20px;
+  cursor: pointer;
+
+  .action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .white-box {
-    @extend .shadow;
-    border-radius: 5px;
-    background-color: $white;
-    @include respond-to($desktop) {
-      padding: 2.5% 3.5%;
-    }
-    @include respond-to($phone) {
-      padding: 20px 25px;
+
+  .action-title {
+    margin-top: 32px;
+    font-size: 12px;
+    line-height: 130%;
+  }
+
+  .task-done {
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .action-status {
+    display: flex;
+    align-items: center;
+
+    .status-text {
+      margin-left: 5px;
     }
   }
-  #recent-task {
-    margin: 4% 0;
-    #get-started {
-      margin: 0 6px;
+
+  .action-points {
+    display: flex;
+    align-items: center;
+
+    .points-text {
+      margin-left: 4px;
     }
   }
-  #voters {
-    margin: 4% 0;
-    #voter-count-div {
-      padding: 0 5% 0 0;
-      #voter-count {
-        height: 111px;
-      }
-    }
-    #add-voter {
-      height: 111px;
-      text-align: center;
-      img {
-        margin-top: 14%;
-        cursor: pointer;
-      }
-    }
+  
+  .action-duration {
+    font-size: 12px;
+    margin-bottom: 27px;
   }
-  #resource-center {
-    margin-top: 6%;
-  }
-  #resource-center-mobile {
-    margin: 10% 2%;
-  }
-  #help-friends {
-    margin-left: 3.5%;
-    .circle {
-      border: 3px solid $blue;
-      padding: 0 9px;
-      margin-right: 10px;
-      border-radius: 50%;
-    }
-    #circle-point {
-      margin: 20px 0;
-    }
-  }
+ }
+
+ .your-voters-title {
+   margin-top: 50px;
+   margin-bottom: 30px;
+ }
+ 
 }
