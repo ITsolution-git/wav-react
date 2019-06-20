@@ -4,10 +4,12 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
+import qs from 'qs';
+import moment from 'moment'
 
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
-import { btwSignOn } from '../../actions/SignOnAction';
+import { signInWithMail, signInWithToken } from '../../actions/AuthActions';
 import Spinner from '../shared/Spinner';
 import Button from '../shared/Button';
 import {
@@ -18,11 +20,26 @@ import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
 import { Typography } from '../shared';
 import BottomLink from './BottomLink';
+import colors from "../../constants/Colors";
 
 
 class LoginByMail extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
+		const { location: { hash }, actions } = this.props;
+		const params = qs.parse(hash);
+
+		const obj = {
+			token: params['#access_token'],
+			idToken: params['id_token'],
+			expiresIn: parseInt(params['expires_in'], 10),
+			startTime: moment().valueOf()
+		};
+
+		if (obj.token) {
+			actions.signInWithToken(obj);
+		}
+
 		this.state = {
 			email: '',
 			password: '',
@@ -33,15 +50,15 @@ class LoginByMail extends BaseComponent {
 
 	onKeyPress = (e) => {
 		if (e.key === 'Enter' || e.which === 13) {
-			this.btwSignOn();
+			this.signInWithMail();
 		}
 	};
 
-	btwSignOn() {
+	signInWithMail() {
 		this.setState({ startValidation: true });
 		const { email, password, valid } = this.state;
 		if (valid.email && valid.password) {
-			this.props.actions.btwSignOn(email, password);
+			this.props.actions.signInWithMail(email, password);
 		}
 	}
 
@@ -68,19 +85,20 @@ class LoginByMail extends BaseComponent {
 				<Paper className='paper'>
 					<div className="btw-form" onKeyPress={this.onKeyPress}>
 						<Typography className='title'>Log In by Email</Typography>
-						{ error && <div>Check your username or password</div> }
-
+						<Row className='inputs-row'>
+							<Col md={12} xs={12}>
+								<Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+							</Col>
+						</Row>
 						<Row className='inputs-row'>
 							<Col md={12}>
-								<EmailInput onChange={(value, valid, name) => {
-									const isValid = error ? true : valid;
-									this.handleChange(value, isValid, name);
-								}}
+								<EmailInput onChange={this.handleChange}
 											isVoter={false}
 											startValidation={startValidation}
 											uniqueValidationEnabled={false}
 											required
-											label='Your email address' />
+											label='Email'
+											placeholder='Your email address' />
 							</Col>
 						</Row>
 						<Row className='inputs-row'>
@@ -88,14 +106,15 @@ class LoginByMail extends BaseComponent {
 								<PasswordInput onChange={this.handleChange}
 											   startValidation={startValidation}
 											   required
-											   label='Your password' />
+											   label='Password'
+											   placeholder='Your password' />
 							</Col>
 						</Row>
 						<Row className='inputs-row'>
 							<Col md={12}>
 								<Button
 									disabled={isFetching}
-									onClick={this.btwSignOn.bind(this)}>
+									onClick={this.signInWithMail.bind(this)}>
 									Log In
 								</Button>
 							</Col>
@@ -108,7 +127,6 @@ class LoginByMail extends BaseComponent {
 										link={routes.registerBySocial}
 										linkText='Sign up'/>
 						</div>
-
 						<Col md={12}>
 							<Spinner loading={isFetching} size={50} />
 						</Col>
@@ -130,7 +148,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		actions: bindActionCreators({ btwSignOn }, dispatch)
+		actions: bindActionCreators({ signInWithMail, signInWithToken }, dispatch)
 	};
 };
 

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import routes from '../../constants/Routes';
 import exclamation from '../../resources/images/exclamation.png';
 import BaseComponent from '../shared/BaseComponent';
-import { btwLogout } from '../../actions/SignOnAction';
+import { btwLogout } from '../../actions/AuthActions';
 import Button from '../shared/Button';
 
 class GeneralErrorPage extends BaseComponent {

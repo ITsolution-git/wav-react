@@ -48,12 +48,12 @@ export function getAsync({ url, params = {}, headers = {}, includeToken = true, 
 
 function makeRequest(requestData, includeToken, failRedirect) {
     if (includeToken) {
-        const token = authStorage.getToken();
-        if (authStorage.isAuthenticated() && !isTokenValid(token)) {
+        const { token, ...restInfo} = authStorage.getTokenInfo();
+        if (authStorage.isAuthenticated() && !isTokenValid(restInfo)) {
             toErrorPage();
             return Promise.reject();
         }
-        requestData.headers['x-access-token'] = token;
+        requestData.headers['Authorization'] = `Bearer ${token}`;
     }
     return axios(requestData)
         .then(response => {

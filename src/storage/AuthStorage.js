@@ -6,28 +6,28 @@ export default {
     saveTokenInfo,
     getLoggedUser,
     isAuthenticated,
-    getToken,
+    getTokenInfo,
     getCurrentRole
 };
 
 const sessionKeys = {
-    token: 'token',
+    tokenInfo: 'tokenInfo',
     user: 'user'
 };
 
-function saveTokenInfo(token) {
-    const userObj = parseJwt(token);
-    userObj.role = userObj.role || roles.captain;
-    localStorage.setItem(sessionKeys.token, token);
-    localStorage.setItem(sessionKeys.user, JSON.stringify(userObj));
+function saveTokenInfo(tokenInfo) {
+    let user = parseJwt(tokenInfo.idToken);
+    user.role = roles.captain;
+    localStorage.setItem(sessionKeys.tokenInfo, JSON.stringify(tokenInfo));
+    localStorage.setItem(sessionKeys.user, JSON.stringify(user));
 }
 
 function getLoggedUser() {
     return JSON.parse(localStorage.getItem(sessionKeys.user)) || {};
 }
 
-function getToken() {
-    return localStorage.getItem(sessionKeys.token);
+function getTokenInfo() {
+    return JSON.parse(localStorage.getItem(sessionKeys.tokenInfo)) || {};
 }
 
 function getCurrentRole() {

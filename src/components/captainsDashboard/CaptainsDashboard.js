@@ -10,7 +10,7 @@ import routes from '../../constants/Routes';
 import authStorage from '../../storage/AuthStorage';
 import { loadVoterList } from '../../actions/VoterListAction';
 import { loadTaskList } from '../../actions/TaskListAction';
-import { getBtwUserProfile } from '../../actions/SignOnAction';
+import { getBtwUserProfile } from '../../actions/AuthActions';
 import Spinner from '../shared/Spinner';
 import ContentLayout from '../layout/ContentLayout';
 import Icon from '../shared/Icon';

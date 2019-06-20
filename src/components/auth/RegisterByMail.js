@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { btwRegister } from '../../actions/SignOnAction';
+import { signUpWitMail } from '../../actions/AuthActions';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 import fieldConstants from '../../constants/FieldConstants';
@@ -16,6 +16,7 @@ import {
 } from '../shared/validatedInputs';
 import { Button, Paper, Typography, BaseComponent } from '../shared';
 import BottomLink from './BottomLink';
+import colors from '../../constants/Colors';
 
 class RegisterByMail extends BaseComponent {
 	constructor(props) {
@@ -44,12 +45,12 @@ class RegisterByMail extends BaseComponent {
     };
 
 
-    btwRegister() {
+    signupWitMail() {
 		const { isValid, btwIdentity } = this.state;
 		this.setState({ startValidation: true });
 
         if (Object.values(isValid).every(val => val)) {
-            this.props.btwRegister(btwIdentity)
+            this.props.signupWitMail(btwIdentity)
         }
 	}
 
@@ -70,6 +71,11 @@ class RegisterByMail extends BaseComponent {
                 <Paper className='paper'>
                     <Typography className='title'>Sign Up with Email</Typography>
                     <Row className='inputs-row'>
+                        <Col md={12} xs={12}>
+                            <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+                        </Col>
+                    </Row>
+                    <Row className='inputs-row'>
                         <Col md={6}>
                             <FirstNameInput onChange={this.handleChange}
                                             startValidation={startValidation}
@@ -83,14 +89,10 @@ class RegisterByMail extends BaseComponent {
                     </Row>
                     <Row className='inputs-row'>
                         <Col md={12}>
-                            <EmailInput onChange={(value, valid, name) => {
-                                const isValid = this.props.error ? true : valid;
-                                this.handleChange(value, isValid, name);
-                            }}
+                            <EmailInput onChange={this.handleChange}
                                         isVoter={false}
                                         startValidation={startValidation}
                                         uniqueValidationEnabled={false}
-                                        customError={error}
                                         required />
                         </Col>
                     </Row>
@@ -119,7 +121,7 @@ class RegisterByMail extends BaseComponent {
                     <Row className='inputs-row'>
                         <Col md={12} xs={12} align="center">
                             <div id="btn_signup">
-                                <Button onClick={this.btwRegister.bind(this, 'btwSignOn')}>Sign Up</Button>
+                                <Button onClick={this.signupWitMail.bind(this, 'btwSignOn')}>Sign Up</Button>
                             </div>
                         </Col>
                     </Row>
@@ -140,7 +142,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-	btwRegister: (btwIdentity) => dispatch(btwRegister(btwIdentity))
+	signupWitMail: (btwIdentity) => dispatch(signUpWitMail(btwIdentity))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterByMail));
