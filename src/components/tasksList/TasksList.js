@@ -8,22 +8,17 @@ import cn from 'classnames';
 import {
     ActionItem,
     BaseComponent,
-    Dialog,
     Paper,
     SvgIcon,
     Typography,
-<<<<<<< HEAD
-    VoterAvatar
-=======
->>>>>>> B2-196: created taskcompleteddialog
 } from '../shared';
-import colors from '../../constants/Colors';
 import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import ContentLayout from '../layout/ContentLayout';
 import SubTasksList from './SubTasksList';
 import EmptyTask from './EmptyTask';
 import TaskCompleteDialog from './TaskCompleteDialog';
+import CongratsDialog from './CongratsDialog';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
@@ -39,13 +34,8 @@ class TaskList extends BaseComponent {
             tasks: [
                 {
                     task_id: 0,
-<<<<<<< HEAD
                     title: 'Help 5 people register for voting',
-                    status: 1, // 0: in progress, 1: completed
-=======
-                    title:'Help 5 people register for voting',
                     status: 0, // 0: in progress, 1: completed
->>>>>>> B2-196: empty task added
                     points: {
                         score: 4,
                         total: 20
@@ -436,35 +426,13 @@ class TaskList extends BaseComponent {
                     }
 
                     {
-                        showCongratDlg && <Dialog className={cn('congrate-dlg')}
-                            show={showCongratDlg}
-                            onClose={() => this.setState({ showCongratDlg: false })}>
-
-                            <Typography color={colors['white']} className={cn('cong-title')}>Congratulations!</Typography>
-                            <Typography color={colors['white']} variant='body'>Here are your 4 points. Well deserved, my friend. Well deserved!</Typography>
-
-                            <div className={cn('points-icon')}>
-                                <SvgIcon name="points-icon" />
-
-                                <div className={cn('points')}>
-                                    <SvgIcon name="medal" />
-                                    <Typography variant="body"> +4</Typography>
-                                </div>
-                            </div>
-
-                            <Typography color={colors['white']} variant='body'>Share your result:</Typography>
-
-                            <div className={cn('share-icons')}>
-                                <SvgIcon name="social-twitter" className={cn('tw-icon')} />
-                                <SvgIcon name="social-fb" />
-                            </div>
-
-                            <SvgIcon name="ellipse-solid" className={cn('ellipse-solid')} />
-                            <SvgIcon name="plus-solid" className={cn('plus-solid')} />
-                        </Dialog>
+                        showCongratDlg &&
+                        <CongratsDialog showCongratDlg={showCongratDlg}
+                            onClose={() => this.setState({ showCongratDlg: false })}
+                        />
                     }
                 </div>
-            </ContentLayout >
+            </ContentLayout>
         );
     }
 }
