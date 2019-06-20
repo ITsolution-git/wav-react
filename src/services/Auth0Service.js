@@ -49,7 +49,6 @@ class Auth0Service {
                 username: email,
                 password: password
             }, response => {
-                debugger;
                 if (response === null) {
                     resolve();
                 } else {

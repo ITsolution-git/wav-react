@@ -17,44 +17,36 @@ import { logout } from '../helpers/AuthHelper';
 
 const domain = window.location.origin;
 
-export function signinWithMail(email, password, onSuccess = () => {}) {
-	const auth0Service = new Auth0Service(domain + routes.loginByMail);
-	auth0Service.signIn({ email, password });
+export function signInWithToken(userInfo) {
 
-	// return dispatch => {
-	// 	dispatch(initializeRequest(appDataTypes.signOn));
-	// 	return IdentityService.login(email, password).then(
-	// 		response => {
-	//             authStorage.saveTokenInfo(response.token);
-	//             PubSub.publish(pubsubConstants.onAuthChange, true);
-	//             dispatch(loadDataSuccess(appDataTypes.signOn, response));
-	//             onSuccess();
-	// 		},
-	// 		error => {
-	// 			const { response } = error;
-	// 			const msgError = response ? response.data.message : 'Something went wrong while signing in';
-	// 			dispatch(loadDataFailure(appDataTypes.signOn, msgError));
-	// 		});
-	// };
-
-	// return dispatch => {
-	// 	dispatch(initializeRequest(appDataTypes.signOn));
-	// 	return IdentityService.login(email, password).then(
-	// 		response => {
-    //             authStorage.saveTokenInfo(response.token);
-    //             PubSub.publish(pubsubConstants.onAuthChange, true);
-    //             dispatch(loadDataSuccess(appDataTypes.signOn, response));
-    //             onSuccess();
-	// 		},
-	// 		error => {
-	// 			const { response } = error;
-	// 			const msgError = response ? response.data.message : 'Something went wrong while signing in';
-	// 			dispatch(loadDataFailure(appDataTypes.signOn, msgError));
-	// 		});
-	// };
+	return dispatch => {
+		if (parseInt(userInfo.expiresIn, 10) > 0) {
+			authStorage.saveTokenInfo(userInfo);
+			PubSub.publish(pubsubConstants.onAuthChange, true);
+			return dispatch(loadDataSuccess(appDataTypes.signOn, null));
+		}
+		return dispatch(loadDataFailure(appDataTypes.signOn, 'Invalid token.'));
+	};
 }
 
-export function signupWitMail(identity) {
+export function signInWithMail(email, password) {
+
+	return dispatch => {
+		const auth0Service = new Auth0Service(domain + routes.loginByMail);
+
+		dispatch(initializeRequest(appDataTypes.signOn));
+
+		return auth0Service.signIn({email, password}).then(
+			() => {
+	            dispatch(loadDataSuccess(appDataTypes.signOn, null));
+			},
+			error => {
+				dispatch(loadDataFailure(appDataTypes.signOn, error));
+			});
+	};
+}
+
+export function signUpWitMail(identity) {
 
 	return dispatch => {
 		const auth0Service = new Auth0Service(domain + routes.registerByMail);
@@ -64,7 +56,7 @@ export function signupWitMail(identity) {
 		return auth0Service.signUp(identity).then(
 			() => {
 					const { email, password } = identity;
-					dispatch(signinWithMail(email, password, () => {
+					dispatch(signInWithMail(email, password, () => {
 	                    dispatch(loadDataSuccess(appDataTypes.register, null));
 					}));
 				},

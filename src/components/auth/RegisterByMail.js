@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { signupWitMail } from '../../actions/AuthActions';
+import { signUpWitMail } from '../../actions/AuthActions';
 import appDataTypes from '../../constants/AppDataTypes';
 import routes from '../../constants/Routes';
 import fieldConstants from '../../constants/FieldConstants';
@@ -71,6 +71,11 @@ class RegisterByMail extends BaseComponent {
                 <Paper className='paper'>
                     <Typography className='title'>Sign Up with Email</Typography>
                     <Row className='inputs-row'>
+                        <Col md={12} xs={12}>
+                            <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+                        </Col>
+                    </Row>
+                    <Row className='inputs-row'>
                         <Col md={6}>
                             <FirstNameInput onChange={this.handleChange}
                                             startValidation={startValidation}
@@ -120,11 +125,6 @@ class RegisterByMail extends BaseComponent {
                             </div>
                         </Col>
                     </Row>
-                    <Row className='inputs-row'>
-                        <Col md={12} xs={12}>
-                            <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
-                        </Col>
-                    </Row>
                     <BottomLink />
                 </Paper>
             </div>
@@ -142,7 +142,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-	signupWitMail: (btwIdentity) => dispatch(signupWitMail(btwIdentity))
+	signupWitMail: (btwIdentity) => dispatch(signUpWitMail(btwIdentity))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterByMail));
