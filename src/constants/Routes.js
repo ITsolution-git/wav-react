@@ -11,6 +11,7 @@ export default {
     community: '/community',
     captainsDashboard: '/home',
     adminDashboard: '/home_admin',
+    ConsultManagement: '/consult',
     messageList: '/message_list',
     loginBySocial: '/',
     loginByMail: '/login_by_mail',
