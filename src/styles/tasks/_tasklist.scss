@@ -12,27 +12,8 @@
       background: $divider;
   }
 
-  .tabs {
-    display: flex;
-    justify-content: center;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  .actions-tabs {
     margin-bottom: 26px;
-
-    li {
-      margin: 0 10px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      color: $secondary;
-      line-height: 18px;
-      padding: 0;
-
-      &.active {
-        color: black;
-      }
-    }
   }
 
   .actions-content {
@@ -148,9 +129,4 @@
       margin-bottom: 27px;
     }
   }
-}
-
-.btw-content-layout {
-  width: 100%;
-  height: 100%;
 }

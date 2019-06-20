@@ -11,6 +11,7 @@ import {
     Paper,
     SvgIcon,
     Typography,
+    Tabs
 } from '../shared';
 import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';
@@ -19,6 +20,7 @@ import SubTasksList from './SubTasksList';
 import EmptyTask from './EmptyTask';
 import TaskCompleteDialog from './TaskCompleteDialog';
 import CongratsDialog from './CongratsDialog';
+import colors from '../../constants/Colors';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
@@ -31,11 +33,26 @@ class TaskList extends BaseComponent {
             showMarkAsDoneDlg: false,
             markAsDoneModalStatus: 0, //0 : start,
             showCongratDlg: false,
+            tabs: [
+                {
+                    id: 'allActions',
+                    title: 'All actions'
+                },
+                {
+                    id: 'inProgress',
+                    title: 'In progress'
+                },
+                {
+                    id: 'completed',
+                    title: 'Completed'
+                }
+            ],
+            activeTabId: 'allActions',
             tasks: [
                 {
                     task_id: 0,
                     title: 'Help 5 people register for voting',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'completed',
                     points: {
                         score: 4,
                         total: 20
@@ -93,7 +110,6 @@ class TaskList extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
                     
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
@@ -103,7 +119,7 @@ class TaskList extends BaseComponent {
                 {
                     task_id: 1,
                     title: 'Test',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'inProgress', // 0: in progress, 1: completed
                     points: {
                         score: 4,
                         total: 20
@@ -161,7 +177,6 @@ class TaskList extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
                     
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
@@ -171,7 +186,7 @@ class TaskList extends BaseComponent {
                 {
                     task_id: 2,
                     title: 'Test',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'inProgress', // 0: in progress, 1: completed
                     points: {
                         score: 4,
                         total: 20
@@ -229,7 +244,6 @@ class TaskList extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
                     
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
@@ -239,7 +253,7 @@ class TaskList extends BaseComponent {
                 {
                     task_id: 3,
                     title: 'Test',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'inProgress', // 0: in progress, 1: completed
                     points: {
                         score: 4,
                         total: 20
@@ -297,7 +311,6 @@ class TaskList extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
                     
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
@@ -306,14 +319,15 @@ class TaskList extends BaseComponent {
                 }
             ]
         };
+
     }
 
     componentWillMount() {
         this.props.actions.loadTaskList();
     }
 
-    switchTab = status => () => {
-        this.setState({ selectedTab: status });
+    switchTab = (tabId) => {
+        this.setState({ activeTabId: tabId })
     }
 
     gotoAll = () => {
@@ -375,7 +389,9 @@ class TaskList extends BaseComponent {
             isShowMobileSelectedDetail,
             showMarkAsDoneDlg,
             subTaskForMark,
-            showCongratDlg
+            showCongratDlg,
+            tabs,
+            activeTabId,
         } = this.state;
 
         const selectedTask = tasks[selectedTaskNo];
@@ -383,11 +399,10 @@ class TaskList extends BaseComponent {
         return (
             <ContentLayout>
                 <div className='bwt-task-list'>
-                    <ul className={'tabs'}>
-                        <li className={cn({ 'active': selectedTab === 2 })} onClick={this.switchTab(2)}>All actions</li>
-                        <li className={cn({ 'active': selectedTab === 0 })} onClick={this.switchTab(0)}>In progress</li>
-                        <li className={cn({ 'active': selectedTab === 1 })} onClick={this.switchTab(1)}>Completed</li>
-                    </ul>
+                    <Tabs tabs={tabs}
+                        activeTabId={activeTabId}
+                        onTabSelect={this.switchTab}
+                        className={cn('actions-tabs')} />
 
                     {
                         this.countTaskofCurrentTab(tasks, selectedTab) ?
@@ -396,24 +411,59 @@ class TaskList extends BaseComponent {
                                     {
                                         tasks.map((task, index) => {
 
-                                            return ((task.status === selectedTab || selectedTab === 2) &&
+                                            return ((task.status === activeTabId || activeTabId === 'allActions') &&
                                                 <ActionItem className={cn({ 'task-selected': index === selectedTaskNo })} key={task.task_id} task={task} onSelectTask={this.onClickTask} />
                                             )
                                         }
                                         )
                                     }
+
                                 </div>
+
+                                <Paper className={cn('selected-action', { 'mobile-selected-action': isShowMobileSelectedDetail })}>
+                                    {
+                                        isShowMobileSelectedDetail &&
+                                        <div className={cn('mobile-selected-header')}>
+                                            <div className={cn('goto-all-actions')}>
+                                                <SvgIcon name="arrow-left" onClick={this.gotoAll} />
+                                                <Typography color='white' className={cn('nav-title')}>All actions</Typography>
+                                            </div>
+                                            <SvgIcon name="navigation" />
+                                        </div>
+                                    }
+                                    <div className={cn('header', { 'completed-selected-header': selectedTask.status === 'completed' })}>
+                                        <div className={cn('action-status')}>
+                                            <SvgIcon name={selectedTask.status === 'completed' ? 'action-status-completed' : 'action-status-inprogress'} />
+                                            <Typography className={'status-text'} variant="functional" lightColor={selectedTask.status !== 'completed'} color={selectedTask.status === 'completed' ? colors['white'] : colors['secondary']}>{selectedTask.status ? 'Completed' : 'In progress'}</Typography>
+                                        </div>
+
+                                        <div className={'action-points'}>
+                                            <Typography variant='functional' lightColor={selectedTask.status !== 'completed'} color={selectedTask.status === 'completed' ? colors['white'] : colors['secondary']}>Points earned: </Typography>
+                                            <SvgIcon name='medal' />
+                                            <Typography className={'points-text'} variant="functional" lightColor={selectedTask.status !== 'completed'} color={selectedTask.status === 'completed' ? colors['white'] : colors['secondary']}>{selectedTask.points.score} / {selectedTask.points.total}</Typography>
+                                        </div>
+                                    </div>
+                                    <div className={'action-body'}>
+                                        <Typography>{selectedTask.title}</Typography>
+                                        <Typography variant='body' lightColor className={'action-duration'}>{selectedTask.start_date} – {selectedTask.end_date}</Typography>
+                                        <ReadMoreAndLess charLimit={250}
+                                            readMoreText='Read more'
+                                            readLessText='Read less'
+                                        >
+                                            {selectedTask.description}
+                                        </ReadMoreAndLess>
+
+                                        {selectedTask.status === 'inProgress' && <Typography className={'active-task-title'}>Active tasks({selectedTask.subTasks.length - this.getCompletedTasksCount(selectedTask)})</Typography>}
+
+                                        <SubTasksList subTasks={selectedTask.subTasks} status={0} onMarkAsDone={this.clickMarkAsDone} />
+
+                                        <Typography className={'active-task-title'}>Done tasks({this.getCompletedTasksCount(selectedTask)})</Typography>
+
+                                        <SubTasksList subTasks={selectedTask.subTasks} status={1} />
+                                    </div>
+                                </Paper>
                             </div> :
-                            <div className={cn('empty-task')}>
-                                <SvgIcon name="task-empty" />
-                                <Typography lightColor >Hey! It's empty here.</Typography>
-                                <Typography lightColor variant="body">Looks like you don’t have any actions available for now.</Typography>
-                                <div className={'action-points'}>
-                                    <Typography variant='functional' lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>Points earned: </Typography>
-                                    <SvgIcon name='medal' />
-                                    <Typography className={'points-text'} variant="functional" lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>{selectedTask.points.score} / {selectedTask.points.total}</Typography>
-                                </div>
-                            </div>
+                            <EmptyTask />
                     }
 
                     {

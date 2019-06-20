@@ -36,6 +36,7 @@ import {
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
 import ActionItem from './ActionItem';
+import Tabs from './Tabs';
 
 export {
 	BaseComponent,
@@ -70,5 +71,6 @@ export {
 	VoterCardView,
 	SocialButton,
 	VoterStatusDropdown,
-	ActionItem
+	ActionItem,
+	Tabs
 }

@@ -89,7 +89,7 @@ class CaptainsDashboard extends BaseComponent {
                 {
                     task_id: 0,
                     title: 'Test1',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'inProgress',
                     points: {
                         score: 4,
                         total: 20
@@ -131,7 +131,7 @@ class CaptainsDashboard extends BaseComponent {
                         },
                         {
                             subTask_id: 2,
-                            status: 1, //0 : in progress, 1: done
+                            status: 'inProgress',
                             voter: {
                                 name: 'Dennis Holman',
                                 status: 'in-frequent', //not-registered, in-frequent, regular,
@@ -157,7 +157,7 @@ class CaptainsDashboard extends BaseComponent {
                 {
                     task_id: 1,
                     title: 'Test',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'inProgress',
                     points: {
                         score: 4,
                         total: 20
@@ -225,7 +225,7 @@ class CaptainsDashboard extends BaseComponent {
                 {
                     task_id: 2,
                     title: 'Test',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'inProgress',
                     points: {
                         score: 4,
                         total: 20
@@ -293,7 +293,7 @@ class CaptainsDashboard extends BaseComponent {
                 {
                     task_id: 3,
                     title: 'Test',
-                    status: 0, // 0: in progress, 1: completed
+                    status: 'inProgress',
                     points: {
                         score: 4,
                         total: 20

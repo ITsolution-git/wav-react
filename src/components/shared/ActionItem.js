@@ -23,8 +23,8 @@ class ActionItem extends BaseComponent {
                 <div onClick={this.handleClick}>
                     <div className={'btw-action-header'}>
                         <div className={'btw-action-status'}>
-                            <SvgIcon name={task.status ? 'action-status-completed' : 'action-status-inprogress'}/>
-                            <Typography className={'btw-status-text'} variant="functional" lightColor>{task.status ? 'Completed' : 'In progress'}</Typography>
+                            <SvgIcon name={task.status === 'completed'? 'action-status-completed' : 'action-status-inprogress'}/>
+                            <Typography className={'btw-status-text'} variant="functional" lightColor>{task.status === 'completed' ? 'Completed' : 'In progress'}</Typography>
                         </div>
 
                         <div className={'btw-action-points'}>
