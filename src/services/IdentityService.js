@@ -1,14 +1,14 @@
 import config from '../config/ApiConfig';
-import { getAsync } from '../helpers/RequestHelper';
+import { postAsync } from '../helpers/RequestHelper';
 
 const IdentityService = {
-	getUserProfile,
+	getUser,
 };
 
-function getUserProfile(email) {
-	return getAsync({
-		url: `${config.apiHost}/api/v1/getUser`,
-		headers: {'x-key': email }
+function getUser(data) {
+	return postAsync({
+		url: `${config.apiHost}/auth/getUser`,
+		data
 	});
 }
 

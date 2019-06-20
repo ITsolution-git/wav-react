@@ -1,6 +1,6 @@
 import PubSub from 'pubsub-js';
 
-import IdentityService from '../services/IdentityService';
+import identityService from '../services/IdentityService';
 import authStorage  from '../storage/AuthStorage';
 import appDataTypes from '../constants/AppDataTypes';
 import pubsubConstants from '../constants/PubSubConstants';
@@ -69,7 +69,8 @@ export function signUpWitMail(identity) {
 export function getBtwUserProfile() {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.profile));
-		return IdentityService.getUserProfile(authStorage.getLoggedUser().email).then(
+
+		return identityService.getUser({ email: authStorage.getLoggedUser().email }).then(
 				response => {
 					dispatch(loadDataSuccess(appDataTypes.profile, response.data.userInformation))
 				},

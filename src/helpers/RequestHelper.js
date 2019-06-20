@@ -53,7 +53,7 @@ function makeRequest(requestData, includeToken, failRedirect) {
             toErrorPage();
             return Promise.reject();
         }
-        requestData.headers['Authorization'] = token;
+        requestData.headers['Authorization'] = `Bearer ${token}`;
     }
     return axios(requestData)
         .then(response => {
