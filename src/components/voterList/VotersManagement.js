@@ -205,17 +205,17 @@ class VotersManagement extends BaseComponent {
         const { selectedVoter } = this.state;
 
         return (
-            <Container>
+            <Container className='btw-voter-page'>
                 <Row className='text-center'>
                     <Col>
                         <FilterBar {...this.props} />
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={12} lg={6}>
+                    <Col md={12} lg={6}>
                         <VotersList {...this.props} />
                     </Col>
-                    <Col xs={12} lg={6}>
+                    <Col md={12} lg={6}>
                         <VoterDetail selectedVoter={selectedVoter} changeStatusHandler={this.changeStatusHandler} />
                     </Col>
                 </Row>

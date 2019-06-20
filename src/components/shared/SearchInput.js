@@ -15,11 +15,9 @@ class SearchInput extends BaseComponent {
 
     inputHandler = (event) => {
         const { value } = event.target;
-
         this.setState({ value: value });
-        if (this.isMobile() || !value) {
-            this.props.onChange(value);
-        }
+        if (this.props.onChange)
+            this.props.onChange(value)
     }
 
     clickHandler = () => {
@@ -51,14 +49,15 @@ class SearchInput extends BaseComponent {
                 {this.renderIcon()}
                 <input
                     type='text'
-                    className='btw-paper'
+                    className={classNames({'btw-search-focus': isValue})}
                     placeholder={placeholder}
                     name='search'
                     value={value}
-                    onChange={this.inputHandler} />
+                    onChange={this.inputHandler} 
+                />
                 < Button
                     type='button'
-                    className='btw-paper search-button'
+                    className='search-button'
                     onClick={this.clickHandler}
                     disabled={!isValue}>
                     Search

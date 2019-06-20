@@ -22,9 +22,9 @@ import StatusIcon from './StatusIcon'
 import SvgIcon from './SvgIcon'
 import TaskProgressBar from './TaskProgressBar'
 import Typography from './Typography'
-import VoterAvatar from './VoterAvatar'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
+import { VoterCardView, VoterInfo, VoterAvatar } from './voterComponents'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
 
@@ -53,6 +53,8 @@ export {
 	VoterAvatar,
 	VotersProgressBar,
 	VotersTable,
+	VoterInfo,
+	VoterCardView,
 	SocialButton,
 	VoterStatusDropdown
 }

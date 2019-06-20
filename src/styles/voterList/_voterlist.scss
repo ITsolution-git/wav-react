@@ -1,92 +1,34 @@
-.btw-voter-list {
-  .voters-list {
-    margin-top: 30px;
+.btw-voter-page {
+  .btw-voter-filter {
+    position: relative;
 
-    .voter-item {
-      @extend .shadow;
-      background-color: $white;
-      border-radius: 5px;
+    .btw-voter-filter-item {
+      margin: 1em;
+      font-weight: 600;
+      color: $charcoal;
+      cursor: pointer;
+    }
+
+    .btw-voter-filter-item.active-item {
+      color: black;
+    }
+
+    .btw-voter-add-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 0.35em;
+      width: 132px;
 
       @include respond-to($phone) {
-        padding: 20px 5px;
-      }
-      @include respond-to($desktop) {
-        padding: 20px;
-      }
-
-      margin-bottom: 15px;
-
-      .arrow {
-        width: 0;
-        height: 0;
-        border-left: 10px solid transparent;
-        border-right: 10px solid transparent;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      .arrow-up {
-        @extend .arrow;
-        border-bottom: 10px solid $dark-blue;
-      }
-
-      .arrow-down {
-        @extend .arrow;
-        border-top: 10px solid $dark-blue;
-      }
-
-      .more-info {
-        margin-top: 20px;
-      }
-
-      .icons{
-        cursor: pointer;
-        text-align: center;
-        width: 100%;
-      }
-
-      .edit-icon {
-        cursor: pointer;
-        @include respond-to($phone) {
-          text-align: right;
-        }
-      }
-
-      .voting-info {
-        .block {
-          margin-bottom: 25px;
-        }
-        .title {
-          margin: 10px 0;
-        }
-        .section {
-          margin: 5px;
-        }
+        position: relative;
       }
     }
   }
+}
 
-  #add-button {
-    @extend .shadow;
-    background-color: $white;
-    padding: 12px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    img {
-      margin-left: 40px;
-    }
-  }
-
-  #add-button-mobile {
-    background-color: $blue;
-    border-radius: 5px;
-    padding: 20px 0;
-    margin-bottom: 25px;
-    text-align: center;
-    img {
-      margin-right: 20px;
-    }
-  }
+.btw-voter-item {
+  
 }
 
 #add-voter-modal {
