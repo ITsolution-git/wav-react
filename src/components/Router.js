@@ -40,7 +40,6 @@ import MessageList from './messages/MessageList';
 import VoterFilter from './filters/VoterFilter';
 import CaptainFilter from './filters/CaptainFilter';
 
-import VerifyCaptain from './changePassword/verifyCaptain';
 import ChangePassword from './changePassword/changePassword';
 import ForgotPassword from './changePassword/forgotPassword';
 
@@ -167,7 +166,6 @@ const router = () => (
         <Route exact path={routes.resourceCenter} component={ResourceCenter} />
 
         {/* change changePassword */}
-        <Route exact path={routes.verifyCaptain} component={VerifyCaptain} />
         <Route exact path={routes.changePassword} component={ChangePassword} />
         <Route exact path={routes.forgotPassword} component={ForgotPassword} />
 
