@@ -96,9 +96,9 @@ class CaptainsDashboard extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -114,7 +114,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -130,7 +130,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -164,9 +164,9 @@ class CaptainsDashboard extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 0, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -182,7 +182,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -198,7 +198,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -232,9 +232,9 @@ class CaptainsDashboard extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -250,7 +250,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -266,7 +266,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -300,9 +300,9 @@ class CaptainsDashboard extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -318,7 +318,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -334,7 +334,7 @@ class CaptainsDashboard extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',

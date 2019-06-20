@@ -7,12 +7,8 @@ import { BaseComponent, Typography, TaskProgressBar, SvgIcon, Paper } from './in
 class ActionItem extends BaseComponent {
 
     getCompletedTasksCount(task) {
-        var count = 0
-        task.sub_tasks.map(sub_task => {
-            if(sub_task.status) count ++;
-            return count;
-        })
-        return count;
+        
+        return task.subTasks.filter(subTask => subTask.status).length;
     }
 
     handleClick = () => {
@@ -39,10 +35,10 @@ class ActionItem extends BaseComponent {
 
                     <Typography className={'btw-action-title'}>{task.title}</Typography>
                     <Typography className={'btw-action-duration'} lightColor variant="functional">{task.start_date} – {task.end_date}</Typography>
-                    <TaskProgressBar total={task.sub_tasks.length}
+                    <TaskProgressBar total={task.subTasks.length}
                         completedNumber={this.getCompletedTasksCount(task)}
                     />
-                    <Typography className={'btw-task-done'} lightColor variant="functional">Tasks done: {this.getCompletedTasksCount(task)} / {task.sub_tasks.length}</Typography>
+                    <Typography className={'btw-task-done'} lightColor variant="functional">Tasks done: {this.getCompletedTasksCount(task)} / {task.subTasks.length}</Typography>
                     
                 </div>
             </Paper>

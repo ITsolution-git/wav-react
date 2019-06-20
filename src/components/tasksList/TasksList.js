@@ -21,6 +21,7 @@ import colors from '../../constants/Colors';
 import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import ContentLayout from '../layout/ContentLayout';
+import SubTasksList from './SubTasksList';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
@@ -44,9 +45,9 @@ class TaskList extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -62,7 +63,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -78,7 +79,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -112,9 +113,9 @@ class TaskList extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 0, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -130,7 +131,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -146,7 +147,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -180,9 +181,9 @@ class TaskList extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -198,7 +199,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -214,7 +215,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -248,9 +249,9 @@ class TaskList extends BaseComponent {
                     },
                     start_date: '30 May 2019',
                     end_date: '30 May 2019',
-                    sub_tasks: [
+                    subTasks: [
                         {
-                            sub_task_id: 0,
+                            subTask_id: 0,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -266,7 +267,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 1,
+                            subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -282,7 +283,7 @@ class TaskList extends BaseComponent {
                             points: 4
                         },
                         {
-                            sub_task_id: 2,
+                            subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
                                 name: 'Dennis Holman',
@@ -314,12 +315,6 @@ class TaskList extends BaseComponent {
         this.props.actions.loadTaskList();
     }
 
-    goToTask = (task, taskRoute) => {
-        const { state } = task.voter_metaData || {};
-        this.props.actions.getStateInfo(state);
-        this.onLink(`${taskRoute}?taskId=${task._id}`);
-    };
-
     getViewProps = () => {
         if (this.isDesktop()) {
             return {
@@ -345,36 +340,10 @@ class TaskList extends BaseComponent {
         })
     }
 
-    renderSubTasks(sub_tasks, status) {
-        return sub_tasks.map(sub_task => {
-            return (
-                sub_task.status === status && <div className={'sub_task-item'} key={sub_task.sub_task_id}>
-                    <div className={'voter-detail'}>
-                        <VoterAvatar initials={sub_task.voter.initials} src={sub_task.voter.avatar} color={sub_task.voter.status === 'not-registered' ? 'error' : sub_task.voter.status === 'in-frequent' ? 'alert' : 'success'} />
-                        <div className={'voter-general'}>
-                            <Typography className={'voter-name'}>{sub_task.voter.name}</Typography>
-                            <div className={'voter-auth-social'}>
-                                <Typography variant='functional' color={sub_task.voter.status === 'not-registered' ? colors['error'] : sub_task.voter.status === 'in-frequent' ? colors['alert'] : colors['success']}>{sub_task.voter.status === 'not-registered' ? 'Not registerd' : sub_task.voter.status === 'in-frequent' ? 'Infrequent' : 'Regular'} </Typography> |
-                            <SocialList social={sub_task.voter.social} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={'sub-task-info'}>
-                        <SvgIcon name='medal' />
-                        <Typography variant="functional">{sub_task.points}</Typography>
-                        {!status && <Button size='small' color='white' className={'mark-as-done'} onClick={this.clickMarkAsDone(sub_task)}>Mark as Done</Button>}
-                        {<SvgIcon name={status ? 'mark-done' : 'mark-inprogress'} className={cn('mark-icon')} onClick={this.clickMarkAsDone(sub_task)} />}
-                    </div>
-                </div>
-            )
-        })
-    }
-
     getCompletedTasksCount(task) {
         var count = 0
-        task.sub_tasks.map(sub_task => {
-            if (sub_task.status) count++;
+        task.subTasks.map(subTask => {
+            if (subTask.status) count++;
             return count;
         })
         return count;
@@ -395,13 +364,10 @@ class TaskList extends BaseComponent {
         }
     }
 
-    clickMarkAsDone = sub_task => () => {
-        if (sub_task.status) {
-            return;
-        }
+    clickMarkAsDone = (subTask) => {
 
         this.setState({
-            subTaskForMark: sub_task,
+            subTaskForMark: subTask,
             showMarkAsDoneDlg: true,
         })
     }
@@ -433,12 +399,13 @@ class TaskList extends BaseComponent {
     }
 
     onClickTask = (task) => {
-        this.state.tasks.map((task_item, index) => {
+        const { tasks, isShowMobileSelectedDetail } = this.state
+        tasks.map((task_item, index) => {
             if (task.task_id === task_item.task_id) {
                 this.setState({ selectedTaskNo: index })
 
                 if (this.isMobile()) {
-                    this.setState({ isShowMobileSelectedDetail: !this.state.isShowMobileSelectedDetail })
+                    this.setState({ isShowMobileSelectedDetail: !isShowMobileSelectedDetail })
                 }
             }
             return index;
@@ -482,60 +449,37 @@ class TaskList extends BaseComponent {
                                         }
                                         )
                                     }
-
                                 </div>
-
-                                <Paper className={cn('selected-action', { 'mobile-selected-action': isShowMobileSelectedDetail })}>
-                                    {
-                                        isShowMobileSelectedDetail &&
-                                        <div className={cn('mobile-selected-header')}>
-                                            <div className={cn('goto-all-actions')}>
-                                                <SvgIcon name="arrow-left" onClick={this.gotoAll} />
-                                                <Typography color='white' className={cn('nav-title')}>All actions</Typography>
-                                            </div>
-                                            <SvgIcon name="navigation" />
-                                        </div>
-                                    }
-                                    <div className={cn('header', { 'completed-selected-header': selectedTask.status })}>
-                                        <div className={cn('action-status')}>
-                                            <SvgIcon name={selectedTask.status ? 'action-status-completed' : 'action-status-inprogress'} />
-                                            <Typography className={'status-text'} variant="functional" lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>{selectedTask.status ? 'Completed' : 'In progress'}</Typography>
-                                        </div>
-
-                                        <div className={'action-points'}>
-                                            <Typography variant='functional' lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>Points earned: </Typography>
-                                            <SvgIcon name='medal' />
-                                            <Typography className={'points-text'} variant="functional" lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>{selectedTask.points.score} / {selectedTask.points.total}</Typography>
-                                        </div>
-                                    </div>
-                                    <div className={'action-body'}>
-                                        <Typography>{selectedTask.title}</Typography>
-                                        <Typography variant='body' lightColor className={'action-duration'}>{selectedTask.start_date} – {selectedTask.end_date}</Typography>
-                                        <ReadMoreAndLess charLimit={250}
-                                            readMoreText='Read more'
-                                            readLessText='Read less'
-                                        >
-                                            {selectedTask.description}
-                                        </ReadMoreAndLess>
-
-                                        {!selectedTask.status && <Typography className={'active-task-title'}>Active tasks({selectedTask.sub_tasks.length - this.getCompletedTasksCount(selectedTask)})</Typography>}
-
-                                        {this.renderSubTasks(selectedTask.sub_tasks, 0)}
-
-                                        <Typography className={'active-task-title'}>Done tasks({this.getCompletedTasksCount(selectedTask)})</Typography>
-
-                                        {this.renderSubTasks(selectedTask.sub_tasks, 1)}
-                                    </div>
-                                </Paper>
                             </div> :
                             <div className={cn('empty-task')}>
-
                                 <SvgIcon name="task-empty" />
                                 <Typography lightColor >Hey! It's empty here.</Typography>
                                 <Typography lightColor variant="body">Looks like you don’t have any actions available for now.</Typography>
-
+                                <div className={'action-points'}>
+                                    <Typography variant='functional' lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>Points earned: </Typography>
+                                    <SvgIcon name='medal' />
+                                    <Typography className={'points-text'} variant="functional" lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>{selectedTask.points.score} / {selectedTask.points.total}</Typography>
+                                </div>
                             </div>
                     }
+                    <div className={'action-body'}>
+                        <Typography>{selectedTask.title}</Typography>
+                        <Typography variant='body' lightColor className={'action-duration'}>{selectedTask.start_date} – {selectedTask.end_date}</Typography>
+                        <ReadMoreAndLess charLimit={250}
+                            readMoreText='Read more'
+                            readLessText='Read less'
+                        >
+                            {selectedTask.description}
+                        </ReadMoreAndLess>
+
+                        {!selectedTask.status && <Typography className={'active-task-title'}>Active tasks({selectedTask.subTasks.length - this.getCompletedTasksCount(selectedTask)})</Typography>}
+
+                        <SubTasksList subTasks={selectedTask.subTasks} status={0} onMarkAsDone={this.clickMarkAsDone} />
+
+                        <Typography className={'active-task-title'}>Done tasks({this.getCompletedTasksCount(selectedTask)})</Typography>
+
+                        <SubTasksList subTasks={selectedTask.subTasks} status={1} />
+                    </div>
 
                     {showMarkAsDoneDlg && <Dialog className={cn('mark-as-done-dlg')}
                         show={showMarkAsDoneDlg}

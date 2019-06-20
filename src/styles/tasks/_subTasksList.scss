@@ -1,0 +1,62 @@
+.sub_task-item {
+    border: 1px solid $divider;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 15px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 8px;
+    position: relative;
+  
+    &.mark-modal-sub-task-item {
+      margin: 35px 0 50px;
+    }
+  
+    .voter-detail {
+      display: flex;
+      align-items: center;
+  
+      .voter-general{
+        margin: 0 0 0 17px;
+        
+        .voter-name {
+          font-size: 13px;
+        }
+  
+        .voter-auth-social {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  
+    .sub-task-info {
+      display: flex;
+      align-items: center;
+  
+      @include respond-to($phone) {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+      }
+  
+      .mark-as-done {
+        width: 90px;
+        margin-left: 8px;
+  
+        @include respond-to($phone) {
+          display: none;
+        }
+      }
+  
+      .mark-icon {
+        display: none;
+        margin-left: 16px;
+  
+        @include respond-to($phone) {
+          display: block;
+        }
+      }
+    }
+  }
