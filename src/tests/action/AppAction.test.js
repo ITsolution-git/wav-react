@@ -47,8 +47,6 @@ describe('getBtwUserProfile tests', () => {
 		];
 		const store = mockStore({response : []});
 		return store.dispatch(getBtwUserProfile()).then(() => {
-			console.log(store.getActions())
-			console.log(expectedActions)
 			expect(store.getActions()).to.deep.equal(expectedActions)
 		})
 	})
