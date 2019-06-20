@@ -1,4 +1,5 @@
 import localStorage from 'localStorage';
+import cookies from 'js-cookie';
 
 export default class UserAuthenticator {
     static loginCaptain() {
@@ -27,6 +28,6 @@ export default class UserAuthenticator {
         };
 
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('tokenInfo', JSON.stringify(tokenInfo));
+        cookies.set('tokenInfo', JSON.stringify(tokenInfo));
     }
 }
