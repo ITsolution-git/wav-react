@@ -7,19 +7,20 @@ import cn from 'classnames';
 
 import BaseComponent from '../../components/shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
-import routes from '../../constants/Routes';
 import colors from '../../constants/Colors';
 import authStorage from '../../storage/AuthStorage';
 import { loadVoterList } from '../../actions/VoterListAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import { getBtwUserProfile } from '../../actions/AuthActions';
 import { getStateInfo } from '../../actions/TaskAction';
-import Button from '../shared/Button';
-import Spinner from '../shared/Spinner';
-import { SvgIcon } from '../shared';
-import Typography from '../shared/Typography';
-import Paper from '../shared/Paper';
-import ActionItem from '../shared/ActionItem';
+import {
+    ActionItem,
+    Button,
+    Spinner,
+    SvgIcon,
+    Typography,
+    VoterCardView
+} from '../shared';
 import ContentLayout from '../layout/ContentLayout';
 
 class CaptainsDashboard extends BaseComponent {
@@ -33,6 +34,57 @@ class CaptainsDashboard extends BaseComponent {
         actions.getBtwUserProfile();
 
         this.state = {
+            voters: [
+                {
+                    firstName: 'Steven',
+                    lastName: 'Griffith',
+                    name: 'Steven Griffith',
+                    gender: 'Male',
+                    street: 'address street',
+                    social: {
+                        twitter: true,
+                        linkedIn: true
+                    },
+                    status: 'Infrequent'
+                },
+                {
+                    firstName: 'Steven',
+                    lastName: 'Griffith',
+                    name: 'Steven Griffith',
+                    gender: 'Male',
+                    street: 'address street',
+                    social: {
+                        twitter: true,
+                        linkedIn: true
+                    },
+                    status: 'Infrequent'
+                },
+                {
+                    firstName: 'Florence',
+                    lastName: 'Boyle',
+                    name: 'Florence Boyle',
+                    gender: 'Female',
+                    street: 'address street',
+                    social: {
+                        twitter: true,
+                        linkedIn: true
+                    },
+                    status: 'Regular'
+                },
+                {
+                    firstName: 'Florence',
+                    lastName: 'Boyle',
+                    name: 'Florence Boyle',
+                    gender: 'Female',
+                    street: 'address street',
+                    social: {
+                        twitter: true,
+                        linkedIn: true
+                    },
+                    status: 'Regular',
+                    src: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png'
+                }
+            ],
             tasks: [
                 {
                     task_id: 0,
@@ -307,42 +359,8 @@ class CaptainsDashboard extends BaseComponent {
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 }
             ]
-
         }
     }
-
-    goToTask = (task, taskRoute) => {
-        const { state } = task.voter_metaData || {};
-        this.props.actions.getStateInfo(state);
-        this.onLink(`${taskRoute}?taskId=${task._id}`);
-    };
-
-    onAddClick = () => {
-        this.onLink(`${routes.voterList}?openAddModal=true`);
-    };
-
-    renderCircleItem = (number, text) => {
-        return (
-            <div id="circle-point">
-                <span className="circle">{number}</span>
-                {text}
-            </div>
-        )
-    };
-
-    renderResourceCenter = () => {
-        return (
-            <div>
-                <div className="text-15-dark-blue-bold">
-                    Not sure how to talk to your friends about <br />
-                    voting? Uncertain about the latest voter ID laws?
-                </div>
-                <div onClick={() => this.onLink(routes.resourceCenter)}>
-                    Check out our Resource Center  <i className="arrow-right-dark-blue" />
-                </div>
-            </div>
-        )
-    };
 
     render() {
         const {
@@ -355,7 +373,7 @@ class CaptainsDashboard extends BaseComponent {
 
         } = this.props;
 
-        const { tasks } = this.state
+        const { tasks, voters } = this.state
 
         return (
             <ContentLayout>
@@ -395,11 +413,12 @@ class CaptainsDashboard extends BaseComponent {
                                 </Col>
                             </Row>
 
-                            <Row className={cn('today-extra-points')}>
-                                <Col md={12}>
-                                    <Typography>Today’s extra points tasks</Typography>
-                                </Col>
-                            </Row>
+                            <div className={cn('today-extra-points')}>
+                                <Typography>Today’s extra points tasks</Typography>
+                                <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                            </div>
+
+
 
                             <Row>
                                 <Col md={6}>
@@ -426,19 +445,18 @@ class CaptainsDashboard extends BaseComponent {
                                 </Col>
                             </Row>
 
-                            <Row className={cn('actions-in-progress-title')}>
-                                <Col md={12}>
-                                    <Typography>Actions in progress</Typography>
-                                </Col>
-                            </Row>
+                            <div className={cn('actions-in-progress-title')}>
+                                <Typography>Actions in progress</Typography>
+                                <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                            </div>
 
                             <Row>
 
                                 {
                                     tasks.map((task, index) => {
                                         return (
-                                            <Col md={3}>
-                                                <ActionItem key={task.task_id} task={task} />
+                                            <Col md={3} key={task.task_id}>
+                                                <ActionItem task={task} />
                                             </Col>
                                         )
                                     })
@@ -446,20 +464,22 @@ class CaptainsDashboard extends BaseComponent {
 
                             </Row>
 
-                            <Row className={cn('your-voters-title')}>
-                                <Col md={12}>
-                                    <Typography>Your voters</Typography>
-                                </Col>
-                            </Row>
+                            <div className={cn('your-voters-title')}>
+                                <Typography>Your voters</Typography>
+                                <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                            </div>
 
                             <Row>
-                                <Col md={6}>
-                                    <Paper>
-                                        <div>
+                                {
+                                    voters.map((voter, index) => {
+                                        return (
+                                            <Col md={6} key={index}>
+                                                <VoterCardView data={voter} />
+                                            </Col>
+                                        )
+                                    })
+                                }
 
-                                        </div>
-                                    </Paper>
-                                </Col>
                             </Row>
                         </div>
                     }

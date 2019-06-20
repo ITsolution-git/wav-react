@@ -6,15 +6,17 @@ import ReadMoreAndLess from 'react-read-more-less';
 import cn from 'classnames';
 import Dropzone from 'react-dropzone';
 
-import Button from '../shared/Button';
-import BaseComponent from '../shared/BaseComponent';
-import SvgIcon from '../shared/SvgIcon';
-import Dialog from '../shared/Dialog';
-import Paper from '../shared/Paper';
-import SocialList from '../shared/SocialList'
-import Typography from '../shared/Typography';
-import VoterAvatar from '../shared/VoterAvatar';
-import ActionItem from '../shared/ActionItem';
+import {
+    ActionItem,
+    BaseComponent,
+    Button,
+    Dialog,
+    Paper,
+    SocialList,
+    SvgIcon,
+    Typography,
+    VoterAvatar
+} from '../shared';
 import colors from '../../constants/Colors';
 import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';

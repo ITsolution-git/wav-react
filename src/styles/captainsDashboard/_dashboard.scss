@@ -1,8 +1,11 @@
 .btw-captains-dashboard {
 
- .today-extra-points {
+ .today-extra-points, .actions-in-progress-title, .your-voters-title {
    margin-top: 90px;
    margin-bottom: 30px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
  }
 
  .today-extra-point {
@@ -32,11 +35,6 @@
         margin-left: 5px;
      }
    }
- }
-
- .actions-in-progress-title {
-   margin-top: 50px;
-   margin-bottom: 30px;
  }
 
  .action-in-progress {
@@ -83,10 +81,8 @@
     margin-bottom: 27px;
   }
  }
-
- .your-voters-title {
-   margin-top: 50px;
-   margin-bottom: 30px;
- }
  
+ .view-all {
+   cursor: pointer;
+ }
 }
