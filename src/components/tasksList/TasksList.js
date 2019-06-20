@@ -22,6 +22,7 @@ import { getStateInfo } from '../../actions/TaskAction';
 import { loadTaskList } from '../../actions/TaskListAction';
 import ContentLayout from '../layout/ContentLayout';
 import SubTasksList from './SubTasksList';
+import EmptyTask from './EmptyTask';
 
 class TaskList extends BaseComponent {
     constructor(props, context) {
@@ -37,8 +38,13 @@ class TaskList extends BaseComponent {
             tasks: [
                 {
                     task_id: 0,
+<<<<<<< HEAD
                     title: 'Help 5 people register for voting',
                     status: 1, // 0: in progress, 1: completed
+=======
+                    title:'Help 5 people register for voting',
+                    status: 0, // 0: in progress, 1: completed
+>>>>>>> B2-196: empty task added
                     points: {
                         score: 4,
                         total: 20
@@ -315,21 +321,6 @@ class TaskList extends BaseComponent {
         this.props.actions.loadTaskList();
     }
 
-    getViewProps = () => {
-        if (this.isDesktop()) {
-            return {
-                titleClass: '',
-                taskName: '',
-                tileClass: ''
-            }
-        }
-        return {
-            titleClass: '',
-            taskName: '',
-            tileClass: ''
-        }
-    };
-
     switchTab = status => () => {
         this.setState({ selectedTab: status });
     }
@@ -341,26 +332,16 @@ class TaskList extends BaseComponent {
     }
 
     getCompletedTasksCount(task) {
-        var count = 0
-        task.subTasks.map(subTask => {
-            if (subTask.status) count++;
-            return count;
-        })
-        return count;
+        return task.subTasks.filter(subTask => subTask.status).length;
     }
 
     countTaskofCurrentTab() {
-        var count = 0;
-        if (this.state.selectedTab === 2) {
-            return this.state.tasks.length
+        const { tasks, selectedTab } = this.state
+
+        if (selectedTab === 2) {
+            return tasks.length
         } else {
-            this.state.tasks.map(task => {
-                if (task.status === this.state.selectedTab) {
-                    count++
-                }
-                return count;
-            })
-            return count
+            return tasks.filter(task => task.status === selectedTab).length;
         }
     }
 
@@ -461,6 +442,7 @@ class TaskList extends BaseComponent {
                                     <Typography className={'points-text'} variant="functional" lightColor={!selectedTask.status} color={selectedTask.status ? 'white' : 'secondary'}>{selectedTask.points.score} / {selectedTask.points.total}</Typography>
                                 </div>
                             </div>
+
                     }
                     <div className={'action-body'}>
                         <Typography>{selectedTask.title}</Typography>
@@ -480,7 +462,7 @@ class TaskList extends BaseComponent {
 
                         <SubTasksList subTasks={selectedTask.subTasks} status={1} />
                     </div>
-
+                    <EmptyTask />
                     {showMarkAsDoneDlg && <Dialog className={cn('mark-as-done-dlg')}
                         show={showMarkAsDoneDlg}
                         closeButton
@@ -576,7 +558,7 @@ class TaskList extends BaseComponent {
                         </Dialog>
                     }
                 </div>
-            </ContentLayout>
+            </ContentLayout >
         );
     }
 }
