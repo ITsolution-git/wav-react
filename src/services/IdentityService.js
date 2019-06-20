@@ -3,7 +3,6 @@ import { getAsync, postAsync } from '../helpers/RequestHelper';
 
 const IdentityService = {
 	login,
-	register,
 	getUserProfile,
 };
 
@@ -23,22 +22,6 @@ function login(email, password) {
         return response.data;
 	});
 }
-
-function register({ username, password, email, firstname, lastname}) {
-	return postAsync({
-		url: `${config.apiHost}/user/register`,
-		data: {
-			username,
-			password,
-			email,
-			firstname,
-			lastname
-		},
-		includeToken: false,
-		failRedirect: false
-	});
-}
-
 
 function getUserProfile(email) {
 	return getAsync({

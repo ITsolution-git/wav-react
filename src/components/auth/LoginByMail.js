@@ -7,7 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
-import { btwSignOn } from '../../actions/SignOnAction';
+import { signinWithMail } from '../../actions/AuthActions';
 import Spinner from '../shared/Spinner';
 import Button from '../shared/Button';
 import {
@@ -33,15 +33,15 @@ class LoginByMail extends BaseComponent {
 
 	onKeyPress = (e) => {
 		if (e.key === 'Enter' || e.which === 13) {
-			this.btwSignOn();
+			this.signinWithMail();
 		}
 	};
 
-	btwSignOn() {
+	signinWithMail() {
 		this.setState({ startValidation: true });
 		const { email, password, valid } = this.state;
 		if (valid.email && valid.password) {
-			this.props.actions.btwSignOn(email, password);
+			this.props.actions.signinWithMail(email, password);
 		}
 	}
 
@@ -80,7 +80,8 @@ class LoginByMail extends BaseComponent {
 											startValidation={startValidation}
 											uniqueValidationEnabled={false}
 											required
-											label='Your email address' />
+											label='Email'
+											placeholder='Your email address' />
 							</Col>
 						</Row>
 						<Row className='inputs-row'>
@@ -88,14 +89,15 @@ class LoginByMail extends BaseComponent {
 								<PasswordInput onChange={this.handleChange}
 											   startValidation={startValidation}
 											   required
-											   label='Your password' />
+											   label='Password'
+											   placeholder='Your password' />
 							</Col>
 						</Row>
 						<Row className='inputs-row'>
 							<Col md={12}>
 								<Button
 									disabled={isFetching}
-									onClick={this.btwSignOn.bind(this)}>
+									onClick={this.signinWithMail.bind(this)}>
 									Log In
 								</Button>
 							</Col>
@@ -130,7 +132,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		actions: bindActionCreators({ btwSignOn }, dispatch)
+		actions: bindActionCreators({ signinWithMail }, dispatch)
 	};
 };
 

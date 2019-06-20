@@ -6,7 +6,7 @@ import MockAdapter from 'axios-mock-adapter';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-import { btwRegister, getBtwUserProfile } from '../../actions/SignOnAction';
+import { signupWitMail, getBtwUserProfile } from '../../actions/AuthActions';
 import AppConstants from '../../constants/reducerConstants/AppConstants';
 import AppDataTypes from '../../constants/AppDataTypes';
 import config from '../../config/ApiConfig';
@@ -99,7 +99,7 @@ describe('btwRegister', () => {
 			];
 
 			const store = mockStore({response : []});
-			return store.dispatch(btwRegister( request ) ).then( () => {
+			return store.dispatch(signupWitMail( request ) ).then( () => {
 				expect(store.getActions()).to.deep.equal(expectedActions)
 			} )
 		})
@@ -138,7 +138,7 @@ describe('btwRegister', () => {
                 }
 			]
 			const store = mockStore({response : []});
-			return store.dispatch(btwRegister( request ) ).then( () => {
+			return store.dispatch(signupWitMail( request ) ).then( () => {
 				expect(store.getActions()).to.deep.equal(expectedActions)
 			})
 		})

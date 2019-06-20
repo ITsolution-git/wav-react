@@ -20,7 +20,7 @@ import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
 import authStorage from '../../storage/AuthStorage';
 import appDataTypes from '../../constants/AppDataTypes';
-import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
+import { getBtwUserProfile, btwLogout } from '../../actions/AuthActions';
 import pubsubConstants from '../../constants/PubSubConstants';
 
 class SignedOnHeader extends BaseComponent {

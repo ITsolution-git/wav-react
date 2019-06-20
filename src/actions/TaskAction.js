@@ -6,7 +6,7 @@ import appDataTypes from '../constants/AppDataTypes';
 import { loadTaskList } from './TaskListAction';
 import history from '../utility/History';
 import routes from '../constants/Routes';
-import { getBtwUserProfile } from './SignOnAction';
+import { getBtwUserProfile } from './AuthActions';
 
 export function sendHelpQuestion(message) {
     return dispatch => {

@@ -12,7 +12,7 @@ import RadioButtons from '../shared/inputs/RadioButtons';
 import { Dropdown } from '../shared/validatedInputs/InputBase'
 
 import ProfileConstants from '../../constants/ProfileConstants'
-import { getBtwUserProfile, btwLogout } from '../../actions/SignOnAction';
+import { getBtwUserProfile, btwLogout } from '../../actions/AuthActions';
 import { updateProfile, deleteUser } from '../../actions/UserAction';
 
 import Dialog from '../shared/Dialog';
