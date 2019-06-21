@@ -13,7 +13,7 @@ import PubSub from 'pubsub-js';
 import {
     BaseComponent,
     ProfileDropdown,
-    Logo, 
+    Logo,
     Icon
 } from '../../components/shared';
 import routes from '../../constants/Routes';
@@ -60,9 +60,10 @@ class SignedOnHeader extends BaseComponent {
     };
 
     getCaptainLinks = () => {
-        return [            
+        return [
             { route: routes.tasksList, title: 'Actions' },
             { route: routes.voterList, title: 'Voters' },
+            { route: routes.helpCenter, title: 'Consult' }
         ]
     };
 
@@ -82,8 +83,8 @@ class SignedOnHeader extends BaseComponent {
     };
 
     renderProfileDropdown = () => {
-        const { actions, profile: {data} } = this.props
-        const props={...actions, ...this, ...data}
+        const { actions, profile: { data } } = this.props
+        const props = { ...actions, ...this, ...data }
         return <ProfileDropdown {...props} />
     };
 
@@ -94,33 +95,33 @@ class SignedOnHeader extends BaseComponent {
 
         return (
             <Container className='btw-on-header' >
-                <Navbar expand='lg' collapseOnSelect sticky='top'>                    
+                <Navbar expand='lg' collapseOnSelect sticky='top'>
                     <Navbar.Brand href='/home'><Logo /></Navbar.Brand>
                     <Navbar.Toggle aria-controls='basic-navbar-nav' />
                     <Navbar.Collapse className='justify-content-between'>
-                        { this.isMobile() &&
-                        <Nav id='close-icon'>
-                            <Nav.Item>
-                                <Icon name='close-white' width='30px' height='30px' />
-                            </Nav.Item>
-                        </Nav> }                        
+                        {this.isMobile() &&
+                            <Nav id='close-icon'>
+                                <Nav.Item>
+                                    <Icon name='close-white' width='30px' height='30px' />
+                                </Nav.Item>
+                            </Nav>}
                         <Nav>
-                            { this.resolveLinks().map((link, i) => {
-                                    return (
-                                        <Nav.Item key={i}
-                                                className={classNames({ 'active-menu': link.route === activeItem })}
-                                                eventkey={i}
-                                                onClick={() => {
-                                                    this.setState({ activeItem: link.route });
-                                                    this.onLink(link.route)
-                                                }} >
-                                            { link.title }
-                                        </Nav.Item>
-                                    );
-                                })
+                            {this.resolveLinks().map((link, i) => {
+                                return (
+                                    <Nav.Item key={i}
+                                        className={classNames({ 'active-menu': link.route === activeItem })}
+                                        eventkey={i}
+                                        onClick={() => {
+                                            this.setState({ activeItem: link.route });
+                                            this.onLink(link.route)
+                                        }} >
+                                        {link.title}
+                                    </Nav.Item>
+                                );
+                            })
                             }
                         </Nav>
-                        { this.renderProfileDropdown() }
+                        {this.renderProfileDropdown()}
                     </Navbar.Collapse>
                 </Navbar>
             </Container>
