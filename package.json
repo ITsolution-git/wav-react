@@ -74,8 +74,8 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive"
   },
   "engines": {
-    "node": ">=8.12.x",
-    "npm": ">=6.4.x"
+    "node": "11.x",
+    "npm": "6.x"
   },
   "browserslist": {
     "production": [
