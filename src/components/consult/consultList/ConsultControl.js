@@ -51,7 +51,6 @@ class ConsultControl extends BaseComponent {
                     className='search-input' />
                 <div className='button-group'>
                     {this.renderSortGroup()}
-
                     <Button size='medium' onClick={this.askButtonHandler} className='ask-button'>
                         Ask Question
                     </Button>

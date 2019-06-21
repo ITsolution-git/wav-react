@@ -14,7 +14,9 @@ class SearchInput extends BaseComponent {
     }
 
     componentWillReceiveProps(props) {
-        this.setState({ value: props.value });
+        if (props.value) {
+            this.setState({ value: props.value });
+        }
     }
 
     inputHandler = (event) => {
@@ -79,7 +81,6 @@ SearchInput.propTypes = {
 };
 
 SearchInput.defaultProps = {
-    value: '',
     noButton: false
 }
 
