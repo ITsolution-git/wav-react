@@ -7,13 +7,6 @@ import { BaseComponent, SearchInput, Button } from '../../shared';
 
 class ConsultControl extends BaseComponent {
 
-    constructor() {
-        super();
-        this.state = {
-            isShowAll: false
-        }
-    }
-
     askButtonHandler = () => {
     }
 
