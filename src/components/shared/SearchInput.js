@@ -39,19 +39,19 @@ class SearchInput extends BaseComponent {
     }
 
     renderIcon = () => {
-        const { noButton } = this.props;
+        const { hideButton } = this.props;
         const isValue = !!this.state.value;
 
-        return (this.isMobile() || noButton) ?
+        return (this.isMobile() || hideButton) ?
             <i className={classNames('fa', isValue ? 'fa-close' : 'fa-search')} onClick={this.clearHandler} /> :
             <i className={classNames('fa fa-search', { 'i-active': isValue })} />
     }
 
     renderSearchButton = () => {
-        const { noButton } = this.props;
+        const { hideButton } = this.props;
         const { value } = this.state;
 
-        if (!noButton) {
+        if (!hideButton) {
             return (
                 <Button type='button' className='search-button' onClick={this.clickHandler} disabled={!value}>
                     Search
@@ -61,11 +61,11 @@ class SearchInput extends BaseComponent {
     }
 
     render() {
-        const { placeholder, noButton, className } = this.props;
+        const { placeholder, hideButton, className } = this.props;
         const { value } = this.state;
 
         return (
-            <div className={classNames('btw-search-input', { 'btw-search-no-button': noButton }, className)}>
+            <div className={classNames('btw-search-input', { 'btw-search-hide-button': hideButton }, className)}>
                 {this.renderIcon()}
                 <input
                     type='text'
@@ -84,12 +84,12 @@ class SearchInput extends BaseComponent {
 SearchInput.propTypes = {
     placeholder: PropTypes.string,
     value: PropTypes.string,
-    noButton: PropTypes.bool,
+    hideButton: PropTypes.bool,
     onChange: PropTypes.func
 };
 
 SearchInput.defaultProps = {
-    noButton: false
+    hideButton: false
 }
 
 export default SearchInput;

@@ -37,7 +37,7 @@ class QuestionFilters extends BaseComponent {
         return (
             <div className='btw-question-filters'>
                 <SearchInput
-                    noButton
+                    hideButton
                     placeholder='Search among 875 questions'
                     value={searchString}
                     onChange={onSearch}
