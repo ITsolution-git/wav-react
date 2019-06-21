@@ -36,7 +36,7 @@
             &::-webkit-input-placeholder {@content};
             &:-moz-placeholder           {@content};
             &::-moz-placeholder          {@content};
-            &:-ms-input-placeholder      {@content} ; 
+            &:-ms-input-placeholder      {@content}; 
         }
         
         @include placeholder {
@@ -88,5 +88,19 @@
 
     .i-active {
         color: $primary;
+    }
+}
+
+.btw-search-no-button{
+    input[type=text] {
+        width: 100%;
+        padding-left:  15px;
+        border-radius: 3px;
+    }
+
+    .fa {
+        padding: 12px 19px;
+        right: 0;
+        left: unset;
     }
 }

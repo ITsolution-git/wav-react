@@ -104,12 +104,13 @@ const router = () => (
             component={Authorization(AdminDashBoard, [admin])} />
         <Route exact path={routes.reports}
             component={Authorization(Reports, [admin])} />
-        <Route exact path={routes.consultManagement}
-            component={Authorization(ConsultManagement, [captain])} />
 
         {/* select voters onboarding */}
         <Route exact path={routes.selectVoters}
             component={Authorization(SelectVoters, [captain])} />
+
+        <Route exact path={routes.consultManagement}
+            component={Authorization(ConsultManagement, [captain])} />
 
         {/* voter onboarding */}
         <Route exact path={routes.makelist}

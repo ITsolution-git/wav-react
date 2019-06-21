@@ -32,42 +32,50 @@ class SearchInput extends BaseComponent {
 
     clearHandler = () => {
         this.setState({ value: '' });
+
         if (this.isMobile()) {
             this.props.onChange('');
         }
     }
 
     renderIcon = () => {
+        const { noButton } = this.props;
         const isValue = !!this.state.value;
 
-        return this.isMobile() ?
+        return (this.isMobile() || noButton) ?
             <i className={classNames('fa', isValue ? 'fa-close' : 'fa-search')} onClick={this.clearHandler} /> :
             <i className={classNames('fa fa-search', { 'i-active': isValue })} />
     }
 
-    render() {
-        const { placeholder, className } = this.props;
+    renderSearchButton = () => {
+        const { noButton } = this.props;
         const { value } = this.state;
-        const isValue = !!value;
+
+        if (!noButton) {
+            return (
+                <Button type='button' className='search-button' onClick={this.clickHandler} disabled={!value}>
+                    Search
+                </Button>
+            );
+        }
+    }
+
+    render() {
+        const { placeholder, noButton, className } = this.props;
+        const { value } = this.state;
 
         return (
-            <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon', className)}>
+            <div className={classNames('btw-search-input', { 'btw-search-no-button': noButton }, className)}>
                 {this.renderIcon()}
                 <input
                     type='text'
-                    className={classNames({ 'btw-search-focus': isValue })}
+                    className={classNames({ 'btw-search-focus': !!value })}
                     placeholder={placeholder}
                     name='search'
                     value={value}
                     onChange={this.inputHandler}
                 />
-                < Button
-                    type='button'
-                    className='search-button'
-                    onClick={this.clickHandler}
-                    disabled={!isValue}>
-                    Search
-                </Button>
+                {this.renderSearchButton()}
             </div >
         );
     }
