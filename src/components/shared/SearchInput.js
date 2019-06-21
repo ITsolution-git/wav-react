@@ -13,6 +13,10 @@ class SearchInput extends BaseComponent {
         }
     }
 
+    componentWillReceiveProps(props) {
+        this.setState({ value: props.value });
+    }
+
     inputHandler = (event) => {
         const { value } = event.target;
         this.setState({ value: value });
@@ -49,11 +53,11 @@ class SearchInput extends BaseComponent {
                 {this.renderIcon()}
                 <input
                     type='text'
-                    className={classNames({'btw-search-focus': isValue})}
+                    className={classNames({ 'btw-search-focus': isValue })}
                     placeholder={placeholder}
                     name='search'
                     value={value}
-                    onChange={this.inputHandler} 
+                    onChange={this.inputHandler}
                 />
                 < Button
                     type='button'
@@ -69,7 +73,14 @@ class SearchInput extends BaseComponent {
 
 SearchInput.propTypes = {
     placeholder: PropTypes.string,
+    value: PropTypes.string,
+    noButton: PropTypes.bool,
     onChange: PropTypes.func
 };
+
+SearchInput.defaultProps = {
+    value: '',
+    noButton: false
+}
 
 export default SearchInput;

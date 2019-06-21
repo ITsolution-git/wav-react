@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { BaseComponent } from '../../shared';
+import { ConsultControl } from './index'
 
 class ConsultList extends BaseComponent {
 
@@ -16,14 +17,14 @@ class ConsultList extends BaseComponent {
 
         return (
             <div className='btw-consult-list btw-paper'>
-                dsfsdfsdf
+                <ConsultControl {...this.props} />
             </div>
         );
     }
 }
 
 ConsultList.propTypes = {
-    sortType: PropTypes.array,
+    sortTypes: PropTypes.array,
     selectedSort: PropTypes.string,
     searchString: PropTypes.string,
     onSearch: PropTypes.func,

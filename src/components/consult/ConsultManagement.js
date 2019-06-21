@@ -28,7 +28,7 @@ class ConsultManagement extends BaseComponent {
                 'linkedIn',
                 'Twiteer'
             ],
-            sortType: [
+            sortTypes: [
                 'Newest',
                 'Interesting',
                 'Unanswered',
@@ -40,15 +40,17 @@ class ConsultManagement extends BaseComponent {
     }
 
     onSearchHandler = value => {
+        console.log(value);
         this.setState({ searchString: value });
     }
 
     onSortHandler = sort => {
+        console.log(sort);
         this.setState({ selectedSort: sort });
     }
 
     render() {
-        const { tagList, sortType, selectedSort, searchString } = this.state;
+        const { tagList, sortTypes, selectedSort, searchString } = this.state;
 
         return (
             <ContentLayout>
@@ -68,7 +70,7 @@ class ConsultManagement extends BaseComponent {
                         <Row>
                             <Col xs={12} lg={9}>
                                 <ConsultList
-                                    sortType={sortType}
+                                    sortTypes={sortTypes}
                                     selectedSort={selectedSort}
                                     searchString={searchString}
                                     onSearch={this.onSearchHandler}
