@@ -1,38 +1,24 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Row, Col } from 'react-bootstrap';
 import cn from 'classnames';
 
 import BaseComponent from '../../components/shared/BaseComponent';
-import appDataTypes from '../../constants/AppDataTypes';
 import colors from '../../constants/Colors';
-import authStorage from '../../storage/AuthStorage';
-import { loadVoterList } from '../../actions/VoterListAction';
-import { loadTaskList } from '../../actions/TaskListAction';
-import { getBtwUserProfile } from '../../actions/AuthActions';
-import { getStateInfo } from '../../actions/TaskAction';
+import ContentLayout from '../layout/ContentLayout';
 import {
     ActionItem,
     Button,
-    Spinner,
     SvgIcon,
     Typography,
     VoterCardView
 } from '../shared';
-import ContentLayout from '../layout/ContentLayout';
 
 class CaptainsDashboard extends BaseComponent {
 
     constructor(props) {
         super(props);
-        const { actions } = this.props;
-        const { userid, email } = authStorage.getLoggedUser();
-        actions.loadVoterList(userid, email);
-        actions.loadTaskList(userid);
-        actions.getBtwUserProfile();
-
         this.state = {
             voters: [
                 {
@@ -147,11 +133,8 @@ class CaptainsDashboard extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 },
                 {
@@ -215,11 +198,8 @@ class CaptainsDashboard extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 },
                 {
@@ -283,11 +263,8 @@ class CaptainsDashboard extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 },
                 {
@@ -351,160 +328,135 @@ class CaptainsDashboard extends BaseComponent {
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 }
-            ]
+            ],
+            profile: {
+                firstName: 'Denis',
+                lastName: 'Damin',
+                role: 'Captain',
+                points: 365,
+                activeTasks: 6,
+                voterCounts: 10
+            }
         }
     }
 
     render() {
-        const {
-            profile: {
-                isSuccess,
-                data = {},
-                isFetching
-            },
-            voters_count
-
-        } = this.props;
-
-        const { tasks, voters } = this.state
+        const { tasks, voters, profile } = this.state
 
         return (
             <ContentLayout>
                 <div className='container btw-captains-dashboard'>
-                    <Spinner loading={isFetching} height={300} />
-                    {
-                        isSuccess &&
-                        <div>
+                    <Row>
+                        <Col md={6}>
+                            <Typography>Welcome back!, {profile.firstname}</Typography>
+                            <Typography lightColor variant="body">Nice to meet you again.</Typography>
+                        </Col>
+
+                        <Col md={6}>
                             <Row>
-                                <Col md={6}>
-                                    <Typography>Welcome back!, {data.firstname}</Typography>
-                                    <Typography lightColor variant="body">Nice to meet you again.</Typography>
+                                <Col md={3}>
+                                    <Typography lightColor variant='body'>Current level:</Typography>
+                                    <Typography>{profile.role}</Typography>
                                 </Col>
 
-                                <Col md={6}>
-                                    <Row>
-                                        <Col md={3}>
-                                            <Typography lightColor variant='body'>Current level:</Typography>
-                                            <Typography>Captain</Typography>
-                                        </Col>
+                                <Col md={3}>
+                                    <Typography lightColor variant='body'>Points balance:</Typography>
+                                    <Typography><SvgIcon name="medal" />{profile.points}</Typography>
+                                </Col>
 
-                                        <Col md={3}>
-                                            <Typography lightColor variant='body'>Points balance:</Typography>
-                                            <Typography><SvgIcon name="medal" />365</Typography>
-                                        </Col>
+                                <Col md={3}>
+                                    <Typography lightColor variant='body'>Active tasks:</Typography>
+                                    <Typography>{profile.activeTasks}</Typography>
+                                </Col>
 
-                                        <Col md={3}>
-                                            <Typography lightColor variant='body'>Active tasks:</Typography>
-                                            <Typography>6</Typography>
-                                        </Col>
-
-                                        <Col md={3}>
-                                            <Typography lightColor variant='body'>Your voters:</Typography>
-                                            <Typography>{voters_count}</Typography>
-                                        </Col>
-                                    </Row>
+                                <Col md={3}>
+                                    <Typography lightColor variant='body'>Your voters:</Typography>
+                                    <Typography>{profile.voterCounts}</Typography>
                                 </Col>
                             </Row>
+                        </Col>
+                    </Row>
 
-                            <div className={cn('today-extra-points')}>
-                                <Typography>Today’s extra points tasks</Typography>
-                                <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                    <div className={cn('today-extra-points')}>
+                        <Typography>Today’s extra points tasks</Typography>
+                        <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                    </div>
+
+
+
+                    <Row>
+                        <Col md={6}>
+                            <div className={cn('today-extra-point left-point')}>
+                                <Typography variant='functional' color={colors['white']}>Request a ballot for Dennis Holman</Typography>
+
+                                <div className={cn('points-marks')}>
+                                    <SvgIcon name="medal" />
+                                    <Typography variant='functional' color={colors['white']}>20</Typography>
+                                    <Button size='small' className={'mark-as-done-btn'}>Mark as Done</Button>
+                                </div>
                             </div>
+                        </Col>
 
-
-
-                            <Row>
-                                <Col md={6}>
-                                    <div className={cn('today-extra-point left-point')}>
-                                        <Typography variant='functional' color={colors['white']}>Request a ballot for Dennis Holman</Typography>
-
-                                        <div className={cn('points-marks')}>
-                                            <SvgIcon name="medal" />
-                                            <Typography variant='functional' color={colors['white']}>20</Typography>
-                                            <Button size='small' className={'mark-as-done-btn'}>Mark as Done</Button>
-                                        </div>
-                                    </div>
-                                </Col>
-
-                                <Col md={6}>
-                                    <div className={cn('today-extra-point right-point')}>
-                                        <Typography variant='functional' color={colors['white']}>Help Anna Thompson register for voting</Typography>
-                                        <div className={cn('points-marks')}>
-                                            <SvgIcon name="medal" />
-                                            <Typography variant='functional' color={colors['white']}>20</Typography>
-                                            <Button size='small' className={'mark-as-done-btn'}>Mark as Done</Button>
-                                        </div>
-                                    </div>
-                                </Col>
-                            </Row>
-
-                            <div className={cn('actions-in-progress-title')}>
-                                <Typography>Actions in progress</Typography>
-                                <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                        <Col md={6}>
+                            <div className={cn('today-extra-point right-point')}>
+                                <Typography variant='functional' color={colors['white']}>Help Anna Thompson register for voting</Typography>
+                                <div className={cn('points-marks')}>
+                                    <SvgIcon name="medal" />
+                                    <Typography variant='functional' color={colors['white']}>20</Typography>
+                                    <Button size='small' className={'mark-as-done-btn'}>Mark as Done</Button>
+                                </div>
                             </div>
+                        </Col>
+                    </Row>
 
-                            <Row>
+                    <div className={cn('actions-in-progress-title')}>
+                        <Typography>Actions in progress</Typography>
+                        <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                    </div>
 
-                                {
-                                    tasks.map((task, index) => {
-                                        return (
-                                            <Col md={3} key={task.task_id}>
-                                                <ActionItem task={task} />
-                                            </Col>
-                                        )
-                                    })
-                                }
+                    <Row>
 
-                            </Row>
+                        {
+                            tasks.map((task, index) => {
+                                return (
+                                    <Col md={3} key={task.task_id}>
+                                        <ActionItem task={task} />
+                                    </Col>
+                                )
+                            })
+                        }
 
-                            <div className={cn('your-voters-title')}>
-                                <Typography>Your voters</Typography>
-                                <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
-                            </div>
+                    </Row>
 
-                            <Row>
-                                {
-                                    voters.map((voter, index) => {
-                                        return (
-                                            <Col md={6} key={index}>
-                                                <VoterCardView data={voter} />
-                                            </Col>
-                                        )
-                                    })
-                                }
+                    <div className={cn('your-voters-title')}>
+                        <Typography>Your voters</Typography>
+                        <Typography color={colors['primary']} variant='body' className={cn('view-all')}>View all</Typography>
+                    </div>
 
-                            </Row>
-                        </div>
-                    }
+                    <Row>
+                        {
+                            voters.map((voter, index) => {
+                                return (
+                                    <Col md={6} key={index}>
+                                        <VoterCardView data={voter} />
+                                    </Col>
+                                )
+                            })
+                        }
+
+                    </Row>
                 </div>
             </ContentLayout>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    const profile = state.app[appDataTypes.profile];
-    const voters_count = state.voterList.count;
-
-    return {
-        profile,
-        voters_count,
-        taskList: state.taskList
-    };
-};
-
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators({ loadVoterList, loadTaskList, getBtwUserProfile, getStateInfo }, dispatch)
-    };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CaptainsDashboard));
+export default connect(null, mapDispatchToProps)(withRouter(CaptainsDashboard));
