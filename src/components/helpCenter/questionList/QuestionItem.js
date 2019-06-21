@@ -4,12 +4,12 @@ import moment from 'moment';
 
 import { BaseComponent, Button, Typography, VoterAvatar } from '../../shared';
 
-class ConsultItem extends BaseComponent {
+class QuestionItem extends BaseComponent {
 
     askButtonHandler = () => {
     }
 
-    renderConsultStatus = (count, title) => {
+    renderStatus = (count, title) => {
         return (
             <div className='status-item'>
                 <Typography lightColor>{count}</Typography>
@@ -18,12 +18,12 @@ class ConsultItem extends BaseComponent {
         )
     }
 
-    renderConsultCreator = () => {
-        const { consult: { creator, createdAt } } = this.props;
+    renderCreator = () => {
+        const { question: { creator, createdAt } } = this.props;
         const { firstName, lastName, avatar } = creator;
 
         return (
-            <div className='consult-creator'>
+            <div className='question-creator'>
                 <VoterAvatar
                     size={16}
                     firstName={firstName}
@@ -36,18 +36,18 @@ class ConsultItem extends BaseComponent {
         )
     }
 
-    renderConsultTags = () => {
-        const { consult: { tags } } = this.props;
+    renderTags = () => {
+        const { question: { tags } } = this.props;
         const lastIndex = tags.length - 1;
 
         return (
-            <div className='consult-tags'>
+            <div className='question-tags'>
                 {tags.map((tag, index) => (
                     <Typography
                         key={index}
                         variant='body'
                         lightColor
-                        className='consult-tag-item'>
+                        className='question-tag-item'>
                         {tag} {lastIndex !== index && '  • '}
                     </Typography>
                 ))}
@@ -55,9 +55,9 @@ class ConsultItem extends BaseComponent {
         )
     }
 
-    renderConsultButtons = () => {
+    renderActionButtons = () => {
         return (
-            <div className='consult-buttons'>
+            <div className='question-buttons'>
                 <Button size='small' color='blue' className='answer-button'>
                     <i className='fa fa-pencil' />
                     Answer
@@ -70,34 +70,34 @@ class ConsultItem extends BaseComponent {
     }
 
     render() {
-        const { consult } = this.props;
+        const { question } = this.props;
 
         return (
-            <div className='btw-consult-item'>
-                <div className='consult-status'>
-                    {this.renderConsultStatus(consult.answers, 'answers')}
-                    {this.renderConsultStatus(consult.saved, 'saved')}
+            <div className='btw-question-item'>
+                <div className='question-status'>
+                    {this.renderStatus(question.answers, 'answers')}
+                    {this.renderStatus(question.saved, 'saved')}
                 </div>
-                <div className='consult-content'>
-                    <div className='consult-header'>
-                        {this.renderConsultCreator()}
-                        {this.renderConsultTags()}
+                <div className='question-content'>
+                    <div className='question-header'>
+                        {this.renderCreator()}
+                        {this.renderTags()}
                     </div>
-                    <Typography className='consult-title'>
-                        {consult.title}
+                    <Typography className='question-title'>
+                        {question.title}
                     </Typography>
-                    <Typography variant='body' className='consult-description'>
-                        {consult.description}
+                    <Typography variant='body' className='question-description'>
+                        {question.description}
                     </Typography>
-                    {this.renderConsultButtons()}
+                    {this.renderActionButtons()}
                 </div>
             </div>
         );
     }
 }
 
-ConsultItem.propTypes = {
-    consult: PropTypes.object
+QuestionItem.propTypes = {
+    question: PropTypes.object
 };
 
-export default ConsultItem;
+export default QuestionItem;

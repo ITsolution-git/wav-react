@@ -5,14 +5,14 @@ import { Row, Col } from 'react-bootstrap';
 
 import ContentLayout from '../layout/ContentLayout';
 import { BaseComponent, Typography } from '../shared';
-import { ConsultTagList } from './index';
-import { ConsultList } from './consultList';
+import { TagList } from './index';
+import { QuestionList } from './questionList';
 
-class ConsultManagement extends BaseComponent {
+class HelpCenter extends BaseComponent {
     constructor() {
         super();
         this.state = {
-            tagList: [
+            tags: [
                 'Voters',
                 'Network',
                 'Techniques',
@@ -28,15 +28,15 @@ class ConsultManagement extends BaseComponent {
                 'linkedIn',
                 'Twiteer'
             ],
-            sortTypes: [
+            questionFilterTypes: [
                 'Newest',
                 'Interesting',
                 'Unanswered',
                 'Saved'
             ],
             searchString: '',
-            selectedSort: 'Newest',
-            consultList: [
+            selectedFilter: 'Newest',
+            questionsList: [
                 {
                     id: 1,
                     title: 'What is the best way to encourage you voter to register?',
@@ -173,16 +173,16 @@ class ConsultManagement extends BaseComponent {
         this.setState({ searchString: value });
     }
 
-    onSortHandler = sort => {
-        this.setState({ selectedSort: sort });
+    onFilterHanlder = filter => {
+        this.setState({ selectedFilter: filter });
     }
 
     render() {
-        const { consultList, tagList, sortTypes, selectedSort, searchString } = this.state;
+        const { questionsList, tags, questionFilterTypes, selectedFilter, searchString } = this.state;
 
         return (
             <ContentLayout>
-                <Row className='btw-consult-management container'>
+                <Row className='btw-help-center container'>
                     <Col xs={12}>
                         <Row>
                             <Col xs={12} lg={6}>
@@ -197,17 +197,17 @@ class ConsultManagement extends BaseComponent {
                         </Row>
                         <Row>
                             <Col xs={12} lg={9}>
-                                <ConsultList
-                                    consultList={consultList}
-                                    sortTypes={sortTypes}
-                                    selectedSort={selectedSort}
+                                <QuestionList
+                                    questionsList={questionsList}
+                                    filterTypes={questionFilterTypes}
+                                    selectedFilter={selectedFilter}
                                     searchString={searchString}
                                     onSearch={this.onSearchHandler}
-                                    onSelectSort={this.onSortHandler}
+                                    onSelectFilter={this.onFilterHanlder}
                                 />
                             </Col>
                             <Col xs={12} sm={12} md={12} lg={3}>
-                                <ConsultTagList tagList={tagList} onTagSelect={this.onSearchHandler} />
+                                <TagList tags={tags} onTagSelect={this.onSearchHandler} />
                             </Col>
                         </Row>
                     </Col>
@@ -221,4 +221,4 @@ class ConsultManagement extends BaseComponent {
 const mapDispatchToProps = (dispatch) => ({
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(ConsultManagement));
+export default connect(null, mapDispatchToProps)(withRouter(HelpCenter));

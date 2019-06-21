@@ -33,7 +33,7 @@ import WelcomePage from './voter/WelcomePage';
 import SocialConnect from './socialNetworks/SocialConnect';
 import SelectDistrict from './selectDistrict/SelectDistrict';
 import SelectVoters from './selectVoters/SelectVoters';
-import ConsultManagement from './consult/ConsultManagement';
+import HelpCenter from './helpCenter/HelpCenter';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
@@ -109,8 +109,8 @@ const router = () => (
         <Route exact path={routes.selectVoters}
             component={Authorization(SelectVoters, [captain])} />
 
-        <Route exact path={routes.consultManagement}
-            component={Authorization(ConsultManagement, [captain])} />
+        <Route exact path={routes.helpCenter}
+            component={Authorization(HelpCenter, [captain])} />
 
         {/* voter onboarding */}
         <Route exact path={routes.makelist}

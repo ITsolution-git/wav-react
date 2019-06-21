@@ -5,25 +5,25 @@ import { ButtonGroup } from 'react-bootstrap';
 
 import { BaseComponent, SearchInput, Button } from '../../shared';
 
-class ConsultControl extends BaseComponent {
+class QuestionFilters extends BaseComponent {
 
-    askButtonHandler = () => {
+    askQuestionHanlder = () => {
     }
 
-    renderSortGroup = () => {
-        const { sortTypes, selectedSort, onSelectSort } = this.props;
+    renderFiltersGroup = () => {
+        const { filterTypes, selectedFilter, onSelectFilter } = this.props;
 
         return (
-            <ButtonGroup className='sort-group'>
+            <ButtonGroup className='filter-group'>
                 {
-                    sortTypes.map((sort, index) => (
+                    filterTypes.map((filter, index) => (
                         <Button
                             key={index}
                             color='white'
                             size='medium'
-                            onClick={() => onSelectSort(sort)}
-                            className={classNames('sort-button', { 'sort-select': selectedSort === sort })}>
-                            {sort}
+                            onClick={() => onSelectFilter(filter)}
+                            className={classNames('filter-button', { 'filter-select': selectedFilter === filter })}>
+                            {filter}
                         </Button>
                     ))
                 }
@@ -35,7 +35,7 @@ class ConsultControl extends BaseComponent {
         const { searchString, onSearch } = this.props;
 
         return (
-            <div className='btw-consult-control'>
+            <div className='btw-question-filters'>
                 <SearchInput
                     noButton
                     placeholder='Search among 875 questions'
@@ -43,8 +43,8 @@ class ConsultControl extends BaseComponent {
                     onChange={onSearch}
                     className='search-input' />
                 <div className='button-group'>
-                    {this.renderSortGroup()}
-                    <Button size='medium' onClick={this.askButtonHandler} className='ask-button'>
+                    {this.renderFiltersGroup()}
+                    <Button size='medium' onClick={this.askQuestionHanlder} className='ask-button'>
                         Ask Question
                     </Button>
                 </div>
@@ -54,12 +54,12 @@ class ConsultControl extends BaseComponent {
     }
 }
 
-ConsultControl.propTypes = {
-    sortTypes: PropTypes.array,
-    selectedSort: PropTypes.string,
+QuestionFilters.propTypes = {
+    filterTypes: PropTypes.array,
+    selectedFilter: PropTypes.string,
     searchString: PropTypes.string,
     onSearch: PropTypes.func,
-    onSelectSort: PropTypes.func
+    onSelectFilter: PropTypes.func
 };
 
-export default ConsultControl;
+export default QuestionFilters;

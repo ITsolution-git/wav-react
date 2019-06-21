@@ -1,4 +1,4 @@
-.btw-consult-control{
+.btw-question-filters{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -12,10 +12,10 @@
         display: flex;
         width: min-content;
 
-        .sort-group {
+        .filter-group {
             margin-right: 8px;
 
-            .sort-button{
+            .filter-button{
                 width: fit-content;
                 border-radius: 0;
                 text-transform: capitalize;  
@@ -24,7 +24,7 @@
                 
             }
 
-            .sort-button:focus{
+            .filter-button:focus{
                 outline: unset;
             }
 
@@ -36,7 +36,7 @@
                 border-radius: 0 3px 3px 0;
             }
 
-            .sort-select{
+            .filter-select{
                 border: 1px solid rgba($primary, 0.4);
                 color: $main;
                 background-color: rgba($primary, 0.05);

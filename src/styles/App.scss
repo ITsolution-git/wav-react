@@ -99,11 +99,11 @@ html {
 @import 'selectVoters/socialInfo';
 @import 'selectVoters/voterNotFound';
 
-@import 'consult/consultManagement';
-@import 'consult/consultTagList';
-@import 'consult/consultList';
-@import 'consult/consultControl';
-@import 'consult/consultItem';
+@import 'helpCenter/helpCenter';
+@import 'helpCenter/tagList';
+@import 'helpCenter/questionList';
+@import 'helpCenter/questionFilters';
+@import 'helpCenter/questionItem';
 
 @import 'userSearch/usersearch';
 

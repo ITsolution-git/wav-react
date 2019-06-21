@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { BaseComponent, Typography } from '../shared';
 
-class ConsultTagList extends BaseComponent {
+class TagList extends BaseComponent {
 
     constructor() {
         super();
@@ -42,12 +42,12 @@ class ConsultTagList extends BaseComponent {
 
     renderTagList = () => {
         const { isShowAll } = this.state;
-        const { tagList, minTags } = this.props;
+        const { tags, minTags } = this.props;
 
         return (
             <div className='tag-list'>
-                {[...Array(isShowAll ? tagList.length : minTags)].map((e, i) => (
-                    this.renderTagItem(tagList[i], i)
+                {[...Array(isShowAll ? tags.length : minTags)].map((e, i) => (
+                    this.renderTagItem(tags[i], i)
                 ))}
             </div>
         )
@@ -56,7 +56,7 @@ class ConsultTagList extends BaseComponent {
     render() {
 
         return (
-            <div className='btw-consult-tag-list btw-paper'>
+            <div className='btw-tag-list btw-paper'>
                 <Typography className='title'>
                     Popular Tags:
                 </Typography>
@@ -67,14 +67,14 @@ class ConsultTagList extends BaseComponent {
     }
 }
 
-ConsultTagList.propTypes = {
-    tagList: PropTypes.array,
+TagList.propTypes = {
+    tags: PropTypes.array,
     minTags: PropTypes.number,
     onTagSelect: PropTypes.func
 };
 
-ConsultTagList.defaultProps = {
+TagList.defaultProps = {
     minTags: 10
 }
 
-export default ConsultTagList;
+export default TagList;

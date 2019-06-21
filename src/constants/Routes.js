@@ -11,7 +11,7 @@ export default {
     community: '/community',
     captainsDashboard: '/home',
     adminDashboard: '/home_admin',
-    ConsultManagement: '/consult',
+    helpCenter: '/help_center',
     messageList: '/message_list',
     loginBySocial: '/',
     loginByMail: '/login_by_mail',
@@ -38,8 +38,8 @@ export default {
     selectVoters: '/select_voters',
     voterFilter: '/voter_filter',
     captainFilter: '/captain_filter',
-    changePassword: '/changePassword/change/:token',
-    forgotPassword: '/changePassword/request',
+    changePassword: '/change_password/change/:token',
+    forgotPassword: '/change_password/request',
 
     loglist: '/transaction_logs/list',
     logdetail: '/transaction_logs/detail',
@@ -49,7 +49,7 @@ export default {
     termsOfUse: '/terms_of_use',
     privacyPolicy: '/privacy_policy',
     faq: '/faq',
-    stepsToHelpFriendVote: '/stepsToHelpFriendVote',
+    stepsToHelpFriendVote: '/steps_to_help_friend_vote',
     resourceCenter: '/resource_center',
 
     unsubscribe: '/unsubscribe/:email',

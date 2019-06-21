@@ -63,7 +63,7 @@ class SignedOnHeader extends BaseComponent {
         return [
             { route: routes.tasksList, title: 'Actions' },
             { route: routes.voterList, title: 'Voters' },
-            { route: routes.ConsultManagement, title: 'Consult' }
+            { route: routes.helpCenter, title: 'Consult' }
         ]
     };
 

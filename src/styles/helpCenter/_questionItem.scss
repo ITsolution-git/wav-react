@@ -1,11 +1,11 @@
-.btw-consult-item{
+.btw-question-item{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 16px 0;
     border-top: 1px solid $divider;
 
-    .consult-status{
+    .question-status{
         min-width: 72px;
         display: flex;
         flex-direction: column;
@@ -20,17 +20,17 @@
         }
     }
 
-    .consult-content{
+    .question-content{
         display: flex;
         flex-direction: column;
 
-        .consult-header{
+        .question-header{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             margin-bottom: 20px;
 
-            .consult-creator{
+            .question-creator{
                 display: flex;
                 flex-direction: row;
 
@@ -41,25 +41,25 @@
                 }
             }
 
-            .consult-tags{
+            .question-tags{
                 display: flex;
                 flex-direction: row;
 
-                .consult-tag-item{
+                .question-tag-item{
                     margin-right: 4px;
                 }
             }
         }
         
-        .consult-title{
+        .question-title{
             margin-bottom: 5px;
         }
 
-        .consult-description {
+        .question-description {
             margin-bottom: 20px;
         }
 
-        .consult-buttons {
+        .question-buttons {
             
             .answer-button{
                 width: unset;
