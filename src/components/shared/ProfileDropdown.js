@@ -27,11 +27,16 @@ const ProfileTitle = (props) => {
 }
 
 ProfileTitle.propTypes = {
+	/* user avatar src, show default image if empty */
 	src: PropTypes.string,
-	detail: PropTypes.bool,
-	name: PropTypes.string.isRequired,
-	email: PropTypes.string.isRequired,
+	/* avatar size */
 	size: PropTypes.string.isRequired,
+	/* boolean if user's profile detail is visible or not */
+	detail: PropTypes.bool,
+	/* user's name */
+	name: PropTypes.string.isRequired,
+	/* user's email */
+	email: PropTypes.string.isRequired,
 }
 
 ProfileTitle.defaultProps = {
@@ -61,7 +66,9 @@ const ProfileLevel = (props) => {
 	)
 }
 ProfileLevel.propTypes = {
+	/* user's level */
 	level: PropTypes.string.isRequired,
+	/* user's own coin number */
 	coin: PropTypes.number.isRequired,
 }
 ProfileLevel.defaultProps = {
@@ -112,11 +119,17 @@ const ProfileDropdown = (props) => {
 }
 
 ProfileDropdown.propTypes = {
+	/* user's first name */
 	firstname: PropTypes.string.isRequired,
+	/* user's last name */
 	lastname: PropTypes.string.isRequired,
+	/* user's role */
 	role: PropTypes.string.isRequired,
+	/* logut action handler */
 	btwLogout: PropTypes.func.isRequired,
+	/* link handler for settings page */
 	btwSettings: PropTypes.func.isRequired,
+	/* handler to check if mobile view or not */
 	isMobile: PropTypes.func.isRequired,
 }
 
