@@ -28,15 +28,15 @@ class BaseComponent extends Component {
     };
 
     isMobile = () => {
-        return isMobile();
+        return isMobile;
     };
 
     isTablet = () => {
-        return isTablet();
+        return isTablet;
     }
     
     isDesktop = () => {
-        return !isMobile();
+        return !isMobile;
     };
 
     renderBackground = (color) => {
@@ -48,8 +48,8 @@ class BaseComponent extends Component {
 
     isOnBoarding = () => {
         const { pathname = ''} = this.props.history.location,
-            { welcome, makelist, voterDetail, matchList, voterSuccess, voterNotFoundError } = routes,
-            boardingRoutes = [ welcome,  makelist, voterDetail, matchList, voterSuccess, voterNotFoundError ]
+            { welcome, makelist, matchList, voterSuccess, voterNotFoundError } = routes,
+            boardingRoutes = [ welcome,  makelist, matchList, voterSuccess, voterNotFoundError ]
             .map(route => route.toLowerCase());
 
         return boardingRoutes.includes(pathname.toLowerCase());

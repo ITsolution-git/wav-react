@@ -17,7 +17,8 @@ export default {
         matchListError: null,
         matchListFetching: false,
         noResults: false,
-        matchList: []
+        matchList: [], 
+        selected: false
     },
     voterList: {
         voters: [],

@@ -11,7 +11,8 @@ import PubSub from 'pubsub-js';
 import {
     BaseComponent,
     ProfileDropdown,
-    Logo
+    Logo,
+    Icon
 } from '../../components/shared';
 import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
@@ -80,6 +81,12 @@ class SignedOnHeader extends BaseComponent {
             : this.getAdminLinks();
     };
 
+    getLogoLink = () => {
+        return authStorage.getCurrentRole() === roles.captain
+            ? routes.captainsDashboard
+            : routes.adminDashboard
+    }
+
     renderProfileDropdown = () => {
         const { actions, profile: {data} } = this.props
         const props={...actions, ...this, ...data}
@@ -90,28 +97,43 @@ class SignedOnHeader extends BaseComponent {
         const {
             activeItem
         } = this.state;
-
+        const {
+            history: { location: { pathname } }
+        } = this.props;
         return (
             <Container className='btw-on-header' >
                 <div className='d-flex align-items-center py-2'>
-                    <div className='btw-header-logo'>
-                        <Link to="/home"><Logo /></Link>
-                    </div>
-                    <div className={'btw-header-menus px-4'}>
-                        { this.resolveLinks().map((link, i) => (
-                                <span
-                                    key={i}
-                                    className={classNames({ 'active-menu': link.route === activeItem }, 'mx-3 nav-item')}
-                                    eventkey={i}
-                                    onClick={() => {
-                                        this.setState({ activeItem: link.route });
-                                        this.onLink(link.route)
-                                    }} >
-                                    { link.title }
-                                </span>
-                            ))
-                        }
-                    </div>
+                    { this.isMobile() && pathname === routes.voterDetail ?
+                        <>
+                            <div className='btw-header-logo w-100 py-3'>
+                                <Link className='text-decoration-none d-flex align-items-center' to={routes.voterList}>
+                                    <Icon name='arrow-left' ext='svg' height={21} /> 
+                                    <span className='menu-item'>All Voters</span> 
+                                </Link>
+                            </div>  
+                        </>
+                    : 
+                        <>
+                            <div className='btw-header-logo'>
+                                <Link to={this.getLogoLink()}><Logo /></Link>
+                            </div>
+                            <div className={'btw-header-menus px-4'}>
+                                { this.resolveLinks().map((link, i) => (
+                                        <span
+                                            key={i}
+                                            className={classNames({ 'active-menu': link.route === activeItem }, 'mx-3 nav-item')}
+                                            eventkey={i}
+                                            onClick={() => {
+                                                this.setState({ activeItem: link.route });
+                                                this.onLink(link.route)
+                                            }} >
+                                            { link.title }
+                                        </span>
+                                    ))
+                                }
+                            </div>
+                        </>
+                    }
                     <div className='btw-header-dropdown'>
                         { this.renderProfileDropdown() }
                     </div>

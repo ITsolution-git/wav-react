@@ -1,7 +1,4 @@
-export const FilterLinks = [{
-	label:'All voters',
-	name: 'all'
-}, {
+const Links = [{
 	label:'Not registered',
 	name: 'not'
 }, {
@@ -11,3 +8,7 @@ export const FilterLinks = [{
 	label:'Regular',
 	name: 'regular'
 }]
+
+export default (isMobile) => {
+	return isMobile ? [{ label:'All', name: 'all' }, ...Links] : [{ label:'All voters', name: 'all' }, ...Links]
+}

@@ -24,7 +24,15 @@ import TaskProgressBar from './TaskProgressBar'
 import Typography from './Typography'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
-import { VoterCardView, VoterInfo, VoterAvatar } from './voterComponents'
+import { 
+	VoterCardView, 
+	VoterInfo, 
+	VoterAvatar, 
+	VoterAction, 
+	VoterActionItem,
+	VoterCommunication,
+	VoterProfile
+} from './voterComponents'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
 
@@ -51,6 +59,10 @@ export {
 	TaskProgressBar,
 	Typography,
 	VoterAvatar,
+	VoterAction,
+	VoterActionItem,
+	VoterCommunication,
+	VoterProfile,
 	VotersProgressBar,
 	VotersTable,
 	VoterInfo,
