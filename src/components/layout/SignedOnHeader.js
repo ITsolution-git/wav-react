@@ -1,10 +1,8 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import {
-    Navbar,
-    Nav,
     Container
 } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -13,8 +11,7 @@ import PubSub from 'pubsub-js';
 import {
     BaseComponent,
     ProfileDropdown,
-    Logo, 
-    Icon
+    Logo
 } from '../../components/shared';
 import routes from '../../constants/Routes';
 import roles from '../../constants/Roles';
@@ -60,7 +57,8 @@ class SignedOnHeader extends BaseComponent {
     };
 
     getCaptainLinks = () => {
-        return [            
+        return [
+            { route: routes.captainsDashboard, title: 'Home' },
             { route: routes.tasksList, title: 'Actions' },
             { route: routes.voterList, title: 'Voters' },
         ]
@@ -94,35 +92,29 @@ class SignedOnHeader extends BaseComponent {
 
         return (
             <Container className='btw-on-header' >
-                <Navbar expand='lg' collapseOnSelect sticky='top'>                    
-                    <Navbar.Brand href='/home'><Logo /></Navbar.Brand>
-                    <Navbar.Toggle aria-controls='basic-navbar-nav' />
-                    <Navbar.Collapse className='justify-content-between'>
-                        { this.isMobile() &&
-                        <Nav id='close-icon'>
-                            <Nav.Item>
-                                <Icon name='close-white' width='30px' height='30px' />
-                            </Nav.Item>
-                        </Nav> }                        
-                        <Nav>
-                            { this.resolveLinks().map((link, i) => {
-                                    return (
-                                        <Nav.Item key={i}
-                                                className={classNames({ 'active-menu': link.route === activeItem })}
-                                                eventkey={i}
-                                                onClick={() => {
-                                                    this.setState({ activeItem: link.route });
-                                                    this.onLink(link.route)
-                                                }} >
-                                            { link.title }
-                                        </Nav.Item>
-                                    );
-                                })
-                            }
-                        </Nav>
+                <div className='d-flex align-items-center py-2'>
+                    <div className='btw-header-logo'>
+                        <Link to="/home"><Logo /></Link>
+                    </div>
+                    <div className={'btw-header-menus px-4'}>
+                        { this.resolveLinks().map((link, i) => (
+                                <span
+                                    key={i}
+                                    className={classNames({ 'active-menu': link.route === activeItem }, 'mx-3 nav-item')}
+                                    eventkey={i}
+                                    onClick={() => {
+                                        this.setState({ activeItem: link.route });
+                                        this.onLink(link.route)
+                                    }} >
+                                    { link.title }
+                                </span>
+                            ))
+                        }
+                    </div>
+                    <div className='btw-header-dropdown'>
                         { this.renderProfileDropdown() }
-                    </Navbar.Collapse>
-                </Navbar>
+                    </div>
+                </div>
             </Container>
         )
     }
