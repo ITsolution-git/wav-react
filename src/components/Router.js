@@ -33,6 +33,7 @@ import WelcomePage from './voter/WelcomePage';
 import SocialConnect from './socialNetworks/SocialConnect';
 import SelectDistrict from './selectDistrict/SelectDistrict';
 import SelectVoters from './selectVoters/SelectVoters';
+import HelpCenter from './helpCenter/HelpCenter';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
@@ -70,7 +71,7 @@ const { captain, admin, guest } = roles;
 const router = () => (
     <Switch>
         <Route exact path={routes.loginBySocial}
-           component={Authorization(LoginBySocial, [guest])} />
+            component={Authorization(LoginBySocial, [guest])} />
         <Route exact path={routes.loginByMail}
             component={Authorization(LoginByMail, [guest])} />
         <Route exact path={routes.registerByMail}
@@ -107,6 +108,9 @@ const router = () => (
         {/* select voters onboarding */}
         <Route exact path={routes.selectVoters}
             component={Authorization(SelectVoters, [captain])} />
+
+        <Route exact path={routes.helpCenter}
+            component={Authorization(HelpCenter, [captain])} />
 
         {/* voter onboarding */}
         <Route exact path={routes.makelist}
@@ -177,7 +181,7 @@ const router = () => (
         <Route exact path={routes.unsubscribe} component={Unsubscribe} />
 
         {/* verify email*/}
-        <Route exact path={routes.verifyEmail} 
+        <Route exact path={routes.verifyEmail}
             component={Authorization(VerifyEmail, [captain])} />
     </Switch>
 );

@@ -61,6 +61,7 @@ class SignedOnHeader extends BaseComponent {
             { route: routes.captainsDashboard, title: 'Home' },
             { route: routes.tasksList, title: 'Actions' },
             { route: routes.voterList, title: 'Voters' },
+            { route: routes.helpCenter, title: 'Consult' }
         ]
     };
 

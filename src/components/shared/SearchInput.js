@@ -13,6 +13,12 @@ class SearchInput extends BaseComponent {
         }
     }
 
+    componentWillReceiveProps(props) {
+        if (props.value) {
+            this.setState({ value: props.value });
+        }
+    }
+
     inputHandler = (event) => {
         const { value } = event.target;
         this.setState({ value: value });
@@ -26,42 +32,50 @@ class SearchInput extends BaseComponent {
 
     clearHandler = () => {
         this.setState({ value: '' });
+
         if (this.isMobile()) {
             this.props.onChange('');
         }
     }
 
     renderIcon = () => {
+        const { hideButton } = this.props;
         const isValue = !!this.state.value;
 
-        return this.isMobile() ?
+        return (this.isMobile() || hideButton) ?
             <i className={classNames('fa', isValue ? 'fa-close' : 'fa-search')} onClick={this.clearHandler} /> :
             <i className={classNames('fa fa-search', { 'i-active': isValue })} />
     }
 
-    render() {
-        const { placeholder, className } = this.props;
+    renderSearchButton = () => {
+        const { hideButton } = this.props;
         const { value } = this.state;
-        const isValue = !!value;
+
+        if (!hideButton) {
+            return (
+                <Button type='button' className='search-button' onClick={this.clickHandler} disabled={!value}>
+                    Search
+                </Button>
+            );
+        }
+    }
+
+    render() {
+        const { placeholder, hideButton, className } = this.props;
+        const { value } = this.state;
 
         return (
-            <div className={classNames('btw-search-input', this.isDesktop() ? 'left-addon' : 'right-addon', className)}>
+            <div className={classNames('btw-search-input', { 'btw-search-hide-button': hideButton }, className)}>
                 {this.renderIcon()}
                 <input
                     type='text'
-                    className={classNames({'btw-search-focus': isValue})}
+                    className={classNames({ 'btw-search-focus': !!value })}
                     placeholder={placeholder}
                     name='search'
                     value={value}
-                    onChange={this.inputHandler} 
+                    onChange={this.inputHandler}
                 />
-                < Button
-                    type='button'
-                    className='search-button'
-                    onClick={this.clickHandler}
-                    disabled={!isValue}>
-                    Search
-                </Button>
+                {this.renderSearchButton()}
             </div >
         );
     }
@@ -69,7 +83,13 @@ class SearchInput extends BaseComponent {
 
 SearchInput.propTypes = {
     placeholder: PropTypes.string,
+    value: PropTypes.string,
+    hideButton: PropTypes.bool,
     onChange: PropTypes.func
 };
+
+SearchInput.defaultProps = {
+    hideButton: false
+}
 
 export default SearchInput;
