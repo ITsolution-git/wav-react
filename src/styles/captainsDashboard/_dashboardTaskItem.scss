@@ -1,0 +1,29 @@
+.bcd-task-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $white;
+    padding: 24px;
+    margin-bottom: 26px;
+    border-radius: 3px;
+
+    .task-status {
+        display: flex;
+        align-items: center;
+
+        .mark-button {
+            width: auto;
+            margin-left: 5px;
+            border: solid 1px;
+            background: transparent;
+        }
+    }
+}
+
+.bcd-task-item-light{
+    background: linear-gradient(267.51deg, rgba($primary_color, 0.5) 0.26%, rgba($primary_color, 0.8) 98.82%);
+}
+
+.bcd-task-item-dark{
+    background: linear-gradient(267.51deg, rgba($secondary_color, 0.5) 0.26%, rgba($secondary_color, 0.8) 98.82%);
+}

@@ -1,0 +1,80 @@
+.btw-captains-dashboard {
+
+    .user-info-content {
+        margin-bottom: 63px;
+
+        .main-title{
+            margin-bottom: 26px;
+        }
+    }
+
+    .content {
+        margin-bottom: 26px;
+
+        .content-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 26px;
+
+            .content-title{
+                font-size: 18px;
+            }
+
+            .view-all{
+                font-weight: normal;
+                color: $primary;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .action-in-progress {
+        padding: 20px;
+        cursor: pointer;
+
+        .action-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .action-title {
+            margin-top: 32px;
+            font-size: 12px;
+            line-height: 130%;
+        }
+
+        .task-done {
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .action-status {
+            display: flex;
+            align-items: center;
+
+            .status-text {
+            margin-left: 5px;
+            }
+        }
+
+        .action-points {
+            display: flex;
+            align-items: center;
+
+            .points-text {
+            margin-left: 4px;
+            }
+        }
+        
+        .action-duration {
+            font-size: 12px;
+            margin-bottom: 27px;
+        }
+    }
+    
+    .view-all {
+        cursor: pointer;
+    }
+}

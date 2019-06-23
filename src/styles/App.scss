@@ -75,7 +75,10 @@ html {
 
 @import 'errorPages/general';
 
-@import 'captainsDashboard/dashboard';
+@import 'captainsDashboard/captainsDashboard';
+@import 'captainsDashboard/dashboardUserInfo';
+@import 'captainsDashboard/dashboardTaskItem';
+
 @import 'adminDashboard/dashboard';
 
 @import 'tasks/tasklist';
