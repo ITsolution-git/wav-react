@@ -15,7 +15,7 @@ import VotersManagement from './voterList';
 import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
-import VoterDetail from './voter/VoterDetail';
+import { VoterDetailView } from './voterList';
 import MatchList from './voter/MatchList';
 import VoterSuccess from './voter/shared/VoterSuccess';
 import NotFoundError from './voter/shared/VoterError';
@@ -116,7 +116,7 @@ const router = () => (
         <Route exact path={routes.makelist}
             component={Authorization(MakeList, [captain])} />
         <Route exact path={routes.voterDetail}
-            component={Authorization(VoterDetail, [captain])} />
+            component={Authorization(VoterDetailView, [captain])} />
         <Route exact path={routes.matchList}
             component={Authorization(MatchList, [captain])} />
         <Route exact path={routes.voterSuccess}

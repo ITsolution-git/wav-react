@@ -28,15 +28,15 @@ class BaseComponent extends Component {
     };
 
     isMobile = () => {
-        return isMobile();
+        return isMobile;
     };
 
     isTablet = () => {
-        return isTablet();
+        return isTablet;
     }
     
     isDesktop = () => {
-        return !isMobile();
+        return !isMobile;
     };
 
     renderBackground = (color) => {

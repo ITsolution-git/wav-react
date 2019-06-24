@@ -1,8 +1,14 @@
-import React from 'react';
+import React from 'react'
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 import { Row, Col, Container } from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 
 import { BaseComponent } from '../shared'
+import { Routes } from '../../constants'
 import { VotersList, VoterDetail, FilterBar } from './index'
+import { selectVoter } from '../../actions/VoterAction'
+import { BrowserView } from '../../helpers/DeviceHelper'
 
 class VotersManagement extends BaseComponent {
     constructor() {
@@ -226,6 +232,13 @@ class VotersManagement extends BaseComponent {
     /* set state with selected voter by clicking */
     onSelectVoter = item => {
     	// this.setState({ selectedVoter: item })
+    	if (this.isMobile())
+    		this.props.history.push(Routes.voterDetail)
+    }
+
+    /* set voters by filter status */
+    onSelectFilter = filter => {
+    	// this.setState({ votersList: this.state.votersList })
     }
 
     render() {
@@ -235,7 +248,7 @@ class VotersManagement extends BaseComponent {
             <Container className='btw-voter-page'>
                 <Row className='text-center'>
                     <Col>
-                        <FilterBar {...this.props} />
+                        <FilterBar onSelectFilter={this.onSelectFilter} {...this.props} />
                     </Col>
                 </Row>
                 <Row>
@@ -247,7 +260,12 @@ class VotersManagement extends BaseComponent {
                     	/>
                     </Col>
                     <Col md={12} lg={6}>
-                        <VoterDetail selectedVoter={selectedVoter} changeStatusHandler={this.changeStatusHandler} />
+                    	<BrowserView>
+	                        <VoterDetail 
+	                        	selectedVoter={selectedVoter} 
+	                        	changeStatusHandler={this.changeStatusHandler} 
+	                    	/>
+                    	</BrowserView>
                     </Col>
                 </Row>
             </Container>
@@ -255,4 +273,10 @@ class VotersManagement extends BaseComponent {
     }
 }
 
-export default VotersManagement
+const mapStateToProps = (state) => ({ });
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({ selectVoter }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VotersManagement));

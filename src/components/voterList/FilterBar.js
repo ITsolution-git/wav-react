@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { Col } from 'react-bootstrap'
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { FilterLinks } from '../../constants'
+import filterLinks from '../../constants/VoterFilters'
 import { Button, Icon } from '../shared';
+import { isMobileOnly } from '../../helpers/DeviceHelper'
+
 const Item = (props) => {
 	const { filter, activeItem, onClickItem } = props
 
@@ -17,27 +20,42 @@ const Item = (props) => {
 }
 
 const FilterItems = (props) => {
-	const [ activeItem, setActiveItem ] = useState(FilterLinks[0].name)
-	const onClickItem = (filter) => event => setActiveItem(filter)
+	const [ activeItem, setActiveItem ] = useState(filterLinks(isMobileOnly)[0].name)
+	const onClickItem = (filter) => event => {
+		setActiveItem(filter)
+		if (props.onSelectFilter) props.onSelectFilter(filter)
+	}
 
 	return (
 		<div className='d-flex justify-content-center'>
-			{FilterLinks.map((item, key) => <Item key={key} filter={item} activeItem={activeItem} onClickItem={onClickItem} {...props} />)}
+			{filterLinks(isMobileOnly).map((item, key) => 
+				<Item 
+					key={key} 
+					filter={item} 
+					activeItem={activeItem} 
+					onClickItem={onClickItem} 
+					{...props} 
+				/>
+			)}
 		</div>
 	)
 }
 
 const FilterBar = (props) => {
+	const { onSelectFilter } = props
 	return (
 		<div className='btw-voter-filter mb-5'>
 			<Button size='medium' className='btw-voter-add-btn' onClick={() => {}}>
 				<Icon name='plus-white' width={15} className='mr-3' />Add Voters
 			</Button>
 			<Col>
-				<FilterItems />
+				<FilterItems onSelectFilter={onSelectFilter} />
 			</Col>
 		</div>
 	)
+}
+FilterBar.propTypes = {
+	onSelectFilter: PropTypes.func.isRequired
 }
 
 export default FilterBar;

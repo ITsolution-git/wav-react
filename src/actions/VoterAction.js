@@ -1,4 +1,4 @@
-import VoterContants from '../constants/reducerConstants/VoterConstants';
+import VoterConstants from '../constants/reducerConstants/VoterConstants';
 import voterService from '../services/VoterService';
 import authStorage from '../storage/AuthStorage';
 import boardingTypes from '../constants/VoterBoardingType';
@@ -20,7 +20,7 @@ export function makeListPersist(makeList) {
 	};
 
 	function persist(makeList) {
-		return { type: VoterContants.VOTER_MAKELIST_PERSIST, makeList: makeList }
+		return { type: VoterConstants.VOTER_MAKELIST_PERSIST, makeList: makeList }
 	}
 }
 
@@ -30,7 +30,7 @@ export function voterDetailsPersist(details) {
     };
 
     function persist(details) {
-        return { type: VoterContants.VOTER_DETAILS_PERSIST, voterDetails: details }
+        return { type: VoterConstants.VOTER_DETAILS_PERSIST, voterDetails: details }
     }
 }
 
@@ -40,7 +40,7 @@ export function resetMatchList() {
     };
 
     function actionReset() {
-        return { type: VoterContants.VOTER_MATCHLIST_RESET }   ;
+        return { type: VoterConstants.VOTER_MATCHLIST_RESET }   ;
     }
 }
 
@@ -51,8 +51,8 @@ export function matchListPersist(voterDetails, resubmit = false) {
             makeList,
             boardingType
             } = getState().voter,
-    		firstName = makeList[`${VoterContants.FIRST_NAME_PREIX}${currentNumber}`],
-			lastName = makeList[`${VoterContants.LAST_NAME_PREFIX}${currentNumber}`];
+    		firstName = makeList[`${VoterConstants.FIRST_NAME_PREIX}${currentNumber}`],
+			lastName = makeList[`${VoterConstants.LAST_NAME_PREFIX}${currentNumber}`];
 
     	voterDetails.firstname = voterDetails.firstname || firstName;
     	voterDetails.lastname = voterDetails.lastname || lastName;
@@ -74,7 +74,7 @@ export function matchListPersist(voterDetails, resubmit = false) {
                             boardingInfo.noResultsCount = 0;
                             noResults = false;
                         }
-                        if (isDesktop() && boardingType !== boardingTypes.tasks) {
+                        if (isDesktop && boardingType !== boardingTypes.tasks) {
                             history.push(`${routes.voterNotFoundError}?noResults=${noResults}`);
                         } else {
                             dispatch(actionNoResults(noResults));
@@ -91,16 +91,16 @@ export function matchListPersist(voterDetails, resubmit = false) {
     };
 
     function actionRequest() {
-        return { type: VoterContants.VOTER_MATCHLIST_REQUEST };
+        return { type: VoterConstants.VOTER_MATCHLIST_REQUEST };
     }
     function actionSuccess(matchList) {
-        return { type: VoterContants.VOTER_MATCHLIST_PERSIST, matchList }
+        return { type: VoterConstants.VOTER_MATCHLIST_PERSIST, matchList }
     }
     function actionNoResults(noResults) {
-        return { type: VoterContants.VOTER_MATCHLIST_PERSIST, noResults }
+        return { type: VoterConstants.VOTER_MATCHLIST_PERSIST, noResults }
     }
     function actionError(error) {
-        return { type: VoterContants.VOTER_MATCHLIST_ERROR, error }
+        return { type: VoterConstants.VOTER_MATCHLIST_ERROR, error }
     }
 }
 
@@ -127,7 +127,7 @@ export function registerVoter(voter) {
     };
 
      function updateVoter(data) {
-        return { type: VoterContants.VOTER_UPDATE_SUCCESS, data };
+        return { type: VoterConstants.VOTER_UPDATE_SUCCESS, data };
     }
 }
 
@@ -148,7 +148,7 @@ export function nextNumberPersist() {
     };
 
     function persist() {
-        return { type: VoterContants.VOTER_NEXT_MUMBER_PERSIST }
+        return { type: VoterConstants.VOTER_NEXT_MUMBER_PERSIST }
     }
 }
 
@@ -158,7 +158,7 @@ export function resetVoterState() {
     };
 
     function persist() {
-        return { type: VoterContants.VOTER_RESET_STATE }
+        return { type: VoterConstants.VOTER_RESET_STATE }
     }
 }
 
@@ -169,6 +169,26 @@ export function setBoardingType(type) {
     };
 
     function persist(type) {
-        return { type: VoterContants.VOTER_BOARDING_TYPE_PERSIST, boardingType: type }
+        return { type: VoterConstants.VOTER_BOARDING_TYPE_PERSIST, boardingType: type }
+    }
+}
+
+export function selectVoter(voter) {
+    return dispatch => {
+        dispatch(persist(voter))
+    }
+
+    function persist(voter) {
+        return { type: VoterConstants.VOTER_SELECT, payload: voter }
+    }
+}
+
+export function deSelectVoter() {
+    return dispatch => {
+        dispatch(persist())
+    }
+
+    function persist() {
+        return { type: VoterConstants.VOTER_UN_SELECT }
     }
 }

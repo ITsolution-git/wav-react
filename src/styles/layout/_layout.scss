@@ -7,8 +7,12 @@
     @include respond-to($desktop) {
       padding-top: 72px;
     }
+    @include respond-to($tablet) {
+      padding-top: 76px;
+      align-items: center;
+    }
     @include respond-to($phone) {
-      height: 90%;
+      padding-top: 76px;
       align-items: center;
     }
   }
