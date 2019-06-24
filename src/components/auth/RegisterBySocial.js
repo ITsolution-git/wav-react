@@ -13,7 +13,7 @@ import { getQueryObj } from './helpers/queryHelper';
 class RegisterBySocial extends BaseComponent {
     constructor(props, context) {
         super(props, context);
-        const { location: { hash }, actions } = this.props;
+        const { location: { hash } } = this.props;
         const obj = getQueryObj(hash);
 
         if (obj.token) {
