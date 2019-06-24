@@ -7,6 +7,7 @@ export default {
         [appDataTypes.register]: {},
         [appDataTypes.profile]: {}
     },
+    request: {},
     voterList: {
         voters: [],
         count: 0,

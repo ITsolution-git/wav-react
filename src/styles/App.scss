@@ -41,7 +41,6 @@ html {
 @import 'shared/mixins';
 @import 'shared/components';
 @import 'shared/sharedclasses';
-@import 'shared/titles';
 @import 'shared/components_lib';
 
 
@@ -53,16 +52,8 @@ html {
 @import 'auth/register_by_social';
 @import 'auth/_login_by_mail';
 @import 'auth/login_by_social';
-
-@import 'voter/makelist';
-
-@import 'voter/base';
-@import 'voter/detail';
-@import 'voter/matchlist';
-@import 'voter/success';
-@import 'voter/error';
-@import 'voter/welcome';
-
+@import 'auth/changePassword/base';
+@import 'auth/changePassword/forgot';
 
 @import 'voterList/voterlist';
 @import 'voterList/voterDetail';
@@ -84,16 +75,9 @@ html {
 @import 'tasksList/taskDetailContent';
 @import 'tasksList/congratsDialog';
 
-@import 'tasks/taskworkflow';
-@import 'tasks/stepper';
-
-@import 'auth/changePassword/base';
-@import 'auth/changePassword/forgot';
-
 @import 'onBoarding/socialNetworks/socialConnect';
 @import 'onBoarding/socialNetworks/socialItem';
-
-
+@import 'onBoarding/welcome';
 @import 'onBoarding/selectVoters/selectVoters';
 @import 'onBoarding/selectVoters/socialInfo';
 @import 'onBoarding/selectVoters/voterNotFound';
