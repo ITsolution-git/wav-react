@@ -10,7 +10,7 @@ import {
     forgotPasswordRequest,
     verifyTokenRequest,
     changePasswordRequest
-} from '../../actions/PasswordRequestAction';
+} from '../../actions/ChangePasswordActions';
 
 import PasswordRequestContants from '../../constants/reducerConstants/PasswordRequestConstants';
 import InitialState from '../../constants/InitialState';

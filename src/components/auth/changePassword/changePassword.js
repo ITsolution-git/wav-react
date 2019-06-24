@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { changePasswordRequest, verifyTokenRequest } from '../../../actions/PasswordRequestAction';
+import { changePasswordRequest, verifyTokenRequest } from '../../../actions/ChangePasswordActions';
 import BaseComponent from '../../shared/BaseComponent';
 import routes from '../../../constants/Routes';
 import {

@@ -6,7 +6,7 @@ import InputBase, { TextInput } from './InputBase';
 import fields from '../../../constants/FieldConstants';
 import validationTypes from '../../../constants/ValidationTypes';
 import { validate } from '../../../utility/InputValidator';
-import { checkForUniqueEmail } from "../../../actions/ErrorAction";
+import { checkForUniqueEmail } from "../../../actions/ErrorActions";
 import errorTypes from '../../../constants/ErrorTypesConstants';
 
 class EmailInput extends InputBase {
