@@ -37,6 +37,7 @@ import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
 import ActionItem from './ActionItem';
 import Tabs from './Tabs';
+import { SubTaskItem, TaskCompleteDialog } from './taskComponents'
 
 export {
 	BaseComponent,
@@ -72,5 +73,7 @@ export {
 	SocialButton,
 	VoterStatusDropdown,
 	ActionItem,
-	Tabs
+	Tabs,
+	SubTaskItem,
+	TaskCompleteDialog
 }

@@ -1,0 +1,114 @@
+.btw-task-complete-dialog {
+    padding-left: 0!important;
+    
+    .modal-header {
+        border: none;
+    }
+    
+    .modal-footer {
+        border: none;
+        padding: 0;
+    }
+    
+    .modal-body {
+        padding: 0 40px 32px;
+    }
+    
+    .title{
+        margin-bottom: 13px;
+    }
+
+    .task-info{
+        margin-bottom: 50px;
+
+        .description-part{
+            margin-bottom: 20px;
+        }
+    
+        .view-profile-part{
+            margin-bottom: 32px;
+    
+            span{
+                color: $primary;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .content-header {
+        margin-bottom: 26px;
+
+        textarea{
+            width: 100%;
+            font-size: 12px;
+            border: solid 1px $divider;
+            border-radius: 2px;
+            padding: 10px;
+        }
+
+        .textarea-active{
+            border-color: $secondary;
+        }
+    }
+
+    .uploading-text{
+        padding: 50px;
+        text-align: center;
+    }
+
+    .drop-zone {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin: 30px 0;
+
+        .upload-photo {
+            width: 152px;
+            height: 152px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+            border: 1px dashed $divider;
+
+            .upload-text{
+                font-weight: 600;
+                color: $primary;
+                margin-top: 12px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .uploaded-image {
+        border: 1px solid $divider;
+        box-sizing: border-box;
+        border-radius: 2px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 13px 16px;
+        margin: 30px 0;
+
+        .photo-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .remove-btn {
+            cursor: pointer;
+        }
+    }
+
+    .or-you-can {
+        text-align: center;
+    }
+
+    .add-a-comment-btn {
+        text-align: center;
+        text-decoration: underline;
+        margin-top: 7px;
+        cursor: pointer;
+    }
+}

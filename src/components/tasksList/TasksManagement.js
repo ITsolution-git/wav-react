@@ -1,38 +1,18 @@
 import React from 'react';
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import ReadMoreAndLess from 'react-read-more-less';
-import cn from 'classnames';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
+import classNames from 'classnames';
 
-import {
-    ActionItem,
-    BaseComponent,
-    Paper,
-    SvgIcon,
-    Typography,
-    Tabs
-} from '../shared';
-import { getStateInfo } from '../../actions/TaskAction';
-import { loadTaskList } from '../../actions/TaskListAction';
 import ContentLayout from '../layout/ContentLayout';
-import SubTasksList from './SubTasksList';
-import EmptyTask from './EmptyTask';
-import TaskCompleteDialog from './TaskCompleteDialog';
-import CongratsDialog from './CongratsDialog';
-import colors from '../../constants/Colors';
+import { ActionItem, BaseComponent, Tabs, TaskCompleteDialog } from '../shared';
+import { TaskEmpty, TaskDetail, CongratsDialog } from './index';
 
-class TaskList extends BaseComponent {
+class TasksManagement extends BaseComponent {
+
     constructor(props, context) {
         super(props, context);
         this.state = {
-            showTipsModal: false,
-            selectedTaskNo: 0,
-            selectedTab: 2,
-            isShowMobileSelectedDetail: false,
-            showMarkAsDoneDlg: false,
-            markAsDoneModalStatus: 0, //0 : start,
-            showCongratDlg: false,
             tabs: [
                 {
                     id: 'allActions',
@@ -64,10 +44,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 0,
                             status: 1, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'regular', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -80,10 +61,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'not-registered', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -96,10 +78,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'in-frequent', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -111,9 +94,7 @@ class TaskList extends BaseComponent {
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 },
                 {
@@ -131,10 +112,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 0,
                             status: 0, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'regular', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -147,10 +129,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'not-registered', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -163,10 +146,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'in-frequent', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -178,9 +162,7 @@ class TaskList extends BaseComponent {
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 },
                 {
@@ -196,12 +178,13 @@ class TaskList extends BaseComponent {
                     subTasks: [
                         {
                             subTask_id: 0,
-                            status: 1, //0 : in progress, 1: done
+                            status: 0, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'regular', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -214,10 +197,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 1,
                             status: 1, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'not-registered', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -230,10 +214,11 @@ class TaskList extends BaseComponent {
                             subTask_id: 2,
                             status: 1, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'in-frequent', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -245,9 +230,7 @@ class TaskList extends BaseComponent {
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 },
                 {
@@ -263,12 +246,13 @@ class TaskList extends BaseComponent {
                     subTasks: [
                         {
                             subTask_id: 0,
-                            status: 1, //0 : in progress, 1: done
+                            status: 0, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'regular', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -279,12 +263,13 @@ class TaskList extends BaseComponent {
                         },
                         {
                             subTask_id: 1,
-                            status: 1, //0 : in progress, 1: done
+                            status: 0, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'not-registered', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -295,12 +280,13 @@ class TaskList extends BaseComponent {
                         },
                         {
                             subTask_id: 2,
-                            status: 1, //0 : in progress, 1: done
+                            status: 0, //0 : in progress, 1: done
                             voter: {
-                                name: 'Dennis Holman',
-                                status: 'in-frequent', //not-registered, in-frequent, regular,
+                                firstName: 'Dennis',
+                                lastName: 'Holman',
+                                status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://cdn.pixabay.com/photo/2013/07/13/10/07/man-156584_960_720.png',
+                                avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -312,173 +298,179 @@ class TaskList extends BaseComponent {
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
                     I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    
                     I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    
                     I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                 }
-            ]
+            ],
+            selectedTask: {
+                task_id: 0,
+                title: 'Help 5 people register for voting',
+                status: 'completed',
+                points: {
+                    score: 4,
+                    total: 20
+                },
+                start_date: '30 May 2019',
+                end_date: '30 May 2019',
+                subTasks: [
+                    {
+                        subTask_id: 0,
+                        status: 1, //0 : in progress, 1: done
+                        voter: {
+                            firstName: 'Dennis',
+                            lastName: 'Holman',
+                            status: 'Regular', //not-registered, in-frequent, regular,
+                            initials: 'DH',
+                            avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                            social: {
+                                twitter: true,
+                                linkedIn: true,
+                                facebook: true
+                            }
+                        },
+                        points: 4
+                    },
+                    {
+                        subTask_id: 1,
+                        status: 1, //0 : in progress, 1: done
+                        voter: {
+                            firstName: 'Dennis',
+                            lastName: 'Holman',
+                            status: 'Not registered', //not-registered, in-frequent, regular,
+                            initials: 'DH',
+                            avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                            social: {
+                                twitter: true,
+                                linkedIn: true,
+                                facebook: true
+                            }
+                        },
+                        points: 4
+                    },
+                    {
+                        subTask_id: 2,
+                        status: 1, //0 : in progress, 1: done
+                        voter: {
+                            firstName: 'Dennis',
+                            lastName: 'Holman',
+                            status: 'Infrequent', //not-registered, in-frequent, regular,
+                            initials: 'DH',
+                            avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                            social: {
+                                twitter: true,
+                                linkedIn: true,
+                                facebook: true
+                            }
+                        },
+                        points: 4
+                    }
+                ],
+                description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
+                I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
+                I have examples on how I want everything to look and behave that you can take a look at when we talk. 
+                I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
+            },
+            selectedSubTask: {},
+            isMarkDialogShow: false,
+            isCongratDialogShow: false
         };
 
     }
 
-    componentWillMount() {
-        this.props.actions.loadTaskList();
-    }
+    isEmptyOfSelectedTasks() {
+        const { tasks, activeTabId } = this.state
 
-    switchTab = (tabId) => {
-        this.setState({ activeTabId: tabId })
-    }
-
-    gotoAll = () => {
-        this.setState({
-            isShowMobileSelectedDetail: false
-        })
-    }
-
-    getCompletedTasksCount(task) {
-        return task.subTasks.filter(subTask => subTask.status).length;
-    }
-
-    countTaskofCurrentTab() {
-        const { tasks, selectedTab } = this.state
-
-        if (selectedTab === 2) {
-            return tasks.length
+        if (activeTabId === 'allActions') {
+            return tasks.length === 0
         } else {
-            return tasks.filter(task => task.status === selectedTab).length;
+            return tasks.filter(task => task.status === activeTabId).length === 0;
         }
     }
 
-    clickMarkAsDone = (subTask) => {
+    selectTabHandler = (activeTabId) => {
+        this.setState({ activeTabId });
+    }
 
+    onSelectTaskHandler = (task) => {
+        this.setState({ selectedTask: task });
+    }
+
+    onClickMarkOpenHandler = (selectedSubTask) => {
         this.setState({
-            subTaskForMark: subTask,
-            showMarkAsDoneDlg: true,
+            selectedSubTask,
+            isMarkDialogShow: true
         })
     }
 
-    onClickTask = (task) => {
-        const { tasks, isShowMobileSelectedDetail } = this.state
-        tasks.map((task_item, index) => {
-            if (task.task_id === task_item.task_id) {
-                this.setState({ selectedTaskNo: index })
-
-                if (this.isMobile()) {
-                    this.setState({ isShowMobileSelectedDetail: !isShowMobileSelectedDetail })
-                }
-            }
-            return index;
+    showCongrateHandler = () => {
+        this.setState({
+            isMarkDialogShow: false,
+            isCongratDialogShow: true
         })
     }
 
-    showCongrate = () => {
-        this.setState({
-            showMarkAsDoneDlg: false,
-            showCongratDlg: true,
-            markAsDoneModalStatus: 0
-        })
+    renderTaskList = () => {
+        const { tasks, activeTabId, selectedTask } = this.state;
+
+        return tasks.filter((task) => task.status === activeTabId || activeTabId === 'allActions')
+            .map((task, index) => (
+                <ActionItem
+                    key={index}
+                    task={task}
+                    onSelectTask={this.onSelectTaskHandler}
+                    className={classNames({ 'task-selected': task.task_id === selectedTask.task_id })} />));
+    }
+
+    returnTaskContent = () => {
+        const { selectedTask } = this.state;
+
+        return (
+            <Row>
+                <Col md={5}>
+                    {this.renderTaskList()}
+                </Col>
+                <Col md={7}>
+                    <TaskDetail
+                        task={selectedTask}
+                        onMarkAsDone={this.onClickMarkOpenHandler} />
+                </Col>
+            </Row>
+        )
+    }
+
+    renderEmptyTask = () => {
+        return (
+            <div className='task-empty'>
+                <TaskEmpty />
+            </div>
+        )
     }
 
     render() {
-
-        const {
-            tasks,
-            selectedTaskNo,
-            selectedTab,
-            isShowMobileSelectedDetail,
-            showMarkAsDoneDlg,
-            subTaskForMark,
-            showCongratDlg,
-            tabs,
-            activeTabId,
-        } = this.state;
-
-        const selectedTask = tasks[selectedTaskNo];
+        const { tabs, activeTabId, isMarkDialogShow, isCongratDialogShow, selectedTask, selectedSubTask } = this.state;
 
         return (
             <ContentLayout>
-                <div className='bwt-task-list'>
+                <div className='btw-task-list-page'>
                     <Tabs tabs={tabs}
                         activeTabId={activeTabId}
-                        onTabSelect={this.switchTab}
-                        className={cn('actions-tabs')} />
-
+                        onTabSelect={this.selectTabHandler}
+                        className='actions-tabs' />
+                    {this.isEmptyOfSelectedTasks() ?
+                        this.renderEmptyTask() :
+                        this.returnTaskContent()}
                     {
-                        this.countTaskofCurrentTab(tasks, selectedTab) ?
-                            <div className={'actions-content'}>
-                                <div className={'actions'}>
-                                    {
-                                        tasks.map((task, index) => {
-
-                                            return ((task.status === activeTabId || activeTabId === 'allActions') &&
-                                                <ActionItem className={cn({ 'task-selected': index === selectedTaskNo })} key={task.task_id} task={task} onSelectTask={this.onClickTask} />
-                                            )
-                                        }
-                                        )
-                                    }
-
-                                </div>
-
-                                <Paper className={cn('selected-action', { 'mobile-selected-action': isShowMobileSelectedDetail })}>
-                                    {
-                                        isShowMobileSelectedDetail &&
-                                        <div className={cn('mobile-selected-header')}>
-                                            <div className={cn('goto-all-actions')}>
-                                                <SvgIcon name="arrow-left" onClick={this.gotoAll} />
-                                                <Typography color='white' className={cn('nav-title')}>All actions</Typography>
-                                            </div>
-                                            <SvgIcon name="navigation" />
-                                        </div>
-                                    }
-                                    <div className={cn('header', { 'completed-selected-header': selectedTask.status === 'completed' })}>
-                                        <div className={cn('action-status')}>
-                                            <SvgIcon name={selectedTask.status === 'completed' ? 'action-status-completed' : 'action-status-inprogress'} />
-                                            <Typography className={'status-text'} variant="functional" lightColor={selectedTask.status !== 'completed'} color={selectedTask.status === 'completed' ? colors['white'] : colors['secondary']}>{selectedTask.status ? 'Completed' : 'In progress'}</Typography>
-                                        </div>
-
-                                        <div className={'action-points'}>
-                                            <Typography variant='functional' lightColor={selectedTask.status !== 'completed'} color={selectedTask.status === 'completed' ? colors['white'] : colors['secondary']}>Points earned: </Typography>
-                                            <SvgIcon name='medal' />
-                                            <Typography className={'points-text'} variant="functional" lightColor={selectedTask.status !== 'completed'} color={selectedTask.status === 'completed' ? colors['white'] : colors['secondary']}>{selectedTask.points.score} / {selectedTask.points.total}</Typography>
-                                        </div>
-                                    </div>
-                                    <div className={'action-body'}>
-                                        <Typography>{selectedTask.title}</Typography>
-                                        <Typography variant='body' lightColor className={'action-duration'}>{selectedTask.start_date} – {selectedTask.end_date}</Typography>
-                                        <ReadMoreAndLess charLimit={250}
-                                            readMoreText='Read more'
-                                            readLessText='Read less'
-                                        >
-                                            {selectedTask.description}
-                                        </ReadMoreAndLess>
-
-                                        {selectedTask.status === 'inProgress' && <Typography className={'active-task-title'}>Active tasks({selectedTask.subTasks.length - this.getCompletedTasksCount(selectedTask)})</Typography>}
-
-                                        <SubTasksList subTasks={selectedTask.subTasks} status={0} onMarkAsDone={this.clickMarkAsDone} />
-
-                                        <Typography className={'active-task-title'}>Done tasks({this.getCompletedTasksCount(selectedTask)})</Typography>
-
-                                        <SubTasksList subTasks={selectedTask.subTasks} status={1} />
-                                    </div>
-                                </Paper>
-                            </div> :
-                            <EmptyTask />
-                    }
-
-                    {
-                        showMarkAsDoneDlg &&
-                        <TaskCompleteDialog showMarkAsDoneDlg={showMarkAsDoneDlg}
+                        isMarkDialogShow &&
+                        <TaskCompleteDialog show={isMarkDialogShow}
                             selectedTask={selectedTask}
-                            subTaskForMark={subTaskForMark}
-                            onClose={() => this.setState({ showMarkAsDoneDlg: false })}
-                            onMarkAsDone={this.showCongrate} />
+                            selectedSubTask={selectedSubTask}
+                            onClose={() => this.setState({ isMarkDialogShow: false })}
+                            onMarkAsDone={this.showCongrateHandler} />
                     }
-
                     {
-                        showCongratDlg &&
-                        <CongratsDialog showCongratDlg={showCongratDlg}
-                            onClose={() => this.setState({ showCongratDlg: false })}
+                        isCongratDialogShow &&
+                        <CongratsDialog show={isCongratDialogShow}
+                            onClose={() => this.setState({ isCongratDialogShow: false })}
                         />
                     }
                 </div>
@@ -487,14 +479,4 @@ class TaskList extends BaseComponent {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        taskList: state.taskList
-    }
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ loadTaskList, getStateInfo }, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(TaskList));
+export default connect()(withRouter(TasksManagement));

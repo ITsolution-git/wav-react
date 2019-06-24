@@ -10,7 +10,7 @@ import RegisterByMail from './auth/RegisterByMail';
 import RegisterBySocial from './auth/RegisterBySocial';
 import Profile from './captainProfile/Profile';
 import MakeList from './voter/MakeList';
-import TasksList from './tasksList';
+import TasksManagement from './tasksList';
 import VotersManagement from './voterList';
 import Community from './community/Community';
 import CaptainsDashboard from './captainsDashboard';
@@ -89,7 +89,7 @@ const router = () => (
         <Route exact path={routes.socialConnect}
             component={Authorization(SocialConnect, [captain])} />
         <Route exact path={routes.tasksList}
-            component={Authorization(TasksList, [captain])} />
+            component={Authorization(TasksManagement, [captain])} />
         <Route exact path={routes.voterList}
             component={Authorization(VotersManagement, [captain])} />
         <Route exact path={routes.community}

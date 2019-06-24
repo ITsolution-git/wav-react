@@ -81,13 +81,15 @@ html {
 
 @import 'adminDashboard/dashboard';
 
-@import 'tasks/tasklist';
+@import 'tasksList/tasksManagement';
+@import 'tasksList/taskEmpty';
+@import 'tasksList/taskDetail';
+@import 'tasksList/taskDetailHeader';
+@import 'tasksList/taskDetailContent';
+@import 'tasksList/congratsDialog';
+
 @import 'tasks/taskworkflow';
 @import 'tasks/stepper';
-@import 'tasks/subTasksList';
-@import 'tasks/emptyTask';
-@import 'tasks/taskCompleteDialog';
-@import 'tasks/congratsDialog';
 
 @import 'messages/messagelist';
 
@@ -141,3 +143,5 @@ html {
 @import 'components/voterStatusDropdown';
 @import 'components/actionItem';
 @import 'components/tabs';
+@import 'components/subTaskItem';
+@import 'components/taskCompleteDialog';

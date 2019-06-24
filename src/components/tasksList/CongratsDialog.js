@@ -1,13 +1,7 @@
-import React  from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 
-import { 
-    BaseComponent,
-    Dialog,
-    SvgIcon,
-    Typography
-} from '../shared';
+import { BaseComponent, Dialog, SvgIcon, Typography } from '../shared';
 import colors from '../../constants/Colors';
 
 class CongratsDialog extends BaseComponent {
@@ -17,20 +11,23 @@ class CongratsDialog extends BaseComponent {
     }
 
     render() {
-        const { showCongratDlg } = this.props
+        const { show } = this.props
 
         return (
-            <Dialog className={cn('congrate-dlg')} 
-                show={showCongratDlg} 
+            <Dialog className='btw-congrate-dialog'
+                show={show}
                 onClose={this.onClose}>
-                
-                <Typography color={colors['white']} className={cn('cong-title')}>Congratulations!</Typography>
-                <Typography color={colors['white']} variant='body'>Here are your 4 points. Well deserved, my friend. Well deserved!</Typography>
 
-                <div className={cn('points-icon')}>
+                <Typography color={colors['white']} className='cong-title'>Congratulations!</Typography>
+                <Typography color={colors['white']} variant='body'>
+                    Here are your 4 points. Well deserved, my friend.
+                    Well deserved!
+                </Typography>
+
+                <div className='points-icon'>
                     <SvgIcon name="points-icon" />
 
-                    <div className={cn('points')}>
+                    <div className='points'>
                         <SvgIcon name="medal" />
                         <Typography variant="body"> +4</Typography>
                     </div>
@@ -38,27 +35,27 @@ class CongratsDialog extends BaseComponent {
 
                 <Typography color={colors['white']} variant='body'>Share your result:</Typography>
 
-                <div className={cn('share-icons')}>
-                    <SvgIcon name="social-twitter" className={cn('tw-icon')}/>
+                <div className='share-icons'>
+                    <SvgIcon name="social-twitter" className='tw-icon' />
                     <SvgIcon name="social-fb" />
                 </div>
 
-                <SvgIcon name="ellipse-solid" className={cn('ellipse-solid')}/>
-                <SvgIcon name="plus-solid" className={cn('plus-solid')}/>
+                <SvgIcon name="ellipse-solid" className='ellipse-solid' />
+                <SvgIcon name="plus-solid" className='plus-solid' />
             </Dialog>
         )
     }
 
 }
 
-CongratsDialog.defaultProps = {
-    showCongratDlg: true,
-    onClose: () => {}
- };
- 
- CongratsDialog.propTypes = {
-    showCongratDlg: PropTypes.bool.isRequired,
+
+CongratsDialog.propTypes = {
+    show: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
- };
+};
+
+CongratsDialog.defaultProps = {
+    onClose: () => { }
+};
 
 export default CongratsDialog;
