@@ -177,6 +177,8 @@ class CaptainsDashboard extends BaseComponent {
         }
     }
 
+    onSelectVoter = () => { }
+
     renderTasks = () => {
         const { tasks } = this.state
 
@@ -235,7 +237,7 @@ class CaptainsDashboard extends BaseComponent {
                         voters.map((voter, index) => {
                             return (
                                 <Col xs={12} lg={6} key={index}>
-                                    <VoterCardView data={voter} />
+                                    <VoterCardView data={voter} onSelectItem={this.onSelectVoter} />
                                 </Col>
                             )
                         })
