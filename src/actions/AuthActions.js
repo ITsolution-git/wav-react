@@ -7,6 +7,8 @@ import pubsubConstants from '../constants/PubSubConstants';
 import appConstants from '../constants/reducerConstants/AppConstants';
 import routes from '../constants/Routes';
 import Auth0Service from '../services/Auth0Service';
+import { storageKeys, LocalStorageManager as lsManager } from '../storage';
+import history from '../utility/History';
 
 import {
 	initializeRequest,
@@ -23,6 +25,9 @@ export function signInWithToken(userInfo) {
 		if (parseInt(userInfo.expiresIn, 10) > 0) {
 			authStorage.saveTokenInfo(userInfo);
 			PubSub.publish(pubsubConstants.onAuthChange, true);
+			if (lsManager.getItem(storageKeys.firstLogin)) {
+				history.push(routes.welcome);
+			}
 			return dispatch(loadDataSuccess(appDataTypes.signOn, null));
 		}
 		return dispatch(loadDataFailure(appDataTypes.signOn, 'Invalid token.'));
@@ -56,13 +61,31 @@ export function signUpWitMail(identity) {
 		return auth0Service.signUp(identity).then(
 			() => {
 					const { email, password } = identity;
-					dispatch(signInWithMail(email, password, () => {
-	                    dispatch(loadDataSuccess(appDataTypes.register, null));
-					}));
+					lsManager.setItem(storageKeys.firstLogin, true);
+					dispatch(signInWithMail(email, password));
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.register, error));
 				})
+	};
+}
+
+export function signUpWithSocial(connection) {
+	return dispatch => {
+		const auth0Service = new Auth0Service(domain + routes.registerBySocial);
+
+		dispatch(initializeRequest(appDataTypes.register));
+
+		return auth0Service.socialSignUp(connection).then(
+			() => {
+				// const { email, password } = identity;
+				// dispatch(signInWithMail(email, password, () => {
+				// 	dispatch(loadDataSuccess(appDataTypes.register, null));
+				// }));
+			},
+			error => {
+				dispatch(loadDataFailure(appDataTypes.register, error));
+			})
 	};
 }
 

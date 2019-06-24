@@ -26,9 +26,11 @@ class Auth0Service {
                 connection: authConfig.connection,
                 email,
                 password,
-                firstname,
-                lastname,
-                social: false
+                user_metadata: {
+                    firstname,
+                    lastname,
+                    social: 'false'
+                }
             }, response => {
                 if (response === null) {
                     resolve(response);
@@ -39,7 +41,18 @@ class Auth0Service {
         });
     };
 
-    socialSignUp = () => {
+    socialSignUp = (connection) => {
+        return new Promise((resolve, reject) => {
+            this.auth0.authorize({
+                connection
+            }, response => {
+                if (response === null) {
+                    resolve(response);
+                } else {
+                    reject(this.parseError(response, 'Error occurred while signing up.'));
+                }
+            });
+        });
 
     };
 
