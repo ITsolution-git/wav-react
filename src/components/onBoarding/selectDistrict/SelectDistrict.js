@@ -7,6 +7,7 @@ import Typography from '../../shared/Typography';
 import Button from '../../shared/Button';
 import Autocomplete from '../../shared/Autocomplete';
 import SelectDistrictItem from './SelectDistrictItem';
+import routes from '../../../constants/Routes';
 
 class SelectDistrict extends BaseComponent {
     constructor(props) {
@@ -37,7 +38,7 @@ class SelectDistrict extends BaseComponent {
 
     handleSelectDistrict = index => () => {
         this.setState({selectedVoting: index});
-    }
+    };
 
     getDistricts = (value, item) => {
         this.setState({
@@ -48,7 +49,11 @@ class SelectDistrict extends BaseComponent {
             ],
             searchString: value.label
         });
-    }
+    };
+
+    onNextClick = () => {
+      this.onLink(routes.selectVoters);
+    };
 
     render() {
         const { votingDistrics, selectedVoting, searchAutoItems, searchString } = this.state;
@@ -82,7 +87,7 @@ class SelectDistrict extends BaseComponent {
                     })}
                 </div>
 
-                <Button disabled={selectedVoting < 0}>Next</Button>
+                <Button onClick={this.onNextClick} disabled={selectedVoting < 0}>Next</Button>
             </Paper>
         );
     }

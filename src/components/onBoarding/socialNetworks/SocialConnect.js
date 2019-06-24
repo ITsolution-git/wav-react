@@ -6,6 +6,8 @@ import BaseComponent from '../../shared/BaseComponent';
 import Button from '../../shared/Button';
 import SocialItem from './SocialItem';
 import Typography from '../../shared/Typography';
+import routes from '../../../constants/Routes';
+
 
 class SocialConnect extends BaseComponent {
     constructor() {
@@ -20,11 +22,12 @@ class SocialConnect extends BaseComponent {
     // TODO: implement socialConnectHandler
     socialConnectHandler = (name) => {
         this.setState({ [name]: true })
-    }
+    };
 
     // TODO: implement showResultHandler
     showResultHandler = () => {
-    }
+        this.onLink(routes.selectVoters);
+    };
 
     socialItemRender = () => {
         const { facebook, twitter, linkedIn } = this.state;

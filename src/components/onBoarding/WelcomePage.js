@@ -19,7 +19,7 @@ class WelcomePage extends BaseComponent {
     }
 
     onGetStarted = () => {
-        this.onLink(routes.makelist);
+        this.onLink(routes.selectDistrict);
     };
 
     playPause = () => {

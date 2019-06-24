@@ -44,8 +44,8 @@ class BaseComponent extends Component {
 
     isOnBoarding = () => {
         const { pathname = ''} = this.props.history.location,
-            { welcome, makelist, voterDetail, matchList, voterSuccess, voterNotFoundError } = routes,
-            boardingRoutes = [ welcome,  makelist, voterDetail, matchList, voterSuccess, voterNotFoundError ]
+            { welcome, socialConnect, selectDistrict, selectVoters } = routes,
+            boardingRoutes = [ welcome,  socialConnect, selectDistrict, selectVoters ]
             .map(route => route.toLowerCase());
 
         return boardingRoutes.includes(pathname.toLowerCase());
