@@ -10,10 +10,10 @@ import RegisterByMail from './auth/RegisterByMail';
 import RegisterBySocial from './auth/RegisterBySocial';
 import Profile from './captainProfile/Profile';
 import MakeList from './voter/MakeList';
-import TasksList from './tasksList/TasksList';
+import TasksManagement from './tasksList';
 import VotersManagement from './voterList';
 import Community from './community/Community';
-import CaptainsDashboard from './captainsDashboard/CaptainsDashboard';
+import CaptainsDashboard from './captainsDashboard';
 import AdminDashBoard from './adminDashboard/AdminDashboard';
 import { VoterDetailView } from './voterList';
 import MatchList from './voter/MatchList';
@@ -33,7 +33,7 @@ import WelcomePage from './onBoarding/WelcomePage';
 import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
 import SelectDistrict from './onBoarding/selectDistrict/SelectDistrict';
 import SelectVoters from './onBoarding/selectVoters/SelectVoters';
-import HelpCenter from './helpCenter/HelpCenter';
+import HelpCenter from './helpCenter';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';
 import ReminderVoteTask from './tasks/ReminderVoteTask';
@@ -89,7 +89,7 @@ const router = () => (
         <Route exact path={routes.socialConnect}
             component={Authorization(SocialConnect, [captain])} />
         <Route exact path={routes.tasksList}
-            component={Authorization(TasksList, [captain])} />
+            component={Authorization(TasksManagement, [captain])} />
         <Route exact path={routes.voterList}
             component={Authorization(VotersManagement, [captain])} />
         <Route exact path={routes.community}

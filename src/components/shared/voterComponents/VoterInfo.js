@@ -22,10 +22,10 @@ const VoterInfo = (props) => {
 	}
 	return (
 		<>
-		    <div className='name' dangerouslySetInnerHTML={{ __html: nameHtml }} />
-		    <div className='description'>
-		        {`${sex} | ${street}`}
-		    </div>
+			<div className='name' dangerouslySetInnerHTML={{ __html: nameHtml }} />
+			<div className='description'>
+				{`${sex} | ${street}`}
+			</div>
 		</>
 	)
 }

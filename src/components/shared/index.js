@@ -35,6 +35,9 @@ import {
 } from './voterComponents'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
+import ActionItem from './ActionItem';
+import Tabs from './Tabs';
+import { SubTaskItem, TaskCompleteDialog } from './taskComponents'
 
 export {
 	BaseComponent,
@@ -68,5 +71,9 @@ export {
 	VoterInfo,
 	VoterCardView,
 	SocialButton,
-	VoterStatusDropdown
+	VoterStatusDropdown,
+	ActionItem,
+	Tabs,
+	SubTaskItem,
+	TaskCompleteDialog
 }

@@ -1,0 +1,31 @@
+.btw-captains-dashboard {
+
+    .user-info-content {
+        margin-bottom: 63px;
+
+        .main-title{
+            margin-bottom: 26px;
+        }
+    }
+
+    .content {
+        margin-bottom: 26px;
+
+        .content-header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 26px;
+
+            .content-title{
+                font-size: 18px;
+            }
+
+            .view-all{
+                font-weight: normal;
+                color: $primary;
+                cursor: pointer;
+            }
+        }
+    }
+}
