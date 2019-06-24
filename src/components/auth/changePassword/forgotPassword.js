@@ -73,7 +73,7 @@ class ForgotPassword extends BaseComponent {
                         </Col>
                     </Row>
                     <Button fullWidth onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
-                        Send Request
+                        Send Verification Link
                     </Button>
                     <Typography variant='body' className='remember'>
                         Remembered? <Link to={routes.loginBySocial}>Log in.</Link>
