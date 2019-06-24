@@ -1,18 +1,18 @@
 /**
- * usage: <VoterInfo name='First Last' gender='Male' street='address street' keyword='' />
+ * usage: <VoterInfo name='First Last' sex='Male' street='address street' keyword='' />
  */
 import React from 'react'
 import PropTypes from 'prop-types';
 
 /**
- * Show voters info like first name, last name, gender, address
+ * Show voters info like first name, last name, sex, address
  * @param  {String} name : first and last name
- * @param  {String} gender : user's gender
+ * @param  {String} sex : user's sex
  * @param  {String} street : user's address
  * @return {Component} 
  */
 const VoterInfo = (props) => {
-	const { name, gender, street, keyword } = props
+	const { name, sex, street, keyword } = props
 	let nameHtml = name
 	if (keyword) {
 		let regex = new RegExp(keyword, 'g')
@@ -24,21 +24,25 @@ const VoterInfo = (props) => {
 		<>
 		    <div className='name' dangerouslySetInnerHTML={{ __html: nameHtml }} />
 		    <div className='description'>
-		        {`${gender} | ${street}`}
+		        {`${sex} | ${street}`}
 		    </div>
 		</>
 	)
 }
 
 VoterInfo.propTypes = {
+	/* voter's name */
 	name: PropTypes.string.isRequired,
-	gender: PropTypes.string.isRequired,
+	/* voter's gender */
+	sex: PropTypes.string.isRequired,
+	/* voter's address */
 	street: PropTypes.string.isRequired,
+	/* keyword searched */
 	keyword: PropTypes.string
 }
 VoterInfo.defaultProps = {
 	name: '',
-	gender: '',
+	sex: '',
 	street: ''
 }
 

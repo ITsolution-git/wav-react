@@ -28,7 +28,12 @@
 }
 
 .btw-voter-item {
-  
+  &:hover {
+    border: 1px solid $primary;
+  }
+  &.active-item {
+    border: 1px solid $primary;
+  }
 }
 
 #add-voter-modal {

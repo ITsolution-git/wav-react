@@ -3,49 +3,6 @@ import PropTypes from 'prop-types';
 
 import { SearchInput, VoterCardView } from '../shared'
 
-const list = [{
-        id: 1,
-        name: 'Denis Damin 1',
-        first: 'Denis',
-        last: 'Damin',
-        street: 'New work Sr. 1289',
-        gender: 'Male',
-        social: {
-            twitter: false,
-            linkedIn: false,
-            facebook: true
-        },
-        status: 'Infrequent'
-    },
-    {
-        id: 2,
-        name: 'Denis Damin 2',
-        first: 'Denis',
-        last: 'Damin',
-        street: 'New work Sr. 1289',
-        gender: 'Female',
-        social: {
-            twitter: true,
-            linkedIn: true,
-            facebook: true
-        },
-        status: 'Regular'
-    },
-    {
-        id: 3,
-        name: 'Denis Damin 3',
-        first: 'Denis',
-        last: 'Damin',
-        street: 'New work Sr. 1289',
-        gender: 'Female',
-        social: {
-            twitter: true,
-            linkedIn: true,
-            facebook: true
-        },
-        status: 'Not registered'
-    }]
-
 /**
  * Show status string for result searched
  * @return {Status Component}
@@ -76,18 +33,34 @@ StatusBar.defaultProps = {
  * @return {Component}
  */
 const VotersList = (props) => {
-	const { list, keyword } = props
-	console.log(keyword)
+	const { list, keyword, onSelectVoter } = props
+	const [ activeIndex, setActiveIndex ] = useState('')
+	const onSelectItem = index => () => {
+		setActiveIndex(index)
+		onSelectVoter(list[index])
+	}
 	return (
 		<div className='btw-voter-list mt-5'>
 			<StatusBar isShow={true} count={3} keyword={keyword} />
-			{list.map((item, key) => <VoterCardView key={key} data={item} keyword={keyword} />)}
+			{list.map((item, key) => 
+				<VoterCardView 
+					key={key}
+					data={item}
+					keyword={keyword}
+					active={activeIndex === key}
+					onSelectItem={onSelectItem(key)}
+				/>
+			)}
 		</div>
 	)
 }
 VotersList.propTypes = {
+	/* action click handler for each voter */
+	onSelectVoter: PropTypes.func.isRequired,
+	/* voter list */
 	list: PropTypes.array.isRequired,
-	keyword: PropTypes.string
+	/* keyword searched */
+	keyword: PropTypes.string,
 }
 VotersList.defaultProps = {
 	list: []
@@ -100,17 +73,18 @@ VotersList.defaultProps = {
 const VotersListView = (props) => {
 	const [keyword, setKeyword] = useState('')
 	const searchInputHandler = value => setKeyword(value)
-	// const { list } = props
+	const { list } = props
 	return (
 		<div className='btw-voter-list-view'>
 			<SearchInput
                 placeholder='Search by name or address'
                 onChange={searchInputHandler}/>
-			<VotersList list={list} keyword={keyword} />
+			<VotersList list={list} keyword={keyword} {...props} />
 		</div>
 	)
 }
 VotersListView.propTypes = {
+	/* voter list */
 	list: PropTypes.array.isRequired,
 }
 VotersListView.defaultProps = {

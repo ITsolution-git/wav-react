@@ -32,17 +32,17 @@ VoterAvatar.defaultProps = {
 };
 
 VoterAvatar.propTypes = {
-    // avatar URL
+    /* user's avatar url */
     src: PropTypes.string,
-    // avatar width and height pixel
+    /* avatar width and height pixel */
     size: PropTypes.number,
-    //avatar color : error, alert, success
+    /* avatar color : error, alert, success */
     status: PropTypes.string,
-    // user's first name
+    /* user's first name */
     firstName: PropTypes.string.isRequired,
-    // user's last name
+    /* user's last name */
     lastName: PropTypes.string.isRequired,
-    // avatar without border
+    /* avatar without border */
     noBorder: PropTypes.bool
 };
 

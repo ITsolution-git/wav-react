@@ -14,6 +14,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 1',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -28,6 +30,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 2',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Female',
                     avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -42,6 +46,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 3',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Female',
                     avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -56,6 +62,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 4',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -70,6 +78,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 5',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1554741995-7e71ded4ae1c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -84,6 +94,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 6',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -98,6 +110,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 7',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -112,6 +126,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 8',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -126,6 +142,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 9',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -140,6 +158,8 @@ class VotersManagement extends BaseComponent {
                     name: 'Denis Damin 10',
                     phone: '1-541-754-3010',
                     street: 'New work Sr. 1289',
+                    firstName: 'Denis',
+        			lastName: 'Damin',
                     sex: 'Male',
                     avatar: 'https://images.unsplash.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                     social: {
@@ -155,6 +175,8 @@ class VotersManagement extends BaseComponent {
                 name: 'Denis Damin 1',
                 phone: '1-541-754-3010',
                 street: 'New work Sr. 1289',
+	            firstName: 'Denis',
+				lastName: 'Damin',
                 sex: 'Male',
                 avatar: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                 social: {
@@ -201,8 +223,13 @@ class VotersManagement extends BaseComponent {
         })
     }
 
+    /* set state with selected voter by clicking */
+    onSelectVoter = item => {
+    	// this.setState({ selectedVoter: item })
+    }
+
     render() {
-        const { selectedVoter } = this.state;
+        const { selectedVoter, votersList } = this.state;
 
         return (
             <Container className='btw-voter-page'>
@@ -213,7 +240,11 @@ class VotersManagement extends BaseComponent {
                 </Row>
                 <Row>
                     <Col md={12} lg={6}>
-                        <VotersList {...this.props} />
+                        <VotersList 
+                        	list={votersList} 
+                        	onSelectVoter={this.onSelectVoter}
+                        	{...this.props} 
+                    	/>
                     </Col>
                     <Col md={12} lg={6}>
                         <VoterDetail selectedVoter={selectedVoter} changeStatusHandler={this.changeStatusHandler} />
