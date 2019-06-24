@@ -4,7 +4,6 @@
 import BaseComponent from './BaseComponent'
 import ProfileDropdown from './ProfileDropdown'
 import Logo from './Logo'
-import AboutInfo from './AboutInfo'
 import Icon from './Icon'
 import Arrow from './Arrow'
 import AutoComplete from './Autocomplete'
@@ -40,7 +39,6 @@ export {
 	BaseComponent,
 	ProfileDropdown,
 	Logo,
-	AboutInfo,
 	Icon,
 	Arrow,
 	AutoComplete,

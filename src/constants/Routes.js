@@ -17,8 +17,6 @@ export default {
     loginByMail: '/login_by_mail',
     voterDetail: '/voter_detail',
     matchList: '/match_list',
-    voterSuccess: '/voter_success',
-    voterNotFoundError: '/voter_not_found',
     welcome: '/welcome',
     selectDistrict: '/select_district',
     forum: '/forum',

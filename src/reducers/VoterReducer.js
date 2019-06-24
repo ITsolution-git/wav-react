@@ -38,8 +38,7 @@ export default function voterReducer(state = InitialState.voter, action) {
 		case VoterConstants.VOTER_MATCHLIST_ERROR: {
             return { ...state,
 				matchListError: action.error,
-				matchListFetching: false,
-				voterRoute: routes.voterNotFoundError
+				matchListFetching: false
             };
 		}
 		case VoterConstants.VOTER_DETAILS_PERSIST: {
