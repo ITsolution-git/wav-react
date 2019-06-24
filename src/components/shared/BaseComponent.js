@@ -6,7 +6,7 @@ import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import routes from '../../constants/Routes';
-import { isMobile } from '../../helpers/DeviceHelper';
+import { isMobile, isTablet } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
 
@@ -31,6 +31,10 @@ class BaseComponent extends Component {
         return isMobile();
     };
 
+    isTablet = () => {
+        return isTablet();
+    }
+    
     isDesktop = () => {
         return !isMobile();
     };
