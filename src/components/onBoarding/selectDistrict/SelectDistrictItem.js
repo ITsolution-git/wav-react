@@ -1,8 +1,8 @@
 import React from 'react';
 
-import BaseComponent from '../shared/BaseComponent';
-import Typography from '../shared/Typography';
-import SvgIcon from '../shared/SvgIcon';
+import BaseComponent from '../../shared/BaseComponent';
+import Typography from '../../shared/Typography';
+import SvgIcon from '../../shared/SvgIcon';
 
 
 class SelectDistrictItem extends BaseComponent {

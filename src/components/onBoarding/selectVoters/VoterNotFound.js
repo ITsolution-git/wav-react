@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Typography from '../shared/Typography';
-import SvgIcon from '../shared/SvgIcon';
+import Typography from '../../shared/Typography';
+import SvgIcon from '../../shared/SvgIcon';
 
 const VoterNotFound = () => {
 

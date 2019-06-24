@@ -87,10 +87,14 @@ class SignedOnHeader extends BaseComponent {
             : routes.adminDashboard
     }
 
+    gotoLinkHandler = link => () => {
+        this.onLink(link)
+    }
+
     renderProfileDropdown = () => {
         const { actions, profile: {data} } = this.props
         const props={...actions, ...this, ...data}
-        return <ProfileDropdown {...props} btwSettings={() => this.onLink('/profile')} />
+        return <ProfileDropdown {...props} btwSettings={this.gotoLinkHandler('/profile')} />
     };
 
     render() {

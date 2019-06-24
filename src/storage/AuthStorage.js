@@ -1,7 +1,8 @@
 import localStorage from 'localStorage';
 import roles from '../constants/Roles';
-import { parseJwt } from '../helpers/TokenHelper';
 import cookies from 'js-cookie';
+
+import storageKeys from './constants/storageKeys';
 
 export default {
     saveTokenInfo,
@@ -11,13 +12,8 @@ export default {
     getCurrentRole
 };
 
-const storageKeys = {
-    tokenInfo: 'tokenInfo',
-    user: 'user'
-};
-
 function saveTokenInfo(tokenInfo) {
-    let user = parseJwt(tokenInfo.idToken);
+    let user = tokenInfo.idToken;
     user.role = roles.captain;
     cookies.set(storageKeys.tokenInfo, JSON.stringify(tokenInfo));
     localStorage.setItem(storageKeys.user, JSON.stringify(user));

@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-import qs from 'qs';
-import moment from 'moment'
 
 import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
@@ -20,21 +18,16 @@ import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
 import { Typography } from '../shared';
 import BottomLink from './BottomLink';
-import colors from "../../constants/Colors";
+import colors from '../../constants/Colors';
+import { getQueryObj } from './helpers/queryHelper';
 
 
 class LoginByMail extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		const { location: { hash }, actions } = this.props;
-		const params = qs.parse(hash);
 
-		const obj = {
-			token: params['#access_token'],
-			idToken: params['id_token'],
-			expiresIn: parseInt(params['expires_in'], 10),
-			startTime: moment().valueOf()
-		};
+		const obj = getQueryObj(hash);
 
 		if (obj.token) {
 			actions.signInWithToken(obj);

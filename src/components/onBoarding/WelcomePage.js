@@ -19,20 +19,20 @@ class WelcomePage extends BaseComponent {
     }
 
     onGetStarted = () => {
-        this.onLink(routes.makelist);
+        this.onLink(routes.selectDistrict);
     };
 
     playPause = () => {
         this.setState({playing: !this.state.playing});
-    }
+    };
 
     ref = player => {
         this.player = player;
-    }
+    };
 
     onClickFullscreen = () => {
         screenfull.request(findDOMNode(this.player))
-    }
+    };
 
     render() {
         const { playing } = this.state;

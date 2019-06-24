@@ -4,17 +4,18 @@ import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 
-import routes from '../../constants/Routes';
-import BaseComponent from '../shared/BaseComponent';
-import Dialog from '../shared/Dialog';
-import Button from '../shared/Button';
-import VotersTable from '../shared/VotersTable';
-import SearchInput from '../shared/SearchInput';
-import VotersProgressBar from '../shared/VotersProgressBar';
-import Typography from '../shared/Typography';
-import ContentLayout from '../layout/ContentLayout';
+import routes from '../../../constants/Routes';
+import BaseComponent from '../../shared/BaseComponent';
+import Dialog from '../../shared/Dialog';
+import Button from '../../shared/Button';
+import VotersTable from '../../shared/VotersTable';
+import SearchInput from '../../shared/SearchInput';
+import VotersProgressBar from '../../shared/VotersProgressBar';
+import Typography from '../../shared/Typography';
+import ContentLayout from '../../layout/ContentLayout';
 import SocialInfo from './SocialInfo';
 import VoterNotFound from './VoterNotFound';
+import { storageKeys, LocalStorageManager as lsManager } from '../../../storage';
 
 class SelectVoters extends BaseComponent {
     constructor() {
@@ -280,7 +281,7 @@ class SelectVoters extends BaseComponent {
     isNotConnected = () => {
         const { user: { social: { twitter, linkedIn, facebook } } } = this.state;
         return !(twitter || linkedIn || facebook);
-    }
+    };
 
     getSearchData = () => {
         const { searchString, votersList } = this.state;
@@ -288,11 +289,11 @@ class SelectVoters extends BaseComponent {
         return !!searchString ?
             votersList.filter(item => item.name.toLowerCase().includes(searchString.toLowerCase())) :
             votersList;
-    }
+    };
 
     searchInputHandler = value => {
         this.setState({ searchString: value });
-    }
+    };
 
     clearSelectedVotersHandler = (id) => {
         let { selectedVoters } = this.state;
@@ -304,22 +305,24 @@ class SelectVoters extends BaseComponent {
         }
 
         this.setState({ selectedVoters });
-    }
+    };
 
     nextHandler = () => {
-    }
+        lsManager.removeItem(storageKeys.firstLogin);
+        this.redirectToHome();
+    };
 
     closeModalHandler = () => {
         this.setState({ showAlertModal: false });
-    }
+    };
 
     selectTableHandler = (selectedVoters) => {
         this.setState({ selectedVoters });
-    }
+    };
 
     socialConnectHandler = () => {
         this.onLink(routes.socialConnect);
-    }
+    };
 
     renderDescription = () => {
 
@@ -342,7 +345,7 @@ class SelectVoters extends BaseComponent {
                 }
             </>
         );
-    }
+    };
 
     renderSocialInfo = (device) => {
         const { user } = this.state;
@@ -355,7 +358,7 @@ class SelectVoters extends BaseComponent {
                     className={`social-info-${device}`} />
             );
         }
-    }
+    };
 
     renderVotersProgressBar = (device) => {
         const { selectedVoters } = this.state;
@@ -368,7 +371,7 @@ class SelectVoters extends BaseComponent {
                 onNext={this.nextHandler}
                 className={`voter-progress-bar-${device}`} />
         );
-    }
+    };
 
     renderNoDataText = (isNotConnected, isNoData) => {
         const { user } = this.state;
@@ -383,7 +386,7 @@ class SelectVoters extends BaseComponent {
                     onSocialConnect={this.socialConnectHandler}
                     noConnect={isNotConnected} />
             </div>);
-    }
+    };
 
     renderTable = () => {
         const { selectedVoters, searchString } = this.state;
@@ -407,7 +410,7 @@ class SelectVoters extends BaseComponent {
                         onSelect={this.selectTableHandler} />
                 </div>
             );
-    }
+    };
 
     renderDialog = () => {
         const { showAlertModal } = this.state;
@@ -442,7 +445,7 @@ class SelectVoters extends BaseComponent {
                 </div>
             </Dialog>
         );
-    }
+    };
 
     render() {
 
