@@ -5,7 +5,6 @@ import PubSub from "pubsub-js";
 import Header from './layout/Header';
 import Router from './Router';
 import '../styles/App.css';
-import '../extensions';
 import pubsubConstants from "../constants/PubSubConstants";
 import BaseComponent from './shared/BaseComponent';
 
