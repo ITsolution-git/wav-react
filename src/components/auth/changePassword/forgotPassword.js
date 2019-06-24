@@ -32,6 +32,11 @@ class ForgotPassword extends BaseComponent {
     onForgotPassword = () => {
         const { isValid, email } = this.state;
         const { forgotPasswordRequest } = this.props;
+        if (!email) {
+            console.log(!email);
+            this.handleChange('', false);
+        }
+
         const data = {
             email: email
         };
@@ -66,6 +71,7 @@ class ForgotPassword extends BaseComponent {
                     <Row className='inputs-row'>
                         <Col md={12}>
                             <EmailInput
+                                startValidation
                                 defaultValue={email}
                                 onChange={this.handleChange}
                                 uniqueValidationEnabled={false}
