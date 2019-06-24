@@ -1,19 +1,39 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Row } from 'react-bootstrap';
 
 import { BaseComponent, Paper, Typography, SocialButton } from '../shared';
 import BottomLink from './BottomLink';
 import routes from '../../constants/Routes';
+import { signUpWithSocial } from '../../actions/AuthActions';
+import appDataTypes from "../../constants/AppDataTypes";
+import { getQueryObj } from './helpers/queryHelper';
 
 class RegisterBySocial extends BaseComponent {
+    constructor(props, context) {
+        super(props, context);
+        const { location: { hash }, actions } = this.props;
+        const obj = getQueryObj(hash);
+
+        if (obj.token) {
+
+        }
+
+        this.state = {
+            email: '',
+            password: '',
+            startValidation: false,
+            valid: {}
+        };
+    }
 
     handleGoogleClick = () => {
 
     };
 
     handleFacebookClick = () => {
-
+        this.props.signUpWithSocial('facebook');
     };
 
     handleTwitterClick = () => {
@@ -67,4 +87,18 @@ class RegisterBySocial extends BaseComponent {
     }
 }
 
-export default withRouter(RegisterBySocial);
+const mapStateToProps = (state) => {
+    const { error, isSuccess } = state.app[appDataTypes.register];
+    return {
+        error,
+        isSuccess
+    };
+};
+
+
+const mapDispatchToProps = (dispatch) => ({
+    signUpWithSocial: connection => dispatch(signUpWithSocial(connection))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterBySocial));
+

@@ -66,6 +66,25 @@ export function signUpWitMail(identity) {
 	};
 }
 
+export function signUpWithSocial(connection) {
+	return dispatch => {
+		const auth0Service = new Auth0Service(domain + routes.registerBySocial);
+
+		dispatch(initializeRequest(appDataTypes.register));
+
+		return auth0Service.socialSignUp(connection).then(
+			() => {
+				// const { email, password } = identity;
+				// dispatch(signInWithMail(email, password, () => {
+				// 	dispatch(loadDataSuccess(appDataTypes.register, null));
+				// }));
+			},
+			error => {
+				dispatch(loadDataFailure(appDataTypes.register, error));
+			})
+	};
+}
+
 export function getBtwUserProfile() {
 	return dispatch => {
 		dispatch(initializeRequest(appDataTypes.profile));
