@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { changePasswordRequest, verifyTokenRequest } from '../../actions/PasswordRequestAction';
-import BaseComponent from '../shared/BaseComponent';
-import routes from '../../constants/Routes';
+import { changePasswordRequest, verifyTokenRequest } from '../../../actions/PasswordRequestAction';
+import BaseComponent from '../../shared/BaseComponent';
+import routes from '../../../constants/Routes';
 import {
     PasswordInput,
     TextInput
-} from '../../components/shared/validatedInputs';
-import Button from '../shared/Button';
-import Typography from '../shared/Typography';
+} from '../../shared/validatedInputs';
+import Button from '../../shared/Button';
+import Typography from '../../shared/Typography';
 
 class ChangePassword extends BaseComponent {
     constructor() {

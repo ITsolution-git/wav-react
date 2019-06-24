@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom'
 import { BaseComponent } from '../shared'
 import { Routes } from '../../constants'
 import { VotersList, VoterDetail, FilterBar } from './index'
-import { selectVoter } from '../../actions/VoterAction'
 import { BrowserView } from '../../helpers/DeviceHelper'
 
 class VotersManagement extends BaseComponent {
@@ -276,7 +275,7 @@ class VotersManagement extends BaseComponent {
 const mapStateToProps = (state) => ({ });
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ selectVoter }, dispatch)
+    actions: bindActionCreators({ }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(VotersManagement));

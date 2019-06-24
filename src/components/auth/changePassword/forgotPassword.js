@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { forgotPasswordRequest } from '../../actions/PasswordRequestAction';
-import BaseComponent from '../shared/BaseComponent';
-import routes from '../../constants/Routes';
-import Button from '../shared/Button';
-import Typography from '../shared/Typography';
-import { EmailInput } from '../../components/shared/validatedInputs';
+import { forgotPasswordRequest } from '../../../actions/PasswordRequestAction';
+import BaseComponent from '../../shared/BaseComponent';
+import routes from '../../../constants/Routes';
+import Button from '../../shared/Button';
+import Typography from '../../shared/Typography';
+import { EmailInput } from '../../shared/validatedInputs';
 
 class ForgotPassword extends BaseComponent {
     constructor() {

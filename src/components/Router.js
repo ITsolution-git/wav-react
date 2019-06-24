@@ -13,8 +13,8 @@ import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
 import SelectDistrict from './onBoarding/selectDistrict/SelectDistrict';
 import SelectVoters from './onBoarding/selectVoters/SelectVoters';
 import HelpCenter from './helpCenter/HelpCenter';
-import ChangePassword from './changePassword/changePassword';
-import ForgotPassword from './changePassword/forgotPassword';
+import ChangePassword from './auth/changePassword/changePassword';
+import ForgotPassword from './auth/changePassword/forgotPassword';
 
 import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
