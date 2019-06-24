@@ -75,10 +75,19 @@ html {
 
 @import 'errorPages/general';
 
-@import 'captainsDashboard/dashboard';
+@import 'captainsDashboard/captainsDashboard';
+@import 'captainsDashboard/dashboardUserInfo';
+@import 'captainsDashboard/dashboardTaskItem';
+
 @import 'adminDashboard/dashboard';
 
-@import 'tasks/tasklist';
+@import 'tasksList/tasksManagement';
+@import 'tasksList/taskEmpty';
+@import 'tasksList/taskDetail';
+@import 'tasksList/taskDetailHeader';
+@import 'tasksList/taskDetailContent';
+@import 'tasksList/congratsDialog';
+
 @import 'tasks/taskworkflow';
 @import 'tasks/stepper';
 
@@ -132,3 +141,7 @@ html {
 @import 'components/voterAvatar';
 @import 'components/taskProgressBar';
 @import 'components/voterStatusDropdown';
+@import 'components/actionItem';
+@import 'components/tabs';
+@import 'components/subTaskItem';
+@import 'components/taskCompleteDialog';

@@ -1,0 +1,49 @@
+.btw-subtask-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 24px;
+    margin: 8px 0;
+    border: 1px solid $divider;
+    box-sizing: border-box;
+    border-radius: 3px;
+
+    &.completed-subtask{
+        opacity: 0.5;
+    }
+
+    &.hide-subtask{
+        background-color: $divider;
+        opacity: 1;
+    }
+
+    .voter-info {
+        display: flex;
+        align-items: center;
+
+        .voter-detail{
+            display: flex;
+            flex-direction: column;
+            
+            .voter-name, .voter-status{
+                padding: 0 12px;
+            }
+
+            .voter-social{
+                display: flex;
+            }
+        }
+    }
+
+    .sub-task-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 90px;
+
+        .mark-button{
+            width: unset;
+            margin-left: 8px;
+        }
+    }
+}

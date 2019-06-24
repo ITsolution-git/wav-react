@@ -1,20 +1,29 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+// auth
 import LoginBySocial from './auth/LoginBySocial';
 import LoginByMail from './auth/LoginByMail';
 import GeneralErrorPage from './errorPages/GeneralErrorPage';
 import RegisterByMail from './auth/RegisterByMail';
 import RegisterBySocial from './auth/RegisterBySocial';
-import TasksList from './tasksList/TasksList';
+import ChangePassword from './auth/changePassword/changePassword';
+import ForgotPassword from './auth/changePassword/forgotPassword';
+
+// management
+import TasksManagement from './tasksList';
 import VotersManagement from './voterList';
+
+// on boarding
 import WelcomePage from './onBoarding/WelcomePage';
 import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
 import SelectDistrict from './onBoarding/selectDistrict/SelectDistrict';
 import SelectVoters from './onBoarding/selectVoters/SelectVoters';
+
+// other
+import CaptainsDashboard from './captainsDashboard';
 import HelpCenter from './helpCenter/HelpCenter';
-import ChangePassword from './auth/changePassword/changePassword';
-import ForgotPassword from './auth/changePassword/forgotPassword';
+
 
 import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
@@ -37,11 +46,14 @@ const router = () => (
             component={Authorization(RegisterBySocial, [guest, captain, admin])} />
         <Route exact path={routes.pageDown}
             component={GeneralErrorPage} />
+        <Route exact path={routes.changePassword} component={ChangePassword} />
+        <Route exact path={routes.forgotPassword} component={ForgotPassword} />
+
 
         <Route exact path={routes.socialConnect}
             component={Authorization(SocialConnect, [captain])} />
         <Route exact path={routes.tasksList}
-            component={Authorization(TasksList, [captain])} />
+            component={Authorization(TasksManagement, [captain])} />
         <Route exact path={routes.voterList}
             component={Authorization(VotersManagement, [captain])} />
 
@@ -56,9 +68,8 @@ const router = () => (
         <Route exact path={routes.helpCenter}
             component={Authorization(HelpCenter, [captain])} />
 
-        {/* change changePassword */}
-        <Route exact path={routes.changePassword} component={ChangePassword} />
-        <Route exact path={routes.forgotPassword} component={ForgotPassword} />
+        <Route exact path={routes.captainsDashboard}
+            component={Authorization(CaptainsDashboard, [captain])} />
 
         {/* verify email*/}
         <Route exact path={routes.verifyEmail}

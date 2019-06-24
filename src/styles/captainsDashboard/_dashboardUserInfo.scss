@@ -1,0 +1,21 @@
+.bcd-user-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .info-item {
+        width: 25%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-left: 1px solid $divider;
+
+        &:first-child{
+            border-left: 0;
+        }
+
+        .info-value{
+            font-size: 18px;
+        }
+    }
+}
