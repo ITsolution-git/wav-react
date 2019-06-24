@@ -1,11 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import BaseComponent from '../shared/BaseComponent';
-import Paper from '../shared/Paper';
-import Typography from '../shared/Typography';
-import Button from '../shared/Button';
-import Autocomplete from '../shared/Autocomplete';
+import BaseComponent from '../../shared/BaseComponent';
+import Paper from '../../shared/Paper';
+import Typography from '../../shared/Typography';
+import Button from '../../shared/Button';
+import Autocomplete from '../../shared/Autocomplete';
 import SelectDistrictItem from './SelectDistrictItem';
 
 class SelectDistrict extends BaseComponent {

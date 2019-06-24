@@ -2,10 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import BaseComponent from '../shared/BaseComponent';
-import Button from '../shared/Button';
+import BaseComponent from '../../shared/BaseComponent';
+import Button from '../../shared/Button';
 import SocialItem from './SocialItem';
-import Typography from '../shared/Typography';
+import Typography from '../../shared/Typography';
 
 class SocialConnect extends BaseComponent {
     constructor() {

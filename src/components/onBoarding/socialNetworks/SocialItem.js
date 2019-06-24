@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import BaseComponent from '../shared/BaseComponent';
-import Button from '../shared/Button';
-import SocialIcon from '../shared/SocialIcon';
-import Typography from '../shared/Typography';
+import BaseComponent from '../../shared/BaseComponent';
+import Button from '../../shared/Button';
+import SocialIcon from '../../shared/SocialIcon';
+import Typography from '../../shared/Typography';
 
 class SocialItem extends BaseComponent {
 

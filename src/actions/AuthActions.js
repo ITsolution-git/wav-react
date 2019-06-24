@@ -7,6 +7,7 @@ import pubsubConstants from '../constants/PubSubConstants';
 import appConstants from '../constants/reducerConstants/AppConstants';
 import routes from '../constants/Routes';
 import Auth0Service from '../services/Auth0Service';
+import { storageKeys, LocalStorageManager as lsManager } from '../storage';
 
 import {
 	initializeRequest,
@@ -56,9 +57,8 @@ export function signUpWitMail(identity) {
 		return auth0Service.signUp(identity).then(
 			() => {
 					const { email, password } = identity;
-					dispatch(signInWithMail(email, password, () => {
-	                    dispatch(loadDataSuccess(appDataTypes.register, null));
-					}));
+					lsManager.setItem(storageKeys.firstLogin, true);
+					dispatch(signInWithMail(email, password));
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.register, error));

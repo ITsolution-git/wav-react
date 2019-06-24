@@ -29,10 +29,10 @@ import RegisterVoterTask from './tasks/RegisterVoterTask';
 import UpdateProfileTask from './tasks/UpdateProfileTask';
 import PreferenceTask from './tasks/PreferenceTask';
 import RegularVoteTask from './tasks/RegularVoteTask';
-import WelcomePage from './voter/WelcomePage';
-import SocialConnect from './socialNetworks/SocialConnect';
-import SelectDistrict from './selectDistrict/SelectDistrict';
-import SelectVoters from './selectVoters/SelectVoters';
+import WelcomePage from './onBoarding/WelcomePage';
+import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
+import SelectDistrict from './onBoarding/selectDistrict/SelectDistrict';
+import SelectVoters from './onBoarding/selectVoters/SelectVoters';
 import HelpCenter from './helpCenter/HelpCenter';
 
 import MailRegistrationTask from './tasks/MailRegistrationTask';

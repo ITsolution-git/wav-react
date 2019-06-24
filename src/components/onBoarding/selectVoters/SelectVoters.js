@@ -4,15 +4,15 @@ import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 
-import routes from '../../constants/Routes';
-import BaseComponent from '../shared/BaseComponent';
-import Dialog from '../shared/Dialog';
-import Button from '../shared/Button';
-import VotersTable from '../shared/VotersTable';
-import SearchInput from '../shared/SearchInput';
-import VotersProgressBar from '../shared/VotersProgressBar';
-import Typography from '../shared/Typography';
-import ContentLayout from '../layout/ContentLayout';
+import routes from '../../../constants/Routes';
+import BaseComponent from '../../shared/BaseComponent';
+import Dialog from '../../shared/Dialog';
+import Button from '../../shared/Button';
+import VotersTable from '../../shared/VotersTable';
+import SearchInput from '../../shared/SearchInput';
+import VotersProgressBar from '../../shared/VotersProgressBar';
+import Typography from '../../shared/Typography';
+import ContentLayout from '../../layout/ContentLayout';
 import SocialInfo from './SocialInfo';
 import VoterNotFound from './VoterNotFound';
 
