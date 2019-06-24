@@ -87,16 +87,16 @@ html {
 @import 'tasks/taskworkflow';
 @import 'tasks/stepper';
 
-@import 'changePassword/base';
-@import 'changePassword/forgot';
+@import 'auth/changePassword/base';
+@import 'auth/changePassword/forgot';
 
-@import 'socialNetworks/socialConnect';
-@import 'socialNetworks/socialItem';
+@import 'onBoarding/socialNetworks/socialConnect';
+@import 'onBoarding/socialNetworks/socialItem';
 
 
-@import 'selectVoters/selectVoters';
-@import 'selectVoters/socialInfo';
-@import 'selectVoters/voterNotFound';
+@import 'onBoarding/selectVoters/selectVoters';
+@import 'onBoarding/selectVoters/socialInfo';
+@import 'onBoarding/selectVoters/voterNotFound';
 
 @import 'helpCenter/helpCenter';
 @import 'helpCenter/tagList';
@@ -104,10 +104,10 @@ html {
 @import 'helpCenter/questionFilters';
 @import 'helpCenter/questionItem';
 
-@import 'selectDistrict/selectDistrict';
-@import 'selectDistrict/selectDistrictItem';
+@import 'onBoarding/selectDistrict/selectDistrict';
+@import 'onBoarding/selectDistrict/selectDistrictItem';
 
-@import 'verifyEmail/verifyEmail';
+@import 'auth/verifyEmail/verifyEmail';
 
 // new components
 @import 'components/button';
