@@ -1,5 +1,4 @@
 import appDataTypes from './AppDataTypes';
-import voterBoardingType from './VoterBoardingType';
 import errorTypes from './ErrorTypesConstants';
 
 export default {
@@ -8,18 +7,7 @@ export default {
         [appDataTypes.register]: {},
         [appDataTypes.profile]: {}
     },
-    voter: {
-        makeList: {},
-        voterDetails: {},
-        voterRoute: '',
-        boardingType: voterBoardingType.register,
-        currentNumber: 1,
-        matchListError: null,
-        matchListFetching: false,
-        noResults: false,
-        matchList: [], 
-        selected: false
-    },
+    request: {},
     voterList: {
         voters: [],
         count: 0,
@@ -37,15 +25,6 @@ export default {
         isSuccess: false,
         error: null
     },
-    chats: {
-        chats: [],
-        selectedChatId: 0,
-        isFetching: false,
-        isSuccess: false,
-        error: null
-    },
-    messages: {},
-    request: {},
     user: {
         users: {},
         isFetching: false,
@@ -54,17 +33,6 @@ export default {
         isDeleting: false,
         error: null
     },
-    userSearch: {
-        voters: [],
-        captains: [],
-        isFetching: false,
-        isVoterSuccess: false,
-        isCaptainSuccess: false,
-        voterError: null,
-        captainError: null
-    },
-    transaction: {},
-    votingInfo: {},
     error: {
         [errorTypes.emailExists]: false
     }

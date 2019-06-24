@@ -41,12 +41,10 @@ html {
 @import 'shared/mixins';
 @import 'shared/components';
 @import 'shared/sharedclasses';
-@import 'shared/titles';
 @import 'shared/components_lib';
 
 
 @import 'layout/header';
-@import 'layout/about_info';
 @import 'layout/layout';
 
 @import 'auth/base';
@@ -54,17 +52,8 @@ html {
 @import 'auth/register_by_social';
 @import 'auth/_login_by_mail';
 @import 'auth/login_by_social';
-
-@import 'voter/makelist';
-@import 'captainProfile/profile';
-
-@import 'voter/base';
-@import 'voter/detail';
-@import 'voter/matchlist';
-@import 'voter/success';
-@import 'voter/error';
-@import 'voter/welcome';
-
+@import 'auth/changePassword/base';
+@import 'auth/changePassword/forgot';
 
 @import 'voterList/voterlist';
 @import 'voterList/voterDetail';
@@ -79,8 +68,6 @@ html {
 @import 'captainsDashboard/dashboardUserInfo';
 @import 'captainsDashboard/dashboardTaskItem';
 
-@import 'adminDashboard/dashboard';
-
 @import 'tasksList/tasksManagement';
 @import 'tasksList/taskEmpty';
 @import 'tasksList/taskDetail';
@@ -88,25 +75,12 @@ html {
 @import 'tasksList/taskDetailContent';
 @import 'tasksList/congratsDialog';
 
-@import 'tasks/taskworkflow';
-@import 'tasks/stepper';
-
-@import 'messages/messagelist';
-
-@import 'static/terms';
-@import 'static/privacy';
-@import 'static/resource_center';
-
-@import 'changePassword/base';
-@import 'changePassword/forgot';
-
-@import 'socialNetworks/socialConnect';
-@import 'socialNetworks/socialItem';
-
-
-@import 'selectVoters/selectVoters';
-@import 'selectVoters/socialInfo';
-@import 'selectVoters/voterNotFound';
+@import 'onBoarding/socialNetworks/socialConnect';
+@import 'onBoarding/socialNetworks/socialItem';
+@import 'onBoarding/welcome';
+@import 'onBoarding/selectVoters/selectVoters';
+@import 'onBoarding/selectVoters/socialInfo';
+@import 'onBoarding/selectVoters/voterNotFound';
 
 @import 'helpCenter/helpCenter';
 @import 'helpCenter/tagList';
@@ -114,15 +88,10 @@ html {
 @import 'helpCenter/questionFilters';
 @import 'helpCenter/questionItem';
 
-@import 'userSearch/usersearch';
+@import 'onBoarding/selectDistrict/selectDistrict';
+@import 'onBoarding/selectDistrict/selectDistrictItem';
 
-@import 'transactionLogs/list';
-@import 'transactionLogs/detail';
-
-@import 'selectDistrict/selectDistrict';
-@import 'selectDistrict/selectDistrictItem';
-
-@import 'verifyEmail/verifyEmail';
+@import 'auth/verifyEmail/verifyEmail';
 
 // new components
 @import 'components/button';

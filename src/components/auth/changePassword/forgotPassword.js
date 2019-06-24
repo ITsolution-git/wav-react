@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import { forgotPasswordRequest } from '../../../actions/PasswordRequestAction';
+import { forgotPasswordRequest } from '../../../actions/ChangePasswordActions';
 import BaseComponent from '../../shared/BaseComponent';
 import routes from '../../../constants/Routes';
 import Button from '../../shared/Button';
