@@ -30,7 +30,7 @@ const { captain, admin, guest } = roles;
 
 const router = () => (
     <Switch>
-        /* auth */
+        {/* auth */}
         <Route exact path={routes.loginBySocial} component={Authorization(LoginBySocial, [guest])} />
         <Route exact path={routes.loginByMail} component={Authorization(LoginByMail, [guest])} />
         <Route exact path={routes.registerByMail} component={Authorization(RegisterByMail, [guest, captain, admin])} />
@@ -40,7 +40,7 @@ const router = () => (
         <Route exact path={routes.forgotPassword} component={ForgotPassword} />
         <Route exact path={routes.verifyEmail} component={Authorization(VerifyEmail, [captain])} />
 
-        /* on boarding */
+        {/* on boarding */}
         <Route exact path={routes.selectVoters} component={Authorization(SelectVoters, [captain])} />
         <Route exact path={routes.welcome} component={Authorization(WelcomePage, [captain])} />
         <Route exact path={routes.selectDistrict} component={Authorization(SelectDistrict, [captain])} />
