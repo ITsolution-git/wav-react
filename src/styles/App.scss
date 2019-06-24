@@ -46,7 +46,6 @@ html {
 
 
 @import 'layout/header';
-@import 'layout/about_info';
 @import 'layout/layout';
 
 @import 'auth/base';
@@ -56,7 +55,6 @@ html {
 @import 'auth/login_by_social';
 
 @import 'voter/makelist';
-@import 'captainProfile/profile';
 
 @import 'voter/base';
 @import 'voter/detail';
@@ -79,8 +77,6 @@ html {
 @import 'captainsDashboard/dashboardUserInfo';
 @import 'captainsDashboard/dashboardTaskItem';
 
-@import 'adminDashboard/dashboard';
-
 @import 'tasksList/tasksManagement';
 @import 'tasksList/taskEmpty';
 @import 'tasksList/taskDetail';
@@ -90,12 +86,6 @@ html {
 
 @import 'tasks/taskworkflow';
 @import 'tasks/stepper';
-
-@import 'messages/messagelist';
-
-@import 'static/terms';
-@import 'static/privacy';
-@import 'static/resource_center';
 
 @import 'changePassword/base';
 @import 'changePassword/forgot';
@@ -113,11 +103,6 @@ html {
 @import 'helpCenter/questionList';
 @import 'helpCenter/questionFilters';
 @import 'helpCenter/questionItem';
-
-@import 'userSearch/usersearch';
-
-@import 'transactionLogs/list';
-@import 'transactionLogs/detail';
 
 @import 'selectDistrict/selectDistrict';
 @import 'selectDistrict/selectDistrictItem';
