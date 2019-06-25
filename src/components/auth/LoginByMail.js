@@ -5,18 +5,21 @@ import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
-import BaseComponent from '../shared/BaseComponent';
 import appDataTypes from '../../constants/AppDataTypes';
 import { signInWithMail, signInWithToken } from '../../actions/AuthActions';
-import Spinner from '../shared/Spinner';
-import Button from '../shared/Button';
+import {
+	BaseComponent,
+	Spinner,
+	Button,
+	Paper,
+	Typography
+} from '../shared';
+
 import {
 	EmailInput,
 	PasswordInput
 } from '../shared/validatedInputs';
-import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
-import { Typography } from '../shared';
 import BottomLink from './BottomLink';
 import colors from '../../constants/Colors';
 import { getQueryObj } from './helpers/queryHelper';
@@ -75,6 +78,7 @@ class LoginByMail extends BaseComponent {
 
 		return (
 			<div className='btw-login-mail'>
+				<Spinner loading={isFetching} />
 				<Paper className='paper'>
 					<div className="btw-form" onKeyPress={this.onKeyPress}>
 						<Typography className='title'>Log In by Email</Typography>
@@ -120,9 +124,6 @@ class LoginByMail extends BaseComponent {
 										link={routes.registerBySocial}
 										linkText='Sign up'/>
 						</div>
-						<Col md={12}>
-							<Spinner loading={isFetching} size={50} />
-						</Col>
 					</div>
 				</Paper>
 			</div>
