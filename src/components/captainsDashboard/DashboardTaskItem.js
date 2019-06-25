@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import colors from '../../constants/Colors';
 import { BaseComponent, Typography, SvgIcon, Button } from '../shared';
 
 class DashboardTaskItem extends BaseComponent {
@@ -11,11 +10,11 @@ class DashboardTaskItem extends BaseComponent {
 
         return (
             <div className={`bcd-task-item bcd-task-item-${color}`}>
-                <Typography variant='functional' color={colors['white']}>{title}</Typography>
+                <Typography variant='functional'>{title}</Typography>
                 <div className='task-status'>
                     <SvgIcon name="medal" />
-                    <Typography variant='functional' color={colors['white']}>{points.score}</Typography>
-                    <Button size='small' className={'mark-button'}>Mark as Done</Button>
+                    <Typography variant='functional'>{points.score}</Typography>
+                    <Button size='small' className='mark-button' color='white' onClick={() => { }}>Mark as Done</Button>
                 </div>
             </div>
         );

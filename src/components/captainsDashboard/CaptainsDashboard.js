@@ -1,10 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 import routes from '../../constants/Routes';
-import ContentLayout from '../layout/ContentLayout';
 import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
 import { DashboardUserInfo, DashboardTaskItem } from './index';
 
@@ -189,10 +188,10 @@ class CaptainsDashboard extends BaseComponent {
                 </div>
                 <Row>
                     <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[0]} />
+                        <DashboardTaskItem task={tasks[0]} color='dark' />
                     </Col>
                     <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[1]} color='dark' />
+                        <DashboardTaskItem task={tasks[1]} />
                     </Col>
                 </Row>
             </div>
@@ -251,22 +250,20 @@ class CaptainsDashboard extends BaseComponent {
         const { user } = this.state
 
         return (
-            <ContentLayout>
-                <div className='btw-captains-dashboard container'>
-                    <Row className='user-info-content'>
-                        <Col md={5} lg={6} className='main-title'>
-                            <Typography>Welcome back!, {user.firstName}</Typography>
-                            <Typography lightColor variant="body">Nice to meet you again.</Typography>
-                        </Col>
-                        <Col md={7} lg={6}>
-                            <DashboardUserInfo user={user} />
-                        </Col>
-                    </Row>
-                    {this.renderTasks()}
-                    {this.renderActions()}
-                    {this.renderVoters()}
-                </div>
-            </ContentLayout>
+            <Container className='btw-captains-dashboard'>
+                <Row className='user-info-content'>
+                    <Col md={5} lg={6} className='main-title'>
+                        <Typography>Welcome back!, {user.firstName}</Typography>
+                        <Typography lightColor variant="body">Nice to meet you again.</Typography>
+                    </Col>
+                    <Col md={7} lg={6} className='p-0'>
+                        <DashboardUserInfo user={user} />
+                    </Col>
+                </Row>
+                {this.renderTasks()}
+                {this.renderActions()}
+                {this.renderVoters()}
+            </Container>
         )
     }
 }
