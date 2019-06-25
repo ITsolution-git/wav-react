@@ -5,7 +5,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 
 import routes from '../../constants/Routes';
 import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
-import { DashboardUserInfo, DashboardTaskItem, DashboardPerformer } from './index';
+import { DashboardUserInfo, DashboardTaskItem, DashboardPerformer, PerformanceChart } from './index';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -198,20 +198,32 @@ class CaptainsDashboard extends BaseComponent {
                     activeTasks: 60,
                     src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
                 }
-            ]
+            ],
+            performData: {
+                main: {
+                    startDate: 'Jun 24',
+                    endDate: 'Jun 30',
+                    data: [12, 5, 16, 12, 19, 21, 25]
+                },
+                previous: {
+                    startDate: 'Jun 17',
+                    endDate: 'Jun 23',
+                    data: [10, 7, 10, 22, 9, 9, 15]
+                }
+            }
         }
     }
 
     onSelectVoter = () => { }
 
     renderPerfomance = () => {
-        const { performers } = this.state
+        const { performers, performData } = this.state
 
         return (
             <div className='content'>
                 <Row>
                     <Col xs={12} lg={6}>
-                        <DashboardPerformer performers={performers} />
+                        <PerformanceChart performData={performData} />
                     </Col>
                     <Col xs={12} lg={6}>
                         <DashboardPerformer performers={performers} />

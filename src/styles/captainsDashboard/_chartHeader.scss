@@ -1,0 +1,46 @@
+.bcd-chart-header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .title-content {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+        
+        .chart-title{
+            padding-left: 8px;
+            color: $secondary;
+        }
+    }
+
+    .date-content{
+
+        .date-item{
+            display: flex;
+            align-items: baseline;
+
+            .date-sign{
+                width: 8px;
+                height: 8px;
+                margin-right: 8px;
+                background-color: rgba($primary, 0.35);
+            }
+
+            .main-sign{
+                background-color: $primary;
+            }
+        }
+
+        @include respond-to($phone) {
+            display: flex;
+            justify-content: space-between;
+            flex-direction:row-reverse;
+            width: 100%;
+        }
+    }
+
+    @include respond-to($phone) {
+        flex-direction: column;
+    }
+}
