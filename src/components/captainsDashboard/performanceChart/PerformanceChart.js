@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { BaseComponent, Typography, SvgIcon, Button } from '../../shared';
-import { ChartHeader } from './index';
+import { BaseComponent } from '../../shared';
+import { ChartHeader, ChartFooter } from './index';
 
 class PerformanceChart extends BaseComponent {
 
@@ -12,6 +12,7 @@ class PerformanceChart extends BaseComponent {
         return (
             <div className='bcd-performance-chart btw-paper'>
                 <ChartHeader performData={performData} />
+                <ChartFooter performData={performData} />
             </div>
         );
     }

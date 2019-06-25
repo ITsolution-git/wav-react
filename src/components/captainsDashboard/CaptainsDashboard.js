@@ -209,6 +209,16 @@ class CaptainsDashboard extends BaseComponent {
                     startDate: 'Jun 17',
                     endDate: 'Jun 23',
                     data: [10, 7, 10, 22, 9, 9, 15]
+                },
+                points: {
+                    value: 150,
+                    percent: 2,
+                    isUp: false
+                },
+                activeTasks: {
+                    value: 75,
+                    percent: 10,
+                    isUp: true
                 }
             }
         }
