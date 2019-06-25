@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 
 import routes from '../../constants/Routes';
-import colors from '../../constants/Colors';
-import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm } from '../shared';
-import { DashboardUserInfo, DashboardTaskItem } from './index';
+import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
+import { DashboardUserInfo, DashboardTaskItem, DashboardPerformer } from './index';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -169,31 +168,53 @@ class CaptainsDashboard extends BaseComponent {
             user: {
                 firstName: 'Denis',
                 lastName: 'Damin',
-                role: 'Captain',
+                level: 'Captain',
                 points: 365,
                 activeTasks: 6,
                 voterCounts: 10
-            }
+            },
+            performers: [
+                {
+                    firstName: 'Denis',
+                    lastName: 'Damin',
+                    level: 'Captain',
+                    points: 35,
+                    activeTasks: 6,
+                    src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    firstName: 'Denis',
+                    lastName: 'Damin',
+                    level: 'Captain',
+                    points: 65,
+                    activeTasks: 56,
+                    src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    firstName: 'Denis',
+                    lastName: 'Damin',
+                    level: 'Captain',
+                    points: 45,
+                    activeTasks: 60,
+                    src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                }
+            ]
         }
     }
 
     onSelectVoter = () => { }
 
     renderPerfomance = () => {
-        const { tasks } = this.state
+        const { performers } = this.state
 
         return (
             <div className='content'>
                 <Row>
-                    <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[0]} color='dark' />
+                    <Col xs={12} lg={6}>
+                        <DashboardPerformer performers={performers} />
                     </Col>
-                    <Col xs={12} md={6}>
-                        <CongratsAlarm>
-                            <Typography variant='body' color={colors['white']}>
-                                Your result is better than of <b>75%</b> of Captains this week!
-                            </Typography>
-                        </CongratsAlarm>
+                    <Col xs={12} lg={6}>
+                        <DashboardPerformer performers={performers} />
                     </Col>
                 </Row>
             </div>

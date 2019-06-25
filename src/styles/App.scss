@@ -67,6 +67,8 @@ html {
 @import 'captainsDashboard/captainsDashboard';
 @import 'captainsDashboard/dashboardUserInfo';
 @import 'captainsDashboard/dashboardTaskItem';
+@import 'captainsDashboard/dashboardPerformer';
+
 
 @import 'tasksList/tasksManagement';
 @import 'tasksList/taskEmpty';
@@ -116,3 +118,6 @@ html {
 @import 'components/taskCompleteDialog';
 @import 'components/spinner';
 @import 'components/alarmComponents/congratsAlarm';
+@import 'components/performComponents/performerItem';
+
+

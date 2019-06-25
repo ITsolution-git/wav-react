@@ -40,6 +40,7 @@ import ActionItem from './ActionItem';
 import Tabs from './Tabs';
 import { SubTaskItem, TaskCompleteDialog } from './taskComponents'
 import { CongratsAlarm } from './alarmComponents'
+import { PerformerItem } from './performComponents'
 
 export {
 	BaseComponent,
@@ -79,5 +80,6 @@ export {
 	SubTaskItem,
 	TaskCompleteDialog,
 	TitleAndDescription,
-	CongratsAlarm
+	CongratsAlarm,
+	PerformerItem
 }

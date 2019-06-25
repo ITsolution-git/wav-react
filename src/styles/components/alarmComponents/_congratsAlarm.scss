@@ -5,7 +5,8 @@
     padding: 14px 24px;
     background: linear-gradient(180.25deg, rgba($primary_color, 0.5) 0.14%, rgba($primary_color, 0.8) 99.87%);
     border-radius: 3px;
-
+    position: relative;
+    
     .congrats-title{
         font-size: 17px;
         color: $white;

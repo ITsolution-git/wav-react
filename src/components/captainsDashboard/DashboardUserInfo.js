@@ -19,7 +19,7 @@ class DashboardUserInfo extends BaseComponent {
 
         return (
             <div className='bcd-user-info'>
-                {this.renderItem('Current level', user.role)}
+                {this.renderItem('Current level', user.level)}
                 {this.renderItem('Points balance', user.points, true)}
                 {this.renderItem('Active tasks', user.activeTasks)}
                 {this.renderItem('Your voters', user.voterCounts)}
