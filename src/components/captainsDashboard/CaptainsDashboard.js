@@ -226,6 +226,21 @@ class CaptainsDashboard extends BaseComponent {
 
     onSelectVoter = () => { }
 
+    renderContentHeader = (title, route) => {
+        return (
+            <div className='content-header'>
+                <Typography className='content-title'>{title}</Typography>
+                <span className='view-all' onClick={() => this.onLink(route)}>View All</span>
+            </div>
+        )
+    }
+
+    renderContentFooter = (route) => {
+        return (
+            <span className='view-all-mobile' onClick={() => this.onLink(route)}>View All</span>
+        )
+    }
+
     renderPerfomance = () => {
         const { performers, performData } = this.state
 
@@ -268,10 +283,7 @@ class CaptainsDashboard extends BaseComponent {
 
         return (
             <div className='content'>
-                <div className='content-header'>
-                    <Typography className='content-title'>Actions in progress</Typography>
-                    <span className='view-all' onClick={() => this.onLink(routes.tasksList)}>View All</span>
-                </div>
+                {this.renderContentHeader('Actions in progress', routes.tasksList)}
                 <Row>
                     {
                         tasks.map((task, index) => {
@@ -283,6 +295,7 @@ class CaptainsDashboard extends BaseComponent {
                         })
                     }
                 </Row>
+                {this.renderContentFooter(routes.tasksList)}
             </div>
         );
     }
@@ -292,10 +305,7 @@ class CaptainsDashboard extends BaseComponent {
 
         return (
             <div className='content'>
-                <div className='content-header'>
-                    <Typography className='content-title'>Your voters</Typography>
-                    <span className='view-all' onClick={() => this.onLink(routes.voterList)}>View All</span>
-                </div>
+                {this.renderContentHeader('Your voters', routes.voterList)}
                 <Row>
                     {
                         voters.map((voter, index) => {
@@ -307,6 +317,7 @@ class CaptainsDashboard extends BaseComponent {
                         })
                     }
                 </Row>
+                {this.renderContentFooter(routes.tasksList)}
             </div>
         );
     }
@@ -333,6 +344,5 @@ class CaptainsDashboard extends BaseComponent {
         )
     }
 }
-
 
 export default connect()(withRouter(CaptainsDashboard));

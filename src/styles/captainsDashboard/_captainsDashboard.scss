@@ -28,11 +28,28 @@
             .content-title{
                 font-size: 18px;
             }
+        }
+        
+        .view-button {
+            font-size: 13px;
+            color: $primary;
+            cursor: pointer;
+        }
 
-            .view-all{
-                font-weight: normal;
-                color: $primary;
-                cursor: pointer;
+        .view-all{
+            @extend .view-button;
+
+            @include respond-to($phone) {
+                display: none;
+            }
+        }
+
+        .view-all-mobile{
+            @extend .view-button;
+            display: none;
+
+            @include respond-to($phone) {
+                display: block;
             }
         }
     }

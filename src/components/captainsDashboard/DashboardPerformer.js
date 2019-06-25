@@ -6,6 +6,12 @@ import { BaseComponent, Typography, CongratsAlarm, PerformerItem } from '../shar
 
 class DashboardPerformer extends BaseComponent {
 
+    renderViewAll = (isMobile = false) => {
+        return (
+            <span className={isMobile ? 'view-all-mobile' : 'view-all'} onClick={() => { }}>Full Leaderboard</span>
+        )
+    }
+
     render() {
         const { performers } = this.props;
 
@@ -19,7 +25,7 @@ class DashboardPerformer extends BaseComponent {
                 <div className='content'>
                     <div className='content-header'>
                         <Typography className='content-title'>This week Top Performers</Typography>
-                        <span className='view-all' onClick={() => { }}>Full Leaderboard</span>
+                        {this.renderViewAll()}
                     </div>
                     {
                         performers.map((performer, index) => (
@@ -29,6 +35,7 @@ class DashboardPerformer extends BaseComponent {
                                 rank={index + 1} />
                         ))
                     }
+                    {this.renderViewAll(true)}
                 </div>
             </div>
         );
