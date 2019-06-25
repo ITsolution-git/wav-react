@@ -19,6 +19,7 @@
       top: 0;
       margin: 0.35em;
       width: 132px;
+      z-index: 1;
 
       @include respond-to($phone) {
         position: relative;

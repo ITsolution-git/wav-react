@@ -8,6 +8,7 @@ export default {
     invites: '/invites',
     tasksList: '/task_list',
     voterList: '/voter_list',
+    addVoter: '/add_voter',
     community: '/community',
     captainsDashboard: '/home',
     adminDashboard: '/home_admin',

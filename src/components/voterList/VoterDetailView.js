@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Row, Col } from 'react-bootstrap'
 
-import { BaseComponent } from '../shared';
-import { VoterDetail } from './index'
+import { BaseComponent, VoterDetail } from '../shared';
 
 class VoterDetailView extends BaseComponent {
 	state = {

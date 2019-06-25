@@ -42,10 +42,10 @@ const FilterItems = (props) => {
 }
 
 const FilterBar = (props) => {
-	const { onSelectFilter } = props
+	const { onSelectFilter, onGototAddVoter } = props
 	return (
 		<div className='btw-voter-filter mb-5'>
-			<Button size='medium' className='btw-voter-add-btn' onClick={() => {}}>
+			<Button size='medium' className='btw-voter-add-btn' onClick={onGototAddVoter}>
 				<Icon name='plus-white' width={15} className='mr-3' />Add Voters
 			</Button>
 			<Col>
@@ -55,7 +55,8 @@ const FilterBar = (props) => {
 	)
 }
 FilterBar.propTypes = {
-	onSelectFilter: PropTypes.func.isRequired
+	onSelectFilter: PropTypes.func.isRequired,
+	onGototAddVoter: PropTypes.func.isRequired
 }
 
 export default FilterBar;

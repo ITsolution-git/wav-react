@@ -13,7 +13,7 @@ class Button extends BaseComponent {
             className,
             children,
             fullWidth,
-            onClick = () => { },
+            onClick,
             ...restProps
         } = this.props;
 
@@ -29,7 +29,8 @@ class Button extends BaseComponent {
 
 Button.propTypes = {
     size: PropTypes.oneOf(['large', 'medium', 'small']),
-    color: PropTypes.oneOf(['blue', 'white'])
+    color: PropTypes.oneOf(['blue', 'white']),
+    onClick: PropTypes.func.isRequired
 };
 
 export default Button;

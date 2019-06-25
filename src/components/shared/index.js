@@ -30,7 +30,9 @@ import {
 	VoterAction, 
 	VoterActionItem,
 	VoterCommunication,
-	VoterProfile
+	VoterProfile,
+	VoterDetail,
+	TitleAndDescription
 } from './voterComponents'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
@@ -68,10 +70,12 @@ export {
 	VotersTable,
 	VoterInfo,
 	VoterCardView,
+	VoterDetail,
 	SocialButton,
 	VoterStatusDropdown,
 	ActionItem,
 	Tabs,
 	SubTaskItem,
-	TaskCompleteDialog
+	TaskCompleteDialog,
+	TitleAndDescription
 }
