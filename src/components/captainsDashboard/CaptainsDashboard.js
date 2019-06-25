@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 
 import routes from '../../constants/Routes';
-import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
+import colors from '../../constants/Colors';
+import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm } from '../shared';
 import { DashboardUserInfo, DashboardTaskItem } from './index';
 
 class CaptainsDashboard extends BaseComponent {
@@ -188,7 +189,11 @@ class CaptainsDashboard extends BaseComponent {
                         <DashboardTaskItem task={tasks[0]} color='dark' />
                     </Col>
                     <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[1]} />
+                        <CongratsAlarm>
+                            <Typography variant='body' color={colors['white']}>
+                                Your result is better than of <b>75%</b> of Captains this week!
+                            </Typography>
+                        </CongratsAlarm>
                     </Col>
                 </Row>
             </div>
