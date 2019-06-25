@@ -70,7 +70,7 @@ class RegisterByMail extends BaseComponent {
 		    <div className='btw-register-mail'>
                 <Spinner loading={isFetching} />
                 <Paper className='paper'>
-                    <Typography className='title'>Sign Up with Email</Typography>
+                    <Typography className='title'>Welcome to Be the Wave!</Typography>
                     <Row className='inputs-row'>
                         <Col md={12} xs={12}>
                             <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
