@@ -32,7 +32,9 @@ import {
 	VoterCommunication,
 	VoterProfile,
 	VoterDetail,
-	TitleAndDescription
+	TitleAndDescription,
+	StepProgressBar,
+	RightProgressPanel
 } from './voterComponents'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
@@ -77,5 +79,7 @@ export {
 	Tabs,
 	SubTaskItem,
 	TaskCompleteDialog,
-	TitleAndDescription
+	TitleAndDescription,
+	StepProgressBar,
+	RightProgressPanel
 }
