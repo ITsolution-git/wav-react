@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Chart } from "react-google-charts";
+import { Chart } from 'react-google-charts';
 
 import colors from '../../../constants/Colors';
 import { BaseComponent } from '../../shared';
@@ -28,7 +28,7 @@ class PerformanceChart extends BaseComponent {
                 <ChartHeader {...this.props} />
                 <Chart
                     height={'200px'}
-                    chartType="Bar"
+                    chartType='Bar'
                     loader={<div>Loading Chart</div>}
                     data={chartData}
                     options={{
