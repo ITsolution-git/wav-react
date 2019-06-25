@@ -36,6 +36,11 @@ import {
 	StepProgressBar,
 	RightProgressPanel
 } from './voterComponents'
+import {
+	SelectVoters,
+	SocialInfo,
+	VoterNotFound,
+} from './selectVoters'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
 import ActionItem from './ActionItem';
@@ -81,5 +86,8 @@ export {
 	TaskCompleteDialog,
 	TitleAndDescription,
 	StepProgressBar,
-	RightProgressPanel
+	RightProgressPanel,
+	SelectVoters,
+	SocialInfo,
+	VoterNotFound,
 }

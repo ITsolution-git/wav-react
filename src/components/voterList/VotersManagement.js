@@ -241,7 +241,7 @@ class VotersManagement extends BaseComponent {
     }
 
     onGototAddVoter = () => {
-        this.onLink(Routes.addVoter)
+        this.onLink(Routes.selectVoters)
     }
 
     render() {

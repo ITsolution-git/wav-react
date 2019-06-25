@@ -1,11 +1,9 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { Row, Col, Container } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
-import { BaseComponent, TitleAndDescription, RightProgressPanel } from '../shared'
-import { VotersList } from '../voterList'
+import { BaseComponent, SelectVoters } from '../shared'
 
 class AddVoterToList extends BaseComponent { 
 	state = {
@@ -182,29 +180,9 @@ class AddVoterToList extends BaseComponent {
     }
 
 	render () {
-		const { title, description1, description2, votersList } = this.state
+		// const { title, description1, description2, votersList } = this.state
 		return (
-			<Container className='add-voter-page mt-5'>
-				<Row className='mt-5'>
-					<Col lg={9}>
-						<TitleAndDescription title={title} description1={description1} description2={description2}/>
-					</Col>
-					<Col lg={3}>
-					</Col>
-				</Row>
-				<Row className='mt-5'>
-					<Col lg={9}>
-						<VotersList 
-                        	list={votersList} 
-                        	onSelectVoter={this.onSelectVoter}
-                        	{...this.props} 
-                    	/>
-					</Col>
-					<Col lg={3}>
-						<RightProgressPanel />
-					</Col>
-				</Row>
-			</Container>
+			<SelectVoters />
 		)
 	}
 }
