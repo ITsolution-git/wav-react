@@ -9,7 +9,7 @@ class DashboardTaskItem extends BaseComponent {
         const { task: { title, points }, color } = this.props;
 
         return (
-            <div className={`bcd-task-item bcd-task-item-${color}`}>
+            <div className={`bcd-task-item bcd-task-item-${color} btw-paper`}>
                 <Typography variant='functional'>{title}</Typography>
                 <div className='task-status'>
                     <SvgIcon name='medal' />

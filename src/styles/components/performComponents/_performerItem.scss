@@ -45,6 +45,8 @@
 
             .status-value{
                 color: $secondary;
+                display: flex;
+                align-items: center;
             }
         }
 
