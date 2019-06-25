@@ -178,6 +178,23 @@ class CaptainsDashboard extends BaseComponent {
 
     onSelectVoter = () => { }
 
+    renderPerfomance = () => {
+        const { tasks } = this.state
+
+        return (
+            <div className='content'>
+                <Row>
+                    <Col xs={12} md={6}>
+                        <DashboardTaskItem task={tasks[0]} color='dark' />
+                    </Col>
+                    <Col xs={12} md={6}>
+                        <DashboardTaskItem task={tasks[1]} />
+                    </Col>
+                </Row>
+            </div>
+        );
+    }
+
     renderTasks = () => {
         const { tasks } = this.state
 
@@ -260,6 +277,7 @@ class CaptainsDashboard extends BaseComponent {
                         <DashboardUserInfo user={user} />
                     </Col>
                 </Row>
+                {this.renderPerfomance()}
                 {this.renderTasks()}
                 {this.renderActions()}
                 {this.renderVoters()}

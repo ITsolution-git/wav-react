@@ -8,8 +8,11 @@
         }
 
         .main-title{
-            margin-bottom: 26px;
             padding: 0;
+
+            @include respond-to($phone) {
+                margin-bottom: 25px;
+            }
         }
     }
 
