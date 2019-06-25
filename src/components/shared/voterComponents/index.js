@@ -5,6 +5,8 @@ import VoterAction from './VoterAction'
 import VoterActionItem from './VoterActionItem'
 import VoterCommunication from './VoterCommunication'
 import VoterProfile from './VoterProfile'
+import VoterDetail from './VoterDetail'
+import TitleAndDescription from './TitleAndDescription'
 
 export {
 	VoterAvatar,
@@ -13,5 +15,7 @@ export {
 	VoterInfo,
 	VoterCardView,
 	VoterProfile,
-	VoterCommunication
+	VoterDetail,
+	VoterCommunication,
+	TitleAndDescription
 }

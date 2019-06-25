@@ -4,9 +4,9 @@ import { bindActionCreators } from "redux"
 import { Row, Col, Container } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom'
 
-import { BaseComponent } from '../shared'
+import { BaseComponent, VoterDetail } from '../shared'
 import { Routes } from '../../constants'
-import { VotersList, VoterDetail, FilterBar } from './index'
+import { VotersList, FilterBar } from './index'
 import { BrowserView } from '../../helpers/DeviceHelper'
 
 class VotersManagement extends BaseComponent {
@@ -240,6 +240,10 @@ class VotersManagement extends BaseComponent {
     	// this.setState({ votersList: this.state.votersList })
     }
 
+    onGototAddVoter = () => {
+        this.onLink(Routes.addVoter)
+    }
+
     render() {
         const { selectedVoter, votersList } = this.state;
 
@@ -247,7 +251,11 @@ class VotersManagement extends BaseComponent {
             <Container className='btw-voter-page'>
                 <Row className='text-center'>
                     <Col>
-                        <FilterBar onSelectFilter={this.onSelectFilter} {...this.props} />
+                        <FilterBar 
+                            onSelectFilter={this.onSelectFilter} 
+                            onGototAddVoter={this.onGototAddVoter}
+                            {...this.props} 
+                        />
                     </Col>
                 </Row>
                 <Row>

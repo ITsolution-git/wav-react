@@ -12,6 +12,7 @@ import VerifyEmail from './verifyEmail/VerifyEmail';
 
 import TasksManagement from './tasksList';
 import VotersManagement from './voterList';
+import AddVoterManagement from './addVoter';
 
 import WelcomePage from './onBoarding/WelcomePage';
 import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
@@ -48,6 +49,7 @@ const router = () => (
 
         <Route exact path={routes.tasksList} component={Authorization(TasksManagement, [captain])} />
         <Route exact path={routes.voterList} component={Authorization(VotersManagement, [captain])} />
+        <Route exact path={routes.addVoter} component={Authorization(AddVoterManagement, [captain])} />
         <Route exact path={routes.helpCenter} component={Authorization(HelpCenter, [captain])} />
         <Route exact path={routes.captainsDashboard} component={Authorization(CaptainsDashboard, [captain])} />
     </Switch>
