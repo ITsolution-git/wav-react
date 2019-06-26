@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 import BaseComponent from '../../shared/BaseComponent';
 import Button from '../../shared/Button';
@@ -15,7 +16,8 @@ class SocialConnect extends BaseComponent {
         this.state = {
             facebook: false,
             twitter: false,
-            linkedIn: false
+            linkedIn: false,
+            isUploadDialogShow: false
         }
     }
 
@@ -29,11 +31,15 @@ class SocialConnect extends BaseComponent {
         this.onLink(routes.selectVoters);
     };
 
+    uploadButtonHandler = () => {
+        this.setState({ isUploadDialogShow: true })
+    }
+
     socialItemRender = () => {
         const { facebook, twitter, linkedIn } = this.state;
 
         return (
-            <div className='socialGroup'>
+            <div className='social-group'>
                 <SocialItem
                     name='facebook'
                     status={facebook}
@@ -50,30 +56,49 @@ class SocialConnect extends BaseComponent {
         );
     }
 
+    renderUploadContent = () => {
+        return (
+            <div className='content upload-content'>
+                <Typography className='title'>Import your own voters list</Typography>
+                <Typography variant='body' lightColor className='description'>
+                    Already have a list of voters you want to work with ? Use it!
+                </Typography>
+                <Typography variant='body' lightColor className='sub-description'>
+                    Accepted formats: .csv, Excel (.xls, .xlsx)
+                </Typography>
+                <Button
+                    color='white'
+                    size='small'
+                    onClick={this.uploadButtonHandler}
+                    className='upload-button'>
+                    Upload File
+                </Button>
+            </div>
+        )
+    }
+
     render() {
         return (
-            <div className='btw-social-connect'>
-                <div className='content btw-paper'>
+            <Container className='btw-social-connect btw-paper'>
+                <div className='content'>
                     <Typography className='title'>Connect social accounts</Typography>
-                    <Typography variant='body' className='description'>
+                    <Typography variant='body' lightColor className='description'>
                         Connect your favourite social media services
                         to find your friends among all the voters.
 					</Typography>
                     {this.socialItemRender()}
-                    <Button fullWidth onClick={this.showResultHandler}>
-                        Show Results
-                    </Button>
                 </div>
-            </div >
+                {!this.isMobile() && this.renderUploadContent()}
+                <Button fullWidth onClick={this.showResultHandler}>
+                    Show Results
+                </Button>
+            </Container >
         );
     }
 }
 
-// TODO: Remain these code for implementing API.
 const mapStateToProps = (state) => {
-    const { isUserFound } = state.request;
     return {
-        isUserFound
     };
 };
 
