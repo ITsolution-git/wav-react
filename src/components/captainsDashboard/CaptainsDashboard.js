@@ -1,12 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 
 import routes from '../../constants/Routes';
-import ContentLayout from '../layout/ContentLayout';
 import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
-import { DashboardUserInfo, DashboardTaskItem } from './index';
+import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart } from './index';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -169,15 +168,95 @@ class CaptainsDashboard extends BaseComponent {
             user: {
                 firstName: 'Denis',
                 lastName: 'Damin',
-                role: 'Captain',
+                level: 'Captain',
                 points: 365,
                 activeTasks: 6,
                 voterCounts: 10
+            },
+            performers: [
+                {
+                    firstName: 'Denis',
+                    lastName: 'Damin',
+                    level: 'Captain',
+                    points: 35,
+                    activeTasks: 6,
+                    src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    firstName: 'Denis',
+                    lastName: 'Damin',
+                    level: 'Captain',
+                    points: 65,
+                    activeTasks: 56,
+                    src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                },
+                {
+                    firstName: 'Denis',
+                    lastName: 'Damin',
+                    level: 'Captain',
+                    points: 45,
+                    activeTasks: 60,
+                    src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                }
+            ],
+            performanceData: {
+                main: {
+                    startDate: 'Jun 24',
+                    endDate: 'Jun 30',
+                    data: [12, 5, 16, 12, 19, 21, 25]
+                },
+                previous: {
+                    startDate: 'Jun 17',
+                    endDate: 'Jun 23',
+                    data: [10, 7, 10, 22, 9, 9, 15]
+                },
+                points: {
+                    value: 150,
+                    percent: 2,
+                    isUp: false
+                },
+                activeTasks: {
+                    value: 75,
+                    percent: 10,
+                    isUp: true
+                }
             }
         }
     }
 
     onSelectVoter = () => { }
+
+    renderContentHeader = (title, route) => {
+        return (
+            <div className='content-header'>
+                <Typography className='content-title'>{title}</Typography>
+                <span className='view-all' onClick={() => this.onLink(route)}>View All</span>
+            </div>
+        )
+    }
+
+    renderContentFooter = (route) => {
+        return (
+            <span className='view-all-mobile' onClick={() => this.onLink(route)}>View All</span>
+        )
+    }
+
+    renderPerfomance = () => {
+        const { performers, performanceData } = this.state
+
+        return (
+            <div className='content'>
+                <Row>
+                    <Col xs={12} lg={6}>
+                        <PerformanceChart performanceData={performanceData} />
+                    </Col>
+                    <Col xs={12} lg={6}>
+                        <TopPerformers performers={performers} />
+                    </Col>
+                </Row>
+            </div>
+        );
+    }
 
     renderTasks = () => {
         const { tasks } = this.state
@@ -189,10 +268,10 @@ class CaptainsDashboard extends BaseComponent {
                 </div>
                 <Row>
                     <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[0]} />
+                        <ExtraPointTask task={tasks[0]} color='dark' />
                     </Col>
                     <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[1]} color='dark' />
+                        <ExtraPointTask task={tasks[1]} />
                     </Col>
                 </Row>
             </div>
@@ -204,10 +283,7 @@ class CaptainsDashboard extends BaseComponent {
 
         return (
             <div className='content'>
-                <div className='content-header'>
-                    <Typography className='content-title'>Actions in progress</Typography>
-                    <span className='view-all' onClick={() => this.onLink(routes.tasksList)}>View All</span>
-                </div>
+                {this.renderContentHeader('Actions in progress', routes.tasksList)}
                 <Row>
                     {
                         tasks.map((task, index) => {
@@ -219,6 +295,7 @@ class CaptainsDashboard extends BaseComponent {
                         })
                     }
                 </Row>
+                {this.renderContentFooter(routes.tasksList)}
             </div>
         );
     }
@@ -228,10 +305,7 @@ class CaptainsDashboard extends BaseComponent {
 
         return (
             <div className='content'>
-                <div className='content-header'>
-                    <Typography className='content-title'>Your voters</Typography>
-                    <span className='view-all' onClick={() => this.onLink(routes.voterList)}>View All</span>
-                </div>
+                {this.renderContentHeader('Your voters', routes.voterList)}
                 <Row>
                     {
                         voters.map((voter, index) => {
@@ -243,6 +317,7 @@ class CaptainsDashboard extends BaseComponent {
                         })
                     }
                 </Row>
+                {this.renderContentFooter(routes.tasksList)}
             </div>
         );
     }
@@ -251,25 +326,23 @@ class CaptainsDashboard extends BaseComponent {
         const { user } = this.state
 
         return (
-            <ContentLayout>
-                <div className='btw-captains-dashboard container'>
-                    <Row className='user-info-content'>
-                        <Col md={5} lg={6} className='main-title'>
-                            <Typography>Welcome back!, {user.firstName}</Typography>
-                            <Typography lightColor variant="body">Nice to meet you again.</Typography>
-                        </Col>
-                        <Col md={7} lg={6}>
-                            <DashboardUserInfo user={user} />
-                        </Col>
-                    </Row>
-                    {this.renderTasks()}
-                    {this.renderActions()}
-                    {this.renderVoters()}
-                </div>
-            </ContentLayout>
+            <Container className='btw-captains-dashboard'>
+                <Row className='user-info-content'>
+                    <Col md={5} lg={6} className='main-title'>
+                        <Typography>Welcome back!, {user.firstName}</Typography>
+                        <Typography lightColor variant="body">Nice to meet you again.</Typography>
+                    </Col>
+                    <Col md={7} lg={6} className='p-0'>
+                        <DashboardUserInfo user={user} />
+                    </Col>
+                </Row>
+                {this.renderPerfomance()}
+                {this.renderTasks()}
+                {this.renderActions()}
+                {this.renderVoters()}
+            </Container>
         )
     }
 }
-
 
 export default connect()(withRouter(CaptainsDashboard));

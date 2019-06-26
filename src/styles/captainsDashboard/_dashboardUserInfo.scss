@@ -2,20 +2,43 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
+    
     .info-item {
         width: 25%;
         display: flex;
         align-items: center;
         flex-direction: column;
         border-left: 1px solid $divider;
+        padding: 0 10px;
 
         &:first-child{
             border-left: 0;
+
+            @include respond-to($phone) {
+                padding-left: 0;
+            }
+        }
+
+        &:last-child{
+            @include respond-to($phone) {
+                padding-right: 0;
+            }
         }
 
         .info-value{
             font-size: 18px;
+
+            @include respond-to($phone) {
+                font-size: 14px;
+            }
+        }
+
+        @include respond-to($phone) {
+            align-items: flex-start;
+        }
+
+        @include respond-to($tablet) {
+            align-items: flex-start;
         }
     }
 }

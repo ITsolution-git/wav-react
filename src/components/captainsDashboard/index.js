@@ -1,9 +1,13 @@
 import CaptainsDashboard from './CaptainsDashboard'
 import DashboardUserInfo from './DashboardUserInfo'
-import DashboardTaskItem from './DashboardTaskItem'
+import ExtraPointTask from './ExtraPointTask'
+import TopPerformers from './TopPerformers'
+import { PerformanceChart } from './performanceChart';
 
 export default CaptainsDashboard
 export {
     DashboardUserInfo,
-    DashboardTaskItem
+    ExtraPointTask,
+    TopPerformers,
+    PerformanceChart
 }
