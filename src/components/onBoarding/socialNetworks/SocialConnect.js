@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap';
 
 import routes from '../../../constants/Routes';
 import { BaseComponent, Button, Typography } from '../../shared'
-import { SocialItem } from './index';
+import { SocialItem, UploadFileDialog } from './index';
 
 
 class SocialConnect extends BaseComponent {
@@ -15,7 +15,8 @@ class SocialConnect extends BaseComponent {
             facebook: false,
             twitter: false,
             linkedIn: false,
-            isUploadDialogShow: false
+            isUploadDialogShow: false,
+            files: []
         }
     }
 
@@ -29,6 +30,14 @@ class SocialConnect extends BaseComponent {
 
     uploadButtonHandler = () => {
         this.setState({ isUploadDialogShow: true })
+    }
+
+    onSuccessUploadDialog = files => {
+        this.setState({ files, isUploadDialogShow: false })
+    }
+
+    onCloseUploadDialog = () => {
+        this.setState({ isUploadDialogShow: false })
     }
 
     socialItemRender = () => {
@@ -74,6 +83,8 @@ class SocialConnect extends BaseComponent {
     }
 
     render() {
+        const { isUploadDialogShow } = this.state;
+
         return (
             <Container className='btw-social-connect btw-paper'>
                 <div className='content'>
@@ -88,6 +99,10 @@ class SocialConnect extends BaseComponent {
                 <Button fullWidth onClick={this.showResultHandler}>
                     Show Results
                 </Button>
+                <UploadFileDialog
+                    show={isUploadDialogShow}
+                    onClose={this.onCloseUploadDialog}
+                    onSuccess={this.onSuccessUploadDialog} />
             </Container >
         );
     }
