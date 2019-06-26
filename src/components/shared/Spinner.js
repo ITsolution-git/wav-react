@@ -1,17 +1,25 @@
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import PropTypes from 'prop-types';
 
-import BaseComponent from './BaseComponent';
+import { BaseComponent } from './';
 
 class Spinner extends BaseComponent {
 	render() {
-		const { loading, height = 100, size = 70 } = this.props;
+		const { loading, width = 80, height = 80 } = this.props;
 		return loading ?
-			( <div className='btw-spinner' style={{ height: height }}>
-				 <CircularProgress  size={size} />
+			( <div className='btw-spinner'>
+				<div className='background' style={{ width, height }}>
+					<div className='inner'></div>
+				</div>
 			  </div> )
 			: null
 	}
 }
+
+Spinner.propTypes = {
+	loading: PropTypes.bool,
+	width: PropTypes.number,
+	height: PropTypes.number
+};
 
 export default Spinner;

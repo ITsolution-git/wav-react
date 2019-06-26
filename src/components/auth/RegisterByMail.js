@@ -14,7 +14,7 @@ import {
 	PasswordInput,
 	TextInput
 } from '../shared/validatedInputs';
-import { Button, Paper, Typography, BaseComponent } from '../shared';
+import { Button, Paper, Typography, BaseComponent, Spinner } from '../shared';
 import BottomLink from './BottomLink';
 import colors from '../../constants/Colors';
 
@@ -64,12 +64,13 @@ class RegisterByMail extends BaseComponent {
 		const {
 			startValidation,
 		} = this.state;
-		const { error } = this.props;
+		const { error, isFetching } = this.props;
 
 		return (
 		    <div className='btw-register-mail'>
+                <Spinner loading={isFetching} />
                 <Paper className='paper'>
-                    <Typography className='title'>Sign Up with Email</Typography>
+                    <Typography className='title'>Welcome to Be the Wave!</Typography>
                     <Row className='inputs-row'>
                         <Col md={12} xs={12}>
                             <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
@@ -133,10 +134,11 @@ class RegisterByMail extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { error, isSuccess } = state.app[appDataTypes.register];
+    const { error, isSuccess, isFetching } = state.app[appDataTypes.register];
     return {
         error,
-        isSuccess
+        isSuccess,
+        isFetching
     };
 };
 
