@@ -94,6 +94,7 @@ class ChangePassword extends BaseComponent {
                     <Row className='inputs-row'>
                         <Col md={12}>
                             <PasswordInput
+                                placeholder='Your password (at least 6 charachters)'
                                 onChange={this.handleChange}
                                 isVoter={false}
                                 name='password'
@@ -103,7 +104,9 @@ class ChangePassword extends BaseComponent {
                     </Row>
                     <Row className='inputs-row'>
                         <Col md={12}>
-                            <TextInput label='Confirm Password'
+                            <TextInput
+                                placeholder='Confirm your password'
+                                label='Confirm Password'
                                 type='password'
                                 id='confirmPassword'
                                 validator={value => value === this.state.password}

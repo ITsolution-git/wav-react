@@ -13,8 +13,12 @@ export default class PasswordInput extends InputBase {
                           id={id || 'password'}
                           validator={value => validate(validationTypes.password, value)}
                           validatorError={
-                              <div className="btw-password-error">
-                                  <div id="requirements">Your Password must be at least 7 characters with one special character and one upper case letter</div>
+                              <div className='btw-password-error'>
+                                  <div id='requirements'>
+                                      Your Password must be at least 6 characters
+                                      with one special character and one upper case letter,
+                                      one number
+                                  </div>
                               </div>
                           }
                           name={name || fields.password}

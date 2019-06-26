@@ -39,7 +39,7 @@ export const passwordValidation = (...args) => {
 
   const checkIfValid = (element) => {
     if (typeof element === 'string') {
-      if (!(element.length >= 6 && !!(element.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/)))) {
+      if (!(element.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{6,})/))) {
         return false
       }
       return true;
@@ -53,7 +53,7 @@ export const passwordValidation = (...args) => {
     if (typeof element === 'object') {
       let { password } = element;
       if (typeof password === "string") {
-        if (!(password.length >= 6 && !!(password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/)))) {
+        if (!(password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{6,})/))) {
           return false
         }
         return true;
