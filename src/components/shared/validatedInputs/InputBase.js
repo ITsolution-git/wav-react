@@ -1,7 +1,4 @@
 import React from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Select from 'react-select';
 import cn from 'classnames';
 
 import BaseComponent from '../../shared/BaseComponent';
@@ -160,64 +157,6 @@ export class TextInput extends InputBase {
                     { error }
                 </div>
             </div>
-        );
-    };
-}
-
-export class Dropdown extends InputBase {
-    state = this.baseState;
-
-    componentWillReceiveProps(props) {
-        this.checkForValidation(props);
-    }
-
-    componentWillMount() {
-        this.onMount();
-    }
-
-    mapItem = (item) => {
-        if (typeof item === 'string') {
-            return {
-                label: item,
-                value: item
-            }
-        }
-        return item;
-    };
-
-    render = () => {
-        const {
-            values = [],
-            required,
-            disabled,
-            defaultValue,
-            errorWhite = false,
-            fullWidth = true,
-            classes
-        } = this.props;
-        const {
-            value = defaultValue || '',
-            error,
-            isValid
-        } = this.state;
-        return (
-            <FormControl required={required}
-                disabled={disabled}
-                fullWidth={fullWidth} >
-                <Select
-                    className={`btw-validated-dropdown ${classes}`}
-                    value={value}
-                    onChange={option => {
-                        const e = { target: { value: (option || {}).value || '' } };
-                        this.onChange(e);
-                    }}
-                    placeholder={this.resolveLabel()}
-                    onBlur={this.onFocusOut}
-                    options={values.map(this.mapItem)}
-                />
-                <FormHelperText classes={{ root: cn('btw-input-error', { 'btw-error-white': errorWhite }) }}
-                    error={!isValid}>{error}</FormHelperText>
-            </FormControl>
         );
     };
 }

@@ -15,11 +15,9 @@ class App extends BaseComponent {
 	}
 
 	render() {
-
-		let isHideHeader = this.isOnBoarding();
 		return (
 			<div className='btw-app'>
-				{ !isHideHeader && <Header /> }
+				<Header />
 				<div className='btw-content'>
                     <Router />
 				</div>

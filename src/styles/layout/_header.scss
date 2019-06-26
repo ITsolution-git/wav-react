@@ -3,6 +3,9 @@
   position: fixed;
   width: 100%;
   z-index: 99;
+  height: 72px;
+  display: flex;
+  align-items: center;
 
   header {
     height: 72px;
