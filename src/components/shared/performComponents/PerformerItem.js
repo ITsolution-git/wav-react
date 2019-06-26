@@ -10,7 +10,7 @@ class PerformerItem extends BaseComponent {
             <div className='status-item'>
                 <Typography variant='body' fontWeight='600' className='status-label'>{label}:</Typography>
                 <Typography variant='body' fontWeight='600' className='status-value'>
-                    <SvgIcon name={isPoint? 'medal': 'action-status-completed'} />
+                    <SvgIcon name={isPoint ? 'medal' : 'action-status-completed'} className='status-icon' />
                     {value}
                 </Typography>
             </div>
@@ -18,7 +18,7 @@ class PerformerItem extends BaseComponent {
     }
 
     renderStatus = () => {
-        const { performer :{points, activeTasks} } = this.props;
+        const { performer: { points, activeTasks } } = this.props;
 
         return (
             <div className='performer-status'>
@@ -53,7 +53,7 @@ class PerformerItem extends BaseComponent {
 
 
     render() {
-        return (            
+        return (
             <div className='btw-performer-item btw-paper'>
                 {this.renderPerformer()}
                 {this.renderStatus()}
@@ -61,8 +61,8 @@ class PerformerItem extends BaseComponent {
         )
     }
 }
-            
-                 
+
+
 PerformerItem.propTypes = {
     performer: PropTypes.object,
     rank: PropTypes.number

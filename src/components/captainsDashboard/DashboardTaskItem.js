@@ -12,7 +12,7 @@ class DashboardTaskItem extends BaseComponent {
             <div className={`bcd-task-item bcd-task-item-${color} btw-paper`}>
                 <Typography variant='functional'>{title}</Typography>
                 <div className='task-status'>
-                    <SvgIcon name='medal' />
+                    <SvgIcon name='medal' className='svg-icon' />
                     <Typography variant='functional'>{points.score}</Typography>
                     <Button size='small' className='mark-button' color='white' onClick={() => { }}>Mark as Done</Button>
                 </div>

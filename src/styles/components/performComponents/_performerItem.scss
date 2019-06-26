@@ -47,6 +47,10 @@
                 color: $secondary;
                 display: flex;
                 align-items: center;
+
+                .status-icon{
+                    padding-right: 3px;
+                }
             }
         }
 

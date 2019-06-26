@@ -9,7 +9,10 @@ class DashboardUserInfo extends BaseComponent {
         return (
             <div className='info-item'>
                 <Typography lightColor variant='body'>{label}:</Typography>
-                <Typography className='info-value'>{isPoint && <SvgIcon name="medal" />}{value}</Typography>
+                <Typography className='info-value'>
+                    {isPoint && <SvgIcon name='medal' className='svg-icon' />}
+                    {value}
+                </Typography>
             </div>
         );
     }
