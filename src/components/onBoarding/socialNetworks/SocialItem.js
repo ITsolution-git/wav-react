@@ -1,10 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import BaseComponent from '../../shared/BaseComponent';
-import Button from '../../shared/Button';
-import SocialIcon from '../../shared/SocialIcon';
-import Typography from '../../shared/Typography';
+import { BaseComponent, Button, Typography, SocialIcon } from '../../shared'
 
 class SocialItem extends BaseComponent {
 
@@ -20,7 +17,6 @@ class SocialItem extends BaseComponent {
         const buttonName = !this.isMobile() ? 'Connect' : '+';
         const { socialConnectHandler } = this.props;
 
-        // TODO: Delete styling after modifying button by sergey
         return (
             <Button
                 size='small'

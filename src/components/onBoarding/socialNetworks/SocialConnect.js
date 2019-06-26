@@ -3,11 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import BaseComponent from '../../shared/BaseComponent';
-import Button from '../../shared/Button';
-import SocialItem from './SocialItem';
-import Typography from '../../shared/Typography';
 import routes from '../../../constants/Routes';
+import { BaseComponent, Button, Typography } from '../../shared'
+import { SocialItem } from './index';
 
 
 class SocialConnect extends BaseComponent {
@@ -21,12 +19,10 @@ class SocialConnect extends BaseComponent {
         }
     }
 
-    // TODO: implement socialConnectHandler
     socialConnectHandler = (name) => {
         this.setState({ [name]: true })
     };
 
-    // TODO: implement showResultHandler
     showResultHandler = () => {
         this.onLink(routes.selectVoters);
     };
