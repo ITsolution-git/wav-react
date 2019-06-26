@@ -2,6 +2,7 @@ import envConsts from '../constants/Env';
 
 const env = process.env.REACT_APP_ENV || process.env.NODE_ENV;
 let config = null;
+console.log(env);
 
 switch (env) {
     case envConsts.prod: {
