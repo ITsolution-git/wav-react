@@ -5,7 +5,7 @@ import { Row, Col, Container } from 'react-bootstrap';
 
 import routes from '../../constants/Routes';
 import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
-import { DashboardUserInfo, DashboardTaskItem, DashboardPerformer, PerformanceChart } from './index';
+import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart } from './index';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -199,7 +199,7 @@ class CaptainsDashboard extends BaseComponent {
                     src: 'https://images.unsplash.com/photo-1520484033379-7f74cc7d7340?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
                 }
             ],
-            performData: {
+            performanceData: {
                 main: {
                     startDate: 'Jun 24',
                     endDate: 'Jun 30',
@@ -242,16 +242,16 @@ class CaptainsDashboard extends BaseComponent {
     }
 
     renderPerfomance = () => {
-        const { performers, performData } = this.state
+        const { performers, performanceData } = this.state
 
         return (
             <div className='content'>
                 <Row>
                     <Col xs={12} lg={6}>
-                        <PerformanceChart performData={performData} />
+                        <PerformanceChart performanceData={performanceData} />
                     </Col>
                     <Col xs={12} lg={6}>
-                        <DashboardPerformer performers={performers} />
+                        <TopPerformers performers={performers} />
                     </Col>
                 </Row>
             </div>
@@ -268,10 +268,10 @@ class CaptainsDashboard extends BaseComponent {
                 </div>
                 <Row>
                     <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[0]} color='dark' />
+                        <ExtraPointTask task={tasks[0]} color='dark' />
                     </Col>
                     <Col xs={12} md={6}>
-                        <DashboardTaskItem task={tasks[1]} />
+                        <ExtraPointTask task={tasks[1]} />
                     </Col>
                 </Row>
             </div>

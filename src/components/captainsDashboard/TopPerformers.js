@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import colors from '../../constants/Colors';
-import { BaseComponent, Typography, CongratsAlarm, PerformerItem } from '../shared';
+import { BaseComponent, Typography, CongratsAlarm, VoterPerformer } from '../shared';
 
-class DashboardPerformer extends BaseComponent {
+class TopPerformers extends BaseComponent {
 
-    renderViewAll = (isMobile = false) => {
+    renderFullLeaderboard = (isfooter = false) => {
         return (
-            <span className={isMobile ? 'view-all-mobile' : 'view-all'} onClick={() => { }}>Full Leaderboard</span>
+            <span className={isfooter ? 'full-leaderboard-footer' : 'full-leaderboard'} onClick={() => { }}>Full Leaderboard</span>
         )
     }
 
@@ -16,7 +16,7 @@ class DashboardPerformer extends BaseComponent {
         const { performers } = this.props;
 
         return (
-            <div className='bcd-performer'>
+            <div className='bcd-top-performers'>
                 <CongratsAlarm className='congrats'>
                     <Typography variant='body' color={colors['white']}>
                         Your result is better than of <b>75%</b> of Captains this week!
@@ -25,25 +25,25 @@ class DashboardPerformer extends BaseComponent {
                 <div className='content'>
                     <div className='content-header'>
                         <Typography className='content-title'>This week Top Performers</Typography>
-                        {this.renderViewAll()}
+                        {this.renderFullLeaderboard()}
                     </div>
                     {
                         performers.map((performer, index) => (
-                            <PerformerItem
+                            <VoterPerformer
                                 key={index}
                                 performer={performer}
                                 rank={index + 1} />
                         ))
                     }
-                    {this.renderViewAll(true)}
+                    {this.renderFullLeaderboard(true)}
                 </div>
             </div>
         );
     }
 }
 
-DashboardPerformer.propTypes = {
+TopPerformers.propTypes = {
     performers: PropTypes.array
 };
 
-export default DashboardPerformer;
+export default TopPerformers;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { BaseComponent, Typography, SvgIcon, VoterAvatar } from '../index';
 
-class PerformerItem extends BaseComponent {
+class VoterPerformer extends BaseComponent {
 
     renderItem = (label, value, isPoint = true) => {
         return (
@@ -54,7 +54,7 @@ class PerformerItem extends BaseComponent {
 
     render() {
         return (
-            <div className='btw-performer-item btw-paper'>
+            <div className='btw-voter-performer-item btw-paper'>
                 {this.renderPerformer()}
                 {this.renderStatus()}
             </div >
@@ -63,9 +63,9 @@ class PerformerItem extends BaseComponent {
 }
 
 
-PerformerItem.propTypes = {
+VoterPerformer.propTypes = {
     performer: PropTypes.object,
     rank: PropTypes.number
 };
 
-export default PerformerItem;
+export default VoterPerformer;

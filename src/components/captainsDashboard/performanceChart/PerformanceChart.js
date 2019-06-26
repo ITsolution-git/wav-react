@@ -9,7 +9,7 @@ import { ChartHeader, ChartFooter } from './index';
 class PerformanceChart extends BaseComponent {
 
     getChartData = () => {
-        const { performData: { main, previous } } = this.props;
+        const { performanceData: { main, previous } } = this.props;
         const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
         let data = [['', '', '']];
 
@@ -43,7 +43,7 @@ class PerformanceChart extends BaseComponent {
 }
 
 PerformanceChart.propTypes = {
-    performData: PropTypes.object
+    performanceData: PropTypes.object
 };
 
 export default PerformanceChart;

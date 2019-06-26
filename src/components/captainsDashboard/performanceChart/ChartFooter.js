@@ -30,7 +30,7 @@ class ChartFooter extends BaseComponent {
     }
 
     render() {
-        const { performData: { points, activeTasks } } = this.props;
+        const { performanceData: { points, activeTasks } } = this.props;
 
         return (
             <div className='bcd-chart-footer'>
@@ -42,7 +42,7 @@ class ChartFooter extends BaseComponent {
 }
 
 ChartFooter.propTypes = {
-    performData: PropTypes.object
+    performanceData: PropTypes.object
 };
 
 export default ChartFooter;

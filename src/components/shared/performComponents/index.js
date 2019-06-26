@@ -1,5 +1,5 @@
-import PerformerItem from './PerformerItem'
+import VoterPerformer from './VoterPerformer'
 
 export {
-    PerformerItem
+    VoterPerformer
 }

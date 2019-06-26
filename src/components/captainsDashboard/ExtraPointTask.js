@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { BaseComponent, Typography, SvgIcon, Button } from '../shared';
 
-class DashboardTaskItem extends BaseComponent {
+class ExtraPointTask extends BaseComponent {
 
     render() {
         const { task: { title, points }, color } = this.props;
@@ -21,13 +21,13 @@ class DashboardTaskItem extends BaseComponent {
     }
 }
 
-DashboardTaskItem.propTypes = {
+ExtraPointTask.propTypes = {
     task: PropTypes.object,
     color: PropTypes.oneOf(['light', 'dark'])
 };
 
-DashboardTaskItem.defaultProps = {
+ExtraPointTask.defaultProps = {
     color: 'light'
 }
 
-export default DashboardTaskItem;
+export default ExtraPointTask;

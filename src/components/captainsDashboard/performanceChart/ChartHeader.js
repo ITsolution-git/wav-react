@@ -31,7 +31,7 @@ class ChartHeader extends BaseComponent {
     }
 
     render() {
-        const { performData: { main, previous } } = this.props;
+        const { performanceData: { main, previous } } = this.props;
 
         return (
             <div className='bcd-chart-header'>
@@ -46,7 +46,7 @@ class ChartHeader extends BaseComponent {
 }
 
 ChartHeader.propTypes = {
-    performData: PropTypes.object
+    performanceData: PropTypes.object
 };
 
 export default ChartHeader;
