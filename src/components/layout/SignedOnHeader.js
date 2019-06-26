@@ -94,7 +94,7 @@ class SignedOnHeader extends BaseComponent {
     renderProfileDropdown = () => {
         const { actions, profile: {data} } = this.props
         const props={...actions, ...this, ...data}
-        return <ProfileDropdown {...props} btwSettings={this.gotoLinkHandler('/profile')} />
+        return <ProfileDropdown {...props} btwSettings={this.gotoLinkHandler('/settings/profile')} />
     };
 
     render() {

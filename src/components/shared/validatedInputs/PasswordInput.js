@@ -6,16 +6,18 @@ import { validate } from '../../../utility/InputValidator';
 
 export default class PasswordInput extends InputBase {
     render () {
-        return <TextInput label='Password'
+        const { label, id, name } = this.props
+
+        return <TextInput label={label || 'Password'}
                           type='password'
-                          id='password'
+                          id={id || 'password'}
                           validator={value => validate(validationTypes.password, value)}
                           validatorError={
                               <div className="btw-password-error">
                                   <div id="requirements">Your Password must be at least 7 characters with one special character and one upper case letter</div>
                               </div>
                           }
-                          name={fields.password}
+                          name={name || fields.password}
                           {...this.props } />
     }
 }

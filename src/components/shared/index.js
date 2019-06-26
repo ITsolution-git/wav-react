@@ -46,6 +46,16 @@ import VoterStatusDropdown from './VoterStatusDropdown'
 import ActionItem from './ActionItem';
 import Tabs from './Tabs';
 import { SubTaskItem, TaskCompleteDialog } from './taskComponents'
+import { LeftSideMenu, Panel } from './settings'
+import {
+	EmailInput,
+	FirstNameInput,
+	LastNameInput,
+	PasswordInput,
+	TextInput,
+	ProfileInformationText,
+	ProfileAvatar
+} from './validatedInputs'
 
 export {
 	BaseComponent,
@@ -90,4 +100,13 @@ export {
 	SelectVoters,
 	SocialInfo,
 	VoterNotFound,
+	LeftSideMenu,
+	EmailInput,
+	FirstNameInput,
+	LastNameInput,
+	PasswordInput,
+	TextInput,
+	ProfileInformationText,
+	ProfileAvatar,
+	Panel
 }
