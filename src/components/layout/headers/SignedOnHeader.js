@@ -10,7 +10,8 @@ import PubSub from 'pubsub-js';
 import {
     BaseComponent,
     Logo,
-    Icon
+    Icon,
+    ProfileDropdown
 } from '../../shared';
 import routes from '../../../constants/Routes';
 import roles from '../../../constants/Roles';
@@ -67,6 +68,16 @@ class SignedOnHeader extends BaseComponent {
         return authStorage.getCurrentRole() === roles.captain
             ? routes.captainsDashboard
             : routes.adminDashboard
+    }
+
+    gotoLinkHandler = link => () => {
+        this.onLink(link)
+    }
+
+    renderProfileDropdown = () => {
+        const { actions, profile: {data} } = this.props
+        const props={...actions, ...this, ...data}
+        return <ProfileDropdown {...props} btwSettings={this.gotoLinkHandler('/settings/profile')} />
     };
 
     render() {

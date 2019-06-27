@@ -3,4 +3,6 @@ export default {
     lastName: 'lastname',
     email: 'email',
     password: 'password',
+    profileInformationText: 'profiletext',
+    profileAvatar: 'avatar'
 };

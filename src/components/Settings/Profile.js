@@ -4,7 +4,13 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Container, Col, Row } from 'react-bootstrap'
 
-import { BaseComponent, Typography } from '../shared';
+import { 
+	BaseComponent, 
+	Typography, 
+	LeftSideMenu,
+	Panel,
+} from '../shared';
+import { ProfileInformation, PasswordSetting, NotificationSetting } from './index'
 
 class Profile extends BaseComponent {
 	render() {
@@ -16,11 +22,20 @@ class Profile extends BaseComponent {
 					</Col>
 				</Row>
 				<Row className='my-4'>
-					<Col lg={3}>
-						leftside
+					<Col lg={2}>
+						<LeftSideMenu  />
 					</Col>
-					<Col lg={9}>
-						rightside
+					<Col lg={8}>
+						<Panel title='Profile Information'>
+							<ProfileInformation />
+						</Panel>
+						<Panel title='Password'>
+							<PasswordSetting />
+						</Panel>
+						<Panel title='Password'>
+							<NotificationSetting />
+						</Panel>
+						
 					</Col>
 				</Row>
 			</Container>

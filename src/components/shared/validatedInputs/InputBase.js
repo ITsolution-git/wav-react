@@ -81,6 +81,20 @@ export default class InputBase extends BaseComponent {
         const { label } = this.props;
         return `${label}`;
     };
+
+    renderRightIcon = () => {
+        const { isValid, value } = this.state;
+        const { rightIcon = null, useGreenMark = true } = this.props;
+
+        if (rightIcon) {
+            return rightIcon
+        }
+
+        return value && isValid && useGreenMark
+            ? <SvgIcon width={14} height={10.5} name='green-mark' />
+            : null;
+
+    };
 }
 
 
@@ -98,20 +112,6 @@ export class TextInput extends InputBase {
         this.onMount();
     }
 
-    renderRightIcon = () => {
-        const { isValid, value } = this.state;
-        const { rightIcon = null, useGreenMark = true } = this.props;
-
-        if (rightIcon) {
-            return rightIcon
-        }
-
-        return value && isValid && useGreenMark
-            ? <SvgIcon width={14} height={10.5} name='green-mark' />
-            : null;
-
-    };
-
     render = () => {
         const {
             defaultValue,
@@ -121,6 +121,7 @@ export class TextInput extends InputBase {
             id,
             style,
             className,
+            inputClassName,
             disabled,
             placeholder
         } = this.props;
@@ -132,12 +133,12 @@ export class TextInput extends InputBase {
         } = this.state;
 
         return (
-            <div className={cn('btw-input', { disabled, error: !isValid })}>
+            <div className={cn('btw-input', { disabled, error: !isValid }, className)}>
                 <label htmlFor={id}>{ label }</label>
                 <div className={cn('text-box')}>
                     <input value={value}
                            id={id}
-                           className={cn('btw-input', className)}
+                           className={cn('btw-input', inputClassName)}
                            style={style}
                            type={type}
                            onBlur={this.onFocusOut}
@@ -153,6 +154,76 @@ export class TextInput extends InputBase {
                   { this.renderRightIcon() }
                 </span>
                 </div>
+                <div className='error-msg'>
+                    { error }
+                </div>
+            </div>
+        );
+    };
+}
+
+export class TextArea extends InputBase {
+    state = this.baseState;
+
+    componentWillReceiveProps(props) {
+        if (props.required) {
+            this.checkForValidation(props);
+        }
+        if (props.defaultValue !== this.props.defaultValue) {
+            this.setState({ value: props.defaultValue || '' })
+        }
+    }
+
+    componentWillMount() {
+        this.onMount();
+    }
+
+    render = () => {
+        const {
+            defaultValue,
+            type,
+            maxLength = 50,
+            label,
+            id,
+            style,
+            className,
+            inputClassName,
+            disabled,
+            placeholder,
+            row = 5,
+            helperText,
+        } = this.props;
+
+        const {
+            value = defaultValue || '',
+            isValid,
+            error,
+        } = this.state;
+
+        return (
+            <div className={cn('btw-input', { disabled, error: !isValid }, className)}>
+                <label htmlFor={id}>{ label }</label>
+                <div className={cn('text-box')}>
+                    <textarea
+                           id={id}
+                           className={cn('btw-input', inputClassName)}
+                           style={style}
+                           type={type}
+                           onBlur={this.onFocusOut}
+                           onChange={e => {
+                               const { value } = e.target;
+                               if (value.length <= maxLength) {
+                                   this.onChange(e);
+                               }
+                           }}
+                           rows={row}
+                           placeholder={placeholder}
+                           disabled={disabled}>{value}</textarea>
+                    <span className='right-icon'>
+                      { this.renderRightIcon() }
+                    </span>
+                </div>
+                <span>{helperText}</span>
                 <div className='error-msg'>
                     { error }
                 </div>
