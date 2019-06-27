@@ -17,7 +17,7 @@ class SocialInfo extends BaseComponent {
                     <Typography className='title'>
                         Connect social media accounts
                     </Typography>
-                    <Typography variant='body' className='description'>
+                    <Typography variant='body' lightColor className='description'>
                         {noConnect ?
                             'We will use your accounts information only to connect you with voters you already know in real life. This can make your serching process much easier.' :
                             'With connected social media accounts, it is much easier to find voters that you already know in real life.'

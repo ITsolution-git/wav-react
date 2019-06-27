@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import _ from 'lodash';
 
 import routes from '../../../constants/Routes';
-import ContentLayout from '../../layout/ContentLayout';
 import { storageKeys, LocalStorageManager as lsManager } from '../../../storage';
 import { BaseComponent, Button, Typography, Dialog, VotersTable, SearchInput, VotersProgressBar } from '../../shared';
 import { SocialInfo, VoterNotFound } from './index';
@@ -179,90 +178,6 @@ class SelectVoters extends BaseComponent {
                         facebook: true
                     },
                     status: 'Not registered'
-                },
-                {
-                    id: 14,
-                    name: 'Denis Damin 14',
-                    street: 'New work Sr. 1289',
-                    sex: 'Male',
-                    social: {
-                        twitter: true,
-                        linkedIn: false,
-                        facebook: true
-                    },
-                    status: 'Not registered'
-                },
-                {
-                    id: 15,
-                    name: 'Denis Damin 15',
-                    street: 'New work Sr. 1289',
-                    sex: 'Male',
-                    social: {
-                        twitter: true,
-                        linkedIn: true,
-                        facebook: true
-                    },
-                    status: 'Regular'
-                },
-                {
-                    id: 16,
-                    name: 'Denis Damin 16',
-                    street: 'New work Sr. 1289',
-                    sex: 'Male',
-                    social: {
-                        twitter: true,
-                        linkedIn: true,
-                        facebook: true
-                    },
-                    status: 'Regular'
-                },
-                {
-                    id: 17,
-                    name: 'Denis Damin 17',
-                    street: 'New work Sr. 1289',
-                    sex: 'Male',
-                    social: {
-                        twitter: true,
-                        linkedIn: true,
-                        facebook: true
-                    },
-                    status: 'Regular'
-                },
-                {
-                    id: 18,
-                    name: 'Denis Damin 18',
-                    street: 'New work Sr. 1289',
-                    sex: 'Male',
-                    social: {
-                        twitter: true,
-                        linkedIn: true,
-                        facebook: true
-                    },
-                    status: 'Regular'
-                },
-                {
-                    id: 19,
-                    name: 'Denis Damin 19',
-                    street: 'New work Sr. 1289',
-                    sex: 'Male',
-                    social: {
-                        twitter: true,
-                        linkedIn: true,
-                        facebook: true
-                    },
-                    status: 'Regular'
-                },
-                {
-                    id: 20,
-                    name: 'Denis Damin 20',
-                    street: 'New work Sr. 1289',
-                    sex: 'Male',
-                    social: {
-                        twitter: true,
-                        linkedIn: true,
-                        facebook: true
-                    },
-                    status: 'Regular'
                 }
             ],
             selectedVoters: [],
@@ -324,7 +239,7 @@ class SelectVoters extends BaseComponent {
                 <Typography className='title'>
                     Add 10 voters to your list
                 </Typography>
-                <Typography variant='body' className='page-description'>
+                <Typography variant='body' lightColor className='page-description'>
                     Select <b>10 people</b> among your social media friends or search
                     for other people you know among all the voters of your district.
                     Try to choose a few among <b>regular voters</b>, a few among
@@ -443,30 +358,28 @@ class SelectVoters extends BaseComponent {
     render() {
 
         return (
-            <ContentLayout>
-                <Row className='btw-select-voters container'>
-                    <Col xs={12}>
+            <Container>
+                <Row className='btw-select-voters'>
+                    <Col>
                         <Row>
-                            <Col xs={12} lg={9}>
+                            <Col md={12} lg={9}>
                                 {this.renderSocialInfo('tablet')}
                                 {this.renderDescription()}
                             </Col>
                         </Row>
                         <Row>
-                            <Col xs={12} lg={9}>
+                            <Col md={12} lg={9}>
                                 <Row>
-                                    <Col xs={12}>
+                                    <Col>
                                         <SearchInput
                                             placeholder='Search by name or address'
                                             onChange={this.searchInputHandler}
                                             className='search-input' />
-                                    </Col>
-                                    <Col xs={12}>
                                         {this.renderTable()}
                                     </Col>
                                 </Row>
                             </Col>
-                            <Col xs={12} sm={12} md={12} lg={3}>
+                            <Col md={12} lg={3}>
                                 {this.renderVotersProgressBar('desktop')}
                                 {this.renderSocialInfo('desktop')}
                             </Col>
@@ -475,7 +388,7 @@ class SelectVoters extends BaseComponent {
                     {this.renderVotersProgressBar('tablet')}
                 </Row >
                 {this.renderDialog()}
-            </ContentLayout >
+            </Container>
         );
     }
 }
