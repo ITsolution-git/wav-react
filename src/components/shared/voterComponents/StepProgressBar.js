@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 import cn from 'classnames'
 
 const StepProgressBar = (props) => {
-	const { step } = props
-	const tenArray = [...Array(props.numberOfSteps).keys()]
+	const { step, numberOfSteps } = props
+	const tenArray = [...Array(numberOfSteps).keys()]
 
 	return (
 		<div className='d-flex my-4'>
