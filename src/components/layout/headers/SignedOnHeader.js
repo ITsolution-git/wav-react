@@ -1,5 +1,4 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter, Link } from 'react-router-dom';
 import {
@@ -10,16 +9,15 @@ import PubSub from 'pubsub-js';
 
 import {
     BaseComponent,
-    ProfileDropdown,
     Logo,
     Icon
-} from '../../components/shared';
-import routes from '../../constants/Routes';
-import roles from '../../constants/Roles';
-import authStorage from '../../storage/AuthStorage';
-import appDataTypes from '../../constants/AppDataTypes';
-import { getBtwUserProfile, btwLogout } from '../../actions/AuthActions';
-import pubsubConstants from '../../constants/PubSubConstants';
+} from '../../shared';
+import routes from '../../../constants/Routes';
+import roles from '../../../constants/Roles';
+import authStorage from '../../../storage/AuthStorage';
+import appDataTypes from '../../../constants/AppDataTypes';
+import pubsubConstants from '../../../constants/PubSubConstants';
+import HeaderProfileDropdown from '../components/HeaderProfileDropdown';
 
 class SignedOnHeader extends BaseComponent {
 
@@ -35,22 +33,6 @@ class SignedOnHeader extends BaseComponent {
         this.locationChangeSubscription = PubSub.subscribe(pubsubConstants.onLocationChange, (type, value) => {
             this.setState({ activeItem: value });
         });
-    }
-
-    componentWillMount() {
-        this.checkForLoadingProfile(this.props);
-    }
-
-    checkForLoadingProfile(props) {
-        const { profile:
-            {
-                isSuccess,
-                error
-            },
-            actions } = props;
-        if (!isSuccess && !error && this.getCurrentRoute() !== routes.pageDown) {
-            actions.getBtwUserProfile();
-        }
     }
 
     getCurrentRoute = () => {
@@ -85,16 +67,6 @@ class SignedOnHeader extends BaseComponent {
         return authStorage.getCurrentRole() === roles.captain
             ? routes.captainsDashboard
             : routes.adminDashboard
-    }
-
-    gotoLinkHandler = link => () => {
-        this.onLink(link)
-    }
-
-    renderProfileDropdown = () => {
-        const { actions, profile: {data} } = this.props
-        const props={...actions, ...this, ...data}
-        return <ProfileDropdown {...props} btwSettings={this.gotoLinkHandler('/profile')} />
     };
 
     render() {
@@ -138,9 +110,7 @@ class SignedOnHeader extends BaseComponent {
                             </div>
                         </>
                     }
-                    <div className='btw-header-dropdown'>
-                        { this.renderProfileDropdown() }
-                    </div>
+                    <HeaderProfileDropdown />
                 </div>
             </Container>
         )
@@ -151,16 +121,8 @@ class SignedOnHeader extends BaseComponent {
 const mapStateToProps = (state) => {
     const profile = state.app[appDataTypes.profile];
     return {
-        profile,
-        voter: state.voter
+        profile
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        actions: bindActionCreators({ getBtwUserProfile, btwLogout }, dispatch)
-    };
-};
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignedOnHeader));
+export default connect(mapStateToProps)(withRouter(SignedOnHeader));
