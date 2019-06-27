@@ -4,8 +4,8 @@ import {
     Container
 } from 'react-bootstrap';
 
-import { Logo, BaseComponent } from '../shared';
-import { getHomeRoute } from '../../helpers/AuthHelper';
+import { Logo, BaseComponent } from '../../shared';
+import { getHomeRoute } from '../../../helpers/AuthHelper';
 
 class SignedOffHeader extends BaseComponent {
     render() {
