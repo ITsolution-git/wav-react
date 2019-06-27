@@ -1,6 +1,6 @@
 $phone: '(max-width: 480px)';
-$tablet: '(min-width: 481px) and (max-width: 1199px)';
-$desktop: '(min-width: 1200px)';
+$tablet: '(min-width: 481px) and (max-width: 991px)';
+$desktop: '(min-width: 992px)';
 $computer: '(min-width: 481px)'; /* for tablets and desktop */
 
 @mixin respond-to($media) {

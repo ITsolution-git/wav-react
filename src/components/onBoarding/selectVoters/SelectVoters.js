@@ -306,7 +306,7 @@ class SelectVoters extends BaseComponent {
             this.renderNoDataText(isNotConnected, isNoData) :
             (
                 <div className='btw-paper table-container'>
-                    <Typography variant='body' className='table-description'>
+                    <Typography variant='body' lightColor className='table-description'>
                         {!!searchString ?
                             `We found ${data.length} results for “${searchString}”` :
                             `Hurray! We matched you with ${data.length} of your friends.`
