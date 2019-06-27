@@ -8,15 +8,11 @@ import { BaseComponent } from '../shared';
 import logo from '../../resources/images/logo.svg';
 
 class Logo extends BaseComponent {
-    hanldeClick = () => {
-      if (!this.isOnBoarding()) {
-          this.redirectToHome();
-      }
-    };
+
     render() {
-        const { width = 65, height = 44 } = this.props;
+        const { width = 65, height = 44, staticContext, ...props } = this.props;
         return (
-            <img onClick={this.hanldeClick}
+            <img {...props}
                  src={logo}
                  alt=""
                  width={width} height={height} />

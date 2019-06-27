@@ -13,14 +13,28 @@ class HeaderProfileDropdown extends BaseComponent {
         this.onLink(routes.profile)
     };
 
+    handleLogout = () => {
+        const { actions: { btwLogout } } = this.props;
+        btwLogout();
+    };
+
+    handleActionClick = action => () => {
+      if (!this.isOnBoarding()) {
+          action();
+          return;
+      }
+      this.props.onActionClick(action);
+    };
 
     render() {
-        const { actions, profile: {data} } = this.props;
-        const props={...actions, ...this, ...data};
+        const { profile: {data} } = this.props;
+        const props={...this, ...data};
 
         return (
             <div className='btw-header-dropdown'>
-                <ProfileDropdown {...props} btwSettings={this.goToSettings} />
+                <ProfileDropdown btwLogout={this.handleActionClick(this.handleLogout)}
+                                 btwSettings={this.handleActionClick(this.goToSettings)}
+                                 {...props} />
             </div>
         )
     }
