@@ -16,11 +16,18 @@ class UploadFileDialog extends BaseComponent {
 
     uploadFilesHandler = files => {
         this.setState({ isLoading: true });
-        this.setState({ files });
-        this.setState({ isLoading: false });
+
+        // TODO: remove setTimeout after implement api
+        setTimeout(
+            function () {
+                this.setState({ files, isLoading: false });
+            }
+                .bind(this),
+            3000
+        );
     }
 
-    removeFileHandler = index => {
+    removeFileHandler = (index) => () => {
         const { files } = this.state;
         this.setState({ files: [...files.slice(0, index), ...files.slice(index + 1)] })
     }
@@ -69,7 +76,7 @@ class UploadFileDialog extends BaseComponent {
                 <SvgIcon
                     name='upload-photo-remove'
                     className='remove-button'
-                    onClick={() => this.removeFileHandler(index)} />
+                    onClick={this.removeFileHandler(index)} />
             </div>
         )
     }
