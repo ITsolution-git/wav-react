@@ -1,7 +1,7 @@
 export default {
     registerByMail: '/register_by_mail',
     registerBySocial: '/register_by_social',
-    profile: '/settings/profile',
+    profile: '/settings_profile',
     makelist: '/make_list',
     pageDown: '/page_down',
     tasksList: '/task_list',

@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import { withRouter } from 'react-router-dom'
 
-import { BaseComponent, SelectVoters } from '../shared'
+import { BaseComponent, AddVoters } from '../shared'
 
 class AddVoterToList extends BaseComponent { 
 	state = {
@@ -182,7 +182,7 @@ class AddVoterToList extends BaseComponent {
 	render () {
 		// const { title, description1, description2, votersList } = this.state
 		return (
-			<SelectVoters />
+			<AddVoters />
 		)
 	}
 }
