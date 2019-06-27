@@ -1,56 +1,56 @@
 .btw-social-item {
 
-    align-items: center;
     display: flex;
+    align-items: center;
     flex-direction: column;
     width: 100%;
 
     .main-container {
+        display: flex;
         align-items: center;
         justify-content: space-between;
-        display: flex;
         width: 100%;
-    }
-  
-	.name{
-        text-transform: capitalize;
-	}
-  
-	.controls{
-        width: 100%;
-        height: 48px;
-        margin-left: 24px;
-        align-items: center;
-        justify-content: space-between;
-        display: flex;
-    }
-    
-    .status{
-        color: $primary;
-    }
+        
+        .controls{
+            width: 100%;
+            height: 48px;
+            margin-left: 24px;
+            align-items: center;
+            justify-content: space-between;
+            display: flex;
 
-    .status-center{
-        width: 94px; 
-        text-align: center;
+            .name{
+                text-transform: capitalize;
+            }
+
+            .status{
+                color: $primary;
+            }
+        
+            .status-center{
+                width: 94px; 
+                text-align: center;
+            }
+            
+            .connect-button {
+                width: 94px;
+            }
+
+            .plus-button {
+                width: 24px;
+                font-size: 18px;
+                padding: 0;
+            }
+        }
     }
 
     .border-container{
         width: 100%;
         padding: 8px 0 15px 56px;
-    }
-
-    .item-border{
-        width: 100%;
-        border-bottom: 1px solid $divider;
-    }
-
-    .connect-button {
-        width: 94px;
-    }
-
-    .plus-button {
-        width: 24px;
-        font-size: 18px;
-        padding: 0;
+        
+        .item-border{
+            width: 100%;
+            border-bottom: 1px solid $divider;
+        }
     }
 }

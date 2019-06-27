@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'react-bootstrap';
+import cn from 'classnames';
 
-import BaseComponent from './BaseComponent';
-import Typography from './Typography';
+import { BaseComponent, Typography } from './';
 
 class Dialog extends BaseComponent {
     render() {
@@ -15,12 +15,13 @@ class Dialog extends BaseComponent {
             children,
             actionButtons = null,
             closeButton,
+            className,
             ...restProps
         } = this.props;
         return (
             <Modal show={show}
                 onHide={onHide}
-                className='btw-modal'
+                className={cn('btw-modal', className)}
                 {...restProps}>
                 <Modal.Header closeButton={closeButton}>
                     <Typography>{title}</Typography>

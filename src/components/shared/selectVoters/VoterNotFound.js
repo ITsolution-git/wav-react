@@ -19,5 +19,4 @@ const VoterNotFound = () => {
         </div >
     )
 };
-
 export default VoterNotFound;

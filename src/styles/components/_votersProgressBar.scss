@@ -102,12 +102,12 @@
         }
 
         @include respond-to($desktop) {
-            display: block;
+            display: flex;
         }
     }
     
     .open {
-        display: block;
+        display: flex;
     }
 
     .button-container {

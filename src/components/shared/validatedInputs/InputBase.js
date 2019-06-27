@@ -1,7 +1,4 @@
 import React from 'react';
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Select from 'react-select';
 import cn from 'classnames';
 
 import BaseComponent from '../../shared/BaseComponent';
@@ -84,6 +81,20 @@ export default class InputBase extends BaseComponent {
         const { label } = this.props;
         return `${label}`;
     };
+
+    renderRightIcon = () => {
+        const { isValid, value } = this.state;
+        const { rightIcon = null, useGreenMark = true } = this.props;
+
+        if (rightIcon) {
+            return rightIcon
+        }
+
+        return value && isValid && useGreenMark
+            ? <SvgIcon width={14} height={10.5} name='green-mark' />
+            : null;
+
+    };
 }
 
 
@@ -100,20 +111,6 @@ export class TextInput extends InputBase {
     componentWillMount() {
         this.onMount();
     }
-
-    renderRightIcon = () => {
-        const { isValid, value } = this.state;
-        const { rightIcon = null, useGreenMark = true } = this.props;
-
-        if (rightIcon) {
-            return rightIcon
-        }
-
-        return value && isValid && useGreenMark
-            ? <SvgIcon width={14} height={10.5} name='green-mark' />
-            : null;
-
-    };
 
     render = () => {
         const {
@@ -165,69 +162,13 @@ export class TextInput extends InputBase {
     };
 }
 
-export class Dropdown extends InputBase {
-    state = this.baseState;
-
-    componentWillReceiveProps(props) {
-        this.checkForValidation(props);
-    }
-
-    componentWillMount() {
-        this.onMount();
-    }
-
-    mapItem = (item) => {
-        if (typeof item === 'string') {
-            return {
-                label: item,
-                value: item
-            }
-        }
-        return item;
-    };
-
-    render = () => {
-        const {
-            values = [],
-            required,
-            disabled,
-            defaultValue,
-            errorWhite = false,
-            fullWidth = true,
-            classes
-        } = this.props;
-        const {
-            value = defaultValue || '',
-            error,
-            isValid
-        } = this.state;
-        return (
-            <FormControl required={required}
-                disabled={disabled}
-                fullWidth={fullWidth} >
-                <Select
-                    className={`btw-validated-dropdown ${classes}`}
-                    value={value}
-                    onChange={option => {
-                        const e = { target: { value: (option || {}).value || '' } };
-                        this.onChange(e);
-                    }}
-                    placeholder={this.resolveLabel()}
-                    onBlur={this.onFocusOut}
-                    options={values.map(this.mapItem)}
-                />
-                <FormHelperText classes={{ root: cn('btw-input-error', { 'btw-error-white': errorWhite }) }}
-                    error={!isValid}>{error}</FormHelperText>
-            </FormControl>
-        );
-    };
-}
-
 export class TextArea extends InputBase {
     state = this.baseState;
 
     componentWillReceiveProps(props) {
-        if (props.required) this.checkForValidation(props);
+        if (props.required) {
+            this.checkForValidation(props);
+        }
         if (props.defaultValue !== this.props.defaultValue) {
             this.setState({ value: props.defaultValue || '' })
         }
@@ -236,20 +177,6 @@ export class TextArea extends InputBase {
     componentWillMount() {
         this.onMount();
     }
-
-    renderRightIcon = () => {
-        const { isValid, value } = this.state;
-        const { rightIcon = null, useGreenMark = true } = this.props;
-
-        if (rightIcon) {
-            return rightIcon
-        }
-
-        return value && isValid && useGreenMark
-            ? <SvgIcon width={14} height={10.5} name='green-mark' />
-            : null;
-
-    };
 
     render = () => {
         const {

@@ -23,11 +23,11 @@ import TaskProgressBar from './TaskProgressBar'
 import Typography from './Typography'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
-import { 
-	VoterCardView, 
-	VoterInfo, 
-	VoterAvatar, 
-	VoterAction, 
+import {
+	VoterCardView,
+	VoterInfo,
+	VoterAvatar,
+	VoterAction,
 	VoterActionItem,
 	VoterCommunication,
 	VoterProfile,
@@ -56,6 +56,8 @@ import {
 	ProfileInformationText,
 	ProfileAvatar
 } from './validatedInputs'
+import { CongratsAlarm } from './alarmComponents'
+import { VoterPerformer } from './performComponents'
 
 export {
 	BaseComponent,
@@ -108,5 +110,7 @@ export {
 	TextInput,
 	ProfileInformationText,
 	ProfileAvatar,
-	Panel
+	Panel,
+	CongratsAlarm,
+	VoterPerformer
 }

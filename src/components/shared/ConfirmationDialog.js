@@ -1,35 +1,30 @@
 import React from 'react';
-import { Row, Col } from 'react-bootstrap';
 
-import BaseComponent from '../shared/BaseComponent';
-import Dialog from '../shared/Dialog';
-import Button from '../shared/Button';
+import { BaseComponent, Dialog, Button, Typography } from '../shared';
 
 export default class ConfirmationDialog extends BaseComponent {
     render() {
         const {
             show,
             onClose,
-            submitText,
+            submitText='Ok',
+            cancelText='Cancel',
             title='',
-            description,
+            description = '',
             onSubmit
         } = this.props;
         return (
             <Dialog show={show}
                     title={title}
+                    onHide={onClose}
                     actionButtons={
-                        <Row>
-                            <Col md={3} xs={3}>
-                                <Button onClick={onSubmit}>{submitText}</Button>
-                            </Col>
-                            <Col md={3} xs={3}>
-                                <Button onClick={onClose}>No</Button>
-                            </Col>
-                        </Row>
+                        <>
+                            <Button fullWidth onClick={onSubmit}>{submitText}</Button>
+                            <Button fullWidth onClick={onClose}>{cancelText}</Button>
+                        </>
                     }
-                    onHide={onClose}>
-                   <div>{ description }</div>
+                    className='btw-confirmation-dialog'>
+                   <Typography variant='body' fontWeight='600'>{ description }</Typography>
             </Dialog>
         );
     }
