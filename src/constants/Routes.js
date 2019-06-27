@@ -1,6 +1,6 @@
 export default {
-    registerByMail: '/register_by_mail',
-    registerBySocial: '/register_by_social',
+    registerByMail: '/signup_by_mail',
+    registerBySocial: '/signup',
     profile: '/settings/profile',
     makelist: '/make_list',
     pageDown: '/page_down',

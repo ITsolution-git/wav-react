@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 import cn from 'classnames'
 
 const StepProgressBar = (props) => {
-	const { step } = props
-	const tenArray = [...Array(10).keys()]
+	const { step, numberOfSteps } = props
+	const tenArray = [...Array(numberOfSteps).keys()]
 
 	return (
 		<div className='d-flex my-4'>
@@ -23,11 +23,13 @@ const StepProgressBar = (props) => {
 
 StepProgressBar.propTypes = {
 	/* showing step number */
+    numberOfSteps: PropTypes.number,
     step: PropTypes.number,
 };
 
 StepProgressBar.defaultProps = {
-	number: 0
+	numberOfSteps: 10,
+	step: 0
 }
 
 export default StepProgressBar

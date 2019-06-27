@@ -37,7 +37,7 @@ import {
 	RightProgressPanel
 } from './voterComponents'
 import {
-	SelectVoters,
+	SelectVoters as AddVoters,
 	SocialInfo,
 	VoterNotFound,
 } from './selectVoters'
@@ -99,7 +99,7 @@ export {
 	TitleAndDescription,
 	StepProgressBar,
 	RightProgressPanel,
-	SelectVoters,
+	AddVoters,
 	SocialInfo,
 	VoterNotFound,
 	LeftSideMenu,
