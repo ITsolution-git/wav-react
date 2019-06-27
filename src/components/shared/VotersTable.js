@@ -44,7 +44,7 @@ class VotersTable extends BaseComponent {
 
     renderDesktopHeader = () => {
         return (
-            <tr className='desktop-header'>
+            <tr>
                 <th className='check'></th>
                 <th className='name'>Name</th>
                 <th>Connected On</th>
@@ -122,7 +122,7 @@ class VotersTable extends BaseComponent {
         return (
             <div className={classNames('btw-voters-table', className)}>
                 <Table responsive>
-                    <thead>
+                    <thead className='desktop-header'>
                         {this.renderDesktopHeader()}
                     </thead>
                     <tbody>

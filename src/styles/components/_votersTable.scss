@@ -27,35 +27,35 @@
     }
 
     .table {
+        
         thead {
             tr {
                 margin-top: 10px;
-
-                th {
-                    position: sticky;
-                    top: 0;
-                    vertical-align: bottom;
-                    border-bottom: 0.5px solid $divider;
-                    color: $secondary;
-                    font-size: 13px;
-                    background-color: $white;
-                    z-index: 1;
-
-                    @include respond-to($phone) {
-                        background-color: unset;
-                    }
-                }
-
-                .check {
-                    width: 15px;
-                }
             }
+        }
 
-            .desktop-header {
+        th {
+            position: sticky;
+            top: 0;
+            vertical-align: bottom;
+            border-bottom: 0.5px solid $divider;
+            border-top: unset;
+            color: $secondary;
+            font-size: 13px;
+            font-weight: normal;
+            background-color: $white;
+            z-index: 1;
+            padding: 14px 4px;
 
-                @include respond-to($phone) {
-                    display: none;
-                }
+            @include respond-to($phone) {
+                background-color: unset;
+            }
+        }
+
+        .desktop-header {
+
+            @include respond-to($phone) {
+                display: none;
             }
         }
 
@@ -64,14 +64,15 @@
             tr {
                 td {
                     height: 63.5px;
-                    padding: 14px 8px;
+                    padding: 8px 4px;
                     font-size: 13px;
                     font-weight: normal;
                     color: $secondary;
+                    vertical-align: middle;
                 }
 
                 .check{
-                    padding: 10px 0;
+                    padding-bottom: 15px;
                 }
 
                 .name {

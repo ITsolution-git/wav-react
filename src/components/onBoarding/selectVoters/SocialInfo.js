@@ -2,10 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../../shared/BaseComponent';
-import Button from '../../shared/Button';
-import Typography from '../../shared/Typography';
-import SocialList from '../../shared/SocialList';
+import { BaseComponent, Button, Typography, SocialList } from '../../shared';
 
 class SocialInfo extends BaseComponent {
 
@@ -20,7 +17,7 @@ class SocialInfo extends BaseComponent {
                     <Typography className='title'>
                         Connect social media accounts
                     </Typography>
-                    <Typography variant='body' className='description'>
+                    <Typography variant='body' lightColor className='description'>
                         {noConnect ?
                             'We will use your accounts information only to connect you with voters you already know in real life. This can make your serching process much easier.' :
                             'With connected social media accounts, it is much easier to find voters that you already know in real life.'
