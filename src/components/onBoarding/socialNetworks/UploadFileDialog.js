@@ -53,6 +53,7 @@ class UploadFileDialog extends BaseComponent {
                     <Typography lightColor variant='body'>Uploading...</Typography>
                 </div> :
                 <Dropzone
+                    accept='.csv, .xls, .xlsx'
                     className='content'
                     ref={(node) => { this.dropzoneRef = node; }}
                     onDrop={this.uploadFilesHandler}>
