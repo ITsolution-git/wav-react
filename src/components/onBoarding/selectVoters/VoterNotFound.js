@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Typography from '../../shared/Typography';
-import SvgIcon from '../../shared/SvgIcon';
+import { SvgIcon, Typography } from '../../shared';
 
 const VoterNotFound = () => {
 
@@ -11,7 +10,7 @@ const VoterNotFound = () => {
             <div className='info-content'>
                 <Typography className='title'>
                     What a pity!
-                    </Typography>
+                </Typography>
                 <Typography variant='body' className='description'>
                     It seems like there is no Dennis Holman in your district.
                     Try serching for somebody more local.

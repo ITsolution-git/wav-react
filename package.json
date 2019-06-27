@@ -3,7 +3,6 @@
   "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.1.2",
     "auth0-js": "^9.10.4",
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
@@ -28,6 +27,7 @@
     "react-dom": "^16.8.6",
     "react-dropzone": "^4.2.9",
     "react-fontawesome": "^1.6.1",
+    "react-google-charts": "^3.0.13",
     "react-helmet": "^5.2.0",
     "react-https-redirect": "^1.0.10",
     "react-moment": "^0.7.0",

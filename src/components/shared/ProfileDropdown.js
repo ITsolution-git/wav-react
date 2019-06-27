@@ -106,10 +106,10 @@ const ProfileDropdown = (props) => {
 			        	<ProfileLevel {...data} />
 			        </Dropdown.Item>
 			        <Dropdown.Divider />
-			        <Dropdown.Item eventKey={1.3} onClick={() => props.btwSettings()}>
+			        <Dropdown.Item eventKey={1.3} onClick={props.btwSettings}>
 			        	<Icon className='menu-icon' name='settings' ext='svg' width={15} height={15} />Account Settings
 		        	</Dropdown.Item>
-			        <Dropdown.Item eventKey={1.4} onClick={() => props.btwLogout()}>
+			        <Dropdown.Item eventKey={1.4} onClick={props.btwLogout}>
 			        	<Icon className='menu-icon' name='logout' ext='svg' width={15} height={15} />Log Out
 		        	</Dropdown.Item>
 		        </Dropdown.Menu>

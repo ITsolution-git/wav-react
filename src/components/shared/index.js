@@ -23,11 +23,11 @@ import TaskProgressBar from './TaskProgressBar'
 import Typography from './Typography'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
-import { 
-	VoterCardView, 
-	VoterInfo, 
-	VoterAvatar, 
-	VoterAction, 
+import {
+	VoterCardView,
+	VoterInfo,
+	VoterAvatar,
+	VoterAction,
 	VoterActionItem,
 	VoterCommunication,
 	VoterProfile,
@@ -46,6 +46,8 @@ import VoterStatusDropdown from './VoterStatusDropdown'
 import ActionItem from './ActionItem';
 import Tabs from './Tabs';
 import { SubTaskItem, TaskCompleteDialog } from './taskComponents'
+import { CongratsAlarm } from './alarmComponents'
+import { VoterPerformer } from './performComponents'
 
 export {
 	BaseComponent,
@@ -90,4 +92,6 @@ export {
 	AddVoters,
 	SocialInfo,
 	VoterNotFound,
+	CongratsAlarm,
+	VoterPerformer
 }

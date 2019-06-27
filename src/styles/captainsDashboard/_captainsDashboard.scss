@@ -1,10 +1,18 @@
 .btw-captains-dashboard {
 
     .user-info-content {
-        margin-bottom: 63px;
+        margin: 60px 0;
+
+        @include respond-to($phone) {
+            margin: 30px 0;
+        }
 
         .main-title{
-            margin-bottom: 26px;
+            padding: 0;
+
+            @include respond-to($phone) {
+                margin-bottom: 25px;
+            }
         }
     }
 
@@ -20,12 +28,33 @@
             .content-title{
                 font-size: 18px;
             }
+        }
+        
+        .view-button {
+            font-size: 13px;
+            color: $primary;
+            cursor: pointer;
+        }
 
-            .view-all{
-                font-weight: normal;
-                color: $primary;
-                cursor: pointer;
+        .view-all{
+            @extend .view-button;
+
+            @include respond-to($phone) {
+                display: none;
             }
         }
+
+        .view-all-mobile{
+            @extend .view-button;
+            display: none;
+
+            @include respond-to($phone) {
+                display: block;
+            }
+        }
+    }
+    
+    .svg-icon{
+        padding-right: 3px;
     }
 }

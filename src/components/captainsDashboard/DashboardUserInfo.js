@@ -9,7 +9,10 @@ class DashboardUserInfo extends BaseComponent {
         return (
             <div className='info-item'>
                 <Typography lightColor variant='body'>{label}:</Typography>
-                <Typography className='info-value'>{isPoint && <SvgIcon name="medal" />}{value}</Typography>
+                <Typography className='info-value'>
+                    {isPoint && <SvgIcon name='medal' className='svg-icon' />}
+                    {value}
+                </Typography>
             </div>
         );
     }
@@ -19,7 +22,7 @@ class DashboardUserInfo extends BaseComponent {
 
         return (
             <div className='bcd-user-info'>
-                {this.renderItem('Current level', user.role)}
+                {this.renderItem('Current level', user.level)}
                 {this.renderItem('Points balance', user.points, true)}
                 {this.renderItem('Active tasks', user.activeTasks)}
                 {this.renderItem('Your voters', user.voterCounts)}

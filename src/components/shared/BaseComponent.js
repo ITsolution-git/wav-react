@@ -33,7 +33,7 @@ class BaseComponent extends Component {
 
     isTablet = () => {
         return isTablet;
-    }
+    };
     
     isDesktop = () => {
         return !isMobile;

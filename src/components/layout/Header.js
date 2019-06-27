@@ -1,13 +1,13 @@
 import React from 'react';
 import PubSub from 'pubsub-js';
+import { withRouter } from 'react-router-dom';
 
 import pubsubConstants from '../../constants/PubSubConstants';
-import SignedOnHeader from './SignedOnHeader';
-import SignedOffHeader from './SignedOffHeader';
+import { SignedOnHeader, SignedOffHeader, OnBoardingHeader } from './'
 import authStorage from '../../storage/AuthStorage';
 import BaseComponent from '../shared/BaseComponent';
 
-export default class Header extends BaseComponent {
+class Header extends BaseComponent {
 	constructor(props, context) {
 		super(props, context);
 		this.state = {
@@ -29,12 +29,16 @@ export default class Header extends BaseComponent {
 		const { authenticated } = this.state;
 
 		return (
-			<div className="btw-header">
+			<div className='btw-header'>
 				{ authenticated
-					? <SignedOnHeader />
+					? this.isOnBoarding()
+							? <OnBoardingHeader />
+							: <SignedOnHeader />
 					: <SignedOffHeader />
 				}
 			</div>
 		);
 	}
 }
+
+export default withRouter(Header);
