@@ -5,17 +5,10 @@ import { Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 
 import routes from '../../../constants/Routes';
-import BaseComponent from '../../shared/BaseComponent';
-import Dialog from '../../shared/Dialog';
-import Button from '../../shared/Button';
-import VotersTable from '../../shared/VotersTable';
-import SearchInput from '../../shared/SearchInput';
-import VotersProgressBar from '../../shared/VotersProgressBar';
-import Typography from '../../shared/Typography';
 import ContentLayout from '../../layout/ContentLayout';
-import SocialInfo from './SocialInfo';
-import VoterNotFound from './VoterNotFound';
 import { storageKeys, LocalStorageManager as lsManager } from '../../../storage';
+import { BaseComponent, Button, Typography, Dialog, VotersTable, SearchInput, VotersProgressBar } from '../../shared';
+import { SocialInfo, VoterNotFound } from './index';
 
 class SelectVoters extends BaseComponent {
     constructor() {

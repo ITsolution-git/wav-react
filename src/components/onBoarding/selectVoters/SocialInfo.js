@@ -2,10 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import BaseComponent from '../../shared/BaseComponent';
-import Button from '../../shared/Button';
-import Typography from '../../shared/Typography';
-import SocialList from '../../shared/SocialList';
+import { BaseComponent, Button, Typography, SocialList } from '../../shared';
 
 class SocialInfo extends BaseComponent {
 
