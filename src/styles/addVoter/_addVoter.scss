@@ -1,0 +1,13 @@
+.btw-add-voter-apge {
+
+}
+
+.btw-one-step {
+	border: 2px solid $charcoal;
+	width: 9%;
+	margin: 1%;
+
+	&.active {
+		border-color: $primary;
+	}
+}

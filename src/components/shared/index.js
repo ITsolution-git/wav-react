@@ -32,8 +32,15 @@ import {
 	VoterCommunication,
 	VoterProfile,
 	VoterDetail,
-	TitleAndDescription
+	TitleAndDescription,
+	StepProgressBar,
+	RightProgressPanel
 } from './voterComponents'
+import {
+	SelectVoters as AddVoters,
+	SocialInfo,
+	VoterNotFound,
+} from './selectVoters'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
 import ActionItem from './ActionItem';
@@ -80,6 +87,11 @@ export {
 	SubTaskItem,
 	TaskCompleteDialog,
 	TitleAndDescription,
+	StepProgressBar,
+	RightProgressPanel,
+	AddVoters,
+	SocialInfo,
+	VoterNotFound,
 	CongratsAlarm,
 	VoterPerformer
 }

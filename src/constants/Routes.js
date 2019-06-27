@@ -1,7 +1,8 @@
 export default {
     registerByMail: '/signup_by_mail',
     registerBySocial: '/signup',
-    profile: '/profile',
+    profile: '/settings/profile',
+    makelist: '/make_list',
     pageDown: '/page_down',
     tasksList: '/task_list',
     voterList: '/voter_list',
