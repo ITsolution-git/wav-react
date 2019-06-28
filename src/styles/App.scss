@@ -87,9 +87,6 @@ html {
 @import 'onBoarding/socialNetworks/socialItem';
 @import 'onBoarding/socialNetworks/uploadFileDialog';
 @import 'onBoarding/welcome';
-@import 'onBoarding/selectVoters/selectVoters';
-@import 'onBoarding/selectVoters/socialInfo';
-@import 'onBoarding/selectVoters/voterNotFound';
 
 @import 'helpCenter/helpCenter';
 @import 'helpCenter/tagList';
@@ -108,6 +105,7 @@ html {
 @import 'components/input';
 @import 'components/dropdown';
 @import 'components/checkbox';
+@import 'components/switchButton';
 @import 'components/searchInput';
 @import 'components/votersProgressBar';
 @import 'components/votersTable';
@@ -127,5 +125,10 @@ html {
 @import 'components/alarmComponents/congratsAlarm';
 @import 'components/performComponents/voterPerformer';
 @import 'components/confirmationDialog';
+
+@import 'components/selectVoters/selectVoters';
+@import 'components/selectVoters/socialInfo';
+@import 'components/selectVoters/voterNotFound';
+@import 'components/selectVoters/connectListInfo';
 
 

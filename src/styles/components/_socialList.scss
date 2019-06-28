@@ -4,14 +4,22 @@
     width: fit-content;
     align-items: center;
 
-    div:nth-child(2) {
-        margin: 0 8px;
+    div{
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .voter-file{
+        margin-right: 8px;
     }
 }
 
 .social-list-large{
-    div:nth-child(2) {
-        margin: 0 24px;
+    div{
+        margin-right: 24px;
     }
 }
 
