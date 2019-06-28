@@ -23,7 +23,7 @@ import routes from '../../constants/Routes';
 import BottomLink from './BottomLink';
 import colors from '../../constants/Colors';
 import { getQueryObj } from './helpers/queryHelper';
-
+import './styles/index.scss';
 
 class LoginByMail extends BaseComponent {
 	constructor(props, context) {

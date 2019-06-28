@@ -1,3 +1,5 @@
+@import '../../styles/shared/index.scss';
+
 .welcome-div {
   
   @include respond-to($computer) {

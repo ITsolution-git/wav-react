@@ -5,6 +5,7 @@ import { Row } from 'react-bootstrap';
 import { BaseComponent, Paper, Typography, SocialButton } from '../shared';
 import BottomLink from './BottomLink';
 import routes from '../../constants/Routes';
+import './styles/index.scss';
 
 class LoginBySocial extends BaseComponent {
 

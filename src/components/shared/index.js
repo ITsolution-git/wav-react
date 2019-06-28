@@ -62,6 +62,7 @@ import {
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer } from './performComponents'
 import SwitchButton from './SwitchButton'
+import './styles/index.scss';
 
 export {
 	BaseComponent,

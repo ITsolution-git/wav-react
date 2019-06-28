@@ -7,6 +7,7 @@ import Paper from '../shared/Paper';
 import SvgIcon from '../shared/SvgIcon';
 import Typography from '../shared/Typography';
 import colors from '../../constants/Colors';
+import './_verifyEmail.scss';
 
 class VerifyEmail extends BaseComponent {
     constructor(props, context) {
