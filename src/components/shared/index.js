@@ -41,6 +41,7 @@ import {
 	SelectVoters as AddVoters,
 	SocialInfo,
 	VoterNotFound,
+	ConnectListInfo
 } from './selectVoters'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
@@ -60,6 +61,7 @@ import {
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer } from './performComponents'
+import SwitchButton from './SwitchButton'
 
 export {
 	BaseComponent,
@@ -104,6 +106,7 @@ export {
 	AddVoters,
 	SocialInfo,
 	VoterNotFound,
+	ConnectListInfo,
 	LeftSideMenu,
 	EmailInput,
 	FirstNameInput,
@@ -116,5 +119,6 @@ export {
 	Panel,
 	CongratsAlarm,
 	VoterPerformer,
-	CommentsList
+	CommentsList,
+	SwitchButton
 }
