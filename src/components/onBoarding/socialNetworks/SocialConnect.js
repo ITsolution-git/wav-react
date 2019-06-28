@@ -95,7 +95,7 @@ class SocialConnect extends BaseComponent {
 					</Typography>
                     {this.socialItemRender()}
                 </div>
-                {!this.isMobile() && this.renderUploadContent()}
+                {!this.isMobileOnly() && this.renderUploadContent()}
                 <Button fullWidth onClick={this.showResultHandler}>
                     Show Results
                 </Button>

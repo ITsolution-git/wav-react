@@ -14,13 +14,13 @@ class SocialItem extends BaseComponent {
     }
 
     connectButtonRender = () => {
-        const buttonName = !this.isMobile() ? 'Connect' : '+';
+        const buttonName = !this.isMobileOnly() ? 'Connect' : '+';
         const { socialConnectHandler } = this.props;
 
         return (
             <Button
                 size='small'
-                className={this.isMobile() ? 'plus-button' : 'connect-button'}
+                className={this.isMobileOnly() ? 'plus-button' : 'connect-button'}
                 onClick={socialConnectHandler}>
                 {buttonName}
             </Button>
