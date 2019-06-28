@@ -24,8 +24,12 @@ class CommentsList extends BaseComponent {
         const { comment } = this.state;
 
         return (
-            <div>
-                <Typography variant='body' fontWeight='600'>Comments ({comments.length})</Typography>
+            <div className='btw-comments-list'>
+                <Typography className='title'
+                            variant='body'
+                            fontWeight='600'>
+                    Comments ({comments.length})
+                </Typography>
                 { comments.map(( comment, index) =>
                     <Comment key={index}
                              comment={comment}
@@ -42,7 +46,7 @@ class CommentsList extends BaseComponent {
                                   placeholder='Add updates...'
                                   defaultValue={comment}
                                   onChange={this.hanldeCommentChange} />
-                        <div className='d-flex flex-row-reverse'>
+                        <div className='d-flex flex-row-reverse add-comment-button'>
                             <Button size='small'
                                     onClick={this.onAddClick}
                                     style={{ width: 93 }}

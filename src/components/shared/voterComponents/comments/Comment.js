@@ -28,11 +28,11 @@ class Comment extends BaseComponent {
         } } = this.props;
 
         return (
-            <Row>
-                <Col sm={2} md={1}>
+            <Row className='btw-comment'>
+                <Col xs={1} sm={1} md={1} lg={1}>
                     <VoterAvatar src={avatar} size={24} noBorder />
                 </Col>
-                <Col sm={10} md={11}>
+                <Col xs={11} sm={1} md={11} lg={11}>
                     <Typography color={colors.secondary} variant='body'>{ text }</Typography>
                     <div className='d-flex flex-row'>
                         <div className='p-2'>

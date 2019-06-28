@@ -56,11 +56,6 @@ html {
 @import 'auth/changePassword/forgot';
 
 @import 'voterList/voterlist';
-@import 'voterList/voterDetail';
-@import 'voterList/voterProfile';
-@import 'voterList/voterCommunication';
-@import 'voterList/voterAction';
-@import 'voterList/voterCardView';
 
 @import 'addVoter/addVoter';
 
@@ -116,7 +111,7 @@ html {
 @import 'components/socialList';
 @import 'components/socialIcon';
 @import 'components/statusIcon';
-@import 'components/voterAvatar';
+@import 'components/voterComponents/voterAvatar';
 @import 'components/taskProgressBar';
 @import 'components/voterStatusDropdown';
 @import 'components/actionItem';
@@ -127,5 +122,11 @@ html {
 @import 'components/alarmComponents/congratsAlarm';
 @import 'components/performComponents/voterPerformer';
 @import 'components/confirmationDialog';
+@import 'components/voterComponents/voterDetail';
+@import 'components/voterComponents/voterProfile';
+@import 'components/voterComponents/voterCommunication';
+@import 'components/voterComponents/voterAction';
+@import 'components/voterComponents/voterCardView';
+@import 'components/voterComponents/commentsList';
 
 
