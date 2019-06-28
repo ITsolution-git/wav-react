@@ -87,7 +87,7 @@
     }
 
     .voter-progress-bar-desktop {
-        margin-bottom: 16px;
+        margin-bottom: 24px;
 
         @include respond-to($tablet) {
             display: none;

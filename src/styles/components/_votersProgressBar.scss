@@ -76,8 +76,6 @@
     }
 
     .voters-list-container {
-
-        margin-bottom: 24px;
         display: none;
 
         .item {
@@ -112,6 +110,7 @@
 
         width: 100%;
         text-align: center;
+        margin-top: 24px;
 
         button {
             width: 100%;

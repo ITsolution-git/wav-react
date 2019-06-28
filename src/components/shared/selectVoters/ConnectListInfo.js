@@ -2,19 +2,21 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { BaseComponent, Button, Typography, SvgIcon } from '../index';
+import { BaseComponent, Button, Typography, SvgIcon, SwitchButton } from '../index';
 
 class ConnectListInfo extends BaseComponent {
 
-    renderFileItem = (file, index) => {
+    onSwitchHandler = (value, event) => {
+    }
 
+    renderFileItem = (file, index) => {
         return (
             <div key={index} className='file-item'>
                 <div className='file-info'>
                     <SvgIcon name='voter-list-file' />
                     <Typography variant='functional' lightColor className='file-name'>{file.name}</Typography>
                 </div>
-                <SvgIcon name='switch-on' />
+                <SwitchButton onSwitch={this.onSwitchHandler} />
             </div>
         )
     }

@@ -59,6 +59,7 @@ import {
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer } from './performComponents'
+import SwitchButton from './SwitchButton'
 
 export {
 	BaseComponent,
@@ -114,5 +115,6 @@ export {
 	ProfileAvatar,
 	Panel,
 	CongratsAlarm,
-	VoterPerformer
+	VoterPerformer,
+	SwitchButton
 }
