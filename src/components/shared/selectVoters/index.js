@@ -1,10 +1,11 @@
 import SelectVoters from './SelectVoters'
 import SocialInfo from './SocialInfo'
 import VoterNotFound from './VoterNotFound'
+import ConnectListInfo from './ConnectListInfo'
 
-export default SelectVoters
 export {
-	SelectVoters,
-	SocialInfo,
-	VoterNotFound,
+    SelectVoters,
+    SocialInfo,
+    VoterNotFound,
+    ConnectListInfo
 }

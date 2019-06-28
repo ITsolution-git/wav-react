@@ -40,6 +40,7 @@ import {
 	SelectVoters as AddVoters,
 	SocialInfo,
 	VoterNotFound,
+	ConnectListInfo
 } from './selectVoters'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
@@ -102,6 +103,7 @@ export {
 	AddVoters,
 	SocialInfo,
 	VoterNotFound,
+	ConnectListInfo,
 	LeftSideMenu,
 	EmailInput,
 	FirstNameInput,
