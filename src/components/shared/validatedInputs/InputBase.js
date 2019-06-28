@@ -202,7 +202,7 @@ export class TextArea extends InputBase {
 
         return (
             <div className={cn('btw-input', { disabled, error: !isValid }, className)}>
-                <label htmlFor={id}>{ label }</label>
+                {label && <label htmlFor={id}>{ label }</label> }
                 <div className={cn('text-box')}>
                     <textarea
                            id={id}
@@ -218,7 +218,8 @@ export class TextArea extends InputBase {
                            }}
                            rows={row}
                            placeholder={placeholder}
-                           disabled={disabled}>{value}</textarea>
+                           value={value}
+                           disabled={disabled} />
                     <span className='right-icon'>
                       { this.renderRightIcon() }
                     </span>

@@ -211,6 +211,26 @@ class VotersManagement extends BaseComponent {
                         description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
                         I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
                     }
+                ],
+                comments: [
+                    {
+                        id: 1,
+                        avatar: 'https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg',
+                        text: 'Asked Ann for Denisse’s phone number and she said she would email me.',
+                        date: '06/27/2019'
+                    },
+                    {
+                        id: 2,
+                        avatar: 'https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg',
+                        text: 'Ann has sent me phone number, called Deniss. He explained me that he moved and wasn’t able to do the paperwork yet. Needs help with  the ballot later on.',
+                        date: '06/28/2019'
+                    },
+                    {
+                        id: 3,
+                        avatar: 'https://www.rd.com/wp-content/uploads/2017/09/01-shutterstock_476340928-Irina-Bg-1024x683.jpg',
+                        text: 'Remind Deniss to register tomorrow.',
+                        date: '06/30/2019'
+                    },
                 ]
             },
             searchString: ''

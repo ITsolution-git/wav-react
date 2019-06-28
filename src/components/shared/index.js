@@ -34,7 +34,8 @@ import {
 	VoterDetail,
 	TitleAndDescription,
 	StepProgressBar,
-	RightProgressPanel
+	RightProgressPanel,
+	CommentsList
 } from './voterComponents'
 import {
 	SelectVoters as AddVoters,
@@ -54,7 +55,8 @@ import {
 	PasswordInput,
 	TextInput,
 	ProfileInformationText,
-	ProfileAvatar
+	ProfileAvatar,
+	TextArea
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer } from './performComponents'
@@ -108,9 +110,11 @@ export {
 	LastNameInput,
 	PasswordInput,
 	TextInput,
+	TextArea,
 	ProfileInformationText,
 	ProfileAvatar,
 	Panel,
 	CongratsAlarm,
-	VoterPerformer
+	VoterPerformer,
+	CommentsList
 }

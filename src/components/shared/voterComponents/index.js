@@ -9,6 +9,7 @@ import VoterDetail from './VoterDetail'
 import TitleAndDescription from './TitleAndDescription'
 import StepProgressBar from './StepProgressBar'
 import RightProgressPanel from './RightProgressPanel'
+import CommentsList from './comments';
 
 export {
 	VoterAvatar,
@@ -22,4 +23,5 @@ export {
 	TitleAndDescription,
 	StepProgressBar,
 	RightProgressPanel,
+	CommentsList
 }

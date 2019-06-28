@@ -30,7 +30,8 @@ class Button extends BaseComponent {
 Button.propTypes = {
     size: PropTypes.oneOf(['large', 'medium', 'small']),
     color: PropTypes.oneOf(['blue', 'white']),
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    fullWidth: PropTypes.bool
 };
 
 export default Button;
