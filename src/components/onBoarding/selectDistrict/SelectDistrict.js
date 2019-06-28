@@ -8,6 +8,7 @@ import Button from '../../shared/Button';
 import Autocomplete from '../../shared/Autocomplete';
 import SelectDistrictItem from './SelectDistrictItem';
 import routes from '../../../constants/Routes';
+import './styles/index.scss';
 
 class SelectDistrict extends BaseComponent {
     constructor(props) {

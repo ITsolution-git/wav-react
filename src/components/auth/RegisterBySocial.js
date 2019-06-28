@@ -9,6 +9,7 @@ import routes from '../../constants/Routes';
 import { signUpWithSocial } from '../../actions/AuthActions';
 import appDataTypes from "../../constants/AppDataTypes";
 import { getQueryObj } from './helpers/queryHelper';
+import './styles/index.scss';
 
 class RegisterBySocial extends BaseComponent {
     constructor(props, context) {

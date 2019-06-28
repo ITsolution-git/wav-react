@@ -9,6 +9,7 @@ import BaseComponent from '../shared/BaseComponent';
 import Button from '../shared/Button';
 import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
+import './_welcome.scss';
 
 class WelcomePage extends BaseComponent {
     constructor(props) {

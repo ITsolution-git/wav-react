@@ -10,6 +10,7 @@ import TitleAndDescription from './TitleAndDescription'
 import StepProgressBar from './StepProgressBar'
 import RightProgressPanel from './RightProgressPanel'
 import CommentsList from './comments';
+import './styles/index.scss';
 
 export {
 	VoterAvatar,

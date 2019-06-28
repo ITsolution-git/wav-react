@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import { BaseComponent, Typography, Button, VoterAvatar, TextArea } from '../../';
 import Comment from './Comment';
+import './_commentsList.scss';
 
 class CommentsList extends BaseComponent {
     state = {
