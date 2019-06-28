@@ -6,7 +6,7 @@ import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import routes from '../../constants/Routes';
-import { isMobile, isTablet } from '../../helpers/DeviceHelper';
+import { isMobile, isMobileOnly, isTablet } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
 
@@ -16,13 +16,13 @@ class BaseComponent extends Component {
     };
 
     redirectToHome = () => {
-        this.onLink( getHomeRoute());
+        this.onLink(getHomeRoute());
     };
 
     renderRequiredFieldMsg = () => {
         return (
             <div className="text-18-dark-blue-bold" style={{ marginBottom: 20 }}>
-                Fields marked with <span style={{ color: 'red'}}>*</span> are required
+                Fields marked with <span style={{ color: 'red' }}>*</span> are required
             </div>
         )
     };
@@ -31,26 +31,30 @@ class BaseComponent extends Component {
         return isMobile;
     };
 
+    isMobileOnly = () => {
+        return isMobileOnly;
+    };
+
     isTablet = () => {
         return isTablet;
     };
-    
+
     isDesktop = () => {
         return !isMobile;
     };
 
     renderBackground = (color) => {
-      return (
-          <Helmet bodyAttributes={{style: `background-color : ${color}`}}>
-          </Helmet>
-      )
+        return (
+            <Helmet bodyAttributes={{ style: `background-color : ${color}` }}>
+            </Helmet>
+        )
     };
 
     isOnBoarding = () => {
-        const { pathname = ''} = this.props.history.location,
+        const { pathname = '' } = this.props.history.location,
             { welcome, socialConnect, selectDistrict, selectVoters } = routes,
-            boardingRoutes = [ welcome,  socialConnect, selectDistrict, selectVoters ]
-            .map(route => route.toLowerCase());
+            boardingRoutes = [welcome, socialConnect, selectDistrict, selectVoters]
+                .map(route => route.toLowerCase());
 
         return boardingRoutes.includes(pathname.toLowerCase());
     };
