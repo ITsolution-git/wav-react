@@ -80,6 +80,19 @@ class SignedOnHeader extends BaseComponent {
         return <ProfileDropdown {...props} btwSettings={this.gotoLinkHandler('/settings/profile')} />
     };
 
+    checkSubRoute = (route) => [routes.voterDetail, routes.profile].includes(route)
+
+    getSubRouteTitle = (route) => {
+        switch(route) {
+            case routes.voterDetail:
+                return 'All Voters'
+            case routes.profile:
+                return 'Account Settings'
+            default:
+                return ''
+        }
+    }
+
     render() {
         const {
             activeItem
@@ -90,13 +103,13 @@ class SignedOnHeader extends BaseComponent {
         return (
             <Container className='btw-on-header' >
                 <div className='d-flex align-items-center py-2'>
-                    { this.isMobile() && pathname === routes.voterDetail ?
+                    { this.isMobile() && this.checkSubRoute(pathname) ?
                         <>
-                            <div className='btw-header-logo w-100 py-3'>
-                                <Link className='text-decoration-none d-flex align-items-center' to={routes.voterList}>
-                                    <Icon name='arrow-left' ext='svg' height={21} /> 
-                                    <span className='menu-item'>All Voters</span> 
-                                </Link>
+                            <div className='btw-header-logo w-100 py-3 d-flex'>
+                                    <Icon name='arrow-left' ext='svg' height={21} className={pathname !== routes.voterDetail && 'invisible'} />
+                                    <Link className='text-decoration-none d-flex align-items-center mx-auto' to={routes.voterList}>
+                                        <span className='menu-item'>{this.getSubRouteTitle(pathname)}</span> 
+                                    </Link>
                             </div>  
                         </>
                     : 

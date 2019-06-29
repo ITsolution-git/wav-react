@@ -54,7 +54,9 @@ import {
 	PasswordInput,
 	TextInput,
 	ProfileInformationText,
-	ProfileAvatar
+	ProfileAvatar,
+	RadioOption,
+	RadioGroup
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer } from './performComponents'
@@ -112,5 +114,7 @@ export {
 	ProfileAvatar,
 	Panel,
 	CongratsAlarm,
-	VoterPerformer
+	VoterPerformer,
+	RadioOption,
+	RadioGroup
 }

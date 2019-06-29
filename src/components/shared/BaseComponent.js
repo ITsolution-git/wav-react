@@ -6,7 +6,7 @@ import history from '../../utility/History';
 import { getHomeRoute } from '../../helpers/AuthHelper';
 import pubsubConstants from "../../constants/PubSubConstants";
 import routes from '../../constants/Routes';
-import { isMobile, isTablet } from '../../helpers/DeviceHelper';
+import { isMobile, isTablet, isMobileOnly } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
 
@@ -38,6 +38,10 @@ class BaseComponent extends Component {
     isDesktop = () => {
         return !isMobile;
     };
+
+    isMobileOnly = () => {
+        return isMobileOnly;
+    }
 
     renderBackground = (color) => {
       return (

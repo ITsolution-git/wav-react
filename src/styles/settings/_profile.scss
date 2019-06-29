@@ -4,15 +4,74 @@
 	}
 
 	label {
-		font-weight: 600;
+		font-weight: 700;
 	}
 
 	.profile-info {
+		.btn-submit {
+			@include respond-to($phone) { 
+				width: 100%;
+			}
+		}
 		
 	}
 
 	.forgot-password {
 		font-weight: 600;
 		font-size: 15px;
+	}
+
+	.avatar-cancel {
+		font-size: 15px !important;
+		color: $primary;
+		// text-align: right;
+	}
+
+}
+.btw-setting-menu {
+	div.btw-typography.body {
+		font-size: 15px;
+		@include respond-to($phone) {
+			margin-bottom: 0;
+			padding-bottom: 1em;
+		}
+	}
+
+	@include respond-to($tablet) {
+	  	flex-direction: row !important;
+	  	justify-content: space-between;
+	  	margin-bottom: 2em;
+	}
+
+	@include respond-to($phone) {
+	  	flex-direction: row !important;
+	  	justify-content: space-between;
+	  	margin-bottom: 2em;
+	  	border-bottom: 1px solid $dark-grey;
+	}
+
+	.btw-setting-sub-menu {
+		@include respond-to($tablet) {
+			flex-direction: row !important;
+			justify-content: space-around;
+
+			div {
+				margin-right: 1em;
+			}
+		}
+
+		@include respond-to($phone) {
+			flex-direction: row !important;
+			justify-content: space-around;
+			
+
+			.font-weight-bold {
+				border-bottom: 2px solid $primary;
+			}
+
+			div {
+				margin-right: 1em;
+			}
+		}
 	}
 }

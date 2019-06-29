@@ -33,7 +33,7 @@ const ProfileInformation = (props) => {
 	}
 
 	return (
-		<div className='d-flex flex-column px-5 profile-info'>
+		<div className='d-flex flex-column px-md-5 profile-info'>
 			<ProfileAvatar
 				className='my-3'
 				onChange={handleChange}
@@ -60,7 +60,7 @@ const ProfileInformation = (props) => {
 				className='my-3'
 				onChange={handleChange}
 			    startValidation={false} />
-			<Button className='my-3' size='medium' onClick={onSubmit}>Save Changes</Button>
+			<Button className='my-3 btn-submit' size='medium' onClick={onSubmit}>Save Changes</Button>
 		</div>
 	)
 }

@@ -218,7 +218,8 @@ export class TextArea extends InputBase {
                            }}
                            rows={row}
                            placeholder={placeholder}
-                           disabled={disabled}>{value}</textarea>
+                           value={value}
+                           disabled={disabled} />
                     <span className='right-icon'>
                       { this.renderRightIcon() }
                     </span>

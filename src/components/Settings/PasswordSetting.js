@@ -33,8 +33,8 @@ const PasswordSetting = (props) => {
 	}
 
 	return (
-		<div className='d-flex flex-column px-5'>
-			<Typography variant='body my-4'>You can edit your password here.</Typography>
+		<div className='d-flex flex-column px-md-5'>
+			<Typography variant='body' className='my-4'>You can edit your password here.</Typography>
 			<PasswordInput 
 				className='my-3'
 				name='currentPassword'
@@ -61,7 +61,7 @@ const PasswordSetting = (props) => {
 	            required />
 	        <div className='d-flex justify-content-between align-items-center' >
 	        	<Button className='my-3' size='medium' onClick={onSubmit}>Save Changes</Button>
-	        	<Typography variant='body forgot-password' onClick={onForgot}><u>Forgot Password?</u></Typography>
+	        	<Typography variant='body' className='forgot-password' onClick={onForgot}><u>Forgot Password?</u></Typography>
 	        </div>
 		</div>
 	)

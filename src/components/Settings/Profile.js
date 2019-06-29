@@ -13,17 +13,25 @@ import {
 import { ProfileInformation, PasswordSetting, NotificationSetting } from './index'
 
 class Profile extends BaseComponent {
+	onGotoPanel = menu => {
+
+	}
+
+	onLogout = event => {
+
+	}
+
 	render() {
 		return (
 			<Container>
-				<Row className='my-4'>
+				<Row className='my-4 d-none d-md-block'>
 					<Col>
 						<Typography> Account Settings </Typography>
 					</Col>
 				</Row>
 				<Row className='my-4'>
 					<Col lg={2}>
-						<LeftSideMenu  />
+						<LeftSideMenu onSetActiveMenu={this.onGotoPanel} onLogout={this.onLogout}  />
 					</Col>
 					<Col lg={8}>
 						<Panel title='Profile Information'>
