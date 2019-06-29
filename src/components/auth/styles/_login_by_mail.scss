@@ -1,0 +1,16 @@
+@import 'base';
+
+.btw-login-mail {
+  @extend .btw-register-mail;
+
+  .btw-form {
+
+    .forgot-password-link{
+      margin-top: 50px;
+    }
+
+    .go-to-signup{
+      margin-top: 20px;
+    }
+  }
+}

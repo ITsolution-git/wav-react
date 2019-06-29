@@ -2,9 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PubSub from "pubsub-js";
 
-import Header from './layout/Header';
+import { Header } from './layout';
 import Router from './Router';
-import '../styles/App.css';
+import '../styles/App.scss';
 import pubsubConstants from "../constants/PubSubConstants";
 import BaseComponent from './shared/BaseComponent';
 

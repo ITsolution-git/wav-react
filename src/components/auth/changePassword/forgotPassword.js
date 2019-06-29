@@ -9,6 +9,7 @@ import routes from '../../../constants/Routes';
 import Button from '../../shared/Button';
 import Typography from '../../shared/Typography';
 import { EmailInput } from '../../shared/validatedInputs';
+import './styles/index.scss';
 
 class ForgotPassword extends BaseComponent {
     constructor() {

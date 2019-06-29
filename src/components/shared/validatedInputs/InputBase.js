@@ -202,7 +202,7 @@ export class TextArea extends InputBase {
 
         return (
             <div className={cn('btw-input', { disabled, error: !isValid }, className)}>
-                <label htmlFor={id}>{ label }</label>
+                {label && <label htmlFor={id}>{ label }</label> }
                 <div className={cn('text-box')}>
                     <textarea
                            id={id}

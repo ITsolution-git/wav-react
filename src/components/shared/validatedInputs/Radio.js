@@ -13,7 +13,7 @@ export class RadioGroup extends BaseComponent {
 
 	handleChange = value => event => {
 		this.setState({ value })
-		// this.props.onChange(value)
+		this.props.onChange(value)
 	}
 
 	createContextValue = memorize((value, name, onChange) => ({

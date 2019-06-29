@@ -36,11 +36,7 @@ class VotersProgressBar extends BaseComponent {
 
     zoomHandler = () => {
         const { zoom } = this.state;
-        const { selectedVoters } = this.props;
-
-        if (selectedVoters.length !== 0) {
-            this.setState({ zoom: !zoom });
-        }
+        this.setState({ zoom: !zoom });
     }
 
     renderVotersList = () => {

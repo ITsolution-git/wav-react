@@ -18,10 +18,10 @@ import { Profile } from './Settings';
 import WelcomePage from './onBoarding/WelcomePage';
 import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
 import SelectDistrict from './onBoarding/selectDistrict/SelectDistrict';
-import SelectVoters from './shared/selectVoters';
+import { SelectVoters } from './shared/selectVoters';
 
 import CaptainsDashboard from './captainsDashboard';
-import HelpCenter from './helpCenter/HelpCenter';
+import HelpCenter from './helpCenter';
 
 
 import Authorization from './hocs/Authorization';

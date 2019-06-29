@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames'
 
 import { 
 	Typography, 
 	PasswordInput,
 	Button
 } from '../shared';
+import { isMobileOnly } from '../../helpers/DeviceHelper'
 
 const PasswordSetting = (props) => {
 	const [validated, setValidated] = useState(false)
@@ -33,7 +35,7 @@ const PasswordSetting = (props) => {
 	}
 
 	return (
-		<div className='d-flex flex-column px-md-5'>
+		<div className='d-flex flex-column px-md-5 password'>
 			<Typography variant='body' className='my-4'>You can edit your password here.</Typography>
 			<PasswordInput 
 				className='my-3'
@@ -59,7 +61,7 @@ const PasswordSetting = (props) => {
 				onChange={handleChange}
 	            startValidation={validated}
 	            required />
-	        <div className='d-flex justify-content-between align-items-center' >
+	        <div className={cn('d-flex justify-content-between align-items-center', {'flex-column': isMobileOnly})} >
 	        	<Button className='my-3' size='medium' onClick={onSubmit}>Save Changes</Button>
 	        	<Typography variant='body' className='forgot-password' onClick={onForgot}><u>Forgot Password?</u></Typography>
 	        </div>

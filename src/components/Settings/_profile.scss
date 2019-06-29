@@ -1,0 +1,172 @@
+@import '../../styles/shared/index.scss';
+
+.btw-account-settings {
+	.side-wrapper {
+		@include respond-to($phone) {
+			padding: 0;
+		}
+		@include respond-to($tablet) {
+		    padding: 0 3rem!important;
+		}
+	}
+	.btw-profile-panel {
+		.panel-title {
+			border-bottom: 1px solid $dark-grey;
+		}
+
+		label {
+			font-weight: 700;
+		}
+
+		.forgot-password {
+			font-weight: 600;
+			font-size: 15px;
+		}
+	}
+
+	.profile-info {
+		.btn-submit {
+			@include respond-to($phone) {
+				width: 100%;
+			}
+		}
+		label {
+			font-weight: 700;
+		}
+		@include respond-to($phone) {
+			padding: 0 1em;
+		}
+	}
+	.avatar-cancel {
+		font-size: 15px !important;
+		color: $primary;
+		// text-align: right;
+	}
+
+	.password {
+		label {
+			font-weight: 700;
+		}
+		@include respond-to($phone) {
+			padding: 0 1em;
+
+			button {
+				width: 100%;
+			}
+			.forgot-password {
+				width: 100%;
+				font-weight: 700;
+				font-size: 15px;
+				padding: 2em 0;
+			}
+		}
+	}
+	.notify {
+		@include respond-to($phone) {
+			padding: 0 1em;
+		}
+	}
+
+	.btw-setting-menu {
+		div.btw-typography.body {
+			font-size: 15px;
+			font-weight: 700;
+			color: $charcoal;
+			cursor: pointer;
+
+			@include respond-to($phone) {
+				margin-bottom: 0;
+				padding-bottom: 1em;
+			}
+		}
+
+		@include respond-to($tablet) {
+		  	flex-direction: row !important;
+		  	justify-content: space-between;
+		  	margin-bottom: 2em;
+		}
+
+		@include respond-to($phone) {
+		  	flex-direction: row !important;
+		  	justify-content: space-between;
+		  	margin-bottom: 2em;
+		  	border-bottom: 1px solid $dark-grey;
+		  	padding: 0 1em;
+		}
+
+		.btw-setting-sub-menu {
+			div.btw-typography.body.active {
+				color: black;
+			}
+
+			@include respond-to($tablet) {
+				flex-direction: row !important;
+				justify-content: space-around;
+
+				div {
+					margin-right: 1em;
+				}
+			}
+
+			@include respond-to($phone) {
+				flex-direction: row !important;
+				justify-content: space-around;
+
+				.active {
+					border-bottom: 2px solid $primary;
+				}
+
+				div {
+					margin-right: 1em;
+				}
+			}
+		}
+	}
+
+
+}
+.btw-delete-account-modal.btw-modal {
+	.modal-content {
+		padding: 0;
+		.modal-header {
+			border-bottom: 1px solid $dark-grey;
+			padding: 1em;
+			padding-left: 2em;
+			.btw-typography.heading {
+				font-size: 15px;
+			    font-weight: 700;
+			}
+		}
+
+		.modal-body {
+			padding: 2em;
+			min-height: 30px;
+		}
+		.modal-footer {
+			justify-content: flex-start;
+		    padding: 2em;
+		    padding-top: 0;
+		    padding-bottom: 4em;
+
+		    .primary,
+		    .secondary.leave {
+		    	width: 154px;
+		    }
+
+		    .secondary {
+		    	width: 88px;
+		    }
+
+		    @include respond-to($phone) { 
+		    	flex-direction: column;
+		    	.primary,
+	    	 	.secondary,
+	    	 	.secondary.leave {
+		    		width: 100%;
+		    		margin: 0;
+		    		margin-bottom: 1em;
+		    	}
+		    }
+		}
+	}
+}

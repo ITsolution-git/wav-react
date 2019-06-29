@@ -79,7 +79,7 @@ class VotersTable extends BaseComponent {
                     </td>
                     <td>{this.renderVoterInfo(item)}</td>
                     <td>
-                        <SocialList social={item.social} />
+                        <SocialList social={item.social} showVoterFile />
                     </td>
                     <td>
                         <StatusIcon type={item.status} />
@@ -107,7 +107,7 @@ class VotersTable extends BaseComponent {
                                 <StatusIcon type={item.status} />
                             </div>
                             <div>
-                                <SocialList social={item.social} />
+                                <SocialList social={item.social} showVoterFile />
                             </div>
                         </div>
                     </td>

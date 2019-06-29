@@ -8,6 +8,7 @@ import exclamation from '../../resources/images/exclamation.png';
 import BaseComponent from '../shared/BaseComponent';
 import { btwLogout } from '../../actions/AuthActions';
 import Button from '../shared/Button';
+import './_general.scss';
 
 class GeneralErrorPage extends BaseComponent {
 

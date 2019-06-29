@@ -8,6 +8,7 @@ import Icon from './Icon'
 import Arrow from './Arrow'
 import AutoComplete from './Autocomplete'
 import Button from './Button'
+import ButtonLink from './ButtonLink'
 import Checkbox from './Checkbox'
 import ConfirmationDialog from './ConfirmationDialog'
 import Dialog from './Dialog'
@@ -34,12 +35,14 @@ import {
 	VoterDetail,
 	TitleAndDescription,
 	StepProgressBar,
-	RightProgressPanel
+	RightProgressPanel,
+	CommentsList
 } from './voterComponents'
 import {
 	SelectVoters as AddVoters,
 	SocialInfo,
 	VoterNotFound,
+	ConnectListInfo
 } from './selectVoters'
 import SocialButton from './SocialButton'
 import VoterStatusDropdown from './VoterStatusDropdown'
@@ -56,10 +59,13 @@ import {
 	ProfileInformationText,
 	ProfileAvatar,
 	RadioOption,
-	RadioGroup
+	RadioGroup,
+	TextArea
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer } from './performComponents'
+import SwitchButton from './SwitchButton'
+import './styles/index.scss';
 
 export {
 	BaseComponent,
@@ -104,17 +110,22 @@ export {
 	AddVoters,
 	SocialInfo,
 	VoterNotFound,
+	ConnectListInfo,
 	LeftSideMenu,
 	EmailInput,
 	FirstNameInput,
 	LastNameInput,
 	PasswordInput,
 	TextInput,
+	TextArea,
 	ProfileInformationText,
 	ProfileAvatar,
 	Panel,
 	CongratsAlarm,
 	VoterPerformer,
 	RadioOption,
-	RadioGroup
+	RadioGroup,
+	CommentsList,
+	SwitchButton,
+	ButtonLink
 }

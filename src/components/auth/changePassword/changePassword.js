@@ -12,6 +12,8 @@ import {
 } from '../../shared/validatedInputs';
 import Button from '../../shared/Button';
 import Typography from '../../shared/Typography';
+import './styles/index.scss';
+
 
 class ChangePassword extends BaseComponent {
     constructor() {
