@@ -1,16 +1,20 @@
 import config from '../config/ApiConfig';
-import { postAsync } from '../helpers/RequestHelper';
+import { getAsync } from '../helpers/RequestHelper';
 
 const IdentityService = {
 	getUser,
 };
 
-function getUser(data) {
-	return postAsync({
-		url: `${config.apiHost}/auth/getUser`,
-		data
+function getUser(email, token) {
+	const getHeaders = () => token ? { 'Authorization': `Bearer ${token}`} : {};
+
+	return getAsync({
+		url: `${config.apiHost}/user`,
+		params: { email },
+		headers: getHeaders(),
+		includeToken: !token,
+		failRedirect: !token
 	});
 }
-
 
 export default IdentityService

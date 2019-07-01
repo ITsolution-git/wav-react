@@ -70,7 +70,7 @@ class Auth0Service {
                 }
             });
         });
-    }
+    };
 
 }
 
