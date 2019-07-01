@@ -3,26 +3,34 @@ import PropTypes from 'prop-types';
 import SimpleAutoComplete from 'react-autocomplete';
 import cn from 'classnames';
 
-import BaseComponent from '../shared/BaseComponent';
-import SvgIcon from '../shared/SvgIcon';
 import colors from '../../constants/Colors';
+import { BaseComponent } from './index';
 
 class Autocomplete extends BaseComponent {
 
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.value
+            value: this.props.value,
+            defaultItem: {
+                label: ''
+            }
         };
     }
 
     onChange = e => {
-        this.setState({ value: e.target.value });
+        const value = e.target.value;
+        const { defaultItem } = this.state;
+
+        this.setState({ value });
+        if (!value) {
+            this.props.onSelect(defaultItem);
+        }
     };
 
     onSelect = (value, item) => {
-      this.setState({ value });
-      this.props.onSelect(item);
+        this.setState({ value });
+        this.props.onSelect(item);
     };
 
     getItemValue = item => item.label;
@@ -31,8 +39,8 @@ class Autocomplete extends BaseComponent {
         const { inputClass } = this.props;
         return (
             <div className={cn('input-class', inputClass)}>
+                <i className='fa fa-search' />
                 <input {...props} />
-                <SvgIcon name='search' />
             </div>
         )
     };
@@ -40,7 +48,7 @@ class Autocomplete extends BaseComponent {
     renderItem = ({ id, label }, isHighlighted) => {
         return (
             <div key={id} className='item' style={{ background: isHighlighted ? colors.divider : colors.white }}>
-                <div className='item-value'>{ label }</div>
+                <div className='item-value'>{label}</div>
             </div>
         );
     };
@@ -78,7 +86,7 @@ Autocomplete.defaultProps = {
     inputClass: '',
     value: '',
     items: [],
-    onSelect: () => {}
+    onSelect: () => { }
 };
 
 Autocomplete.propTypes = {

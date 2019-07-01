@@ -12,7 +12,7 @@ class SelectDistrict extends BaseComponent {
         super(props);
         this.state = {
             votingDistrics: [],
-            selectedVoting: -1,
+            selectedVoting: null,
             searchAutoItems: [
                 { id: 0, label: "Chicago, IL" },
                 { id: 1, label: "Chicago, PL" },
@@ -29,12 +29,12 @@ class SelectDistrict extends BaseComponent {
         let data = [];
         if (!!value.label) {
             data = [
-                { title: "illinois's Congresssional District #1" },
-                { title: "illinois's Congresssional District #2" },
-                { title: "illinois's Congresssional District #3" },
-                { title: "illinois's Congresssional District #4" },
-                { title: "illinois's Congresssional District #5" },
-                { title: "illinois's Congresssional District #6" }
+                { id: 0, title: "illinois's Congresssional District #1" },
+                { id: 1, title: "illinois's Congresssional District #2" },
+                { id: 2, title: "illinois's Congresssional District #3" },
+                { id: 3, title: "illinois's Congresssional District #4" },
+                { id: 4, title: "illinois's Congresssional District #5" },
+                { id: 5, title: "illinois's Congresssional District #6" }
             ];
         }
 
@@ -44,8 +44,8 @@ class SelectDistrict extends BaseComponent {
         });
     };
 
-    selectDistrictHandler = index => () => {
-        this.setState({ selectedVoting: index });
+    selectDistrictHandler = id => () => {
+        this.setState({ selectedVoting: id });
     };
 
     onNextHandler = () => {
@@ -57,12 +57,12 @@ class SelectDistrict extends BaseComponent {
 
         return (
             <div className={'districts-list'}>
-                {votingDistrics.map((item, index) => (
+                {votingDistrics.map((disctrict, index) => (
                     <SelectDistrictItem
                         key={index}
-                        name={item.title}
-                        isSelected={selectedVoting === index}
-                        onSelect={this.selectDistrictHandler(index)} />)
+                        district={disctrict}
+                        isSelected={disctrict.id === selectedVoting}
+                        onSelect={this.selectDistrictHandler(disctrict.id)} />)
                 )}
             </div>
         )
