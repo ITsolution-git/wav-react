@@ -1,29 +1,71 @@
-.select-disctrict {
+.btw-select-disctrict {
     width: 512px;
+	display: flex;
+	align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
     padding: 51px 88px;
+    
+    .title{
+        margin-bottom: 12px;
+    }
 
-    @include respond-to($phone) {
-        width: 272px;
-        padding: 37px 16px;
+    .description{
+        margin-bottom: 24px;
+    }
+
+    .description-result{
+        margin-bottom: 12px;
+
+        @include respond-to($phone) {
+            margin-bottom: 20px;
+        }
     }
 
     .search-box {
-        margin: 28px 0 32px;
+        width: 100%;
+        margin-bottom: 26px;
     }
 
     .districts-list {
+        width: 100%;
         max-height: 352px;
-        padding: 8px 0;
-        overflow: scroll;
-        margin: 13px 0 40px;
+        overflow-y: scroll;
+        padding: 0 5px;
+        margin-bottom: 20px;
 
         &::-webkit-scrollbar {
             width: 3px;
         }
 
         &::-webkit-scrollbar-thumb {
-            width: 3px;
             background: $divider;
         }
+
+        @include respond-to($phone) {
+            margin-bottom: 45px;
+        }
+    }
+
+    .button-content{
+        width: 100%;
+
+        @include respond-to($phone) {
+            z-index: 10000;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            padding: 16px 40px;
+            background: $white;
+            box-shadow: 0px 1px 5px rgba($main, 0.2);
+            border-radius: 2px;
+        }
+    }
+
+    @include respond-to($phone) {
+        box-shadow: unset !important;
+        border-radius: 0 !important;
+        padding: 37px 16px;
+        width: 100%;
     }
 }
