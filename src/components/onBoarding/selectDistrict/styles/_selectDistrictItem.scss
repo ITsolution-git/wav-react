@@ -21,6 +21,10 @@
             font-size: 10px;
         }
     }
+
+    &:last-child{
+        margin-bottom: 0;
+    }
 }
 
 .district-item-select {
