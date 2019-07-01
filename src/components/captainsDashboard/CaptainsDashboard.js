@@ -329,7 +329,7 @@ class CaptainsDashboard extends BaseComponent {
             <Container className='btw-captains-dashboard'>
                 <Row className='user-info-content'>
                     <Col md={5} lg={6} className='main-title'>
-                        <Typography>Welcome back!, {user.firstName}</Typography>
+                        <Typography>{`Welcome back, ${user.firstName}!`}</Typography>
                         <Typography lightColor variant="body">Nice to meet you again.</Typography>
                     </Col>
                     <Col md={7} lg={6} className='p-0'>
