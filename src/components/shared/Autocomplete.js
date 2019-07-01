@@ -3,36 +3,46 @@ import PropTypes from 'prop-types';
 import SimpleAutoComplete from 'react-autocomplete';
 import cn from 'classnames';
 
-import BaseComponent from '../shared/BaseComponent';
-import SvgIcon from '../shared/SvgIcon';
 import colors from '../../constants/Colors';
+import { BaseComponent } from './index';
 
 class Autocomplete extends BaseComponent {
 
     constructor(props) {
         super(props);
         this.state = {
-            value: this.props.value
+            value: this.props.value,
+            defaultItem: {
+                label: ''
+            }
         };
     }
 
     onChange = e => {
-        this.setState({ value: e.target.value });
+        const value = e.target.value;
+        const { defaultItem } = this.state;
+
+        this.setState({ value });
+        if (!value) {
+            this.props.onSelect(defaultItem);
+        }
     };
 
     onSelect = (value, item) => {
-      this.setState({ value });
-      this.props.onSelect(item);
+        this.setState({ value });
+        this.props.onSelect(item);
     };
 
     getItemValue = item => item.label;
 
     renderInput = (props) => {
-        const { inputClass } = this.props;
+        const { inputClass, placeholder } = this.props;
+        const { value } = this.state;
+
         return (
             <div className={cn('input-class', inputClass)}>
-                <input {...props} />
-                <SvgIcon name='search' />
+                <i className={cn('fa fa-search', { 'i-active': !!value })} />
+                <input placeholder={placeholder} {...props} />
             </div>
         )
     };
@@ -40,7 +50,7 @@ class Autocomplete extends BaseComponent {
     renderItem = ({ id, label }, isHighlighted) => {
         return (
             <div key={id} className='item' style={{ background: isHighlighted ? colors.divider : colors.white }}>
-                <div className='item-value'>{ label }</div>
+                <div className='item-value'>{label}</div>
             </div>
         );
     };
@@ -76,14 +86,16 @@ class Autocomplete extends BaseComponent {
 
 Autocomplete.defaultProps = {
     inputClass: '',
+    placeholder: '',
     value: '',
     items: [],
-    onSelect: () => {}
+    onSelect: () => { }
 };
 
 Autocomplete.propTypes = {
     // css class name for styling input text
     inputClass: PropTypes.string,
+    placeholder: PropTypes.string,
     // default value
     value: PropTypes.string,
     onSelect: PropTypes.func.isRequired,

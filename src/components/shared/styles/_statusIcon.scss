@@ -10,7 +10,7 @@
 }
 
 @mixin icon-color($color) {
-    color: $color;
+    color: $color !important;
     background-color: rgba($color, 0.05);
     border: 1px solid $color;
 }
