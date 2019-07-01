@@ -10,6 +10,10 @@ import { isMobile, isMobileOnly, isTablet } from '../../helpers/DeviceHelper';
 
 class BaseComponent extends Component {
 
+    componentDidMount() {
+        window.scrollTo(0, 0);
+    }
+
     onLink = (route, params) => {
         PubSub.publish(pubsubConstants.onLocationChange, route);
         history.push(route, params);
