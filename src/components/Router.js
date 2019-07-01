@@ -13,7 +13,7 @@ import VerifyEmail from './verifyEmail/VerifyEmail';
 import TasksManagement from './tasksList';
 import VotersManagement from './voterList';
 import AddVoterManagement from './addVoter';
-import { Profile } from './settings';
+import { Profile } from './setting';
 
 import WelcomePage from './onBoarding/WelcomePage';
 import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
