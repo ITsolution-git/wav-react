@@ -17,7 +17,7 @@ class CaptainsDashboard extends BaseComponent {
                     firstName: 'Steven',
                     lastName: 'Griffith',
                     name: 'Steven Griffith',
-                    gender: 'Male',
+                    sex: 'Male',
                     street: 'address street',
                     social: {
                         twitter: true,
@@ -29,7 +29,7 @@ class CaptainsDashboard extends BaseComponent {
                     firstName: 'Steven',
                     lastName: 'Griffith',
                     name: 'Steven Griffith',
-                    gender: 'Male',
+                    sex: 'Male',
                     street: 'address street',
                     social: {
                         twitter: true,
@@ -41,7 +41,7 @@ class CaptainsDashboard extends BaseComponent {
                     firstName: 'Florence',
                     lastName: 'Boyle',
                     name: 'Florence Boyle',
-                    gender: 'Female',
+                    sex: 'Female',
                     street: 'address street',
                     social: {
                         twitter: true,
@@ -53,7 +53,7 @@ class CaptainsDashboard extends BaseComponent {
                     firstName: 'Florence',
                     lastName: 'Boyle',
                     name: 'Florence Boyle',
-                    gender: 'Female',
+                    sex: 'Female',
                     street: 'address street',
                     social: {
                         twitter: true,
