@@ -10,7 +10,8 @@ class Auth0Service {
             domain: authConfig.domain,
             redirectUri: redirectUrl,
             clientID: authConfig.cliendId,
-            responseType: 'token id_token'
+            responseType: 'token id_token',
+            audience: authConfig.audience,
         });
     }
 
