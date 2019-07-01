@@ -55,19 +55,20 @@ function makeRequest(requestData, includeToken, failRedirect) {
         }
         requestData.headers['Authorization'] = `Bearer ${token}`;
     }
+
     return axios(requestData)
         .then(response => {
-            return Promise.resolve(response);
+            return Promise.resolve(response.data);
         })
-        .catch(error => {
+        .catch(response => {
             // handle server down
-            if (error.request) {
-                return Promise.reject({response: { data: { message: 'No response returned from the server' }}});
+            if (response.request) {
+                return Promise.reject({ data: { message: 'No response returned from the server' }});
             }
             if (process.env.NODE_ENV !== environment.test && failRedirect) {
                 toErrorPage();
             }
-            return Promise.reject(error);
+            return Promise.reject(response.data);
         });
 }
 

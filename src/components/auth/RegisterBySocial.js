@@ -2,23 +2,26 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Row } from 'react-bootstrap';
+import { bindActionCreators } from 'redux';
 
-import { BaseComponent, Paper, Typography, SocialButton } from '../shared';
+import { BaseComponent, Paper, Typography, SocialButton, Spinner } from '../shared';
 import BottomLink from './BottomLink';
 import routes from '../../constants/Routes';
-import { signUpWithSocial } from '../../actions/AuthActions';
-import appDataTypes from "../../constants/AppDataTypes";
+import { signUpWithSocial, signUpWithToken  } from '../../actions/AuthActions';
+import appDataTypes from '../../constants/AppDataTypes';
 import { getQueryObj } from './helpers/queryHelper';
 import './styles/index.scss';
+import colors from "../../constants/Colors";
+
 
 class RegisterBySocial extends BaseComponent {
     constructor(props, context) {
         super(props, context);
-        const { location: { hash } } = this.props;
-        const obj = getQueryObj(hash);
+        const { location: { hash }, actions } = this.props;
+        const userInfo = getQueryObj(hash);
 
-        if (obj.token) {
-
+        if (userInfo.token) {
+            actions.signUpWithToken(userInfo);
         }
 
         this.state = {
@@ -34,7 +37,7 @@ class RegisterBySocial extends BaseComponent {
     };
 
     handleFacebookClick = () => {
-        this.props.signUpWithSocial('facebook');
+        this.props.actions.signUpWithSocial('facebook');
     };
 
     handleTwitterClick = () => {
@@ -55,12 +58,18 @@ class RegisterBySocial extends BaseComponent {
     };
 
     render() {
+        const { error, isFetching } = this.props;
+
         return (
             <div className='btw-register-social'>
+                <Spinner loading={isFetching} />
                 <Paper className='paper'>
                     <Row className='no-margin'>
                         <Typography className='title'>Sign Up with Email</Typography>
                         <Typography variant='body' lightColor>Use any Sign Up method you like.</Typography>
+                    </Row>
+                    <Row className='no-margin'>
+                        <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
                     </Row>
                     <div className='buttons'>
                         <SocialButton iconName='google-normal' onClick={this.handleGoogleClick}>
@@ -89,16 +98,17 @@ class RegisterBySocial extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { error, isSuccess } = state.app[appDataTypes.register];
+    const { error, isSuccess, isFetching } = state.app[appDataTypes.register];
     return {
         error,
-        isSuccess
+        isSuccess,
+        isFetching
     };
 };
 
 
 const mapDispatchToProps = (dispatch) => ({
-    signUpWithSocial: connection => dispatch(signUpWithSocial(connection))
+    actions: bindActionCreators({ signUpWithSocial, signUpWithToken }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterBySocial));
