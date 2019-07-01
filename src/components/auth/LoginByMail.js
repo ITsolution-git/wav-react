@@ -81,30 +81,29 @@ class LoginByMail extends BaseComponent {
 				<Spinner loading={isFetching} />
 				<Paper className='paper'>
 					<div className="btw-form" onKeyPress={this.onKeyPress}>
-						<Typography className='title'>Log In by Email</Typography>
 						<Row className='inputs-row'>
 							<Col md={12} xs={12}>
-								<Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+								<Typography fontWeight='normal' variant='body' color={colors.error}>{error}</Typography>
 							</Col>
 						</Row>
 						<Row className='inputs-row'>
 							<Col md={12}>
 								<EmailInput onChange={this.handleChange}
-											isVoter={false}
-											startValidation={startValidation}
-											uniqueValidationEnabled={false}
-											required
-											label='Email'
-											placeholder='Your email address' />
+									isVoter={false}
+									startValidation={startValidation}
+									uniqueValidationEnabled={false}
+									required
+									label='Email'
+									placeholder='Your email address' />
 							</Col>
 						</Row>
 						<Row className='inputs-row'>
 							<Col md={12}>
 								<PasswordInput onChange={this.handleChange}
-											   startValidation={startValidation}
-											   required
-											   label='Password'
-											   placeholder='Your password' />
+									startValidation={startValidation}
+									required
+									label='Password'
+									placeholder='Your password' />
 							</Col>
 						</Row>
 						<Row className='inputs-row'>
@@ -121,8 +120,8 @@ class LoginByMail extends BaseComponent {
 
 						<div className='go-to-signup'>
 							<BottomLink title={`Don't have an account?`}
-										link={routes.registerBySocial}
-										linkText='Sign up'/>
+								link={routes.registerBySocial}
+								linkText='Sign up' />
 						</div>
 					</div>
 				</Paper>
