@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {Col, Row} from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 
 import { BaseComponent, Paper, Typography, SocialButton, Spinner } from '../shared';
