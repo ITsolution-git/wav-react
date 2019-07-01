@@ -10,10 +10,10 @@ import { MobileOnlyView, isMobileOnly } from '../../../helpers/DeviceHelper'
 const VoterItem = (props) => {
 	const { data, keyword, onSelectItem, active } = props
 	return (
-		<Row 
-			onClick={onSelectItem} 
+		<Row
+			onClick={onSelectItem}
 			className={classNames({ 'active-item': active }, 'btw-paper d-flex my-3 mx-0 py-3 btw-voter-item align-items-center')}>
-			{!isMobileOnly && 
+			{!isMobileOnly &&
 				<>
 					<Col xs='1'>
 						<VoterAvatar {...data} />
@@ -22,7 +22,7 @@ const VoterItem = (props) => {
 						<VoterInfo {...data} keyword={keyword} />
 					</Col>
 					<Col xs='3'>
-						<SocialList social={data.social} />
+						<SocialList social={data.social} showVoterFile />
 					</Col>
 					<Col xs='3' className='p-0'>
 						<StatusIcon type={data.status} />
@@ -33,13 +33,13 @@ const VoterItem = (props) => {
 				<Col xs='2'>
 					<VoterAvatar {...data} />
 				</Col>
-				<Col xs='8'>
+				<Col xs='10' className='pl-4'>
 					<VoterInfo {...data} keyword={keyword} />
 					<div className='d-flex'>
 						<div className='w-75'>
 							<StatusIcon type={data.status} />
 						</div>
-						<SocialList social={data.social} />
+						<SocialList social={data.social} showVoterFile />
 					</div>
 				</Col>
 			</MobileOnlyView>
@@ -54,7 +54,7 @@ VoterItem.propTypes = {
 	active: PropTypes.bool,
 	/* voter data */
 	data: PropTypes.object.isRequired,
-	/* action click handler with this component */	
+	/* action click handler with this component */
 	onSelectItem: PropTypes.func.isRequired
 }
 
