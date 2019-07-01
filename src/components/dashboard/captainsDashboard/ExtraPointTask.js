@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { BaseComponent, Typography, SvgIcon, Button } from '../shared';
+import { BaseComponent, Typography, SvgIcon, Button } from '../../shared';
 
 class ExtraPointTask extends BaseComponent {
 

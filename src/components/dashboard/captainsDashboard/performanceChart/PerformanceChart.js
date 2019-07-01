@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Chart } from 'react-google-charts';
 
-import colors from '../../../constants/Colors';
-import { BaseComponent } from '../../shared';
+import colors from '../../../../constants/Colors';
+import { BaseComponent } from '../../../shared';
 import { ChartHeader, ChartFooter } from './index';
 
 class PerformanceChart extends BaseComponent {

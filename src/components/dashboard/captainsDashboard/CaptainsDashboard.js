@@ -3,8 +3,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
 
-import routes from '../../constants/Routes';
-import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
+import routes from '../../../constants/Routes';
+import { BaseComponent, ActionItem, Typography, VoterCardView } from '../../shared';
 import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart } from './index';
 
 class CaptainsDashboard extends BaseComponent {

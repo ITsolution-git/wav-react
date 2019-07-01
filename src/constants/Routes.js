@@ -8,6 +8,7 @@ export default {
     voterList: '/voter_list',
     addVoter: '/add_voter',
     captainsDashboard: '/home',
+    Leaderboard: '/leaderboard',
     adminDashboard: '/home_admin',
     helpCenter: '/help_center',
     loginBySocial: '/',

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import colors from '../../constants/Colors';
-import { BaseComponent, Typography, CongratsAlarm, VoterPerformer } from '../shared';
+import colors from '../../../constants/Colors';
+import { BaseComponent, Typography, CongratsAlarm, VoterPerformer } from '../../shared';
 
 class TopPerformers extends BaseComponent {
 
