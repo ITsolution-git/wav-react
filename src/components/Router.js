@@ -53,7 +53,7 @@ const router = () => (
         <Route exact path={routes.addVoter} component={Authorization(AddVoterManagement, [captain])} />
         <Route exact path={routes.helpCenter} component={Authorization(HelpCenter, [captain])} />
         <Route exact path={routes.captainsDashboard} component={Authorization(CaptainsDashboard, [captain])} />
-        <Route exact path={routes.Leaderboard} component={Authorization(Leaderboard, [captain])} />
+        <Route exact path={routes.leaderboard} component={Authorization(Leaderboard, [captain])} />
         <Route exact path={routes.profile} component={Authorization(Profile, [captain])} />
     </Switch>
 );
