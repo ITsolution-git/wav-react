@@ -36,11 +36,13 @@ class Autocomplete extends BaseComponent {
     getItemValue = item => item.label;
 
     renderInput = (props) => {
-        const { inputClass } = this.props;
+        const { inputClass, placeholder } = this.props;
+        const { value } = this.state;
+
         return (
             <div className={cn('input-class', inputClass)}>
-                <i className='fa fa-search' />
-                <input {...props} />
+                <i className={cn('fa fa-search', { 'i-active': !!value })} />
+                <input placeholder={placeholder} {...props} />
             </div>
         )
     };
@@ -84,6 +86,7 @@ class Autocomplete extends BaseComponent {
 
 Autocomplete.defaultProps = {
     inputClass: '',
+    placeholder: '',
     value: '',
     items: [],
     onSelect: () => { }
@@ -92,6 +95,7 @@ Autocomplete.defaultProps = {
 Autocomplete.propTypes = {
     // css class name for styling input text
     inputClass: PropTypes.string,
+    placeholder: PropTypes.string,
     // default value
     value: PropTypes.string,
     onSelect: PropTypes.func.isRequired,

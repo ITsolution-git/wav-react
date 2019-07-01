@@ -113,7 +113,8 @@ class SelectDistrict extends BaseComponent {
                     items={searchAutoItems}
                     onSelect={this.getDistricts}
                     value={searchString}
-                    className='search-box' />
+                    className='search-box'
+                    placeholder='Search by ZIP, Address, City' />
                 {this.renderSearchResult()}
             </Container>
         );
