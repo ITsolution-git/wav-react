@@ -421,7 +421,7 @@ class TasksManagement extends BaseComponent {
                     className={classNames({ 'task-selected': task.task_id === selectedTask.task_id })} />));
     }
 
-    returnTaskContent = () => {
+    renderTaskContent = () => {
         const { selectedTask } = this.state;
 
         return (
@@ -458,7 +458,7 @@ class TasksManagement extends BaseComponent {
                         className='actions-tabs' />
                     {this.isEmptyOfSelectedTasks() ?
                         this.renderEmptyTask() :
-                        this.returnTaskContent()}
+                        this.renderTaskContent()}
                     {
                         isMarkDialogShow &&
                         <TaskCompleteDialog show={isMarkDialogShow}
