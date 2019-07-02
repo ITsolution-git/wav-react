@@ -3,24 +3,24 @@
     margin-bottom: 16px;
     width: 100%;
 
-    .btw-action-header {
+    .action-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    .btw-action-title {
-        margin-top: 32px;
+    .action-title {
+        margin: 32px 0 8px 0;
         font-size: 12px;
         line-height: 130%;
     }
 
-    .btw-task-done {
+    .task-done {
         font-size: 12px;
         margin-top: 3px;
     }
 
-    .btw-action-status {
+    .action-status {
         display: flex;
         align-items: center;
   
@@ -29,16 +29,16 @@
         }
     }
 
-    .btw-action-points {
+    .action-points {
         display: flex;
         align-items: center;
 
-        .btw-points-text {
+        .points-text {
             margin-left: 4px;
         }
     }
         
-    .btw-action-duration {
+    .action-duration {
         font-size: 12px;
         margin-bottom: 27px;
     }

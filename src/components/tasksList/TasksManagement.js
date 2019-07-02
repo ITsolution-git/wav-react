@@ -425,10 +425,10 @@ class TasksManagement extends BaseComponent {
 
         return (
             <Row>
-                <Col md={5}>
+                <Col md={4} lg={5}>
                     {this.renderTaskList()}
                 </Col>
-                <Col md={7}>
+                <Col md={8} lg={7}>
                     <TaskDetail
                         task={selectedTask}
                         onMarkAsDone={this.onClickMarkOpenHandler} />
