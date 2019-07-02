@@ -1,11 +1,8 @@
 import History from '../utility/History';
-import localStorage from 'localStorage';
-import PubSub from 'pubsub-js';
 
 import authStorage from '../storage/AuthStorage';
 import roles from '../constants/Roles';
 import routes from '../constants/Routes';
-import pubsubConstants from '../constants/PubSubConstants';
 
 export function getHomeRoute() {
     const currentRole = authStorage.getCurrentRole();
@@ -26,7 +23,5 @@ export function redirectToHome() {
 }
 
 export function logout() {
-    localStorage.clear();
-    History.push(routes.loginBySocial);
-    PubSub.publish(pubsubConstants.onAuthChange, false);
+    authStorage.clearStorage()
 }
