@@ -1,9 +1,13 @@
 .bcd-top-performers{
     display: flex;
     flex-direction: column;
- 
+    
     .congrats {
         margin-bottom: 37px;
+
+        @include respond-to($phone) {
+            display: none;
+        }
     }
 
     .view-leaderboard {
@@ -28,5 +32,8 @@
             display: block;
         }
     }
-
+    
+    @include respond-to($phone) {
+        display: none;
+    }
 }

@@ -15,6 +15,7 @@ class ChartHeader extends BaseComponent {
                     lightColor={!isMain}>
                     {data.startDate} - {data.endDate}
                 </Typography>
+                {isMain && <i className='fa fa-sort-desc' />}
             </div>
         )
     }

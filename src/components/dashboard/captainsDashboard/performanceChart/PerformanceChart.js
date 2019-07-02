@@ -27,7 +27,7 @@ class PerformanceChart extends BaseComponent {
             <div className='bcd-performance-chart btw-paper'>
                 <ChartHeader {...this.props} />
                 <Chart
-                    height={'200px'}
+                    height={'205px'}
                     chartType='Bar'
                     loader={<div>Loading Chart</div>}
                     data={chartData}
@@ -35,6 +35,7 @@ class PerformanceChart extends BaseComponent {
                         legend: { position: 'none' },
                         colors: [colors['primaryOpacity'], colors['primary']],
                     }}
+                    className='chart-content'
                 />
                 <ChartFooter {...this.props} />
             </div>
