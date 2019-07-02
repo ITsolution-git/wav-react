@@ -30,11 +30,15 @@
         
         thead {
             .rank-header{
-                width: 100px;
+                width: 80px;
             }
 
             .score-header{
                 width: 125px;
+
+                @include respond-to($tablet) {
+                    width: 75px;
+                }
             }
         }
 

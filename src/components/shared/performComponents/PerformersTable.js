@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap';
 import classNames from 'classnames';
 
 import { BaseComponent, SvgIcon } from '../index';
+import { PerformerInfo } from './index';
 
 class PerformersTable extends BaseComponent {
 
@@ -40,7 +41,11 @@ class PerformersTable extends BaseComponent {
                     <td>
                         {item.id}
                     </td>
-                    <td>{this.renderPerformerInfo(item)}</td>
+                    <td>
+                        <PerformerInfo
+                            name={`${item.firstName} ${item.lastName}`}
+                            level={item.level} />
+                    </td>
                     <td>
                         <SvgIcon name='medal' className='status-icon' />
                         {item.points}
