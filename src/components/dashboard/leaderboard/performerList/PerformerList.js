@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { BaseComponent } from '../../../shared';
-import { PerformerFilters, PerformerListHeader, PerformerListItem } from './index';
+import { BaseComponent, PerformersTable } from '../../../shared';
+import { PerformerFilters } from './index';
 
 class PerformerList extends BaseComponent {
 
@@ -12,10 +12,9 @@ class PerformerList extends BaseComponent {
         return (
             <div className='btw-performer-list btw-paper'>
                 <PerformerFilters {...this.props} />
-                <div className='performer-list'>
-                    <PerformerListHeader />
-                    <PerformerListItem performer={performers[0]} />
-                </div>
+                <PerformersTable
+                    data={performers}
+                />
             </div>
         );
     }
