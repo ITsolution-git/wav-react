@@ -7,7 +7,7 @@ export default function districtReducer(state=InitialState.districtList, action)
 			return {...state, isFetching: true}
 		}
 		case DistrictConstants.DISTRICT_LIST_SUCCESS: {
-		    return { ...state, ...{ districts: action.data.districts, isFetching: false, isSuccess: true, count: action.data.districts.length }};
+		    return { ...state, ...{ districts: action.data.districts, isFetching: false, isSuccess: true, count: action.data.districts ? action.data.districts.length : 0 }};
 		}
 		case DistrictConstants.DISTRICT_LIST_ERROR: {
 		    return { ...state, ...{ error: action.error, isFetching: false, isSuccess: false }};

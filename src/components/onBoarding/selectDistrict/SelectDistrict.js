@@ -76,14 +76,14 @@ class SelectDistrict extends BaseComponent {
     }
 
     renderSearchResult = () => {
-        const { votingDistrics, selectedDistrict, searchString } = this.state;
+        const { districts } = this.props
+        const { selectedDistrict, searchString } = this.state;
 
         if (!!searchString) {
             return (
                 <>
                     <Typography variant='body' lightColor className='description-result'>
-                        The information you provided overlaps {votingDistrics.length}
-                        voting districts. Please, select one:
+                        The information you provided overlaps {districts.length} voting districts. Please, select one:
                     </Typography>
                     {this.renderDistrictList()}
                     <div className='button-content'>

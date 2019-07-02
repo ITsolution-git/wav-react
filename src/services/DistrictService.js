@@ -9,11 +9,6 @@ export default {
 function getDistrictByAddress(address) {
 	return getAsync({
 	    url: `${config.apiHost}/districts?address=${address}`,
-	    headers: getHeaders()
 	});
-}
-
-function getHeaders() {
-    return { 'x-key': authStorage.getLoggedUser().email };
 }
 
