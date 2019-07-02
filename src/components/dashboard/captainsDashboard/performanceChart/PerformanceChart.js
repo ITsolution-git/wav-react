@@ -27,7 +27,7 @@ class PerformanceChart extends BaseComponent {
             <div className='bcd-performance-chart btw-paper'>
                 <ChartHeader {...this.props} />
                 <Chart
-                    height={'205px'}
+                    height='205px'
                     chartType='Bar'
                     loader={<div>Loading Chart</div>}
                     data={chartData}
