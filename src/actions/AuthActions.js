@@ -129,8 +129,13 @@ export function getBtwUserProfile() {
 
 export function btwLogout() {
 	return dispatch => {
+		const callBackUrl = domain + routes.loginBySocial;
+		const auth0Service = new Auth0Service(callBackUrl);
+
+		auth0Service.signOut();
 		dispatch(logoutAction());
         logout();
+
         function logoutAction() {
             return { type: appConstants.USER_LOGOUT };
         }

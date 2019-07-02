@@ -72,6 +72,10 @@ class Auth0Service {
         });
     };
 
+    signOut = () => {
+        this.auth0.logout({ returnTo: this.auth0.baseOptions.redirectUri });
+    };
+
 }
 
 export default Auth0Service;
