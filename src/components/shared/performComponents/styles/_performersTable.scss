@@ -27,18 +27,17 @@
     }
 
     .table {
-        
-        thead {
-            .rank-header{
-                width: 80px;
-            }
+        margin-bottom: 0;
 
-            .score-header{
-                width: 125px;
+        .rank-content{
+            width: 80px;
+        }
 
-                @include respond-to($tablet) {
-                    width: 75px;
-                }
+        .score-content{
+            width: 15%;
+
+            @include respond-to($tablet) {
+                width: 25%;
             }
         }
 
@@ -68,7 +67,6 @@
         }
 
         tbody {
-
             tr {
                 td {
                     height: 63.5px;

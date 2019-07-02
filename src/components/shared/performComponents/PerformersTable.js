@@ -3,32 +3,28 @@ import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import classNames from 'classnames';
 
-import { BaseComponent, SvgIcon } from '../index';
-import { PerformerInfo } from './index';
+import { BaseComponent, SvgIcon, Typography } from '../index';
+import { PerformerInfo, PerformerRank } from './index';
 
 class PerformersTable extends BaseComponent {
 
     renderDesktopHeader = () => {
         return (
             <tr>
-                <th className='rank-header'>Rank</th>
-                <th className='captain-header'>Captain</th>
-                <th className='score-header'>Tasks done</th>
-                <th className='score-header'>Points earned</th>
+                <th className='rank-content'>Rank</th>
+                <th>Captain</th>
+                <th className='score-content'>Tasks done</th>
+                <th className='score-content'>Points earned</th>
             </tr>
         );
     }
 
-    renderPerformerInfo = (item) => {
+    renderStatusItem = (value, isPoint = true) => {
         return (
-            <>
-                <div className='name'>
-                    {item.name}
-                </div>
-                <div className='description'>
-                    {`${item.sex} | ${item.street}`}
-                </div>
-            </>
+            <Typography variant='body' fontWeight='600'>
+                <SvgIcon name={isPoint ? 'medal' : 'action-status-completed'} className='status-icon' />
+                {value}
+            </Typography>
         );
     }
 
@@ -39,7 +35,7 @@ class PerformersTable extends BaseComponent {
             return (
                 <tr key={i} className={classNames('desktop-body')}>
                     <td>
-                        {item.id}
+                        <PerformerRank performer={item} rank={i + 1} />
                     </td>
                     <td>
                         <PerformerInfo
@@ -47,18 +43,40 @@ class PerformersTable extends BaseComponent {
                             level={item.level} />
                     </td>
                     <td>
-                        <SvgIcon name='medal' className='status-icon' />
-                        {item.points}
+                        {this.renderStatusItem(item.points)}
                     </td>
                     <td>
-                        <SvgIcon name='action-status-completed' className='status-icon' />
-                        {item.activeTasks}
+                        {this.renderStatusItem(item.activeTasks, false)}
                     </td>
                 </tr>
             );
         })
     }
 
+    renderMobileBody = () => {
+        const { data } = this.props;
+
+        return data.map((item, i) => {
+            return (
+                <tr key={i} className={classNames('mobile-body')}>
+                    <td className='rank-content'>
+                        <PerformerRank performer={item} rank={i + 1} />
+                    </td>
+                    <td>
+                        <PerformerInfo
+                            name={`${item.firstName} ${item.lastName}`}
+                            level={item.level} />
+                    </td>
+                    <td>
+                        <div className='status-content'>
+                            {this.renderStatusItem(item.points)}
+                            {this.renderStatusItem(item.activeTasks, false)}
+                        </div>
+                    </td>
+                </tr>
+            );
+        })
+    }
 
     render() {
         const { className } = this.props;
@@ -71,6 +89,7 @@ class PerformersTable extends BaseComponent {
                     </thead>
                     <tbody>
                         {this.renderDesktopBody()}
+                        {this.renderMobileBody()}
                     </tbody>
                 </Table >
             </div >
