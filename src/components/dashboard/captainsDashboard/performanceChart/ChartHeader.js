@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { BaseComponent, Typography, SvgIcon } from '../../shared';
+import { BaseComponent, Typography, SvgIcon } from '../../../shared';
 
 class ChartHeader extends BaseComponent {
 
@@ -15,6 +15,7 @@ class ChartHeader extends BaseComponent {
                     lightColor={!isMain}>
                     {data.startDate} - {data.endDate}
                 </Typography>
+                {isMain && <i className='fa fa-sort-desc' />}
             </div>
         )
     }

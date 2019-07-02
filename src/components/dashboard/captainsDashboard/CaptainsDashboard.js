@@ -2,9 +2,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
+import classNames from 'classnames';
 
-import routes from '../../constants/Routes';
-import { BaseComponent, ActionItem, Typography, VoterCardView } from '../shared';
+import colors from '../../../constants/Colors';
+import routes from '../../../constants/Routes';
+import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm, SvgIcon } from '../../shared';
 import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart } from './index';
 
 class CaptainsDashboard extends BaseComponent {
@@ -220,17 +222,37 @@ class CaptainsDashboard extends BaseComponent {
                     percent: 10,
                     isUp: true
                 }
+            },
+            isOpen: {
+                performanceContent: false,
+                taskContent: false,
+                actionContent: false,
+                voterContent: false
             }
         }
     }
 
     onSelectVoter = () => { }
 
-    renderContentHeader = (title, linkName, route) => {
+    accordionHandler = (contentName) => () => {
+        this.setState((prevState) => ({
+            isOpen: {
+                ...prevState.isOpen,
+                [contentName]: !prevState.isOpen[contentName]
+            }
+        }));
+    }
+
+    renderContentHeader = (title, linkName, route, contentName, isOpen) => {
         return (
             <div className='content-header'>
                 <Typography className='content-title'>{title}</Typography>
-                <span className='view-all' onClick={() => this.onLink(route)}>{linkName}</span>
+                {!!linkName && <span className='view-all' onClick={() => this.onLink(route)}>{linkName}</span>}
+                <SvgIcon
+                    name={isOpen ? 'accordion-open' : 'accordion-close'}
+                    onClick={this.accordionHandler(contentName)}
+                    className='accordion-button'
+                />
             </div>
         )
     }
@@ -241,12 +263,37 @@ class CaptainsDashboard extends BaseComponent {
         )
     }
 
+    renderCongrat = () => {
+        const { isOpen: { performanceContent } } = this.state;
+
+        return (
+            <div className='content top-congrats'>
+                {this.renderContentHeader('Performance stats', '', '', 'performanceContent', performanceContent)}
+                <div className={classNames('content-body top-congrats', { 'content-inactive': !performanceContent })}>
+                    <CongratsAlarm>
+                        <Typography variant='body' color={colors['white']}>
+                            Your result is better than of <b>75%</b> of Captains this week!
+                        </Typography>
+                        <Typography
+                            variant='body'
+                            fontWeight='600'
+                            color={colors['white']}
+                            className='congrat-link'
+                            onClick={() => this.onLink(routes.leaderboard)}>
+                            View Leaderboard
+                        </Typography>
+                    </CongratsAlarm>
+                </div>
+            </div>
+        )
+    }
+
     renderPerfomance = () => {
-        const { performers, performanceData } = this.state
+        const { performers, performanceData, isOpen: { performanceContent } } = this.state
 
         return (
             <div className='content'>
-                <Row>
+                <Row className={classNames('content-body', { 'content-inactive': !performanceContent })}>
                     <Col xs={12} lg={6}>
                         <PerformanceChart performanceData={performanceData} />
                     </Col>
@@ -259,65 +306,69 @@ class CaptainsDashboard extends BaseComponent {
     }
 
     renderTasks = () => {
-        const { tasks } = this.state
+        const { tasks, isOpen: { taskContent } } = this.state
 
         return (
             <div className='content'>
-                <div className='content-header'>
-                    <Typography className='content-title'>Today’s extra points tasks</Typography>
+                {this.renderContentHeader('Today’s extra points tasks', '', '', 'taskContent', taskContent)}
+                <div className={classNames('content-body', { 'content-inactive': !taskContent })}>
+                    <Row>
+                        <Col xs={12} md={6}>
+                            <ExtraPointTask task={tasks[0]} color='dark' />
+                        </Col>
+                        <Col xs={12} md={6}>
+                            <ExtraPointTask task={tasks[1]} />
+                        </Col>
+                    </Row>
                 </div>
-                <Row>
-                    <Col xs={12} md={6}>
-                        <ExtraPointTask task={tasks[0]} color='dark' />
-                    </Col>
-                    <Col xs={12} md={6}>
-                        <ExtraPointTask task={tasks[1]} />
-                    </Col>
-                </Row>
             </div>
         );
     }
 
     renderActions = () => {
-        const { tasks } = this.state
+        const { tasks, isOpen: { actionContent } } = this.state
 
         return (
             <div className='content'>
-                {this.renderContentHeader('Actions in progress', 'All Actions', routes.tasksList)}
-                <Row>
-                    {
-                        tasks.map((task, index) => {
-                            return (
-                                <Col sm={6} lg={3} key={index}>
-                                    <ActionItem task={task} />
-                                </Col>
-                            )
-                        })
-                    }
-                </Row>
-                {this.renderContentFooter('All Actions', routes.tasksList)}
+                {this.renderContentHeader('Actions in progress', 'All Actions', routes.tasksList, 'actionContent', actionContent)}
+                <div className={classNames('content-body', { 'content-inactive': !actionContent })}>
+                    <Row>
+                        {
+                            tasks.map((task, index) => {
+                                return (
+                                    <Col sm={6} lg={3} key={index}>
+                                        <ActionItem task={task} />
+                                    </Col>
+                                )
+                            })
+                        }
+                    </Row>
+                    {this.renderContentFooter('All Actions', routes.tasksList)}
+                </div>
             </div>
         );
     }
 
     renderVoters = () => {
-        const { voters } = this.state
+        const { voters, isOpen: { voterContent } } = this.state
 
         return (
             <div className='content'>
-                {this.renderContentHeader('Your voters', 'All Voters', routes.voterList)}
-                <Row>
-                    {
-                        voters.map((voter, index) => {
-                            return (
-                                <Col xs={12} lg={6} key={index}>
-                                    <VoterCardView data={voter} onSelectItem={this.onSelectVoter} />
-                                </Col>
-                            )
-                        })
-                    }
-                </Row>
-                {this.renderContentFooter('All Voters', routes.tasksList)}
+                {this.renderContentHeader('Your voters', 'All Voters', routes.voterList, 'voterContent', voterContent)}
+                <div className={classNames('content-body', { 'content-inactive': !voterContent })}>
+                    <Row>
+                        {
+                            voters.map((voter, index) => {
+                                return (
+                                    <Col xs={12} lg={6} key={index}>
+                                        <VoterCardView data={voter} onSelectItem={this.onSelectVoter} />
+                                    </Col>
+                                )
+                            })
+                        }
+                    </Row>
+                    {this.renderContentFooter('All Voters', routes.tasksList)}
+                </div>
             </div>
         );
     }
@@ -336,6 +387,7 @@ class CaptainsDashboard extends BaseComponent {
                         <DashboardUserInfo user={user} />
                     </Col>
                 </Row>
+                {this.renderCongrat()}
                 {this.renderPerfomance()}
                 {this.renderTasks()}
                 {this.renderActions()}

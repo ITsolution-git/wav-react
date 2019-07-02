@@ -60,7 +60,7 @@ import {
 	TextArea
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
-import { VoterPerformer } from './performComponents'
+import { VoterPerformer, PerformersTable } from './performComponents'
 import SwitchButton from './SwitchButton'
 import './styles/index.scss';
 
@@ -120,6 +120,7 @@ export {
 	Panel,
 	CongratsAlarm,
 	VoterPerformer,
+	PerformersTable,
 	CommentsList,
 	SwitchButton
 }

@@ -1,6 +1,10 @@
 import VoterPerformer from './VoterPerformer'
-import './_voterPerformer.scss';
+import PerformersTable from './PerformersTable'
+import PerformerInfo from './PerformerInfo'
+import './styles/index.scss';
 
 export {
-    VoterPerformer
+    VoterPerformer,
+    PerformersTable,
+    PerformerInfo
 }

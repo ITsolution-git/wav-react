@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import colors from '../../constants/Colors';
-import { BaseComponent, Typography, CongratsAlarm, VoterPerformer } from '../shared';
+import routes from '../../../constants/Routes';
+import colors from '../../../constants/Colors';
+import { BaseComponent, Typography, CongratsAlarm, VoterPerformer } from '../../shared';
 
 class TopPerformers extends BaseComponent {
 
     renderFullLeaderboard = (isfooter = false) => {
         return (
-            <span className={isfooter ? 'full-leaderboard-footer' : 'full-leaderboard'} onClick={() => { }}>Full Leaderboard</span>
+            <span
+                className={isfooter ? 'full-leaderboard-footer' : 'full-leaderboard'}
+                onClick={() => this.onLink(routes.leaderboard)}>
+                Full Leaderboard
+            </span>
         )
     }
 
