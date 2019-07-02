@@ -1,95 +1,122 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
-import BaseComponent from '../../shared/BaseComponent';
-import Paper from '../../shared/Paper';
-import Typography from '../../shared/Typography';
-import Button from '../../shared/Button';
-import Autocomplete from '../../shared/Autocomplete';
-import SelectDistrictItem from './SelectDistrictItem';
 import routes from '../../../constants/Routes';
+import { BaseComponent, Button, Typography, AutoComplete } from '../../shared'
+import { SelectDistrictItem } from './index';
 import './styles/index.scss';
 
 class SelectDistrict extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-           votingDistrics: [
-               {title: "illinois's Congresssional District #1"},
-               {title: "illinois's Congresssional District #2"},
-               {title: "illinois's Congresssional District #3"},
-               {title: "illinois's Congresssional District #4"},
-               {title: "illinois's Congresssional District #5"},
-               {title: "illinois's Congresssional District #5"},
-               {title: "illinois's Congresssional District #5"},
-               {title: "illinois's Congresssional District #5"}
-            ],
-            selectedVoting: -1,
+            votingDistrics: [],
+            selectedVoting: null,
             searchAutoItems: [
-                {id: 0, label: "Area 0"},
-                {id: 1, label: "Area 1"},
-                {id: 2, label: "Area 2"},
-                {id: 3, label: "Area 3"},
-                {id: 4, label: "Area 4"},
-                {id: 5, label: "Area 5"},
+                { id: 0, label: "Chicago, IL" },
+                { id: 1, label: "Chicago, PL" },
+                { id: 2, label: "Los IL" },
+                { id: 3, label: "New York PL" },
+                { id: 4, label: "Califonia FL" },
+                { id: 5, label: "Califonia CL" },
             ],
             searchString: ""
         }
     }
 
-    handleSelectDistrict = index => () => {
-        this.setState({selectedVoting: index});
-    };
-
     getDistricts = (value, item) => {
+        let data = [];
+        if (!!value.label) {
+            data = [
+                { id: 0, title: "illinois's Congresssional District #1" },
+                { id: 1, title: "illinois's Congresssional District #2" },
+                { id: 2, title: "illinois's Congresssional District #3" },
+                { id: 3, title: "illinois's Congresssional District #4" },
+                { id: 4, title: "illinois's Congresssional District #5" },
+                { id: 5, title: "illinois's Congresssional District #6" }
+            ];
+        }
+
         this.setState({
-            votingDistrics: [
-                {title: "illinois's Congresssional District #1"},
-                {title: "illinois's Congresssional District #2"},
-                {title: "illinois's Congresssional District #3"}
-            ],
+            votingDistrics: data,
             searchString: value.label
         });
     };
 
-    onNextClick = () => {
-      this.onLink(routes.selectVoters);
+    selectDistrictHandler = id => () => {
+        this.setState({ selectedVoting: id });
     };
 
-    render() {
-        const { votingDistrics, selectedVoting, searchAutoItems, searchString } = this.state;
-        
-        return (
-            <Paper className={'select-disctrict'}>
-                <Typography>Select voting district</Typography>
-                {
-                    !searchString && <Typography variant='body'>Enter your ZIP code to find a voting district you are attached to. You can change the district anytime.</Typography>
-                }
+    onNextHandler = () => {
+        this.onLink(routes.selectVoters);
+    };
 
-                <Autocomplete items={searchAutoItems}
+    renderDistrictList = () => {
+        const { votingDistrics, selectedVoting } = this.state;
+
+        return (
+            <div className={'districts-list'}>
+                {votingDistrics.map((disctrict, index) => (
+                    <SelectDistrictItem
+                        key={index}
+                        district={disctrict}
+                        isSelected={disctrict.id === selectedVoting}
+                        onSelect={this.selectDistrictHandler(disctrict.id)} />)
+                )}
+            </div>
+        )
+    }
+
+    renderSearchDescription = () => {
+        const { searchString } = this.state;
+
+        if (!searchString) {
+            return (
+                <Typography variant='body' lightColor className='description'>
+                    Enter your ZIP code to find a voting district you are
+                    attached to. You can change the district anytime.
+                </Typography>
+            )
+        }
+    }
+
+    renderSearchResult = () => {
+        const { votingDistrics, selectedVoting, searchString } = this.state;
+
+        if (!!searchString) {
+            return (
+                <>
+                    <Typography variant='body' lightColor className='description-result'>
+                        The information you provided overlaps {votingDistrics.length}
+                        voting districts. Please, select one:
+                    </Typography>
+                    {this.renderDistrictList()}
+                    <div className='button-content'>
+                        <Button fullWidth disabled={selectedVoting < 0} onClick={this.onNextHandler}>
+                            Next
+                        </Button>
+                    </div>
+                </>
+            )
+        }
+    }
+
+    render() {
+        const { searchAutoItems, searchString } = this.state;
+
+        return (
+            <Container className='btw-paper btw-select-disctrict'>
+                <Typography className='title'>Select voting district</Typography>
+                {this.renderSearchDescription()}
+                <AutoComplete
+                    items={searchAutoItems}
                     onSelect={this.getDistricts}
                     value={searchString}
-                    className={'search-box'} />
-
-                {
-                    searchString && <Typography variant='body'>The information you provided overlaps {votingDistrics.length} voting districts. Please, select one:</Typography>
-                }
-
-                <div className={'districts-list'}>
-                    {votingDistrics.map((item, index) => {
-
-                        return (
-                            <SelectDistrictItem 
-                                key={index} 
-                                districtName={item.title} 
-                                isSelected={selectedVoting === index}
-                                handleSelect={this.handleSelectDistrict(index)}/>
-                        );
-                    })}
-                </div>
-
-                <Button onClick={this.onNextClick} disabled={selectedVoting < 0}>Next</Button>
-            </Paper>
+                    className='search-box'
+                    placeholder='Search by ZIP, Address, City' />
+                {this.renderSearchResult()}
+            </Container>
         );
     }
 }

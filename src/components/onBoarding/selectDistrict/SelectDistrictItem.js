@@ -1,20 +1,19 @@
 import React from 'react';
+import classNames from 'classnames';
 
-import BaseComponent from '../../shared/BaseComponent';
-import Typography from '../../shared/Typography';
-import SvgIcon from '../../shared/SvgIcon';
-
+import { BaseComponent, SvgIcon, Typography } from '../../shared'
 
 class SelectDistrictItem extends BaseComponent {
 
     render() {
-        const { isSelected, districtName, handleSelect } = this.props;
+        const { isSelected, district, onSelect } = this.props;
 
-        return(
-            <div className={'district-item'} onClick={handleSelect}>
-                <SvgIcon name={isSelected ? 'radio-button-selected' : 'radio-button'}/>
-                <Typography variant={'functional'} 
-                    className={'district-name'}>{districtName}</Typography>
+        return (
+            <div className={classNames('btw-district-item', { 'district-item-select': isSelected })} onClick={onSelect}>
+                <SvgIcon name={isSelected ? 'radio-button-selected' : 'radio-button'} />
+                <Typography variant='functional' fontWeight='600' className='district-name'>
+                    {district.title}
+                </Typography>
             </div>
         );
     }

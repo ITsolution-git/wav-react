@@ -63,7 +63,7 @@ const PasswordSetting = (props) => {
 	            required />
 	        <div className={cn('d-flex justify-content-between align-items-center', {'flex-column': isMobileOnly})} >
 	        	<Button className='my-3' size='medium' onClick={onSubmit}>Save Changes</Button>
-	        	<Typography variant='body' className='forgot-password' onClick={onForgot}><u>Forgot Password?</u></Typography>
+	        	<Typography variant='body' fontWeight='700' className='forgot-password' onClick={onForgot}><u>Forgot Password?</u></Typography>
 	        </div>
 		</div>
 	)

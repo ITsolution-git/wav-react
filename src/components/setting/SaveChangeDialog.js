@@ -5,7 +5,7 @@ import { Dialog, Button } from '../shared'
 
 const SaveChangeModal = props => (
 	<Dialog
-		className='btw-delete-account-modal'
+		className='btw-account-modal'
 		show={props.open}
 		onClose={props.onClose}
 		title='Changes Not Saved'

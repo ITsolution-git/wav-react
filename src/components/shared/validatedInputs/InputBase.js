@@ -84,13 +84,12 @@ export default class InputBase extends BaseComponent {
 
     renderRightIcon = () => {
         const { isValid, value } = this.state;
-        const { rightIcon = null, useGreenMark = true } = this.props;
-
+        const { rightIcon = null, useGreenMark = true, validator } = this.props;
         if (rightIcon) {
             return rightIcon
         }
 
-        return value && isValid && useGreenMark
+        return value && isValid && useGreenMark && (validator ? validator(value) : true)
             ? <SvgIcon width={14} height={10.5} name='green-mark' />
             : null;
 

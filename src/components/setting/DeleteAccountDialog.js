@@ -6,7 +6,7 @@ import { isMobileOnly } from '../../helpers/DeviceHelper'
 
 const DeleteAccountDialog = props => (
 	<Dialog
-		className='btw-delete-account-modal'
+		className='btw-account-modal'
 		show={props.open}
 		onClose={props.onClose}
 		title='Delete Your Account'

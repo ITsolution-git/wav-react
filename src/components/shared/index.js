@@ -60,7 +60,9 @@ import {
 	ProfileAvatar,
 	RadioOption,
 	RadioGroup,
-	TextArea
+	TextArea,
+	ProfileAvatarOption,
+	DragDropImageUpload
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer } from './performComponents'
@@ -120,6 +122,8 @@ export {
 	TextArea,
 	ProfileInformationText,
 	ProfileAvatar,
+	ProfileAvatarOption,
+	DragDropImageUpload,
 	Panel,
 	CongratsAlarm,
 	VoterPerformer,

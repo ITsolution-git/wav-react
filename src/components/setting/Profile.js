@@ -11,7 +11,12 @@ import {
 	Panel,
 	ButtonLink,
 } from '../shared';
-import { ProfileInformation, PasswordSetting, NotificationSetting, DeleteAccountDialog } from './index'
+import { 
+	ProfileInformation, 
+	PasswordSetting, 
+	NotificationSetting,
+	DeleteAccountDialog
+} from './index'
 
 class Profile extends BaseComponent {
 	state = {

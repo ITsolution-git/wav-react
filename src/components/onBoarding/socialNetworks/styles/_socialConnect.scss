@@ -5,7 +5,8 @@
     justify-content: center;
     flex-direction: column;
 	padding: 51px 88px;
-  
+    margin: 100px 0;
+
 	.content{
         border-bottom: 1px solid $divider;
         padding-bottom: 24px;
@@ -55,6 +56,6 @@
     @include respond-to($phone) {
         padding: 37px 16px;
         width: 100%;
-        margin: 0 24px;
+        margin: 64PX 24px;
     }
 }
