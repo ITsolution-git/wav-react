@@ -20,14 +20,15 @@ import { logout } from '../helpers/AuthHelper';
 const domain = window.location.origin;
 
 export function signInWithToken(userInfo) {
-
 	return dispatch => {
 		if (parseInt(userInfo.expiresIn, 10) > 0) {
 			authStorage.saveTokenInfo(userInfo);
+			const redirectRoute = lsManager.getItem(storageKeys.firstLogin)
+				? routes.welcome
+				: routes.captainsDashboard;
+
+			history.push(redirectRoute);
 			PubSub.publish(pubsubConstants.onAuthChange, true);
-			if (lsManager.getItem(storageKeys.firstLogin)) {
-				history.push(routes.welcome);
-			}
 			return dispatch(loadDataSuccess(appDataTypes.signOn, null));
 		}
 		return dispatch(loadDataFailure(appDataTypes.signOn, 'Invalid token.'));
@@ -70,23 +71,45 @@ export function signUpWitMail(identity) {
 	};
 }
 
-export function signUpWithSocial(connection) {
+export function authorizeWithSocial(connection, isLogin = false) {
 	return dispatch => {
-		const auth0Service = new Auth0Service(domain + routes.registerBySocial);
+		const subRoute = isLogin ? routes.loginBySocial : routes.registerBySocial;
+		const type = isLogin ? appDataTypes.signOn : appDataTypes.register;
+
+		const auth0Service = new Auth0Service(domain + subRoute);
+
+		dispatch(initializeRequest(appDataTypes[type]));
+
+		return auth0Service.socialAuthorize(connection).then(
+			() => {
+				dispatch(loadDataSuccess(appDataTypes[type], null));
+			},
+			error => {
+				dispatch(loadDataFailure(appDataTypes[type], error));
+			})
+	};
+}
+
+export function signUpWithToken(userInfo) {
+	const { token, idToken: { email }} = userInfo;
+
+	return dispatch => {
 
 		dispatch(initializeRequest(appDataTypes.register));
 
-		return auth0Service.socialSignUp(connection).then(
-			() => {
-				// const { email, password } = identity;
-				// dispatch(signInWithMail(email, password, () => {
-				// 	dispatch(loadDataSuccess(appDataTypes.register, null));
-				// }));
-			},
-			error => {
-				dispatch(loadDataFailure(appDataTypes.register, error));
+		return identityService.getUser(email, token)
+			.then(({ user }) => {
+				const { registrationDate, lastLoginTime } = user;
+				if (registrationDate === lastLoginTime) {
+					lsManager.setItem(storageKeys.firstLogin, true);
+				}
+
+				return dispatch(signInWithToken(userInfo))
 			})
-	};
+			.catch(({ data: { message } }) => {
+				return dispatch(loadDataFailure(appDataTypes.register, message));
+			})
+	}
 }
 
 export function getBtwUserProfile() {
@@ -94,8 +117,8 @@ export function getBtwUserProfile() {
 		dispatch(initializeRequest(appDataTypes.profile));
 
 		return identityService.getUser({ email: authStorage.getLoggedUser().email }).then(
-				response => {
-					dispatch(loadDataSuccess(appDataTypes.profile, response.data.userInformation))
+			({ user }) => {
+					dispatch(loadDataSuccess(appDataTypes.profile, user))
 				},
 				error => {
 					dispatch(loadDataFailure(appDataTypes.profile, error));
@@ -106,8 +129,13 @@ export function getBtwUserProfile() {
 
 export function btwLogout() {
 	return dispatch => {
+		const callBackUrl = domain + routes.loginBySocial;
+		const auth0Service = new Auth0Service(callBackUrl);
+
+		auth0Service.signOut();
 		dispatch(logoutAction());
-        logout();
+		logout();
+
         function logoutAction() {
             return { type: appConstants.USER_LOGOUT };
         }

@@ -42,7 +42,7 @@ class Auth0Service {
         });
     };
 
-    socialSignUp = (connection) => {
+    socialAuthorize = (connection) => {
         return new Promise((resolve, reject) => {
             this.auth0.authorize({
                 connection
@@ -70,7 +70,11 @@ class Auth0Service {
                 }
             });
         });
-    }
+    };
+
+    signOut = () => {
+        this.auth0.logout({ returnTo: this.auth0.baseOptions.redirectUri });
+    };
 
 }
 

@@ -9,7 +9,8 @@ export default {
     getLoggedUser,
     isAuthenticated,
     getTokenInfo,
-    getCurrentRole
+    getCurrentRole,
+    clearStorage
 };
 
 function saveTokenInfo(tokenInfo) {
@@ -33,4 +34,9 @@ function getCurrentRole() {
 
 function isAuthenticated() {
     return !!getLoggedUser().email;
+}
+
+function clearStorage() {
+    localStorage.clear();
+    cookies.remove(storageKeys.tokenInfo);
 }
