@@ -6,9 +6,9 @@ import { BaseComponent, Typography, SvgIcon, VoterAvatar } from '../index';
 class PerformerRank extends BaseComponent {
 
     renderRankContent = () => {
-        const { rank } = this.props;
+        const { rank, topNumber } = this.props;
 
-        return rank <= 3 ?
+        return rank <= topNumber ?
             <SvgIcon name={`place-${rank}`} className='place' /> :
             <Typography variant='body' className='place'>
                 {`${rank}.`}
@@ -35,5 +35,9 @@ PerformerRank.propTypes = {
     performer: PropTypes.object,
     rank: PropTypes.number
 };
+
+PerformerRank.defaultProps = {
+    topNumber: 3
+}
 
 export default PerformerRank;
