@@ -1,6 +1,5 @@
 import config from '../config/ApiConfig';
 import { getAsync } from '../helpers/RequestHelper';
-import authStorage from '../storage/AuthStorage';
 
 export default {
 	getDistrictByAddress
