@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import routes from '../../../constants/Routes';
-import { BaseComponent, Button, Typography, AutoComplete } from '../../shared'
+import { getDistrictByAddress, selectDistrict } from '../../../actions/DistrictListActions';
+import { BaseComponent, Button, Typography, AutoComplete, Spinner } from '../../shared'
 import { SelectDistrictItem } from './index';
 import './styles/index.scss';
 
@@ -11,8 +14,7 @@ class SelectDistrict extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
-            votingDistrics: [],
-            selectedVoting: null,
+            selectedDistrict: {},
             searchAutoItems: [
                 { id: 0, label: "Chicago, IL" },
                 { id: 1, label: "Chicago, PL" },
@@ -26,43 +28,35 @@ class SelectDistrict extends BaseComponent {
     }
 
     getDistricts = (value, item) => {
-        let data = [];
         if (!!value.label) {
-            data = [
-                { id: 0, title: "illinois's Congresssional District #1" },
-                { id: 1, title: "illinois's Congresssional District #2" },
-                { id: 2, title: "illinois's Congresssional District #3" },
-                { id: 3, title: "illinois's Congresssional District #4" },
-                { id: 4, title: "illinois's Congresssional District #5" },
-                { id: 5, title: "illinois's Congresssional District #6" }
-            ];
+            this.props.actions.getDistrictByAddress(value.label)
         }
-
         this.setState({
-            votingDistrics: data,
             searchString: value.label
         });
     };
 
-    selectDistrictHandler = id => () => {
-        this.setState({ selectedVoting: id });
+    selectDistrictHandler = district => () => {
+        this.setState({ selectedDistrict: district });
     };
 
     onNextHandler = () => {
+        this.props.actions.selectDistrict(this.state.selectedDistrict)
         this.onLink(routes.selectVoters);
     };
 
     renderDistrictList = () => {
-        const { votingDistrics, selectedVoting } = this.state;
+        const { districts } = this.props
+        const { selectedDistrict } = this.state;
 
         return (
             <div className={'districts-list'}>
-                {votingDistrics.map((disctrict, index) => (
+                {districts.map((item, index) => (
                     <SelectDistrictItem
                         key={index}
-                        district={disctrict}
-                        isSelected={disctrict.id === selectedVoting}
-                        onSelect={this.selectDistrictHandler(disctrict.id)} />)
+                        district={item}
+                        isSelected={item._id === selectedDistrict._id}
+                        onSelect={this.selectDistrictHandler(item)} />)
                 )}
             </div>
         )
@@ -82,7 +76,7 @@ class SelectDistrict extends BaseComponent {
     }
 
     renderSearchResult = () => {
-        const { votingDistrics, selectedVoting, searchString } = this.state;
+        const { votingDistrics, selectedDistrict, searchString } = this.state;
 
         if (!!searchString) {
             return (
@@ -93,7 +87,7 @@ class SelectDistrict extends BaseComponent {
                     </Typography>
                     {this.renderDistrictList()}
                     <div className='button-content'>
-                        <Button fullWidth disabled={selectedVoting < 0} onClick={this.onNextHandler}>
+                        <Button fullWidth disabled={selectedDistrict < 0} onClick={this.onNextHandler}>
                             Next
                         </Button>
                     </div>
@@ -103,10 +97,13 @@ class SelectDistrict extends BaseComponent {
     }
 
     render() {
+        const { isFetching } = this.props;
         const { searchAutoItems, searchString } = this.state;
 
         return (
             <Container className='btw-paper btw-select-disctrict'>
+                <Spinner loading={isFetching} />
+
                 <Typography className='title'>Select voting district</Typography>
                 {this.renderSearchDescription()}
                 <AutoComplete
@@ -121,4 +118,20 @@ class SelectDistrict extends BaseComponent {
     }
 }
 
-export default withRouter(SelectDistrict);
+const mapStateToProps = (state) => {
+    const { error, districts, isSuccess, isFetching } = state.districtList;
+    return {
+        error,
+        districts,
+        isFetching,
+        isSuccess
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        actions: bindActionCreators({ getDistrictByAddress, selectDistrict }, dispatch)
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectDistrict));
