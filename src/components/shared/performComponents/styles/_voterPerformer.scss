@@ -12,14 +12,6 @@
 
     .performer-info{
         display: flex;
-
-        .place{
-            margin-right: 8px;
-        }
-
-        .info{
-            margin-left: 16px;
-        }
     }
 
     .performer-status{
@@ -40,16 +32,6 @@
 
                 @include respond-to($phone) {
                     display: none;
-                }
-            }
-
-            .status-value{
-                color: $secondary;
-                display: flex;
-                align-items: center;
-
-                .status-icon{
-                    padding-right: 3px;
                 }
             }
         }

@@ -27,18 +27,17 @@
     }
 
     .table {
-        
-        thead {
-            .rank-header{
-                width: 80px;
-            }
+        margin-bottom: 0;
 
-            .score-header{
-                width: 125px;
+        .rank-content{
+            width: 80px;
+        }
 
-                @include respond-to($tablet) {
-                    width: 75px;
-                }
+        .score-content{
+            width: 15%;
+
+            @include respond-to($tablet) {
+                width: 25%;
             }
         }
 
@@ -68,7 +67,6 @@
         }
 
         tbody {
-
             tr {
                 td {
                     height: 63.5px;
@@ -78,14 +76,14 @@
                     color: $secondary;
                     vertical-align: middle;
                 }
-
-                .status-icon{
-                    padding-right: 3px;
-                }
             }
 
             .selected-row{
-                background-color: rgba($primary, 0.05);
+                background: linear-gradient(266.97deg, rgba($primary_color, 0.4) 0.26%, rgba($primary_color, 0.7) 98.82%);
+                
+                *{
+                    color: white !important;
+                }
             }
             
             .mobile-body {
@@ -100,6 +98,12 @@
                 @include respond-to($phone) {
                     display: none;
                 }
+            }
+
+            .status-content{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
             }
         }
     }
