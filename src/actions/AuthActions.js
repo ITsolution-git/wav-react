@@ -134,7 +134,7 @@ export function btwLogout() {
 
 		auth0Service.signOut();
 		dispatch(logoutAction());
-        logout();
+		logout();
 
         function logoutAction() {
             return { type: appConstants.USER_LOGOUT };
