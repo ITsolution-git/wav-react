@@ -83,7 +83,11 @@
             }
 
             .selected-row{
-                background-color: rgba($primary, 0.05);
+                background: linear-gradient(266.97deg, rgba($primary_color, 0.4) 0.26%, rgba($primary_color, 0.7) 98.82%);
+                
+                *{
+                    color: white !important;
+                }
             }
             
             .mobile-body {

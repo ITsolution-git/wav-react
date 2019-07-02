@@ -128,7 +128,8 @@ class Leaderboard extends BaseComponent {
                 'All Time'
             ],
             searchString: '',
-            selectedFilter: 'Today'
+            selectedFilter: 'Today',
+            selectedPerformer: {}
         }
     }
 
@@ -136,12 +137,16 @@ class Leaderboard extends BaseComponent {
         this.setState({ searchString: value });
     }
 
+    onSelectPerformerHandler = selectedPerformer => {
+        this.setState({ selectedPerformer });
+    }
+
     onFilterHanlder = filter => {
         this.setState({ selectedFilter: filter });
     }
 
     render() {
-        const { performers, filterTypes, selectedFilter, searchString } = this.state;
+        const { performers, filterTypes, selectedFilter, searchString, selectedPerformer } = this.state;
 
         return (
             <Container className='btw-leaderboard'>
@@ -157,11 +162,13 @@ class Leaderboard extends BaseComponent {
 
                 <PerformerList
                     performers={performers}
+                    selectedPerformer={selectedPerformer}
                     filterTypes={filterTypes}
                     selectedFilter={selectedFilter}
                     searchString={searchString}
                     onSearch={this.onSearchHandler}
                     onSelectFilter={this.onFilterHanlder}
+                    onSelectPerformer={this.onSelectPerformerHandler}
                 />
             </Container>
         )

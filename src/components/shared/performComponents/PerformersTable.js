@@ -8,15 +8,8 @@ import { PerformerInfo, PerformerRank } from './index';
 
 class PerformersTable extends BaseComponent {
 
-    renderDesktopHeader = () => {
-        return (
-            <tr>
-                <th className='rank-content'>Rank</th>
-                <th>Captain</th>
-                <th className='score-content'>Tasks done</th>
-                <th className='score-content'>Points earned</th>
-            </tr>
-        );
+    selectRowHandler = (item) => () => {
+        this.props.onSelect(item);
     }
 
     renderStatusItem = (value, isPoint = true) => {
@@ -28,12 +21,26 @@ class PerformersTable extends BaseComponent {
         );
     }
 
+    renderDesktopHeader = () => {
+        return (
+            <tr>
+                <th className='rank-content'>Rank</th>
+                <th>Captain</th>
+                <th className='score-content'>Tasks done</th>
+                <th className='score-content'>Points earned</th>
+            </tr>
+        );
+    }
+
     renderDesktopBody = () => {
-        const { data } = this.props;
+        const { data, selectedItem } = this.props;
 
         return data.map((item, i) => {
             return (
-                <tr key={i} className={classNames('desktop-body')}>
+                <tr
+                    key={i}
+                    className={classNames('desktop-body', { 'selected-row': item.id === selectedItem.id })}
+                    onClick={this.selectRowHandler(item)}>
                     <td>
                         <PerformerRank performer={item} rank={i + 1} />
                     </td>
@@ -54,11 +61,14 @@ class PerformersTable extends BaseComponent {
     }
 
     renderMobileBody = () => {
-        const { data } = this.props;
+        const { data, selectedItem } = this.props;
 
         return data.map((item, i) => {
             return (
-                <tr key={i} className={classNames('mobile-body')}>
+                <tr
+                    key={i}
+                    className={classNames('mobile-body', { 'selected-row': item.id === selectedItem.id })}
+                    onClick={this.selectRowHandler(item)}>
                     <td className='rank-content'>
                         <PerformerRank performer={item} rank={i + 1} />
                     </td>
@@ -99,12 +109,14 @@ class PerformersTable extends BaseComponent {
 
 PerformersTable.propTypes = {
     data: PropTypes.array,
-    selectedData: PropTypes.array,
+    selectedItem: PropTypes.object,
     onSelect: PropTypes.func
 };
 
 PerformersTable.defaultProps = {
-    maxSelectedVoters: 10
+    data: [],
+    selectedItem: {},
+    onSelect: () => { }
 }
 
 export default PerformersTable;
