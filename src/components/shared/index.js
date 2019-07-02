@@ -65,7 +65,7 @@ import {
 	DragDropImageUpload
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
-import { VoterPerformer } from './performComponents'
+import { VoterPerformer, PerformersTable } from './performComponents'
 import SwitchButton from './SwitchButton'
 import './styles/index.scss';
 
@@ -129,6 +129,7 @@ export {
 	VoterPerformer,
 	RadioOption,
 	RadioGroup,
+	PerformersTable,
 	CommentsList,
 	SwitchButton,
 	ButtonLink

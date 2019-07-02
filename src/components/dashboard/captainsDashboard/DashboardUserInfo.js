@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { BaseComponent, Typography, SvgIcon } from '../shared';
+import { BaseComponent, Typography, SvgIcon } from '../../shared';
 
 class DashboardUserInfo extends BaseComponent {
 

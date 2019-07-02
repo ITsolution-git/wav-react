@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { BaseComponent, Typography, SvgIcon } from '../../shared';
+import { BaseComponent, Typography, SvgIcon } from '../../../shared';
 
 class ChartFooter extends BaseComponent {
 
