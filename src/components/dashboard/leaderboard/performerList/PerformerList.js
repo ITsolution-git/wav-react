@@ -2,14 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { BaseComponent } from '../../../shared';
-import { PerformerFilters } from './index';
+import { PerformerFilters, PerformerListHeader, PerformerListItem } from './index';
 
 class PerformerList extends BaseComponent {
 
     render() {
+        const { performers } = this.props;
+
         return (
             <div className='btw-performer-list btw-paper'>
                 <PerformerFilters {...this.props} />
+                <div className='performer-list'>
+                    <PerformerListHeader />
+                    <PerformerListItem performer={performers[0]} />
+                </div>
             </div>
         );
     }
