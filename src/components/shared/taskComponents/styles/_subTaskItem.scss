@@ -1,12 +1,18 @@
 .btw-subtask-item {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
+    flex-direction: column;
     margin: 8px 0;
-    border: 1px solid $divider;
-    box-sizing: border-box;
-    border-radius: 3px;
+
+    .item-content{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid $divider;
+        box-sizing: border-box;
+        border-radius: 3px;
+        padding: 15px;
+        width: 100%;
+    }
 
     &.completed-subtask{
         opacity: 0.5;
@@ -27,6 +33,10 @@
             
             .voter-name, .voter-status{
                 padding-left: 12px;
+                
+                @include respond-to($phone) {
+                    padding-left: 3px;
+                }
             }
 
             .voter-social{
@@ -44,6 +54,19 @@
         .mark-button{
             width: unset;
             margin-left: 8px;
+
+            @include respond-to($phone) {
+                display: none;
+            }
+        }
+    }
+
+    .footer-mark-button {
+        font-weight: 600;
+        border-radius: 3px;
+
+        @include respond-to($computer) {
+            display: none;
         }
     }
 }
