@@ -71,18 +71,21 @@ export function signUpWitMail(identity) {
 	};
 }
 
-export function signUpWithSocial(connection) {
+export function authorizeWithSocial(connection, isLogin = false) {
 	return dispatch => {
-		const auth0Service = new Auth0Service(domain + routes.registerBySocial);
+		const subRoute = isLogin ? routes.loginBySocial : routes.registerBySocial;
+		const type = isLogin ? appDataTypes.signOn : appDataTypes.register;
 
-		dispatch(initializeRequest(appDataTypes.register));
+		const auth0Service = new Auth0Service(domain + subRoute);
 
-		return auth0Service.socialSignUp(connection).then(
+		dispatch(initializeRequest(appDataTypes[type]));
+
+		return auth0Service.socialAuthorize(connection).then(
 			() => {
-				dispatch(loadDataSuccess(appDataTypes.register, null));
+				dispatch(loadDataSuccess(appDataTypes[type], null));
 			},
 			error => {
-				dispatch(loadDataFailure(appDataTypes.register, error));
+				dispatch(loadDataFailure(appDataTypes[type], error));
 			})
 	};
 }

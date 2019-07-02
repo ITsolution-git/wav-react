@@ -1,24 +1,34 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-import { BaseComponent, Paper, Typography, SocialButton } from '../shared';
+import {BaseComponent, Paper, Typography, SocialButton, Spinner} from '../shared';
 import BottomLink from './BottomLink';
 import routes from '../../constants/Routes';
 import './styles/index.scss';
+import { authorizeWithSocial, signInWithToken } from '../../actions/AuthActions';
+import { getQueryObj } from './helpers/queryHelper';
+import socialTypes from './helpers/socialTypes';
+import appDataTypes from '../../constants/AppDataTypes';
+import colors from "../../constants/Colors";
+
 
 class LoginBySocial extends BaseComponent {
 
-    handleGoogleClick = () => {
+    constructor(props, context) {
+        super(props, context);
+        const { location: { hash }, actions } = this.props;
+        const userInfo = getQueryObj(hash);
 
-    };
+        if (userInfo.token) {
+            actions.signInWithToken(userInfo);
+        }
+    }
 
-    handleFacebookClick = () => {
-
-    };
-
-    handleTwitterClick = () => {
-
+    handleSocialClick = connection => () => {
+        this.props.actions.authorizeWithSocial(connection, true);
     };
 
     handleMailClick = () => {
@@ -35,20 +45,26 @@ class LoginBySocial extends BaseComponent {
     };
 
     render() {
+        const { error, isFetching } = this.props;
+
         return (
             <div className='btw-login-social'>
+                <Spinner loading={isFetching} />
                 <Paper className='paper'>
                     <Row className='no-margin'>
                         <Typography className='title'>Log In to your account</Typography>
                     </Row>
+                    <Row className='no-margin'>
+                        <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+                    </Row>
                     <div className='buttons'>
-                        <SocialButton iconName='google-normal' onClick={this.handleGoogleClick}>
+                        <SocialButton iconName='google-normal' onClick={this.handleSocialClick(socialTypes.google)}>
                             { this.renderText('Google') }
                         </SocialButton>
-                        <SocialButton iconName='facebook-normal' onClick={this.handleFacebookClick}>
+                        <SocialButton iconName='facebook-normal' onClick={this.handleSocialClick(socialTypes.facebook)}>
                             { this.renderText('Facebook') }
                         </SocialButton>
-                        <SocialButton iconName='twitter-normal' onClick={this.handleTwitterClick}>
+                        <SocialButton iconName='twitter-normal' onClick={this.handleSocialClick(socialTypes.twitter)}>
                             { this.renderText('Twitter') }
                         </SocialButton>
                         <Row className='no-margin'>
@@ -69,4 +85,18 @@ class LoginBySocial extends BaseComponent {
     }
 }
 
-export default withRouter(LoginBySocial);
+const mapStateToProps = (state) => {
+    const { error, isSuccess, isFetching } = state.app[appDataTypes.signOn];
+    return {
+        error,
+        isSuccess,
+        isFetching
+    };
+};
+
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({ authorizeWithSocial, signInWithToken }, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginBySocial));

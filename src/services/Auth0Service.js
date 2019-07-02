@@ -42,7 +42,7 @@ class Auth0Service {
         });
     };
 
-    socialSignUp = (connection) => {
+    socialAuthorize = (connection) => {
         return new Promise((resolve, reject) => {
             this.auth0.authorize({
                 connection

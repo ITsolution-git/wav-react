@@ -7,11 +7,12 @@ import { bindActionCreators } from 'redux';
 import { BaseComponent, Paper, Typography, SocialButton, Spinner } from '../shared';
 import BottomLink from './BottomLink';
 import routes from '../../constants/Routes';
-import { signUpWithSocial, signUpWithToken  } from '../../actions/AuthActions';
+import { authorizeWithSocial, signUpWithToken  } from '../../actions/AuthActions';
 import appDataTypes from '../../constants/AppDataTypes';
 import { getQueryObj } from './helpers/queryHelper';
 import './styles/index.scss';
-import colors from "../../constants/Colors";
+import colors from '../../constants/Colors';
+import socialTypes from './helpers/socialTypes';
 
 
 class RegisterBySocial extends BaseComponent {
@@ -23,25 +24,10 @@ class RegisterBySocial extends BaseComponent {
         if (userInfo.token) {
             actions.signUpWithToken(userInfo);
         }
-
-        this.state = {
-            email: '',
-            password: '',
-            startValidation: false,
-            valid: {}
-        };
     }
 
-    handleGoogleClick = () => {
-
-    };
-
-    handleFacebookClick = () => {
-        this.props.actions.signUpWithSocial('facebook');
-    };
-
-    handleTwitterClick = () => {
-
+    handleSocialClick = connection => () => {
+        this.props.actions.authorizeWithSocial(connection);
     };
 
     handleMailClick = () => {
@@ -71,14 +57,17 @@ class RegisterBySocial extends BaseComponent {
                     <Row className='no-margin'>
                         <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
                     </Row>
+                    <Row className='no-margin'>
+                        <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+                    </Row>
                     <div className='buttons'>
-                        <SocialButton iconName='google-normal' onClick={this.handleGoogleClick}>
+                        <SocialButton iconName='google-normal' onClick={this.handleSocialClick(socialTypes.google)}>
                             { this.renderText('Google') }
                         </SocialButton>
-                        <SocialButton iconName='facebook-normal' onClick={this.handleFacebookClick}>
+                        <SocialButton iconName='facebook-normal' onClick={this.handleSocialClick(socialTypes.facebook)}>
                             { this.renderText('Facebook') }
                         </SocialButton>
-                        <SocialButton iconName='twitter-normal' onClick={this.handleTwitterClick}>
+                        <SocialButton iconName='twitter-normal' onClick={this.handleSocialClick(socialTypes.twitter)}>
                             { this.renderText('Twitter') }
                         </SocialButton>
                         <Row className='no-margin'>
@@ -98,7 +87,7 @@ class RegisterBySocial extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { error, isSuccess, isFetching } = state.app[appDataTypes.register];
+    const { error, isSuccess, isFetching } = state.app[appDataTypes.signOn];
     return {
         error,
         isSuccess,
@@ -108,7 +97,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ signUpWithSocial, signUpWithToken }, dispatch)
+    actions: bindActionCreators({ authorizeWithSocial, signUpWithToken }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(RegisterBySocial));
