@@ -6,7 +6,7 @@
         	border: 2px dashed $primary;
         }
 
-        @include respond-to($phone) { 
+        @include respond-to($portable) { 
     	    width: 170px;
     	    margin: auto;
     	    justify-content: center;
@@ -19,21 +19,7 @@
     	    	text-align: center;
     	    }
         }
-
-        @include respond-to($tablet) {
-        	width: 170px;
-        	margin: auto;
-        	justify-content: center;
-        	display: flex;
-        	flex-direction: column;
-        	height: 170px;
-        	border-radius: 5px;	
-        	.body {
-        		color: $primary;
-    	    	text-align: center;
-    	    }
-        }
-
+        
         .body span {
         	color: $primary;
         	cursor: pointer;
