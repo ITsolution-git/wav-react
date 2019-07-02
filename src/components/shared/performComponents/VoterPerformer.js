@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { BaseComponent, Typography, SvgIcon, VoterAvatar } from '../index';
+import { BaseComponent, Typography } from '../index';
+import { PerformerInfo, PerformerRank, PerformerStatusItem } from './index';
 
 class VoterPerformer extends BaseComponent {
 
-    renderItem = (label, value, isPoint = true) => {
+    renderItem = (label, value, type = 'point') => {
         return (
             <div className='status-item'>
                 <Typography variant='body' fontWeight='600' className='status-label'>{label}:</Typography>
-                <Typography variant='body' fontWeight='600' className='status-value'>
-                    <SvgIcon name={isPoint ? 'medal' : 'action-status-completed'} className='status-icon' />
-                    {value}
-                </Typography>
-            </div>
+                <PerformerStatusItem type={type} value={value} />
+            </div >
         );
     }
 
@@ -22,7 +20,7 @@ class VoterPerformer extends BaseComponent {
 
         return (
             <div className='performer-status'>
-                {this.renderItem('Tasks done', activeTasks, false)}
+                {this.renderItem('Tasks done', activeTasks, 'task')}
                 {this.renderItem('Points earned', points)}
             </div>
         );
@@ -33,24 +31,13 @@ class VoterPerformer extends BaseComponent {
 
         return (
             <div className='performer-info'>
-                <SvgIcon name={`place-${rank}`} className='place' />
-                <VoterAvatar
-                    firstName={performer.firstName}
-                    lastName={performer.lastName}
-                    src={performer.src}
-                    status='Regular' />
-                <div className='info'>
-                    <Typography variant='body'>
-                        {performer.firstName} {performer.lastName}
-                    </Typography>
-                    <Typography variant='body' lightColor>
-                        Level: {performer.level}
-                    </Typography>
-                </div>
+                <PerformerRank performer={performer} rank={rank} />
+                <PerformerInfo
+                    name={`${performer.firstName} ${performer.lastName}`}
+                    level={performer.level} />
             </div>
         )
     }
-
 
     render() {
         return (

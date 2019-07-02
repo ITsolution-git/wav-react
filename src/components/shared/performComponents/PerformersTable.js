@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap';
 import classNames from 'classnames';
 
 import { BaseComponent, SvgIcon, Typography } from '../index';
-import { PerformerInfo, PerformerRank } from './index';
+import { PerformerInfo, PerformerRank, PerformerStatusItem } from './index';
 
 class PerformersTable extends BaseComponent {
 
@@ -50,10 +50,10 @@ class PerformersTable extends BaseComponent {
                             level={item.level} />
                     </td>
                     <td>
-                        {this.renderStatusItem(item.points)}
+                        <PerformerStatusItem value={item.activeTasks} type='task' />
                     </td>
                     <td>
-                        {this.renderStatusItem(item.activeTasks, false)}
+                        <PerformerStatusItem value={item.points} />
                     </td>
                 </tr>
             );
@@ -79,8 +79,8 @@ class PerformersTable extends BaseComponent {
                     </td>
                     <td>
                         <div className='status-content'>
-                            {this.renderStatusItem(item.points)}
-                            {this.renderStatusItem(item.activeTasks, false)}
+                            <PerformerStatusItem value={item.activeTasks} type='task' />
+                            <PerformerStatusItem value={item.points} />
                         </div>
                     </td>
                 </tr>
