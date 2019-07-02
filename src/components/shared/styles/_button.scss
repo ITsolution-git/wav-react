@@ -19,6 +19,17 @@
     opacity: 0.6;
   }
 }
+.button-red {
+  background-color: $danger;
+  &:hover {
+    background-color: $danger-hover;
+  }
+  &:disabled, [disabled] {
+    background-color: $divider;
+    color: $secondary;
+    opacity: 0.6;
+  }
+}
 
 .button-white {
   background-color: $white;

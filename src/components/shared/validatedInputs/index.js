@@ -5,4 +5,7 @@ export { default as PasswordInput } from './PasswordInput';
 export { default as TextInput } from './TextInput';
 export { default as ProfileInformationText } from './ProfileInformationText';
 export { default as ProfileAvatar } from './ProfileAvatar';
+export { default as ProfileAvatarOption } from './ProfileAvatarOption';
+export { default as DragDropImageUpload } from './DragDropImageUpload';
+export { RadioGroup, RadioOption } from './Radio';
 export { TextArea } from './InputBase';

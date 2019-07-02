@@ -9,35 +9,98 @@ import {
 	Typography, 
 	LeftSideMenu,
 	Panel,
+	ButtonLink,
 } from '../shared';
-import { ProfileInformation, PasswordSetting, NotificationSetting } from './index'
+import { 
+	ProfileInformation, 
+	PasswordSetting, 
+	NotificationSetting,
+	DeleteAccountDialog
+} from './index'
 
 class Profile extends BaseComponent {
+	state = {
+		activeMenu: '',
+		openDeleteModal: false,
+	}
+	onGotoPanel = menu => {
+		this.setState({ activeMenu: menu })
+	}
+
+	onLogout = event => {
+
+	}
+
+	onOpenDeleteAccountModal = event => {
+		this.setState({ openDeleteModal: true })
+	}
+
+	onCloseModal = event => {
+		this.setState({ openDeleteModal: false })	
+	}
+
+	showSection = () => {
+		const { activeMenu } = this.state
+		switch(activeMenu) {
+			case 'Password':
+				return <PasswordSetting />
+			case 'Notification':
+				return <NotificationSetting />
+			case 'Profile':
+			default:
+				return <>
+						<ProfileInformation />
+						<ButtonLink className='my-5 ml-3' label={'Delete your account'} onClick={this.onOpenDeleteAccountModal} />
+					</>
+
+		}
+	}
+
+	onDeleteAccount = () => {
+
+	}
+
+	onSaveChange = () => {
+
+	}
+
 	render() {
+		const { openDeleteModal } = this.state
 		return (
-			<Container>
-				<Row className='my-4'>
+			<Container className='btw-account-settings'>
+				<Row className='my-4 d-none d-md-block'>
 					<Col>
 						<Typography> Account Settings </Typography>
 					</Col>
 				</Row>
 				<Row className='my-4'>
-					<Col lg={2}>
-						<LeftSideMenu  />
+					<Col lg={2} className='side-wrapper'>
+						<LeftSideMenu onSetActiveMenu={this.onGotoPanel} onLogout={this.onLogout}  />
 					</Col>
-					<Col lg={8}>
-						<Panel title='Profile Information'>
-							<ProfileInformation />
-						</Panel>
-						<Panel title='Password'>
-							<PasswordSetting />
-						</Panel>
-						<Panel title='Password'>
-							<NotificationSetting />
-						</Panel>
-						
-					</Col>
+					{ this.isMobileOnly() ? 
+						<Col>
+							{this.showSection()}
+						</Col>
+					:
+						<Col lg={8}>
+							<Panel title='Profile Information'>
+								<ProfileInformation />
+							</Panel>
+							<Panel title='Password'>
+								<PasswordSetting />
+							</Panel>
+							<Panel title='Notification'>
+								<NotificationSetting />
+							</Panel>
+							<ButtonLink className='mt-5' label={'Delete your account'} onClick={this.onOpenDeleteAccountModal} />
+						</Col>
+					}
 				</Row>
+				<DeleteAccountDialog 
+					open={openDeleteModal}
+					onClose={this.onCloseModal}
+					onDelete={this.onDeleteAccount}
+				/>
 			</Container>
 		)
 	}

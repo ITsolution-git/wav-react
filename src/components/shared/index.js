@@ -8,6 +8,7 @@ import Icon from './Icon'
 import Arrow from './Arrow'
 import AutoComplete from './Autocomplete'
 import Button from './Button'
+import ButtonLink from './ButtonLink'
 import Checkbox from './Checkbox'
 import ConfirmationDialog from './ConfirmationDialog'
 import Dialog from './Dialog'
@@ -57,7 +58,11 @@ import {
 	TextInput,
 	ProfileInformationText,
 	ProfileAvatar,
-	TextArea
+	RadioOption,
+	RadioGroup,
+	TextArea,
+	ProfileAvatarOption,
+	DragDropImageUpload
 } from './validatedInputs'
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer, PerformersTable } from './performComponents'
@@ -117,10 +122,15 @@ export {
 	TextArea,
 	ProfileInformationText,
 	ProfileAvatar,
+	ProfileAvatarOption,
+	DragDropImageUpload,
 	Panel,
 	CongratsAlarm,
 	VoterPerformer,
+	RadioOption,
+	RadioGroup,
 	PerformersTable,
 	CommentsList,
-	SwitchButton
+	SwitchButton,
+	ButtonLink
 }

@@ -1,20 +1,139 @@
 @import '../../styles/shared/index.scss';
 
-.btw-profile-panel {
-	.panel-title {
-		border-bottom: 1px solid $dark-grey;
+.btw-account-settings {
+	.side-wrapper {
+		@include respond-to($phone) {
+			padding: 0;
+		}
 	}
 
-	label {
+	.btw-input label {
 		font-weight: 600;
+	}
+
+	.btw-profile-panel {
+		.panel-title {
+			border-bottom: 1px solid $dark-grey;
+		}
 	}
 
 	.profile-info {
-		
+		@include respond-to($phone) {
+			padding: 0 1em;
+
+			.btn-submit { 
+				width: 100%;
+			}
+		}
 	}
 
-	.forgot-password {
-		font-weight: 600;
+	.avatar-cancel.btw-typography.heading {
 		font-size: 15px;
+		color: $primary;		
+	}
+
+	.password {
+		@include respond-to($phone) {
+			padding: 0 1em;
+			button {
+				width: 100%;
+			}
+			.forgot-password {
+				width: 100%;
+				font-size: 15px;
+				padding: 2em 0;
+			}
+		}
+	}
+
+	.notify {
+		@include respond-to($phone) {
+			padding: 0 1em;
+		}
+	}
+
+	.btw-setting-menu {
+		.btw-setting-sub-menu {
+			div.btw-typography.body {
+				font-size: 15px;
+				color: $charcoal;
+				cursor: pointer;
+
+				&.active {
+					color: black;	
+				}
+
+				@include respond-to($portable) { 
+					margin-right: 1em;
+				}
+
+				@include respond-to($phone) {
+					margin-bottom: 0;
+					padding-bottom: 1em;
+					&.active {
+						border-bottom: 2px solid $primary;
+					}
+				}
+			}
+
+			@include respond-to($portable) {
+				justify-content: space-around;
+			}
+		}
+
+		@include respond-to($portable) {
+		  	justify-content: space-between;
+		  	margin-bottom: 2em;
+		}
+
+		@include respond-to($phone) {
+		  	border-bottom: 1px solid $dark-grey;
+		  	padding: 0 1em;
+		}		
+	}
+
+
+}
+.btw-account-modal.btw-modal {
+	.modal-content {
+		padding: 0;
+		.modal-header {
+			border-bottom: 1px solid $dark-grey;
+			padding: 1em;
+			padding-left: 2em;
+			.btw-typography.heading {
+				font-size: 15px;
+			    font-weight: 700;
+			}
+		}
+
+		.modal-body {
+			padding: 2em;
+			min-height: 30px;
+		}
+		.modal-footer {
+			justify-content: flex-start;
+		    padding: 0 2em 4em 2em;
+
+		    .primary,
+		    .secondary.leave {
+		    	width: 154px;
+		    }
+
+		    .secondary {
+		    	width: 88px;
+		    }
+
+		    @include respond-to($phone) { 
+		    	flex-direction: column;
+		    	.primary,
+	    	 	.secondary,
+	    	 	.secondary.leave {
+		    		width: 100%;
+		    		margin: 0;
+		    		margin-bottom: 1em;
+		    	}
+		    }
+		}
 	}
 }

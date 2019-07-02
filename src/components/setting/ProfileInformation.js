@@ -9,9 +9,12 @@ import {
 	Button,
 	ProfileAvatar,
 } from '../shared';
+import { SaveChangeDialog } from './index'
 
 const ProfileInformation = (props) => {
 	const [validated, setValidated] = useState(false)
+	const [openSaveModal, setOpenSaveModal] = useState(false)
+
 	const [data, setData] = useState({
 		firstName: '',
 		lastName: '',
@@ -32,8 +35,12 @@ const ProfileInformation = (props) => {
 
 	}
 
+	const onOpenSaveModal = () => setOpenSaveModal(true)
+
+	const onCloseModal = () => setOpenSaveModal(false)
+
 	return (
-		<div className='d-flex flex-column px-5 profile-info'>
+		<div className='d-flex flex-column px-md-5 profile-info'>
 			<ProfileAvatar
 				className='my-3'
 				onChange={handleChange}
@@ -60,7 +67,13 @@ const ProfileInformation = (props) => {
 				className='my-3'
 				onChange={handleChange}
 			    startValidation={false} />
-			<Button className='my-3' size='medium' onClick={onSubmit}>Save Changes</Button>
+			<Button className='my-3 btn-submit' size='medium' onClick={onOpenSaveModal}>Save Changes</Button>
+
+			<SaveChangeDialog 
+				open={openSaveModal}
+				onClose={onCloseModal}
+				onSave={onSubmit}
+			/>
 		</div>
 	)
 }
