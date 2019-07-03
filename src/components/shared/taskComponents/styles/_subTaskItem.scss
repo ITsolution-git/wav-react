@@ -59,6 +59,10 @@
                 display: none;
             }
         }
+
+        @include respond-to($phone) {
+            min-width: unset;
+        }
     }
 
     .footer-mark-button {

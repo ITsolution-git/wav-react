@@ -47,7 +47,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -64,7 +64,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -81,7 +81,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -115,7 +115,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -132,7 +132,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -149,7 +149,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -183,7 +183,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -200,7 +200,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -217,7 +217,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -251,7 +251,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Regular', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -268,7 +268,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Not registered', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -285,7 +285,7 @@ class TasksManagement extends BaseComponent {
                                 lastName: 'Holman',
                                 status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
-                                avatar: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                src: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                                 social: {
                                     twitter: true,
                                     linkedIn: true,
@@ -320,7 +320,7 @@ class TasksManagement extends BaseComponent {
                             lastName: 'Holman',
                             status: 'Regular', //not-registered, in-frequent, regular,
                             initials: 'DH',
-                            avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                            src: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                             social: {
                                 twitter: true,
                                 linkedIn: true,
@@ -337,7 +337,7 @@ class TasksManagement extends BaseComponent {
                             lastName: 'Holman',
                             status: 'Not registered', //not-registered, in-frequent, regular,
                             initials: 'DH',
-                            avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                            src: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                             social: {
                                 twitter: true,
                                 linkedIn: true,
@@ -354,7 +354,7 @@ class TasksManagement extends BaseComponent {
                             lastName: 'Holman',
                             status: 'Infrequent', //not-registered, in-frequent, regular,
                             initials: 'DH',
-                            avatar: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                            src: 'https://images.unsplash.com/photo-1557265193-56758b5a2f7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
                             social: {
                                 twitter: true,
                                 linkedIn: true,
