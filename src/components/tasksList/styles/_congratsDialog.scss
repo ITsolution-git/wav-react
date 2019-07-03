@@ -10,6 +10,12 @@
             display: none;
         }
     
+        .modal-content{
+            padding: 0 !important;
+            border: 0;
+            border-radius: 3px;
+        }
+
         .modal-body {
             background: linear-gradient(180.25deg, rgba($primary_color, 0.5) 0.14%, rgba($primary_color, 0.8) 99.87%);
             border-radius: 3px;

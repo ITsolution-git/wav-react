@@ -52,13 +52,10 @@ class TaskCompleteDialog extends BaseComponent {
     }
 
     renderSubTaskInfo = () => {
-        const { selectedTask, selectedSubTask } = this.props
+        const { selectedSubTask } = this.props
 
         return (
             <div className='task-info'>
-                <Typography variant='body' fontWeight='600' className='title'>
-                    {`Task ${selectedTask.task_id}: ${selectedTask.title}`}
-                </Typography>
                 <Typography variant='body' lightColor className='description-part'>
                     Communicate and encourage Dennis Holfman to register for voting.
                 </Typography>
@@ -146,11 +143,12 @@ class TaskCompleteDialog extends BaseComponent {
     }
 
     render() {
-        const { show, onClose } = this.props;
+        const { show, onClose, selectedTask, selectedSubTask } = this.props;
 
         return (
             <Dialog className='btw-task-complete-dialog'
                 show={show}
+                title={`Task ${selectedTask.task_id}: ${selectedTask.title}`}
                 closeButton
                 actionButtons={this.renderActionButton()}
                 onClose={onClose}>
