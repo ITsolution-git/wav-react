@@ -20,5 +20,8 @@ export default {
     captainFilter: '/captain_filter',
     changePassword: '/change_password/change/:token',
     forgotPassword: '/change_password/request',
-    verifyEmail: '/verify_email'
+    verifyEmail: '/verify_email',
+
+    // static
+    termsAndConditions: '/terms_conditions'
 }

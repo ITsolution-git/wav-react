@@ -1,16 +1,17 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Col, Row} from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 
 import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, TextInput } from '../../shared';
 import { BottomLink, LeftIcon, SocialButton } from '../components';
-
 import { authorizeWithSocial, signUpWithToken, signUpWitMail  } from '../../../actions/AuthActions';
 import appDataTypes from '../../../constants/AppDataTypes';
 import { getQueryObj } from '../helpers/queryHelper';
 import colors from '../../../constants/Colors';
+import routes from '../../../constants/Routes';
 import socialTypes from '../helpers/socialTypes';
 import './styles.scss';
 import fieldConstants from "../../../constants/FieldConstants";
@@ -120,6 +121,14 @@ class SignUp extends BaseComponent {
                                            placeholder='Password'
                                            startValidation={startValidation}
                                            required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <Typography variant='functional' color={colors.secondary}>
+                                By Clicking one of the Sign Up buttons <br />
+                                I agree <Link to={routes.termsAndConditions} target='_blank'>terms of service</Link>
+                            </Typography>
                         </Col>
                     </Row>
                     <Row>
