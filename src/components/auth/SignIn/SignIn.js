@@ -91,7 +91,7 @@ class SignIn extends BaseComponent {
                     </div>
                     <Typography className='text-center email-text' variant='functional' color={colors.secondary}>Or log in with email:</Typography>
                     <Row>
-                        <Col md={12}>
+                        <Col md={12} className='input'>
                             <EmailInput onChange={this.handleChange}
                                         isVoter={false}
                                         hideLabel
@@ -103,7 +103,7 @@ class SignIn extends BaseComponent {
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={12}>
+                        <Col md={12} className='input'>
                             <PasswordInput onChange={this.handleChange}
                                            label='Password'
                                            hideLabel
