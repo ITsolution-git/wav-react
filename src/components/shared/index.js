@@ -44,7 +44,7 @@ import {
 	VoterNotFound,
 	ConnectListInfo
 } from './selectVoters'
-import SocialButton from './SocialButton'
+
 import VoterStatusDropdown from './VoterStatusDropdown'
 import ActionItem from './ActionItem';
 import Tabs from './Tabs';
@@ -100,7 +100,6 @@ export {
 	VoterInfo,
 	VoterCardView,
 	VoterDetail,
-	SocialButton,
 	VoterStatusDropdown,
 	ActionItem,
 	Tabs,

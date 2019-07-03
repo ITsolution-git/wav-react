@@ -20,10 +20,9 @@ import {
 	PasswordInput
 } from '../shared/validatedInputs';
 import routes from '../../constants/Routes';
-import BottomLink from './BottomLink';
+import BottomLink from './components/BottomLink/BottomLink';
 import colors from '../../constants/Colors';
 import { getQueryObj } from './helpers/queryHelper';
-import './styles/index.scss';
 
 class LoginByMail extends BaseComponent {
 	constructor(props, context) {
@@ -120,7 +119,7 @@ class LoginByMail extends BaseComponent {
 
 						<div className='go-to-signup'>
 							<BottomLink title={`Don't have an account?`}
-								link={routes.registerBySocial}
+								link={routes.signUp}
 								linkText='Sign up' />
 						</div>
 					</div>

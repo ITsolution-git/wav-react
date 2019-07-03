@@ -15,9 +15,8 @@ import {
 	TextInput
 } from '../shared/validatedInputs';
 import { Button, Paper, Typography, BaseComponent, Spinner } from '../shared';
-import BottomLink from './BottomLink';
+import BottomLink from './components/BottomLink/BottomLink';
 import colors from '../../constants/Colors';
-import './styles/index.scss';
 
 class RegisterByMail extends BaseComponent {
 	constructor(props) {

@@ -1,11 +1,8 @@
-.btw-register-social {
+@import '../styles/base.scss';
+
+.btw-sign-in {
   .paper {
     @extend .btw-register-paper;
-
-    .title {
-      margin-bottom: 25px;
-    }
-
 
     .buttons {
       margin: 30px 0 50px 0;

@@ -24,40 +24,6 @@
   }
 }
 
-.btw-social-button {
-  height: 40px;
-  border-radius: 3px;
-  border: 1px solid $divider;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  @extend .btw-social-width;
-
-  .icon {
-    border-right: 1px solid $divider;
-    padding-right: 17px;
-  }
-}
-
-.btw-social-divider {
-  @extend .btw-social-width;
-  display: flex;
-  justify-content: center;
-  border-top: 1px solid $divider;
-  text-align: center;
-  margin: 12px 0 3px 0;
-
-  div {
-    color: $divider;
-    width: 40px;
-    margin-top: -7px;
-    background: white;
-    font-weight: bold;
-    font-size: 10px;
-  }
-}
-
 .btw-bottom-text {
   margin-right: 6px;
 }

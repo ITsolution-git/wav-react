@@ -12,9 +12,9 @@ export function getHomeRoute() {
         case roles.admin:
             return routes.adminDashboard;
         case roles.guest:
-            return routes.loginBySocial;
+            return routes.signIn;
         default:
-            return routes.loginBySocial
+            return routes.signIn
     }
 }
 

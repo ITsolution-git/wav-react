@@ -10,7 +10,9 @@ const colors = {
     success: '#20DDAD',
     alert: '#FEC754',
     white: '#FFFFFF',
-}
+    blue: '#4BA3EB',
+    darkBlue: '#475993'
+};
 
 export const getColorByStatus = status => {
     switch (status) {

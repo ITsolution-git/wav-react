@@ -38,7 +38,7 @@ export function signInWithToken(userInfo) {
 export function signInWithMail(email, password) {
 
 	return dispatch => {
-		const auth0Service = new Auth0Service(domain + routes.loginByMail);
+		const auth0Service = new Auth0Service(domain + routes.signIn);
 
 		dispatch(initializeRequest(appDataTypes.signOn));
 
@@ -55,7 +55,7 @@ export function signInWithMail(email, password) {
 export function signUpWitMail(identity) {
 
 	return dispatch => {
-		const auth0Service = new Auth0Service(domain + routes.registerByMail);
+		const auth0Service = new Auth0Service(domain + routes.signUp);
 
 		dispatch(initializeRequest(appDataTypes.register));
 
@@ -73,7 +73,7 @@ export function signUpWitMail(identity) {
 
 export function authorizeWithSocial(connection, isLogin = false) {
 	return dispatch => {
-		const subRoute = isLogin ? routes.loginBySocial : routes.registerBySocial;
+		const subRoute = isLogin ? routes.signIn : routes.signUp;
 		const type = isLogin ? appDataTypes.signOn : appDataTypes.register;
 
 		const auth0Service = new Auth0Service(domain + subRoute);
@@ -129,7 +129,7 @@ export function getBtwUserProfile() {
 
 export function btwLogout() {
 	return dispatch => {
-		const callBackUrl = domain + routes.loginBySocial;
+		const callBackUrl = domain + routes.signIn;
 		const auth0Service = new Auth0Service(callBackUrl);
 
 		auth0Service.signOut();
