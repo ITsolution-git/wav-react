@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
 
-import { BaseComponent, Button, Dialog, SvgIcon, Typography, SubTaskItem } from '../index';
+import { BaseComponent, Button, Dialog, SvgIcon, Typography, StatusIcon, VoterAvatar, SocialList } from '../index';
 import colors from '../../../constants/Colors';
 
 class TaskCompleteDialog extends BaseComponent {
@@ -51,8 +51,33 @@ class TaskCompleteDialog extends BaseComponent {
         );
     }
 
+    renderVoter = () => {
+        const { selectedSubTask: { voter } } = this.props
+
+        return (
+            <div className='voter-content'>
+                <VoterAvatar
+                    src={voter.src}
+                    firstName={voter.firstName}
+                    lastName={voter.lastName}
+                    status={voter.status} />
+                <div className='voter-info'>
+                    <Typography variant='body' fontWeight='600'>
+                        {voter.firstName} {voter.lastName}
+                    </Typography>
+                    <Typography variant='functional' lightColor>
+                        {`${voter.sex} | ${voter.lastName}`}
+                    </Typography>
+                    <div className='voter-status'>
+                        <StatusIcon type={voter.status} className='social-icon' />
+                        <SocialList social={voter.social} showVoterFile />
+                    </div>
+                </div>
+            </div >
+        )
+    }
+
     renderSubTaskInfo = () => {
-        const { selectedSubTask } = this.props
 
         return (
             <div className='task-info'>
@@ -64,7 +89,7 @@ class TaskCompleteDialog extends BaseComponent {
                     purpose to this particular voter better,
                     <span onClick={this.showVoterProfileHandler}>view voter’s profile</span>.
                 </Typography>
-                <SubTaskItem subTask={selectedSubTask} hideSubTask />
+                {this.renderVoter()}
             </div>
         )
     }
@@ -143,7 +168,7 @@ class TaskCompleteDialog extends BaseComponent {
     }
 
     render() {
-        const { show, onClose, selectedTask, selectedSubTask } = this.props;
+        const { show, onClose, selectedTask } = this.props;
 
         return (
             <Dialog className='btw-task-complete-dialog'

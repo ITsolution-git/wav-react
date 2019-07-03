@@ -60,6 +60,34 @@
                 cursor: pointer;
             }
         }
+
+        .voter-content{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background: $divider;
+            border: 1px solid $divider;
+            box-sizing: border-box;
+            border-radius: 3px;
+            padding: 10px 16px;
+
+            .voter-info{
+                padding-left: 8px;
+                width: 90%;
+    
+                .voter-status{
+                    padding-top: 3px;
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+    
+                    .social-icon{
+                        padding: 0 3px;
+                        height: unset;
+                    }
+                }
+            }
+        }
     }
 
     .content-header {
