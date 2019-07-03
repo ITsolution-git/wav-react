@@ -18,7 +18,7 @@ class SubTaskItem extends BaseComponent {
         return (
             <div className='voter-info' >
                 <VoterAvatar
-                    src={voter.avatar}
+                    src={voter.src}
                     firstName={voter.firstName}
                     lastName={voter.lastName}
                     color={getColorByStatus(voter.status)} />

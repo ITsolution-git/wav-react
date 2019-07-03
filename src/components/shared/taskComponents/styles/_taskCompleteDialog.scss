@@ -1,25 +1,68 @@
 .btw-task-complete-dialog {
     padding-left: 0!important;
     
+    .modal-dialog{
+        @include respond-to($phone) {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    }
+
+    .modal-content{
+        padding: 0 !important;
+        border: 0;
+        overflow: overlay;
+        height: -webkit-fill-available;
+
+        @include respond-to($phone) {
+            height: 100vh;
+        }
+    }
+
     .modal-header {
         border: none;
+        padding: 15px 24px !important;
+        border: 0.5px solid $divider !important;
+        box-sizing: border-box;
+        border-radius: 2px;
+
+        .heading {
+            font-weight: 600;
+            font-size: 13px;
+        }
     }
     
     .modal-footer {
         border: none;
-        padding: 0;
+        padding-bottom: 0 !important;
     }
     
     .modal-body {
-        padding: 0 40px 32px;
+        padding: 0 24px !important;
+        overflow: overlay;
+        @include respond-to($phone) {
+            min-height: unset !important;
+        }
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+      
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px $background; 
     }
     
-    .title{
-        margin-bottom: 13px;
+    ::-webkit-scrollbar-thumb {
+        background: $divider; 
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: $background; 
     }
 
     .task-info{
-        margin-bottom: 50px;
+        margin: 18px 0 35px 0;
 
         .description-part{
             margin-bottom: 20px;
@@ -33,82 +76,39 @@
                 cursor: pointer;
             }
         }
-    }
 
-    .content-header {
-        margin-bottom: 26px;
-
-        textarea{
-            width: 100%;
-            font-size: 12px;
-            border: solid 1px $divider;
-            border-radius: 2px;
-            padding: 10px;
-        }
-
-        .textarea-active{
-            border-color: $secondary;
-        }
-    }
-
-    .uploading-text{
-        padding: 50px;
-        text-align: center;
-    }
-
-    .drop-zone {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin: 30px 0;
-
-        .upload-photo {
-            width: 152px;
-            height: 152px;
+        .voter-content{
             display: flex;
-            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            padding: 40px 0;
-            border: 1px dashed $divider;
+            background: $divider;
+            border: 1px solid $divider;
+            box-sizing: border-box;
+            border-radius: 3px;
+            padding: 10px 16px;
 
-            .upload-text{
-                font-weight: 600;
-                color: $primary;
-                margin-top: 12px;
-                cursor: pointer;
+            .voter-info{
+                padding-left: 8px;
+                width: 90%;
+    
+                .voter-status{
+                    padding-top: 3px;
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+    
+                    .social-icon{
+                        padding: 0 3px;
+                        height: unset;
+                    }
+                }
             }
         }
     }
 
-    .uploaded-image {
-        border: 1px solid $divider;
-        box-sizing: border-box;
-        border-radius: 2px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 13px 16px;
-        margin: 30px 0;
-
-        .photo-info {
-            display: flex;
-            align-items: center;
+    .comments-content{
+        .title{
+            margin-bottom: 21px;
         }
-
-        .remove-btn {
-            cursor: pointer;
-        }
-    }
-
-    .or-you-can {
-        text-align: center;
-    }
-
-    .add-a-comment-btn {
-        text-align: center;
-        text-decoration: underline;
-        margin-top: 7px;
-        cursor: pointer;
     }
 }
