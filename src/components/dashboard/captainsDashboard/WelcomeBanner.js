@@ -12,7 +12,7 @@ class WelcomeBanner extends BaseComponent {
 
         return (
             <div className='bcd-welcome-banner btw-paper'>
-                <Carousel showStatus={false}
+                <Carousel showStatus={false} infiniteLoop={true}
                     autoPlay showArrows={false} showThumbs={false}>
                     {contents.map((content, index) => (
                         <div key={index}>
