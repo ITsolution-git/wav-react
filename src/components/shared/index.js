@@ -65,6 +65,7 @@ import {
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer, PerformersTable } from './performComponents'
 import SwitchButton from './SwitchButton'
+import PopoverKeepOnHover from './PopoverKeepOnHover'
 import './styles/index.scss';
 
 export {
@@ -130,5 +131,6 @@ export {
 	PerformersTable,
 	CommentsList,
 	SwitchButton,
-	ButtonLink
+	ButtonLink,
+	PopoverKeepOnHover
 }
