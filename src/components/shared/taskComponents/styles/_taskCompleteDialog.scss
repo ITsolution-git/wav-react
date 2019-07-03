@@ -2,7 +2,6 @@
     padding-left: 0!important;
     
     .modal-dialog{
-        
         @include respond-to($phone) {
             margin: 0 !important;
             padding: 0 !important;
@@ -12,10 +11,11 @@
     .modal-content{
         padding: 0 !important;
         border: 0;
+        overflow: overlay;
+        height: -webkit-fill-available;
 
         @include respond-to($phone) {
             height: 100vh;
-            overflow: overlay;
         }
     }
 
@@ -39,10 +39,26 @@
     
     .modal-body {
         padding: 0 24px !important;
-
+        overflow: overlay;
         @include respond-to($phone) {
             min-height: unset !important;
         }
+    }
+
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+      
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px $background; 
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: $divider; 
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: $background; 
     }
 
     .task-info{
@@ -94,83 +110,5 @@
         .title{
             margin-bottom: 21px;
         }
-    }
-
-    .content-header {
-        margin-bottom: 26px;
-
-        textarea{
-            width: 100%;
-            font-size: 12px;
-            border: solid 1px $divider;
-            border-radius: 2px;
-            padding: 10px;
-        }
-
-        .textarea-active{
-            border-color: $secondary;
-        }
-    }
-
-    .uploading-text{
-        padding: 50px;
-        text-align: center;
-    }
-
-    .drop-zone {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin: 30px 0;
-
-        .upload-photo {
-            width: 152px;
-            height: 152px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 0;
-            border: 1px dashed $divider;
-
-            .upload-text{
-                font-weight: 600;
-                color: $primary;
-                margin-top: 12px;
-                cursor: pointer;
-            }
-        }
-    }
-
-    .uploaded-image {
-        border: 1px solid $divider;
-        box-sizing: border-box;
-        border-radius: 2px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 13px 16px;
-        margin: 30px 0;
-
-        .photo-info {
-            display: flex;
-            align-items: center;
-        }
-
-        .remove-btn {
-            cursor: pointer;
-        }
-    }
-
-    .or-you-can {
-        text-align: center;
-    }
-
-    .add-a-comment-btn {
-        text-align: center;
-        text-decoration: underline;
-        margin-top: 7px;
-        color: $primary;
-        cursor: pointer;
     }
 }

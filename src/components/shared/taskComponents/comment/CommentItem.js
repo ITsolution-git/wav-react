@@ -6,6 +6,11 @@ import { BaseComponent, Typography, VoterAvatar } from '../../index';
 
 class CommentItem extends BaseComponent {
 
+    onEditHandler = () => {
+        const { comment } = this.props;
+        this.props.onEdit(comment);
+    }
+
     renderImages = () => {
         const { comment: { images } } = this.props;
 
@@ -25,7 +30,7 @@ class CommentItem extends BaseComponent {
 
         return (
             <div className='content-footer'>
-                <Typography variant='functional' lightColor className='content-button' onClick={() => { }}>
+                <Typography variant='functional' lightColor className='content-button' onClick={this.onEditHandler}>
                     Edit
                 </Typography>
                 <Typography variant='functional' lightColor className='content-button' onClick={() => { }}>

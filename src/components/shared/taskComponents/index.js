@@ -2,7 +2,7 @@ import SubTaskItem from './SubTaskItem'
 import TaskCompleteDialog from './TaskCompleteDialog'
 import ActionItem from './ActionItem'
 import TaskProgressBar from './TaskProgressBar'
-import { CommentItem } from './comment'
+import { CommentItem, CommentEditor } from './comment'
 import './styles/index.scss';
 
 export {
@@ -10,5 +10,6 @@ export {
     TaskCompleteDialog,
     ActionItem,
     TaskProgressBar,
-    CommentItem
+    CommentItem,
+    CommentEditor
 }

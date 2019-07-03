@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import Dropzone from 'react-dropzone';
 
-import { BaseComponent, Button, Dialog, SvgIcon, Typography, StatusIcon, VoterAvatar, SocialList } from '../index';
-import { CommentItem } from './index';
-import colors from '../../../constants/Colors';
+import { BaseComponent, Button, Dialog, Typography, StatusIcon, VoterAvatar, SocialList } from '../index';
+import { CommentItem, CommentEditor } from './index';
 
 class TaskCompleteDialog extends BaseComponent {
 
     constructor(props, context) {
         super(props, context);
         this.state = {
-            file: '',
-            comment: '',
-            isImageUpload: true,
-            isLoading: false,
-            markAsDoneModalStatus: 0
+            currentComment: {
+                text: '',
+                images: []
+            }
         }
     }
 
@@ -26,20 +22,16 @@ class TaskCompleteDialog extends BaseComponent {
         this.setState({ comment: event.target.value });
     }
 
-    inputPhotoHandler = files => {
-        const file = files[0];
-        this.setState({ isLoading: true });
-        // TODO: implement upload phoro logic
-        this.setState({ file: file.name });
-        this.setState({ isLoading: false });
-    }
-
-    removePhotoHandler = () => {
-        this.setState({ file: '' })
-    }
-
     onMarkAsDone = () => {
         this.props.onMarkAsDone()
+    }
+
+    onAddComment = currentComment => {
+        this.setState({ currentComment });
+    }
+
+    onCancelComment = () => {
+        this.setState({ currentComment: { text: '', images: [] } });
     }
 
     renderActionButton = () => {
@@ -75,7 +67,6 @@ class TaskCompleteDialog extends BaseComponent {
     }
 
     renderSubTaskInfo = () => {
-
         return (
             <div className='task-info'>
                 <Typography variant='body' lightColor className='description-part'>
@@ -93,6 +84,7 @@ class TaskCompleteDialog extends BaseComponent {
 
     renderComments = () => {
         const { selectedSubTask: { comments, voter } } = this.props;
+        const { currentComment } = this.state;
 
         return (
             <div className='comments-content'>
@@ -100,64 +92,15 @@ class TaskCompleteDialog extends BaseComponent {
                     {`Updates (${comments.length})`}
                 </Typography>
                 {comments.map((comment, index) => (
-                    <CommentItem key={index} comment={comment} voter={voter} />
+                    <CommentItem key={index} comment={comment} voter={voter} onEdit={this.onAddComment} />
                 ))}
+                <CommentEditor
+                    voter={voter}
+                    comment={currentComment}
+                    onCancel={this.onCancelComment}
+                    onAdd={this.onAddComment} />
             </div>
         )
-    }
-
-    renderContentHeader = () => {
-        const { isImageUpload, comment } = this.state;
-
-        return (
-            <div className='content-header'>
-                <Typography variant='body' fontWeight='600' className='title'>
-                    {isImageUpload ? 'Add a photo' : 'Add a text comment'}
-                </Typography>
-                {isImageUpload ?
-                    <Typography variant='functional' lightColor>
-                        e.g. a screenshot of the person’s status changed
-                        to “registered” or their photo with the ballot.
-                        Feel free to show off with the result of your work.
-                    </Typography> :
-                    <textarea
-                        placeholder='Write about your success...'
-                        value={comment}
-                        onChange={this.inputChangeHandler}
-                        className={classNames({ 'textarea-active': !!comment })}></textarea>
-                }
-            </div>
-        )
-    }
-
-    renderImageUpload = () => {
-        const { isImageUpload, isLoading, file } = this.state;
-
-        if (isImageUpload) {
-            if (!file) {
-                return isLoading ?
-                    <Typography lightColor variant='body' className='uploading-text'>Uploading...</Typography> :
-                    <Dropzone
-                        className='drop-zone'
-                        ref={(node) => { this.dropzoneRef = node; }}
-                        onDrop={this.inputPhotoHandler}>
-                        <div className='upload-photo'>
-                            <SvgIcon name='add-photo-to-upload' />
-                            <Typography variant='body' className='upload-text'>Upload Photo</Typography>
-                        </div>
-                    </Dropzone>
-            } else {
-                return (
-                    <div className='uploaded-image'>
-                        <div className='photo-info'>
-                            <SvgIcon name='uploaded-photo' />
-                            <Typography variant='body' color={colors['secondary']}>{file}</Typography>
-                        </div>
-                        <SvgIcon name='upload-photo-remove' className='remove-btn' onClick={this.removePhotoHandler} />
-                    </div>
-                )
-            }
-        }
     }
 
     render() {
@@ -172,8 +115,6 @@ class TaskCompleteDialog extends BaseComponent {
                 onClose={onClose}>
                 {this.renderSubTaskInfo()}
                 {this.renderComments()}
-                {/* {this.renderContentHeader()}
-                {this.renderImageUpload()} */}
             </Dialog>
         )
     }

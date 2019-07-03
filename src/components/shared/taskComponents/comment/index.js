@@ -1,5 +1,7 @@
 import CommentItem from './CommentItem'
+import CommentEditor from './CommentEditor'
 
 export {
-    CommentItem
+    CommentItem,
+    CommentEditor
 }
