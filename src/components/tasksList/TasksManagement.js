@@ -57,44 +57,6 @@ class TasksManagement extends BaseComponent {
                                 }
                             },
                             points: 4
-                        },
-                        {
-                            subTask_id: 1,
-                            status: 1, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Not registered', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
-                                }
-                            },
-                            points: 4
-                        },
-                        {
-                            subTask_id: 2,
-                            status: 1, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Infrequent', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplsh.com/photo-1527585743534-7113e3211270?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
-                                }
-                            },
-                            points: 4
                         }
                     ],
                     description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
@@ -130,6 +92,25 @@ class TasksManagement extends BaseComponent {
                                     facebook: true
                                 }
                             },
+                            comments: [
+                                {
+                                    text: 'Asked Ann for Dennise’s phone number and she said she would email me.',
+                                    images: [],
+                                    createdAt: '2019-06-21T12:58:00.000+00:00'
+                                },
+                                {
+                                    text: 'Ann has sent me phone number, called Dennis. He explained me that he moved and wasn’t able to do the paperwork yet. Needs help with  the ballot later on.  ',
+                                    images: [
+                                        'https://images.unsplash.com/photo-1562113321-9dbe518626e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                        'https://images.unsplash.com/photo-1562119426-0b118d5965fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                        'https://images.unsplash.com/photo-1562113321-9dbe518626e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                        'https://images.unsplash.com/photo-1562119426-0b118d5965fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                        'https://images.unsplash.com/photo-1562113321-9dbe518626e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+                                        'https://images.unsplash.com/photo-1562119426-0b118d5965fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                                    ],
+                                    createdAt: '2019-06-21T12:58:00.000+00:00'
+                                }
+                            ],
                             points: 4
                         },
                         {
@@ -139,25 +120,6 @@ class TasksManagement extends BaseComponent {
                                 firstName: 'Dennis',
                                 lastName: 'Holman',
                                 status: 'Not registered', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
-                                }
-                            },
-                            points: 4
-                        },
-                        {
-                            subTask_id: 2,
-                            status: 1, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Infrequent', //not-registered, in-frequent, regular,
                                 initials: 'DH',
                                 street: 'New work Sr. 1289',
                                 sex: 'Male',
@@ -204,118 +166,20 @@ class TasksManagement extends BaseComponent {
                                     facebook: true
                                 }
                             },
-                            points: 4
-                        },
-                        {
-                            subTask_id: 1,
-                            status: 1, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Not registered', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
+                            comments: [
+                                {
+                                    text: 'Asked Ann for Dennise’s phone number and she said she would email me.',
+                                    images: [],
+                                    createdAt: '2019-06-21T12:58:00.000+00:00'
+                                },
+                                {
+                                    text: 'Ann has sent me phone number, called Dennis. He explained me that he moved and wasn’t able to do the paperwork yet. Needs help with  the ballot later on.  ',
+                                    images: [
+                                        'https://images.unsplash.com/photo-1562113321-9dbe518626e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+                                    ],
+                                    createdAt: '2019-06-21T12:58:00.000+00:00'
                                 }
-                            },
-                            points: 4
-                        },
-                        {
-                            subTask_id: 2,
-                            status: 1, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Infrequent', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplash.com/photo-1549396193-9c8e59660445?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
-                                }
-                            },
-                            points: 4
-                        }
-                    ],
-                    description: `I am making an online multiplayer game in Javascript, using Node.js, Websockets.io, and using p5.js as the drawing library. The game has a variety of errors and issues that need to be fixed, as well as polishing some preexisting features, as well as updating and smoothing out my current circle to circle collision system. 
-                    I need someone who is confident that they can help my game look and feel professional within a timely manner, and have everything work as well as I want it to work. 
-                    I have examples on how I want everything to look and behave that you can take a look at when we talk. 
-                    I may have more work for you in the future, as I expand my game output. This could be the start of a relationship if you are interested in continuing to work with me.`
-                },
-                {
-                    task_id: 3,
-                    title: 'Test',
-                    status: 'inProgress', // 0: in progress, 1: completed
-                    points: {
-                        score: 4,
-                        total: 20
-                    },
-                    start_date: '30 May 2019',
-                    end_date: '30 May 2019',
-                    subTasks: [
-                        {
-                            subTask_id: 0,
-                            status: 0, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Regular', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
-                                }
-                            },
-                            points: 4
-                        },
-                        {
-                            subTask_id: 1,
-                            status: 0, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Not registered', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
-                                }
-                            },
-                            points: 4
-                        },
-                        {
-                            subTask_id: 2,
-                            status: 0, //0 : in progress, 1: done
-                            voter: {
-                                firstName: 'Dennis',
-                                lastName: 'Holman',
-                                status: 'Infrequent', //not-registered, in-frequent, regular,
-                                initials: 'DH',
-                                street: 'New work Sr. 1289',
-                                sex: 'Male',
-                                src: 'https://images.unsplash.com/photo-1549907319-f028c3db04e7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-                                social: {
-                                    twitter: true,
-                                    linkedIn: true,
-                                    facebook: true
-                                }
-                            },
+                            ],
                             points: 4
                         }
                     ],

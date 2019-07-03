@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Dropzone from 'react-dropzone';
 
 import { BaseComponent, Button, Dialog, SvgIcon, Typography, StatusIcon, VoterAvatar, SocialList } from '../index';
+import { CommentItem } from './index';
 import colors from '../../../constants/Colors';
 
 class TaskCompleteDialog extends BaseComponent {
@@ -31,10 +32,6 @@ class TaskCompleteDialog extends BaseComponent {
         // TODO: implement upload phoro logic
         this.setState({ file: file.name });
         this.setState({ isLoading: false });
-    }
-
-    switchCommentHandler = () => {
-        this.setState({ isImageUpload: false });
     }
 
     removePhotoHandler = () => {
@@ -94,6 +91,21 @@ class TaskCompleteDialog extends BaseComponent {
         )
     }
 
+    renderComments = () => {
+        const { selectedSubTask: { comments, voter } } = this.props;
+
+        return (
+            <div className='comments-content'>
+                <Typography variant='body' fontWeight='600' className='title'>
+                    {`Updates (${comments.length})`}
+                </Typography>
+                {comments.map((comment, index) => (
+                    <CommentItem key={index} comment={comment} voter={voter} />
+                ))}
+            </div>
+        )
+    }
+
     renderContentHeader = () => {
         const { isImageUpload, comment } = this.state;
 
@@ -148,25 +160,6 @@ class TaskCompleteDialog extends BaseComponent {
         }
     }
 
-    renderContentFooter = () => {
-        const { isImageUpload, file } = this.state;
-
-        if (isImageUpload && !file) {
-            return (
-                <>
-                    <Typography lightColor variant='body' className='or-you-can'>or you can</Typography>
-                    <Typography
-                        variant='body'
-                        fontWeight='600'
-                        className='add-a-comment-btn'
-                        onClick={this.switchCommentHandler}>
-                        Add a Text Comment
-                    </Typography>
-                </>
-            );
-        }
-    }
-
     render() {
         const { show, onClose, selectedTask } = this.props;
 
@@ -178,9 +171,9 @@ class TaskCompleteDialog extends BaseComponent {
                 actionButtons={this.renderActionButton()}
                 onClose={onClose}>
                 {this.renderSubTaskInfo()}
-                {this.renderContentHeader()}
-                {this.renderImageUpload()}
-                {this.renderContentFooter()}
+                {this.renderComments()}
+                {/* {this.renderContentHeader()}
+                {this.renderImageUpload()} */}
             </Dialog>
         )
     }
