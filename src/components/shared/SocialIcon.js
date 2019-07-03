@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import _ from 'lodash';
 
-import { Icon, BaseComponent } from '../shared';
+import { Icon, BaseComponent, PopoverKeepOnHover, ButtonLink } from '../shared';
 
 class SocialIcon extends BaseComponent {
 
@@ -20,12 +21,22 @@ class SocialIcon extends BaseComponent {
         }
     }
 
+    renderPopover = (name) => {
+        return (
+            <div className='btw-social-popup'>
+                You are friends with <br/> <ButtonLink href='#/' label='Sudie Sears' className='social-user-link' /> on <br/> {_.upperFirst(name)}.
+            </div>
+        )        
+    }
+
     renderIcon = (name, iconSizeClass, visible, height, enable) => {
 
         return (
-            <div className={classNames('btw-social-icon', iconSizeClass, visible ? name : { 'social-icon-default': enable })} >
-                {enable && <Icon name={`${name}-${visible ? 'light' : 'grey'}`} height={height} />}
-            </div >
+            <PopoverKeepOnHover component={this.renderPopover(name)}>
+                <div className={classNames('btw-social-icon', iconSizeClass, visible ? name : { 'social-icon-default': enable })} >
+                    {enable && <Icon name={`${name}-${visible ? 'light' : 'grey'}`} height={height} />}
+                </div >
+            </PopoverKeepOnHover>
         );
     }
 
