@@ -1,6 +1,10 @@
 @import '../../../styles/shared/index.scss';
 
 .btw-register-paper {
+  a {
+    color: $primary;
+    text-decoration: none;
+  }
 
   @include respond-to($phone) {
     width: 310px;
@@ -9,7 +13,7 @@
 
   @include respond-to($computer) {
     width: 512px;
-    padding: 43px 88px 30px 88px;
+    padding: 33px 88px 33px 88px;
   }
 
 }

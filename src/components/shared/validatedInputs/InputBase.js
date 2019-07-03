@@ -122,7 +122,9 @@ export class TextInput extends InputBase {
             className,
             inputClassName,
             disabled,
-            placeholder
+            placeholder,
+            hideLabel = false,
+            leftIcon
         } = this.props;
 
         const {
@@ -133,8 +135,11 @@ export class TextInput extends InputBase {
 
         return (
             <div className={cn('btw-input', { disabled, error: !isValid }, className)}>
-                <label htmlFor={id}>{ label }</label>
+                { !hideLabel && <label htmlFor={id}>{ label }</label> }
                 <div className={cn('text-box')}>
+                    <span className='left-icon'>
+                        { leftIcon }
+                    </span>
                     <input value={value}
                            id={id}
                            className={cn('btw-input', inputClassName)}
@@ -149,9 +154,9 @@ export class TextInput extends InputBase {
                            }}
                            placeholder={placeholder}
                            disabled={disabled} />
-                <span className='right-icon'>
-                  { this.renderRightIcon() }
-                </span>
+                    <span className='right-icon'>
+                      { this.renderRightIcon() }
+                    </span>
                 </div>
                 <div className='error-msg'>
                     { error }

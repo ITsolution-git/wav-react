@@ -1,17 +1,21 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { BaseComponent, Paper, Typography, Spinner } from '../../shared';
-import { BottomLink, SocialButton } from '../components';
+import { BaseComponent, Paper, Typography, Spinner, Button } from '../../shared';
+import { BottomLink, SocialButton, LeftIcon } from '../components';
 import routes from '../../../constants/Routes';
-import { authorizeWithSocial, signInWithToken } from '../../../actions/AuthActions';
+import { authorizeWithSocial, signInWithToken, signInWithMail } from '../../../actions/AuthActions';
 import { getQueryObj } from '../helpers/queryHelper';
 import socialTypes from '../helpers/socialTypes';
 import appDataTypes from '../../../constants/AppDataTypes';
 import colors from '../../../constants/Colors';
+import {
+    EmailInput,
+    PasswordInput,
+} from '../../shared/validatedInputs';
 import './styles.scss';
 
 
@@ -25,14 +29,33 @@ class SignIn extends BaseComponent {
         if (userInfo.token) {
             actions.signInWithToken(userInfo);
         }
+
+        this.state = {
+            email: '',
+            password: '',
+            startValidation: false,
+            valid: {}
+        };
+
     }
 
     handleSocialClick = connection => () => {
         this.props.actions.authorizeWithSocial(connection, true);
     };
 
-    handleMailClick = () => {
-        // this.onLink(routes.loginByMail);
+    handleChange = (value, isValid, name) => {
+        this.setState({
+            [name]: value,
+            valid: { ...this.state.valid, [name]: isValid }
+        });
+    };
+
+    signInWithMail = () => {
+        this.setState({ startValidation: true });
+        const { email, password, valid } = this.state;
+        if (valid.email && valid.password) {
+            this.props.actions.signInWithMail(email, password);
+        }
     };
 
     renderText = (network, color) => {
@@ -43,6 +66,7 @@ class SignIn extends BaseComponent {
 
     render() {
         const { error, isFetching } = this.props;
+        const { startValidation } = this.state;
 
         return (
             <div className='btw-sign-in'>
@@ -64,11 +88,43 @@ class SignIn extends BaseComponent {
                         <SocialButton networkType='twitter' onClick={this.handleSocialClick(socialTypes.twitter)}>
                             { this.renderText('Twitter', colors.white) }
                         </SocialButton>
-                        <Typography className='text-center' variant='functional' color={colors.secondary}>Or log in with email:</Typography>
                     </div>
-                    <BottomLink title={`Don't have an account?`}
-                                link={routes.signUp}
-                                linkText='Sign up'/>
+                    <Typography className='text-center email-text' variant='functional' color={colors.secondary}>Or log in with email:</Typography>
+                    <Row>
+                        <Col md={12}>
+                            <EmailInput onChange={this.handleChange}
+                                        isVoter={false}
+                                        hideLabel
+                                        placeholder='email@example.com'
+                                        leftIcon={<LeftIcon name='envelope' />}
+                                        startValidation={startValidation}
+                                        uniqueValidationEnabled={false}
+                                        required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <PasswordInput onChange={this.handleChange}
+                                           label='Password'
+                                           hideLabel
+                                           leftIcon={<LeftIcon name='lock' />}
+                                           placeholder='Password'
+                                           startValidation={startValidation}
+                                           required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <Button
+                                disabled={isFetching}
+                                onClick={this.signInWithMail}>
+                                Log In
+                            </Button>
+                        </Col>
+                    </Row>
+                    <BottomLink title=''
+                                link={routes.forgotPassword}
+                                linkText='Forgot Password'/>
                 </Paper>
             </div>
         )
@@ -86,7 +142,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ authorizeWithSocial, signInWithToken }, dispatch)
+    actions: bindActionCreators({ authorizeWithSocial, signInWithToken, signInWithMail }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignIn));

@@ -7,7 +7,7 @@ import './styles.scss';
 
 const BottomLink = ({ title = 'Already have an account?', link = '/', linkText = 'Log in' }) => {
     return (
-        <Row className='no-margin'>
+        <Row className='btw-bottom-link no-margin'>
             <Typography className='btw-bottom-text' variant='body' displayInline lightColor>
                 { title }
             </Typography>
