@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import classNames from 'classnames';
 
-import ContentLayout from '../layout/ContentLayout';
 import { ActionItem, BaseComponent, Tabs, TaskCompleteDialog } from '../shared';
 import { TaskEmpty, TaskDetail, CongratsDialog } from './index';
 
@@ -421,15 +420,15 @@ class TasksManagement extends BaseComponent {
                     className={classNames({ 'task-selected': task.task_id === selectedTask.task_id })} />));
     }
 
-    returnTaskContent = () => {
+    renderTaskContent = () => {
         const { selectedTask } = this.state;
 
         return (
             <Row>
-                <Col md={5}>
+                <Col md={4} lg={5}>
                     {this.renderTaskList()}
                 </Col>
-                <Col md={7}>
+                <Col md={8} lg={7}>
                     <TaskDetail
                         task={selectedTask}
                         onMarkAsDone={this.onClickMarkOpenHandler} />
@@ -450,31 +449,29 @@ class TasksManagement extends BaseComponent {
         const { tabs, activeTabId, isMarkDialogShow, isCongratDialogShow, selectedTask, selectedSubTask } = this.state;
 
         return (
-            <ContentLayout>
-                <div className='btw-task-list-page'>
-                    <Tabs tabs={tabs}
-                        activeTabId={activeTabId}
-                        onTabSelect={this.selectTabHandler}
-                        className='actions-tabs' />
-                    {this.isEmptyOfSelectedTasks() ?
-                        this.renderEmptyTask() :
-                        this.returnTaskContent()}
-                    {
-                        isMarkDialogShow &&
-                        <TaskCompleteDialog show={isMarkDialogShow}
-                            selectedTask={selectedTask}
-                            selectedSubTask={selectedSubTask}
-                            onClose={() => this.setState({ isMarkDialogShow: false })}
-                            onMarkAsDone={this.showCongrateHandler} />
-                    }
-                    {
-                        isCongratDialogShow &&
-                        <CongratsDialog show={isCongratDialogShow}
-                            onClose={() => this.setState({ isCongratDialogShow: false })}
-                        />
-                    }
-                </div>
-            </ContentLayout>
+            <Container className='btw-task-list-page'>
+                <Tabs tabs={tabs}
+                    activeTabId={activeTabId}
+                    onTabSelect={this.selectTabHandler}
+                    className='actions-tabs' />
+                {this.isEmptyOfSelectedTasks() ?
+                    this.renderEmptyTask() :
+                    this.renderTaskContent()}
+                {
+                    isMarkDialogShow &&
+                    <TaskCompleteDialog show={isMarkDialogShow}
+                        selectedTask={selectedTask}
+                        selectedSubTask={selectedSubTask}
+                        onClose={() => this.setState({ isMarkDialogShow: false })}
+                        onMarkAsDone={this.showCongrateHandler} />
+                }
+                {
+                    isCongratDialogShow &&
+                    <CongratsDialog show={isCongratDialogShow}
+                        onClose={() => this.setState({ isCongratDialogShow: false })}
+                    />
+                }
+            </Container>
         );
     }
 }

@@ -65,7 +65,7 @@ class WelcomePage extends BaseComponent {
                     </div>
 
                     <div className="watch-later-div">
-                        <Button onClick={this.onGetStarted}>Watch Later</Button>
+                        <Button color='white' size='medium' onClick={this.onGetStarted}>Watch Later</Button>
                     </div>
                 </Paper>
             </div>

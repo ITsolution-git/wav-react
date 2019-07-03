@@ -20,7 +20,6 @@ import SocialList from './SocialList'
 import Spinner from './Spinner'
 import StatusIcon from './StatusIcon'
 import SvgIcon from './SvgIcon'
-import TaskProgressBar from './TaskProgressBar'
 import Typography from './Typography'
 import VotersProgressBar from './VotersProgressBar'
 import VotersTable from './VotersTable'
@@ -46,9 +45,8 @@ import {
 } from './selectVoters'
 
 import VoterStatusDropdown from './VoterStatusDropdown'
-import ActionItem from './ActionItem';
 import Tabs from './Tabs';
-import { SubTaskItem, TaskCompleteDialog } from './taskComponents'
+import { SubTaskItem, TaskCompleteDialog, ActionItem, TaskProgressBar } from './taskComponents'
 import { LeftSideMenu, Panel } from './settings'
 import {
 	EmailInput,
@@ -67,6 +65,7 @@ import {
 import { CongratsAlarm } from './alarmComponents'
 import { VoterPerformer, PerformersTable } from './performComponents'
 import SwitchButton from './SwitchButton'
+import PopoverKeepOnHover from './PopoverKeepOnHover'
 import './styles/index.scss';
 
 export {
@@ -131,5 +130,6 @@ export {
 	PerformersTable,
 	CommentsList,
 	SwitchButton,
-	ButtonLink
+	ButtonLink,
+	PopoverKeepOnHover
 }

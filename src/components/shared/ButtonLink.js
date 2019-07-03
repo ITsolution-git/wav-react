@@ -9,7 +9,7 @@ const ButtonLink = (props) => {
 		...(props.link && { href: props.link }),
 	}
 	return (
-		<div className={cn('d-flex', props.className)}>
+		<div className={cn(props.className, 'd-inline-flex')}>
 			<a 
 				className={cn('btw-btn-link')}
 				{...aProps}

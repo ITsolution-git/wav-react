@@ -33,6 +33,14 @@ export default {
         isDeleting: false,
         error: null
     },
+    districtList: {
+        selected: {},
+        districts: [],
+        count: 0,
+        isFetching: false,
+        isSuccess: false,
+        error: null
+    },
     error: {
         [errorTypes.emailExists]: false
     }

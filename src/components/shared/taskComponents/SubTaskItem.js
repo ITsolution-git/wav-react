@@ -61,12 +61,24 @@ class SubTaskItem extends BaseComponent {
     }
 
     render() {
-        const { status, hideSubTask } = this.props;
+        const { subTask, status, hideSubTask, onMarkAsDone } = this.props;
 
         return (
             <div className={classNames('btw-subtask-item', { 'completed-subtask': status, 'hide-subtask': hideSubTask })}>
-                {this.renderVoter()}
-                {this.renderSubTask()}
+                <div className='item-content'>
+                    {this.renderVoter()}
+                    {this.renderSubTask()}
+                </div>
+                {!status &&
+                    <Button
+                        size='small'
+                        color='white'
+                        className='footer-mark-button'
+                        fullWidth
+                        onClick={() => onMarkAsDone(subTask)}>
+                        Mark as Done
+                    </Button>
+                }
             </div>
         )
     }
