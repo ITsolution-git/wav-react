@@ -13,7 +13,7 @@ class CommentItem extends BaseComponent {
             return (
                 <div className='image-content'>
                     {images.map((image, index) => (
-                        <img key={index} src={image} className='image' />
+                        <img key={index} src={image} className='image' alt='' />
                     ))}
                 </div>
             )
