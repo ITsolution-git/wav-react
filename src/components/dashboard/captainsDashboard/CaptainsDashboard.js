@@ -279,28 +279,30 @@ class CaptainsDashboard extends BaseComponent {
     }
 
     renderCongrat = () => {
-        const { isOpen: { performanceContent } } = this.state;
+        const { isOpen: { performanceContent }, isFirstLogin } = this.state;
 
-        return (
-            <div className='content top-congrats'>
-                {this.renderContentHeader('Performance stats', '', '', 'performanceContent', performanceContent)}
-                <div className={classNames('content-body top-congrats', { 'content-inactive': !performanceContent })}>
-                    <CongratsAlarm>
-                        <Typography variant='body' color={colors['white']}>
-                            Your result is better than of <b>75%</b> of Captains this week!
-                        </Typography>
-                        <Typography
-                            variant='body'
-                            fontWeight='600'
-                            color={colors['white']}
-                            className='congrat-link'
-                            onClick={() => this.onLink(routes.leaderboard)}>
-                            View Leaderboard
-                        </Typography>
-                    </CongratsAlarm>
+        if (!isFirstLogin) {
+            return (
+                <div className='content top-congrats'>
+                    {this.renderContentHeader('Performance stats', '', '', 'performanceContent', performanceContent)}
+                    <div className={classNames('content-body top-congrats', { 'content-inactive': !performanceContent })}>
+                        <CongratsAlarm>
+                            <Typography variant='body' color={colors['white']}>
+                                Your result is better than of <b>75%</b> of Captains this week!
+                            </Typography>
+                            <Typography
+                                variant='body'
+                                fontWeight='600'
+                                color={colors['white']}
+                                className='congrat-link'
+                                onClick={() => this.onLink(routes.leaderboard)}>
+                                View Leaderboard
+                            </Typography>
+                        </CongratsAlarm>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 
     renderPerfomance = () => {
