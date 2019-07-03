@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import colors from '../../../constants/Colors';
 import routes from '../../../constants/Routes';
 import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm, SvgIcon } from '../../shared';
-import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart } from './index';
+import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart, WelcomeBanner } from './index';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -228,7 +228,8 @@ class CaptainsDashboard extends BaseComponent {
                 taskContent: false,
                 actionContent: false,
                 voterContent: false
-            }
+            },
+            isFirstLogin: true
         }
     }
 
@@ -241,6 +242,20 @@ class CaptainsDashboard extends BaseComponent {
                 [contentName]: !prevState.isOpen[contentName]
             }
         }));
+    }
+
+    onGotBannerHandler = () => {
+        this.setState({ isFirstLogin: false });
+    }
+
+    renderWelcomeBanner = () => {
+        const { isFirstLogin } = this.state;
+
+        if (isFirstLogin) {
+            return (
+                <WelcomeBanner onGot={this.onGotBannerHandler} />
+            )
+        }
     }
 
     renderContentHeader = (title, linkName, route, contentName, isOpen) => {
@@ -289,20 +304,22 @@ class CaptainsDashboard extends BaseComponent {
     }
 
     renderPerfomance = () => {
-        const { performers, performanceData, isOpen: { performanceContent } } = this.state
+        const { performers, performanceData, isOpen: { performanceContent }, isFirstLogin } = this.state
 
-        return (
-            <div className='content'>
-                <Row className={classNames('content-body', { 'content-inactive': !performanceContent })}>
-                    <Col xs={12} lg={6}>
-                        <PerformanceChart performanceData={performanceData} />
-                    </Col>
-                    <Col xs={12} lg={6}>
-                        <TopPerformers performers={performers} />
-                    </Col>
-                </Row>
-            </div>
-        );
+        if (!isFirstLogin) {
+            return (
+                <div className='content'>
+                    <Row className={classNames('content-body', { 'content-inactive': !performanceContent })}>
+                        <Col xs={12} lg={6}>
+                            <PerformanceChart performanceData={performanceData} />
+                        </Col>
+                        <Col xs={12} lg={6}>
+                            <TopPerformers performers={performers} />
+                        </Col>
+                    </Row>
+                </div>
+            );
+        }
     }
 
     renderTasks = () => {
@@ -387,6 +404,7 @@ class CaptainsDashboard extends BaseComponent {
                         <DashboardUserInfo user={user} />
                     </Col>
                 </Row>
+                {this.renderWelcomeBanner()}
                 {this.renderCongrat()}
                 {this.renderPerfomance()}
                 {this.renderTasks()}
