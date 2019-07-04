@@ -25,7 +25,7 @@ class GeneralErrorPage extends BaseComponent {
                 <div>
                     <h3>Sorry ....Something went wrong .... Please try again later</h3>
                     <br/><br/><br/>
-                    <Button onClick={() => this.onLink(routes.loginBySocial)}>
+                    <Button onClick={() => this.onLink(routes.signIn)}>
                         Back to login page
                     </Button>
                 </div>

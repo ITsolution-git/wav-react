@@ -43,7 +43,7 @@ import {
 	VoterNotFound,
 	ConnectListInfo
 } from './selectVoters'
-import SocialButton from './SocialButton'
+
 import VoterStatusDropdown from './VoterStatusDropdown'
 import Tabs from './Tabs';
 import { SubTaskItem, TaskCompleteDialog, ActionItem, TaskProgressBar } from './taskComponents'
@@ -99,7 +99,6 @@ export {
 	VoterInfo,
 	VoterCardView,
 	VoterDetail,
-	SocialButton,
 	VoterStatusDropdown,
 	ActionItem,
 	Tabs,

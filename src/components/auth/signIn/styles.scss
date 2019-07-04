@@ -1,0 +1,29 @@
+@import '../styles/base.scss';
+
+.btw-sign-in {
+  margin-top: 7vh;
+
+  .paper {
+    @extend .btw-register-paper;
+
+    .buttons {
+      margin: 20px 0 20px 0;
+
+      & > div {
+        margin-bottom: 15px;
+      }
+    }
+
+    .email-text {
+      margin-bottom: 20px;
+    }
+
+    .input {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding-left: 45px;
+    }
+  }
+}

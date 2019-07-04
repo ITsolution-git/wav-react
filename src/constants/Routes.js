@@ -1,8 +1,6 @@
 export default {
-    registerByMail: '/signup_by_mail',
-    registerBySocial: '/signup',
+    signUp: '/signup',
     profile: '/settings/profile',
-    makelist: '/make_list',
     pageDown: '/page_down',
     tasksList: '/task_list',
     voterList: '/voter_list',
@@ -11,8 +9,7 @@ export default {
     leaderboard: '/leaderboard',
     adminDashboard: '/home_admin',
     helpCenter: '/help_center',
-    loginBySocial: '/',
-    loginByMail: '/login_by_mail',
+    signIn: '/',
     voterDetail: '/voter_detail',
     matchList: '/match_list',
     welcome: '/welcome',
@@ -23,5 +20,8 @@ export default {
     captainFilter: '/captain_filter',
     changePassword: '/change_password/change/:token',
     forgotPassword: '/change_password/request',
-    verifyEmail: '/verify_email'
+    verifyEmail: '/verify_email',
+
+    // static
+    termsAndConditions: '/terms_conditions'
 }

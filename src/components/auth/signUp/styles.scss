@@ -1,0 +1,11 @@
+@import '../styles/base.scss';
+@import '../signIn/styles.scss';
+
+.btw-sign-up {
+ @extend .btw-sign-in;
+ margin: 2vh;
+
+ button {
+  margin-top: 5px;
+ }
+}
