@@ -78,11 +78,11 @@
             box-shadow: unset;
             border-radius: 0;
             background-color: unset;
-            margin:0 0 160px 0;
+            margin:0 0 180px 0;
         }
 
         @include respond-to($tablet) {
-            margin-bottom: 160px;
+            margin-bottom: 180px;
         }
     }
 
