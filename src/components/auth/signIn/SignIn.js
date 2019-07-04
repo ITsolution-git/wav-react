@@ -4,8 +4,8 @@ import { Col, Row } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { BaseComponent, Paper, Typography, Spinner, Button, ErrorAlarm } from '../../shared';
-import { BottomLink, SocialButton, LeftIcon } from '../components';
+import { BaseComponent, Paper, Typography, Spinner, Button } from '../../shared';
+import { BottomLink, SocialButton, LeftIcon, ErrorMessage } from '../components';
 import routes from '../../../constants/Routes';
 import { authorizeWithSocial, signInWithToken, signInWithMail } from '../../../actions/AuthActions';
 import { getQueryObj } from '../helpers/queryHelper';
@@ -77,21 +77,10 @@ class SignIn extends BaseComponent {
         return (
             <div className='btw-sign-in'>
                 <Spinner loading={isFetching} />
-                <ErrorAlarm >
-                    <Typography variant='body' fontWeight='600'>
-                        That’s strange
-                    </Typography>
-                    <Typography variant='body' fontWeight='600'>
-                        We couldn’t find an account matching the username and password you entered.
-                        Please check your username and password and try again.
-                    </Typography>
-                </ErrorAlarm>
+                <ErrorMessage error={error} />
                 <Paper className='paper'>
                     <Row className='no-margin'>
                         <Typography className='title'>Log In</Typography>
-                    </Row>
-                    <Row className='no-margin'>
-                        <Typography fontWeight='normal' variant='body' color={colors.error}>{error}</Typography>
                     </Row>
                     <div className='buttons'>
                         <SocialButton networkType='google' onClick={this.handleSocialClick(socialTypes.google)}>
@@ -131,6 +120,7 @@ class SignIn extends BaseComponent {
                     <Row>
                         <Col md={12}>
                             <Button
+                                fullWidth
                                 disabled={isFetching}
                                 onClick={this.signInWithMail}>
                                 Log In
