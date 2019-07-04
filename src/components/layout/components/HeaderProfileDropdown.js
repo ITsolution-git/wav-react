@@ -18,22 +18,14 @@ class HeaderProfileDropdown extends BaseComponent {
         btwLogout();
     };
 
-    handleActionClick = action => () => {
-      if (!this.isOnBoarding()) {
-          action();
-          return;
-      }
-      this.props.onActionClick(action);
-    };
-
     render() {
         const { profile: {data} } = this.props;
         const props={...this, ...data};
 
         return (
             <div className='btw-header-dropdown'>
-                <ProfileDropdown btwLogout={this.handleActionClick(this.handleLogout)}
-                                 btwSettings={this.handleActionClick(this.goToSettings)}
+                <ProfileDropdown btwLogout={this.handleLogout}
+                                 btwSettings={this.goToSettings}
                                  {...props} />
             </div>
         )
