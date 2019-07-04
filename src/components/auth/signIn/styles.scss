@@ -2,6 +2,9 @@
 
 .btw-sign-in {
   margin-top: 7vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .paper {
     @extend .btw-register-paper;
