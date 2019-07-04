@@ -17,7 +17,7 @@ export class RadioGroup extends BaseComponent {
 	}
 
 	createContextValue = memorize((value, name, onChange) => ({
-		value, 
+		value,
 		name,
 		onChange
 	}))
@@ -44,16 +44,16 @@ export class RadioOption extends BaseComponent {
 			<RadioContext.Consumer>
 				{radioGroup => (
 					<div className='btw-radio-option'>
-						<input
-							id={this.props.value}
-							type='radio'
-							name={radioGroup.name}
-							checked={radioGroup.value === this.props.value}
-							onChange={radioGroup.onChange(this.props.value)}
-						/>
-						<label htmlFor={this.props.value}>{this.props.children}</label>
+						<label className='container'>{this.props.children}
+							<input
+								type='radio'
+								id={this.props.value}
+								name={radioGroup.name}
+								checked={radioGroup.value === this.props.value}
+								onChange={radioGroup.onChange(this.props.value)} />
+							<span className='checkmark' />
+						</label>
 					</div>
-
 				)}
 			</RadioContext.Consumer>
 		)
