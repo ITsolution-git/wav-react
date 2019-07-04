@@ -131,6 +131,9 @@ class SignIn extends BaseComponent {
                     <BottomLink title=''
                                 link={routes.forgotPassword}
                                 linkText='Forgot Password'/>
+                    <BottomLink title="Don't have an account?"
+                                link={routes.signUp}
+                                linkText='Sign Up'/>
                 </Paper>
             </div>
         )
