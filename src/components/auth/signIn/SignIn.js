@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { BaseComponent, Paper, Typography, Spinner, Button } from '../../shared';
-import { BottomLink, SocialButton, LeftIcon } from '../components';
+import { BottomLink, SocialButton, LeftIcon, ErrorMessage } from '../components';
 import routes from '../../../constants/Routes';
 import { authorizeWithSocial, signInWithToken, signInWithMail } from '../../../actions/AuthActions';
 import { getQueryObj } from '../helpers/queryHelper';
@@ -66,7 +66,7 @@ class SignIn extends BaseComponent {
 
     renderText = (network, color) => {
         return (
-            <Typography variant='body' color={color} displayInline>Log in with { network }</Typography>
+            <Typography variant='body' color={color} displayInline>Log in with {network}</Typography>
         )
     };
 
@@ -77,51 +77,50 @@ class SignIn extends BaseComponent {
         return (
             <div className='btw-sign-in'>
                 <Spinner loading={isFetching} />
+                <ErrorMessage error={error} />
                 <Paper className='paper'>
                     <Row className='no-margin'>
                         <Typography className='title'>Log In</Typography>
                     </Row>
-                    <Row className='no-margin'>
-                        <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
-                    </Row>
                     <div className='buttons'>
                         <SocialButton networkType='google' onClick={this.handleSocialClick(socialTypes.google)}>
-                            { this.renderText('Google', colors.main) }
+                            {this.renderText('Google', colors.main)}
                         </SocialButton>
                         <SocialButton networkType='facebook' onClick={this.handleSocialClick(socialTypes.facebook)}>
-                            { this.renderText('Facebook', colors.white) }
+                            {this.renderText('Facebook', colors.white)}
                         </SocialButton>
                         <SocialButton networkType='twitter' onClick={this.handleSocialClick(socialTypes.twitter)}>
-                            { this.renderText('Twitter', colors.white) }
+                            {this.renderText('Twitter', colors.white)}
                         </SocialButton>
                     </div>
                     <Typography className='text-center email-text' variant='functional' color={colors.secondary}>Or log in with email:</Typography>
                     <Row>
                         <Col md={12} className='input'>
                             <EmailInput onChange={this.handleChange}
-                                        isVoter={false}
-                                        hideLabel
-                                        placeholder='email@example.com'
-                                        leftIcon={<LeftIcon name='envelope' />}
-                                        startValidation={startValidation}
-                                        uniqueValidationEnabled={false}
-                                        required />
+                                isVoter={false}
+                                hideLabel
+                                placeholder='email@example.com'
+                                leftIcon={<LeftIcon name='envelope' />}
+                                startValidation={startValidation}
+                                uniqueValidationEnabled={false}
+                                required />
                         </Col>
                     </Row>
                     <Row>
                         <Col md={12} className='input'>
                             <PasswordInput onChange={this.handleChange}
-                                           label='Password'
-                                           hideLabel
-                                           leftIcon={<LeftIcon name='lock' />}
-                                           placeholder='Password'
-                                           startValidation={startValidation}
-                                           required />
+                                label='Password'
+                                hideLabel
+                                leftIcon={<LeftIcon name='lock' />}
+                                placeholder='Password'
+                                startValidation={startValidation}
+                                required />
                         </Col>
                     </Row>
                     <Row>
                         <Col md={12}>
                             <Button
+                                fullWidth
                                 disabled={isFetching}
                                 onClick={this.signInWithMail}>
                                 Log In
@@ -129,11 +128,11 @@ class SignIn extends BaseComponent {
                         </Col>
                     </Row>
                     <BottomLink title=''
-                                link={routes.forgotPassword}
-                                linkText='Forgot Password'/>
+                        link={routes.forgotPassword}
+                        linkText='Forgot Password' />
                     <BottomLink title="Don't have an account?"
-                                link={routes.signUp}
-                                linkText='Sign Up'/>
+                        link={routes.signUp}
+                        linkText='Sign Up' />
                 </Paper>
             </div>
         )

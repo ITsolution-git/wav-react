@@ -62,7 +62,7 @@ import {
 	ProfileAvatarOption,
 	DragDropImageUpload
 } from './validatedInputs'
-import { CongratsAlarm } from './alarmComponents'
+import { CongratsAlarm, ErrorAlarm } from './alarmComponents'
 import { VoterPerformer, PerformersTable } from './performComponents'
 import SwitchButton from './SwitchButton'
 import PopoverKeepOnHover from './PopoverKeepOnHover'
@@ -124,6 +124,7 @@ export {
 	DragDropImageUpload,
 	Panel,
 	CongratsAlarm,
+	ErrorAlarm,
 	VoterPerformer,
 	RadioOption,
 	RadioGroup,

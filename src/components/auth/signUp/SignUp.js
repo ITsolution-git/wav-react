@@ -6,7 +6,7 @@ import { Col, Row } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 
 import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, TextInput } from '../../shared';
-import { BottomLink, LeftIcon, SocialButton } from '../components';
+import { BottomLink, LeftIcon, SocialButton, ErrorMessage } from '../components';
 import { authorizeWithSocial, signUpWithToken, signUpWitMail } from '../../../actions/AuthActions';
 import appDataTypes from '../../../constants/AppDataTypes';
 import { getQueryObj } from '../helpers/queryHelper';
@@ -79,12 +79,10 @@ class SignUp extends BaseComponent {
         return (
             <div className='btw-sign-up'>
                 <Spinner loading={isFetching} />
+                <ErrorMessage error={error} />
                 <Paper className='paper'>
                     <Row className='no-margin'>
                         <Typography className='title'>Sign Up</Typography>
-                    </Row>
-                    <Row className='no-margin'>
-                        <Typography fontWeight='normal' variant='body' color={colors.error}>{error}</Typography>
                     </Row>
                     <div className='buttons'>
                         <SocialButton networkType='google' onClick={this.handleSocialClick(socialTypes.google)}>
@@ -156,6 +154,7 @@ class SignUp extends BaseComponent {
                     <Row>
                         <Col md={12}>
                             <Button
+                                fullWidth
                                 disabled={isFetching}
                                 onClick={this.signUpWitMail}>
                                 Sign Up

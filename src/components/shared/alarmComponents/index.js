@@ -1,6 +1,8 @@
 import CongratsAlarm from './CongratsAlarm'
-import './_congratsAlarm.scss';
+import ErrorAlarm from './ErrorAlarm'
+import './styles/index.scss';
 
 export {
-  CongratsAlarm
+    CongratsAlarm,
+    ErrorAlarm
 }
