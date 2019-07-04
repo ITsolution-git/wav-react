@@ -2,12 +2,12 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {Col, Row} from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 
 import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, TextInput } from '../../shared';
 import { BottomLink, LeftIcon, SocialButton } from '../components';
-import { authorizeWithSocial, signUpWithToken, signUpWitMail  } from '../../../actions/AuthActions';
+import { authorizeWithSocial, signUpWithToken, signUpWitMail } from '../../../actions/AuthActions';
 import appDataTypes from '../../../constants/AppDataTypes';
 import { getQueryObj } from '../helpers/queryHelper';
 import colors from '../../../constants/Colors';
@@ -29,7 +29,8 @@ class SignUp extends BaseComponent {
         this.state = {
             btwIdentity: {},
             isValid: {
-                fullName: false,
+                [fieldConstants.firstName]: false,
+                [fieldConstants.lastName]: false,
                 [fieldConstants.email]: false,
                 [fieldConstants.password]: false
             },
@@ -67,7 +68,7 @@ class SignUp extends BaseComponent {
 
     renderText = (network, color) => {
         return (
-            <Typography variant='body' color={color} displayInline>Sign Up with { network }</Typography>
+            <Typography variant='body' color={color} displayInline>Sign Up with {network}</Typography>
         )
     };
 
@@ -83,53 +84,65 @@ class SignUp extends BaseComponent {
                         <Typography className='title'>Sign Up</Typography>
                     </Row>
                     <Row className='no-margin'>
-                        <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+                        <Typography fontWeight='normal' variant='body' color={colors.error}>{error}</Typography>
                     </Row>
                     <div className='buttons'>
                         <SocialButton networkType='google' onClick={this.handleSocialClick(socialTypes.google)}>
-                            { this.renderText('Google', colors.main) }
+                            {this.renderText('Google', colors.main)}
                         </SocialButton>
                         <SocialButton networkType='facebook' onClick={this.handleSocialClick(socialTypes.facebook)}>
-                            { this.renderText('Facebook', colors.white) }
+                            {this.renderText('Facebook', colors.white)}
                         </SocialButton>
                         <SocialButton networkType='twitter' onClick={this.handleSocialClick(socialTypes.twitter)}>
-                            { this.renderText('Twitter', colors.white) }
+                            {this.renderText('Twitter', colors.white)}
                         </SocialButton>
                     </div>
                     <Typography className='text-center email-text' variant='functional' color={colors.secondary}>Or sign up with email:</Typography>
                     <Row>
                         <Col md={12} className='input'>
                             <TextInput onChange={this.handleChange}
-                                        hideLabel
-                                        label='Full Name'
-                                        name='fullName'
-                                        placeholder='Full Name'
-                                        leftIcon={<LeftIcon name='profile' />}
-                                        startValidation={startValidation}
-                                        required />
+                                hideLabel
+                                label='First Name'
+                                name='firstname'
+                                placeholder='First Name'
+                                leftIcon={<LeftIcon name='profile' />}
+                                startValidation={startValidation}
+                                required />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12} className='input'>
+                            <TextInput onChange={this.handleChange}
+                                hideLabel
+                                label='Last Name'
+                                name='lastname'
+                                placeholder='Last Name'
+                                leftIcon={<LeftIcon name='profile' />}
+                                startValidation={startValidation}
+                                required />
                         </Col>
                     </Row>
                     <Row>
                         <Col md={12} className='input'>
                             <EmailInput onChange={this.handleChange}
-                                        isVoter={false}
-                                        hideLabel
-                                        placeholder='email@example.com'
-                                        leftIcon={<LeftIcon name='envelope' />}
-                                        startValidation={startValidation}
-                                        uniqueValidationEnabled={false}
-                                        required />
+                                isVoter={false}
+                                hideLabel
+                                placeholder='email@example.com'
+                                leftIcon={<LeftIcon name='envelope' />}
+                                startValidation={startValidation}
+                                uniqueValidationEnabled={false}
+                                required />
                         </Col>
                     </Row>
                     <Row>
                         <Col md={12} className='input'>
                             <PasswordInput onChange={this.handleChange}
-                                           label='Password'
-                                           hideLabel
-                                           leftIcon={<LeftIcon name='lock' />}
-                                           placeholder='Password'
-                                           startValidation={startValidation}
-                                           required />
+                                label='Password'
+                                hideLabel
+                                leftIcon={<LeftIcon name='lock' />}
+                                placeholder='Password'
+                                startValidation={startValidation}
+                                required />
                         </Col>
                     </Row>
                     <Row>
