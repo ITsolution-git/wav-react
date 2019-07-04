@@ -41,12 +41,17 @@ class SignUp extends BaseComponent {
         this.props.actions.authorizeWithSocial(connection);
     };
 
+    onKeyPress = (e) => {
+        if (e.key === 'Enter' || e.which === 13) {
+            this.signUpWitMail();
+        }
+    };
+
     signUpWitMail = () => {
         const { isValid, btwIdentity } = this.state;
         this.setState({ startValidation: true });
-
         if (Object.values(isValid).every(val => val)) {
-            this.props.signupWitMail(btwIdentity)
+            this.props.actions.signUpWitMail(btwIdentity)
         }
     };
 
@@ -77,6 +82,9 @@ class SignUp extends BaseComponent {
                     <Row className='no-margin'>
                         <Typography className='title'>Sign Up</Typography>
                     </Row>
+                    <Row className='no-margin'>
+                        <Typography fontWeight='normal' variant='body' color={colors.error}>{ error }</Typography>
+                    </Row>
                     <div className='buttons'>
                         <SocialButton networkType='google' onClick={this.handleSocialClick(socialTypes.google)}>
                             { this.renderText('Google', colors.main) }
@@ -94,6 +102,7 @@ class SignUp extends BaseComponent {
                             <TextInput onChange={this.handleChange}
                                         hideLabel
                                         label='Full Name'
+                                        name='fullName'
                                         placeholder='Full Name'
                                         leftIcon={<LeftIcon name='profile' />}
                                         startValidation={startValidation}
@@ -148,7 +157,7 @@ class SignUp extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { error, isSuccess, isFetching } = state.app[appDataTypes.signOn];
+    const { error, isSuccess, isFetching } = state.app[appDataTypes.register];
     return {
         error,
         isSuccess,

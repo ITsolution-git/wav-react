@@ -50,6 +50,12 @@ class SignIn extends BaseComponent {
         });
     };
 
+    onKeyPress = (e) => {
+        if (e.key === 'Enter' || e.which === 13) {
+            this.signInWithMail();
+        }
+    };
+
     signInWithMail = () => {
         this.setState({ startValidation: true });
         const { email, password, valid } = this.state;
