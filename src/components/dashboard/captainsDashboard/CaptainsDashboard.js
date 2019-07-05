@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import colors from '../../../constants/Colors';
 import routes from '../../../constants/Routes';
 import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm, SvgIcon } from '../../shared';
-import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart, WelcomeBanner } from './index';
+import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart, WelcomeBanner, NoTaskBanner } from './index';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -229,7 +229,8 @@ class CaptainsDashboard extends BaseComponent {
                 actionContent: false,
                 voterContent: false
             },
-            isFirstLogin: true
+            isFirstLogin: true,
+            isNotifyMe: true
         }
     }
 
@@ -246,6 +247,10 @@ class CaptainsDashboard extends BaseComponent {
 
     onGotBannerHandler = () => {
         this.setState({ isFirstLogin: false });
+    }
+
+    onNotifyHandler = () => {
+        this.setState({ isNotifyMe: false });
     }
 
     renderWelcomeBanner = () => {
@@ -393,7 +398,7 @@ class CaptainsDashboard extends BaseComponent {
     }
 
     render() {
-        const { user } = this.state
+        const { user, isNotifyMe } = this.state;
 
         return (
             <Container className='btw-captains-dashboard'>
@@ -406,12 +411,19 @@ class CaptainsDashboard extends BaseComponent {
                         <DashboardUserInfo user={user} />
                     </Col>
                 </Row>
-                {this.renderWelcomeBanner()}
-                {this.renderCongrat()}
-                {this.renderPerfomance()}
-                {this.renderTasks()}
-                {this.renderActions()}
-                {this.renderVoters()}
+                {isNotifyMe ?
+                    <NoTaskBanner onNotify={this.onNotifyHandler} /> :
+                    <>
+                        {this.renderWelcomeBanner()}
+                        {this.renderCongrat()}
+                        {this.renderPerfomance()}
+                        {this.renderTasks()}
+                        {this.renderActions()}
+                        {this.renderVoters()}
+                    </>
+                }
+
+
             </Container>
         )
     }
