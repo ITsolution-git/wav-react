@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 
-import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, TextInput } from '../../shared';
+import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, FirstNameInput, LastNameInput } from '../../shared';
 import { BottomLink, LeftIcon, SocialButton, ErrorMessage } from '../components';
 import { authorizeWithSocial, signUpWithToken, signUpWitMail } from '../../../actions/AuthActions';
 import appDataTypes from '../../../constants/AppDataTypes';
@@ -98,11 +98,9 @@ class SignUp extends BaseComponent {
                     <Typography className='text-center email-text' variant='functional' color={colors.secondary}>Or sign up with email:</Typography>
                     <Row>
                         <Col md={12} className='input'>
-                            <TextInput onChange={this.handleChange}
+                            <FirstNameInput
+                                onChange={this.handleChange}
                                 hideLabel
-                                label='First Name'
-                                name='firstname'
-                                placeholder='First Name'
                                 leftIcon={<LeftIcon name='profile' />}
                                 startValidation={startValidation}
                                 required />
@@ -110,11 +108,9 @@ class SignUp extends BaseComponent {
                     </Row>
                     <Row>
                         <Col md={12} className='input'>
-                            <TextInput onChange={this.handleChange}
+                            <LastNameInput
+                                onChange={this.handleChange}
                                 hideLabel
-                                label='Last Name'
-                                name='lastname'
-                                placeholder='Last Name'
                                 leftIcon={<LeftIcon name='profile' />}
                                 startValidation={startValidation}
                                 required />

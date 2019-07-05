@@ -115,3 +115,27 @@ export const textValidation = (...args) => {
 
   return booleanResult;
 };
+
+//**Objects that include first name or last name fields must have the property names as 'firstName' or 'lastName'**
+export const nameValidation = (...args) => {
+
+  const checkIfValid = (element) => {
+    if (typeof element === 'string') {
+      if (!(element.length <= 30 && element.length >= 2)) {
+        return false
+      }
+      if (!(element.match(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/))) {
+        return false
+      }
+      return true;
+    }
+    // if given element is neither a string, object, nor array
+    return false;
+  }
+
+  let booleanResult = args.reduce((previousBoolean, currentArg) => {
+    return previousBoolean && checkIfValid(currentArg);
+  }, true)
+
+  return booleanResult;
+};
