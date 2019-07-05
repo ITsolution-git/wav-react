@@ -11,7 +11,7 @@ export default class FirstNameInput extends InputBase {
             id='firstname'
             placeholder={placeholder}
             validator={value => startValidation ? validate('name', value) : true}
-            validatorError="Name must be at least 2 characters without number and special character"
+            validatorError='Name must be at least 2 characters without number and special character'
             name={fields.firstName}
             {...this.props} />
     }
