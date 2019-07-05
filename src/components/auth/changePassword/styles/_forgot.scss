@@ -2,7 +2,8 @@
 	align-items: center;
 	justify-content: center;
 	display: flex;
-	width: 512px;
+    width: 512px;
+    padding-top: 90px;
   
 	.content{
         padding: 51px 88px;
@@ -30,15 +31,11 @@
         font-size: 13px;
         color: $error;
     }
-
-	.remember{
-        margin-top: 50px;
-        
-        a {
-            color: $main;
-            font-weight: bold;
-        }
-	}
+	
+    a {
+        color: $primary;
+        text-decoration: none;
+    }
   
 	@media screen and (max-width: 568px) {
         .content{

@@ -4,11 +4,9 @@ import { withRouter, Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 import { forgotPasswordRequest } from '../../../actions/ChangePasswordActions';
-import BaseComponent from '../../shared/BaseComponent';
 import routes from '../../../constants/Routes';
-import Button from '../../shared/Button';
-import Typography from '../../shared/Typography';
-import { EmailInput } from '../../shared/validatedInputs';
+import { BaseComponent, Button, Spinner, Typography, EmailInput } from '../../shared';
+import { BottomLink } from '../components';
 import './styles/index.scss';
 
 class ForgotPassword extends BaseComponent {
@@ -53,10 +51,12 @@ class ForgotPassword extends BaseComponent {
     }
 
     render() {
+        const { isFetching } = this.props;
         const { email } = this.state;
 
         return (
             <div className="btw-forgot-password">
+                <Spinner loading={isFetching} />
                 <div className='content btw-paper'>
                     <Typography className='title'>Reset Password</Typography>
                     <Typography variant='body' className='description'>
@@ -77,9 +77,9 @@ class ForgotPassword extends BaseComponent {
                     <Button fullWidth onClick={this.onForgotPassword.bind(this, 'onForgotPassword')}>
                         Send Verification Link
                     </Button>
-                    <Typography variant='body' className='remember'>
-                        Remembered? <Link to={routes.signIn}>Log in</Link>
-                    </Typography>
+                    <BottomLink title='Remembered?'
+                        link={routes.signIn}
+                        linkText='Log in' />
                 </div>
             </div >
         );
@@ -87,9 +87,10 @@ class ForgotPassword extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-    const { isUserFound } = state.request;
+    const { isUserFound, isFetching } = state.request;
     return {
-        isUserFound
+        isUserFound,
+        isFetching
     };
 };
 

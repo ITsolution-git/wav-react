@@ -4,14 +4,9 @@ import { withRouter, Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 import { changePasswordRequest, verifyTokenRequest } from '../../../actions/ChangePasswordActions';
-import BaseComponent from '../../shared/BaseComponent';
 import routes from '../../../constants/Routes';
-import {
-    PasswordInput,
-    TextInput
-} from '../../shared/validatedInputs';
-import Button from '../../shared/Button';
-import Typography from '../../shared/Typography';
+import { BaseComponent, PasswordInput, TextInput, Button, Typography } from '../../shared';
+import { BottomLink } from '../components';
 import './styles/index.scss';
 
 
@@ -121,9 +116,9 @@ class ChangePassword extends BaseComponent {
                     <Button fullWidth onClick={this.changePassword}>
                         Save New Password
                     </Button>
-                    <Typography variant='body' className='remember'>
-                        Remembered? <Link to={routes.signIn}>Log in</Link>
-                    </Typography>
+                    <BottomLink title='Remembered?'
+                        link={routes.signIn}
+                        linkText='Log in' />
                 </div>
             </div >
         );
