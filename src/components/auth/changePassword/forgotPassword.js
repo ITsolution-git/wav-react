@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 
 import { forgotPasswordRequest } from '../../../actions/ChangePasswordActions';
