@@ -386,7 +386,7 @@ class CaptainsDashboard extends BaseComponent {
                             })
                         }
                     </Row>
-                    {this.renderContentFooter('All Voters', routes.tasksList)}
+                    {this.renderContentFooter('All Voters', routes.voterList)}
                 </div>
             </div>
         );
