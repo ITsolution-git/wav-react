@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, FirstNameInput, LastNameInput } from '../../shared';
 import { BottomLink, LeftIcon, SocialButton, ErrorMessage } from '../components';
-import { authorizeWithSocial, signUpWithToken, signUpWitMail } from '../../../actions/AuthActions';
+import { authorizeWithSocial, signUpWithToken, signUpWitMail, initializeAuthState } from '../../../actions/AuthActions';
 import appDataTypes from '../../../constants/AppDataTypes';
 import { getQueryObj } from '../helpers/queryHelper';
 import colors from '../../../constants/Colors';
@@ -36,6 +36,10 @@ class SignUp extends BaseComponent {
             },
             startValidation: false
         }
+    }
+
+    componentWillMount() {
+        this.props.actions.initializeAuthState()
     }
 
     handleSocialClick = connection => () => {
@@ -175,7 +179,7 @@ const mapStateToProps = (state) => {
 
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({ authorizeWithSocial, signUpWithToken, signUpWitMail }, dispatch)
+    actions: bindActionCreators({ authorizeWithSocial, signUpWithToken, signUpWitMail, initializeAuthState }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignUp));

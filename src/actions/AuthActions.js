@@ -11,6 +11,7 @@ import { storageKeys, LocalStorageManager as lsManager } from '../storage';
 import history from '../utility/History';
 
 import {
+	initializeState,
 	initializeRequest,
 	loadDataSuccess,
 	loadDataFailure
@@ -139,5 +140,11 @@ export function btwLogout() {
         function logoutAction() {
             return { type: appConstants.USER_LOGOUT };
         }
+	}
+}
+
+export function initializeAuthState() {
+	return dispatch => {
+		dispatch(initializeState(appDataTypes.register))		
 	}
 }

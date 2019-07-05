@@ -1,5 +1,12 @@
 import appConstants from '../constants/reducerConstants/AppConstants';
 
+export function initializeState(dataType) {
+    return {
+        type: appConstants.INITIALIZE_STATE,
+        dataType
+    };
+}
+
 export function initializeRequest(dataType) {
     return {
         type: appConstants.INITIALIZE_REQUEST,
