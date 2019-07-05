@@ -13,15 +13,17 @@ export default function appReducer (state = initialState.app, action) {
         error = ''
     } = action;
 
-    const updateState = (isFetching = true, isSuccess = null) => {
+    const updateState = (isFetching = true, isSuccess = null, initial=false) => {
         return update(state, {
             [dataType]: {
-                $set: { isFetching, data, error, isSuccess }
+                $set: initial ? initialState.app[dataType] : { isFetching, data, error, isSuccess }
             }
         });
     };
 
     switch (type) {
+        case appConstants.INITIALIZE_STATE:
+            return updateState(false, false, true)
         case appConstants.INITIALIZE_REQUEST:
             return updateState(true);
         case appConstants.LOAD_DATA_SUCCESS:
