@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -34,7 +34,8 @@ class SignIn extends BaseComponent {
             email: '',
             password: '',
             startValidation: false,
-            valid: {}
+            valid: {},
+            isError: false
         };
 
     }
@@ -75,7 +76,7 @@ class SignIn extends BaseComponent {
         const { startValidation } = this.state;
 
         return (
-            <div className='btw-sign-in'>
+            <Container className='btw-sign-in'>
                 <Spinner loading={isFetching} />
                 <ErrorMessage error={error} />
                 <Paper className='paper'>
@@ -134,7 +135,7 @@ class SignIn extends BaseComponent {
                         link={routes.signUp}
                         linkText='Sign Up' />
                 </Paper>
-            </div>
+            </Container>
         )
     }
 }
