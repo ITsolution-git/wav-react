@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Container } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 
 import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, FirstNameInput, LastNameInput } from '../../shared';
@@ -77,7 +77,7 @@ class SignUp extends BaseComponent {
         const { startValidation } = this.state;
 
         return (
-            <div className='btw-sign-up'>
+            <Container className='btw-sign-up'>
                 <Spinner loading={isFetching} />
                 <ErrorMessage error={error} />
                 <Paper className='paper'>
@@ -159,7 +159,7 @@ class SignUp extends BaseComponent {
                     </Row>
                     <BottomLink />
                 </Paper>
-            </div>
+            </Container>
         )
     }
 }
