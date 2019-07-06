@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { BaseComponent, ProfileDropdown } from '../../shared';
 import { btwLogout } from '../../../actions/AuthActions';
 import routes from '../../../constants/Routes';
-import appDataTypes from "../../../constants/AppDataTypes";
 
 class HeaderProfileDropdown extends BaseComponent {
     goToSettings = () => {
