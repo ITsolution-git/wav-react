@@ -35,7 +35,8 @@ class SignIn extends BaseComponent {
             password: '',
             startValidation: false,
             valid: {},
-            isError: false
+            isError: false,
+            isAuthed: userInfo.token ? true : false
         };
 
     }
@@ -73,8 +74,10 @@ class SignIn extends BaseComponent {
 
     render() {
         const { error, isFetching } = this.props;
-        const { startValidation } = this.state;
-
+        const { startValidation, isAuthed } = this.state;
+        if (isAuthed)
+            return null
+        
         return (
             <Container className='btw-sign-in'>
                 <Spinner loading={isFetching} />
