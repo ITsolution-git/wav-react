@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import colors from '../../../constants/Colors';
 import routes from '../../../constants/Routes';
 import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm, SvgIcon } from '../../shared';
-import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart, WelcomeBanner, NoTaskBanner } from './index';
+import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart, WelcomeBanner, NoTaskBanner, ConfirmEmailMessage } from './index';
 
 class CaptainsDashboard extends BaseComponent {
 
@@ -230,7 +230,8 @@ class CaptainsDashboard extends BaseComponent {
                 voterContent: false
             },
             isFirstLogin: true,
-            isNotifyMe: true
+            isNotifyMe: true,
+            isConfirmEmail: true
         }
     }
 
@@ -251,6 +252,10 @@ class CaptainsDashboard extends BaseComponent {
 
     onNotifyHandler = () => {
         this.setState({ isNotifyMe: false });
+    }
+
+    onResendEmailHandler = () => {
+        this.setState({ isConfirmEmail: false });
     }
 
     renderWelcomeBanner = () => {
@@ -398,33 +403,35 @@ class CaptainsDashboard extends BaseComponent {
     }
 
     render() {
-        const { user, isNotifyMe } = this.state;
+        const { user, isNotifyMe, isConfirmEmail } = this.state;
 
         return (
             <Container className='btw-captains-dashboard'>
-                <Row className='user-info-content'>
-                    <Col md={5} lg={6} className='main-title'>
-                        <Typography>{`Welcome back, ${user.firstName}!`}</Typography>
-                        <Typography lightColor variant="body">Nice to meet you again.</Typography>
-                    </Col>
-                    <Col md={7} lg={6} className='p-0'>
-                        <DashboardUserInfo user={user} />
-                    </Col>
-                </Row>
-                {isNotifyMe ?
-                    <NoTaskBanner onNotify={this.onNotifyHandler} /> :
-                    <>
-                        {this.renderWelcomeBanner()}
-                        {this.renderCongrat()}
-                        {this.renderPerfomance()}
-                        {this.renderTasks()}
-                        {this.renderActions()}
-                        {this.renderVoters()}
-                    </>
-                }
-
-
-            </Container>
+                <ConfirmEmailMessage isShow={isConfirmEmail} onConfirm={this.onResendEmailHandler} />
+                <div className={classNames({ 'main-content-opacity': isConfirmEmail })}>
+                    <Row className='user-info-content'>
+                        <Col md={5} lg={6} className='main-title'>
+                            <Typography>{`Welcome back, ${user.firstName}!`}</Typography>
+                            <Typography lightColor variant="body">Nice to meet you again.</Typography>
+                        </Col>
+                        <Col md={7} lg={6} className='p-0'>
+                            <DashboardUserInfo user={user} />
+                        </Col>
+                    </Row>
+                    {
+                        isNotifyMe ?
+                            <NoTaskBanner onNotify={this.onNotifyHandler} /> :
+                            <>
+                                {this.renderWelcomeBanner()}
+                                {this.renderCongrat()}
+                                {this.renderPerfomance()}
+                                {this.renderTasks()}
+                                {this.renderActions()}
+                                {this.renderVoters()}
+                            </>
+                    }
+                </div>
+            </Container >
         )
     }
 }
