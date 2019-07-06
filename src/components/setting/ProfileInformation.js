@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { 
+import {
 	EmailInput,
 	FirstNameInput,
 	LastNameInput,
@@ -21,10 +21,10 @@ const ProfileInformation = (props) => {
 		email: '',
 		bio: ''
 	})
-	
+
 	const handleChange = (value, valid, name) => {
 		if (value) {
-			setData({ ...data, [name]: value})
+			setData({ ...data, [name]: value })
 		}
 		if (data.firstName && data.lastName && data.email) {
 			setValidated(true)
@@ -46,30 +46,30 @@ const ProfileInformation = (props) => {
 				onChange={handleChange}
 				startValidation={validated}
 			/>
-			<FirstNameInput 
+			<FirstNameInput
 				className='my-3'
 				onChange={handleChange}
-	            startValidation={validated}
-	            required />
-			<LastNameInput 
+				startValidation={validated}
+				required />
+			<LastNameInput
 				className='my-3'
 				onChange={handleChange}
-			    startValidation={validated}
-			    required />
-			<EmailInput 
+				startValidation={validated}
+				required />
+			<EmailInput
 				className='my-3'
 				onChange={handleChange}
-			    isVoter={false}
-			    startValidation={validated}
-			    uniqueValidationEnabled={false}
-			    required />
-			<ProfileInformationText 
+				isVoter={false}
+				startValidation={validated}
+				uniqueValidationEnabled={false}
+				required />
+			<ProfileInformationText
 				className='my-3'
 				onChange={handleChange}
-			    startValidation={false} />
-			<Button className='my-3 btn-submit' size='medium' onClick={onOpenSaveModal}>Save Changes</Button>
+				startValidation={false} />
+			<Button className='my-3 btn-submit' size='medium' disabled={!validated} onClick={onOpenSaveModal}>Save Changes</Button>
 
-			<SaveChangeDialog 
+			<SaveChangeDialog
 				open={openSaveModal}
 				onClose={onCloseModal}
 				onSave={onSubmit}
