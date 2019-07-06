@@ -98,8 +98,10 @@ class SignedOnHeader extends BaseComponent {
             activeItem
         } = this.state;
         const {
-            history: { location: { pathname } }
+            history: { location: { pathname } },
+            user
         } = this.props;
+        
         return (
             <Container className='btw-on-header' >
                 <div className='d-flex align-items-center py-2'>
@@ -134,7 +136,7 @@ class SignedOnHeader extends BaseComponent {
                             </div>
                         </>
                     }
-                    <HeaderProfileDropdown />
+                    <HeaderProfileDropdown profile={user} />
                 </div>
             </Container>
         )
@@ -144,8 +146,10 @@ class SignedOnHeader extends BaseComponent {
 
 const mapStateToProps = (state) => {
     const profile = state.app[appDataTypes.profile];
+    const user = authStorage.getLoggedUser();
     return {
-        profile
+        profile,
+        user
     };
 };
 

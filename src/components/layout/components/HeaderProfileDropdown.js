@@ -6,7 +6,6 @@ import { bindActionCreators } from 'redux';
 import { BaseComponent, ProfileDropdown } from '../../shared';
 import { btwLogout } from '../../../actions/AuthActions';
 import routes from '../../../constants/Routes';
-import appDataTypes from "../../../constants/AppDataTypes";
 
 class HeaderProfileDropdown extends BaseComponent {
     goToSettings = () => {
@@ -19,9 +18,9 @@ class HeaderProfileDropdown extends BaseComponent {
     };
 
     render() {
-        const { profile: {data} } = this.props;
-        const props={...this, ...data};
-
+        const { profile } = this.props;
+        const props={...this, ...profile};
+        
         return (
             <div className='btw-header-dropdown'>
                 <ProfileDropdown btwLogout={this.handleLogout}
@@ -32,12 +31,7 @@ class HeaderProfileDropdown extends BaseComponent {
     }
 }
 
-const mapStateToProps = (state) => {
-    const profile = state.app[appDataTypes.profile];
-    return {
-        profile
-    };
-};
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => {
     return {
