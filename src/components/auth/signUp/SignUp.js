@@ -34,7 +34,8 @@ class SignUp extends BaseComponent {
                 [fieldConstants.email]: false,
                 [fieldConstants.password]: false
             },
-            startValidation: false
+            startValidation: false,
+            isAuthed: userInfo.token ? true : false
         }
     }
 
@@ -78,7 +79,9 @@ class SignUp extends BaseComponent {
 
     render() {
         const { error, isFetching } = this.props;
-        const { startValidation } = this.state;
+        const { startValidation, isAuthed } = this.state;
+        if (isAuthed)
+            return null
 
         return (
             <Container className='btw-sign-up'>
