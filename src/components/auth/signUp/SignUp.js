@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Col, Row, Container } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
+import _ from 'lodash';
 
 import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, FirstNameInput, LastNameInput } from '../../shared';
 import { BottomLink, LeftIcon, SocialButton, ErrorMessage } from '../components';
@@ -35,12 +36,26 @@ class SignUp extends BaseComponent {
                 [fieldConstants.password]: false
             },
             startValidation: false,
+            error: false,
             isAuthed: userInfo.token ? true : false
         }
     }
 
     componentWillMount() {
         this.props.actions.initializeAuthState()
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.error && newProps.error !== this.props.error)
+            this.setState({ 
+                error: newProps.error, 
+                btwIdentity: {},
+                isValid: {},
+                startValidation: false,
+            }, () => {
+                this.pageToTop()
+                setTimeout(() => this.setState({ error: '' }), 4000)
+            })
     }
 
     handleSocialClick = connection => () => {
@@ -56,7 +71,7 @@ class SignUp extends BaseComponent {
     signUpWitMail = () => {
         const { isValid, btwIdentity } = this.state;
         this.setState({ startValidation: true });
-        if (Object.values(isValid).every(val => val)) {
+        if (!_.isEmpty(isValid) && !_.isEmpty(btwIdentity) && Object.values(isValid).every(val => val)) {
             this.props.actions.signUpWitMail(btwIdentity)
         }
     };
@@ -78,16 +93,16 @@ class SignUp extends BaseComponent {
     };
 
     render() {
-        const { error, isFetching } = this.props;
-        const { startValidation, isAuthed } = this.state;
+        const { isFetching } = this.props;
+        const { startValidation, error, btwIdentity, isAuthed } = this.state;
         if (isAuthed)
             return null
 
         return (
             <Container className='btw-sign-up'>
                 <Spinner loading={isFetching} />
-                <ErrorMessage error={error} />
                 <Paper className='paper'>
+                    <ErrorMessage error={error} />
                     <Row className='no-margin'>
                         <Typography className='title'>Sign Up</Typography>
                     </Row>
@@ -110,6 +125,7 @@ class SignUp extends BaseComponent {
                                 hideLabel
                                 leftIcon={<LeftIcon name='profile' />}
                                 startValidation={startValidation}
+                                defaultValue={btwIdentity[fieldConstants.firstName]}
                                 required />
                         </Col>
                     </Row>
@@ -120,6 +136,7 @@ class SignUp extends BaseComponent {
                                 hideLabel
                                 leftIcon={<LeftIcon name='profile' />}
                                 startValidation={startValidation}
+                                defaultValue={btwIdentity[fieldConstants.lastName]}
                                 required />
                         </Col>
                     </Row>
@@ -132,6 +149,7 @@ class SignUp extends BaseComponent {
                                 leftIcon={<LeftIcon name='envelope' />}
                                 startValidation={startValidation}
                                 uniqueValidationEnabled={false}
+                                defaultValue={btwIdentity[fieldConstants.email]}
                                 required />
                         </Col>
                     </Row>
@@ -143,6 +161,7 @@ class SignUp extends BaseComponent {
                                 leftIcon={<LeftIcon name='lock' />}
                                 placeholder='Password'
                                 startValidation={startValidation}
+                                defaultValue={btwIdentity[fieldConstants.password]}
                                 required />
                         </Col>
                     </Row>

@@ -28,6 +28,10 @@ class BaseComponent extends Component {
         )
     };
 
+    pageToTop = () => {
+        window.scrollTo(0, 0)
+    }
+
     isMobile = () => {
         return isMobile;
     };
