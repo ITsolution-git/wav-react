@@ -43,6 +43,8 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            justify-content: center;
+            min-width: 90px;
 
             .computer-mark-action-button{
                 width: unset;
@@ -51,6 +53,10 @@
                 @include respond-to($phone) {
                     display: none;
                 }
+            }
+
+            @include respond-to($phone) {
+                min-width: unset;
             }
         }
         .mobile-mark-action-button{

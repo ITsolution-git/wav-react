@@ -39,7 +39,7 @@ export const passwordValidation = (...args) => {
 
   const checkIfValid = (element) => {
     if (typeof element === 'string') {
-      if (!(element.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{6,})/))) {
+      if (!(element.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{7,})/))) {
         return false
       }
       return true;
