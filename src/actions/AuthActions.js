@@ -95,7 +95,7 @@ export function signUpWithToken(userInfo) {
 	const { token, idToken: { email }} = userInfo;
 
 	return dispatch => {
-
+		dispatch(signInWithToken(userInfo))
 		dispatch(initializeRequest(appDataTypes.register));
 
 		return identityService.getUser(email, token)
@@ -104,8 +104,6 @@ export function signUpWithToken(userInfo) {
 				if (registrationDate === lastLoginTime) {
 					lsManager.setItem(storageKeys.firstLogin, true);
 				}
-
-				return dispatch(signInWithToken(userInfo))
 			})
 			.catch(({ data: { message } }) => {
 				return dispatch(loadDataFailure(appDataTypes.register, message));
