@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { 
-	Typography, 
+import {
+	Typography,
 	SwitchButton
 } from '../shared';
 
@@ -14,7 +14,8 @@ const NotificationSetting = (props) => {
 		<div className='d-flex flex-column px-md-5 notify'>
 			<Typography variant='body'> We want you to stay updated at all times, so we kindly recommend you to turn notifications on. We won’t spam you – only inform on the most important updates and your profile activity. </Typography>
 			<div className='d-flex align-items-center mt-4'>
-				<SwitchButton onSwitch={onSwitchHandler} checked={true} /> <span className='ml-2'>Enable email notifications</span>
+				<SwitchButton onSwitch={onSwitchHandler} />
+				<Typography variant='body' className='ml-2'>Enable email notifications</Typography>
 			</div>
 		</div>
 	)
@@ -25,7 +26,7 @@ NotificationSetting.propTypes = {
 }
 
 NotificationSetting.defaultProps = {
-	onChange: e => {}
+	onChange: e => { }
 }
 
 export default NotificationSetting
