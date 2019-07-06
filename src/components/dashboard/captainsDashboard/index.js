@@ -4,6 +4,7 @@ import ExtraPointTask from './ExtraPointTask'
 import TopPerformers from './TopPerformers'
 import { PerformanceChart } from './performanceChart';
 import WelcomeBanner from './WelcomeBanner';
+import NoTaskBanner from './NoTaskBanner';
 import './styles/index.scss';
 
 export default CaptainsDashboard
@@ -12,5 +13,6 @@ export {
     ExtraPointTask,
     TopPerformers,
     PerformanceChart,
-    WelcomeBanner
+    WelcomeBanner,
+    NoTaskBanner
 }
