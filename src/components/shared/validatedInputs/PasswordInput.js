@@ -15,8 +15,11 @@ export default class PasswordInput extends InputBase {
             validatorError={
                 <div className='btw-password-error'>
                     <div id='requirements'>
-                        Your password must be at least 6 characters with one special
-                        character, one upper case letter and one numeric.
+                        Your password must be at least 6 characters with
+                        <br />
+                        One special character,
+                        <br />
+                        One upper case letter and one numeric.
                     </div>
                 </div>
             }
