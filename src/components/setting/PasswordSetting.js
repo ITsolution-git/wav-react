@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames'
 
-import { 
-	Typography, 
+import {
+	Typography,
 	PasswordInput,
 	Button
 } from '../shared';
 import { isMobileOnly } from '../../helpers/DeviceHelper'
+import colors from '../../constants/Colors';
 
 const PasswordSetting = (props) => {
 	const [validated, setValidated] = useState(false)
@@ -37,34 +38,34 @@ const PasswordSetting = (props) => {
 	return (
 		<div className='d-flex flex-column px-md-5 password'>
 			<Typography variant='body' className='my-4'>You can edit your password here.</Typography>
-			<PasswordInput 
+			<PasswordInput
 				className='my-3'
 				name='currentPassword'
 				label='Current password'
 				id='currentPassword'
 				onChange={handleChange}
-	            startValidation={validated}
-	            required />
-	        <PasswordInput 
+				startValidation={validated}
+				required />
+			<PasswordInput
 				className='my-3'
 				name='newPassword'
 				label='New password'
 				id='newPassword'
 				onChange={handleChange}
-	            startValidation={validated}
-	            required />
-	        <PasswordInput 
+				startValidation={validated}
+				required />
+			<PasswordInput
 				className='my-3'
 				name='confirmPassword'
 				label='Confirm new password'
 				id='confirmPassword'
 				onChange={handleChange}
-	            startValidation={validated}
-	            required />
-	        <div className={cn('d-flex justify-content-between align-items-center', {'flex-column': isMobileOnly})} >
-	        	<Button className='my-3' size='medium' onClick={onSubmit}>Save Changes</Button>
-	        	<Typography variant='body' fontWeight='700' className='forgot-password' onClick={onForgot}><u>Forgot Password?</u></Typography>
-	        </div>
+				startValidation={validated}
+				required />
+			<div className={cn('d-flex justify-content-between align-items-center', { 'flex-column': isMobileOnly })} >
+				<Button className='my-3' size='medium' onClick={onSubmit}>Save Changes</Button>
+				<Typography variant='body' fontWeight='600' color={colors.primary} onClick={onForgot}>Forgot Password?</Typography>
+			</div>
 		</div>
 	)
 }
