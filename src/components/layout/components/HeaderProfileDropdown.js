@@ -19,9 +19,9 @@ class HeaderProfileDropdown extends BaseComponent {
     };
 
     render() {
-        const { profile: {data} } = this.props;
-        const props={...this, ...data};
-
+        const { profile } = this.props;
+        const props={...this, ...profile};
+        
         return (
             <div className='btw-header-dropdown'>
                 <ProfileDropdown btwLogout={this.handleLogout}
@@ -32,12 +32,7 @@ class HeaderProfileDropdown extends BaseComponent {
     }
 }
 
-const mapStateToProps = (state) => {
-    const profile = state.app[appDataTypes.profile];
-    return {
-        profile
-    };
-};
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => {
     return {

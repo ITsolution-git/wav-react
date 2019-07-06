@@ -85,7 +85,7 @@ const ProfileDropdown = (props) => {
 	const size = props.isMobile() ? '50px' : '40px';
 	const name = `${props.firstname} ${props.lastname}`
 	const level = props.role
-	const data = {size, name, level}
+	const data = {size, name: name.trim() ? name : props.nickname, level, src: props.picture, email: props.email }
 	return (
 		<div className='justify-content-end'>
 		    <Dropdown 
