@@ -9,7 +9,13 @@ import { SearchInput, VoterCardView } from '../shared'
  */
 const StatusBar = (props) => {
 	const { isShow, count, keyword } = props
-	if (!isShow || !keyword) return ''
+	if (!isShow || !keyword) {
+		return (
+			<div className='mb-4'>
+				You have 10 voters in your list
+			</div>
+		)
+	}
 	return (
 		<div className='mb-4'>
 			We found {count} results for '{keyword}'
@@ -34,7 +40,7 @@ StatusBar.defaultProps = {
  */
 const VotersList = (props) => {
 	const { list, keyword, onSelectVoter } = props
-	const [ activeIndex, setActiveIndex ] = useState('')
+	const [activeIndex, setActiveIndex] = useState('')
 	const onSelectItem = index => () => {
 		setActiveIndex(index)
 		onSelectVoter(list[index])
@@ -42,8 +48,8 @@ const VotersList = (props) => {
 	return (
 		<div className='btw-voter-list mt-5'>
 			<StatusBar isShow={true} count={3} keyword={keyword} />
-			{list.map((item, key) => 
-				<VoterCardView 
+			{list.map((item, key) =>
+				<VoterCardView
 					key={key}
 					data={item}
 					keyword={keyword}
@@ -77,8 +83,8 @@ const VotersListView = (props) => {
 	return (
 		<div className='btw-voter-list-view'>
 			<SearchInput
-                placeholder='Search by name or address'
-                onChange={searchInputHandler}/>
+				placeholder='Search by name or address'
+				onChange={searchInputHandler} />
 			<VotersList list={list} keyword={keyword} {...props} />
 		</div>
 	)
