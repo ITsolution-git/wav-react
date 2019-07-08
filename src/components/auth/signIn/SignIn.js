@@ -35,10 +35,23 @@ class SignIn extends BaseComponent {
             password: '',
             startValidation: false,
             valid: {},
-            isError: false,
+            error: '',
             isAuthed: userInfo.token ? true : false
         };
 
+    }
+
+    componentWillReceiveProps(newProps) {
+        if (newProps.error && newProps.error !== this.props.error)
+            this.setState({
+                error: newProps.error,
+                password: '',
+                isValid: {},
+                startValidation: false,
+            }, () => {
+                this.pageToTop()
+                setTimeout(() => this.setState({ error: '' }), 4000)
+            })
     }
 
     handleSocialClick = connection => () => {
@@ -73,16 +86,16 @@ class SignIn extends BaseComponent {
     };
 
     render() {
-        const { error, isFetching } = this.props;
-        const { startValidation, isAuthed } = this.state;
+        const { isFetching } = this.props;
+        const { error, startValidation, isAuthed, password } = this.state;
         if (isAuthed)
             return null
-        
+
         return (
             <Container className='btw-sign-in'>
                 <Spinner loading={isFetching} />
-                <ErrorMessage error={error} />
                 <Paper className='paper'>
+                    <ErrorMessage error={error} />
                     <Row className='no-margin'>
                         <Typography className='title'>Log In</Typography>
                     </Row>
@@ -114,6 +127,7 @@ class SignIn extends BaseComponent {
                         <Col md={12} className='input'>
                             <PasswordInput onChange={this.handleChange}
                                 label='Password'
+                                defaultValue={password}
                                 hideLabel
                                 leftIcon={<LeftIcon name='lock' />}
                                 placeholder='Password'
