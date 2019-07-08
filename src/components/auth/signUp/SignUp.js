@@ -47,8 +47,8 @@ class SignUp extends BaseComponent {
 
     componentWillReceiveProps(newProps) {
         if (newProps.error && newProps.error !== this.props.error)
-            this.setState({ 
-                error: newProps.error, 
+            this.setState({
+                error: newProps.error,
                 btwIdentity: {},
                 isValid: {},
                 startValidation: false,
@@ -122,6 +122,7 @@ class SignUp extends BaseComponent {
                         <Col md={12} className='input'>
                             <FirstNameInput
                                 onChange={this.handleChange}
+                                maxLength='30'
                                 hideLabel
                                 leftIcon={<LeftIcon name='profile' />}
                                 startValidation={startValidation}
@@ -133,6 +134,7 @@ class SignUp extends BaseComponent {
                         <Col md={12} className='input'>
                             <LastNameInput
                                 onChange={this.handleChange}
+                                maxLength='30'
                                 hideLabel
                                 leftIcon={<LeftIcon name='profile' />}
                                 startValidation={startValidation}
