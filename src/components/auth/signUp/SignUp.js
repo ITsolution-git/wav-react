@@ -47,11 +47,13 @@ class SignUp extends BaseComponent {
 
     componentWillReceiveProps(newProps) {
         if (newProps.error && newProps.error !== this.props.error)
-            this.setState({
-                error: newProps.error,
-                btwIdentity: {},
-                isValid: {},
-                startValidation: false,
+            this.setState(prevState => {
+                return {
+                    error: newProps.error,
+                    btwIdentity: { ...prevState.btwIdentity, password: '' },
+                    isValid: {},
+                    startValidation: false
+                }
             }, () => {
                 this.pageToTop()
                 setTimeout(() => this.setState({ error: '' }), 4000)
