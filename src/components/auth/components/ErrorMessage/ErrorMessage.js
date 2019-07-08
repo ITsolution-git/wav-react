@@ -3,7 +3,7 @@ import React from 'react';
 import { Typography, ErrorAlarm } from '../../../shared';
 import './styles.scss';
 
-const ErrorMessage = ({ title = 'That’s strange', error = '' }) => {
+const ErrorMessage = ({ title = 'Sorry,', error = '' }) => {
 
     return !!error ?
         <ErrorAlarm className='bac-error-message'>
