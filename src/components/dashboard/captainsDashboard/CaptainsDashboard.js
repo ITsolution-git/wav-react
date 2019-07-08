@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import colors from '../../../constants/Colors';
 import routes from '../../../constants/Routes';
+import authStorage from '../../../storage/AuthStorage';
 import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm, SvgIcon } from '../../shared';
 import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart, WelcomeBanner, NoTaskBanner, ConfirmEmailMessage } from './index';
 
@@ -404,10 +405,11 @@ class CaptainsDashboard extends BaseComponent {
 
     render() {
         const { user, isNotifyMe, isConfirmEmail } = this.state;
+        const { user: { email } } = this.props;
 
         return (
             <Container className='btw-captains-dashboard'>
-                <ConfirmEmailMessage isShow={isConfirmEmail} onConfirm={this.onResendEmailHandler} />
+                <ConfirmEmailMessage email={email} isShow={isConfirmEmail} onConfirm={this.onResendEmailHandler} />
                 <div className={classNames({ 'main-content-opacity': isConfirmEmail })}>
                     <Row className='user-info-content'>
                         <Col md={5} lg={6} className='main-title'>
@@ -436,4 +438,11 @@ class CaptainsDashboard extends BaseComponent {
     }
 }
 
-export default connect()(withRouter(CaptainsDashboard));
+const mapStateToProps = (state) => {
+    const user = authStorage.getLoggedUser();
+    return {
+        user
+    };
+};
+
+export default connect(mapStateToProps)(withRouter(CaptainsDashboard));
