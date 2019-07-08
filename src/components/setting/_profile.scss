@@ -76,6 +76,12 @@
 			}
 		}
 
+		.logout-button{
+			@include respond-to($phone) {
+		  	display: none !important;
+			}	
+		}
+
 		@include respond-to($portable) {
 		  	justify-content: space-between;
 		  	margin-bottom: 2em;
