@@ -4,9 +4,13 @@ import { Table } from 'react-bootstrap';
 import classNames from 'classnames';
 import _ from 'lodash';
 
-import { BaseComponent, Checkbox, SocialList, StatusIcon } from '../shared';
+import { BaseComponent, Checkbox, SocialList, StatusIcon } from '..';
 
 class VotersTable extends BaseComponent {
+
+    isSelect = () => {
+        return this.props.type === 'select';
+    }
 
     clearHandler = (id) => {
         let { selectedData, onSelect } = this.props;
@@ -17,7 +21,7 @@ class VotersTable extends BaseComponent {
 
     addHandler = (item) => {
         let { selectedData, onSelect, maxSelectedVoters } = this.props;
-        if (selectedData.length >= maxSelectedVoters) {
+        if ((selectedData.length >= maxSelectedVoters) && this.isSelect()) {
             return null;
         }
         selectedData = [
@@ -136,6 +140,7 @@ class VotersTable extends BaseComponent {
 }
 
 VotersTable.propTypes = {
+    type: PropTypes.oneOf(['select', 'add']),
     data: PropTypes.array,
     selectedData: PropTypes.array,
     maxSelectedVoters: PropTypes.number,
@@ -143,7 +148,8 @@ VotersTable.propTypes = {
 };
 
 VotersTable.defaultProps = {
-    maxSelectedVoters: 10
+    maxSelectedVoters: 10,
+    type: 'select'
 }
 
 export default VotersTable;

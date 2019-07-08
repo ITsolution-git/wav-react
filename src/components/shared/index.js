@@ -21,8 +21,6 @@ import Spinner from './Spinner'
 import StatusIcon from './StatusIcon'
 import SvgIcon from './SvgIcon'
 import Typography from './Typography'
-import VotersProgressBar from './VotersProgressBar'
-import VotersTable from './VotersTable'
 import {
 	VoterCardView,
 	VoterInfo,
@@ -38,11 +36,12 @@ import {
 	CommentsList
 } from './voterComponents'
 import {
-	SelectVoters as AddVoters,
 	SocialInfo,
 	VoterNotFound,
-	ConnectListInfo
-} from './selectVoters'
+	ConnectListInfo,
+	VotersProgressBar,
+	VotersTable
+} from './selectVoterComponents'
 
 import VoterStatusDropdown from './VoterStatusDropdown'
 import Tabs from './Tabs';
@@ -107,7 +106,6 @@ export {
 	TitleAndDescription,
 	StepProgressBar,
 	RightProgressPanel,
-	AddVoters,
 	SocialInfo,
 	VoterNotFound,
 	ConnectListInfo,

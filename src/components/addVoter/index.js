@@ -1,3 +1,4 @@
-import AddVoterToList from './AddVoterToList'
+import AddVoterManagement from './AddVoterManagement'
+import './styles/index.scss';
 
-export default AddVoterToList;
+export default AddVoterManagement;

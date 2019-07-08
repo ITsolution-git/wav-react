@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 
-import { BaseComponent, Button, Typography } from '../shared';
+import { BaseComponent, Button, Typography } from '..';
 
 class VotersProgressBar extends BaseComponent {
 
@@ -14,10 +14,24 @@ class VotersProgressBar extends BaseComponent {
         }
     }
 
-    clickHandler = () => {
-        const { selectedVoters, maxVoters, onNext } = this.props;
+    isSelect = () => {
+        return this.props.type === 'select';
+    }
 
-        if (selectedVoters.length === maxVoters) {
+    isFinish = () => {
+        const { selectedVoters, maxVoters } = this.props;
+
+        if (this.isSelect()) {
+            return selectedVoters.length === maxVoters;
+        } else {
+            return selectedVoters.length >= 1;
+        }
+    }
+
+    clickHandler = () => {
+        const { onNext } = this.props;
+
+        if (this.isFinish()) {
             onNext();
         }
     }
@@ -66,13 +80,15 @@ class VotersProgressBar extends BaseComponent {
     renderProgressBar = () => {
         const { selectedVoters, maxVoters } = this.props;
 
-        return (
-            <div className='progress-container'>
-                {[...Array(maxVoters)].map((e, i) => {
-                    return <div key={i} className={classNames('item', { 'active': selectedVoters.length > i })} />
-                })}
-            </div>
-        );
+        if (this.isSelect()) {
+            return (
+                <div className='progress-container'>
+                    {[...Array(maxVoters)].map((e, i) => {
+                        return <div key={i} className={classNames('item', { 'active': selectedVoters.length > i })} />
+                    })}
+                </div>
+            );
+        }
     }
 
     render() {
@@ -86,7 +102,9 @@ class VotersProgressBar extends BaseComponent {
                         <div className='zoom' onClick={this.zoomHandler} />
                     </div>
                     <div className='status-container'>
-                        <div className='status'>Added {selectedVoters.length}/{maxVoters}:</div>
+                        <div className='status'>
+                            Added {selectedVoters.length}
+                            {this.isSelect() && `/${maxVoters}`}:</div>
                         <span
                             className={classNames('clear', { 'active': selectedVoters.length !== 0 })}
                             onClick={this.clearAllHandler}>
@@ -99,8 +117,8 @@ class VotersProgressBar extends BaseComponent {
                 <div className='button-container'>
                     <Button
                         onClick={this.clickHandler}
-                        disabled={selectedVoters.length < maxVoters} >
-                        Next Step
+                        disabled={!this.isFinish()} >
+                        {this.isSelect() ? 'Next Step' : 'Finish'}
                     </Button>
                 </div>
             </div>
@@ -109,6 +127,7 @@ class VotersProgressBar extends BaseComponent {
 }
 
 VotersProgressBar.propTypes = {
+    type: PropTypes.oneOf(['select', 'add']),
     selectedVoters: PropTypes.array,
     maxVoters: PropTypes.number,
     onClear: PropTypes.func,
@@ -116,7 +135,8 @@ VotersProgressBar.propTypes = {
 };
 
 VotersProgressBar.defaultProps = {
-    maxVoters: 10
+    maxVoters: 10,
+    type: 'select'
 }
 
 export default VotersProgressBar;
