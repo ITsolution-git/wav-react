@@ -92,7 +92,7 @@ class ChangePassword extends BaseComponent {
                         <Col md={12}>
                             <PasswordInput
                                 startValidation
-                                placeholder='Your password (at least 6 charachters)'
+                                placeholder='Your password (at least 7 charachters)'
                                 onChange={this.handleChange}
                                 isVoter={false}
                                 name='password'
