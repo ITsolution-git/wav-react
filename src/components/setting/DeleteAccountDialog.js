@@ -11,8 +11,8 @@ const DeleteAccountDialog = props => (
 		onClose={props.onClose}
 		title='Delete Your Account'
 		actionButtons={[
-			<Button key='btn-1' size='medium' color='red' onClick={props.onDelete} className={'primary'}>Delet Account</Button>,
-			<Button key='btn-2' size='medium' onClick={props.onClose} className={'secondary'}>Cancel</Button>	
+			<Button key='btn-1' size='medium' color='red' onClick={props.onDelete} className={'primary'}>Delete Account</Button>,
+			<Button key='btn-2' size='medium' onClick={props.onClose} className={'secondary'}>Cancel</Button>
 		]}
 		closeButton
 	>
