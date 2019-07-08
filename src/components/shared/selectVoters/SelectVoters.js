@@ -242,7 +242,9 @@ class SelectVoters extends BaseComponent {
         this.onLink(routes.socialConnect);
     };
 
-    importFilesHandler = () => { }
+    importFilesHandler = () => {
+        this.onLink(routes.socialConnect);
+    }
 
     switchStatusHandler = (fileIndex) => { }
 
