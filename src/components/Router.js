@@ -16,7 +16,7 @@ import { Profile } from './setting';
 import WelcomePage from './onBoarding/WelcomePage';
 import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
 import SelectDistrict from './onBoarding/selectDistrict/SelectDistrict';
-import SelectVoterManagement from './onBoarding/selectVoter';
+import SelectVoterManagement from './onBoarding/selectVoters';
 
 import { CaptainsDashboard, Leaderboard } from './dashboard';
 import HelpCenter from './helpCenter';

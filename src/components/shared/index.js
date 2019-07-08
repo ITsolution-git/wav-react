@@ -41,7 +41,7 @@ import {
 	ConnectListInfo,
 	VotersProgressBar,
 	VotersTable
-} from './selectVoters'
+} from './selectVoterComponents'
 
 import VoterStatusDropdown from './VoterStatusDropdown'
 import Tabs from './Tabs';
