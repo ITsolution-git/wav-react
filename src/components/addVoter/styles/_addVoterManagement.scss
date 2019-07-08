@@ -78,6 +78,10 @@
 
         .table-description {
             padding: 13px 10px;
+
+            @include respond-to($phone) {
+               display: none;
+            }
         }
 
         @include respond-to($phone) {
@@ -85,7 +89,7 @@
             box-shadow: unset;
             border-radius: 0;
             background-color: unset;
-            margin:0 0 140px 0;
+            margin:20px 0 140px 0;
         }
 
         @include respond-to($tablet) {
@@ -136,5 +140,11 @@
 
     .connect-list-info{
         margin-bottom: 24px;
+    }
+}
+
+.bav-alert-dialog{
+    @include respond-to($desktop) {
+        display: none !important;
     }
 }

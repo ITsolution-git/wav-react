@@ -132,7 +132,7 @@
     @include respond-to($phone) {
         position: fixed;
         bottom: 0;
-        z-index: 10000;
+        z-index: 1020;
         right: 0px;
         width: 100%
     }

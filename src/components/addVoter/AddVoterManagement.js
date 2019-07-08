@@ -375,27 +375,26 @@ class AddVoterManagement extends BaseComponent {
 
         return (
             <Dialog
-                id='selectedVotersAlertDialog'
+                id='addedVotersAlertDialog'
                 title='Add more voters to your list'
                 show={showAlertModal}
                 actionButtons={
-                    <Row>
-                        <Col xs={12}>
-                            <Button
-                                fullWidth
-                                id='selectedVotersAlertDialog'
-                                onClick={this.closeModalHandler}>
-                                Ok, got it!
-                            </Button>
-                        </Col>
-                    </Row>
+                    <Button
+                        fullWidth
+                        id='addedVotersAlertDialog'
+                        onClick={this.closeModalHandler}>
+                        Ok, got it!
+                    </Button>
                 }
-                onClose={this.closeModalHandler}>
+                onClose={this.closeModalHandler}
+                className='bav-alert-dialog'>
                 <div>
                     <Typography variant='body' lightColor className='mb-2'>
-                        We matched you with 40 of your social media friends.
-                        Select people among your social media friends or search for
-                        other people you know among all the voters of your district.
+                        {this.isNotConnected() ?
+                            `Search for people you know among all the voters of your district.` :
+                            `We matched you with 40 of your social media friends.
+                            Select people among your social media friends or search for
+                            other people you know among all the voters of your district.`}
                     </Typography>
                     <Typography variant='body' lightColor>
                         Try to choose a few among <b>regular voters</b>,

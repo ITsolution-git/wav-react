@@ -1,5 +1,5 @@
 .btw-modal {
-    z-index: 100000;
+    z-index: 10000 !important;
     display: flex !important;
     align-items: center;
 
@@ -9,7 +9,7 @@
         justify-content: center;
         
         @include respond-to($phone) {
-            padding: 0 36px;
+            padding: 0 24px;
         }
 
         .modal-content {
