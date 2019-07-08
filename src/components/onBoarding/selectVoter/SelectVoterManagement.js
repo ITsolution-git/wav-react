@@ -4,13 +4,14 @@ import { withRouter } from 'react-router-dom';
 import { Row, Col, Container } from 'react-bootstrap';
 import _ from 'lodash';
 
-import routes from '../../constants/Routes';
+import routes from '../../../constants/Routes';
+import { storageKeys, LocalStorageManager as lsManager } from '../../../storage';
 import {
     BaseComponent, Button, Typography, Dialog, VotersTable, SearchInput,
     VotersProgressBar, SocialInfo, VoterNotFound, ConnectListInfo
-} from '../shared';
+} from '../../shared';
 
-class AddVoterManagement extends BaseComponent {
+class SelectVoterManagement extends BaseComponent {
     constructor() {
         super();
         this.state = {
@@ -184,7 +185,7 @@ class AddVoterManagement extends BaseComponent {
             selectedVoters: [],
             showAlertModal: false,
             searchString: '',
-            importFiles: [
+            files: [
                 {
                     name: 'voters_list.csv',
                     isOn: true
@@ -227,7 +228,8 @@ class AddVoterManagement extends BaseComponent {
     };
 
     nextHandler = () => {
-        this.onLink(routes.voterList);
+        lsManager.removeItem(storageKeys.firstLogin);
+        this.redirectToHome();
     };
 
     closeModalHandler = () => {
@@ -249,49 +251,26 @@ class AddVoterManagement extends BaseComponent {
     switchStatusHandler = (fileIndex) => { }
 
     renderDescription = () => {
-        const { importFiles } = this.state;
-        const isNoFile = importFiles.length === 0;
 
-        if (!this.isNotConnected()) {
-            return (
-                <>
-                    <Typography variant='body' lightColor className='page-description'>
-                        Add more voters to your list. Select people among your social media
-                        friends or search for other people you know among all the voters of your district.
-                        {isNoFile &&
-                            <>
-                                You can also <span onClick={this.socialConnectHandler}> import your own list of voters</span>
-                                , you would ike to work with.
-                            </>
-                        }
-                    </Typography>
-                    <Typography variant='body' lightColor className='page-description'>
-                        Try to choose a few among <b>regular voters</b>, a few among
-                        <b> infrequent voters</b>, and a few <b>unregistered voters</b>.
-                    </Typography>
-                </>
-            );
-        } else {
-            return (
-                <>
-                    <Typography variant='body' lightColor className='page-description'>
-                        Add more people to your list. Search for people you know among all the voters of your district.
-                        Try to choose a few among <b>regular voters</b>, a few among <b>infrequent voters</b>,
-                        and a few <b>unregistered voters</b>.
-                    </Typography>
-                    <Typography variant='body' lightColor className='page-description'>
-                        To ease your searching process
-                        <span onClick={this.socialConnectHandler}> connect your social media accounts</span>.
-                        You can also <span onClick={this.socialConnectHandler}>import your own list of voters</span>,
-                        you would like to work with. Accepted formats: .csv, Excel (.xls, .xlsx)
-                    </Typography>
+        return (
+            <>
+                <Typography className='page-title'>
+                    Add 10 voters to your list
+                </Typography>
+                <Typography variant='body' lightColor className='page-description'>
+                    Select <b>10 people</b> among your social media friends or search
+                    for other people you know among all the voters of your district.
+                    Try to choose a few among <b>regular voters</b>, a few among
+                    <b> infrequent voters</b>, and a few <b>unregistered voters</b>.
+                </Typography>
+                {this.isNotConnected() &&
                     <Typography variant='body' className='page-no-connect-description'>
                         To ease your searching process
                         <span onClick={this.socialConnectHandler}> connect your social media accounts.</span>
                     </Typography>
-                </>
-            );
-        }
+                }
+            </>
+        );
     };
 
     renderSocialInfo = (device) => {
@@ -308,11 +287,11 @@ class AddVoterManagement extends BaseComponent {
     };
 
     renderConnectListInfo = () => {
-        const { importFiles } = this.state;
+        const { files } = this.state;
 
         return (
             <ConnectListInfo
-                files={importFiles}
+                files={files}
                 importFiles={this.importFilesHandler}
                 switchStatus={this.switchStatusHandler}
                 className='connect-list-info' />
@@ -328,7 +307,6 @@ class AddVoterManagement extends BaseComponent {
                 selectedVoters={selectedVoters}
                 onClear={this.clearSelectedVotersHandler}
                 onNext={this.nextHandler}
-                type='add'
                 className={`voter-progress-bar-${device}`} />
         );
     };
@@ -366,7 +344,6 @@ class AddVoterManagement extends BaseComponent {
                     </Typography>
                     <VotersTable
                         data={data}
-                        type='add'
                         selectedData={selectedVoters}
                         onSelect={this.selectTableHandler} />
                 </div>
@@ -378,30 +355,30 @@ class AddVoterManagement extends BaseComponent {
 
         return (
             <Dialog
-                id='addedVotersAlertDialog'
-                title='Add more voters to your list'
+                id='selectedVotersAlertDialog'
+                title='Hurray! We matched you with 40 of your friends.'
                 show={showAlertModal}
                 actionButtons={
-                    <Button
-                        fullWidth
-                        id='addedVotersAlertDialog'
-                        onClick={this.closeModalHandler}>
-                        Ok, got it!
-                    </Button>
+                    <Row>
+                        <Col xs={12}>
+                            <Button
+                                fullWidth
+                                id='selectedVotersAlertDialog'
+                                onClick={this.closeModalHandler}>
+                                Ok, got it!
+                            </Button>
+                        </Col>
+                    </Row>
                 }
-                onClose={this.closeModalHandler}
-                className='bav-alert-dialog'>
+                onClose={this.closeModalHandler}>
                 <div>
-                    <Typography variant='body' lightColor className='mb-2'>
-                        {this.isNotConnected() ?
-                            `Search for people you know among all the voters of your district.` :
-                            `We matched you with 40 of your social media friends.
-                            Select people among your social media friends or search for
-                            other people you know among all the voters of your district.`}
+                    <Typography variant='body' displayInline lightColor>
+                        Select 10 people among your social media friends or search
+                        for other people you know among all the voters of your district.
                     </Typography>
-                    <Typography variant='body' lightColor>
-                        Try to choose a few among <b>regular voters</b>,
-                        a few among <b>infrequent voters</b>, and a few <b>unregistered voters</b>.
+                    <Typography variant='body' displayInline lightColor>
+                        Try to choose a few among regular voters, a few among
+                        infrequent voters, and a few unregistered voters.
                     </Typography>
                 </div>
             </Dialog>
@@ -412,14 +389,11 @@ class AddVoterManagement extends BaseComponent {
 
         return (
             <Container>
-                <Row className='btw-add-voters'>
+                <Row className='btw-select-voters'>
                     <Col>
                         <Row>
                             <Col md={12} lg={9}>
                                 {this.renderSocialInfo('tablet')}
-                                <Typography className='page-title'>
-                                    Add voters to your list
-                                </Typography>
                                 {this.renderDescription()}
                             </Col>
                         </Row>
@@ -454,4 +428,4 @@ class AddVoterManagement extends BaseComponent {
 const mapDispatchToProps = (dispatch) => ({
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(AddVoterManagement));
+export default connect(null, mapDispatchToProps)(withRouter(SelectVoterManagement));

@@ -1,12 +1,14 @@
-import SelectVoters from './SelectVoters'
 import SocialInfo from './SocialInfo'
 import VoterNotFound from './VoterNotFound'
 import ConnectListInfo from './ConnectListInfo'
+import VotersProgressBar from './VotersProgressBar'
+import VotersTable from './VotersTable'
 import './styles/index.scss';
 
 export {
-    SelectVoters,
     SocialInfo,
     VoterNotFound,
-    ConnectListInfo
+    ConnectListInfo,
+    VotersProgressBar,
+    VotersTable
 }

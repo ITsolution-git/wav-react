@@ -16,7 +16,7 @@ import { Profile } from './setting';
 import WelcomePage from './onBoarding/WelcomePage';
 import SocialConnect from './onBoarding/socialNetworks/SocialConnect';
 import SelectDistrict from './onBoarding/selectDistrict/SelectDistrict';
-import { SelectVoters } from './shared/selectVoters';
+import SelectVoterManagement from './onBoarding/selectVoter';
 
 import { CaptainsDashboard, Leaderboard } from './dashboard';
 import HelpCenter from './helpCenter';
@@ -40,7 +40,7 @@ const router = () => (
         <Route exact path={routes.verifyEmail} component={Authorization(VerifyEmail, [captain])} />
 
         {/* on boarding */}
-        <Route exact path={routes.selectVoters} component={Authorization(SelectVoters, [captain])} />
+        <Route exact path={routes.selectVoters} component={Authorization(SelectVoterManagement, [captain])} />
         <Route exact path={routes.welcome} component={Authorization(WelcomePage, [captain])} />
         <Route exact path={routes.selectDistrict} component={Authorization(SelectDistrict, [captain])} />
         <Route exact path={routes.socialConnect} component={Authorization(SocialConnect, [captain])} />

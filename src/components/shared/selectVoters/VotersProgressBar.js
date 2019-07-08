@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Row, Col } from 'react-bootstrap';
 
-import { BaseComponent, Button, Typography } from '../shared';
+import { BaseComponent, Button, Typography } from '..';
 
 class VotersProgressBar extends BaseComponent {
 
