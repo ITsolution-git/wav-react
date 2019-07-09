@@ -11,20 +11,21 @@ export default class ConfirmationDialog extends BaseComponent {
             cancelText='Cancel',
             title='',
             description = '',
-            onSubmit
+            onSubmit,
         } = this.props;
         return (
-            <Dialog show={show}
-                    title={title}
-                    onHide={onClose}
-                    actionButtons={
-                        <>
-                            <Button fullWidth onClick={onSubmit}>{submitText}</Button>
-                            <Button fullWidth onClick={onClose}>{cancelText}</Button>
-                        </>
-                    }
-                    className='btw-confirmation-dialog'>
-                   <Typography variant='body' fontWeight='600'>{ description }</Typography>
+            <Dialog
+                className='btw-account-modal'
+                show={show}
+                onClose={onClose}
+                title={title}
+                actionButtons={[
+                    <Button key='btn-1' size='medium' onClick={onClose} className={'primary'}>{submitText}</Button>,
+                    <Button key='btn-2' size='medium' color='white' onClick={onSubmit} className={'secondary leave'}>{cancelText}</Button>    
+                ]}
+                closeButton
+            >
+                <Typography variant='body' fontWeight='600'><span dangerouslySetInnerHTML={{__html: description}} /></Typography>
             </Dialog>
         );
     }

@@ -45,8 +45,12 @@ class OnBoardingHeader extends BaseComponent {
                 </div>
             </Container>
             <ConfirmationDialog show={showAlertModal}
+                        title='Warning!'
+                        submitText='Cancel'
+                        cancelText='OK'
                         onSubmit={this.handleAlertSubmit}
-                        description={`Warning! If you leave the onboarding you'll be required to pick up where you left. After clicking 'Ok' you will be automatically signed out`}
+                        description={`If you stop the onboarding process you'll be required to pick up where you left when next you log in.<br />
+                                After clicking 'Ok' you will be automatically signed out`}
                         onClose={this.hideAlertModal} />
             </>
         )
