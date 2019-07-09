@@ -132,7 +132,6 @@ VotersProgressBar.propTypes = {
     maxVoters: PropTypes.number,
     onClear: PropTypes.func,
     onNext: PropTypes.func,
-    label: PropTypes.string
 };
 
 VotersProgressBar.defaultProps = {
