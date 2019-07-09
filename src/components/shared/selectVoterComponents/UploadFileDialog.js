@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 
-import { BaseComponent, Button, Dialog, SvgIcon, Typography } from '../../shared';
+import { BaseComponent, Button, Dialog, SvgIcon, Typography } from '../index';
 
 class UploadFileDialog extends BaseComponent {
 
