@@ -5,8 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 import AuthStorage from '../../../storage/AuthStorage'
-import { BaseComponent, Button, Typography } from '../../shared'
-import { SocialItem, UploadFileDialog } from './index';
+import { BaseComponent, Button, Typography, UploadFileDialog } from '../../shared'
+import { SocialItem } from './index';
 import { updateProfile, updateOnboardingBySource } from '../../../actions';
 
 class SocialConnect extends BaseComponent {
@@ -29,7 +29,7 @@ class SocialConnect extends BaseComponent {
     showResultHandler = () => {
         if (this.state.isImported) {
             const { user, actions } = this.props
-            actions.updateProfile(updateOnboardingBySource(user, true), true)        
+            actions.updateProfile(updateOnboardingBySource(user, true), true)
         }
     };
 
