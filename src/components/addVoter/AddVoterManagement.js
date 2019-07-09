@@ -7,7 +7,7 @@ import _ from 'lodash';
 import routes from '../../constants/Routes';
 import {
     BaseComponent, Button, Typography, Dialog, VotersTable, SearchInput,
-    VotersProgressBar, SocialInfo, VoterNotFound, ConnectListInfo
+    VotersProgressBar, SocialInfo, VoterNotFound, ConnectListInfo, UploadFileDialog
 } from '../shared';
 
 class AddVoterManagement extends BaseComponent {
@@ -183,6 +183,7 @@ class AddVoterManagement extends BaseComponent {
             ],
             selectedVoters: [],
             showAlertModal: false,
+            isUploadDialogShow: false,
             searchString: '',
             importFiles: [
                 {
@@ -243,7 +244,16 @@ class AddVoterManagement extends BaseComponent {
     };
 
     importFilesHandler = () => {
+        this.setState({ isUploadDialogShow: true });
+    }
+
+    onSuccessUploadDialog = files => {
+        this.setState({ isUploadDialogShow: false })
         this.onLink(routes.socialConnect);
+    }
+
+    onCloseUploadDialog = () => {
+        this.setState({ isUploadDialogShow: false })
     }
 
     switchStatusHandler = (fileIndex) => { }
@@ -258,9 +268,9 @@ class AddVoterManagement extends BaseComponent {
                     <Typography variant='body' lightColor className='page-description'>
                         Add more voters to your list. Select people among your social media
                         friends or search for other people you know among all the voters of your district.
-                        {isNoFile &&
+                        {!isNoFile &&
                             <>
-                                You can also <span onClick={this.socialConnectHandler}> import your own list of voters</span>
+                                You can also <span onClick={this.importFilesHandler}> import your own list of voters</span>
                                 , you would ike to work with.
                             </>
                         }
@@ -282,7 +292,7 @@ class AddVoterManagement extends BaseComponent {
                     <Typography variant='body' lightColor className='page-description'>
                         To ease your searching process
                         <span onClick={this.socialConnectHandler}> connect your social media accounts</span>.
-                        You can also <span onClick={this.socialConnectHandler}>import your own list of voters</span>,
+                        You can also <span onClick={this.importFilesHandler}>import your own list of voters</span>,
                         you would like to work with. Accepted formats: .csv, Excel (.xls, .xlsx)
                     </Typography>
                     <Typography variant='body' className='page-no-connect-description'>
@@ -409,6 +419,7 @@ class AddVoterManagement extends BaseComponent {
     };
 
     render() {
+        const { isUploadDialogShow } = this.state;
 
         return (
             <Container>
@@ -445,6 +456,10 @@ class AddVoterManagement extends BaseComponent {
                     {this.renderVotersProgressBar('tablet')}
                 </Row >
                 {this.renderDialog()}
+                <UploadFileDialog
+                    show={isUploadDialogShow}
+                    onClose={this.onCloseUploadDialog}
+                    onSuccess={this.onSuccessUploadDialog} />
             </Container>
         );
     }

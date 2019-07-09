@@ -10,7 +10,7 @@ import AuthStorage from '../../../storage/AuthStorage'
 import { storageKeys, LocalStorageManager as lsManager } from '../../../storage';
 import {
     BaseComponent, Button, Typography, Dialog, VotersTable, SearchInput,
-    VotersProgressBar, SocialInfo, VoterNotFound, ConnectListInfo
+    VotersProgressBar, SocialInfo, VoterNotFound, ConnectListInfo, UploadFileDialog
 } from '../../shared';
 import { updateProfile, updateOnboardingByVoter } from '../../../actions';
 
@@ -187,6 +187,7 @@ class SelectVoterManagement extends BaseComponent {
             ],
             selectedVoters: [],
             showAlertModal: false,
+            isUploadDialogShow: false,
             searchString: '',
             files: [
                 {
@@ -249,7 +250,16 @@ class SelectVoterManagement extends BaseComponent {
     };
 
     importFilesHandler = () => {
+        this.setState({ isUploadDialogShow: true });
+    }
+
+    onSuccessUploadDialog = files => {
+        this.setState({ isUploadDialogShow: false })
         this.onLink(routes.socialConnect);
+    }
+
+    onCloseUploadDialog = () => {
+        this.setState({ isUploadDialogShow: false })
     }
 
     switchStatusHandler = (fileIndex) => { }
@@ -390,13 +400,14 @@ class SelectVoterManagement extends BaseComponent {
     };
 
     render() {
+        const { isUploadDialogShow } = this.state;
 
         return (
             <Container>
                 <Row className='btw-select-voters'>
                     <Col>
                         <Row>
-                            <Col md={12} lg={9}>                                
+                            <Col md={12} lg={9}>
                                 {this.renderDescription()}
                             </Col>
                         </Row>
@@ -414,13 +425,17 @@ class SelectVoterManagement extends BaseComponent {
                             </Col>
                             <Col md={12} lg={3}>
                                 {this.renderVotersProgressBar('desktop')}
-                                {this.renderConnectListInfo()}                                
+                                {this.renderConnectListInfo()}
                             </Col>
                         </Row>
                     </Col>
                     {this.renderVotersProgressBar('tablet')}
                 </Row >
                 {this.renderDialog()}
+                <UploadFileDialog
+                    show={isUploadDialogShow}
+                    onClose={this.onCloseUploadDialog}
+                    onSuccess={this.onSuccessUploadDialog} />
             </Container>
         );
     }

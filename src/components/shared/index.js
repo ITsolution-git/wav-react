@@ -40,7 +40,8 @@ import {
 	VoterNotFound,
 	ConnectListInfo,
 	VotersProgressBar,
-	VotersTable
+	VotersTable,
+	UploadFileDialog
 } from './selectVoterComponents'
 
 import VoterStatusDropdown from './VoterStatusDropdown'
@@ -95,6 +96,7 @@ export {
 	VoterProfile,
 	VotersProgressBar,
 	VotersTable,
+	UploadFileDialog,
 	VoterInfo,
 	VoterCardView,
 	VoterDetail,
