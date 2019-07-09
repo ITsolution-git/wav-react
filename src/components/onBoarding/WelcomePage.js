@@ -6,6 +6,7 @@ import screenfull from 'screenfull';
 import classnames from 'classnames';
 
 import BaseComponent from '../shared/BaseComponent';
+import AuthStorage from '../../storage/AuthStorage'
 import Button from '../shared/Button';
 import Paper from '../shared/Paper';
 import routes from '../../constants/Routes';
@@ -20,6 +21,12 @@ class WelcomePage extends BaseComponent {
     }
 
     onGetStarted = () => {
+        /* temporarily code */
+        const user = AuthStorage.getLoggedUser()
+        if (!user.onboarding) {
+            AuthStorage.getUserMoreInfo({onboarding: { district: false, importSource: false, addTenVoters: false}})
+        }
+        /* temporarily code */
         this.onLink(routes.selectDistrict);
     };
 

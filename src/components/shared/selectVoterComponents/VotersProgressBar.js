@@ -131,7 +131,8 @@ VotersProgressBar.propTypes = {
     selectedVoters: PropTypes.array,
     maxVoters: PropTypes.number,
     onClear: PropTypes.func,
-    onNext: PropTypes.func
+    onNext: PropTypes.func,
+    label: PropTypes.string
 };
 
 VotersProgressBar.defaultProps = {

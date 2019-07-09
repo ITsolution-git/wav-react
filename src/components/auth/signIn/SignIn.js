@@ -4,14 +4,15 @@ import { Col, Row, Container } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { BaseComponent, Paper, Typography, Spinner, Button } from '../../shared';
-import { BottomLink, SocialButton, LeftIcon, ErrorMessage } from '../components';
 import routes from '../../../constants/Routes';
-import { authorizeWithSocial, signInWithToken, signInWithMail } from '../../../actions/AuthActions';
-import { getQueryObj } from '../helpers/queryHelper';
-import socialTypes from '../helpers/socialTypes';
+import AuthStorage from '../../../storage/AuthStorage'
 import appDataTypes from '../../../constants/AppDataTypes';
 import colors from '../../../constants/Colors';
+import { BaseComponent, Paper, Typography, Spinner, Button } from '../../shared';
+import { BottomLink, SocialButton, LeftIcon, ErrorMessage } from '../components';
+import { authorizeWithSocial, signInWithToken, signInWithMail, authorizeRoute } from '../../../actions/AuthActions';
+import { getQueryObj } from '../helpers/queryHelper';
+import socialTypes from '../helpers/socialTypes';
 import {
     EmailInput,
     PasswordInput,
@@ -39,6 +40,11 @@ class SignIn extends BaseComponent {
             isAuthed: userInfo.token ? true : false
         };
 
+    }
+
+    componentWillMount() {
+        if (AuthStorage.isAuthenticated())
+            this.props.history.push(authorizeRoute(AuthStorage.getLoggedUser()))
     }
 
     componentWillReceiveProps(newProps) {
