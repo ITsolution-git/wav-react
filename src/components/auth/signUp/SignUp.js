@@ -8,9 +8,10 @@ import _ from 'lodash';
 
 import { BaseComponent, Paper, Typography, Spinner, EmailInput, PasswordInput, Button, FirstNameInput, LastNameInput } from '../../shared';
 import { BottomLink, LeftIcon, SocialButton, ErrorMessage } from '../components';
-import { authorizeWithSocial, signUpWithToken, signUpWitMail, initializeAuthState } from '../../../actions/AuthActions';
-import appDataTypes from '../../../constants/AppDataTypes';
+import { authorizeWithSocial, signUpWithToken, signUpWitMail, initializeAuthState, authorizeRoute } from '../../../actions/AuthActions';
 import { getQueryObj } from '../helpers/queryHelper';
+import AuthStorage from '../../../storage/AuthStorage'
+import appDataTypes from '../../../constants/AppDataTypes';
 import colors from '../../../constants/Colors';
 import routes from '../../../constants/Routes';
 import socialTypes from '../helpers/socialTypes';
@@ -42,7 +43,11 @@ class SignUp extends BaseComponent {
     }
 
     componentWillMount() {
-        this.props.actions.initializeAuthState()
+        if (AuthStorage.isAuthenticated()) {
+            this.props.history.push(authorizeRoute(AuthStorage.getLoggedUser()))
+        } else {
+            this.props.actions.initializeAuthState()
+        }
     }
 
     componentWillReceiveProps(newProps) {

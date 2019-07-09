@@ -130,5 +130,5 @@ export {
 	CommentsList,
 	SwitchButton,
 	ButtonLink,
-	PopoverKeepOnHover
+	PopoverKeepOnHover,
 }

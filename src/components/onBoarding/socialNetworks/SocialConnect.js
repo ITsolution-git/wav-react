@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import routes from '../../../constants/Routes';
+import AuthStorage from '../../../storage/AuthStorage'
 import { BaseComponent, Button, Typography } from '../../shared'
 import { SocialItem, UploadFileDialog } from './index';
-
+import { updateProfile, updateOnboardingBySource } from '../../../actions';
 
 class SocialConnect extends BaseComponent {
     constructor() {
@@ -16,16 +17,20 @@ class SocialConnect extends BaseComponent {
             twitter: false,
             linkedIn: false,
             isUploadDialogShow: false,
-            files: []
+            files: [],
+            isImported: false
         }
     }
 
     socialConnectHandler = (name) => {
-        this.setState({ [name]: true })
+        this.setState({ [name]: true, isImported: true })
     };
 
     showResultHandler = () => {
-        this.onLink(routes.selectVoters);
+        if (this.state.isImported) {
+            const { user, actions } = this.props
+            actions.updateProfile(updateOnboardingBySource(user, true), true)        
+        }
     };
 
     uploadButtonHandler = () => {
@@ -33,7 +38,7 @@ class SocialConnect extends BaseComponent {
     }
 
     onSuccessUploadDialog = files => {
-        this.setState({ files, isUploadDialogShow: false })
+        this.setState({ files, isUploadDialogShow: false, isImported: true })
     }
 
     onCloseUploadDialog = () => {
@@ -109,11 +114,14 @@ class SocialConnect extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
+    const user = AuthStorage.getLoggedUser()
     return {
+        user
     };
 };
 
 const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({ updateProfile }, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SocialConnect));
