@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
-import routes from '../../../constants/Routes';
-import { getDistrictByAddress, selectDistrict } from '../../../actions/DistrictListActions';
+import AuthStorage from '../../../storage/AuthStorage'
+import { getDistrictByAddress, selectDistrict, updateProfile, updateOnboardingByDistrict } from '../../../actions';
 import { BaseComponent, Button, Typography, AutoComplete, Spinner } from '../../shared'
 import { SelectDistrictItem } from './index';
 import './styles/index.scss';
@@ -41,8 +41,9 @@ class SelectDistrict extends BaseComponent {
     };
 
     onNextHandler = () => {
-        this.props.actions.selectDistrict(this.state.selectedDistrict)
-        this.onLink(routes.selectVoters);
+        const { actions, user } = this.props
+        actions.selectDistrict(this.state.selectedDistrict)
+        actions.updateProfile(updateOnboardingByDistrict(user, true), true)        
     };
 
     renderDistrictList = () => {
@@ -120,7 +121,10 @@ class SelectDistrict extends BaseComponent {
 
 const mapStateToProps = (state) => {
     const { error, districts, isSuccess, isFetching } = state.districtList;
+    // console.log(state.app[appDataTypes.profile])
+    const user = AuthStorage.getLoggedUser()
     return {
+        user,
         error,
         districts,
         isFetching,
@@ -130,7 +134,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ getDistrictByAddress, selectDistrict }, dispatch)
+        actions: bindActionCreators({ getDistrictByAddress, selectDistrict, updateProfile }, dispatch)
     };
 };
 

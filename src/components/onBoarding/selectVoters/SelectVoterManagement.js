@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { Row, Col, Container } from 'react-bootstrap';
 import _ from 'lodash';
 
 import routes from '../../../constants/Routes';
+import AuthStorage from '../../../storage/AuthStorage'
 import { storageKeys, LocalStorageManager as lsManager } from '../../../storage';
 import {
     BaseComponent, Button, Typography, Dialog, VotersTable, SearchInput,
     VotersProgressBar, SocialInfo, VoterNotFound, ConnectListInfo
 } from '../../shared';
+import { updateProfile, updateOnboardingByVoter } from '../../../actions';
 
 class SelectVoterManagement extends BaseComponent {
     constructor() {
@@ -229,7 +232,8 @@ class SelectVoterManagement extends BaseComponent {
 
     nextHandler = () => {
         lsManager.removeItem(storageKeys.firstLogin);
-        this.redirectToHome();
+        const { user, actions } = this.props
+        actions.updateProfile(updateOnboardingByVoter(user, true), true)
     };
 
     closeModalHandler = () => {
@@ -392,8 +396,7 @@ class SelectVoterManagement extends BaseComponent {
                 <Row className='btw-select-voters'>
                     <Col>
                         <Row>
-                            <Col md={12} lg={9}>
-                                {this.renderSocialInfo('tablet')}
+                            <Col md={12} lg={9}>                                
                                 {this.renderDescription()}
                             </Col>
                         </Row>
@@ -411,8 +414,7 @@ class SelectVoterManagement extends BaseComponent {
                             </Col>
                             <Col md={12} lg={3}>
                                 {this.renderVotersProgressBar('desktop')}
-                                {this.renderConnectListInfo()}
-                                {this.renderSocialInfo('desktop')}
+                                {this.renderConnectListInfo()}                                
                             </Col>
                         </Row>
                     </Col>
@@ -426,6 +428,15 @@ class SelectVoterManagement extends BaseComponent {
 
 // TODO: Remain these code for implementing API.
 const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({ updateProfile }, dispatch)
 });
 
-export default connect(null, mapDispatchToProps)(withRouter(SelectVoterManagement));
+const mapStateToProps = (state) => {
+    const user = AuthStorage.getLoggedUser()
+    return {
+        user
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SelectVoterManagement));

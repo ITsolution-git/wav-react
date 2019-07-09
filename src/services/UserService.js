@@ -7,7 +7,8 @@ const UserService = {
     checkForUniqueEmail,
     deleteUser,
     unsubscribeUser,
-    updateProfile
+    updateProfile,
+    getCurrentUser
 };
 
 function loadUser(userId) {
@@ -43,10 +44,15 @@ function unsubscribeUser(data) {
 
 function updateProfile(data) {
     return patchAsync({
-        url: `${config.apiHost}/api/v1/user/updateProfile`,
-        data,
-        headers: getHeaders()
+        url: `${config.apiHost}/user`,
+        data
     })
+}
+
+function getCurrentUser() {
+    return getAsync({
+        url: `${config.apiHost}/user`,
+    });
 }
 
 function getHeaders() {

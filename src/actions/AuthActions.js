@@ -1,14 +1,15 @@
 import PubSub from 'pubsub-js';
 
 import identityService from '../services/IdentityService';
+import UserService from '../services/UserService';
 import authStorage  from '../storage/AuthStorage';
 import appDataTypes from '../constants/AppDataTypes';
 import pubsubConstants from '../constants/PubSubConstants';
 import appConstants from '../constants/reducerConstants/AppConstants';
 import routes from '../constants/Routes';
 import Auth0Service from '../services/Auth0Service';
+import history from '../utility/History'
 import { storageKeys, LocalStorageManager as lsManager } from '../storage';
-import history from '../utility/History';
 
 import {
 	initializeState,
@@ -24,11 +25,7 @@ export function signInWithToken(userInfo) {
 	return dispatch => {
 		if (parseInt(userInfo.expiresIn, 10) > 0) {
 			authStorage.saveTokenInfo(userInfo);
-			const redirectRoute = lsManager.getItem(storageKeys.firstLogin)
-				? routes.welcome
-				: routes.captainsDashboard;
-
-			history.push(redirectRoute);
+			dispatch(checkCurrentUserStatus(true))
 			PubSub.publish(pubsubConstants.onAuthChange, true);
 			return dispatch(loadDataSuccess(appDataTypes.signOn, null));
 		}
@@ -46,6 +43,7 @@ export function signInWithMail(email, password) {
 		return auth0Service.signIn({email, password}).then(
 			() => {
 	            dispatch(loadDataSuccess(appDataTypes.signOn, null));
+	            dispatch(getBtwUserProfile())
 			},
 			error => {
 				dispatch(loadDataFailure(appDataTypes.signOn, error));
@@ -123,6 +121,43 @@ export function getBtwUserProfile() {
 					dispatch(loadDataFailure(appDataTypes.profile, error));
 				})
 	};
+}
+
+export function checkCurrentUserStatus(isRoute=false) {
+    return dispatch => {
+        dispatch(initializeRequest(appDataTypes.profile));
+        return UserService.getCurrentUser().then(
+            (data) => {
+            	const { user } = data
+                dispatch(loadDataSuccess(appDataTypes.profile, data));
+                authStorage.getUserMoreInfo(user)
+            	isRoute && history.push(authorizeRoute(user, routes.captainsDashboard))
+            },
+            error => {
+                dispatch(loadDataFailure(appDataTypes.profile, error));
+                authStorage.clearStorage()
+            });
+    };
+}
+
+export function authorizeRoute(user, toRoute='') {
+	let redirectRoute = ''
+	const { onboarding } = user
+	if (!onboarding)
+		return redirectRoute
+	if (lsManager.getItem(storageKeys.firstLogin)) {
+		redirectRoute = routes.welcome
+	} else if (!onboarding.district) {
+		redirectRoute = routes.selectDistrict
+	} else if (!onboarding.importSource) {
+		redirectRoute = routes.socialConnect
+	} else if (!onboarding.addTenVoters) {
+		redirectRoute = routes.selectVoters
+	}
+	if (!redirectRoute && toRoute) {
+		redirectRoute = toRoute
+	}
+	return redirectRoute
 }
 
 

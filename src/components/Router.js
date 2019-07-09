@@ -27,13 +27,13 @@ import Authorization from './hocs/Authorization';
 import routes from '../constants/Routes';
 import roles from '../constants/Roles';
 
-const { captain, guest } = roles;
+const { captain } = roles;
 
 const router = () => (
     <Switch>
         {/* auth */}
-        <Route exact path={routes.signIn} component={Authorization(SignIn, [guest])} />
-        <Route exact path={routes.signUp} component={Authorization(SignUp, [guest])} />
+        <Route exact path={routes.signIn} component={SignIn} />
+        <Route exact path={routes.signUp} component={SignUp} />
         <Route exact path={routes.pageDown} component={GeneralErrorPage} />
         <Route exact path={routes.changePassword} component={ChangePassword} />
         <Route exact path={routes.forgotPassword} component={ForgotPassword} />

@@ -1,5 +1,15 @@
 import UserConstansts from '../constants/reducerConstants/UserConstants';
 import UserService from '../services/UserService';
+import appDataTypes from '../constants/AppDataTypes';
+import {
+    initializeRequest,
+    loadDataSuccess,
+    loadDataFailure
+} from './AppAction';
+import authStorage from '../storage/AuthStorage'
+import history from '../utility/History'
+import routes from '../constants/Routes'
+import { authorizeRoute } from './index'
 
 export function loadUser(userId) {
     return (dispatch, getState) => {
@@ -77,26 +87,46 @@ export function unsubscribeUser(email) {
     }
 }
 
-export function updateProfile(data) {
-	return dispatch => {
-		
-		dispatch(actionRequest())
-		return UserService.updateProfile(data).then(
-			response => {
-				dispatch(actionSucceeded());
-			},
-			error => {
-				dispatch(actionFailed(error));
-			});
-	};
+export function getCurrentUser() {
+    return dispatch => {
+        dispatch(initializeRequest(appDataTypes.profile));
+        return UserService.getCurrentUser().then(
+            (data) => {
+                dispatch(loadDataSuccess(appDataTypes.profile, data));
+            },
+            error => {
+                dispatch(loadDataFailure(appDataTypes.profile, error));
+            });
+    };
+}
 
-	function actionSucceeded() {
-		return { type: UserConstansts.UPDATE_PROFILE_SUCCESS };
-    }
-    function actionRequest() {
-        return { type: UserConstansts.UPDATE_PROFILE_REQUEST };
-    }
-    function actionFailed(err) {
-        return { type: UserConstansts.UPDATE_PROFILE_FAILURE, err };
-    }
+export function updateProfile(data, isRoute = false) {
+    return dispatch => {
+        dispatch(initializeRequest(appDataTypes.profile));
+        return UserService.updateProfile(data).then(
+            (data) => {
+                dispatch(loadDataSuccess(appDataTypes.profile, data));
+                authStorage.getUserMoreInfo(data.user || {})
+                isRoute && history.push(authorizeRoute(authStorage.getLoggedUser(), routes.captainsDashboard))
+            },
+            error => {
+                dispatch(loadDataFailure(appDataTypes.profile, error));
+            });
+    };
+}
+
+export function updateOnboardingByDistrict(user, status) {
+    return { onboarding: { ...user.onboarding, district: status } }
+}
+
+export function updateOnboardingBySource(user, status) {
+    return { onboarding: { ...user.onboarding, importSource: status} }
+}
+
+export function updateOnboardingByVoter(user, status) {
+    return { onboarding: { ...user.onboarding, addTenVoters: status} }
+}
+
+export function initOnboardingByVoter() {
+    return { onboarding: {district: false, importSource: false, addTenVoters: false} }
 }

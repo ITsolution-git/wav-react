@@ -10,6 +10,7 @@ export default {
     isAuthenticated,
     getTokenInfo,
     getCurrentRole,
+    getUserMoreInfo,
     clearStorage
 };
 
@@ -17,7 +18,10 @@ function saveTokenInfo(tokenInfo) {
     let user = tokenInfo.idToken;
     user.role = roles.captain;
     cookies.set(storageKeys.tokenInfo, JSON.stringify(tokenInfo));
-    localStorage.setItem(storageKeys.user, JSON.stringify(user));
+    localStorage.setItem(storageKeys.user, JSON.stringify({
+        ...user, 
+        
+    }));
 }
 
 function getLoggedUser() {
@@ -25,7 +29,7 @@ function getLoggedUser() {
 }
 
 function getTokenInfo() {
-    return JSON.parse(cookies.get(storageKeys.tokenInfo)) || {};
+    return JSON.parse(cookies.get(storageKeys.tokenInfo) || '{}') || {};
 }
 
 function getCurrentRole() {
@@ -34,6 +38,11 @@ function getCurrentRole() {
 
 function isAuthenticated() {
     return !!getLoggedUser().email;
+}
+
+function getUserMoreInfo(user) {
+    const _user = getLoggedUser()
+    localStorage.setItem(storageKeys.user, JSON.stringify({..._user, ...user}));   
 }
 
 function clearStorage() {

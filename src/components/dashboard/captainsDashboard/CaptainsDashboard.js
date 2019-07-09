@@ -445,4 +445,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(withRouter(CaptainsDashboard));
+const mapDispatchToProps = (dispatch) => ({
+    
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CaptainsDashboard));
