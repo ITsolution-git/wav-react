@@ -1,4 +1,5 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-bootstrap';
@@ -7,6 +8,7 @@ import classNames from 'classnames';
 import colors from '../../../constants/Colors';
 import routes from '../../../constants/Routes';
 import authStorage from '../../../storage/AuthStorage';
+import { initOnboardingByVoter, updateProfile } from '../../../actions'
 import { BaseComponent, ActionItem, Typography, VoterCardView, CongratsAlarm, SvgIcon } from '../../shared';
 import { DashboardUserInfo, ExtraPointTask, TopPerformers, PerformanceChart, WelcomeBanner, NoTaskBanner, ConfirmEmailMessage } from './index';
 
@@ -236,6 +238,10 @@ class CaptainsDashboard extends BaseComponent {
         }
     }
 
+    componentWillMount() {
+        // this.props.actions.updateProfile(initOnboardingByVoter())
+    }
+
     onSelectVoter = () => { }
 
     accordionHandler = (contentName) => () => {
@@ -446,7 +452,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    
+    actions: bindActionCreators({ updateProfile }, dispatch)    
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CaptainsDashboard));

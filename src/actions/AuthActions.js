@@ -8,8 +8,10 @@ import pubsubConstants from '../constants/PubSubConstants';
 import appConstants from '../constants/reducerConstants/AppConstants';
 import routes from '../constants/Routes';
 import Auth0Service from '../services/Auth0Service';
-import history from '../utility/History'
+
 import { storageKeys, LocalStorageManager as lsManager } from '../storage';
+import history from '../utility/History';
+import {postAsync, getAsync} from '../helpers/RequestHelper';
 
 import {
 	initializeState,
@@ -18,6 +20,7 @@ import {
 	loadDataFailure
 } from './AppAction';
 import { logout } from '../helpers/AuthHelper';
+import config from "../config/ApiConfig";
 
 const domain = window.location.origin;
 
@@ -150,7 +153,10 @@ export function authorizeRoute(user, toRoute='') {
 	} else if (!onboarding.district) {
 		redirectRoute = routes.selectDistrict
 	} else if (!onboarding.importSource) {
-		redirectRoute = routes.socialConnect
+		if ([routes.sendToGoogle, routes.sendToTwitter, routes.connectGoogle, routes.connectTwitter].includes(history.location.pathname))
+			redirectRoute = history.location.pathname
+		else			
+			redirectRoute = routes.socialConnect
 	} else if (!onboarding.addTenVoters) {
 		redirectRoute = routes.selectVoters
 	}
@@ -180,4 +186,27 @@ export function initializeAuthState() {
 	return dispatch => {
 		dispatch(initializeState(appDataTypes.register))		
 	}
+}
+
+export async function getTwitterRequestTokens() {
+	const { token } = await getAsync({
+		url: `${config.apiHost}/oauth/twitter/get_request_token`,
+	});
+	return token;
+}
+
+export async function getTwitterFriends(oauth_token, oauth_verifier) {
+	return await getAsync({
+		url: `${config.apiHost}/oauth/twitter/friends/list`,
+		// headers: {},
+		params: { oauth_token, oauth_verifier }
+	});
+}
+
+export async function importContactsFromGoogle(accessToken) {
+	return await getAsync({
+		url: `${config.apiHost}/oauth/google/friends/list?access_token=${accessToken}`,
+		// headers: {},
+		// includeToken: false
+	});
 }

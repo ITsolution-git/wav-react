@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import { OauthSender } from 'react-oauth-flow';
 
 import { BaseComponent, Button, Typography, SocialIcon } from '../../shared'
 
@@ -16,7 +17,18 @@ class SocialItem extends BaseComponent {
     connectButtonRender = () => {
         const buttonName = !this.isMobileOnly() ? 'Connect' : '+';
         const { socialConnectHandler } = this.props;
-
+        if (this.props.name === 'google') {
+            return (
+                <OauthSender
+                    authorizeUrl="https://accounts.google.com/o/oauth2/auth"
+                    clientId="905671205791-jb00s4o9g6ckv2i1p5tlucu9f52u33ke.apps.googleusercontent.com"
+                    // eslint-disable-next-line
+                    redirectUri={`${location.origin}/connectGoogle`}
+                    render={({ url }) => <a className='connect-button' href={url}>{buttonName}</a>}
+                    args={{scope: 'https://www.googleapis.com/auth/contacts'}}
+                />
+            )
+        }
         return (
             <Button
                 size='small'

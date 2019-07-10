@@ -13,9 +13,8 @@ class SocialConnect extends BaseComponent {
     constructor() {
         super();
         this.state = {
-            facebook: false,
+            google: false,
             twitter: false,
-            linkedIn: false,
             isUploadDialogShow: false,
             files: [],
             isImported: false
@@ -23,7 +22,13 @@ class SocialConnect extends BaseComponent {
     }
 
     socialConnectHandler = (name) => {
-        this.setState({ [name]: true, isImported: true })
+        if (name === 'google') {
+            this.props.history.push(`/sendToGoogle`);
+        }
+        else {
+            this.props.history.push(`/sendToTwitter`);
+        }
+        this.setState({ [name]: true })
     };
 
     showResultHandler = () => {
@@ -46,22 +51,18 @@ class SocialConnect extends BaseComponent {
     }
 
     socialItemRender = () => {
-        const { facebook, twitter, linkedIn } = this.state;
+        const { google, twitter } = this.state;
 
         return (
             <div className='social-group'>
                 <SocialItem
-                    name='facebook'
-                    status={facebook}
-                    socialConnectHandler={() => this.socialConnectHandler('facebook')} />
+                    name='google'
+                    status={google}
+                    socialConnectHandler={() => this.socialConnectHandler('google')} />
                 <SocialItem
                     name='twitter'
                     status={twitter}
-                    socialConnectHandler={() => this.socialConnectHandler('twitter')} />
-                <SocialItem
-                    name='linkedIn'
-                    status={linkedIn}
-                    socialConnectHandler={() => this.socialConnectHandler('linkedIn')} />
+                    socialConnectHandler={() => this.socialConnectHandler('twitter')} />                
             </div>
         );
     }

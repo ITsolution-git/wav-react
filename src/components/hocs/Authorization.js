@@ -25,8 +25,12 @@ const Authentication = (RouteComponent, roles) => {
             const currentRole = authStorage.getCurrentRole();
             const route = authorizeRoute(user)
             
-            if (currentRole === Role.captain && route && history.location.pathname !== route ) history.push(route)
+            if (currentRole === Role.captain && route && history.location.pathname !== route ) {
+                console.log('route', route)
+                history.push(route)
+            }
             if (roles.indexOf(currentRole) !== -1) {
+                console.log('role', RouteComponent)
                 return <RouteComponent {...this.props} />
             }
             // redirectToHome();

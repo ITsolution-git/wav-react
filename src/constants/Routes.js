@@ -21,6 +21,10 @@ export default {
     changePassword: '/change_password/change/:token',
     forgotPassword: '/change_password/request',
     verifyEmail: '/verify_email',
+    connectGoogle: '/connectGoogle',
+    connectTwitter: '/connectTwitter',
+    sendToGoogle: '/sendToGoogle',
+    sendToTwitter: '/sendToTwitter',
 
     // static
     termsAndConditions: '/terms_conditions'
