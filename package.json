@@ -11,7 +11,7 @@
     "date-from-num": "^1.0.1",
     "dotenv": "^5.0.1",
     "font-awesome": "^4.7.0",
-    "googleapis": "23.0.0",
+    "googleapis": "39.1.0",
     "history": "^4.7.2",
     "immutability-helper": "^2.6.6",
     "import": "0.0.6",
